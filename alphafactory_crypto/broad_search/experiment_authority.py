@@ -67,8 +67,20 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
         "runtime_date": "20260731",
         "allowed_statuses": {
             "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
         },
-        "expected_run_outcome": None,
+        "expected_run_outcome": {
+            "status": "ENGINE_VALIDATION_BLOCKED",
+            "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "runtime": "runtime/crypto_search_economic_v2_20260731",
+            "producer_source_sha": (
+                "bcb77cecf2d75e650e73998b37af9ceed1b71072"
+            ),
+            "generation_attempts": 2_280,
+            "strict_evaluated_count": 2_000,
+            "checkpoint": "checkpoint_000",
+            "rescue_rerun_started": False,
+        },
     },
 }
 
@@ -221,13 +233,14 @@ def _validate_search_economic_receipt(
     run_authorized = receipt.get("run_authorized")
     if status not in receipt_spec["allowed_statuses"]:
         blockers.append("status")
+    consumed_statuses = {
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+    }
     if (
         status == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
         and run_authorized is not True
-    ) or (
-        status == "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED"
-        and run_authorized is not False
-    ):
+    ) or (status in consumed_statuses and run_authorized is not False):
         blockers.append("run_authorized")
     run_authorization = dict(receipt.get("run_authorization") or {})
     expected_run_authorization = {
@@ -243,7 +256,7 @@ def _validate_search_economic_receipt(
         blockers.append("run_authorization")
     run_outcome = dict(receipt.get("run_outcome") or {})
     expected_run_outcome = receipt_spec["expected_run_outcome"]
-    if status == "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED":
+    if status in consumed_statuses:
         if run_outcome != expected_run_outcome:
             blockers.append("run_outcome")
     elif run_outcome:
@@ -689,7 +702,7 @@ def _materialize_search_economic_receipt(
     base_path_label = str(raw.get("base_receipt_path") or "").replace("\\", "/")
     if not base_path_label:
         return raw
-    expected_keys = {
+    required_keys = {
         "schema_version",
         "receipt_id",
         "status",
@@ -700,7 +713,10 @@ def _materialize_search_economic_receipt(
         "search_campaign",
         "validation_kill_line",
     }
-    if set(raw) != expected_keys:
+    optional_keys = {"run_outcome"}
+    if not required_keys.issubset(raw) or not set(raw).issubset(
+        required_keys | optional_keys
+    ):
         raise RuntimeError(
             "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:SCHEMA"
         )
@@ -745,6 +761,8 @@ def _materialize_search_economic_receipt(
     ):
         effective[key] = raw[key]
     effective.pop("run_outcome", None)
+    if raw.get("run_outcome"):
+        effective["run_outcome"] = dict(raw["run_outcome"])
     effective["search_campaign"] = {
         **dict(base["search_campaign"]),
         **search_override,

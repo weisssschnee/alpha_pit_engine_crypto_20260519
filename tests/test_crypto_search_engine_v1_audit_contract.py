@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import random
 from collections import Counter
+from pathlib import Path
 
 import pandas as pd
 import pytest
@@ -30,6 +31,8 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _initial_policies,
     _proposal_liveness_preflight,
     _search_ordering_reward,
+    _validation_blocked_decision,
+    _validation_blocked_report_text,
 )
 from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
 
@@ -241,6 +244,36 @@ def test_budget_exhausted_closure_preserves_partial_evidence_boundaries() -> Non
     assert decision["research_decision"] == "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN"
     assert "layer defect" in report
     assert "No seed, parameter, or rescue rerun was used." in report
+
+
+def test_validation_blocked_decision_preserves_checkpoint_without_research_claim() -> None:
+    archive = BehaviorArchive()
+    decision = _validation_blocked_decision(
+        source_sha="a" * 40,
+        closure_source_sha="b" * 40,
+        state={"generation_attempts": 2_280, "next_checkpoint_index": 1},
+        ledger=({"candidate_id": "candidate-1"},),
+        archive=archive,
+        checkpoint=Path("checkpoint_000"),
+        failure={
+            "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "arm": "canonical_typed_random",
+            "candidate_id": "candidate-1",
+            "horizon_hours": 1,
+            "selection_rank": 1,
+        },
+        campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
+    )
+    report = _validation_blocked_report_text(decision)
+
+    assert decision["status"] == "ENGINE_VALIDATION_BLOCKED"
+    assert decision["research_decision"] == "HOLD_ENGINE_VALIDATION_BLOCKED"
+    assert decision["future_new_data_arena_qualified_arms"] == []
+    assert decision["alpha_claim"] is False
+    assert decision["rescue_rerun_started"] is False
+    assert decision["sealed_reads"] == 0
+    assert "not an Alpha or" in report
+    assert "No adaptive continuation" in report
 
 
 def test_cem_checkpoint_update_does_not_double_count_prior_elites() -> None:

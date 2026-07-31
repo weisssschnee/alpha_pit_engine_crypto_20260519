@@ -61,6 +61,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     TypedEvolutionV2,
     V22_PARAMETERS,
     _ProposalGenerationFailure,
+    _ValidationStageBlocked,
     _balanced_lane_choice,
     _checkpoint_allocation,
     _checkpoint_resume_order,
@@ -668,6 +669,155 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     assert (tmp_path / "validation_candidate_ledger.parquet").is_file()
     assert (tmp_path / "validation_arm_metrics.parquet").is_file()
     assert (tmp_path / "validation_decisions.json").is_file()
+
+
+def _minimal_validation_failure_inputs(
+    tmp_path: Path,
+) -> dict[str, object]:
+    registry = _role_complete_registry()
+    arms = ("canonical_typed_random",)
+    source_sha = "a" * 40
+    frozen_hash = "b" * 64
+    state = _new_campaign_state(source_sha, frozen_hash, arms=arms, seeds=SEEDS)
+    state["next_checkpoint_index"] = 1
+    policies = _initial_policies(registry, arms=arms, seeds=SEEDS)
+    archive = BehaviorArchive()
+    candidate = generate_candidate(
+        registry,
+        skeleton=skeleton_registry()[0],
+        rng=random.Random(29),
+    )
+    train_ledger = []
+    for ordinal, horizon in enumerate((1, 4), start=1):
+        local = CandidateSpec(
+            f"validation-failure-{horizon}h",
+            candidate.skeleton_id,
+            candidate.mechanism_family,
+            candidate.expression,
+            candidate.control,
+            horizon,
+            candidate.mapping_id,
+            candidate.raw_fields,
+            candidate.field_families,
+            candidate.rolling_windows,
+            candidate.expression_depth,
+            candidate.operator_path,
+        )
+        train_ledger.append(
+            {
+                "arm": arms[0],
+                "arm_completion_ordinal": ordinal,
+                "candidate_id": local.candidate_id,
+                "candidate_spec_json": json.dumps(
+                    local.to_dict(), sort_keys=True
+                ),
+                "search_reward": float(3 - ordinal),
+                "search_reward_authority": SEARCH_REWARD_AUTHORITY,
+                "search_reward_matched_limiting_component": (
+                    "primary_minus_left_control"
+                ),
+                "train_orientation": 1.0,
+                "train_orientation_fitted": True,
+                "evaluation_partition": "train",
+                "economic_receipt_sha256": "R" * 64,
+            }
+        )
+    return {
+        "runtime_root": tmp_path,
+        "store": _FakeStore(),
+        "registry": registry,
+        "state": state,
+        "policies": policies,
+        "train_ledger": train_ledger,
+        "archive": archive,
+        "train_metrics": [],
+        "identities": {
+            "raw_cache": {"identity_sha256": "C" * 64},
+            "compiler_identity": {"sha256": "D" * 64},
+        },
+        "economic_receipt": {
+            "receipt_sha256": "R" * 64,
+            "execution": {
+                "horizons_hours": [1, 4],
+                "partition_tail_purge_hours": 6,
+            },
+            "validation": {
+                "optimizer_feedback_allowed": False,
+                "policy_memory_write_allowed": False,
+                "candidate_generation_allowed": False,
+            },
+            "validation_kill_line": {
+                "minimum_evaluated_per_active_arm": 2,
+                "evaluated_per_active_arm": 2,
+                "required_horizons_hours": [1, 4],
+                "evaluated_per_arm_per_horizon": 1,
+                "candidate_selection": (
+                    "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
+                    "THEN_COMPLETION_ORDINAL"
+                ),
+                "arm_aggregation": (
+                    "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+                ),
+            },
+        },
+    }
+
+
+def test_frozen_validation_constructibility_failure_is_typed_and_side_effect_free(
+    tmp_path: Path,
+) -> None:
+    inputs = _minimal_validation_failure_inputs(tmp_path)
+    state_before = deepcopy(inputs["state"])
+    policy_hash_before = _payload_sha(
+        {
+            key: _export_policy(policy)
+            for key, policy in sorted(inputs["policies"].items())
+        }
+    )
+    archive_hash_before = inputs["archive"].state_hash()
+
+    def reject_degenerate_control(*_args):
+        raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
+
+    with pytest.raises(_ValidationStageBlocked) as captured:
+        run_frozen_validation_stage(
+            **inputs,
+            evaluation_runner=reject_degenerate_control,
+        )
+
+    assert captured.value.to_dict() == {
+        "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "arm": "canonical_typed_random",
+        "candidate_id": "validation-failure-1h",
+        "horizon_hours": 1,
+        "selection_rank": 1,
+    }
+    assert inputs["state"] == state_before
+    assert inputs["archive"].state_hash() == archive_hash_before
+    assert _payload_sha(
+        {
+            key: _export_policy(policy)
+            for key, policy in sorted(inputs["policies"].items())
+        }
+    ) == policy_hash_before
+    assert not (tmp_path / "checkpoints").exists()
+    assert not (tmp_path / "validation_candidate_ledger.parquet").exists()
+
+
+def test_frozen_validation_unexpected_value_error_still_propagates(
+    tmp_path: Path,
+) -> None:
+    inputs = _minimal_validation_failure_inputs(tmp_path)
+
+    def reject_unexpected(*_args):
+        raise ValueError("UNEXPECTED_VALIDATION_DEFECT")
+
+    with pytest.raises(ValueError, match="UNEXPECTED_VALIDATION_DEFECT"):
+        run_frozen_validation_stage(
+            **inputs,
+            evaluation_runner=reject_unexpected,
+        )
+    assert not (tmp_path / "checkpoints").exists()
 
 
 def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:

@@ -4941,6 +4941,33 @@ class _EngineBudgetExhausted(RuntimeError):
     pass
 
 
+class _ValidationStageBlocked(RuntimeError):
+    def __init__(
+        self,
+        reason: str,
+        *,
+        arm: str,
+        candidate_id: str,
+        horizon_hours: int,
+        selection_rank: int,
+    ) -> None:
+        super().__init__(reason)
+        self.reason = str(reason)
+        self.arm = str(arm)
+        self.candidate_id = str(candidate_id)
+        self.horizon_hours = int(horizon_hours)
+        self.selection_rank = int(selection_rank)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "reason": self.reason,
+            "arm": self.arm,
+            "candidate_id": self.candidate_id,
+            "horizon_hours": self.horizon_hours,
+            "selection_rank": self.selection_rank,
+        }
+
+
 class _ProposalGenerationFailure(RuntimeError):
     def __init__(
         self,
@@ -5287,6 +5314,84 @@ def _top_decile_mean(values: Sequence[float]) -> float | None:
         return None
     count = max(1, int(math.ceil(0.10 * len(finite))))
     return float(np.mean(sorted(finite, reverse=True)[:count]))
+
+
+def _validation_blocked_decision(
+    *,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    checkpoint: Path,
+    failure: Mapping[str, Any],
+    campaign: str,
+    closure_source_sha: str | None = None,
+) -> dict[str, Any]:
+    economic_config = _economic_campaign_config(campaign)
+    strict_count = len(ledger)
+    family_count = len(archive.champion_by_family)
+    return {
+        "schema_version": 1,
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "reason": str(failure["reason"]),
+        "producer_source_sha": str(source_sha),
+        "closure_source_sha": str(closure_source_sha or source_sha),
+        "epoch_id": economic_config["epoch_id"],
+        "report_title": economic_config["report_title"],
+        "search_campaign": campaign,
+        "surface_description": (
+            "existing 115-field OI/mark x aggTrades aligned carrier; "
+            "receipt-bound Binance USD-M target"
+        ),
+        "strict_evaluated_count": strict_count,
+        "generation_attempts": int(state["generation_attempts"]),
+        "checkpoint_count": int(state.get("next_checkpoint_index", 0)),
+        "checkpoint": checkpoint.name,
+        "checkpoint_restore_verified": True,
+        "behavior_family_count": family_count,
+        "behavior_duplicate_rate": (
+            1.0 - family_count / strict_count if strict_count else 0.0
+        ),
+        "validation_stage": {
+            "status": "BLOCKED_BEFORE_COMPLETE_EQUAL_COUNT",
+            **dict(failure),
+            "candidate_generation_performed": False,
+            "optimizer_feedback_written": False,
+            "policy_memory_written": False,
+            "holdout_read": False,
+        },
+        "research_decision": "HOLD_ENGINE_VALIDATION_BLOCKED",
+        "future_new_data_arena_qualified_arms": [],
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": False,
+        "next_arena_started": False,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def _validation_blocked_report_text(decision: Mapping[str, Any]) -> str:
+    failure = dict(decision["validation_stage"])
+    return f"""# {decision['report_title']}
+
+- Status: `ENGINE_VALIDATION_BLOCKED` (`{decision['reason']}`)
+- Producer source: `{decision['producer_source_sha']}`
+- Closure source: `{decision['closure_source_sha']}`
+- Strict train candidates retained: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Exact checkpoint: `{decision['checkpoint']}`; restore verified: `{decision['checkpoint_restore_verified']}`.
+- Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
+
+The frozen validation stage stopped before complete equal-count evaluation because
+candidate `{failure['candidate_id']}` from arm `{failure['arm']}` at
+{failure['horizon_hours']}h produced `{failure['reason']}` on the validation
+block. This is an engine validation-constructibility defect, not an Alpha or
+carrier-information conclusion. No adaptive continuation, seed/parameter
+change, rescue rerun, holdout/OOS/challenge read, promotion, or next Arena
+occurred.
+"""
 
 
 def _budget_exhausted_decision(
@@ -6569,6 +6674,8 @@ def _final_manifest(
         "validation_candidate_ledger.parquet",
         "validation_arm_metrics.parquet",
         "validation_decisions.json",
+        "validation_failure_stdout.log",
+        "validation_failure_stderr.log",
     ):
         path = runtime_root / name
         if path.is_file():
@@ -6736,6 +6843,180 @@ def close_budget_exhausted_engine(
     return {
         "result": "PASS",
         "status": "ENGINE_BUDGET_EXHAUSTED",
+        "producer_source_sha": producer_source_sha,
+        "closure_source_sha": closure_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "checkpoint": checkpoint.name,
+        "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
+        "candidate_generation_performed": False,
+        "candidate_evaluation_performed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def close_validation_blocked_engine(
+    repo_root: Path,
+    *,
+    runtime_date: str = ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+    expected_producer_source_sha: str | None = None,
+    closure_source_sha: str | None = None,
+    campaign: str = ECONOMIC_SEARCH_V2_CAMPAIGN,
+) -> dict[str, Any]:
+    """Close an already-stopped validation crash without evaluating a candidate."""
+
+    economic_config = _economic_campaign_config(campaign)
+    if runtime_date != economic_config["runtime_date"]:
+        raise ValueError("economic search runtime date changed")
+    runtime_root = (
+        repo_root
+        / f"runtime/{economic_config['runtime_prefix']}_{runtime_date}"
+    )
+    report_path = (
+        repo_root
+        / f"reports/{economic_config['report_prefix']}_{runtime_date}.md"
+    )
+    checkpoint = runtime_root / "checkpoints" / "checkpoint_000"
+    failure_log = runtime_root / "validation_failure_stderr.log"
+    for path in (
+        runtime_root / "frozen_contract.json",
+        runtime_root / "embedded_preflight.json",
+        runtime_root / "candidate_ledger.parquet",
+        runtime_root / "behavior_archive.parquet",
+        runtime_root / "behavior_family_summary.json",
+        runtime_root / "arm_checkpoint_metrics.parquet",
+        checkpoint / "manifest.json",
+        checkpoint / "state.json",
+        failure_log,
+    ):
+        if not path.is_file():
+            raise FileNotFoundError(
+                f"validation-blocked closure input missing: {path}"
+            )
+    for path in (
+        runtime_root / "final_decision.json",
+        runtime_root / "run_manifest.json",
+        runtime_root / "validation_candidate_ledger.parquet",
+        runtime_root / "validation_arm_metrics.parquet",
+        runtime_root / "validation_decisions.json",
+        runtime_root / "checkpoints" / "checkpoint_validation",
+    ):
+        if path.exists():
+            raise RuntimeError(
+                f"validation-blocked closure found unexpected artifact: {path}"
+            )
+
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+    state = _read_json(checkpoint / "state.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet").to_dict(
+        "records"
+    )
+    archive = BehaviorArchive.from_rows(
+        pd.read_parquet(runtime_root / "behavior_archive.parquet").to_dict(
+            "records"
+        )
+    )
+    producer_source_sha = str(checkpoint_manifest["source_sha"]).lower()
+    if (
+        expected_producer_source_sha is not None
+        and producer_source_sha != str(expected_producer_source_sha).lower()
+    ):
+        raise RuntimeError("validation-blocked producer source SHA changed")
+    if checkpoint_manifest.get("restore_verified") is not True:
+        raise RuntimeError("validation-blocked checkpoint restore was not verified")
+    if int(checkpoint_manifest.get("completed_ledger_row_count", -1)) != len(
+        ledger
+    ):
+        raise RuntimeError("validation-blocked checkpoint row count changed")
+    if len(ledger) != CHECKPOINT_SIZE:
+        raise RuntimeError("validation-blocked closure requires checkpoint_000")
+    if int(state.get("next_checkpoint_index", -1)) != 1:
+        raise RuntimeError("validation-blocked checkpoint progress changed")
+    if int(state.get("strict_evaluated", -1)) != len(ledger):
+        raise RuntimeError("validation-blocked state row count changed")
+    checkpoint_files = {
+        str(row["name"]): dict(row)
+        for row in checkpoint_manifest.get("files", ())
+        if isinstance(row, Mapping)
+    }
+    for name in (
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "arm_checkpoint_metrics.parquet",
+    ):
+        checkpoint_file = checkpoint / name
+        top_level_file = runtime_root / name
+        record = checkpoint_files.get(name)
+        if (
+            not checkpoint_file.is_file()
+            or record is None
+            or sha256_file(checkpoint_file) != str(record.get("sha256") or "")
+            or sha256_file(top_level_file) != sha256_file(checkpoint_file)
+        ):
+            raise RuntimeError(
+                f"validation-blocked checkpoint artifact changed: {name}"
+            )
+    failure_text = failure_log.read_text(encoding="utf-8", errors="replace")
+    failure_reason = "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
+    if (
+        "run_frozen_validation_stage" not in failure_text
+        or failure_reason not in failure_text
+    ):
+        raise RuntimeError("validation-blocked traceback identity changed")
+
+    closure_sha = str(closure_source_sha or _git_sha(repo_root)).lower()
+    decision = _validation_blocked_decision(
+        source_sha=producer_source_sha,
+        state=state,
+        ledger=ledger,
+        archive=archive,
+        checkpoint=checkpoint,
+        failure={
+            "reason": failure_reason,
+            "arm": "NOT_PERSISTED_BY_PRODUCER",
+            "candidate_id": "NOT_PERSISTED_BY_PRODUCER",
+            "horizon_hours": -1,
+            "selection_rank": -1,
+            "producer_traceback_sha256": sha256_file(failure_log),
+            "closure_mode": "POST_MORTEM_FROM_VERIFIED_CHECKPOINT",
+        },
+        campaign=campaign,
+        closure_source_sha=closure_sha,
+    )
+    _write_json(runtime_root / "final_decision.json", decision)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(
+        _validation_blocked_report_text(decision),
+        encoding="utf-8",
+        newline="\n",
+    )
+    identities = {
+        "raw_cache": checkpoint_manifest["data_cache_identity"],
+        "compiler_identity": checkpoint_manifest["compiler_identity"],
+    }
+    manifest = _final_manifest(
+        repo_root=repo_root,
+        runtime_root=runtime_root,
+        report_path=report_path,
+        source_sha=producer_source_sha,
+        frozen_hash=str(frozen["frozen_contract_sha256"]),
+        identities=identities,
+        state=state,
+        epoch_id=economic_config["epoch_id"],
+        base_sha=producer_source_sha,
+        status="ENGINE_VALIDATION_BLOCKED",
+        closure_source_sha=closure_sha,
+        continuation=(
+            "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-{economic_config['cli_suffix']} --runtime-date {runtime_date}"
+        ),
+    )
+    _write_json(runtime_root / "run_manifest.json", manifest)
+    return {
+        "result": "PASS",
+        "status": "ENGINE_VALIDATION_BLOCKED",
         "producer_source_sha": producer_source_sha,
         "closure_source_sha": closure_sha,
         "strict_evaluated_count": len(ledger),
@@ -7346,6 +7627,17 @@ def _write_validation_top_level_artifacts(
     )
 
 
+VALIDATION_CANDIDATE_FAIL_CLOSED_ERRORS = frozenset(
+    {
+        "CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY",
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+        "DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE",
+    }
+)
+
+
 def _restore_validation_checkpoint(
     *,
     runtime_root: Path,
@@ -7630,7 +7922,19 @@ def run_frozen_validation_stage(
     validation_rows: list[dict[str, Any]] = []
     for arm, rank, horizon_rank, train_row, candidate in selected:
         orientation = float(train_row["train_orientation"])
-        evaluation = dict(evaluate_selected(candidate, orientation))
+        try:
+            evaluation = dict(evaluate_selected(candidate, orientation))
+        except ValueError as exc:
+            reason = str(exc)
+            if reason not in VALIDATION_CANDIDATE_FAIL_CLOSED_ERRORS:
+                raise
+            raise _ValidationStageBlocked(
+                reason,
+                arm=arm,
+                candidate_id=candidate.candidate_id,
+                horizon_hours=int(candidate.horizon_hours),
+                selection_rank=int(rank),
+            ) from exc
         if evaluation.get("candidate_id") != candidate.candidate_id:
             raise RuntimeError("VALIDATION_EVALUATION_CANDIDATE_CHANGED")
         if evaluation.get("evaluation_partition") != "validation":
@@ -9001,6 +9305,86 @@ def run_engine(
                 flush=True,
             )
         stop_executor()
+    except _ValidationStageBlocked as failure:
+        stop_executor()
+        if not is_economic or economic_config is None:
+            raise
+        failure_payload = failure.to_dict()
+        state["validation_stage"] = {
+            "status": "BLOCKED_BEFORE_COMPLETE_EQUAL_COUNT",
+            **failure_payload,
+            "candidate_generation_performed": False,
+            "optimizer_feedback_written": False,
+            "policy_memory_written": False,
+            "holdout_read": False,
+        }
+        state["attempted_exact_ids"] = sorted(attempted_ids)
+        state["wall_elapsed_seconds"] = active_elapsed()
+        _write_top_level_artifacts(
+            runtime_root=runtime_root,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+        )
+        blocked_checkpoint = _write_checkpoint(
+            runtime_root=runtime_root,
+            label="checkpoint_validation_blocked",
+            checkpoint_index=int(state["next_checkpoint_index"]),
+            registry=registry,
+            state=state,
+            policies=policies,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            identities=identities,
+        )
+        decision = _validation_blocked_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            checkpoint=blocked_checkpoint,
+            failure=failure_payload,
+            campaign=campaign,
+        )
+        _write_json(runtime_root / "final_decision.json", decision)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            _validation_blocked_report_text(decision),
+            encoding="utf-8",
+            newline="\n",
+        )
+        manifest = _final_manifest(
+            repo_root=repo_root,
+            runtime_root=runtime_root,
+            report_path=report_path,
+            source_sha=source_sha,
+            frozen_hash=frozen_hash,
+            identities=identities,
+            state=state,
+            epoch_id=economic_config["epoch_id"],
+            base_sha=source_sha,
+            status="ENGINE_VALIDATION_BLOCKED",
+            continuation=(
+                "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+                f"check-{economic_config['cli_suffix']} "
+                f"--runtime-date {runtime_date}"
+            ),
+        )
+        _write_json(runtime_root / "run_manifest.json", manifest)
+        print(
+            json.dumps(
+                {
+                    "event": "search_engine_v1_validation_blocked",
+                    "checkpoint": blocked_checkpoint.name,
+                    "strict_evaluated": len(ledger),
+                    **failure_payload,
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
+        return {"result": "ENGINE_VALIDATION_BLOCKED", **decision}
     except _EngineBudgetExhausted as failure:
         stop_executor()
         state["attempted_exact_ids"] = sorted(attempted_ids)
@@ -9291,12 +9675,15 @@ def check_engine(
     budget_exhausted = (
         decision.get("status") == "ENGINE_BUDGET_EXHAUSTED"
     )
+    validation_blocked = (
+        decision.get("status") == "ENGINE_VALIDATION_BLOCKED"
+    )
     preflight = _read_json(runtime_root / "embedded_preflight.json")
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
     family_summary = _read_json(runtime_root / "behavior_family_summary.json")
-    if is_economic and not budget_exhausted:
+    if is_economic and not budget_exhausted and not validation_blocked:
         validation_rows = pd.read_parquet(
             runtime_root / "validation_candidate_ledger.parquet"
         )
@@ -9331,7 +9718,7 @@ def check_engine(
             errors.append("validation_arm_count")
         if validation_decisions.get("status") != "VALIDATION_STAGE_COMPLETE":
             errors.append("validation_decision")
-    elif is_economic:
+    elif is_economic and budget_exhausted:
         validation_status = decision.get("validation_stage", {}).get("status")
         if validation_status not in {
             "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000",
@@ -9353,6 +9740,17 @@ def check_engine(
                 errors.append(f"budget_exhausted_unexpected_validation:{name}")
             if validation_status == "VALIDATION_STAGE_COMPLETE" and not exists:
                 errors.append(f"budget_exhausted_missing_validation:{name}")
+    elif is_economic:
+        validation_status = decision.get("validation_stage", {}).get("status")
+        if validation_status != "BLOCKED_BEFORE_COMPLETE_EQUAL_COUNT":
+            errors.append("validation_blocked_status")
+        for name in (
+            "validation_candidate_ledger.parquet",
+            "validation_arm_metrics.parquet",
+            "validation_decisions.json",
+        ):
+            if (runtime_root / name).exists():
+                errors.append(f"validation_blocked_unexpected_artifact:{name}")
 
     frozen_without_hash = {
         key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
@@ -9412,14 +9810,18 @@ def check_engine(
     if preflight.get("workers_selected") not in {DEFAULT_WORKERS, FALLBACK_WORKERS}:
         errors.append("worker_selection")
 
-    if budget_exhausted:
+    if budget_exhausted or validation_blocked:
         if not 0 < len(ledger) < STRICT_TARGET:
-            errors.append("budget_exhausted_strict_count")
+            errors.append("partial_terminal_strict_count")
         if int(decision.get("strict_evaluated_count", -1)) != len(ledger):
-            errors.append("budget_exhausted_decision_count")
+            errors.append("partial_terminal_decision_count")
     elif len(ledger) != STRICT_TARGET:
         errors.append("strict_count")
-    expected_strict_count = len(ledger) if budget_exhausted else STRICT_TARGET
+    expected_strict_count = (
+        len(ledger)
+        if budget_exhausted or validation_blocked
+        else STRICT_TARGET
+    )
     if ledger["candidate_id"].nunique() != expected_strict_count:
         errors.append("exact_unique")
     for column in (
@@ -9492,6 +9894,40 @@ def check_engine(
                         "budget_exhausted_checkpoint_file:"
                         + str(record["name"])
                     )
+    elif validation_blocked:
+        if len(checkpoints) != 1:
+            errors.append("validation_blocked_numeric_checkpoint")
+        validation_stage = dict(decision.get("validation_stage") or {})
+        blocked_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_validation_blocked"
+        )
+        if blocked_checkpoint.is_dir():
+            blocked_manifest = _read_json(blocked_checkpoint / "manifest.json")
+            if blocked_manifest.get("restore_verified") is not True:
+                errors.append("validation_blocked_checkpoint_restore")
+            if int(
+                blocked_manifest.get("completed_ledger_row_count", -1)
+            ) != len(ledger):
+                errors.append("validation_blocked_checkpoint_rows")
+        elif (
+            validation_stage.get("closure_mode")
+            == "POST_MORTEM_FROM_VERIFIED_CHECKPOINT"
+            and decision.get("checkpoint") == "checkpoint_000"
+        ):
+            checkpoint_manifest = _read_json(
+                runtime_root
+                / "checkpoints"
+                / "checkpoint_000"
+                / "manifest.json"
+            )
+            if checkpoint_manifest.get("restore_verified") is not True:
+                errors.append("validation_blocked_checkpoint_restore")
+            if int(
+                checkpoint_manifest.get("completed_ledger_row_count", -1)
+            ) != len(ledger):
+                errors.append("validation_blocked_checkpoint_rows")
+        else:
+            errors.append("validation_blocked_checkpoint")
     elif len(checkpoints) != CHECKPOINT_COUNT:
         errors.append("checkpoint_count")
     for index, checkpoint in enumerate(checkpoints):
@@ -9541,6 +9977,17 @@ def check_engine(
             errors.append("budget_exhausted_research_decision")
         if decision.get("future_new_data_arena_qualified_arms") != []:
             errors.append("budget_exhausted_arm_qualification")
+    elif validation_blocked:
+        if len(ledger) != CHECKPOINT_SIZE:
+            errors.append("validation_blocked_checkpoint_count")
+        if set(metrics["checkpoint_index"].astype(int).unique()) != {0}:
+            errors.append("validation_blocked_checkpoint_metrics")
+        if decision.get("research_decision") != (
+            "HOLD_ENGINE_VALIDATION_BLOCKED"
+        ):
+            errors.append("validation_blocked_research_decision")
+        if decision.get("future_new_data_arena_qualified_arms") != []:
+            errors.append("validation_blocked_arm_qualification")
     else:
         initial = (
             ledger[ledger["checkpoint_index"] == 0]
@@ -12499,6 +12946,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-economic-v1",
             "run-economic-v2",
             "close-economic-v2",
+            "close-validation-blocked-v2",
             "check-economic-v2",
             "build-canary-cache",
             "run-canary",
@@ -12604,6 +13052,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             runtime_date=str(
                 args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            closure_source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
+        )
+    elif args.command == "close-validation-blocked-v2":
+        result = close_validation_blocked_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            expected_producer_source_sha=(
+                "bcb77cecf2d75e650e73998b37af9ceed1b71072"
             ),
             closure_source_sha=args.source_sha,
             campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
@@ -12752,6 +13212,7 @@ __all__ = [
     "check_v12",
     "check_v13",
     "check_engine",
+    "close_validation_blocked_engine",
     "run_frozen_validation_stage",
     "run_engine",
 ]

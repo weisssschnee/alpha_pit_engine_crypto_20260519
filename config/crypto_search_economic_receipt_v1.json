@@ -197,7 +197,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "7647AD0E2B6C97AC837ABF50B331F8E9FBC98510BA792BFF4D0DC903DE045695"
+      "sha256": "33FE152DE84209256C3C9E01094C9FA8FB67B021808765E1D688BFEFE3BC3694"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -217,7 +217,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "992AE117F2530041A35B137FD5F06CEAC29AD30E4BE4F78B42B08B7AF0684FB3"
+      "sha256": "018E3D34B70988E861D0FA642764EACEE4A1CE1BE92FFD593B0EB1E9ACFC1616"
     }
   }
 }
