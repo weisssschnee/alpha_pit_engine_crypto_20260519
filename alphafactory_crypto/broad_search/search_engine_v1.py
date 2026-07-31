@@ -5345,6 +5345,9 @@ def _validation_blocked_decision(
         ),
         "strict_evaluated_count": strict_count,
         "generation_attempts": int(state["generation_attempts"]),
+        "active_wall_seconds": float(
+            state.get("wall_elapsed_seconds", 0.0)
+        ),
         "checkpoint_count": int(state.get("next_checkpoint_index", 0)),
         "checkpoint": checkpoint.name,
         "checkpoint_restore_verified": True,
@@ -10022,12 +10025,16 @@ def check_engine(
             or decision.get("rescue_rerun_started") is not False
         ):
             errors.append("budget_exhausted_final_decision")
-    elif decision.get("status") != "PASS" or decision.get("sealed_reads") != 0:
+    elif (
+        not validation_blocked
+        and decision.get("status") != "PASS"
+    ) or decision.get("sealed_reads") != 0:
         errors.append("final_decision")
     if decision.get("next_arena_started") is not False:
         errors.append("next_arena_boundary")
     if (
         not budget_exhausted
+        and not validation_blocked
         and decision.get("success_questions", {}).get(
             "continuous_checkpoint_resume"
         )
@@ -10038,7 +10045,11 @@ def check_engine(
     if manifest.get("strict_evaluated_count") != expected_strict_count:
         errors.append("manifest_strict_count")
     expected_manifest_status = (
-        "ENGINE_BUDGET_EXHAUSTED" if budget_exhausted else "COMPLETED"
+        "ENGINE_BUDGET_EXHAUSTED"
+        if budget_exhausted
+        else "ENGINE_VALIDATION_BLOCKED"
+        if validation_blocked
+        else "COMPLETED"
     )
     if manifest.get("status") != expected_manifest_status:
         errors.append("manifest_status")
@@ -10082,6 +10093,9 @@ def check_engine(
         "component_qualification": (
             "HOLD_ENGINE_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000"
             if budget_exhausted
+            else
+            "HOLD_ENGINE_VALIDATION_BLOCKED"
+            if validation_blocked
             else
             "HOLD_POST_AUDIT_REMEDIATION_REQUIRED"
             if post_audit_holds
