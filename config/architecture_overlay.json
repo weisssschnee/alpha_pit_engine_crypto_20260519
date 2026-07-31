@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V5 fresh-state authorized; not started; research HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V5 validation complete; random control failed; research HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -473,7 +473,10 @@
                                     "reports/CRYPTO_SEARCH_ECONOMIC_V3_20260731.md",
                                     "runtime/crypto_search_economic_v4_20260731/run_manifest.json",
                                     "runtime/crypto_search_economic_v4_20260731/final_decision.json",
-                                    "reports/CRYPTO_SEARCH_ECONOMIC_V4_20260731.md"
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V4_20260731.md",
+                                    "runtime/crypto_search_economic_v5_20260731/run_manifest.json",
+                                    "runtime/crypto_search_economic_v5_20260731/final_decision.json",
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V5_20260731.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -481,8 +484,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v5.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "aef521fb8caa557f62097d551ee5d9a4ff6ae59d",
-                                        "sha256":  "F9A1EDBCFD47D7734B15A1716E3104FF2B42FDDF4E3CE17DC59BDD08A7DF88D3"
+                                        "verified_sha":  "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889",
+                                        "sha256":  "1CE1A6C108CE85C19C6D666D78E77F7F47A5BEA661932B0D0A593E66103E1BD9"
                                     },
                       "contracts":  [
                                         {
@@ -531,9 +534,9 @@
                                             "evidence_ref":  "runtime/crypto_search_economic_v4_20260731/final_decision.json"
                                         },
                                         {
-                                            "id":  "crypto_search_economic_v5_authorized_not_started",
+                                            "id":  "crypto_search_economic_v5_consumed_outcome",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The current user instruction authorizes exactly one crypto_search_economic_v5 fresh-state conditional-development campaign on the unchanged 115-field OI/mark x aggTrades carrier, receipt-bound Binance USD-M target, joint primary-plus-matched Sortino reward, frozen 5 bps cost, existing seeds, 20,000 strict-candidate target, 100,000-attempt cap, 18-hour cap, and 10-worker memory preflight with fail-closed fallback to 8. V5 imports no candidate, reward, RNG, distribution, population, policy, archive, checkpoint, receipt, or transition memory from V1-V4. The arm-local validation stage deterministically backfills candidate-local constructibility failures by frozen train rank within arm and horizon; if canonical typed random fails constructibility or the economic kill-line, the campaign closes at checkpoint_validation and allocates no later budget. The V5 runtime is not started at this authority snapshot. Tuning, reseeding, rescue, OOS, challenge, forward, promotion, latent training, operator expansion, formal claims, a second campaign, and all prior-state import remain forbidden.",
+                                            "rule":  "The one-run V5 receipt is consumed and run_authorized is false. Producer a6946df8b9b24db8572e48a5f8b79ef621feb0f9 used the unchanged 115-field OI/mark x aggTrades carrier, receipt-bound Binance USD-M target, joint primary-plus-matched Sortino reward, frozen 5 bps cost, existing seeds, and the fail-closed 8-worker memory fallback. It completed restore-verified checkpoint_000 with 2,000 strict candidates from 2,298 attempts and 1,962 behavior families. Validation persisted one canonical-random CONTROL_BEHAVIOR_EQUALS_PRIMARY candidate-local failure, deterministically backfilled by frozen train rank within the same 1h lane, and completed 128 matched evaluations per current arm with 64 at each 1h and 4h horizon. The canonical typed-random ensemble failed net mean, non-overlap floor Sortino, matched increment, and control-not-dominant conditions. The runner wrote restore-verified checkpoint_validation, exited all current arms, and allocated none of the remaining 18k budget. No arm qualifies. Tuning, reseeding, rescue, OOS, challenge, forward, promotion, latent training, operator expansion, formal claims, a second campaign, and all prior-state import remain forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt/require_real_experiment_authority and broad_search.search_engine_v1 run-economic-v5/run_frozen_validation_stage/check-economic-v5",
                                             "bypass_forbidden":  true,
@@ -542,7 +545,7 @@
                                         {
                                             "id":  "crypto_search_validation_arm_local_failure_repair",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The retained validation orchestrator records known candidate-local constructibility degenerations, deterministically backfills by frozen train rank within the same arm and horizon, exits only an arm whose frozen pool cannot fill the receipt-bound equal matched count, and prevents any other arm from qualifying when the canonical typed-random control fails constructibility or its economic kill-line. Attempted, evaluated, and failure counts plus exact failure identities are checkpointed and restored without reevaluation. A completed equal-count stage whose canonical control fails its economic kill-line now closes cleanly at checkpoint_validation instead of entering an undefined next-checkpoint allocation. Policy, archive, candidate generation, validation-reward selection, holdout access, and unexpected-error suppression remain forbidden. Verification is source/synthetic only with 344 passing tests and one pre-existing NumPy warning; no market candidate was generated, replayed, or evaluated by the repair, and every V1-V4 receipt remains consumed.",
+                                            "rule":  "The retained validation orchestrator records known candidate-local constructibility degenerations, deterministically backfills by frozen train rank within the same arm and horizon, exits only an arm whose frozen pool cannot fill the receipt-bound equal matched count, and prevents any other arm from qualifying when the canonical typed-random control fails constructibility or its economic kill-line. Attempted, evaluated, and failure counts plus exact failure identities are checkpointed and restored without reevaluation. A completed equal-count stage whose canonical control fails its economic kill-line closes cleanly at checkpoint_validation instead of entering an undefined next-checkpoint allocation. Policy, archive, candidate generation, validation-reward selection, holdout access, and unexpected-error suppression remain forbidden. Verification includes 345 passing tests plus V5 runtime evidence: one candidate-local failure was persisted and backfilled, all three arms reached the exact 128 validation count, policy/archive hashes were unchanged, and the random-control failure produced a verified terminal with no later allocation.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v1.run_frozen_validation_stage/check_engine and broad_search.experiment_authority.resolve_search_economic_receipt",
                                             "bypass_forbidden":  true,
@@ -675,7 +678,7 @@
                                         {
                                             "id":  "search_engine_economic_reward_suspension",
                                             "type":  "BOUNDARY",
-                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V4 schema-2 receipts are consumed. The distinct V5 schema-2 receipt authorizes one fresh-state conditional-development campaign using explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; it does not promote those bindings to active formal authority. Prior state, formal claims, OOS, promotion, parameter tuning, seed changes, rescue reruns, and a second V5 campaign remain forbidden.",
+                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V5 schema-2 receipts are consumed. V5 used explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; its validation-blocked outcome does not promote those bindings to active formal authority. Prior state, formal claims, OOS, promotion, parameter tuning, seed changes, rescue reruns, and another campaign remain forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
                                             "bypass_forbidden":  true,
@@ -695,9 +698,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "config/crypto_search_economic_receipt_v5.json",
-                                          "evidence_sha256":  "F9A1EDBCFD47D7734B15A1716E3104FF2B42FDDF4E3CE17DC59BDD08A7DF88D3",
-                                          "verified_at_sha":  "aef521fb8caa557f62097d551ee5d9a4ff6ae59d"
+                                          "evidence_ref":  "runtime/crypto_search_economic_v5_20260731/final_decision.json",
+                                          "evidence_sha256":  "B1769588F88AEF41EF569467BA8DB78FB5BEF72B259171B10C747FC2CD66A1DA",
+                                          "verified_at_sha":  "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -742,8 +745,12 @@
                                            "GROSS PERSISTENCE DIAGNOSTIC PASS",
                                            "95.16% GROSS POSITIVES COST-KILLED",
                                            "V1-V4 ECONOMIC RECEIPTS CONSUMED",
-                                           "V5 ONE-RUN FRESH-STATE AUTHORIZED",
-                                           "V5 NOT STARTED",
+                                           "V5 AUTHORIZATION CONSUMED",
+                                           "V5 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
+                                           "V5 EQUAL-COUNT VALIDATION COMPLETE",
+                                           "V5 RANDOM CONTROL KILL-LINE FAILED",
+                                           "V5 REMAINING 18K NOT ALLOCATED",
+                                           "V5 FUTURE ARENA ARMS NONE",
                                            "V5 PRIOR-STATE IMPORT FORBIDDEN",
                                            "ENGINEERING SEARCH CHAIN RETAINED",
                                            "PAIR REWARD DIAGNOSTIC ONLY",
