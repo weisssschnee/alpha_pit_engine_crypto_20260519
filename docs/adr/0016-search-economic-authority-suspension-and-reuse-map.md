@@ -133,14 +133,18 @@ accepted components whose nodes explicitly said `active_authority: false`.
   holdout now have one content-hashed successor receipt, but the receipt
   remains run-inactive and has no runtime or market evidence.
 - The fresh validation campaign orchestration is now reusable source inside
-  the existing Search Engine. It selects exactly 128 candidates per active arm
-  by frozen train reward, consumes each candidate's persisted train
+  the existing legacy rolling Search Engine. Immediately after
+  `checkpoint_000` updates and restores the frozen train policy, and before
+  `checkpoint_001` allocation, it selects the top 64 train candidates for each
+  required 1h/4h horizon per active arm (128 total), consumes each candidate's persisted train
   orientation and train-frozen limiting matched sleeve, evaluates only the
   receipt validation block, aggregates an equal-weight ensemble with a
   worst-horizon floor, invokes the existing kill-line, writes failed arms to
   the existing `arm_states`, and atomically publishes/restores
-  `checkpoint_validation`. Policy state, archive state, generation attempts,
-  and holdout access remain unchanged. This is source and synthetic-test
-  evidence only; no validation campaign ran.
+  `checkpoint_validation`. The next existing allocation consumes those states,
+  so a failed adaptive arm receives zero subsequent budget; a failed typed-random
+  control stops continuation. Policy state, archive state, generation attempts,
+  and holdout access remain unchanged. This is source and synthetic-test evidence
+  only; no validation campaign ran.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.

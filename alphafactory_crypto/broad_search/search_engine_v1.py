@@ -6474,12 +6474,21 @@ def _validation_path_summary(
 def _validation_arm_metrics(
     arm: str,
     records: Sequence[Mapping[str, Any]],
+    *,
+    required_horizons: Sequence[int],
 ) -> dict[str, Any]:
     by_horizon: dict[int, list[Mapping[str, Any]]] = defaultdict(list)
     for record in records:
         by_horizon[int(record["horizon_hours"])].append(record)
     if not by_horizon:
         raise ValueError(f"validation arm has no evaluated candidates: {arm}")
+    observed_horizons = tuple(sorted(by_horizon))
+    expected_horizons = tuple(sorted(int(value) for value in required_horizons))
+    if observed_horizons != expected_horizons:
+        raise RuntimeError(
+            "VALIDATION_REQUIRED_HORIZONS_MISSING:"
+            f"{arm}:expected={expected_horizons}:observed={observed_horizons}"
+        )
     horizon_rows: list[dict[str, Any]] = []
     for horizon, local in sorted(by_horizon.items()):
         primary_path = _equal_weight_path(
@@ -6589,6 +6598,10 @@ def _validation_arm_metrics(
         ),
         "aggregation": (
             "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+        ),
+        "required_horizons_hours_json": json.dumps(
+            expected_horizons,
+            separators=(",", ":"),
         ),
     }
 
@@ -6714,12 +6727,37 @@ def run_frozen_validation_stage(
     ):
         raise RuntimeError("ECONOMIC_RECEIPT_VALIDATION_WRITE_BOUNDARY_CHANGED")
     evaluated_per_arm = int(kill_line.get("evaluated_per_active_arm", 0))
+    evaluated_per_horizon = int(
+        kill_line.get("evaluated_per_arm_per_horizon", 0)
+    )
     minimum = int(kill_line.get("minimum_evaluated_per_active_arm", 0))
-    if evaluated_per_arm < minimum or minimum <= 0:
+    required_horizons = tuple(
+        int(value) for value in kill_line.get("required_horizons_hours", ())
+    )
+    receipt_horizons = tuple(
+        int(value)
+        for value in dict(economic_receipt.get("execution") or {}).get(
+            "horizons_hours",
+            (),
+        )
+    )
+    if (
+        evaluated_per_arm < minimum
+        or minimum <= 0
+        or evaluated_per_horizon <= 0
+        or len(required_horizons) < 2
+        or tuple(sorted(required_horizons))
+        != tuple(sorted(receipt_horizons))
+        or evaluated_per_horizon * len(required_horizons)
+        != evaluated_per_arm
+    ):
         raise RuntimeError("VALIDATION_EVALUATED_COUNT_CONTRACT_INVALID")
     if (
         kill_line.get("candidate_selection")
-        != "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+        != (
+            "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
+            "THEN_COMPLETION_ORDINAL"
+        )
     ):
         raise RuntimeError("VALIDATION_CANDIDATE_SELECTION_CHANGED")
     if (
@@ -6745,24 +6783,48 @@ def run_frozen_validation_stage(
     )
     if not active_arms:
         raise RuntimeError("VALIDATION_HAS_NO_ACTIVE_ARMS")
-    selected: list[tuple[str, int, Mapping[str, Any], CandidateSpec]] = []
+    selected: list[
+        tuple[str, int, int, Mapping[str, Any], CandidateSpec]
+    ] = []
     expected_receipt_hash = str(
         economic_receipt.get("receipt_sha256") or ""
     )
     for arm in active_arms:
-        candidates = sorted(
-            by_arm.get(arm, ()),
-            key=lambda row: (
-                -float(row["search_reward"]),
-                int(row["arm_completion_ordinal"]),
-                str(row["candidate_id"]),
-            ),
-        )
-        if len(candidates) < evaluated_per_arm:
-            raise RuntimeError(
-                f"VALIDATION_TRAIN_CANDIDATE_COUNT_TOO_SMALL:{arm}"
+        arm_selected: list[tuple[int, int, Mapping[str, Any]]] = []
+        for horizon in required_horizons:
+            candidates = sorted(
+                (
+                    row
+                    for row in by_arm.get(arm, ())
+                    if int(
+                        CandidateSpec.from_dict(
+                            json.loads(str(row["candidate_spec_json"]))
+                        ).horizon_hours
+                    )
+                    == horizon
+                ),
+                key=lambda row: (
+                    -float(row["search_reward"]),
+                    int(row["arm_completion_ordinal"]),
+                    str(row["candidate_id"]),
+                ),
             )
-        for rank, row in enumerate(candidates[:evaluated_per_arm], start=1):
+            if len(candidates) < evaluated_per_horizon:
+                raise RuntimeError(
+                    "VALIDATION_TRAIN_HORIZON_COUNT_TOO_SMALL:"
+                    f"{arm}:{horizon}"
+                )
+            arm_selected.extend(
+                (horizon, horizon_rank, row)
+                for horizon_rank, row in enumerate(
+                    candidates[:evaluated_per_horizon],
+                    start=1,
+                )
+            )
+        for rank, (horizon, horizon_rank, row) in enumerate(
+            arm_selected,
+            start=1,
+        ):
             if row.get("search_reward_authority") != SEARCH_REWARD_AUTHORITY:
                 raise RuntimeError(
                     f"VALIDATION_TRAIN_REWARD_AUTHORITY_CHANGED:{arm}"
@@ -6787,7 +6849,13 @@ def run_frozen_validation_stage(
                 raise RuntimeError(
                     f"VALIDATION_CANDIDATE_IDENTITY_CHANGED:{arm}"
                 )
-            selected.append((arm, rank, row, candidate))
+            if int(candidate.horizon_hours) != int(horizon):
+                raise RuntimeError(
+                    f"VALIDATION_CANDIDATE_HORIZON_CHANGED:{arm}"
+                )
+            selected.append(
+                (arm, rank, horizon_rank, row, candidate)
+            )
 
     if evaluation_runner is None:
         def evaluate_selected(
@@ -6813,7 +6881,7 @@ def run_frozen_validation_stage(
     archive_hash_before = archive.state_hash()
     internal_records: list[dict[str, Any]] = []
     validation_rows: list[dict[str, Any]] = []
-    for arm, rank, train_row, candidate in selected:
+    for arm, rank, horizon_rank, train_row, candidate in selected:
         orientation = float(train_row["train_orientation"])
         evaluation = dict(evaluate_selected(candidate, orientation))
         if evaluation.get("candidate_id") != candidate.candidate_id:
@@ -6841,6 +6909,7 @@ def run_frozen_validation_stage(
         internal = {
             "arm": arm,
             "selection_rank": int(rank),
+            "horizon_selection_rank": int(horizon_rank),
             "candidate_id": candidate.candidate_id,
             "horizon_hours": int(candidate.horizon_hours),
             "matched_component": matched_component,
@@ -6872,6 +6941,7 @@ def run_frozen_validation_stage(
             {
                 "arm": arm,
                 "selection_rank": int(rank),
+                "horizon_selection_rank": int(horizon_rank),
                 "candidate_id": candidate.candidate_id,
                 "horizon_hours": int(candidate.horizon_hours),
                 "train_search_reward": float(train_row["search_reward"]),
@@ -6900,6 +6970,7 @@ def run_frozen_validation_stage(
         _validation_arm_metrics(
             arm,
             [row for row in internal_records if row["arm"] == arm],
+            required_horizons=required_horizons,
         )
         for arm in active_arms
     ]
@@ -6936,6 +7007,12 @@ def run_frozen_validation_stage(
         "schema_version": 1,
         "status": "VALIDATION_STAGE_COMPLETE",
         "matched_evaluated_counts": counts,
+        "orchestration_campaign": kill_line["orchestration_campaign"],
+        "trigger_after_train_checkpoint_index": int(
+            kill_line["trigger_after_train_checkpoint_index"]
+        ),
+        "required_horizons_hours": list(required_horizons),
+        "evaluated_per_arm_per_horizon": evaluated_per_horizon,
         "candidate_selection": kill_line["candidate_selection"],
         "arm_aggregation": kill_line["arm_aggregation"],
         "arm_decisions": decisions,
@@ -6997,6 +7074,28 @@ def run_frozen_validation_stage(
         restored_archive,
         restored_metrics,
         {**validation_decisions, "resumed": False},
+    )
+
+
+def _frozen_validation_due(
+    *,
+    campaign: str,
+    state: Mapping[str, Any],
+    economic_receipt: Mapping[str, Any],
+) -> bool:
+    kill_line = dict(economic_receipt.get("validation_kill_line") or {})
+    expected_campaign = str(kill_line.get("orchestration_campaign") or "")
+    if campaign != expected_campaign:
+        raise RuntimeError(
+            "ECONOMIC_RECEIPT_VALIDATION_CAMPAIGN_CHANGED:"
+            f"expected={expected_campaign}:observed={campaign}"
+        )
+    trigger = int(kill_line.get("trigger_after_train_checkpoint_index", -1))
+    if trigger < 0:
+        raise RuntimeError("VALIDATION_CHECKPOINT_TRIGGER_INVALID")
+    return (
+        "validation_stage" not in state
+        and int(state.get("next_checkpoint_index", 0)) > trigger
     )
 
 
@@ -7352,7 +7451,67 @@ def run_engine(
             executor.shutdown(wait=True, cancel_futures=False)
             executor = None
 
+    validation_result: dict[str, Any] | None = None
+    if isinstance(state.get("validation_stage"), Mapping):
+        validation_result = {
+            **dict(state["validation_stage"]),
+            "resumed": True,
+        }
+
+    def execute_frozen_validation_if_due() -> bool:
+        nonlocal state
+        nonlocal policies
+        nonlocal ledger
+        nonlocal archive
+        nonlocal metrics
+        nonlocal attempted_ids
+        nonlocal validation_result
+        if not _frozen_validation_due(
+            campaign=campaign,
+            state=state,
+            economic_receipt=economic_receipt,
+        ):
+            return False
+        stop_executor()
+        from alphafactory_crypto.broad_search.replay_v14_binance_target import (
+            BinanceTargetStore,
+        )
+
+        validation_execution = dict(economic_receipt["execution"])
+        validation_target_root = (
+            repo_root / str(validation_execution["target_cache_path"])
+        )
+        _validate_receipt_target_store_binding(
+            store,
+            validation_target_root,
+            validation_execution,
+        )
+        (
+            state,
+            policies,
+            ledger,
+            archive,
+            metrics,
+            validation_result,
+        ) = run_frozen_validation_stage(
+            runtime_root=runtime_root,
+            store=BinanceTargetStore(store, validation_target_root),
+            registry=registry,
+            state=state,
+            policies=policies,
+            train_ledger=ledger,
+            archive=archive,
+            train_metrics=metrics,
+            identities=identities,
+            economic_receipt=economic_receipt,
+        )
+        attempted_ids = set(
+            str(value) for value in state["attempted_exact_ids"]
+        )
+        return True
+
     try:
+        execute_frozen_validation_if_due()
         executor = start_executor(int(state["workers"]))
         for checkpoint_index in range(
             int(state["next_checkpoint_index"]), checkpoint_count
@@ -7934,6 +8093,12 @@ def run_engine(
                 expected_frozen_hash=frozen_hash,
                 expected_identities=identities,
             )
+            validation_ran = execute_frozen_validation_if_due()
+            if (
+                validation_ran
+                and int(state["next_checkpoint_index"]) < checkpoint_count
+            ):
+                executor = start_executor(int(state["workers"]))
             if is_v13 and checkpoint_index == 0:
                 canary_path = runtime_root / "constructibility_canary.json"
                 canary = _read_json(canary_path)
@@ -8008,38 +8173,10 @@ def run_engine(
         raise AssertionError(
             f"Search Engine V1 ended without exactly {strict_target:,} strict candidates"
         )
-    from alphafactory_crypto.broad_search.replay_v14_binance_target import (
-        BinanceTargetStore,
-    )
-
-    validation_execution = dict(economic_receipt["execution"])
-    validation_target_root = (
-        repo_root / str(validation_execution["target_cache_path"])
-    )
-    _validate_receipt_target_store_binding(
-        store,
-        validation_target_root,
-        validation_execution,
-    )
-    (
-        state,
-        policies,
-        ledger,
-        archive,
-        metrics,
-        validation_result,
-    ) = run_frozen_validation_stage(
-        runtime_root=runtime_root,
-        store=BinanceTargetStore(store, validation_target_root),
-        registry=registry,
-        state=state,
-        policies=policies,
-        train_ledger=ledger,
-        archive=archive,
-        train_metrics=metrics,
-        identities=identities,
-        economic_receipt=economic_receipt,
-    )
+    if validation_result is None:
+        raise RuntimeError(
+            "VALIDATION_STAGE_NOT_COMPLETED_BEFORE_ADDITIONAL_BUDGET"
+        )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
         _v13_final_decision(

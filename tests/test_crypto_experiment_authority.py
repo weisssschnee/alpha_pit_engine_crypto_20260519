@@ -138,11 +138,27 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "apply_search_validation_kill_line"
     )
     assert result["validation_kill_line"]["evaluated_per_active_arm"] == 128
+    assert result["validation_kill_line"]["orchestration_campaign"] == "legacy"
+    assert (
+        result["validation_kill_line"][
+            "trigger_after_train_checkpoint_index"
+        ]
+        == 0
+    )
+    assert result["validation_kill_line"]["required_horizons_hours"] == [1, 4]
+    assert (
+        result["validation_kill_line"]["evaluated_per_arm_per_horizon"]
+        == 64
+    )
     assert result["validation_kill_line"]["candidate_selection"] == (
-        "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+        "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
+        "THEN_COMPLETION_ORDINAL"
     )
     assert result["validation_kill_line"]["failed_arm_allocation"] == (
         "EXISTING_ARM_STATE_EXITED"
+    )
+    assert result["validation_kill_line"]["continuation_action"] == (
+        "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE"
     )
     assert result["holdout"]["read_allowed"] is False
     assert result["run_authorized"] is False

@@ -7,6 +7,7 @@ from copy import deepcopy
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pytest
 
 from alphafactory_crypto.broad_search.audit import (
@@ -64,6 +65,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _checkpoint_allocation,
     _evaluation_audit_fields,
     _export_policy,
+    _frozen_validation_due,
     _load_checkpoint,
     _metrics_rows,
     _new_campaign_state,
@@ -458,7 +460,7 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     source_sha = "a" * 40
     frozen_hash = "b" * 64
     state = _new_campaign_state(source_sha, frozen_hash, arms=arms, seeds=SEEDS)
-    state["next_checkpoint_index"] = 2
+    state["next_checkpoint_index"] = 1
     policies = _initial_policies(registry, arms=arms, seeds=SEEDS)
     policy_hash_before = _payload_sha(
         {
@@ -481,7 +483,7 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
                 candidate.mechanism_family,
                 candidate.expression,
                 candidate.control,
-                candidate.horizon_hours,
+                1 if ordinal <= 64 else 4,
                 candidate.mapping_id,
                 candidate.raw_fields,
                 candidate.field_families,
@@ -536,6 +538,7 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
 
     receipt = {
         "receipt_sha256": "R" * 64,
+        "execution": {"horizons_hours": [1, 4]},
         "validation": {
             "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
             "start": "2025-11-01T00:00:00Z",
@@ -545,10 +548,15 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
             "candidate_generation_allowed": False,
         },
         "validation_kill_line": {
+            "orchestration_campaign": "legacy",
+            "trigger_after_train_checkpoint_index": 0,
             "minimum_evaluated_per_active_arm": 128,
             "evaluated_per_active_arm": 128,
+            "required_horizons_hours": [1, 4],
+            "evaluated_per_arm_per_horizon": 64,
             "candidate_selection": (
-                "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+                "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
+                "THEN_COMPLETION_ORDINAL"
             ),
             "arm_aggregation": (
                 "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
@@ -583,11 +591,15 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     assert result["matched_evaluated_counts"] == {
         arm: 128 for arm in arms
     }
+    metrics_frame = pd.read_parquet(
+        tmp_path / "validation_arm_metrics.parquet"
+    )
+    assert set(metrics_frame["required_horizons_hours_json"]) == {"[1,4]"}
     assert restored_state["arm_states"]["hierarchical_typed_cem_v2"] == "EXITED"
     assert restored_state["arm_states"]["canonical_typed_random"] == "ACTIVE"
     assert restored_state["arm_states"]["typed_evolution_v2"] == "ACTIVE"
     next_allocation = _checkpoint_allocation(
-        2, restored_state["arm_states"]
+        1, restored_state["arm_states"]
     )
     assert next_allocation["hierarchical_typed_cem_v2"] == 0
     assert next_allocation["canonical_typed_random"] >= 400
@@ -629,6 +641,53 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     )
     assert resumed[-1]["resumed"] is True
     assert resumed[0]["validation_stage"] == restored_state["validation_stage"]
+
+
+def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
+    receipt = {
+        "validation_kill_line": {
+            "orchestration_campaign": "legacy",
+            "trigger_after_train_checkpoint_index": 0,
+        }
+    }
+    state = {
+        "next_checkpoint_index": 0,
+        "arm_states": {
+            "canonical_typed_random": "ACTIVE",
+            "hierarchical_typed_cem_v2": "ACTIVE",
+            "typed_evolution_v2": "ACTIVE",
+        },
+    }
+    assert not _frozen_validation_due(
+        campaign="legacy",
+        state=state,
+        economic_receipt=receipt,
+    )
+    state["next_checkpoint_index"] = 1
+    assert _frozen_validation_due(
+        campaign="legacy",
+        state=state,
+        economic_receipt=receipt,
+    )
+    state["validation_stage"] = {"status": "VALIDATION_STAGE_COMPLETE"}
+    state["arm_states"]["hierarchical_typed_cem_v2"] = "EXITED"
+    assert not _frozen_validation_due(
+        campaign="legacy",
+        state=state,
+        economic_receipt=receipt,
+    )
+    next_allocation = _checkpoint_allocation(1, state["arm_states"])
+    assert next_allocation["hierarchical_typed_cem_v2"] == 0
+    assert sum(next_allocation.values()) == 2_000
+    with pytest.raises(
+        RuntimeError,
+        match="ECONOMIC_RECEIPT_VALIDATION_CAMPAIGN_CHANGED",
+    ):
+        _frozen_validation_due(
+            campaign="search_engine_v1_3_cross_carrier",
+            state=state,
+            economic_receipt=receipt,
+        )
 
 
 def test_report_only_metrics_are_not_policy_feedback() -> None:

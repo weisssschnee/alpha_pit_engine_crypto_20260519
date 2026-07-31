@@ -391,15 +391,35 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.authority_symbol")
     if kill_line.get("runtime_symbol") != expected_validation_runtime:
         blockers.append("validation_kill_line.runtime_symbol")
+    if (
+        kill_line.get("evaluation_order")
+        != "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET"
+    ):
+        blockers.append("validation_kill_line.evaluation_order")
     if kill_line.get("equal_matched_evaluated_count") is not True:
         blockers.append("validation_kill_line.equal_matched_evaluated_count")
+    if kill_line.get("orchestration_campaign") != "legacy":
+        blockers.append("validation_kill_line.orchestration_campaign")
+    if kill_line.get("trigger_after_train_checkpoint_index") != 0:
+        blockers.append(
+            "validation_kill_line.trigger_after_train_checkpoint_index"
+        )
     if kill_line.get("minimum_evaluated_per_active_arm") != 128:
         blockers.append("validation_kill_line.minimum_evaluated_per_active_arm")
     if kill_line.get("evaluated_per_active_arm") != 128:
         blockers.append("validation_kill_line.evaluated_per_active_arm")
+    if kill_line.get("required_horizons_hours") != [1, 4]:
+        blockers.append("validation_kill_line.required_horizons_hours")
+    if kill_line.get("evaluated_per_arm_per_horizon") != 64:
+        blockers.append(
+            "validation_kill_line.evaluated_per_arm_per_horizon"
+        )
     if (
         kill_line.get("candidate_selection")
-        != "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+        != (
+            "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
+            "THEN_COMPLETION_ORDINAL"
+        )
     ):
         blockers.append("validation_kill_line.candidate_selection")
     if (
@@ -413,6 +433,11 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.failure_action")
     if kill_line.get("failed_arm_allocation") != "EXISTING_ARM_STATE_EXITED":
         blockers.append("validation_kill_line.failed_arm_allocation")
+    if (
+        kill_line.get("continuation_action")
+        != "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE"
+    ):
+        blockers.append("validation_kill_line.continuation_action")
     if (
         kill_line.get("checkpoint_action")
         != "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS"
