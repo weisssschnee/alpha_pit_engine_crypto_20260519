@@ -136,12 +136,27 @@ def test_frozen_campaign_contract_has_continuous_stage_allocation() -> None:
     assert frozen["stages"] == config["stages"]
 
 
-def test_mechanism_receipt_authorizes_independent_final_arm_validation() -> None:
+def test_mechanism_receipt_consumes_validation_blocked_outcome() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_mechanism_v2_receipt.json",
     )
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED"
+    )
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "reason": "VALIDATION_CONTROL_PATH_SCHEMA_INCONSISTENT",
+        "runtime": "runtime/crypto_search_mechanism_v2_20260801",
+        "producer_source_sha": (
+            "ef688d89ca0e89654015bf5f76a6b9c26494d837"
+        ),
+        "generation_attempts": 20_386,
+        "strict_evaluated_count": 12_000,
+        "checkpoint": "checkpoint_005",
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["strict_evaluated_target"] == 12_000
     assert receipt["search_campaign"]["checkpoint_count"] == 6
     assert receipt["mechanism"]["economic_hypothesis_field"] == "hypothesis"
