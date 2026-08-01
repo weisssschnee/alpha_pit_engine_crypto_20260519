@@ -5695,6 +5695,10 @@ def _metrics_rows(
                     bool(row["matched_positive"]) for row in rows
                 )
                 / max(cpu_hours, 1.0e-12),
+                "positive_search_rewards_per_cpu_hour": sum(
+                    float(row["search_reward"]) > 0.0 for row in rows
+                )
+                / max(cpu_hours, 1.0e-12),
                 "new_behavior_families_per_cpu_hour": sum(
                     bool(
                         row.get(
@@ -5723,6 +5727,11 @@ def _metrics_rows(
                 "top_decile_pair_reward_at_matched_count": top_pair_reward,
                 "positive_matched_family_rate": sum(
                     bool(row["matched_positive"])
+                    for row in family_champions.values()
+                )
+                / max(1, len(family_champions)),
+                "positive_search_reward_family_rate": sum(
+                    float(row["search_reward"]) > 0.0
                     for row in family_champions.values()
                 )
                 / max(1, len(family_champions)),
@@ -5904,6 +5913,17 @@ def _metrics_rows(
                 / 3600.0,
             ),
             "positive_matched_discoveries_per_cpu_hour": None,
+            "positive_search_rewards_per_cpu_hour": sum(
+                float(row["search_reward"]) > 0.0 for row in ledger
+            )
+            / max(
+                1.0e-12,
+                sum(
+                    float(value["cpu_seconds"])
+                    for value in state["arm_counters"].values()
+                )
+                / 3600.0,
+            ),
             "new_behavior_families_per_cpu_hour": None,
             "new_behavior_families_per_1k_evaluations": 1000.0
             * len(archive.champion_by_family)
@@ -5915,6 +5935,11 @@ def _metrics_rows(
             "top_decile_pair_reward_at_matched_count": None,
             "positive_matched_family_rate": sum(
                 bool(row["champion_matched_positive"])
+                for row in archive.summary_rows()
+            )
+            / max(1, len(archive.champion_by_family)),
+            "positive_search_reward_family_rate": sum(
+                float(row["champion_search_reward"]) > 0.0
                 for row in archive.summary_rows()
             )
             / max(1, len(archive.champion_by_family)),
@@ -15554,7 +15579,10 @@ def check_mechanism_v2(
     for operation in MECHANISM_EVOLUTION_OPERATIONS:
         operation_rows = ledger.loc[ledger["operation"].astype(str) == operation]
         if operation_rows.empty or not bool(
-            operation_rows["receipt_verified"].fillna(False).all()
+            operation_rows["receipt_verified"]
+            .astype("boolean")
+            .fillna(False)
+            .all()
         ):
             errors.append(f"operation_not_verified:{operation}")
 

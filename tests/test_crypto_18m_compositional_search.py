@@ -2212,7 +2212,7 @@ def test_metrics_use_valid_exact_unique_counter_for_cpu_density() -> None:
             "arm": "canonical_typed_random",
             "checkpoint_index": 0,
             "behavior_family_id": "FAMILY",
-            "search_reward": -1.0,
+            "search_reward": 0.5,
             "pair_reward": -1.0,
             "candidate_id": "CANDIDATE",
             "matched_positive": False,
@@ -2237,3 +2237,6 @@ def test_metrics_use_valid_exact_unique_counter_for_cpu_density() -> None:
     campaign = next(row for row in rows if row["arm"] == "__campaign__")
     assert random_arm["valid_exact_unique_per_cpu_hour"] == pytest.approx(9.0)
     assert campaign["valid_exact_unique_per_cpu_hour"] == pytest.approx(9.0)
+    assert random_arm["positive_matched_discoveries_per_cpu_hour"] == 0.0
+    assert random_arm["positive_search_rewards_per_cpu_hour"] == 1.0
+    assert random_arm["positive_search_reward_family_rate"] == 1.0
