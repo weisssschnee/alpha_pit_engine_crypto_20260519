@@ -1,0 +1,20 @@
+{
+  "capture_role": "POST_MORTEM_PROCESS_EXIT_RECORD",
+  "captured_at_utc": "2026-08-01T09:43:54.9527745Z",
+  "checkpoint": "checkpoint_005",
+  "exception_message": "validation control path inconsistent for arm: extensible_mechanism_random_v2:interaction_left",
+  "exception_type": "ValueError",
+  "exit_code": 1,
+  "generation_attempts_at_exit": 20386,
+  "producer_source_sha": "ef688d89ca0e89654015bf5f76a6b9c26494d837",
+  "process_wall_seconds": 41790.5,
+  "rescue_rerun_started": false,
+  "schema_version": 1,
+  "status": "PROCESS_EXIT_CAPTURED",
+  "strict_evaluated_at_exit": 12000,
+  "terminal_output_truncated_by_host": true,
+  "traceback_file": "alphafactory_crypto/broad_search/search_engine_v1.py",
+  "traceback_function": "_validation_arm_metrics",
+  "traceback_line_at_producer": 9385,
+  "validation_artifacts_persisted_before_exit": false
+}

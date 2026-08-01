@@ -1,0 +1,4013 @@
+{
+  "arms": {
+    "active": [
+      "canonical_typed_random",
+      "extensible_mechanism_random_v2",
+      "mechanism_level_cem_v2",
+      "mechanism_evolution_v2"
+    ],
+    "arm_local_adaptive_memory": true,
+    "random_control_survival_required_for_adaptive_search": false,
+    "same_frozen_seed_set_for_every_arm": true
+  },
+  "authorization": "ONE_FRESH_STATE_12000_STRICT_MECHANISM_CAMPAIGN",
+  "base_sha": "bbb0e696bc5f560f733dd4e9bfe263f11e4bb840",
+  "behavior_descriptor": {
+    "contract_sha256": "5C4F21D45F4DA55FEF2E689181A2D9F25041B5AC37D3C74278005688274E5E34",
+    "frozen_observation_count": 1528,
+    "mapped_weight_quantization_step": 0.05,
+    "observed_support_sha256": "465C2002A61B893458167DEE0DB3B96139A3A3A8888180C4CE27E143E4E55D99",
+    "outcome_fields_in_identity": [],
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "pit_regime_source": "__BASE_ELIGIBLE_COUNT__",
+    "pit_regime_source_validation": "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT",
+    "pit_regime_thresholds": [
+      118.0,
+      122.0,
+      126.0
+    ],
+    "pit_regime_thresholds_sha256": "CCECF4207B7F1AACDC8C96A257BDEA04A3C253BE2C6778245D9A61CD8BA1815E",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "selected_overlap_quantization_step": 0.1,
+    "selected_weight_epsilon": 1e-12,
+    "selection_rate_quantization_step": 0.2,
+    "turnover_bin_edges": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "turnover_histogram_quantization_step": 0.1
+  },
+  "boundaries": {
+    "challenge": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_only": true,
+    "forward": false,
+    "latent_priority": false,
+    "liquidation": "HOLD",
+    "may_stress": false,
+    "oos": false,
+    "promotion": false,
+    "recent": false,
+    "relational_training": false,
+    "report_only_feedback": false,
+    "sealed_reads": 0
+  },
+  "budget": {
+    "checkpoint_count": 6,
+    "checkpoint_size": 2000,
+    "fail_closed_attempt_reservation_per_proposal": 4225,
+    "raw_generation_attempts_maximum": 100000,
+    "strict_evaluated_target": 12000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "comparison_contract": {
+    "adaptive_vs_mechanism_random_count": 3000,
+    "pair_reward_per_cpu_hour_forbidden": true,
+    "primary_efficiency_metrics": [
+      "valid_exact_unique_per_cpu_hour",
+      "positive_matched_discoveries_per_cpu_hour",
+      "new_behavior_families_per_cpu_hour",
+      "new_behavior_families_per_1k_evaluations",
+      "positive_matched_family_rate",
+      "behavior_duplicate_rate"
+    ],
+    "reward_quality_metrics": [
+      "mean_search_reward_at_matched_count",
+      "top_decile_search_reward_at_matched_count",
+      "mean_pair_reward_at_matched_count",
+      "top_decile_pair_reward_at_matched_count"
+    ],
+    "same_matched_evaluated_count": true,
+    "stage_b_vs_stage_a_count": 2000
+  },
+  "compiler_identity": {
+    "bundle_sha256": "CB4D6E5DB4DF729F1748D751B26AA79AD1302A396A34BDF53AEA659A6E871433",
+    "paths": [
+      {
+        "bytes": 53858,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+      },
+      {
+        "bytes": 22527,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "07549C7DE24C7BB4EE593A2F80CBED7831BE2D9B7992A4B922B2D2E89A6AA7A7"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 84087,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "989C337BB17F9893FE585785B781E392FC600ADF3166433AB113C553EEFD0DC0"
+      },
+      {
+        "bytes": 66378,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "7963A36C426174A8A8C745CF73BCF19ADD53EA24487E0F037CDEC222F623BFC9"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 652811,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "C0C7A934CD8642FA48A4F74CB0E3A4CE791C0F4F2DC5DD953A59373CAA26A2AA"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "cpu_hour_definition": "sum process CPU seconds for proposal, compile, archive, and pair evaluation; excludes queue and human wait",
+  "economic_receipt": {
+    "component_sha256": {
+      "campaign_contract": "ED35C73E9AF95DC19D50A98CBDDCF4BE96464BA517B4989C6B9A58DA65B786A7",
+      "direction": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9",
+      "mechanism": "989C337BB17F9893FE585785B781E392FC600ADF3166433AB113C553EEFD0DC0",
+      "mechanism_catalog": "472BCAE447D078BA9B59C13B192ADB70BF383D4385CE66C5AB66B3B5F7C11861",
+      "mechanism_mapping": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
+      "optimizer_reward_and_matched_attribution": "7963A36C426174A8A8C745CF73BCF19ADD53EA24487E0F037CDEC222F623BFC9",
+      "portfolio_mapping_and_cost": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036",
+      "runtime_binding": "A8DE78DD8287D276FEE68A85DF40E10C752FFB27054546C2D709D917A3DCA3BC",
+      "target_contract": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+      "target_execution": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629",
+      "validation_kill_line": "6E775900DE6B07843AAB1D4E67248FE2126882F869122135C9FEC95C5AD5BDA4"
+    },
+    "cost": {
+      "cost_bps": 5.0,
+      "initial_establishment_charged": true,
+      "model_id": "FULL_L1_FIXED_BPS"
+    },
+    "direction": {
+      "allowed_values": [
+        -1,
+        1
+      ],
+      "authority_symbol": "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation",
+      "fit_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "persist_in_candidate_ledger": true,
+      "rule": "TRAIN_FROZEN_SIGN_ORIENTATION"
+    },
+    "evidence_partition": {
+      "holdout": {
+        "end_exclusive": "2026-07-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "read_allowed": false,
+        "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+        "start": "2026-01-01T00:00:00Z"
+      },
+      "train": {
+        "end_exclusive": "2025-11-01T00:00:00Z",
+        "optimizer_feedback_allowed": true,
+        "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+        "start": "2025-08-29T07:00:00Z"
+      },
+      "validation": {
+        "candidate_generation_allowed": false,
+        "end_exclusive": "2026-01-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+        "start": "2025-11-01T00:00:00Z"
+      }
+    },
+    "execution": {
+      "authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+      "execution_delay_hours": 2,
+      "formula": "log(open_price[t+2+h] / open_price[t+2])",
+      "horizons_hours": [
+        1,
+        4
+      ],
+      "instrument_type": "LINEAR_PERPETUAL",
+      "missing_value_fill": null,
+      "partition_tail_purge_hours": 6,
+      "positive_price_required": true,
+      "price_field": "open_price",
+      "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+      "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+      "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
+      "target_store_symbol": "alphafactory_crypto.broad_search.replay_v14_binance_target.BinanceTargetStore",
+      "venue": "BINANCE_USD_M"
+    },
+    "formal_claims_authorized": false,
+    "holdout": {
+      "end_exclusive": "2026-07-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "read_allowed": false,
+      "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+      "start": "2026-01-01T00:00:00Z"
+    },
+    "market": {
+      "asset_class": "CRYPTO",
+      "calendar": "CONTINUOUS_UTC"
+    },
+    "mechanism": {
+      "candidate_bindings": [
+        "mechanism_id",
+        "mechanism_spec",
+        "hypothesis"
+      ],
+      "catalog_path": "config/crypto_typed_mechanism_catalog_v2.json",
+      "economic_hypothesis_field": "hypothesis",
+      "mapping_adapter_symbol": "alphafactory_crypto.broad_search.compositional18m.mapping_id_for_mechanism_spec",
+      "mapping_authority_symbol": "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING",
+      "mapping_classes": [
+        "CROSS_SECTIONAL_RELATIVE",
+        "DIRECTIONAL_STATEFUL",
+        "SPARSE_EVENT_CARRY"
+      ],
+      "registry_symbol": "alphafactory_crypto.broad_search.compositional18m.compile_mechanism_catalog"
+    },
+    "optimizer_reward": {
+      "authority_id": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+      "authority_symbol": "alphafactory_crypto.broad_search.pair18m.SEARCH_REWARD_AUTHORITY",
+      "feedback_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "pair_reward_role": "MATCHED_ATTRIBUTION_DIAGNOSTIC_ONLY"
+    },
+    "portfolio": {
+      "mapping_authority_component": "explicit_portfolio_mapping",
+      "mapping_ids": [
+        "CROSS_SECTIONAL_ZERO_NET",
+        "TIME_SERIES_DIRECTIONAL_STATEFUL",
+        "SPARSE_EVENT_OR_CARRY"
+      ],
+      "mapping_symbol": "alphafactory_crypto.instrument_capability.mapping.DEFAULT_MAPPING_CONTRACTS",
+      "matched_roles": [
+        "PRIMARY_MINUS_LEFT_CONTROL",
+        "PRIMARY_MINUS_RIGHT_CONTROL",
+        "AB_MINUS_A",
+        "AB_MINUS_B",
+        "ABC_MINUS_AB"
+      ],
+      "primary_role": "STANDALONE_MAPPED_PORTFOLIO",
+      "shared_support_execution_horizon_cost": true
+    },
+    "receipt_path": "config/crypto_search_mechanism_v2_receipt.json",
+    "receipt_sha256": "389E7FD409B232D179F1C55F2DB11174A40647F55ED4EBDD4483671C8D91F0F5",
+    "result": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+    "run_authorization": {
+      "additional_seed_campaign_allowed": false,
+      "authority": "CURRENT_USER_INSTRUCTION",
+      "candidate_or_policy_state_persistence_authorized": false,
+      "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
+      "decision_id": "USER_AUTHORIZED_EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_12K_20260801",
+      "mechanism_catalog_persistence_authorized": true,
+      "parameter_tuning_allowed": false,
+      "rescue_rerun_allowed": false,
+      "scope": "ONE_FRESH_STATE_12000_STRICT_MECHANISM_CAMPAIGN",
+      "seed_change_allowed": false
+    },
+    "run_authorized": true,
+    "run_outcome": {},
+    "search_campaign": {
+      "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+      "carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "checkpoint_count": 6,
+      "checkpoint_size": 2000,
+      "field_count": 115,
+      "fresh_state": true,
+      "runner_campaign": "crypto_search_mechanism_v2",
+      "runtime_date": "20260801",
+      "seed_derivation": "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)",
+      "seed_set": [
+        3119619210,
+        1353677240,
+        2161345710,
+        2150829259
+      ],
+      "strict_evaluated_target": 12000
+    },
+    "train": {
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "optimizer_feedback_allowed": true,
+      "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "start": "2025-08-29T07:00:00Z"
+    },
+    "validation": {
+      "candidate_generation_allowed": false,
+      "end_exclusive": "2026-01-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+      "start": "2025-11-01T00:00:00Z"
+    },
+    "validation_kill_line": {
+      "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+      "authority_symbol": "alphafactory_crypto.broad_search.experiment_authority.evaluate_search_validation_kill_line",
+      "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+      "checkpoint_action": "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS",
+      "continuation_action": "NO_ADDITIONAL_BUDGET_FINAL_PER_ARM_QUALIFICATION",
+      "equal_matched_evaluated_count": true,
+      "evaluated_per_active_arm": 128,
+      "evaluated_per_arm_per_horizon": 64,
+      "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
+      "failed_arm_allocation": "EXISTING_ARM_STATE_EXITED",
+      "failure_action": "STOP_ARM_AND_WRITE_CHECKPOINT",
+      "minimum_evaluated_per_active_arm": 128,
+      "orchestration_campaign": "crypto_search_mechanism_v2",
+      "random_control_survival_required": false,
+      "required_conditions": [
+        "validation_net_mean_positive",
+        "validation_nonoverlap_floor_sortino_positive",
+        "validation_matched_increment_positive",
+        "validation_control_not_dominant"
+      ],
+      "required_horizons_hours": [
+        1,
+        4
+      ],
+      "runtime_symbol": "alphafactory_crypto.broad_search.search_engine_v1.apply_search_validation_kill_line",
+      "threshold_tuning_allowed": false,
+      "trigger_after_train_checkpoint_index": 5
+    }
+  },
+  "elite_authority": {
+    "admission_hard_gates": [
+      "compile_valid",
+      "exact_unique",
+      "matched_control_valid",
+      "strict_cost_evaluated"
+    ],
+    "equal_reward_tie_break": [
+      "arm_seed_policy_local_behavior_family_count",
+      "candidate_id"
+    ],
+    "matched_attribution_diagnostic": "pair_reward",
+    "only_ordering_authority": "search_reward"
+  },
+  "environment": {
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "psutil": "7.0.0",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1"
+    },
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "python_executable": "G:\\PythonProject\\.venv\\Scripts\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.11.9",
+    "thread_caps": {
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null
+    }
+  },
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V2_MECHANISM_GRAMMAR_20260801",
+  "evaluator_contract": {
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; primary and controls retain identical raw and finite transformed support",
+    "finite_transformed_support_equality_required": true,
+    "hierarchical_three_axis_extension": {
+      "behavior_identity": "ABC_minus_AB incremental delta weight",
+      "conditional_gate": "ABC_minus_AB must pass",
+      "dag": "ABC=StateModulation(AB,C); AB=RatioInteraction(A,B)",
+      "interaction_gate": "AB_minus_A and AB_minus_B must both pass",
+      "pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
+      "shared_contract": "raw support, target, timestamps, eligibility, horizon, mapping, and cost are identical for A, B, AB, and ABC"
+    },
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "gross_lcb_role": "DIAGNOSTIC_ONLY",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "market_semantics": {
+      "a_share_constraints_applied": false,
+      "asset_class": "CRYPTO",
+      "calendar": "CONTINUOUS_UTC",
+      "forbidden_cross_market_constraints": [
+        "A_SHARE_T_PLUS_ONE",
+        "A_SHARE_ST",
+        "A_SHARE_PRICE_LIMIT",
+        "A_SHARE_STAMP_DUTY",
+        "A_SHARE_SUSPENSION_CALENDAR"
+      ]
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support",
+      "finite transformed support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+    "pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+    "pair_reward_role": "matched attribution and execution diagnostic; never proposal-policy, elite, parent, archive-champion, or arm-exit ordering authority",
+    "schema_version": 4,
+    "search_objective": {
+      "authority": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+      "component_authority": "CRYPTO_TRAIN_PORTFOLIO_SORTINO_COMPONENT_V2",
+      "feature_warmup": "every evaluation block materializes each candidate from up to max(rolling_windows)-1 prior continuous UTC coordinates, then trims back to the frozen evidence block before target or reward computation",
+      "formula_weights": {
+        "train_day_bootstrap_sortino_p25": 0.2,
+        "train_day_sortino": 0.8
+      },
+      "holdout_role": "read-only and excluded from train behavior contracts, validation target endpoints, optimizer feedback, and Search Engine V1 execution",
+      "partition_tail_purge": "each economic evidence role excludes execution delay plus the maximum target horizon from its tail; the current receipt freezes this at six hours",
+      "portfolio": "minimum of primary mapped portfolio and every required matched incremental delta-weight sleeve",
+      "selected_horizon_scope": "CandidateSpec freezes one horizon; the duplicate nominal worst-horizon term is removed rather than counted twice",
+      "shared_resample_path": "primary and matched components use one deterministic ordered-day stationary-bootstrap index path",
+      "split": "train/development adaptive block only",
+      "stationary_bootstrap_draws": 600,
+      "stationary_bootstrap_support_minimum": 0.6,
+      "turnover_penalty_start_one_way": 0.55,
+      "turnover_penalty_weight": 0.75,
+      "uncertainty_contract": "CRYPTO_ORDERED_DAY_STATIONARY_BOOTSTRAP_V1",
+      "validation_role": "distinct receipt-bound validation block; train-frozen direction and matched limiting sleeve are replayed without optimizer, proposal-policy, archive, or generation feedback"
+    },
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "fresh_state": {
+    "old_archive_import": false,
+    "old_candidate_import": false,
+    "old_distribution_import": false,
+    "old_policy_state_import": false,
+    "old_population_import": false,
+    "old_reward_import": false,
+    "old_transition_memory_import": false
+  },
+  "frozen_contract_sha256": "F1FAA7B6CADF8675F5940559EE9C405B563A3DAA8C3540E699C6A9A391183679",
+  "input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    "behavior_contract_window": {
+      "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "holdout_read": false,
+      "start": "2025-08-29T07:00:00Z",
+      "validation_read": false
+    },
+    "compiler_identity": {
+      "bundle_sha256": "CB4D6E5DB4DF729F1748D751B26AA79AD1302A396A34BDF53AEA659A6E871433",
+      "paths": [
+        {
+          "bytes": 53858,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+        },
+        {
+          "bytes": 22527,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "07549C7DE24C7BB4EE593A2F80CBED7831BE2D9B7992A4B922B2D2E89A6AA7A7"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 84087,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "989C337BB17F9893FE585785B781E392FC600ADF3166433AB113C553EEFD0DC0"
+        },
+        {
+          "bytes": 66378,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "7963A36C426174A8A8C745CF73BCF19ADD53EA24487E0F037CDEC222F623BFC9"
+        },
+        {
+          "bytes": 112828,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+        },
+        {
+          "bytes": 652811,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "C0C7A934CD8642FA48A4F74CB0E3A4CE791C0F4F2DC5DD953A59373CAA26A2AA"
+        },
+        {
+          "bytes": 34792,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    }
+  },
+  "latent_status": "LATENT_SEARCH_PRIORITY_MODEL_DEFERRED",
+  "mechanism_grammar": {
+    "catalog": [
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_0021B51F4829B001067394B3C0BF5F82",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E9459852FDF92815DA6E2A1A48EB1D28"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_00C93EF19246516DA6B7B8822FDD6413",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BAD90A772321C05C325125BC1AB95525"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_019DCD308FFD024C58A0BAF9AACEB5D7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_896785614FB8E99DDBB49229A604C037"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_0204B0F5968D8D36A690C43533B332EF",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A19F4A50CC8557C04778943F1A078F31"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_05247608CEF11904F1999D37ECBB9524",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeDiv",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_05297A2602D45F2DF9A23E4015A9C44A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_069919BFA53D57E5CBB5D82C811D92A2",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_085123DB71EACA10CE6BD2138D135995",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_0B6B490560FC62A7BE37D0F5F3A42F0D",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_6E74B8D177A8D73201A3117692CDC3B3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_0BC31533FD8356D056C5C230A1668545",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_0E2AA006DBA92C85B41670BEDED282E8",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BCD8F8034DC7AC70DEA277F2ACDCC3C2"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_11564E5D988CA6E0498B876DAEEEB7F0",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_68C0BC653C144B461628468F031684FF"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_11C975A21B2EEA30CAD515C53846F70F",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_134895AC46B199B7FFA9B6DE183EBB24",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A01A8660E96688076A64B9E954559074"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_1C2E867FAE9D7F67459D50AF5D6DD53A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A01A8660E96688076A64B9E954559074"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_1CF0C58741923AA8EF9B3ED24F068BD5",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_1D8BF3001BDDC8EC83C16563E6C21AE0",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_FEE5EDEEC5F5F8894E6631F39299E807"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_1E5EEEE4A9B34E6BE50774070FB82875",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_207A877815E451C0BC95EC3D57845729",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_2303B0DA22C8695A9CF4307BC34C408D",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_279270A4220E1421D6021BE3AC5B32B7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_2AD33E78313B25C5D95306343BBC5B22",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_3885A9883D20465562D9861A2858A645"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_2E0518EBF43D1CD7B196B79314EDD756",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_896785614FB8E99DDBB49229A604C037"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_2FEAE288534850756E667428E1688199",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B13C549C6D7F3F46E7FFED2714A4BB4A"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_31464C8978C3D2438269827747115BE3",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3239E2615CB7B285A4F858A12B369047",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1CF0C58741923AA8EF9B3ED24F068BD5"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_35D3AAB2FB7E4F119A8CE58860F407D3",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_3885A9883D20465562D9861A2858A645",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3ACBFCDCBBD00A6D5D693499FAC0CE7F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3B4AEB10C1D16D0A6722F2AC51B2DF5E",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3C8BE5F090DB54EC7F71627538D58E3B",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_93442BA9263A4016C63E391203D1D968"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3CB4BD4DA91A1680FEEB1B57D9368DA8",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3D8D42EED89AAF65035FDB7B171ED340",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E6340DE5CAFA7CE1420C11987A9BBD3"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_3DA9C3F97CBD31D4EB638C369BD846EA",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_085123DB71EACA10CE6BD2138D135995"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_410848171640A3466A057109BFE36147",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4427CC8F664FFCD1A5B8E8A0E3E88AAE",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_47795E447DA6312D337B6D13E360DA6A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_477DC0FB0EF9A91F5AA7C168C2685FF6",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_484E2970244C2D8473377F09D740822E",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4A4F86513664EB6AA2FCD7E1CF7EAA99",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_7EEE9F7302C3D1DFFCA708AC9D04D14E"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4ABA01906E971094E94B6445C9E1A21F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4D0F0AFEC1818787881867013EF22ECA",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_4E6340DE5CAFA7CE1420C11987A9BBD3",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4EBF86ABCC990378E06952CF920E3CC9",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4F045E6AC3232F14EC28580CE807830C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_93442BA9263A4016C63E391203D1D968"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4F742F9306797F665D3FA2A501758613",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_3885A9883D20465562D9861A2858A645"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_4FA77123C4D0CAFE06EBEBB4F7473135",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B13C549C6D7F3F46E7FFED2714A4BB4A"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_500E72C650271945AE62043E9217A78E",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_05247608CEF11904F1999D37ECBB9524"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_516E7E0CB5DE597DA21C736F861DB980",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_7EEE9F7302C3D1DFFCA708AC9D04D14E"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_52F18CE79FFBB20649E4E405D160AA6F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_54CB7697F6DA6DE48BBDA95B4C29188A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_54E1670F0A4E7568CC81A166F794DDF3",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5882F61BDFC3A0212EB1CD72A2DE301C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_11C975A21B2EEA30CAD515C53846F70F"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5995238D40630736BCB82EEE84D311D1",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5B28F359F32A09B1425D07AC61F47D55",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0C245A710B50D6B7D96DCCB435FD3A5"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5B2BA0DC73BE1CCAF851B801539AC04A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_5C6BCD3643950F795905756A93B9DE15",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5DA04C2D9EC50D1101E044C99E32AFF1",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5DD1040999B10BA48928C6F1B00496DB",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_484E2970244C2D8473377F09D740822E"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_5E1DF9FADFCC585CD5EEEEF553DCC171",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_896785614FB8E99DDBB49229A604C037"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_60BC1D0C52F30FB915DDC448D3FFF3C7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C6BCD3643950F795905756A93B9DE15"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_63A27DDD1205884AF1EE5C8EDCF9F2F2",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_651A247F04A5AD656D830771BBB3D3F9",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_651FECAC3033E5E9C936823D92A2ABB6",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_7E817D6946B93C8057509E2DE17A4D96"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_68C0BC653C144B461628468F031684FF",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_68E3C05BBFC3AB7C432A6F478CDE48B0",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_05247608CEF11904F1999D37ECBB9524"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_6B6CE812D4244091C751CAF5CE355BC1",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_6E74B8D177A8D73201A3117692CDC3B3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_6D7A3E021AD495753902CA63BD61D56A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_6E74B8D177A8D73201A3117692CDC3B3",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_6E976A91469D449B8C4F0A5DA27196F5",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_484E2970244C2D8473377F09D740822E"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_6FDC0DD9B582514802C74BF6DFAA83AC",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_CBC7F168D60FF094B9B5975CFD2903F9"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_70941D34B95AECF368672A834E2E9030",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_7E817D6946B93C8057509E2DE17A4D96"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_70D4745F793C7761E5C58311224B2351",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F56F921FE6FAFDB6F38659C13DBB01DB"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_71CD0CA67A2C3F9511109EDD840F968F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_896785614FB8E99DDBB49229A604C037"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_7451BC75A5BA6BD51EE699C32E9BBD99",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_74D6DA8DF485F4BD2CCAB3E5A80D8FC3",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_74FFF8CE91C8E7A1A5B543D6D34161A1",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_78B08FB259F32BCE26AD68D84E7FF9FE",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_7946841545E41DFA61AFD2A69697D29C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_7A6744EEFFC05769EF7D529A49012003",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_7BD86446C1B4891B86C3A7165EA4820F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_7E817D6946B93C8057509E2DE17A4D96",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_7EEE9F7302C3D1DFFCA708AC9D04D14E",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_7F2BB9516324D3C339F06CFB382A9C98",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_822C9CEE2DF03B680D56E39A7A8D6B71",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BCA9BEE0E830BDA4A9466CFA430C9DB9"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8316E82E71D517C6430C588A71EEA12C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_3885A9883D20465562D9861A2858A645"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8390C67FD91002412B847C143F1FBFE1",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_842016FED1625AB9BBC51A8737EDA036",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_844DA23ADB8E82D3A85EB7CD482789FB",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B47E6382F7336D5D823CDE239E5F5F82"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_848ABE44C106BEF689509940386BFC4F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_858D022DE1ED55E006201DCEFF18030C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_86DA772A211DA4313186DDB5143763E6",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_896785614FB8E99DDBB49229A604C037",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8B344F004D04CF5C5A7263E49845C4D7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8C49C8D2C3C8FE5B515526A76D4763A9",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_11C975A21B2EEA30CAD515C53846F70F"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8CF4407D13DA1ABCB3506E7C3CC13D61",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B47E6382F7336D5D823CDE239E5F5F82"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8D4D0A5CA5FDA35E4942903ADCB76489",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E9459852FDF92815DA6E2A1A48EB1D28"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8F8D9347A1A7F77C79428DD0510DE86A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_069919BFA53D57E5CBB5D82C811D92A2"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_8FA1FC1FCF39FEDD2186B7282B6AFC92",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_68C0BC653C144B461628468F031684FF"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_910F17FC27B34F794F1B25E5D684565A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_93442BA9263A4016C63E391203D1D968",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_951F51A988B7E072A6C2D073245BAF8B",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B54E923C176C43B46262957F2C0A34E8"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9BBB84512330A4BC53028EAD7C93E383",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1CF0C58741923AA8EF9B3ED24F068BD5"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9BE25D5E68945E12FBC056511EBC700E",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9C6B13F5F44406CB12AF52A11344F227",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_FEE5EDEEC5F5F8894E6631F39299E807"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9D0E1691CF7E2F52C15F726256B3A7B7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_93442BA9263A4016C63E391203D1D968"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9ED95743DBA1A6CBF189980C39F981DA",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C6BCD3643950F795905756A93B9DE15"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9F11724F40D7F06E1692FD783FFED2F2",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E8EE04630E3C12529A4A365B5CF7F5C3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9F158BF3AEC0E6CB9BE730B841A5D5C7",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_9F7D856B2E05AA49C6CFC34339571856",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BCD8F8034DC7AC70DEA277F2ACDCC3C2"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_A01A8660E96688076A64B9E954559074",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_A19F4A50CC8557C04778943F1A078F31",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_A26A6252A4F72B2CB71C768D08DB033A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_A3F8E53D44B36CB75251F49BD3EAC27A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B54E923C176C43B46262957F2C0A34E8"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_A55A41AE99FFF753430650E15B96B187",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_A6CFCA602A3DB63BE441D9BA07ED3551",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_484E2970244C2D8473377F09D740822E"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_A94F565942CBE9A3938828F19B75584C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F56F921FE6FAFDB6F38659C13DBB01DB"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_B07744C65D259D303821A659597D8F72",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B0F646A38B4827872D4864D985AAA8F3",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_B13C549C6D7F3F46E7FFED2714A4BB4A",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B20CB17C99FF4B99528430F096502D44",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_069919BFA53D57E5CBB5D82C811D92A2"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B4527FD91816ED5AD321ED47DC864AA6",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_B47E6382F7336D5D823CDE239E5F5F82",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_B54E923C176C43B46262957F2C0A34E8",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B7A14FC3955A9EBACD2B0C00CCD2796F",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B91195008A972C640407EDB547709FD5",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_B9C57FF162A50D656D46FFC701E55EDF",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_74D6DA8DF485F4BD2CCAB3E5A80D8FC3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_BA2E969A8D8FD84F4F1F1FFB72CD9B24",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_BAD90A772321C05C325125BC1AB95525",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_BC5DA7D65C1D5B5AAFD50DA491616B28",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_BCA9BEE0E830BDA4A9466CFA430C9DB9",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_BCD8F8034DC7AC70DEA277F2ACDCC3C2",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_BFA9FC4194B8511042BC72953C18A724",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C02CAC70DDA645E9FFB9DA84C64CEEDF",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_F0C245A710B50D6B7D96DCCB435FD3A5"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C10456A0BAFF190FBD670DC70C2CF3EE",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_E8EE04630E3C12529A4A365B5CF7F5C3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C41F87D5C9EC3AC0E27C2FCF59061A26",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C6D6BB2BE5D7C5F40166B32E451B729D",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_477DC0FB0EF9A91F5AA7C168C2685FF6"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C81FBDC51CDDB1DDB40950645060B263",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B07744C65D259D303821A659597D8F72"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_C8651427F4C1749540925FA360B9AE98",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_CAC0C1D1C99D088A381A39A5B85210AE",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_CBC7F168D60FF094B9B5975CFD2903F9",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_CC9F8A781A69A332964CE3A25271619E",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_D152C78D2230C2200B70E44214DA560E",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_93442BA9263A4016C63E391203D1D968"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_D372124F7F28EF2E089DECF99359C636",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_D6EFD678AA5AEB22565639F233E21373",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_D730B38C0D2D0A71641C35982CBC497A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_D7336CB82AD84E8EA9E122B889752455",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_477DC0FB0EF9A91F5AA7C168C2685FF6"
+        ],
+        "payload_operator": "SafeDiv",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_DCFC3F9AFBB593648802A0E11CCB986C",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_CBC7F168D60FF094B9B5975CFD2903F9"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_DDC5E48BCB43AFE3E597B77830816B6D",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_74D6DA8DF485F4BD2CCAB3E5A80D8FC3"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "BASIS_BUNDLE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth. The BASIS_BUNDLE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_DFCE8E9FD99C5509B48D9B894BE16EF8",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_PRICE_DIVERGENCE_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_E26919317E3CAD8CAEB129035D44761A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeDiv",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "FUNDING",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_E47755F267F10A7985F607C2959486A6",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_484E2970244C2D8473377F09D740822E"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FUNDING_FLOW_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_E8EE04630E3C12529A4A365B5CF7F5C3",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_E9459852FDF92815DA6E2A1A48EB1D28",
+        "parent_mechanism_ids": [],
+        "payload_operator": "RatioInteraction",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_EA37BEBC55FCE425E16C6715E57A5978",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BCA9BEE0E830BDA4A9466CFA430C9DB9"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_EAE5273632638880981BD9AF0EA612A3",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "OI_FLOW_CONFIRMATION_V2"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FUNDING",
+        "generation": 2,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure. The FUNDING state controls whether or how strongly the payload is expressed.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_EB530C4209442B4F84F372A82EFE4BFD",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_085123DB71EACA10CE6BD2138D135995"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure.",
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_F0C245A710B50D6B7D96DCCB435FD3A5",
+        "parent_mechanism_ids": [],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_F0CE2A27AAA654AE8FC0EDF47FE05345",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_4E6340DE5CAFA7CE1420C11987A9BBD3"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "BASIS_OI_CROWDING"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "BASIS_BUNDLE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_F2078AA9790B93EDAB331334E26EC590",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_3885A9883D20465562D9861A2858A645"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "BASIS_FLOW_DISLOCATION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_F34F6CEC11D7B4D82969727C006F2542",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F"
+        ],
+        "payload_operator": "Residual",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation.",
+        "left_role": "LARGE_TRADE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_F56F921FE6FAFDB6F38659C13DBB01DB",
+        "parent_mechanism_ids": [],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "OI_LEVEL",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_OI_CROWDING"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "FLOW_IMBALANCE",
+        "generation": 2,
+        "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift. The FLOW_IMBALANCE state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_LEVEL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_FA66027C8F737DC7AFE52727F73C42CF",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_B07744C65D259D303821A659597D8F72"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "OI_ACTIVITY_EXPANSION"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_FBDCC0DA0CE4839653700A9FA5F440F6",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "OI_NOTIONAL",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_FBF8698E4C71C3E82F183C75179EDE5A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BAD90A772321C05C325125BC1AB95525"
+        ],
+        "payload_operator": "SafeMul",
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1,
+        "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": "StateModulation",
+        "condition_role": "OI_LEVEL",
+        "generation": 2,
+        "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow. The OI_LEVEL state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_FCD2219553E8D0568DCF5360D32F455A",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_A19F4A50CC8557C04778943F1A078F31"
+        ],
+        "payload_operator": "NormalizedDifference",
+        "right_role": "LARGE_TRADE",
+        "schema_version": 1,
+        "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+      },
+      {
+        "condition_operator": "ConditionGate",
+        "condition_role": "TRADE_INTENSITY",
+        "generation": 2,
+        "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption. The TRADE_INTENSITY state controls whether or how strongly the payload is expressed.",
+        "left_role": "PRICE_RESPONSE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "SPARSE_EVENT_CARRY",
+        "matched_control_schema": "HIERARCHICAL_A_B_AB_ABC",
+        "mechanism_id": "MECHANISM_V2_FE4EFE771CF5BD46878C811F7D3EB404",
+        "parent_mechanism_ids": [
+          "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71"
+        ],
+        "payload_operator": "RatioInteraction",
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1,
+        "template_id": "FLOW_PRICE_ABSORPTION"
+      },
+      {
+        "condition_operator": null,
+        "condition_role": null,
+        "generation": 1,
+        "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints.",
+        "left_role": "FLOW_IMBALANCE",
+        "lifecycle": "ACTIVE",
+        "mapping_class": "DIRECTIONAL_STATEFUL",
+        "matched_control_schema": "DUAL_AXIS_A_B_AB",
+        "mechanism_id": "MECHANISM_V2_FEE5EDEEC5F5F8894E6631F39299E807",
+        "parent_mechanism_ids": [],
+        "payload_operator": "SafeMul",
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1,
+        "template_id": "FLOW_INTENSITY_CONVICTION"
+      }
+    ],
+    "catalog_file_sha256": "472BCAE447D078BA9B59C13B192ADB70BF383D4385CE66C5AB66B3B5F7C11861",
+    "catalog_path": "config/crypto_typed_mechanism_catalog_v2.json",
+    "compiled_catalog_sha256": "D9512912DAB29E4AA8FDAB9C9B4EEDC4E5D4ACEEE3DF210B0A2278E92575D15C",
+    "compiled_mechanism_count": 184,
+    "existing_candidate_spec_reused": true,
+    "existing_compiler_reused": true,
+    "existing_expression_ast_reused": true,
+    "existing_pair_evaluator_reused": true,
+    "existing_typed_registry_reused": true,
+    "generation_count": 2,
+    "mechanism_family_count": 12,
+    "second_ast_or_compiler_created": false,
+    "template_count": 12
+  },
+  "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+  "objective": "Measure whether an extensible typed economic-mechanism grammar and mechanism-level adaptive policies improve compute density, behavior discovery, and train reward ordering",
+  "persistent_mechanism_knowledge": {
+    "behavior_yield": true,
+    "cem_distribution": false,
+    "constructibility_counts": true,
+    "declarative_mechanism_specs": true,
+    "individual_candidate_reward": false,
+    "lifecycle": true,
+    "lineage": true,
+    "population": false,
+    "replicated_aggregate_outcomes": true,
+    "rng_state": false
+  },
+  "policies": {
+    "extensible_mechanism_random_v2": {
+      "duplicate_resample_limit": 64
+    },
+    "mechanism_evolution_v2": {
+      "crossover_probability": 0.2,
+      "duplicate_resample_limit": 64,
+      "mechanism_mutation_probability": 0.3,
+      "parameter_mutation_probability": 0.5,
+      "population_limit": 256,
+      "tournament_size": 4,
+      "warmup": 32
+    },
+    "mechanism_level_cem_v2": {
+      "count_pseudocount": 0.5,
+      "duplicate_resample_limit": 64,
+      "elite_fraction": 0.2,
+      "entropy_floor_ratio": 0.6,
+      "minimum_observation_count": 8,
+      "minimum_probability": 0.002,
+      "smoothing": 0.35
+    }
+  },
+  "relational_status": "STAGE1_CLOSED_READ_ONLY_BRIDGES_ONLY",
+  "schema_version": 2,
+  "search_engine_version": "EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_V2",
+  "seed_contract": {
+    "additional_seed_campaign_allowed": false,
+    "derivation": "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)",
+    "evidence_role": "FRESH_DEVELOPMENT_MECHANISM_SEARCH_ONLY",
+    "pre_registered_before_candidate_one": true,
+    "prior_v1_v6_seed_set_reused": false,
+    "within_campaign_seed_change_allowed": false
+  },
+  "seeds": [
+    3119619210,
+    1353677240,
+    2161345710,
+    2150829259
+  ],
+  "source_sha": "ef688d89ca0e89654015bf5f76a6b9c26494d837",
+  "stages": [
+    {
+      "allocation_per_checkpoint": {
+        "canonical_typed_random": 2000,
+        "extensible_mechanism_random_v2": 0,
+        "mechanism_evolution_v2": 0,
+        "mechanism_level_cem_v2": 0
+      },
+      "checkpoint_indexes": [
+        0
+      ],
+      "stage_id": "LEGACY_FIXED_SKELETON_BASELINE",
+      "strict_count": 2000
+    },
+    {
+      "allocation_per_checkpoint": {
+        "canonical_typed_random": 0,
+        "extensible_mechanism_random_v2": 2000,
+        "mechanism_evolution_v2": 0,
+        "mechanism_level_cem_v2": 0
+      },
+      "checkpoint_indexes": [
+        1,
+        2
+      ],
+      "stage_id": "EXPANDED_TYPED_MECHANISM_GRAMMAR",
+      "strict_count": 4000
+    },
+    {
+      "allocation_per_checkpoint": {
+        "canonical_typed_random": 0,
+        "extensible_mechanism_random_v2": 0,
+        "mechanism_evolution_v2": 1000,
+        "mechanism_level_cem_v2": 1000
+      },
+      "checkpoint_indexes": [
+        3,
+        4,
+        5
+      ],
+      "stage_id": "MECHANISM_LEVEL_ADAPTIVE_SEARCH",
+      "strict_count": 6000
+    }
+  ],
+  "surface": {
+    "carrier_reused": true,
+    "context_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+    "field_ids": [
+      "bybit__open_interest_last",
+      "bybit__open_interest_mean",
+      "bybit__open_interest_min",
+      "bybit__open_interest_max",
+      "bybit__open_interest_std",
+      "bybit__open_interest_value_last",
+      "bybit__open_interest_value_mean",
+      "bybit__open_interest_value_min",
+      "bybit__open_interest_value_max",
+      "bybit__open_interest_value_std",
+      "bybit__oi_n",
+      "bybit__mark_price_last",
+      "bybit__mark_price_mean",
+      "bybit__mark_price_min",
+      "bybit__mark_price_max",
+      "bybit__mark_price_std",
+      "bybit__index_price_last",
+      "bybit__index_price_mean",
+      "bybit__index_price_min",
+      "bybit__index_price_max",
+      "bybit__index_price_std",
+      "bybit__funding_rate_last",
+      "bybit__funding_rate_mean",
+      "bybit__funding_rate_min",
+      "bybit__funding_rate_max",
+      "bybit__funding_rate_std",
+      "bybit__mark_n",
+      "hyperliquid_futures__open_interest_last",
+      "hyperliquid_futures__open_interest_mean",
+      "hyperliquid_futures__open_interest_min",
+      "hyperliquid_futures__open_interest_max",
+      "hyperliquid_futures__open_interest_std",
+      "hyperliquid_futures__oi_n",
+      "hyperliquid_futures__mark_price_last",
+      "hyperliquid_futures__mark_price_mean",
+      "hyperliquid_futures__mark_price_min",
+      "hyperliquid_futures__mark_price_max",
+      "hyperliquid_futures__mark_price_std",
+      "hyperliquid_futures__index_price_last",
+      "hyperliquid_futures__index_price_mean",
+      "hyperliquid_futures__index_price_min",
+      "hyperliquid_futures__index_price_max",
+      "hyperliquid_futures__index_price_std",
+      "hyperliquid_futures__funding_rate_last",
+      "hyperliquid_futures__funding_rate_mean",
+      "hyperliquid_futures__funding_rate_min",
+      "hyperliquid_futures__funding_rate_max",
+      "hyperliquid_futures__funding_rate_std",
+      "hyperliquid_futures__mark_n",
+      "okx_futures__open_interest_last",
+      "okx_futures__open_interest_mean",
+      "okx_futures__open_interest_min",
+      "okx_futures__open_interest_max",
+      "okx_futures__open_interest_std",
+      "okx_futures__open_interest_value_last",
+      "okx_futures__open_interest_value_mean",
+      "okx_futures__open_interest_value_min",
+      "okx_futures__open_interest_value_max",
+      "okx_futures__open_interest_value_std",
+      "okx_futures__oi_n",
+      "okx_futures__mark_price_last",
+      "okx_futures__mark_price_mean",
+      "okx_futures__mark_price_min",
+      "okx_futures__mark_price_max",
+      "okx_futures__mark_price_std",
+      "okx_futures__funding_rate_last",
+      "okx_futures__funding_rate_mean",
+      "okx_futures__funding_rate_min",
+      "okx_futures__funding_rate_max",
+      "okx_futures__funding_rate_std",
+      "okx_futures__mark_n",
+      "agg_trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_underlying_trade_count",
+      "sell_underlying_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "trade_count_le_100",
+      "trade_count_100_1k",
+      "trade_count_1k_10k",
+      "trade_count_10k_100k",
+      "trade_count_100k_1m",
+      "trade_count_gt_1m",
+      "notional_le_100",
+      "notional_100_1k",
+      "notional_1k_10k",
+      "notional_10k_100k",
+      "notional_100k_1m",
+      "notional_gt_1m",
+      "open_price",
+      "high_price",
+      "low_price",
+      "close_price",
+      "max_trade_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "avg_agg_trade_notional",
+      "avg_underlying_trade_notional",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_100k_plus",
+      "large_notional_100k_plus",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ],
+    "fields": 115,
+    "new_materializer": false
+  },
+  "validation_contract": {
+    "candidate_generation_allowed": false,
+    "holdout_read": false,
+    "optimizer_feedback_allowed": false,
+    "per_arm_absolute_qualification": true,
+    "policy_memory_write_allowed": false,
+    "random_control_survival_required_for_adaptive_search": false,
+    "trigger_after_checkpoint_index": 5
+  }
+}

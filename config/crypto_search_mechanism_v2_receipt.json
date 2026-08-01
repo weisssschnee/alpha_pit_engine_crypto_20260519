@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_MECHANISM_V2_RECEIPT",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_12K_20260801",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -14,6 +14,16 @@
     "mechanism_catalog_persistence_authorized": true,
     "candidate_or_policy_state_persistence_authorized": false,
     "additional_seed_campaign_allowed": false
+  },
+  "run_outcome": {
+    "status": "ENGINE_VALIDATION_BLOCKED",
+    "reason": "VALIDATION_CONTROL_PATH_SCHEMA_INCONSISTENT",
+    "runtime": "runtime/crypto_search_mechanism_v2_20260801",
+    "producer_source_sha": "ef688d89ca0e89654015bf5f76a6b9c26494d837",
+    "generation_attempts": 20386,
+    "strict_evaluated_count": 12000,
+    "checkpoint": "checkpoint_005",
+    "rescue_rerun_started": false
   },
   "market": {
     "asset_class": "CRYPTO",

@@ -24,8 +24,10 @@ AutoML layer is neither necessary nor authorized.
 ## Decision
 
 1. Authorize exactly one fresh-state, development-only Search Engine V2
-   campaign under `config/crypto_search_mechanism_v2_receipt.json`, bound to
-   producer source `fbc396aef80c1d1749479e2b3eb0ade923585968`.
+   campaign under `config/crypto_search_mechanism_v2_receipt.json`. The actual
+   producer source is `ef688d89ca0e89654015bf5f76a6b9c26494d837`;
+   the earlier `fbc396a...` production bundle remains its code-equivalent
+   pre-governance implementation ancestor.
 2. Compile the declarative mechanism catalog into the existing typed genome.
    The frozen catalog contains 12 economic templates and 184 legal binary or
    conditional mechanism specifications using only existing operators,
@@ -72,3 +74,27 @@ AutoML layer is neither necessary nor authorized.
   promotion claim.
 - No additional campaign is implied. A budget-exhausted or validation-blocked
   outcome is retained without tuning, seed change, rescue, or state import.
+
+## Observed outcome
+
+The single authorization is consumed as `ENGINE_VALIDATION_BLOCKED`. Producer
+`ef688d89ca0e89654015bf5f76a6b9c26494d837` retained exactly 12,000 strict,
+exact-unique, matched-control-valid, full-cost train candidates from 20,386 raw
+attempts. All six 2,000-candidate checkpoints restore exactly. The archive
+contains 11,738 behavior families, and the compiled grammar contains 184 legal
+mechanism specifications.
+
+After checkpoint 5, the frozen validation stage evaluated candidates but failed
+before equal-count arm aggregation. Binary and hierarchical mechanisms legally
+emit different control schemas; the producer aggregator incorrectly required
+every candidate in an arm to expose identical control names and raised
+`validation control path inconsistent for arm:
+extensible_mechanism_random_v2:interaction_left`. No validation checkpoint was
+written, no arm is qualified, and no validation result or market-information
+conclusion is inferred.
+
+Closure source `8a526e8683874e3bdbcfd54e49adfbd0c1f290ff` repaired future
+heterogeneous-control aggregation without re-evaluating this campaign. Source
+`c7d4806e` also added reward-authority-aligned positive-search-reward
+productivity metrics while preserving legacy pair/matched-positive diagnostics.
+Neither repair changes the retained producer artifacts or rescues this run.

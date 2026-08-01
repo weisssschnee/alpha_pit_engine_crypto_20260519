@@ -4,32 +4,34 @@ Last updated: 2026-08-01 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_MECHANISM_GRAMMAR_AUTHORIZED_RUN_PENDING`
+`CRYPTO_SEARCH_ENGINE_V2_MECHANISM_GRAMMAR_VALIDATION_BLOCKED_CLOSED`
 
-ADR 0017 accepts one fresh-state, development-only Search Engine V2 campaign
-bound to producer source `fbc396aef80c1d1749479e2b3eb0ade923585968` and
-`config/crypto_search_mechanism_v2_receipt.json`. The implementation compiles
-12 declarative economic templates into 184 legal typed mechanism specs while
-reusing the existing Expression AST, TypedExpressionRegistry, CandidateSpec,
-compiler, matched controls, evaluator, behavior archive, Binance USD-M target,
-and frozen 5 bps cost assumption.
+The one fresh-state, development-only Search Engine V2 authorization is
+consumed. Producer `ef688d89ca0e89654015bf5f76a6b9c26494d837` retained exactly
+12,000 strict, exact-unique, matched-control-valid, full-cost train candidates
+from 20,386 raw attempts across six exact 2,000-candidate checkpoints. The run
+used 8 workers after the frozen memory preflight, compiled 12 declarative
+economic templates into 184 legal mechanism specs, and produced 11,738 behavior
+families. No prior candidate, reward, distribution, population, archive,
+transition, or policy state entered the campaign.
 
-The single continuous campaign is capped at 12,000 strict candidates and six
-2,000-candidate checkpoints: 2,000 legacy fixed-Skeleton typed-random controls,
-4,000 expanded-mechanism typed-random candidates, then 3,000 mechanism CEM and
-3,000 mechanism Evolution candidates. There is no pre-adaptive economic
-positivity gate. Adaptive memory is arm-local and campaign-local; final
-development validation occurs only after checkpoint 5 and qualifies arms
-independently. No old candidate, reward, distribution, population, archive,
-transition, or policy state may enter the run.
+The final validation did not complete. Binary and hierarchical mechanisms
+legally expose different matched-control schemas, while the producer arm
+aggregator incorrectly required identical control names and raised
+`validation control path inconsistent for arm:
+extensible_mechanism_random_v2:interaction_left`. The exact train checkpoint is
+`checkpoint_005`; no validation checkpoint or complete equal-count validation
+metrics exist. The independent blocked-outcome checker passes, but all arm
+qualification remains empty. This is an engine aggregation defect, not a
+market, carrier, or Alpha negative.
 
-The receipt authorizes no holdout/OOS, challenge, recent, May stress, forward,
-promotion, latent or relational training, liquidation admission, parameter
-tuning, seed change, rescue rerun, or second campaign. The existing CURRENT
-Search Engine node remains NON_FORMAL. Full source regression is `360 passed`
-with one pre-existing NumPy small-sample warning; independent spec and standards
-reviews report no remaining hard code finding. Market execution has not yet
-started.
+Closure `8a526e8683874e3bdbcfd54e49adfbd0c1f290ff` repaired future
+heterogeneous-control aggregation without re-evaluating the campaign. Follow-up
+source `c7d4806e` added reward-authority-aligned positive-search-reward
+productivity metrics because the producer dashboard still reported only legacy
+`matched_positive/pair_reward` counts. The old diagnostic did not enter policy
+updates or the validation kill-line. No seed, parameter, budget, validation
+rerun, holdout/OOS/challenge/forward read, promotion, or next Arena occurred.
 
 The preceding durable state remains:
 
@@ -556,13 +558,13 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-1. Run the one receipt-bound Search Engine V2 mechanism campaign from producer `fbc396aef80c1d1749479e2b3eb0ade923585968`; write six atomic checkpoints and stop at 12,000 strict candidates or the frozen 100,000-attempt/18-hour budget.
+1. Preserve the consumed V2 mechanism campaign at producer `ef688d89ca0e89654015bf5f76a6b9c26494d837`: six exact checkpoints, 12,000 strict train candidates, and terminal `ENGINE_VALIDATION_BLOCKED`. Do not rerun its validation or reuse its adaptive state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
-3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
+3. Keep future-Arena qualification for every V2 arm suspended. Train-only reward ordering suggests a potentially useful Evolution gradient, but the equal-count validation gate did not complete and grants no qualification. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
 5. Keep V1-V5 as consumed outcomes. V3 and V4 are each bound to their own `checkpoint_000` plus `checkpoint_validation_blocked`; V5 is bound to `checkpoint_000` plus completed `checkpoint_validation`. Do not reuse any receipt or run state.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. After the terminal checkpoint, run the independent V2 checker, consume the V2 receipt, attach only aggregate mechanism knowledge, update the existing CURRENT node, commit/push closure, verify local and remote SHA equality plus a clean worktree, then stop.
+7. Complete only the V2 blocked-outcome Git/Graph closure: retain producer artifacts, failure record, compact report, consumed receipt, checker PASS, and existing CURRENT-node update. Push, verify local/tracking/remote SHA equality and a clean worktree, then stop.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -588,6 +590,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
+- Search Engine V2 completed all 12,000 train candidates but its final arm aggregator rejected legal heterogeneous control schemas before equal-count validation artifacts were persisted. Future source now aggregates controls equal-weight within candidate and then equal-weight across candidates; the consumed run remains blocked and cannot be rescued.
 - V1-V6 are consumed and `run_authorized=false`; their component hashes resolve against each run's frozen producer source. Only the V2 mechanism receipt authorizes one current market-development run.
 - V4 confirms the NaN/support and rolling-warm-up repairs but exposes a distinct orchestration defect: validation-period mapped-control equality for one selected candidate terminates all active arms before equal-count metrics exist. This is an engine-validation failure, not a market or Alpha negative.
 - V3 proves the repaired failure path: the exact validation candidate identity and all campaign state are persisted in `checkpoint_validation_blocked`, and the process terminates as `ENGINE_VALIDATION_BLOCKED` instead of crashing. This is a validation-constructibility result, not a portfolio-reward, Alpha-space, or carrier-information negative. All retained results remain development-only and conditional on 5 bps.
@@ -658,11 +661,10 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Execute the single receipt-bound Search Engine V2 12k mechanism campaign from
-producer `fbc396aef80c1d1749479e2b3eb0ade923585968`. On terminal completion, run
-the independent checker, consume the receipt, commit the immutable runtime and
-compact report, refresh only the existing CURRENT search node, rebuild/check
-Graph, push, and verify local/tracking/remote SHA equality plus a clean
-worktree. Then stop. Do not import V1-V6 state, tune, reseed, rescue, read
-holdout/OOS/challenge/forward, train latent/relational models, promote
-candidates, or start another campaign.
+Finish the blocked-outcome closure for producer
+`ef688d89ca0e89654015bf5f76a6b9c26494d837`: update only the existing CURRENT
+search node, rebuild/check Graph, commit the immutable runtime and compact
+report, push, and verify local/tracking/remote SHA equality plus a clean
+worktree. Then stop. Do not rerun validation, import V1-V6 state, tune, reseed,
+rescue, read holdout/OOS/challenge/forward, train latent/relational models,
+promote candidates, or start another campaign.
