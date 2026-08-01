@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "PREFLIGHT_PRODUCER_TERMINATED_WITHOUT_CHECKPOINT",
+  "producer_source_sha": "f60f145ad9998943f16079adb61de1a6ca636a6c",
+  "strict_candidates_consumed_outside_campaign": 0,
+  "first_batch_strict_completed": 4,
+  "retained_candidate_ledger_rows": 0,
+  "checkpoint_count": 0,
+  "final_decision_present": false,
+  "producer_process_present_at_audit": false,
+  "windows_application_error_observed": false,
+  "stdout_log_present": false,
+  "stderr_log_present": false,
+  "root_cause": "UNPROVEN_NO_PERSISTED_PROCESS_EXIT_EVIDENCE",
+  "authorization_resolution": "CURRENT_USER_AUTHORIZED_THROUGHPUT_REPAIR_AND_RELAUNCH_AFTER_FAILED_PRECHECKPOINT_PRODUCER",
+  "eligible_for_checkpoint_resume": false,
+  "sealed_reads": 0
+}

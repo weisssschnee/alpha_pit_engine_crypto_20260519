@@ -19,23 +19,13 @@
       }
     },
     {
-      "stage_id": "EXPANDED_BASIS_TYPED_RANDOM",
-      "checkpoint_indexes": [1, 2],
-      "strict_count": 4000,
+      "stage_id": "CONCURRENT_EXPANDED_RANDOM_AND_FRESH_EVOLUTION",
+      "checkpoint_indexes": [1, 2, 3, 4],
+      "strict_count": 8000,
       "allocation_per_checkpoint": {
         "legacy_mechanism_random_v2": 0,
-        "expanded_mechanism_random_v2_1": 2000,
-        "mechanism_evolution_v2_1": 0
-      }
-    },
-    {
-      "stage_id": "FRESH_EVOLUTION_ON_EXPANDED_BASIS",
-      "checkpoint_indexes": [3, 4],
-      "strict_count": 4000,
-      "allocation_per_checkpoint": {
-        "legacy_mechanism_random_v2": 0,
-        "expanded_mechanism_random_v2_1": 0,
-        "mechanism_evolution_v2_1": 2000
+        "expanded_mechanism_random_v2_1": 1000,
+        "mechanism_evolution_v2_1": 1000
       }
     }
   ],
@@ -47,7 +37,12 @@
     "wall_time_seconds_maximum": 64800,
     "workers_default": 10,
     "workers_memory_fallback": 8,
-    "workers_12_forbidden": true
+    "workers_12_forbidden": true,
+    "required_pairs_per_hour": 555.5555555556,
+    "stateless_random_inflight_rule": "CEIL(workers / active_policy_lanes)",
+    "adaptive_inflight_per_policy_lane": 1,
+    "cache_scope": "EXISTING_CANDIDATE_LOCAL_DAG_ONLY",
+    "minimum_free_memory_reserve_bytes": 12884901888
   },
   "policy_parameters": {
     "legacy_mechanism_random_v2": {

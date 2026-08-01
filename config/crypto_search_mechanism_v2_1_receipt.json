@@ -217,7 +217,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "E7A71CA1FDC15EC06A7EB953C557422902E2345FA5A0A963FB5351AEA1805A37"
+      "sha256": "0FEF5D2F5F76EC8FACE24BD40D1BEEA40AAD3D8335340E585ABECAADAB78B2C9"
     },
     "legacy_mechanism_catalog": {
       "path": "config/crypto_typed_mechanism_catalog_v2.json",
@@ -233,7 +233,7 @@
     },
     "campaign_contract": {
       "path": "config/crypto_search_engine_v2_1_mechanism_basis.json",
-      "sha256": "3ECAECC595CDED231134A3FEE1B3FE68EC37728346FA0A1301BBD47847C29426"
+      "sha256": "5E1F499F051BFE048396659BA76AD96E09A7DDE5849BE20338580C5EBD26521A"
     }
   }
 }

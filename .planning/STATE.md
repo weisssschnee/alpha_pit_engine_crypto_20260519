@@ -4,7 +4,7 @@ Last updated: 2026-08-01 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_1_MECHANISM_BASIS_AUTHORIZED_IMPLEMENTED_NOT_RUN`
+`CRYPTO_SEARCH_ENGINE_V2_1_THROUGHPUT_REPAIR_IN_PROGRESS`
 
 ADR 0018 accepts the current user's authorization for one fresh-state,
 development-only Search Engine V2.1 campaign. It preserves V2 as consumed and
@@ -12,7 +12,9 @@ does not rerun its validation. The V2.1 implementation reuses the existing
 115-field aligned carrier, AST, compiler, controls, evaluator, archive, and
 checkpoint path; expands only frozen gate/modulation modes; assigns zero budget
 to CEM; and freezes five 2,000-candidate checkpoints as 2,000 old-grammar
-random, 4,000 expanded-basis random, and 4,000 fresh Evolution. The terminal
+random followed by four concurrent 1,000-expanded-random plus
+1,000-fresh-Evolution checkpoints. Totals remain 4,000 per new arm and adaptive
+feedback stays sequential within each arm/seed lane. The terminal
 validation stage runs automatically only if the pre-registered equal-count
 train gate passes. No candidate, reward, population, distribution, archive,
 RNG, or policy state crosses from V2.
@@ -569,7 +571,8 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-0. Execute only ADR 0018's V2.1 campaign after the producer source, receipt,
+0. Finish the source-only V2.1 throughput repair, bind its producer source and
+   receipt hashes, then execute only ADR 0018's V2.1 campaign after the receipt,
    catalog, aggregate-only knowledge, tests, budget, seeds, and hashes are
    committed. Run continuously with exact 2,000-candidate checkpoints; stop on
    the frozen train gate, validation result, raw-attempt limit, or 18-hour wall
@@ -678,7 +681,7 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Freeze and commit the V2.1 producer bundle, then run exactly one continuous
+Freeze and commit the throughput-repaired V2.1 producer bundle, then run exactly one continuous
 10,000-strict-candidate campaign under ADR 0018. Do not rerun V2 validation,
 import V1-V6 or V2 adaptive state, tune, reseed, rescue, read
 holdout/OOS/challenge/forward, train latent/relational models, promote

@@ -35,9 +35,14 @@ routing through the existing ConditionGate and StateModulation AST nodes.
    confirmation/disagreement, absolute/positive/negative magnitude modulation,
    and sign routing. Thresholds and modes are frozen before candidate one.
 4. Allocate five exact 2,000-candidate checkpoints: 2,000 old-grammar random,
-   4,000 expanded-basis random, and 4,000 fresh expanded-basis Evolution. CEM
-   receives zero budget. All arms use the same four pre-registered V2.1 seeds,
-   disjoint from V1-V6 and mechanism V2.
+   followed by four checkpoints containing 1,000 expanded-basis random and
+   1,000 fresh expanded-basis Evolution each. Totals remain 4,000 per new arm;
+   the concurrent allocation exposes eight independent arm/seed lanes without
+   changing reward feedback order inside an adaptive lane. CEM receives zero
+   budget. All arms use the same four pre-registered V2.1 seeds, disjoint from
+   V1-V6 and mechanism V2. Stateless random lanes may pre-generate enough
+   deterministic proposals to fill otherwise idle evaluator slots; adaptive
+   lanes remain one-in-flight.
 5. Import no V2 candidate, individual reward, population, distribution,
    archive, transition memory, RNG, or policy state. A committed aggregate-only
    knowledge file may document mechanism/template/operator/role/window/
@@ -66,3 +71,8 @@ routing through the existing ConditionGate and StateModulation AST nodes.
   adaptive state remains campaign-local and exactly checkpointed.
 - A terminal result updates only the existing CURRENT Search Engine capability
   node during final closure.
+- The initial preflight-only launch at producer `f60f145a` produced no retained
+  ledger or checkpoint and exposed a four-lane scheduler ceiling. It consumed
+  no campaign state. The concurrent schedule and bounded random lookahead are
+  a throughput repair for the still-single authorized campaign, not a rescue
+  rerun, seed change, or second budget.

@@ -19,6 +19,7 @@ import shutil
 import subprocess
 import sys
 import time
+import traceback
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -4191,7 +4192,7 @@ class MechanismRandomV2:
                 continue
             self.seen.add(candidate.candidate_id)
             self.step += 1
-            return candidate, {
+            metadata = {
                 "policy_state_hash_before": before,
                 "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
                 "parent_ids": [],
@@ -4200,6 +4201,8 @@ class MechanismRandomV2:
                 "raw_attempts": attempt,
                 "compile_valid_attempts": attempt,
             }
+            metadata["policy_state_hash_after_proposal"] = self.state_hash()
+            return candidate, metadata
         raise _ProposalGenerationFailure(
             "Mechanism random duplicate resample limit exhausted",
             raw_attempts=limit + 1,
@@ -5026,6 +5029,26 @@ def _policy_key(arm: str, seed: int) -> str:
     return f"{arm}|{int(seed)}"
 
 
+def _policy_inflight_limit(
+    *,
+    campaign: str,
+    policy: PolicyType,
+    workers: int,
+    active_lane_count: int,
+) -> int:
+    """Return the semantics-preserving proposal lookahead for one policy lane.
+
+    V2.1 random policies have no reward-dependent state, so consecutive asks
+    from the same RNG lane can safely fill otherwise idle evaluator slots.  An
+    adaptive policy remains one-in-flight: its next parent selection must see
+    the preceding candidate's reward and behavior-family observation.
+    """
+
+    if campaign == MECHANISM_SEARCH_V21_CAMPAIGN and type(policy) is MechanismRandomV2:
+        return max(1, int(math.ceil(int(workers) / max(1, int(active_lane_count)))))
+    return 1
+
+
 def _load_mechanism_v2_contract(
     repo_root: Path,
 ) -> tuple[dict[str, Any], tuple[MechanismSpec, ...]]:
@@ -5712,6 +5735,12 @@ def _new_campaign_state(
         "next_checkpoint_index": 0,
         "scheduler_cursor": 0,
         "balanced_batch_index": 0,
+        "evaluation_batch_index": 0,
+        "evaluation_batches": 0,
+        "evaluation_slots_submitted": 0,
+        "evaluation_worker_slots_available": 0,
+        "pair_process_cpu_seconds": 0.0,
+        "batch_evaluator_wall_seconds": 0.0,
         "generation_attempts": 0,
         "compile_valid": 0,
         "exact_unique": 0,
@@ -6922,6 +6951,9 @@ def _ledger_row(
         "cross_carrier_verified": proposal.get("cross_carrier_verified"),
         "operation": str(proposal["operation"]),
         "transition_key": proposal.get("transition_key"),
+        "evaluation_batch_index": proposal.get("evaluation_batch_index"),
+        "evaluation_batch_slot": proposal.get("evaluation_batch_slot"),
+        "policy_inflight_ordinal": proposal.get("policy_inflight_ordinal"),
         "balanced_batch_index": proposal.get("balanced_batch_index"),
         "balanced_batch_slot": proposal.get("balanced_batch_slot"),
         "balanced_batch_size": proposal.get("balanced_batch_size"),
@@ -11425,6 +11457,7 @@ def run_engine(
     attempted_ids = set(str(value) for value in state["attempted_exact_ids"])
     active_started = time.perf_counter()
     prior_active_seconds = float(state["wall_elapsed_seconds"])
+    required_pairs_per_hour = strict_target * 3600.0 / wall_time_limit
     preflight_done = _read_json(runtime_root / "embedded_preflight.json").get(
         "status"
     ) not in {
@@ -11433,6 +11466,53 @@ def run_engine(
 
     def active_elapsed() -> float:
         return prior_active_seconds + (time.perf_counter() - active_started)
+
+    def write_producer_status(
+        status: str,
+        *,
+        checkpoint_index: int | None = None,
+        last_batch: Mapping[str, Any] | None = None,
+    ) -> None:
+        elapsed = active_elapsed()
+        strict_count = len(ledger)
+        observed_per_hour = strict_count * 3600.0 / elapsed if elapsed > 0.0 else 0.0
+        remaining = max(0, strict_target - strict_count)
+        projected_remaining = (
+            remaining / observed_per_hour if observed_per_hour > 0.0 else None
+        )
+        slots = int(state.get("evaluation_slots_submitted", 0))
+        available_slots = int(state.get("evaluation_worker_slots_available", 0))
+        evaluator_wall = float(state.get("batch_evaluator_wall_seconds", 0.0))
+        pair_cpu = float(state.get("pair_process_cpu_seconds", 0.0))
+        _write_json(
+            runtime_root / "producer_status.json",
+            {
+                "schema_version": 1,
+                "status": str(status),
+                "producer_pid": os.getpid(),
+                "producer_parent_pid": os.getppid(),
+                "producer_source_sha": source_sha,
+                "frozen_contract_sha256": frozen_hash,
+                "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+                "checkpoint_index": checkpoint_index,
+                "strict_evaluated": strict_count,
+                "strict_target": strict_target,
+                "generation_attempts": int(state["generation_attempts"]),
+                "active_wall_seconds": elapsed,
+                "required_pairs_per_hour": required_pairs_per_hour,
+                "observed_pairs_per_hour": observed_per_hour,
+                "projected_remaining_hours": projected_remaining,
+                "workers": int(state["workers"]),
+                "evaluation_batches": int(state.get("evaluation_batches", 0)),
+                "worker_slot_fill_ratio": (
+                    slots / available_slots if available_slots > 0 else 0.0
+                ),
+                "evaluator_effective_cores": (
+                    pair_cpu / evaluator_wall if evaluator_wall > 0.0 else 0.0
+                ),
+                "last_batch": dict(last_batch or {}),
+            },
+        )
 
     def enforce_budget(reserve_attempts: int = 0) -> None:
         state["wall_elapsed_seconds"] = active_elapsed()
@@ -11575,6 +11655,9 @@ def run_engine(
         return True
 
     try:
+        write_producer_status(
+            "RUNNING", checkpoint_index=int(state["next_checkpoint_index"])
+        )
         execute_frozen_validation_if_due()
         if _validation_control_arm_stopped(state) and not is_mechanism_campaign:
             raise _ValidationControlArmStopped(
@@ -11672,10 +11755,18 @@ def run_engine(
                         state["scheduler_cursor"] = (
                             int(state["scheduler_cursor"]) + 1
                         )
-                    if any(
+                    pending_for_policy = sum(
                         proposal["policy_key"] == policy_key
                         for proposal in proposals
-                    ):
+                    )
+                    policy = policies[policy_key]
+                    inflight_limit = _policy_inflight_limit(
+                        campaign=campaign,
+                        policy=policy,
+                        workers=int(state["workers"]),
+                        active_lane_count=len(lane_order),
+                    )
+                    if pending_for_policy >= inflight_limit:
                         scans_without_slot += 1
                         if scans_without_slot > len(lane_order) * 2:
                             break
@@ -11695,7 +11786,6 @@ def run_engine(
                     scans_without_slot = 0
                     arm, seed_text = policy_key.rsplit("|", 1)
                     seed = int(seed_text)
-                    policy = policies[policy_key]
                     enforce_budget(MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS)
                     proposal_cpu_started = time.process_time()
                     try:
@@ -11820,6 +11910,11 @@ def run_engine(
                             "balanced_batch_size": (
                                 batch_target_size if is_v12 else None
                             ),
+                            "evaluation_batch_index": int(
+                                state.get("evaluation_batch_index", 0)
+                            ),
+                            "evaluation_batch_slot": len(proposals),
+                            "policy_inflight_ordinal": pending_for_policy + 1,
                         }
                     )
                 if not proposals:
@@ -11833,6 +11928,7 @@ def run_engine(
                         int(state["scheduler_cursor"]) + 1
                     )
                 assert executor is not None
+                batch_wall_started = time.perf_counter()
                 future_rows = [
                     (
                         proposal,
@@ -11845,6 +11941,44 @@ def run_engine(
                 worker_results = [
                     (proposal, future.result()) for proposal, future in future_rows
                 ]
+                batch_evaluator_wall = time.perf_counter() - batch_wall_started
+                batch_pair_cpu = sum(
+                    float(worker["process_cpu_seconds"])
+                    for _, worker in worker_results
+                )
+                state["evaluation_batch_index"] = int(
+                    state.get("evaluation_batch_index", 0)
+                ) + 1
+                state["evaluation_batches"] = int(
+                    state.get("evaluation_batches", 0)
+                ) + 1
+                state["evaluation_slots_submitted"] = int(
+                    state.get("evaluation_slots_submitted", 0)
+                ) + len(proposals)
+                state["evaluation_worker_slots_available"] = int(
+                    state.get("evaluation_worker_slots_available", 0)
+                ) + int(state["workers"])
+                state["pair_process_cpu_seconds"] = float(
+                    state.get("pair_process_cpu_seconds", 0.0)
+                ) + batch_pair_cpu
+                state["batch_evaluator_wall_seconds"] = float(
+                    state.get("batch_evaluator_wall_seconds", 0.0)
+                ) + batch_evaluator_wall
+                last_batch_telemetry = {
+                    "evaluation_batch_index": int(state["evaluation_batch_index"])
+                    - 1,
+                    "submitted": len(proposals),
+                    "workers": int(state["workers"]),
+                    "slot_fill_ratio": len(proposals)
+                    / max(1, int(state["workers"])),
+                    "pair_process_cpu_seconds": batch_pair_cpu,
+                    "evaluator_wall_seconds": batch_evaluator_wall,
+                    "effective_cores": (
+                        batch_pair_cpu / batch_evaluator_wall
+                        if batch_evaluator_wall > 0.0
+                        else 0.0
+                    ),
+                }
                 memory_failure = False
                 batch_peak_rss = 0
                 for proposal, worker in worker_results:
@@ -11954,7 +12088,11 @@ def run_engine(
                         proposal=proposal,
                         archive_row=archive_row,
                         new_family=new_family,
-                        state_hash_after=policy.state_hash(),
+                        state_hash_after=(
+                            str(proposal["policy_state_hash_after_proposal"])
+                            if type(policy) is MechanismRandomV2
+                            else policy.state_hash()
+                        ),
                         checkpoint_index=checkpoint_index,
                         completion_ordinal=completion_ordinal,
                         arm_completion_ordinal=arm_completion[arm],
@@ -12059,6 +12197,11 @@ def run_engine(
                         "RAW_OR_WALL_BUDGET_EXCEEDED_AFTER_WORKER_BATCH"
                     )
                 if len(ledger) % 100 == 0:
+                    write_producer_status(
+                        "RUNNING",
+                        checkpoint_index=checkpoint_index,
+                        last_batch=last_batch_telemetry,
+                    )
                     print(
                         json.dumps(
                             {
@@ -12072,6 +12215,21 @@ def run_engine(
                                     archive.champion_by_family
                                 ),
                                 "workers": state["workers"],
+                                "required_pairs_per_hour": required_pairs_per_hour,
+                                "observed_pairs_per_hour": (
+                                    len(ledger) * 3600.0 / active_elapsed()
+                                ),
+                                "worker_slot_fill_ratio": (
+                                    int(state["evaluation_slots_submitted"])
+                                    / max(
+                                        1,
+                                        int(
+                                            state[
+                                                "evaluation_worker_slots_available"
+                                            ]
+                                        ),
+                                    )
+                                ),
                             },
                             sort_keys=True,
                         ),
@@ -12212,6 +12370,10 @@ def run_engine(
                 )
                 _write_json(canary_path, canary)
             attempted_ids = set(str(value) for value in state["attempted_exact_ids"])
+            write_producer_status(
+                "CHECKPOINT_COMPLETE",
+                checkpoint_index=checkpoint_index,
+            )
             print(
                 json.dumps(
                     {
@@ -12431,7 +12593,36 @@ def run_engine(
             "sealed_reads": 0,
         }
         _write_json(runtime_root / "final_decision.json", decision)
+        write_producer_status(
+            "ENGINE_BUDGET_EXHAUSTED",
+            checkpoint_index=int(state["next_checkpoint_index"]),
+        )
         return {"result": "ENGINE_BUDGET_EXHAUSTED", **decision}
+    except Exception as failure:
+        stop_executor()
+        state["attempted_exact_ids"] = sorted(attempted_ids)
+        state["wall_elapsed_seconds"] = active_elapsed()
+        failure_payload = {
+            "schema_version": 1,
+            "status": "PRODUCER_FAILED",
+            "failure_type": type(failure).__name__,
+            "failure_message": str(failure),
+            "traceback": traceback.format_exc(),
+            "producer_source_sha": source_sha,
+            "frozen_contract_sha256": frozen_hash,
+            "strict_evaluated_count": len(ledger),
+            "generation_attempts": int(state["generation_attempts"]),
+            "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+            "checkpoint_index": int(state["next_checkpoint_index"]),
+            "sealed_reads": 0,
+        }
+        _write_json(runtime_root / "producer_failure.json", failure_payload)
+        write_producer_status(
+            "PRODUCER_FAILED",
+            checkpoint_index=int(state["next_checkpoint_index"]),
+        )
+        print(json.dumps(failure_payload, sort_keys=True), file=sys.stderr, flush=True)
+        raise
     finally:
         stop_executor()
 

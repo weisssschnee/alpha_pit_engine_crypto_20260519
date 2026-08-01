@@ -26,10 +26,12 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     MECHANISM_SEARCH_V21_CAMPAIGN,
     MECHANISM_SEARCH_V21_SEEDS,
     MechanismEvolutionV2,
+    MechanismRandomV2,
     _economic_campaign_seeds,
     _load_mechanism_v21_contract,
     _mechanism_v21_checkpoint_allocation,
     _mechanism_v21_train_gate,
+    _policy_inflight_limit,
 )
 
 
@@ -164,10 +166,22 @@ def test_v21_budget_seed_and_stage_contract_are_exact() -> None:
     )
     expected = (
         {"legacy_mechanism_random_v2": 2_000},
-        {"expanded_mechanism_random_v2_1": 2_000},
-        {"expanded_mechanism_random_v2_1": 2_000},
-        {"mechanism_evolution_v2_1": 2_000},
-        {"mechanism_evolution_v2_1": 2_000},
+        {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
     )
     for checkpoint_index, nonzero in enumerate(expected):
         allocation = _mechanism_v21_checkpoint_allocation(
@@ -177,6 +191,49 @@ def test_v21_budget_seed_and_stage_contract_are_exact() -> None:
         )
         assert set(allocation) == set(MECHANISM_SEARCH_V21_ARMS)
         assert {key: value for key, value in allocation.items() if value} == nonzero
+
+
+def test_v21_scheduler_fills_random_slots_without_lookahead_in_adaptive_lanes() -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    config, legacy, expanded, _ = _load_mechanism_v21_contract(REPO_ROOT)
+    random_policy = MechanismRandomV2(
+        MECHANISM_SEARCH_V21_SEEDS[0], registry, legacy
+    )
+    evolution_policy = MechanismEvolutionV2(
+        MECHANISM_SEARCH_V21_SEEDS[0],
+        registry,
+        expanded,
+        dict(config["policy_parameters"]["mechanism_evolution_v2_1"]),
+    )
+    assert _policy_inflight_limit(
+        campaign=MECHANISM_SEARCH_V21_CAMPAIGN,
+        policy=random_policy,
+        workers=8,
+        active_lane_count=4,
+    ) == 2
+    assert _policy_inflight_limit(
+        campaign=MECHANISM_SEARCH_V21_CAMPAIGN,
+        policy=evolution_policy,
+        workers=8,
+        active_lane_count=8,
+    ) == 1
+
+
+def test_v21_random_lookahead_preserves_rng_sequence_and_state_chain() -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    _, legacy, _, _ = _load_mechanism_v21_contract(REPO_ROOT)
+    sequential = MechanismRandomV2(MECHANISM_SEARCH_V21_SEEDS[0], registry, legacy)
+    lookahead = MechanismRandomV2(MECHANISM_SEARCH_V21_SEEDS[0], registry, legacy)
+    expected = [sequential.propose() for _ in range(3)]
+    actual = [lookahead.propose() for _ in range(3)]
+    assert [value[0].candidate_id for value in actual] == [
+        value[0].candidate_id for value in expected
+    ]
+    for previous, current in zip(actual, actual[1:]):
+        assert previous[1]["policy_state_hash_after_proposal"] == current[1][
+            "policy_state_hash_before"
+        ]
+    assert lookahead.state_hash() == sequential.state_hash()
 
 
 def test_v21_receipt_is_narrow_fresh_state_authority() -> None:
