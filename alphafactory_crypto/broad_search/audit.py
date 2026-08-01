@@ -682,8 +682,15 @@ def search_behavior_descriptor(
         if not np.any(local):
             continue
         local_ranks = rank_buckets[:, local]
-        with np.errstate(all="ignore"):
-            rank_mean = np.nanmean(local_ranks, axis=1)
+        finite_local_ranks = np.isfinite(local_ranks)
+        rank_counts = finite_local_ranks.sum(axis=1)
+        rank_sums = np.where(finite_local_ranks, local_ranks, 0.0).sum(axis=1)
+        rank_mean = np.divide(
+            rank_sums,
+            rank_counts,
+            out=np.full(rank_sums.shape, np.nan, dtype=float),
+            where=rank_counts > 0,
+        )
         rank_rows.append(
             [month, regime, _quantized(rank_mean, float(contract["rank_mean_quantization_step"])).tolist()]
         )

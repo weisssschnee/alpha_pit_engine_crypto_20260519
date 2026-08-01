@@ -6757,6 +6757,17 @@ def _validation_blocked_decision(
 
 def _validation_blocked_report_text(decision: Mapping[str, Any]) -> str:
     failure = dict(decision["validation_stage"])
+    if failure.get("failure_stage") == "ARM_AGGREGATION":
+        failure_description = (
+            f"arm `{failure['arm']}` reached validation arm aggregation, but "
+            f"the producer raised `{failure['exception_message']}`."
+        )
+    else:
+        failure_description = (
+            f"candidate `{failure['candidate_id']}` from arm `{failure['arm']}` "
+            f"at {failure['horizon_hours']}h produced `{failure['reason']}` on "
+            "the validation block."
+        )
     return f"""# {decision['report_title']}
 
 - Status: `ENGINE_VALIDATION_BLOCKED` (`{decision['reason']}`)
@@ -6766,13 +6777,11 @@ def _validation_blocked_report_text(decision: Mapping[str, Any]) -> str:
 - Exact checkpoint: `{decision['checkpoint']}`; restore verified: `{decision['checkpoint_restore_verified']}`.
 - Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
 
-The frozen validation stage stopped before complete equal-count evaluation because
-candidate `{failure['candidate_id']}` from arm `{failure['arm']}` at
-{failure['horizon_hours']}h produced `{failure['reason']}` on the validation
-block. This is an engine validation-constructibility defect, not an Alpha or
-carrier-information conclusion. No adaptive continuation, seed/parameter
-change, rescue rerun, holdout/OOS/challenge read, promotion, or next Arena
-occurred.
+The frozen validation stage stopped before complete equal-count aggregation:
+{failure_description} This is an engine validation-aggregation defect, not an Alpha or
+carrier-information conclusion. No adaptive continuation,
+seed/parameter change, rescue rerun, holdout/OOS/challenge read, promotion, or
+next Arena occurred.
 """
 
 
@@ -8524,6 +8533,7 @@ def _final_manifest(
         "validation_candidate_ledger.parquet",
         "validation_arm_metrics.parquet",
         "validation_decisions.json",
+        "validation_failure.json",
         "validation_failure_stdout.log",
         "validation_failure_stderr.log",
     ):
@@ -8713,6 +8723,7 @@ def close_validation_blocked_engine(
     expected_producer_source_sha: str | None = None,
     closure_source_sha: str | None = None,
     campaign: str = ECONOMIC_SEARCH_V2_CAMPAIGN,
+    failure_record_name: str | None = None,
 ) -> dict[str, Any]:
     """Close an already-stopped validation crash without evaluating a candidate."""
 
@@ -8727,8 +8738,13 @@ def close_validation_blocked_engine(
         repo_root
         / f"reports/{economic_config['report_prefix']}_{runtime_date}.md"
     )
-    checkpoint = runtime_root / "checkpoints" / "checkpoint_000"
-    failure_log = runtime_root / "validation_failure_stderr.log"
+    checkpoint_count = int(economic_config.get("checkpoint_count", 1))
+    checkpoint = runtime_root / "checkpoints" / (
+        f"checkpoint_{checkpoint_count - 1:03d}"
+    )
+    failure_path = runtime_root / (
+        failure_record_name or "validation_failure_stderr.log"
+    )
     for path in (
         runtime_root / "frozen_contract.json",
         runtime_root / "embedded_preflight.json",
@@ -8738,7 +8754,7 @@ def close_validation_blocked_engine(
         runtime_root / "arm_checkpoint_metrics.parquet",
         checkpoint / "manifest.json",
         checkpoint / "state.json",
-        failure_log,
+        failure_path,
     ):
         if not path.is_file():
             raise FileNotFoundError(
@@ -8780,9 +8796,14 @@ def close_validation_blocked_engine(
         ledger
     ):
         raise RuntimeError("validation-blocked checkpoint row count changed")
-    if len(ledger) != CHECKPOINT_SIZE:
-        raise RuntimeError("validation-blocked closure requires checkpoint_000")
-    if int(state.get("next_checkpoint_index", -1)) != 1:
+    expected_strict_target = int(
+        economic_config.get("strict_target", CHECKPOINT_SIZE)
+    )
+    if len(ledger) != expected_strict_target:
+        raise RuntimeError(
+            "validation-blocked closure requires the frozen strict target"
+        )
+    if int(state.get("next_checkpoint_index", -1)) != checkpoint_count:
         raise RuntimeError("validation-blocked checkpoint progress changed")
     if int(state.get("strict_evaluated", -1)) != len(ledger):
         raise RuntimeError("validation-blocked state row count changed")
@@ -8808,13 +8829,56 @@ def close_validation_blocked_engine(
             raise RuntimeError(
                 f"validation-blocked checkpoint artifact changed: {name}"
             )
-    failure_text = failure_log.read_text(encoding="utf-8", errors="replace")
-    failure_reason = "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
-    if (
-        "run_frozen_validation_stage" not in failure_text
-        or failure_reason not in failure_text
-    ):
-        raise RuntimeError("validation-blocked traceback identity changed")
+    if failure_record_name is None:
+        failure_text = failure_path.read_text(
+            encoding="utf-8", errors="replace"
+        )
+        failure_reason = "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
+        if (
+            "run_frozen_validation_stage" not in failure_text
+            or failure_reason not in failure_text
+        ):
+            raise RuntimeError("validation-blocked traceback identity changed")
+        failure = {
+            "reason": failure_reason,
+            "arm": "NOT_PERSISTED_BY_PRODUCER",
+            "candidate_id": "NOT_PERSISTED_BY_PRODUCER",
+            "horizon_hours": -1,
+            "selection_rank": -1,
+            "producer_traceback_sha256": sha256_file(failure_path),
+            "closure_mode": "POST_MORTEM_FROM_VERIFIED_CHECKPOINT",
+        }
+    else:
+        failure_record = _read_json(failure_path)
+        expected_message = (
+            "validation control path inconsistent for arm: "
+            "extensible_mechanism_random_v2:interaction_left"
+        )
+        if (
+            failure_record.get("status") != "PROCESS_EXIT_CAPTURED"
+            or failure_record.get("producer_source_sha")
+            != producer_source_sha
+            or failure_record.get("checkpoint") != checkpoint.name
+            or int(failure_record.get("strict_evaluated_at_exit", -1))
+            != len(ledger)
+            or int(failure_record.get("exit_code", 0)) != 1
+            or failure_record.get("exception_type") != "ValueError"
+            or failure_record.get("exception_message") != expected_message
+            or failure_record.get("traceback_function")
+            != "_validation_arm_metrics"
+        ):
+            raise RuntimeError("validation-blocked failure record changed")
+        failure = {
+            "reason": "VALIDATION_CONTROL_PATH_SCHEMA_INCONSISTENT",
+            "arm": "extensible_mechanism_random_v2",
+            "candidate_id": "NOT_APPLICABLE_ARM_AGGREGATION",
+            "horizon_hours": -1,
+            "selection_rank": -1,
+            "producer_traceback_sha256": sha256_file(failure_path),
+            "closure_mode": "POST_MORTEM_FROM_VERIFIED_CHECKPOINT",
+            "failure_stage": "ARM_AGGREGATION",
+            "exception_message": expected_message,
+        }
 
     closure_sha = str(closure_source_sha or _git_sha(repo_root)).lower()
     decision = _validation_blocked_decision(
@@ -8823,15 +8887,7 @@ def close_validation_blocked_engine(
         ledger=ledger,
         archive=archive,
         checkpoint=checkpoint,
-        failure={
-            "reason": failure_reason,
-            "arm": "NOT_PERSISTED_BY_PRODUCER",
-            "candidate_id": "NOT_PERSISTED_BY_PRODUCER",
-            "horizon_hours": -1,
-            "selection_rank": -1,
-            "producer_traceback_sha256": sha256_file(failure_log),
-            "closure_mode": "POST_MORTEM_FROM_VERIFIED_CHECKPOINT",
-        },
+        failure=failure,
         campaign=campaign,
         closure_source_sha=closure_sha,
     )
@@ -9370,33 +9426,28 @@ def _validation_arm_metrics(
                 for row in local
             ]
         )
-        control_names = sorted(
-            {
-                str(name)
-                for row in local
-                for name in row["paths"]["control_net"]
-            }
-        )
-        if not control_names:
-            raise ValueError(f"validation controls missing for arm: {arm}")
-        control_means: dict[str, float] = {}
-        for name in control_names:
-            if any(name not in row["paths"]["control_net"] for row in local):
-                raise ValueError(
-                    f"validation control path inconsistent for arm: {arm}:{name}"
+        candidate_control_paths: list[np.ndarray] = []
+        control_schema_counts: Counter[str] = Counter()
+        for row in local:
+            controls = dict(row["paths"].get("control_net") or {})
+            if not controls:
+                raise ValueError(f"validation controls missing for arm: {arm}")
+            control_schema_counts["|".join(sorted(str(name) for name in controls))] += 1
+            candidate_control_paths.append(
+                _equal_weight_path(
+                    [
+                        np.asarray(values, dtype=float)
+                        for _, values in sorted(controls.items())
+                    ]
                 )
-            control_path = _equal_weight_path(
-                [
-                    np.asarray(row["paths"]["control_net"][name], dtype=float)
-                    for row in local
-                ]
             )
-            finite_control = control_path[np.isfinite(control_path)]
-            control_means[name] = (
-                float(np.mean(finite_control))
-                if finite_control.size
-                else float("nan")
-            )
+        control_path = _equal_weight_path(candidate_control_paths)
+        finite_control = control_path[np.isfinite(control_path)]
+        control_mean = (
+            float(np.mean(finite_control))
+            if finite_control.size
+            else float("nan")
+        )
         primary_mean, floor_sortino = _validation_path_summary(
             primary_path,
             horizon=horizon,
@@ -9407,14 +9458,6 @@ def _validation_arm_metrics(
             if finite_matched.size
             else float("nan")
         )
-        finite_control_means = [
-            value for value in control_means.values() if math.isfinite(value)
-        ]
-        max_control_mean = (
-            max(finite_control_means)
-            if finite_control_means
-            else float("nan")
-        )
         horizon_rows.append(
             {
                 "horizon_hours": int(horizon),
@@ -9422,16 +9465,19 @@ def _validation_arm_metrics(
                 "validation_net_mean": primary_mean,
                 "validation_nonoverlap_floor_sortino": floor_sortino,
                 "validation_matched_increment": matched_mean,
-                "validation_max_control_net_mean": max_control_mean,
+                "validation_control_net_mean": control_mean,
                 "validation_control_not_dominant": bool(
                     math.isfinite(primary_mean)
-                    and math.isfinite(max_control_mean)
-                    and primary_mean > max_control_mean
+                    and math.isfinite(control_mean)
+                    and primary_mean > control_mean
                 ),
-                "control_net_means_json": json.dumps(
-                    control_means,
+                "control_schema_counts_json": json.dumps(
+                    dict(sorted(control_schema_counts.items())),
                     sort_keys=True,
                     separators=(",", ":"),
+                ),
+                "control_aggregation": (
+                    "EQUAL_WEIGHT_WITHIN_CANDIDATE_THEN_EQUAL_WEIGHT_CANDIDATES"
                 ),
             }
         )
@@ -15368,21 +15414,16 @@ def check_mechanism_v2(
     )
     report_path = repo_root / f"reports/{config['report_prefix']}_{runtime_date}.md"
     errors: list[str] = []
-    required = (
+    required = [
         "frozen_contract.json",
         "embedded_preflight.json",
         "candidate_ledger.parquet",
         "behavior_archive.parquet",
         "behavior_family_summary.json",
         "arm_checkpoint_metrics.parquet",
-        "validation_candidate_ledger.parquet",
-        "validation_arm_metrics.parquet",
-        "validation_decisions.json",
-        "mechanism_knowledge.parquet",
-        "mechanism_knowledge_summary.json",
         "final_decision.json",
         "run_manifest.json",
-    )
+    ]
     for name in required:
         if not (runtime_root / name).is_file():
             errors.append(f"missing:{name}")
@@ -15391,24 +15432,58 @@ def check_mechanism_v2(
     if errors:
         return {"result": "FAIL", "errors": errors}
 
+    decision = _read_json(runtime_root / "final_decision.json")
+    validation_blocked = (
+        decision.get("status") == "ENGINE_VALIDATION_BLOCKED"
+    )
+    required_outcome_artifacts = (
+        ("validation_failure.json",)
+        if validation_blocked
+        else (
+            "validation_candidate_ledger.parquet",
+            "validation_arm_metrics.parquet",
+            "validation_decisions.json",
+            "mechanism_knowledge.parquet",
+            "mechanism_knowledge_summary.json",
+        )
+    )
+    for name in required_outcome_artifacts:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+
     frozen = _read_json(runtime_root / "frozen_contract.json")
     preflight = _read_json(runtime_root / "embedded_preflight.json")
-    decision = _read_json(runtime_root / "final_decision.json")
     manifest = _read_json(runtime_root / "run_manifest.json")
-    validation = _read_json(runtime_root / "validation_decisions.json")
-    knowledge_summary = _read_json(
-        runtime_root / "mechanism_knowledge_summary.json"
+    validation = (
+        None
+        if validation_blocked
+        else _read_json(runtime_root / "validation_decisions.json")
+    )
+    knowledge_summary = (
+        None
+        if validation_blocked
+        else _read_json(runtime_root / "mechanism_knowledge_summary.json")
     )
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
-    validation_rows = pd.read_parquet(
-        runtime_root / "validation_candidate_ledger.parquet"
+    validation_rows = (
+        None
+        if validation_blocked
+        else pd.read_parquet(runtime_root / "validation_candidate_ledger.parquet")
     )
-    validation_metrics = pd.read_parquet(
-        runtime_root / "validation_arm_metrics.parquet"
+    validation_metrics = (
+        None
+        if validation_blocked
+        else pd.read_parquet(runtime_root / "validation_arm_metrics.parquet")
     )
-    knowledge = pd.read_parquet(runtime_root / "mechanism_knowledge.parquet")
+    knowledge = (
+        None
+        if validation_blocked
+        else pd.read_parquet(runtime_root / "mechanism_knowledge.parquet")
+    )
     _, catalog = _load_mechanism_v2_contract(repo_root)
 
     frozen_body = {
@@ -15519,58 +15594,107 @@ def check_mechanism_v2(
     except (KeyError, OSError, ValueError) as exc:
         errors.append(f"checkpoint_exact_restore:{type(exc).__name__}:{exc}")
 
-    validation_checkpoint = runtime_root / "checkpoints" / "checkpoint_validation"
-    if not validation_checkpoint.is_dir() or _read_json(
-        validation_checkpoint / "manifest.json"
-    ).get("restore_verified") is not True:
-        errors.append("validation_checkpoint_restore")
+    qualified: list[str] = []
+    if validation_blocked:
+        failure_record = _read_json(runtime_root / "validation_failure.json")
+        if (
+            failure_record.get("status") != "PROCESS_EXIT_CAPTURED"
+            or failure_record.get("producer_source_sha")
+            != manifest.get("producer_source_sha")
+            or failure_record.get("checkpoint") != "checkpoint_005"
+            or failure_record.get("exception_type") != "ValueError"
+            or failure_record.get("traceback_function")
+            != "_validation_arm_metrics"
+        ):
+            errors.append("validation_failure_record")
+        if any(
+            (runtime_root / name).exists()
+            for name in (
+                "validation_candidate_ledger.parquet",
+                "validation_arm_metrics.parquet",
+                "validation_decisions.json",
+                "mechanism_knowledge.parquet",
+                "mechanism_knowledge_summary.json",
+            )
+        ):
+            errors.append("blocked_outcome_has_success_artifacts")
+        if (
+            decision.get("reason")
+            != "VALIDATION_CONTROL_PATH_SCHEMA_INCONSISTENT"
+            or decision.get("checkpoint") != "checkpoint_005"
+            or decision.get("research_decision")
+            != "HOLD_ENGINE_VALIDATION_BLOCKED"
+            or decision.get("future_new_data_arena_qualified_arms") != []
+            or decision.get("rescue_rerun_started") is not False
+        ):
+            errors.append("validation_blocked_decision")
+    else:
+        validation_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_validation"
+        )
+        if not validation_checkpoint.is_dir() or _read_json(
+            validation_checkpoint / "manifest.json"
+        ).get("restore_verified") is not True:
+            errors.append("validation_checkpoint_restore")
+        if (
+            validation.get("status") != "VALIDATION_STAGE_COMPLETE"
+            or validation.get("random_control_survival_required") is not False
+            or set(dict(validation.get("arm_decisions") or {}))
+            != set(MECHANISM_SEARCH_V2_ARMS)
+            or set(validation_metrics["arm"].astype(str))
+            != set(MECHANISM_SEARCH_V2_ARMS)
+        ):
+            errors.append("independent_validation_contract")
+        evaluated_counts = (
+            validation_rows.loc[
+                validation_rows["validation_status"].astype(str)
+                == "EVALUATED"
+            ]
+            .groupby("arm")
+            .size()
+            .to_dict()
+        )
+        recorded_counts = {
+            str(key): int(value)
+            for key, value in dict(
+                validation.get("matched_evaluated_counts") or {}
+            ).items()
+        }
+        if {
+            str(key): int(value) for key, value in evaluated_counts.items()
+        } != recorded_counts:
+            errors.append("validation_evaluated_counts")
+        qualified = sorted(
+            arm
+            for arm, row in dict(validation.get("arm_decisions") or {}).items()
+            if bool(dict(row).get("passed"))
+        )
+        if (
+            decision.get("future_development_data_arena_qualified_arms")
+            != qualified
+        ):
+            errors.append("validation_qualification_projection")
+        if (
+            len(knowledge) != len(catalog)
+            or knowledge["mechanism_id"].nunique() != len(catalog)
+            or knowledge_summary.get("declared_mechanism_count")
+            != len(catalog)
+            or knowledge_summary.get("individual_candidate_reward_persisted")
+            is not False
+            or knowledge_summary.get("population_or_distribution_persisted")
+            is not False
+            or knowledge["individual_candidate_state_persisted"]
+            .fillna(True)
+            .any()
+        ):
+            errors.append("mechanism_knowledge_boundary")
+        if (
+            decision.get("status")
+            != "PASS_SEARCH_ENGINE_V2_MECHANISM_CAMPAIGN_COMPLETED"
+        ):
+            errors.append("final_decision_status")
     if (
-        validation.get("status") != "VALIDATION_STAGE_COMPLETE"
-        or validation.get("random_control_survival_required") is not False
-        or set(dict(validation.get("arm_decisions") or {}))
-        != set(MECHANISM_SEARCH_V2_ARMS)
-        or set(validation_metrics["arm"].astype(str)) != set(MECHANISM_SEARCH_V2_ARMS)
-    ):
-        errors.append("independent_validation_contract")
-    evaluated_counts = (
-        validation_rows.loc[
-            validation_rows["validation_status"].astype(str) == "EVALUATED"
-        ]
-        .groupby("arm")
-        .size()
-        .to_dict()
-    )
-    recorded_counts = {
-        str(key): int(value)
-        for key, value in dict(
-            validation.get("matched_evaluated_counts") or {}
-        ).items()
-    }
-    if {
-        str(key): int(value) for key, value in evaluated_counts.items()
-    } != recorded_counts:
-        errors.append("validation_evaluated_counts")
-    qualified = sorted(
-        arm
-        for arm, row in dict(validation.get("arm_decisions") or {}).items()
-        if bool(dict(row).get("passed"))
-    )
-    if decision.get("future_development_data_arena_qualified_arms") != qualified:
-        errors.append("validation_qualification_projection")
-
-    if (
-        len(knowledge) != len(catalog)
-        or knowledge["mechanism_id"].nunique() != len(catalog)
-        or knowledge_summary.get("declared_mechanism_count") != len(catalog)
-        or knowledge_summary.get("individual_candidate_reward_persisted") is not False
-        or knowledge_summary.get("population_or_distribution_persisted") is not False
-        or knowledge["individual_candidate_state_persisted"].fillna(True).any()
-    ):
-        errors.append("mechanism_knowledge_boundary")
-    if (
-        decision.get("status")
-        != "PASS_SEARCH_ENGINE_V2_MECHANISM_CAMPAIGN_COMPLETED"
-        or decision.get("strict_evaluated_count")
+        decision.get("strict_evaluated_count")
         != MECHANISM_SEARCH_V2_STRICT_TARGET
         or decision.get("checkpoint_restore_verified") is not True
         or decision.get("sealed_reads") != 0
@@ -15665,6 +15789,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "close-economic-v6",
             "check-economic-v6",
             "run-mechanism-v2",
+            "close-validation-blocked-mechanism-v2",
             "check-mechanism-v2",
             "build-canary-cache",
             "run-canary",
@@ -15913,6 +16038,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_mechanism_v2(
             repo_root,
             runtime_date=str(args.runtime_date or "20260801"),
+        )
+    elif args.command == "close-validation-blocked-mechanism-v2":
+        result = close_validation_blocked_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+            expected_producer_source_sha=(
+                "ef688d89ca0e89654015bf5f76a6b9c26494d837"
+            ),
+            closure_source_sha=args.source_sha,
+            campaign=MECHANISM_SEARCH_V2_CAMPAIGN,
+            failure_record_name="validation_failure.json",
         )
     elif args.command == "check":
         result = check_engine(

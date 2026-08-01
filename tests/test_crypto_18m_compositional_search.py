@@ -73,11 +73,82 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _payload_sha,
     _initial_policies,
     _validate_economic_search_surface,
+    _validation_arm_metrics,
     _validation_control_arm_stopped,
     run_frozen_validation_stage,
     _write_checkpoint,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
+
+
+def test_validation_arm_metrics_supports_heterogeneous_control_schemas() -> None:
+    def record(
+        candidate_id: str,
+        horizon: int,
+        controls: dict[str, np.ndarray],
+    ) -> dict[str, object]:
+        return {
+            "candidate_id": candidate_id,
+            "horizon_hours": horizon,
+            "matched_component": "limiting",
+            "paths": {
+                "primary_net": np.full(16, 0.003),
+                "control_net": controls,
+                "matched_component_net": {
+                    "limiting": np.full(16, 0.001),
+                },
+            },
+        }
+
+    rows = []
+    for horizon in (1, 4):
+        rows.extend(
+            (
+                record(
+                    f"binary-{horizon}",
+                    horizon,
+                    {
+                        "interaction_left": np.full(16, 0.001),
+                        "interaction_right": np.full(16, 0.002),
+                    },
+                ),
+                record(
+                    f"hierarchical-{horizon}",
+                    horizon,
+                    {
+                        "A": np.full(16, 0.001),
+                        "B": np.full(16, 0.0015),
+                        "AB": np.full(16, 0.002),
+                    },
+                ),
+            )
+        )
+
+    metrics = _validation_arm_metrics(
+        "extensible_mechanism_random_v2",
+        rows,
+        required_horizons=(1, 4),
+    )
+
+    assert metrics["matched_evaluated_count"] == 4
+    assert metrics["validation_control_not_dominant"] is True
+    horizon_metrics = json.loads(metrics["horizon_metrics_json"])
+    assert {
+        row["control_aggregation"] for row in horizon_metrics
+    } == {
+        "EQUAL_WEIGHT_WITHIN_CANDIDATE_THEN_EQUAL_WEIGHT_CANDIDATES"
+    }
+    assert {
+        frozenset(json.loads(row["control_schema_counts_json"]))
+        for row in horizon_metrics
+    } == {
+        frozenset(
+            {
+                "A|AB|B",
+                "interaction_left|interaction_right",
+            }
+        )
+    }
 
 
 def test_each_broad_mechanism_has_an_explicit_canonical_mapping_class() -> None:
