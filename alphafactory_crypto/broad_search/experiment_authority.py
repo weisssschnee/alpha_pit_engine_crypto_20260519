@@ -54,6 +54,9 @@ SEARCH_ECONOMIC_V6_RECEIPT_PATH = (
 SEARCH_MECHANISM_V2_RECEIPT_PATH = (
     "config/crypto_search_mechanism_v2_receipt.json"
 )
+SEARCH_MECHANISM_V21_RECEIPT_PATH = (
+    "config/crypto_search_mechanism_v2_1_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -307,6 +310,76 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "target_contract",
             "runtime_binding",
             "mechanism_catalog",
+            "campaign_contract",
+        },
+    },
+    "CRYPTO_SEARCH_MECHANISM_V2_1_RECEIPT": {
+        "path": SEARCH_MECHANISM_V21_RECEIPT_PATH,
+        "decision_id": (
+            "USER_AUTHORIZED_EVOLUTION_GUIDED_MECHANISM_BASIS_10K_20260801"
+        ),
+        "runner_campaign": "crypto_search_mechanism_v2_1",
+        "runtime_date": "20260801",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
+        "run_authorization_scope": (
+            "ONE_FRESH_STATE_10000_STRICT_MECHANISM_BASIS_CAMPAIGN"
+        ),
+        "run_authorization_extras": {
+            "mechanism_catalog_persistence_authorized": True,
+            "aggregate_mechanism_knowledge_authorized": True,
+            "candidate_or_policy_state_persistence_authorized": False,
+            "additional_seed_campaign_allowed": False,
+        },
+        "mechanism_registry_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "compile_mechanism_catalog"
+        ),
+        "mapping_adapter_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "mapping_id_for_mechanism_spec"
+        ),
+        "economic_hypothesis_field": "hypothesis",
+        "mapping_classes": {
+            "CROSS_SECTIONAL_RELATIVE",
+            "DIRECTIONAL_STATEFUL",
+            "SPARSE_EVENT_CARRY",
+        },
+        "strict_evaluated_target": 10_000,
+        "checkpoint_size": 2_000,
+        "checkpoint_count": 5,
+        "validation_trigger": 4,
+        "validation_continuation_action": (
+            "NO_ADDITIONAL_BUDGET_FINAL_PER_ARM_QUALIFICATION"
+        ),
+        "random_control_survival_required": False,
+        "seed_set": (
+            1690649940,
+            1761225687,
+            4212849294,
+            1880069717,
+        ),
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+        ),
+        "required_component_sources": {
+            "mechanism",
+            "mechanism_mapping",
+            "direction",
+            "validation_kill_line",
+            "portfolio_mapping_and_cost",
+            "target_execution",
+            "optimizer_reward_and_matched_attribution",
+            "target_contract",
+            "runtime_binding",
+            "legacy_mechanism_catalog",
+            "expanded_mechanism_catalog",
+            "aggregate_mechanism_knowledge",
             "campaign_contract",
         },
     },

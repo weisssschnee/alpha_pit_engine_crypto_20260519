@@ -4,7 +4,18 @@ Last updated: 2026-08-01 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_MECHANISM_GRAMMAR_VALIDATION_BLOCKED_CLOSED`
+`CRYPTO_SEARCH_ENGINE_V2_1_MECHANISM_BASIS_AUTHORIZED_IMPLEMENTED_NOT_RUN`
+
+ADR 0018 accepts the current user's authorization for one fresh-state,
+development-only Search Engine V2.1 campaign. It preserves V2 as consumed and
+does not rerun its validation. The V2.1 implementation reuses the existing
+115-field aligned carrier, AST, compiler, controls, evaluator, archive, and
+checkpoint path; expands only frozen gate/modulation modes; assigns zero budget
+to CEM; and freezes five 2,000-candidate checkpoints as 2,000 old-grammar
+random, 4,000 expanded-basis random, and 4,000 fresh Evolution. The terminal
+validation stage runs automatically only if the pre-registered equal-count
+train gate passes. No candidate, reward, population, distribution, archive,
+RNG, or policy state crosses from V2.
 
 The one fresh-state, development-only Search Engine V2 authorization is
 consumed. Producer `ef688d89ca0e89654015bf5f76a6b9c26494d837` retained exactly
@@ -558,6 +569,12 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
+0. Execute only ADR 0018's V2.1 campaign after the producer source, receipt,
+   catalog, aggregate-only knowledge, tests, budget, seeds, and hashes are
+   committed. Run continuously with exact 2,000-candidate checkpoints; stop on
+   the frozen train gate, validation result, raw-attempt limit, or 18-hour wall
+   limit. Then consume the receipt, independently check artifacts, update the
+   existing CURRENT Search Engine node, commit, push, and stop.
 1. Preserve the consumed V2 mechanism campaign at producer `ef688d89ca0e89654015bf5f76a6b9c26494d837`: six exact checkpoints, 12,000 strict train candidates, and terminal `ENGINE_VALIDATION_BLOCKED`. Do not rerun its validation or reuse its adaptive state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for every V2 arm suspended. Train-only reward ordering suggests a potentially useful Evolution gradient, but the equal-count validation gate did not complete and grants no qualification. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
@@ -661,10 +678,8 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Finish the blocked-outcome closure for producer
-`ef688d89ca0e89654015bf5f76a6b9c26494d837`: update only the existing CURRENT
-search node, rebuild/check Graph, commit the immutable runtime and compact
-report, push, and verify local/tracking/remote SHA equality plus a clean
-worktree. Then stop. Do not rerun validation, import V1-V6 state, tune, reseed,
-rescue, read holdout/OOS/challenge/forward, train latent/relational models,
-promote candidates, or start another campaign.
+Freeze and commit the V2.1 producer bundle, then run exactly one continuous
+10,000-strict-candidate campaign under ADR 0018. Do not rerun V2 validation,
+import V1-V6 or V2 adaptive state, tune, reseed, rescue, read
+holdout/OOS/challenge/forward, train latent/relational models, promote
+candidates, or start a subsequent campaign.

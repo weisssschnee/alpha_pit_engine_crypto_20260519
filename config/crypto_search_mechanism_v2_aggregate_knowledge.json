@@ -1,0 +1,3838 @@
+{
+  "excluded_legacy_fixed_skeleton_count": 2000,
+  "global_mean_search_reward": -0.5077394130047052,
+  "grouped_outcomes": {
+    "condition_normalizer": [
+      {
+        "behavior_family_count": 2439,
+        "beta_smoothed_positive_rate": 0.023067583974099554,
+        "dimensions": {
+          "condition_normalizer": "HistoricalPercentile"
+        },
+        "mean_search_reward": -0.5633165531705183,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 56,
+        "positive_search_reward_rate": 0.022681247468610773,
+        "shrunk_mean_search_reward": -0.5626054502175771,
+        "strict_evaluated_count": 2469,
+        "top_decile_search_reward": -0.019446208228237324
+      },
+      {
+        "behavior_family_count": 4467,
+        "beta_smoothed_positive_rate": 0.03174260418916001,
+        "dimensions": {
+          "condition_normalizer": "RollingZScore"
+        },
+        "mean_search_reward": -0.46221173559851475,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 146,
+        "positive_search_reward_rate": 0.031540289479369196,
+        "shrunk_mean_search_reward": -0.4625243049349228,
+        "strict_evaluated_count": 4629,
+        "top_decile_search_reward": 0.013380005884856131
+      },
+      {
+        "behavior_family_count": 2846,
+        "beta_smoothed_positive_rate": 0.03650137741046832,
+        "dimensions": {
+          "condition_normalizer": "VolatilityScale"
+        },
+        "mean_search_reward": -0.5330763046807431,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 105,
+        "positive_search_reward_rate": 0.03618194348725017,
+        "shrunk_mean_search_reward": -0.5327999650305614,
+        "strict_evaluated_count": 2902,
+        "top_decile_search_reward": 0.04385985261959534
+      }
+    ],
+    "condition_operator|condition_mode": [
+      {
+        "behavior_family_count": 2142,
+        "beta_smoothed_positive_rate": 0.02211191335740072,
+        "dimensions": {
+          "condition_mode": null,
+          "condition_operator": "ConditionGate"
+        },
+        "mean_search_reward": -0.4737709547095738,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 48,
+        "positive_search_reward_rate": 0.02168021680216802,
+        "shrunk_mean_search_reward": -0.47425492205839137,
+        "strict_evaluated_count": 2214,
+        "top_decile_search_reward": -0.036804440093795666
+      },
+      {
+        "behavior_family_count": 4298,
+        "beta_smoothed_positive_rate": 0.017979062357760582,
+        "dimensions": {
+          "condition_mode": null,
+          "condition_operator": "StateModulation"
+        },
+        "mean_search_reward": -0.5366615500849866,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 78,
+        "positive_search_reward_rate": 0.017759562841530054,
+        "shrunk_mean_search_reward": -0.5364523483701201,
+        "strict_evaluated_count": 4392,
+        "top_decile_search_reward": -0.0505725405268909
+      },
+      {
+        "behavior_family_count": 3299,
+        "beta_smoothed_positive_rate": 0.0535924617196702,
+        "dimensions": {
+          "condition_mode": null,
+          "condition_operator": null
+        },
+        "mean_search_reward": -0.492471334221212,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 181,
+        "positive_search_reward_rate": 0.05332940483205657,
+        "shrunk_mean_search_reward": -0.492613943246627,
+        "strict_evaluated_count": 3394,
+        "top_decile_search_reward": 0.13747548259744616
+      }
+    ],
+    "condition_window": [
+      {
+        "behavior_family_count": 1025,
+        "beta_smoothed_positive_rate": 0.01729106628242075,
+        "dimensions": {
+          "condition_window": 6.0
+        },
+        "mean_search_reward": -0.572101186309856,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 17,
+        "positive_search_reward_rate": 0.016361886429258902,
+        "shrunk_mean_search_reward": -0.5701781454641373,
+        "strict_evaluated_count": 1039,
+        "top_decile_search_reward": -0.0651638083563607
+      },
+      {
+        "behavior_family_count": 1455,
+        "beta_smoothed_positive_rate": 0.04863424383744171,
+        "dimensions": {
+          "condition_window": 12.0
+        },
+        "mean_search_reward": -0.4550527079746089,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 72,
+        "positive_search_reward_rate": 0.04803202134756504,
+        "shrunk_mean_search_reward": -0.4561539323775894,
+        "strict_evaluated_count": 1499,
+        "top_decile_search_reward": 0.03958529556949407
+      },
+      {
+        "behavior_family_count": 1125,
+        "beta_smoothed_positive_rate": 0.03583916083916084,
+        "dimensions": {
+          "condition_window": 24.0
+        },
+        "mean_search_reward": -0.5409952544823775,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 40,
+        "positive_search_reward_rate": 0.03502626970227671,
+        "shrunk_mean_search_reward": -0.5400887920230203,
+        "strict_evaluated_count": 1142,
+        "top_decile_search_reward": 0.037590417801726686
+      },
+      {
+        "behavior_family_count": 1345,
+        "beta_smoothed_positive_rate": 0.01373825018076645,
+        "dimensions": {
+          "condition_window": 48.0
+        },
+        "mean_search_reward": -0.4636402347296751,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 18,
+        "positive_search_reward_rate": 0.013034033309196235,
+        "shrunk_mean_search_reward": -0.4646389422348421,
+        "strict_evaluated_count": 1381,
+        "top_decile_search_reward": -0.04491334827625843
+      },
+      {
+        "behavior_family_count": 1092,
+        "beta_smoothed_positive_rate": 0.019625334522747548,
+        "dimensions": {
+          "condition_window": 72.0
+        },
+        "mean_search_reward": -0.5271770624617113,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 21,
+        "positive_search_reward_rate": 0.01876675603217158,
+        "shrunk_mean_search_reward": -0.5266366586540447,
+        "strict_evaluated_count": 1119,
+        "top_decile_search_reward": -0.03625545904208345
+      },
+      {
+        "behavior_family_count": 1237,
+        "beta_smoothed_positive_rate": 0.023052464228934817,
+        "dimensions": {
+          "condition_window": 168.0
+        },
+        "mean_search_reward": -0.49617950725608834,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 28,
+        "positive_search_reward_rate": 0.022292993630573247,
+        "shrunk_mean_search_reward": -0.4964667098833832,
+        "strict_evaluated_count": 1256,
+        "top_decile_search_reward": -0.052383499165798035
+      },
+      {
+        "behavior_family_count": 1000,
+        "beta_smoothed_positive_rate": 0.020771513353115726,
+        "dimensions": {
+          "condition_window": 336.0
+        },
+        "mean_search_reward": -0.5389853147907094,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 20,
+        "positive_search_reward_rate": 0.019821605550049554,
+        "shrunk_mean_search_reward": -0.5380248259750013,
+        "strict_evaluated_count": 1009,
+        "top_decile_search_reward": -0.047283152390418665
+      },
+      {
+        "behavior_family_count": 1501,
+        "beta_smoothed_positive_rate": 0.05908798972382787,
+        "dimensions": {
+          "condition_window": 720.0
+        },
+        "mean_search_reward": -0.5053404931218574,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 91,
+        "positive_search_reward_rate": 0.05852090032154341,
+        "shrunk_mean_search_reward": -0.5053888645372646,
+        "strict_evaluated_count": 1555,
+        "top_decile_search_reward": 0.1969216134201181
+      }
+    ],
+    "horizon_hours": [
+      {
+        "behavior_family_count": 4355,
+        "beta_smoothed_positive_rate": 0.017873303167420813,
+        "dimensions": {
+          "horizon_hours": 1
+        },
+        "mean_search_reward": -0.6589898282014384,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 78,
+        "positive_search_reward_rate": 0.01765504753282028,
+        "shrunk_mean_search_reward": -0.6579021847663158,
+        "strict_evaluated_count": 4418,
+        "top_decile_search_reward": -0.06411148443509841
+      },
+      {
+        "behavior_family_count": 5384,
+        "beta_smoothed_positive_rate": 0.041189111747851004,
+        "dimensions": {
+          "horizon_hours": 4
+        },
+        "mean_search_reward": -0.38802885507937956,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 229,
+        "positive_search_reward_rate": 0.041024722321748475,
+        "shrunk_mean_search_reward": -0.3887112095242692,
+        "strict_evaluated_count": 5582,
+        "top_decile_search_reward": 0.06724888158265438
+      }
+    ],
+    "left_normalizer": [
+      {
+        "behavior_family_count": 3141,
+        "beta_smoothed_positive_rate": 0.02146189735614308,
+        "dimensions": {
+          "left_normalizer": "HistoricalPercentile"
+        },
+        "mean_search_reward": -0.5299829289131018,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 68,
+        "positive_search_reward_rate": 0.021164021164021163,
+        "shrunk_mean_search_reward": -0.529763578371016,
+        "strict_evaluated_count": 3213,
+        "top_decile_search_reward": -0.019524105544837297
+      },
+      {
+        "behavior_family_count": 3314,
+        "beta_smoothed_positive_rate": 0.035693387946167346,
+        "dimensions": {
+          "left_normalizer": "RollingZScore"
+        },
+        "mean_search_reward": -0.49917835915301195,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 121,
+        "positive_search_reward_rate": 0.035421545667447304,
+        "shrunk_mean_search_reward": -0.49925781208899056,
+        "strict_evaluated_count": 3416,
+        "top_decile_search_reward": 0.03480185997380683
+      },
+      {
+        "behavior_family_count": 3306,
+        "beta_smoothed_positive_rate": 0.0352801660243107,
+        "dimensions": {
+          "left_normalizer": "VolatilityScale"
+        },
+        "mean_search_reward": -0.49521379548578054,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 118,
+        "positive_search_reward_rate": 0.03500444971818451,
+        "shrunk_mean_search_reward": -0.4953315797233961,
+        "strict_evaluated_count": 3371,
+        "top_decile_search_reward": 0.038495145027973646
+      }
+    ],
+    "left_role|right_role|condition_role": [
+      {
+        "behavior_family_count": 215,
+        "beta_smoothed_positive_rate": 0.009216589861751152,
+        "dimensions": {
+          "condition_role": "FUNDING",
+          "left_role": "BASIS_BUNDLE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.6560405393705594,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.004651162790697674,
+        "shrunk_mean_search_reward": -0.6368274379790317,
+        "strict_evaluated_count": 215,
+        "top_decile_search_reward": -0.1239149240812713
+      },
+      {
+        "behavior_family_count": 177,
+        "beta_smoothed_positive_rate": 0.0111731843575419,
+        "dimensions": {
+          "condition_role": "OI_LEVEL",
+          "left_role": "BASIS_BUNDLE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.760231490535922,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.005649717514124294,
+        "shrunk_mean_search_reward": -0.7215724164641567,
+        "strict_evaluated_count": 177,
+        "top_decile_search_reward": -0.27795946662869214
+      },
+      {
+        "behavior_family_count": 152,
+        "beta_smoothed_positive_rate": 0.00641025641025641,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "BASIS_BUNDLE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.8071071362412177,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7556030118134305,
+        "strict_evaluated_count": 154,
+        "top_decile_search_reward": -0.4103475266625938
+      },
+      {
+        "behavior_family_count": 290,
+        "beta_smoothed_positive_rate": 0.010273972602739725,
+        "dimensions": {
+          "condition_role": "FLOW_IMBALANCE",
+          "left_role": "BASIS_BUNDLE",
+          "right_role": "OI_LEVEL"
+        },
+        "mean_search_reward": -0.7173207088316732,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.006896551724137931,
+        "shrunk_mean_search_reward": -0.6964927539668813,
+        "strict_evaluated_count": 290,
+        "top_decile_search_reward": -0.18381208526122383
+      },
+      {
+        "behavior_family_count": 616,
+        "beta_smoothed_positive_rate": 0.15963855421686746,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "BASIS_BUNDLE",
+          "right_role": "OI_LEVEL"
+        },
+        "mean_search_reward": -0.33282233938516953,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 105,
+        "positive_search_reward_rate": 0.15861027190332327,
+        "shrunk_mean_search_reward": -0.34088767995552277,
+        "strict_evaluated_count": 662,
+        "top_decile_search_reward": 0.6024287074001635
+      },
+      {
+        "behavior_family_count": 435,
+        "beta_smoothed_positive_rate": 0.02027027027027027,
+        "dimensions": {
+          "condition_role": "FUNDING",
+          "left_role": "CROSS_VENUE_OI_BUNDLE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.5658363676690799,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 8,
+        "positive_search_reward_rate": 0.01809954751131222,
+        "shrunk_mean_search_reward": -0.56191421039216,
+        "strict_evaluated_count": 442,
+        "top_decile_search_reward": -0.08556724392062418
+      },
+      {
+        "behavior_family_count": 222,
+        "beta_smoothed_positive_rate": 0.0044444444444444444,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "CROSS_VENUE_OI_BUNDLE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.7463687746875842,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7164231292999288,
+        "strict_evaluated_count": 223,
+        "top_decile_search_reward": -0.35529812736863103
+      },
+      {
+        "behavior_family_count": 312,
+        "beta_smoothed_positive_rate": 0.006349206349206349,
+        "dimensions": {
+          "condition_role": "OI_LEVEL",
+          "left_role": "FLOW_IMBALANCE",
+          "right_role": "TRADE_INTENSITY"
+        },
+        "mean_search_reward": -0.5624800935734023,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.003194888178913738,
+        "shrunk_mean_search_reward": -0.5574026971148566,
+        "strict_evaluated_count": 313,
+        "top_decile_search_reward": -0.1372380477143995
+      },
+      {
+        "behavior_family_count": 671,
+        "beta_smoothed_positive_rate": 0.06843575418994413,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "FLOW_IMBALANCE",
+          "right_role": "TRADE_INTENSITY"
+        },
+        "mean_search_reward": -0.33884155519465187,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 48,
+        "positive_search_reward_rate": 0.06722689075630252,
+        "shrunk_mean_search_reward": -0.3460865035189437,
+        "strict_evaluated_count": 714,
+        "top_decile_search_reward": 0.07765754124717367
+      },
+      {
+        "behavior_family_count": 976,
+        "beta_smoothed_positive_rate": 0.06818181818181818,
+        "dimensions": {
+          "condition_role": "OI_LEVEL",
+          "left_role": "FUNDING",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.34846941680231364,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 71,
+        "positive_search_reward_rate": 0.06736242884250475,
+        "shrunk_mean_search_reward": -0.3531624553644467,
+        "strict_evaluated_count": 1054,
+        "top_decile_search_reward": 0.06597425749963803
+      },
+      {
+        "behavior_family_count": 976,
+        "beta_smoothed_positive_rate": 0.03182256509161042,
+        "dimensions": {
+          "condition_role": "TRADE_INTENSITY",
+          "left_role": "FUNDING",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.29926477637995313,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 32,
+        "positive_search_reward_rate": 0.030917874396135265,
+        "shrunk_mean_search_reward": -0.3055170616395521,
+        "strict_evaluated_count": 1035,
+        "top_decile_search_reward": -0.0073145387120271315
+      },
+      {
+        "behavior_family_count": 177,
+        "beta_smoothed_positive_rate": 0.05027932960893855,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "FUNDING",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.4238500519132776,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 8,
+        "positive_search_reward_rate": 0.04519774011299435,
+        "shrunk_mean_search_reward": -0.4366943560038311,
+        "strict_evaluated_count": 177,
+        "top_decile_search_reward": 0.0638795547444349
+      },
+      {
+        "behavior_family_count": 416,
+        "beta_smoothed_positive_rate": 0.011848341232227487,
+        "dimensions": {
+          "condition_role": "FUNDING",
+          "left_role": "LARGE_TRADE",
+          "right_role": "OI_LEVEL"
+        },
+        "mean_search_reward": -0.5047321935270117,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 4,
+        "positive_search_reward_rate": 0.009523809523809525,
+        "shrunk_mean_search_reward": -0.5049450940210077,
+        "strict_evaluated_count": 420,
+        "top_decile_search_reward": -0.07897932479094992
+      },
+      {
+        "behavior_family_count": 255,
+        "beta_smoothed_positive_rate": 0.04263565891472868,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "LARGE_TRADE",
+          "right_role": "OI_LEVEL"
+        },
+        "mean_search_reward": -0.4639480582412225,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 10,
+        "positive_search_reward_rate": 0.0390625,
+        "shrunk_mean_search_reward": -0.46881376432605393,
+        "strict_evaluated_count": 256,
+        "top_decile_search_reward": 0.05871388863874824
+      },
+      {
+        "behavior_family_count": 353,
+        "beta_smoothed_positive_rate": 0.0056022408963585435,
+        "dimensions": {
+          "condition_role": "BASIS_BUNDLE",
+          "left_role": "OI_LEVEL",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.6672654069672593,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.0028169014084507044,
+        "shrunk_mean_search_reward": -0.6540746271047225,
+        "strict_evaluated_count": 355,
+        "top_decile_search_reward": -0.21477731826906765
+      },
+      {
+        "behavior_family_count": 227,
+        "beta_smoothed_positive_rate": 0.013100436681222707,
+        "dimensions": {
+          "condition_role": "FUNDING",
+          "left_role": "OI_LEVEL",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.654794389702996,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.00881057268722467,
+        "shrunk_mean_search_reward": -0.6366254350530142,
+        "strict_evaluated_count": 227,
+        "top_decile_search_reward": -0.12240651139004112
+      },
+      {
+        "behavior_family_count": 165,
+        "beta_smoothed_positive_rate": 0.005917159763313609,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "OI_LEVEL",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.7428394055939087,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7050343816599663,
+        "strict_evaluated_count": 167,
+        "top_decile_search_reward": -0.28881339441256626
+      },
+      {
+        "behavior_family_count": 348,
+        "beta_smoothed_positive_rate": 0.002849002849002849,
+        "dimensions": {
+          "condition_role": "BASIS_BUNDLE",
+          "left_role": "OI_LEVEL",
+          "right_role": "PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.6176459784577287,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6084149808343776,
+        "strict_evaluated_count": 349,
+        "top_decile_search_reward": -0.19177964801817338
+      },
+      {
+        "behavior_family_count": 314,
+        "beta_smoothed_positive_rate": 0.009433962264150943,
+        "dimensions": {
+          "condition_role": "FUNDING",
+          "left_role": "OI_LEVEL",
+          "right_role": "PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.5477670245903083,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.006329113924050633,
+        "shrunk_mean_search_reward": -0.5440863246743908,
+        "strict_evaluated_count": 316,
+        "top_decile_search_reward": -0.09566641932564436
+      },
+      {
+        "behavior_family_count": 186,
+        "beta_smoothed_positive_rate": 0.010638297872340425,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "OI_LEVEL",
+          "right_role": "PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.624187397208632,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.005376344086021506,
+        "shrunk_mean_search_reward": -0.607094115123652,
+        "strict_evaluated_count": 186,
+        "top_decile_search_reward": -0.174709348798892
+      },
+      {
+        "behavior_family_count": 302,
+        "beta_smoothed_positive_rate": 0.003289473684210526,
+        "dimensions": {
+          "condition_role": "FLOW_IMBALANCE",
+          "left_role": "OI_LEVEL",
+          "right_role": "TRADE_INTENSITY"
+        },
+        "mean_search_reward": -0.6319149632966078,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6200179045860063,
+        "strict_evaluated_count": 302,
+        "top_decile_search_reward": -0.20226338096746307
+      },
+      {
+        "behavior_family_count": 237,
+        "beta_smoothed_positive_rate": 0.012552301255230125,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "OI_LEVEL",
+          "right_role": "TRADE_INTENSITY"
+        },
+        "mean_search_reward": -0.5253570596426086,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.008438818565400843,
+        "shrunk_mean_search_reward": -0.5232612801169101,
+        "strict_evaluated_count": 237,
+        "top_decile_search_reward": -0.0976978685031155
+      },
+      {
+        "behavior_family_count": 350,
+        "beta_smoothed_positive_rate": 0.0056179775280898875,
+        "dimensions": {
+          "condition_role": "TRADE_INTENSITY",
+          "left_role": "OI_NOTIONAL",
+          "right_role": "PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.5191827025600352,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.002824858757062147,
+        "shrunk_mean_search_reward": -0.5182340360684016,
+        "strict_evaluated_count": 354,
+        "top_decile_search_reward": -0.1252187710141427
+      },
+      {
+        "behavior_family_count": 211,
+        "beta_smoothed_positive_rate": 0.004694835680751174,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "OI_NOTIONAL",
+          "right_role": "PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.6191954817121609,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6045181393309321,
+        "strict_evaluated_count": 211,
+        "top_decile_search_reward": -0.252806159739572
+      },
+      {
+        "behavior_family_count": 249,
+        "beta_smoothed_positive_rate": 0.00398406374501992,
+        "dimensions": {
+          "condition_role": "OI_LEVEL",
+          "left_role": "PRICE_RESPONSE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.6162928268866131,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6039308722808443,
+        "strict_evaluated_count": 249,
+        "top_decile_search_reward": -0.19511119630849152
+      },
+      {
+        "behavior_family_count": 232,
+        "beta_smoothed_positive_rate": 0.004273504273504274,
+        "dimensions": {
+          "condition_role": "TRADE_INTENSITY",
+          "left_role": "PRICE_RESPONSE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.5836262069442334,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5744278076788359,
+        "strict_evaluated_count": 232,
+        "top_decile_search_reward": -0.16581442240361233
+      },
+      {
+        "behavior_family_count": 180,
+        "beta_smoothed_positive_rate": 0.03296703296703297,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "PRICE_RESPONSE",
+          "right_role": "FLOW_IMBALANCE"
+        },
+        "mean_search_reward": -0.5751760786371148,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 5,
+        "positive_search_reward_rate": 0.027777777777777776,
+        "shrunk_mean_search_reward": -0.5649969592963737,
+        "strict_evaluated_count": 180,
+        "top_decile_search_reward": -0.054014593344587435
+      },
+      {
+        "behavior_family_count": 276,
+        "beta_smoothed_positive_rate": 0.0035971223021582736,
+        "dimensions": {
+          "condition_role": "OI_LEVEL",
+          "left_role": "PRICE_RESPONSE",
+          "right_role": "LARGE_TRADE"
+        },
+        "mean_search_reward": -0.6140829372869643,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6030342594394569,
+        "strict_evaluated_count": 276,
+        "top_decile_search_reward": -0.20882532419566419
+      },
+      {
+        "behavior_family_count": 227,
+        "beta_smoothed_positive_rate": 0.013100436681222707,
+        "dimensions": {
+          "condition_role": null,
+          "left_role": "PRICE_RESPONSE",
+          "right_role": "LARGE_TRADE"
+        },
+        "mean_search_reward": -0.5542508849502855,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.00881057268722467,
+        "shrunk_mean_search_reward": -0.548504293821874,
+        "strict_evaluated_count": 227,
+        "top_decile_search_reward": -0.19786939015803442
+      }
+    ],
+    "left_window": [
+      {
+        "behavior_family_count": 1116,
+        "beta_smoothed_positive_rate": 0.03280141843971631,
+        "dimensions": {
+          "left_window": 6
+        },
+        "mean_search_reward": -0.5647730386990991,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 36,
+        "positive_search_reward_rate": 0.03197158081705151,
+        "shrunk_mean_search_reward": -0.563196979957976,
+        "strict_evaluated_count": 1126,
+        "top_decile_search_reward": 0.05457003395536379
+      },
+      {
+        "behavior_family_count": 1163,
+        "beta_smoothed_positive_rate": 0.00935374149659864,
+        "dimensions": {
+          "left_window": 12
+        },
+        "mean_search_reward": -0.5818610855585442,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 10,
+        "positive_search_reward_rate": 0.008517887563884156,
+        "shrunk_mean_search_reward": -0.5798943413448436,
+        "strict_evaluated_count": 1174,
+        "top_decile_search_reward": -0.10376845035851437
+      },
+      {
+        "behavior_family_count": 1284,
+        "beta_smoothed_positive_rate": 0.01596958174904943,
+        "dimensions": {
+          "left_window": 24
+        },
+        "mean_search_reward": -0.5164080454232607,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 20,
+        "positive_search_reward_rate": 0.015232292460015232,
+        "shrunk_mean_search_reward": -0.5162018028675777,
+        "strict_evaluated_count": 1313,
+        "top_decile_search_reward": -0.0699915062932167
+      },
+      {
+        "behavior_family_count": 1189,
+        "beta_smoothed_positive_rate": 0.029826014913007456,
+        "dimensions": {
+          "left_window": 48
+        },
+        "mean_search_reward": -0.5067364774404663,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 35,
+        "positive_search_reward_rate": 0.029045643153526972,
+        "shrunk_mean_search_reward": -0.5067624224186844,
+        "strict_evaluated_count": 1205,
+        "top_decile_search_reward": 0.04418359472701307
+      },
+      {
+        "behavior_family_count": 1293,
+        "beta_smoothed_positive_rate": 0.02042360060514372,
+        "dimensions": {
+          "left_window": 72
+        },
+        "mean_search_reward": -0.4697557916465083,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 26,
+        "positive_search_reward_rate": 0.019696969696969695,
+        "shrunk_mean_search_reward": -0.47065481227037104,
+        "strict_evaluated_count": 1320,
+        "top_decile_search_reward": -0.030384548213859573
+      },
+      {
+        "behavior_family_count": 1225,
+        "beta_smoothed_positive_rate": 0.03891977760127085,
+        "dimensions": {
+          "left_window": 168
+        },
+        "mean_search_reward": -0.48044424632635035,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 48,
+        "positive_search_reward_rate": 0.03818615751789976,
+        "shrunk_mean_search_reward": -0.48112186101502946,
+        "strict_evaluated_count": 1257,
+        "top_decile_search_reward": 0.02919281552794388
+      },
+      {
+        "behavior_family_count": 1324,
+        "beta_smoothed_positive_rate": 0.06192821956368754,
+        "dimensions": {
+          "left_window": 336
+        },
+        "mean_search_reward": -0.44085920081807806,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 87,
+        "positive_search_reward_rate": 0.0613107822410148,
+        "shrunk_mean_search_reward": -0.44233416070089826,
+        "strict_evaluated_count": 1419,
+        "top_decile_search_reward": 0.09915806153047622
+      },
+      {
+        "behavior_family_count": 1159,
+        "beta_smoothed_positive_rate": 0.03872053872053872,
+        "dimensions": {
+          "left_window": 720
+        },
+        "mean_search_reward": -0.5228653343197011,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 45,
+        "positive_search_reward_rate": 0.03794266441821248,
+        "shrunk_mean_search_reward": -0.5224679373721807,
+        "strict_evaluated_count": 1186,
+        "top_decile_search_reward": 0.028703065386962788
+      }
+    ],
+    "mechanism_id": [
+      {
+        "behavior_family_count": 49,
+        "beta_smoothed_positive_rate": 0.0196078431372549,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_0021B51F4829B001067394B3C0BF5F82"
+        },
+        "mean_search_reward": -0.5877511534987344,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5561415770072661,
+        "strict_evaluated_count": 49,
+        "top_decile_search_reward": -0.2735080050998998
+      },
+      {
+        "behavior_family_count": 34,
+        "beta_smoothed_positive_rate": 0.027777777777777776,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_00C93EF19246516DA6B7B8822FDD6413"
+        },
+        "mean_search_reward": -0.4213372440371311,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4632292047486821,
+        "strict_evaluated_count": 34,
+        "top_decile_search_reward": -0.07537760118375773
+      },
+      {
+        "behavior_family_count": 132,
+        "beta_smoothed_positive_rate": 0.08759124087591241,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_019DCD308FFD024C58A0BAF9AACEB5D7"
+        },
+        "mean_search_reward": -0.29082048297408003,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 11,
+        "positive_search_reward_rate": 0.08148148148148149,
+        "shrunk_mean_search_reward": -0.33238578693204407,
+        "strict_evaluated_count": 135,
+        "top_decile_search_reward": 0.0636135485448008
+      },
+      {
+        "behavior_family_count": 22,
+        "beta_smoothed_positive_rate": 0.041666666666666664,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_0204B0F5968D8D36A690C43533B332EF"
+        },
+        "mean_search_reward": -0.577423342021487,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5361291618633941,
+        "strict_evaluated_count": 22,
+        "top_decile_search_reward": -0.17005503093470162
+      },
+      {
+        "behavior_family_count": 59,
+        "beta_smoothed_positive_rate": 0.03278688524590164,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_05247608CEF11904F1999D37ECBB9524"
+        },
+        "mean_search_reward": -0.5576943846421746,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.01694915254237288,
+        "shrunk_mean_search_reward": -0.5401278012092183,
+        "strict_evaluated_count": 59,
+        "top_decile_search_reward": -0.11495961216470985
+      },
+      {
+        "behavior_family_count": 53,
+        "beta_smoothed_positive_rate": 0.01818181818181818,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_069919BFA53D57E5CBB5D82C811D92A2"
+        },
+        "mean_search_reward": -0.9083491932649639,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7575313936375723,
+        "strict_evaluated_count": 53,
+        "top_decile_search_reward": -0.3545616374742615
+      },
+      {
+        "behavior_family_count": 60,
+        "beta_smoothed_positive_rate": 0.016129032258064516,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_085123DB71EACA10CE6BD2138D135995"
+        },
+        "mean_search_reward": -0.7075825867974525,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.638071917652149,
+        "strict_evaluated_count": 60,
+        "top_decile_search_reward": -0.3529026821202912
+      },
+      {
+        "behavior_family_count": 53,
+        "beta_smoothed_positive_rate": 0.01818181818181818,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_0B6B490560FC62A7BE37D0F5F3A42F0D"
+        },
+        "mean_search_reward": -0.5179153047187017,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5140843807793148,
+        "strict_evaluated_count": 53,
+        "top_decile_search_reward": -0.1761914406869598
+      },
+      {
+        "behavior_family_count": 51,
+        "beta_smoothed_positive_rate": 0.018867924528301886,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_0BC31533FD8356D056C5C230A1668545"
+        },
+        "mean_search_reward": -0.5928660547265351,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5600461446651066,
+        "strict_evaluated_count": 51,
+        "top_decile_search_reward": -0.19462062567906682
+      },
+      {
+        "behavior_family_count": 44,
+        "beta_smoothed_positive_rate": 0.021739130434782608,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_0E2AA006DBA92C85B41670BEDED282E8"
+        },
+        "mean_search_reward": -0.5922709349263724,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.556678715169881,
+        "strict_evaluated_count": 44,
+        "top_decile_search_reward": -0.23154923125715876
+      },
+      {
+        "behavior_family_count": 41,
+        "beta_smoothed_positive_rate": 0.023255813953488372,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_11564E5D988CA6E0498B876DAEEEB7F0"
+        },
+        "mean_search_reward": -0.5624080787309595,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5384437321112316,
+        "strict_evaluated_count": 41,
+        "top_decile_search_reward": -0.12228490535619241
+      },
+      {
+        "behavior_family_count": 67,
+        "beta_smoothed_positive_rate": 0.014492753623188406,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_11C975A21B2EEA30CAD515C53846F70F"
+        },
+        "mean_search_reward": -0.4900818373512903,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.49578933655239416,
+        "strict_evaluated_count": 67,
+        "top_decile_search_reward": -0.18470218435505473
+      },
+      {
+        "behavior_family_count": 54,
+        "beta_smoothed_positive_rate": 0.017857142857142856,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_134895AC46B199B7FFA9B6DE183EBB24"
+        },
+        "mean_search_reward": -0.6127523747510436,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5736777843338015,
+        "strict_evaluated_count": 54,
+        "top_decile_search_reward": -0.1611660572498598
+      },
+      {
+        "behavior_family_count": 31,
+        "beta_smoothed_positive_rate": 0.030303030303030304,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_1A80B590524D4FAD0770FE7D3F750D5B"
+        },
+        "mean_search_reward": -0.7554509519986731,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6296292179064988,
+        "strict_evaluated_count": 31,
+        "top_decile_search_reward": -0.40147305637793274
+      },
+      {
+        "behavior_family_count": 21,
+        "beta_smoothed_positive_rate": 0.043478260869565216,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_1C2E867FAE9D7F67459D50AF5D6DD53A"
+        },
+        "mean_search_reward": -0.5117159108764564,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5093150065010594,
+        "strict_evaluated_count": 21,
+        "top_decile_search_reward": -0.1822893504719306
+      },
+      {
+        "behavior_family_count": 60,
+        "beta_smoothed_positive_rate": 0.016129032258064516,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_1CF0C58741923AA8EF9B3ED24F068BD5"
+        },
+        "mean_search_reward": -0.46420339418001944,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4793463572494754,
+        "strict_evaluated_count": 60,
+        "top_decile_search_reward": -0.11811219353724334
+      },
+      {
+        "behavior_family_count": 53,
+        "beta_smoothed_positive_rate": 0.01818181818181818,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_1D8BF3001BDDC8EC83C16563E6C21AE0"
+        },
+        "mean_search_reward": -0.5834491882711347,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.55494668464142,
+        "strict_evaluated_count": 53,
+        "top_decile_search_reward": -0.12582736474815717
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.05,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_1E5EEEE4A9B34E6BE50774070FB82875"
+        },
+        "mean_search_reward": -0.43928508815922607,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02631578947368421,
+        "shrunk_mean_search_reward": -0.4705784938028736,
+        "strict_evaluated_count": 38,
+        "top_decile_search_reward": -0.05627541320683456
+      },
+      {
+        "behavior_family_count": 18,
+        "beta_smoothed_positive_rate": 0.05,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_207A877815E451C0BC95EC3D57845729"
+        },
+        "mean_search_reward": -0.3552404385056983,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4528397821850627,
+        "strict_evaluated_count": 18,
+        "top_decile_search_reward": -0.13093107527515224
+      },
+      {
+        "behavior_family_count": 45,
+        "beta_smoothed_positive_rate": 0.0425531914893617,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_2100B4640DD956A2BA413869DEEC0E7D"
+        },
+        "mean_search_reward": -0.5761939340943093,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.022222222222222223,
+        "shrunk_mean_search_reward": -0.5477453019531751,
+        "strict_evaluated_count": 45,
+        "top_decile_search_reward": -0.18237693184569145
+      },
+      {
+        "behavior_family_count": 360,
+        "beta_smoothed_positive_rate": 0.08638743455497382,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_2303B0DA22C8695A9CF4307BC34C408D"
+        },
+        "mean_search_reward": -0.32674980767178896,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 32,
+        "positive_search_reward_rate": 0.08421052631578947,
+        "shrunk_mean_search_reward": -0.3408072527461902,
+        "strict_evaluated_count": 380,
+        "top_decile_search_reward": 0.10982608677349774
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.020833333333333332,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_279270A4220E1421D6021BE3AC5B32B7"
+        },
+        "mean_search_reward": -0.7183177097819307,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6319266136681971,
+        "strict_evaluated_count": 46,
+        "top_decile_search_reward": -0.1449275869674164
+      },
+      {
+        "behavior_family_count": 48,
+        "beta_smoothed_positive_rate": 0.02,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_27FBDE0A2DE01D6EE3B6CB6877739781"
+        },
+        "mean_search_reward": -0.647652253529016,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5916871173192917,
+        "strict_evaluated_count": 48,
+        "top_decile_search_reward": -0.14668095956033983
+      },
+      {
+        "behavior_family_count": 43,
+        "beta_smoothed_positive_rate": 0.022222222222222223,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_2AD33E78313B25C5D95306343BBC5B22"
+        },
+        "mean_search_reward": -0.681505353406056,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.607365218834813,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.27185104653040887
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.07142857142857142,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_2E0518EBF43D1CD7B196B79314EDD756"
+        },
+        "mean_search_reward": -0.5538103188828154,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.05,
+        "shrunk_mean_search_reward": -0.5333343607147665,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": 0.017728760504612216
+      },
+      {
+        "behavior_family_count": 25,
+        "beta_smoothed_positive_rate": 0.1111111111111111,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_2FEAE288534850756E667428E1688199"
+        },
+        "mean_search_reward": -0.6093223556336733,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.08,
+        "shrunk_mean_search_reward": -0.5522933352103929,
+        "strict_evaluated_count": 25,
+        "top_decile_search_reward": 0.04991017375679422
+      },
+      {
+        "behavior_family_count": 29,
+        "beta_smoothed_positive_rate": 0.06451612903225806,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_31464C8978C3D2438269827747115BE3"
+        },
+        "mean_search_reward": -0.46779393603706504,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.034482758620689655,
+        "shrunk_mean_search_reward": -0.48874894034795824,
+        "strict_evaluated_count": 29,
+        "top_decile_search_reward": 0.009724197848199051
+      },
+      {
+        "behavior_family_count": 43,
+        "beta_smoothed_positive_rate": 0.022222222222222223,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3239E2615CB7B285A4F858A12B369047"
+        },
+        "mean_search_reward": -0.6626308582424828,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5965438416076976,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.2923525409858548
+      },
+      {
+        "behavior_family_count": 65,
+        "beta_smoothed_positive_rate": 0.014925373134328358,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_35D3AAB2FB7E4F119A8CE58860F407D3"
+        },
+        "mean_search_reward": -0.6559240164401522,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6070383740696955,
+        "strict_evaluated_count": 65,
+        "top_decile_search_reward": -0.1108188378521023
+      },
+      {
+        "behavior_family_count": 45,
+        "beta_smoothed_positive_rate": 0.02127659574468085,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_362A8B814676344B0FF0EC7C8E1812C0"
+        },
+        "mean_search_reward": -0.609648014877222,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5672963881250072,
+        "strict_evaluated_count": 45,
+        "top_decile_search_reward": -0.17663486632224923
+      },
+      {
+        "behavior_family_count": 33,
+        "beta_smoothed_positive_rate": 0.02857142857142857,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3885A9883D20465562D9861A2858A645"
+        },
+        "mean_search_reward": -0.7725501899853129,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6421818074717829,
+        "strict_evaluated_count": 33,
+        "top_decile_search_reward": -0.45705166658355295
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.023809523809523808,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3ACBFCDCBBD00A6D5D693499FAC0CE7F"
+        },
+        "mean_search_reward": -0.7246402571508707,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6282398819747971,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.3440827237716666
+      },
+      {
+        "behavior_family_count": 51,
+        "beta_smoothed_positive_rate": 0.018867924528301886,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3B4AEB10C1D16D0A6722F2AC51B2DF5E"
+        },
+        "mean_search_reward": -0.7376679294743756,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6490207905945027,
+        "strict_evaluated_count": 51,
+        "top_decile_search_reward": -0.26553666707967316
+      },
+      {
+        "behavior_family_count": 23,
+        "beta_smoothed_positive_rate": 0.04,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3C8BE5F090DB54EC7F71627538D58E3B"
+        },
+        "mean_search_reward": -0.6972289313042764,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5869804842936167,
+        "strict_evaluated_count": 23,
+        "top_decile_search_reward": -0.182650184410994
+      },
+      {
+        "behavior_family_count": 14,
+        "beta_smoothed_positive_rate": 0.125,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3CB4BD4DA91A1680FEEB1B57D9368DA8"
+        },
+        "mean_search_reward": -0.6423474712183114,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.07142857142857142,
+        "shrunk_mean_search_reward": -0.5487070828958026,
+        "strict_evaluated_count": 14,
+        "top_decile_search_reward": -0.11127032958880885
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.020833333333333332,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3D8D42EED89AAF65035FDB7B171ED340"
+        },
+        "mean_search_reward": -0.7326783319664836,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6403956985462668,
+        "strict_evaluated_count": 46,
+        "top_decile_search_reward": -0.22743409011103136
+      },
+      {
+        "behavior_family_count": 58,
+        "beta_smoothed_positive_rate": 0.016666666666666666,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_3DA9C3F97CBD31D4EB638C369BD846EA"
+        },
+        "mean_search_reward": -0.6341572456385769,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5892086829243114,
+        "strict_evaluated_count": 58,
+        "top_decile_search_reward": -0.21803144595522236
+      },
+      {
+        "behavior_family_count": 3,
+        "beta_smoothed_positive_rate": 0.2,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_410848171640A3466A057109BFE36147"
+        },
+        "mean_search_reward": -1.4101468510176467,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.585088621977243,
+        "strict_evaluated_count": 3,
+        "top_decile_search_reward": -0.23044055305294067
+      },
+      {
+        "behavior_family_count": 24,
+        "beta_smoothed_positive_rate": 0.038461538461538464,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4427CC8F664FFCD1A5B8E8A0E3E88AAE"
+        },
+        "mean_search_reward": -0.4023841139218209,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.46258714196918327,
+        "strict_evaluated_count": 24,
+        "top_decile_search_reward": -0.14269008385181348
+      },
+      {
+        "behavior_family_count": 44,
+        "beta_smoothed_positive_rate": 0.021739130434782608,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_47795E447DA6312D337B6D13E360DA6A"
+        },
+        "mean_search_reward": -0.7460485317954931,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6457078501993718,
+        "strict_evaluated_count": 44,
+        "top_decile_search_reward": -0.2796346503232932
+      },
+      {
+        "behavior_family_count": 52,
+        "beta_smoothed_positive_rate": 0.018518518518518517,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_477DC0FB0EF9A91F5AA7C168C2685FF6"
+        },
+        "mean_search_reward": -0.566022222241833,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5438192472943557,
+        "strict_evaluated_count": 52,
+        "top_decile_search_reward": -0.12424058496539621
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.07142857142857142,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_484E2970244C2D8473377F09D740822E"
+        },
+        "mean_search_reward": -0.44001913070946513,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.05,
+        "shrunk_mean_search_reward": -0.470117033951794,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": 0.04208866076547532
+      },
+      {
+        "behavior_family_count": 60,
+        "beta_smoothed_positive_rate": 0.016129032258064516,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4A4F86513664EB6AA2FCD7E1CF7EAA99"
+        },
+        "mean_search_reward": -0.5817441480010752,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5560033706110334,
+        "strict_evaluated_count": 60,
+        "top_decile_search_reward": -0.24580680562370016
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4ABA01906E971094E94B6445C9E1A21F"
+        },
+        "mean_search_reward": -0.6665937668326312,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5949974383468053,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.16382412424100568
+      },
+      {
+        "behavior_family_count": 48,
+        "beta_smoothed_positive_rate": 0.02,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4D0F0AFEC1818787881867013EF22ECA"
+        },
+        "mean_search_reward": -0.5252842260645072,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5182663008405864,
+        "strict_evaluated_count": 48,
+        "top_decile_search_reward": -0.16823302478818275
+      },
+      {
+        "behavior_family_count": 35,
+        "beta_smoothed_positive_rate": 0.02702702702702703,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4E507AADB02AC2F287C084D96008C4C0"
+        },
+        "mean_search_reward": -0.7763988793997059,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.648083910375228,
+        "strict_evaluated_count": 35,
+        "top_decile_search_reward": -0.30854483253965326
+      },
+      {
+        "behavior_family_count": 140,
+        "beta_smoothed_positive_rate": 0.07746478873239436,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4E6340DE5CAFA7CE1420C11987A9BBD3"
+        },
+        "mean_search_reward": -0.4176467506727883,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 10,
+        "positive_search_reward_rate": 0.07142857142857142,
+        "shrunk_mean_search_reward": -0.43440817622291233,
+        "strict_evaluated_count": 140,
+        "top_decile_search_reward": 0.03603923741592524
+      },
+      {
+        "behavior_family_count": 57,
+        "beta_smoothed_positive_rate": 0.03389830508474576,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4EBF86ABCC990378E06952CF920E3CC9"
+        },
+        "mean_search_reward": -0.5230043333444099,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.017543859649122806,
+        "shrunk_mean_search_reward": -0.5175158226604711,
+        "strict_evaluated_count": 57,
+        "top_decile_search_reward": -0.14495696662145602
+      },
+      {
+        "behavior_family_count": 45,
+        "beta_smoothed_positive_rate": 0.02127659574468085,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4F045E6AC3232F14EC28580CE807830C"
+        },
+        "mean_search_reward": -0.7818482090351091,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6679328652302658,
+        "strict_evaluated_count": 45,
+        "top_decile_search_reward": -0.3201738182504159
+      },
+      {
+        "behavior_family_count": 1,
+        "beta_smoothed_positive_rate": 0.3333333333333333,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4F742F9306797F665D3FA2A501758613"
+        },
+        "mean_search_reward": -2.0,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5529594307924414,
+        "strict_evaluated_count": 1,
+        "top_decile_search_reward": -2.0
+      },
+      {
+        "behavior_family_count": 58,
+        "beta_smoothed_positive_rate": 0.016666666666666666,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_4FA77123C4D0CAFE06EBEBB4F7473135"
+        },
+        "mean_search_reward": -0.7357119791298754,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6546550667298149,
+        "strict_evaluated_count": 58,
+        "top_decile_search_reward": -0.2880648009996875
+      },
+      {
+        "behavior_family_count": 13,
+        "beta_smoothed_positive_rate": 0.06666666666666667,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_500E72C650271945AE62043E9217A78E"
+        },
+        "mean_search_reward": -0.6224839434357612,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5408878329070103,
+        "strict_evaluated_count": 13,
+        "top_decile_search_reward": -0.28768544326564705
+      },
+      {
+        "behavior_family_count": 25,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_516E7E0CB5DE597DA21C736F861DB980"
+        },
+        "mean_search_reward": -0.43163239726568525,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.47435914294373155,
+        "strict_evaluated_count": 25,
+        "top_decile_search_reward": -0.17427326879772945
+      },
+      {
+        "behavior_family_count": 45,
+        "beta_smoothed_positive_rate": 0.02127659574468085,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_52F18CE79FFBB20649E4E405D160AA6F"
+        },
+        "mean_search_reward": -0.6593582572059935,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5963478284470165,
+        "strict_evaluated_count": 45,
+        "top_decile_search_reward": -0.1880656710901736
+      },
+      {
+        "behavior_family_count": 41,
+        "beta_smoothed_positive_rate": 0.023255813953488372,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_54CB7697F6DA6DE48BBDA95B4C29188A"
+        },
+        "mean_search_reward": -0.6090016244525981,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5646127098453025,
+        "strict_evaluated_count": 41,
+        "top_decile_search_reward": -0.2152166825085488
+      },
+      {
+        "behavior_family_count": 41,
+        "beta_smoothed_positive_rate": 0.023255813953488372,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_54E1670F0A4E7568CC81A166F794DDF3"
+        },
+        "mean_search_reward": -0.7585649893824454,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6486140517922031,
+        "strict_evaluated_count": 41,
+        "top_decile_search_reward": -0.3534313472209578
+      },
+      {
+        "behavior_family_count": 75,
+        "beta_smoothed_positive_rate": 0.025974025974025976,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5882F61BDFC3A0212EB1CD72A2DE301C"
+        },
+        "mean_search_reward": -0.44165420088126645,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.013333333333333334,
+        "shrunk_mean_search_reward": -0.46141800263780886,
+        "strict_evaluated_count": 75,
+        "top_decile_search_reward": -0.05006981278601485
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5995238D40630736BCB82EEE84D311D1"
+        },
+        "mean_search_reward": -0.8151329726710113,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6765893964833803,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.37249883693160857
+      },
+      {
+        "behavior_family_count": 56,
+        "beta_smoothed_positive_rate": 0.017241379310344827,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5B28F359F32A09B1425D07AC61F47D55"
+        },
+        "mean_search_reward": -0.6636985159464037,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6069861148766951,
+        "strict_evaluated_count": 56,
+        "top_decile_search_reward": -0.28782196111558106
+      },
+      {
+        "behavior_family_count": 185,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5B2BA0DC73BE1CCAF851B801539AC04A"
+        },
+        "mean_search_reward": -0.38248175849734645,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 6,
+        "positive_search_reward_rate": 0.03208556149732621,
+        "shrunk_mean_search_reward": -0.4007842468271888,
+        "strict_evaluated_count": 187,
+        "top_decile_search_reward": 0.0008471859206261662
+      },
+      {
+        "behavior_family_count": 127,
+        "beta_smoothed_positive_rate": 0.15384615384615385,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5C6BCD3643950F795905756A93B9DE15"
+        },
+        "mean_search_reward": -0.3695858737507882,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 19,
+        "positive_search_reward_rate": 0.1484375,
+        "shrunk_mean_search_reward": -0.3972165816015716,
+        "strict_evaluated_count": 128,
+        "top_decile_search_reward": 0.6780056704860384
+      },
+      {
+        "behavior_family_count": 42,
+        "beta_smoothed_positive_rate": 0.022222222222222223,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5C8C2995EDD71070DE7938024992AD57"
+        },
+        "mean_search_reward": -0.7892496966999811,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6691386423233301,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.2949622712190015
+      },
+      {
+        "behavior_family_count": 16,
+        "beta_smoothed_positive_rate": 0.05555555555555555,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5DA04C2D9EC50D1101E044C99E32AFF1"
+        },
+        "mean_search_reward": -0.5405570367462774,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5186786209185626,
+        "strict_evaluated_count": 16,
+        "top_decile_search_reward": -0.16974908035533523
+      },
+      {
+        "behavior_family_count": 174,
+        "beta_smoothed_positive_rate": 0.027932960893854747,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5DD1040999B10BA48928C6F1B00496DB"
+        },
+        "mean_search_reward": -0.29153121180005026,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 4,
+        "positive_search_reward_rate": 0.022598870056497175,
+        "shrunk_mean_search_reward": -0.32463485983138496,
+        "strict_evaluated_count": 177,
+        "top_decile_search_reward": -0.017662783126009846
+      },
+      {
+        "behavior_family_count": 153,
+        "beta_smoothed_positive_rate": 0.060240963855421686,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_5E1DF9FADFCC585CD5EEEEF553DCC171"
+        },
+        "mean_search_reward": -0.23017450127274855,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 9,
+        "positive_search_reward_rate": 0.054878048780487805,
+        "shrunk_mean_search_reward": -0.275491221555517,
+        "strict_evaluated_count": 164,
+        "top_decile_search_reward": 0.008208506340122474
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.020833333333333332,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_60BC1D0C52F30FB915DDC448D3FFF3C7"
+        },
+        "mean_search_reward": -0.6968739532162102,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6192802956935415,
+        "strict_evaluated_count": 46,
+        "top_decile_search_reward": -0.35890882571285804
+      },
+      {
+        "behavior_family_count": 35,
+        "beta_smoothed_positive_rate": 0.02702702702702703,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_63A27DDD1205884AF1EE5C8EDCF9F2F2"
+        },
+        "mean_search_reward": -0.7630512751711007,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6411112813005834,
+        "strict_evaluated_count": 35,
+        "top_decile_search_reward": -0.2711254542761813
+      },
+      {
+        "behavior_family_count": 52,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_651A247F04A5AD656D830771BBB3D3F9"
+        },
+        "mean_search_reward": -0.30871591534222553,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.019230769230769232,
+        "shrunk_mean_search_reward": -0.3845343906422178,
+        "strict_evaluated_count": 52,
+        "top_decile_search_reward": -0.04209062042242989
+      },
+      {
+        "behavior_family_count": 25,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_651FECAC3033E5E9C936823D92A2ABB6"
+        },
+        "mean_search_reward": -0.49117737685202806,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5004753620605485,
+        "strict_evaluated_count": 25,
+        "top_decile_search_reward": -0.12053415636912775
+      },
+      {
+        "behavior_family_count": 58,
+        "beta_smoothed_positive_rate": 0.016666666666666666,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_68C0BC653C144B461628468F031684FF"
+        },
+        "mean_search_reward": -0.4591479541147248,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.47642491727560665,
+        "strict_evaluated_count": 58,
+        "top_decile_search_reward": -0.15425636489038008
+      },
+      {
+        "behavior_family_count": 54,
+        "beta_smoothed_positive_rate": 0.017857142857142856,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_68E3C05BBFC3AB7C432A6F478CDE48B0"
+        },
+        "mean_search_reward": -0.7451465348170379,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6568090011194258,
+        "strict_evaluated_count": 54,
+        "top_decile_search_reward": -0.3870244676350521
+      },
+      {
+        "behavior_family_count": 52,
+        "beta_smoothed_positive_rate": 0.1111111111111111,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_698C976C43FAD7B4A42168277086C1FB"
+        },
+        "mean_search_reward": -0.4698352672407845,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 5,
+        "positive_search_reward_rate": 0.09615384615384616,
+        "shrunk_mean_search_reward": -0.48427494181751624,
+        "strict_evaluated_count": 52,
+        "top_decile_search_reward": 0.20023007351864885
+      },
+      {
+        "behavior_family_count": 30,
+        "beta_smoothed_positive_rate": 0.0625,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_6B6CE812D4244091C751CAF5CE355BC1"
+        },
+        "mean_search_reward": -0.5092798336295473,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.03333333333333333,
+        "shrunk_mean_search_reward": -0.5084847778231771,
+        "strict_evaluated_count": 30,
+        "top_decile_search_reward": -0.05185169642401157
+      },
+      {
+        "behavior_family_count": 44,
+        "beta_smoothed_positive_rate": 0.021739130434782608,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_6D7A3E021AD495753902CA63BD61D56A"
+        },
+        "mean_search_reward": -0.5677254789084507,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5424681880016105,
+        "strict_evaluated_count": 44,
+        "top_decile_search_reward": -0.16871629805824198
+      },
+      {
+        "behavior_family_count": 304,
+        "beta_smoothed_positive_rate": 0.06389776357827476,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_6E74B8D177A8D73201A3117692CDC3B3"
+        },
+        "mean_search_reward": -0.25009854737049564,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 19,
+        "positive_search_reward_rate": 0.06109324758842444,
+        "shrunk_mean_search_reward": -0.27413501296902243,
+        "strict_evaluated_count": 311,
+        "top_decile_search_reward": 0.08058441756362594
+      },
+      {
+        "behavior_family_count": 195,
+        "beta_smoothed_positive_rate": 0.08040201005025126,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_6E976A91469D449B8C4F0A5DA27196F5"
+        },
+        "mean_search_reward": -0.30842886030100614,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 15,
+        "positive_search_reward_rate": 0.07614213197969544,
+        "shrunk_mean_search_reward": -0.33628011657401213,
+        "strict_evaluated_count": 197,
+        "top_decile_search_reward": 0.06975106774274079
+      },
+      {
+        "behavior_family_count": 8,
+        "beta_smoothed_positive_rate": 0.1,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_6FDC0DD9B582514802C74BF6DFAA83AC"
+        },
+        "mean_search_reward": -0.6367285363887691,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.533537237681518,
+        "strict_evaluated_count": 8,
+        "top_decile_search_reward": -0.09088262177065512
+      },
+      {
+        "behavior_family_count": 56,
+        "beta_smoothed_positive_rate": 0.017241379310344827,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_70941D34B95AECF368672A834E2E9030"
+        },
+        "mean_search_reward": -0.5599130404559932,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5409408122918884,
+        "strict_evaluated_count": 56,
+        "top_decile_search_reward": -0.23148389210591022
+      },
+      {
+        "behavior_family_count": 37,
+        "beta_smoothed_positive_rate": 0.04878048780487805,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_70D4745F793C7761E5C58311224B2351"
+        },
+        "mean_search_reward": -0.3767937269595701,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02564102564102564,
+        "shrunk_mean_search_reward": -0.43581150095174365,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -2.8688878505559335e-05
+      },
+      {
+        "behavior_family_count": 147,
+        "beta_smoothed_positive_rate": 0.013422818791946308,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_71CD0CA67A2C3F9511109EDD840F968F"
+        },
+        "mean_search_reward": -0.3168206016519849,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.006802721088435374,
+        "shrunk_mean_search_reward": -0.35095133887705215,
+        "strict_evaluated_count": 147,
+        "top_decile_search_reward": -0.06058327824348432
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7451BC75A5BA6BD51EE699C32E9BBD99"
+        },
+        "mean_search_reward": -0.4553649936331803,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.47897036574429014,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.21950597542224537
+      },
+      {
+        "behavior_family_count": 64,
+        "beta_smoothed_positive_rate": 0.030303030303030304,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_74D6DA8DF485F4BD2CCAB3E5A80D8FC3"
+        },
+        "mean_search_reward": -0.48330041531002677,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.015625,
+        "shrunk_mean_search_reward": -0.4914467478749196,
+        "strict_evaluated_count": 64,
+        "top_decile_search_reward": -0.11546419405609641
+      },
+      {
+        "behavior_family_count": 41,
+        "beta_smoothed_positive_rate": 0.023255813953488372,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_74FFF8CE91C8E7A1A5B543D6D34161A1"
+        },
+        "mean_search_reward": -0.7087462307067499,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6206336530839358,
+        "strict_evaluated_count": 41,
+        "top_decile_search_reward": -0.1151649867028592
+      },
+      {
+        "behavior_family_count": 17,
+        "beta_smoothed_positive_rate": 0.05263157894736842,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_78B08FB259F32BCE26AD68D84E7FF9FE"
+        },
+        "mean_search_reward": -0.6158616933164647,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.545251224541438,
+        "strict_evaluated_count": 17,
+        "top_decile_search_reward": -0.22280210073944562
+      },
+      {
+        "behavior_family_count": 37,
+        "beta_smoothed_positive_rate": 0.02564102564102564,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7946841545E41DFA61AFD2A69697D29C"
+        },
+        "mean_search_reward": -0.7801518781966815,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6538156624554752,
+        "strict_evaluated_count": 37,
+        "top_decile_search_reward": -0.31587219836991925
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7A6744EEFFC05769EF7D529A49012003"
+        },
+        "mean_search_reward": -0.6936538515124819,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6098614285230615,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.23505885701296955
+      },
+      {
+        "behavior_family_count": 15,
+        "beta_smoothed_positive_rate": 0.058823529411764705,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7BD86446C1B4891B86C3A7165EA4820F"
+        },
+        "mean_search_reward": -0.5225170373354393,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.512455676088982,
+        "strict_evaluated_count": 15,
+        "top_decile_search_reward": -0.29617386000558443
+      },
+      {
+        "behavior_family_count": 42,
+        "beta_smoothed_positive_rate": 0.022727272727272728,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7E817D6946B93C8057509E2DE17A4D96"
+        },
+        "mean_search_reward": -0.5768442865586795,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5469610979947988,
+        "strict_evaluated_count": 42,
+        "top_decile_search_reward": -0.24278208955953837
+      },
+      {
+        "behavior_family_count": 56,
+        "beta_smoothed_positive_rate": 0.017241379310344827,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7EEE9F7302C3D1DFFCA708AC9D04D14E"
+        },
+        "mean_search_reward": -0.6597515721727719,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.604474423384384,
+        "strict_evaluated_count": 56,
+        "top_decile_search_reward": -0.28512444750767635
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_7F2BB9516324D3C339F06CFB382A9C98"
+        },
+        "mean_search_reward": -0.7142518016981941,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6198461382954563,
+        "strict_evaluated_count": 38,
+        "top_decile_search_reward": -0.12857743123088433
+      },
+      {
+        "behavior_family_count": 34,
+        "beta_smoothed_positive_rate": 0.027777777777777776,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_822C9CEE2DF03B680D56E39A7A8D6B71"
+        },
+        "mean_search_reward": -0.5642713267822058,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5368619140415994,
+        "strict_evaluated_count": 34,
+        "top_decile_search_reward": -0.16275439325756136
+      },
+      {
+        "behavior_family_count": 35,
+        "beta_smoothed_positive_rate": 0.02702702702702703,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8390C67FD91002412B847C143F1FBFE1"
+        },
+        "mean_search_reward": -0.6311279045204596,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5721960876771142,
+        "strict_evaluated_count": 35,
+        "top_decile_search_reward": -0.13199903215573086
+      },
+      {
+        "behavior_family_count": 30,
+        "beta_smoothed_positive_rate": 0.03125,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_842016FED1625AB9BBC51A8737EDA036"
+        },
+        "mean_search_reward": -0.42489548010901174,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.46765363902291807,
+        "strict_evaluated_count": 30,
+        "top_decile_search_reward": -0.1104730745024124
+      },
+      {
+        "behavior_family_count": 56,
+        "beta_smoothed_positive_rate": 0.017241379310344827,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_844DA23ADB8E82D3A85EB7CD482789FB"
+        },
+        "mean_search_reward": -0.6800342206638417,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6173815633332466,
+        "strict_evaluated_count": 56,
+        "top_decile_search_reward": -0.3672529281527605
+      },
+      {
+        "behavior_family_count": 59,
+        "beta_smoothed_positive_rate": 0.01639344262295082,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_848ABE44C106BEF689509940386BFC4F"
+        },
+        "mean_search_reward": -0.5087975104195994,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5084254322077685,
+        "strict_evaluated_count": 59,
+        "top_decile_search_reward": -0.17483911786525555
+      },
+      {
+        "behavior_family_count": 31,
+        "beta_smoothed_positive_rate": 0.030303030303030304,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_858D022DE1ED55E006201DCEFF18030C"
+        },
+        "mean_search_reward": -0.7533635425331798,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.628602079915542,
+        "strict_evaluated_count": 31,
+        "top_decile_search_reward": -0.1999258333068059
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.023809523809523808,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_86DA772A211DA4313186DDB5143763E6"
+        },
+        "mean_search_reward": -0.7762243071586259,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.656897687534661,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.2904818316880405
+      },
+      {
+        "behavior_family_count": 36,
+        "beta_smoothed_positive_rate": 0.02631578947368421,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_896785614FB8E99DDBB49229A604C037"
+        },
+        "mean_search_reward": -0.47467077275075087,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.49023248581143525,
+        "strict_evaluated_count": 36,
+        "top_decile_search_reward": -0.09479751512475368
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8B344F004D04CF5C5A7263E49845C4D7"
+        },
+        "mean_search_reward": -0.5610528838591805,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5370242772768817,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.1676035522387938
+      },
+      {
+        "behavior_family_count": 36,
+        "beta_smoothed_positive_rate": 0.02631578947368421,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8C49C8D2C3C8FE5B515526A76D4763A9"
+        },
+        "mean_search_reward": -0.6579583675092585,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5872670948012333,
+        "strict_evaluated_count": 36,
+        "top_decile_search_reward": -0.17159423758443584
+      },
+      {
+        "behavior_family_count": 26,
+        "beta_smoothed_positive_rate": 0.03571428571428571,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8CF4407D13DA1ABCB3506E7C3CC13D61"
+        },
+        "mean_search_reward": -0.4502413962649903,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4819644399834537,
+        "strict_evaluated_count": 26,
+        "top_decile_search_reward": -0.16579647587871083
+      },
+      {
+        "behavior_family_count": 43,
+        "beta_smoothed_positive_rate": 0.044444444444444446,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8D4D0A5CA5FDA35E4942903ADCB76489"
+        },
+        "mean_search_reward": -0.34449322959231093,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.023255813953488372,
+        "shrunk_mean_search_reward": -0.41414493451493245,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.041501897634665844
+      },
+      {
+        "behavior_family_count": 51,
+        "beta_smoothed_positive_rate": 0.11320754716981132,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8F8D9347A1A7F77C79428DD0510DE86A"
+        },
+        "mean_search_reward": -0.45435753323362266,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 5,
+        "positive_search_reward_rate": 0.09803921568627451,
+        "shrunk_mean_search_reward": -0.4749384989284978,
+        "strict_evaluated_count": 51,
+        "top_decile_search_reward": 0.05118975751114244
+      },
+      {
+        "behavior_family_count": 55,
+        "beta_smoothed_positive_rate": 0.017241379310344827,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_8FA1FC1FCF39FEDD2186B7282B6AFC92"
+        },
+        "mean_search_reward": -0.4533767352834506,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4731449817275432,
+        "strict_evaluated_count": 56,
+        "top_decile_search_reward": -0.13645554308513
+      },
+      {
+        "behavior_family_count": 27,
+        "beta_smoothed_positive_rate": 0.06896551724137931,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_910F17FC27B34F794F1B25E5D684565A"
+        },
+        "mean_search_reward": -0.6671787426601967,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.037037037037037035,
+        "shrunk_mean_search_reward": -0.5807031740334895,
+        "strict_evaluated_count": 27,
+        "top_decile_search_reward": -0.0572099700153112
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.023809523809523808,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_93442BA9263A4016C63E391203D1D968"
+        },
+        "mean_search_reward": -0.7009223881347753,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6150632880769664,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.30428937778637766
+      },
+      {
+        "behavior_family_count": 17,
+        "beta_smoothed_positive_rate": 0.05263157894736842,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_951F51A988B7E072A6C2D073245BAF8B"
+        },
+        "mean_search_reward": -0.42570648004684086,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4792790076927931,
+        "strict_evaluated_count": 17,
+        "top_decile_search_reward": -0.1678196549241155
+      },
+      {
+        "behavior_family_count": 24,
+        "beta_smoothed_positive_rate": 0.038461538461538464,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9BBB84512330A4BC53028EAD7C93E383"
+        },
+        "mean_search_reward": -0.7874667996239264,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.627622578698657,
+        "strict_evaluated_count": 24,
+        "top_decile_search_reward": -0.18247476001936824
+      },
+      {
+        "behavior_family_count": 9,
+        "beta_smoothed_positive_rate": 0.09090909090909091,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9BE25D5E68945E12FBC056511EBC700E"
+        },
+        "mean_search_reward": -0.5112384800955135,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5085075009026875,
+        "strict_evaluated_count": 9,
+        "top_decile_search_reward": -0.24338575081042851
+      },
+      {
+        "behavior_family_count": 17,
+        "beta_smoothed_positive_rate": 0.05263157894736842,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9C6B13F5F44406CB12AF52A11344F227"
+        },
+        "mean_search_reward": -0.6516659233139767,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5576731002548606,
+        "strict_evaluated_count": 17,
+        "top_decile_search_reward": -0.13487588665561318
+      },
+      {
+        "behavior_family_count": 25,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9D0E1691CF7E2F52C15F726256B3A7B7"
+        },
+        "mean_search_reward": -0.474203620251902,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.493030731972774,
+        "strict_evaluated_count": 25,
+        "top_decile_search_reward": -0.12721168065447871
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.023809523809523808,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9ED95743DBA1A6CBF189980C39F981DA"
+        },
+        "mean_search_reward": -0.6444197114704717,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5836729121523532,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.1525827263899698
+      },
+      {
+        "behavior_family_count": 66,
+        "beta_smoothed_positive_rate": 0.029411764705882353,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9F11724F40D7F06E1692FD783FFED2F2"
+        },
+        "mean_search_reward": -0.5188664317861905,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.015151515151515152,
+        "shrunk_mean_search_reward": -0.5152331195310116,
+        "strict_evaluated_count": 66,
+        "top_decile_search_reward": -0.134583624011862
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9F158BF3AEC0E6CB9BE730B841A5D5C7"
+        },
+        "mean_search_reward": -0.8040943808210129,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6705259446221137,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.3866496176141063
+      },
+      {
+        "behavior_family_count": 17,
+        "beta_smoothed_positive_rate": 0.05263157894736842,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_9F7D856B2E05AA49C6CFC34339571856"
+        },
+        "mean_search_reward": -0.35303158183767086,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4540652674977749,
+        "strict_evaluated_count": 17,
+        "top_decile_search_reward": -0.1320553666301606
+      },
+      {
+        "behavior_family_count": 135,
+        "beta_smoothed_positive_rate": 0.0625,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A01A8660E96688076A64B9E954559074"
+        },
+        "mean_search_reward": -0.4192715177861588,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 8,
+        "positive_search_reward_rate": 0.056338028169014086,
+        "shrunk_mean_search_reward": -0.43554147552750067,
+        "strict_evaluated_count": 142,
+        "top_decile_search_reward": 0.057880096830617275
+      },
+      {
+        "behavior_family_count": 53,
+        "beta_smoothed_positive_rate": 0.01818181818181818,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A19F4A50CC8557C04778943F1A078F31"
+        },
+        "mean_search_reward": -0.5182301132951975,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5142806731858356,
+        "strict_evaluated_count": 53,
+        "top_decile_search_reward": -0.22776380483444256
+      },
+      {
+        "behavior_family_count": 47,
+        "beta_smoothed_positive_rate": 0.02040816326530612,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A26A6252A4F72B2CB71C768D08DB033A"
+        },
+        "mean_search_reward": -0.6776042486137909,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6087982392531485,
+        "strict_evaluated_count": 47,
+        "top_decile_search_reward": -0.28537844253973255
+      },
+      {
+        "behavior_family_count": 68,
+        "beta_smoothed_positive_rate": 0.014285714285714285,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A3F8E53D44B36CB75251F49BD3EAC27A"
+        },
+        "mean_search_reward": -0.591993572485755,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5650322414518191,
+        "strict_evaluated_count": 68,
+        "top_decile_search_reward": -0.19065502660732664
+      },
+      {
+        "behavior_family_count": 35,
+        "beta_smoothed_positive_rate": 0.07317073170731707,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A55A41AE99FFF753430650E15B96B187"
+        },
+        "mean_search_reward": -0.4682694907565136,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.05128205128205128,
+        "shrunk_mean_search_reward": -0.48605875148809286,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": 0.03412878052073303
+      },
+      {
+        "behavior_family_count": 49,
+        "beta_smoothed_positive_rate": 0.0196078431372549,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A6A3ADA1361424BD7C46D557D55028EA"
+        },
+        "mean_search_reward": -0.7123589279939353,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6315215887389307,
+        "strict_evaluated_count": 49,
+        "top_decile_search_reward": -0.28789909999711005
+      },
+      {
+        "behavior_family_count": 94,
+        "beta_smoothed_positive_rate": 0.09375,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A6CFCA602A3DB63BE441D9BA07ED3551"
+        },
+        "mean_search_reward": -0.34625471191435786,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 8,
+        "positive_search_reward_rate": 0.0851063829787234,
+        "shrunk_mean_search_reward": -0.3872666994928588,
+        "strict_evaluated_count": 94,
+        "top_decile_search_reward": 0.02307294268930001
+      },
+      {
+        "behavior_family_count": 67,
+        "beta_smoothed_positive_rate": 0.014492753623188406,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_A94F565942CBE9A3938828F19B75584C"
+        },
+        "mean_search_reward": -0.5424223368813975,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5312116948202444,
+        "strict_evaluated_count": 67,
+        "top_decile_search_reward": -0.13477286900196986
+      },
+      {
+        "behavior_family_count": 61,
+        "beta_smoothed_positive_rate": 0.031746031746031744,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B07744C65D259D303821A659597D8F72"
+        },
+        "mean_search_reward": -0.5949678253783612,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.01639344262295082,
+        "shrunk_mean_search_reward": -0.5649537480024795,
+        "strict_evaluated_count": 61,
+        "top_decile_search_reward": -0.07335604789298364
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B0F646A38B4827872D4864D985AAA8F3"
+        },
+        "mean_search_reward": -0.4358276047906773,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.46870157425994713,
+        "strict_evaluated_count": 38,
+        "top_decile_search_reward": -0.14133395864596415
+      },
+      {
+        "behavior_family_count": 197,
+        "beta_smoothed_positive_rate": 0.26570048309178745,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B13C549C6D7F3F46E7FFED2714A4BB4A"
+        },
+        "mean_search_reward": -0.21028620323531289,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 54,
+        "positive_search_reward_rate": 0.2634146341463415,
+        "shrunk_mean_search_reward": -0.2504486619383532,
+        "strict_evaluated_count": 205,
+        "top_decile_search_reward": 0.9868518831297821
+      },
+      {
+        "behavior_family_count": 54,
+        "beta_smoothed_positive_rate": 0.017857142857142856,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B20CB17C99FF4B99528430F096502D44"
+        },
+        "mean_search_reward": -0.8216823318205331,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7048663620285971,
+        "strict_evaluated_count": 54,
+        "top_decile_search_reward": -0.30630970165955634
+      },
+      {
+        "behavior_family_count": 17,
+        "beta_smoothed_positive_rate": 0.05263157894736842,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B4527FD91816ED5AD321ED47DC864AA6"
+        },
+        "mean_search_reward": -0.6471553203989596,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5561081972027119,
+        "strict_evaluated_count": 17,
+        "top_decile_search_reward": -0.1334888261098418
+      },
+      {
+        "behavior_family_count": 66,
+        "beta_smoothed_positive_rate": 0.014705882352941176,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B47E6382F7336D5D823CDE239E5F5F82"
+        },
+        "mean_search_reward": -0.5540161415362953,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5389053730361842,
+        "strict_evaluated_count": 66,
+        "top_decile_search_reward": -0.33546909817364945
+      },
+      {
+        "behavior_family_count": 125,
+        "beta_smoothed_positive_rate": 0.10236220472440945,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B54E923C176C43B46262957F2C0A34E8"
+        },
+        "mean_search_reward": -0.44051012927913313,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 12,
+        "positive_search_reward_rate": 0.096,
+        "shrunk_mean_search_reward": -0.45421291322319873,
+        "strict_evaluated_count": 125,
+        "top_decile_search_reward": 0.11066523749125755
+      },
+      {
+        "behavior_family_count": 27,
+        "beta_smoothed_positive_rate": 0.06896551724137931,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B7A14FC3955A9EBACD2B0C00CCD2796F"
+        },
+        "mean_search_reward": -0.547354507427845,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.037037037037037035,
+        "shrunk_mean_search_reward": -0.5258683545203793,
+        "strict_evaluated_count": 27,
+        "top_decile_search_reward": -0.0796429152871134
+      },
+      {
+        "behavior_family_count": 48,
+        "beta_smoothed_positive_rate": 0.02,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B8F7C104E9554B71180F6EFA8F816582"
+        },
+        "mean_search_reward": -0.6593470834936226,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5987040152980556,
+        "strict_evaluated_count": 48,
+        "top_decile_search_reward": -0.22342524593546442
+      },
+      {
+        "behavior_family_count": 23,
+        "beta_smoothed_positive_rate": 0.08,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B91195008A972C640407EDB547709FD5"
+        },
+        "mean_search_reward": -0.7583338703602545,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.043478260869565216,
+        "shrunk_mean_search_reward": -0.6125334588079349,
+        "strict_evaluated_count": 23,
+        "top_decile_search_reward": -0.030989714290391667
+      },
+      {
+        "behavior_family_count": 25,
+        "beta_smoothed_positive_rate": 0.037037037037037035,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_B9C57FF162A50D656D46FFC701E55EDF"
+        },
+        "mean_search_reward": -0.6737776664143716,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.580563208359822,
+        "strict_evaluated_count": 25,
+        "top_decile_search_reward": -0.2219321733092401
+      },
+      {
+        "behavior_family_count": 42,
+        "beta_smoothed_positive_rate": 0.022727272727272728,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BA2E969A8D8FD84F4F1F1FFB72CD9B24"
+        },
+        "mean_search_reward": -0.6744692016702211,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6023698335986466,
+        "strict_evaluated_count": 42,
+        "top_decile_search_reward": -0.26305784158308415
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BA937F2FED2F4567B87A2B9A769C9A71"
+        },
+        "mean_search_reward": -0.5099961975174997,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5089645245973651,
+        "strict_evaluated_count": 38,
+        "top_decile_search_reward": -0.12142280552389843
+      },
+      {
+        "behavior_family_count": 60,
+        "beta_smoothed_positive_rate": 0.016129032258064516,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BAD90A772321C05C325125BC1AB95525"
+        },
+        "mean_search_reward": -0.5996248269520758,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5676646829703816,
+        "strict_evaluated_count": 60,
+        "top_decile_search_reward": -0.2389074479090131
+      },
+      {
+        "behavior_family_count": 12,
+        "beta_smoothed_positive_rate": 0.07142857142857142,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BC5DA7D65C1D5B5AAFD50DA491616B28"
+        },
+        "mean_search_reward": -0.7304567787987848,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5684805127667268,
+        "strict_evaluated_count": 12,
+        "top_decile_search_reward": -0.24293283398505927
+      },
+      {
+        "behavior_family_count": 49,
+        "beta_smoothed_positive_rate": 0.0196078431372549,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BCA9BEE0E830BDA4A9466CFA430C9DB9"
+        },
+        "mean_search_reward": -0.726197027652084,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6398927848284282,
+        "strict_evaluated_count": 49,
+        "top_decile_search_reward": -0.4248052444482925
+      },
+      {
+        "behavior_family_count": 49,
+        "beta_smoothed_positive_rate": 0.0392156862745098,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BCD8F8034DC7AC70DEA277F2ACDCC3C2"
+        },
+        "mean_search_reward": -0.5893820580364398,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02040816326530612,
+        "shrunk_mean_search_reward": -0.5571281735794582,
+        "strict_evaluated_count": 49,
+        "top_decile_search_reward": -0.18487633913136753
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.024390243902439025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_BFA9FC4194B8511042BC72953C18A724"
+        },
+        "mean_search_reward": -0.6199212737540477,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5693604351064567,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": -0.24789161923792005
+      },
+      {
+        "behavior_family_count": 84,
+        "beta_smoothed_positive_rate": 0.03409090909090909,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C02CAC70DDA645E9FFB9DA84C64CEEDF"
+        },
+        "mean_search_reward": -0.40133028282669875,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.023255813953488372,
+        "shrunk_mean_search_reward": -0.4301869960953107,
+        "strict_evaluated_count": 86,
+        "top_decile_search_reward": -0.040290500509577054
+      },
+      {
+        "behavior_family_count": 39,
+        "beta_smoothed_positive_rate": 0.047619047619047616,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C10456A0BAFF190FBD670DC70C2CF3EE"
+        },
+        "mean_search_reward": -0.5361672540177154,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.025,
+        "shrunk_mean_search_reward": -0.5235326580119329,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.05548778111501929
+      },
+      {
+        "behavior_family_count": 52,
+        "beta_smoothed_positive_rate": 0.018518518518518517,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C41F87D5C9EC3AC0E27C2FCF59061A26"
+        },
+        "mean_search_reward": -0.5993404885387079,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5644448407162306,
+        "strict_evaluated_count": 52,
+        "top_decile_search_reward": -0.24294826785013632
+      },
+      {
+        "behavior_family_count": 55,
+        "beta_smoothed_positive_rate": 0.10526315789473684,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C522C6DCA1A1AE9ECF8C00752B76A24D"
+        },
+        "mean_search_reward": -0.6039116796705299,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 5,
+        "positive_search_reward_rate": 0.09090909090909091,
+        "shrunk_mean_search_reward": -0.5685379723911461,
+        "strict_evaluated_count": 55,
+        "top_decile_search_reward": 0.046841854268418366
+      },
+      {
+        "behavior_family_count": 28,
+        "beta_smoothed_positive_rate": 0.03333333333333333,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C6D6BB2BE5D7C5F40166B32E451B729D"
+        },
+        "mean_search_reward": -0.5593177798329824,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5318093175245678,
+        "strict_evaluated_count": 28,
+        "top_decile_search_reward": -0.15343247178441444
+      },
+      {
+        "behavior_family_count": 66,
+        "beta_smoothed_positive_rate": 0.014705882352941176,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C81FBDC51CDDB1DDB40950645060B263"
+        },
+        "mean_search_reward": -0.6507998076977521,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6040862094306347,
+        "strict_evaluated_count": 66,
+        "top_decile_search_reward": -0.2755691546151805
+      },
+      {
+        "behavior_family_count": 129,
+        "beta_smoothed_positive_rate": 0.030534351145038167,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_C8651427F4C1749540925FA360B9AE98"
+        },
+        "mean_search_reward": -0.31462424362632957,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 3,
+        "positive_search_reward_rate": 0.023255813953488372,
+        "shrunk_mean_search_reward": -0.35300738288165884,
+        "strict_evaluated_count": 129,
+        "top_decile_search_reward": -0.00355938309544229
+      },
+      {
+        "behavior_family_count": 50,
+        "beta_smoothed_positive_rate": 0.019230769230769232,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_CAC0C1D1C99D088A381A39A5B85210AE"
+        },
+        "mean_search_reward": -0.6582616915019962,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5995212901371997,
+        "strict_evaluated_count": 50,
+        "top_decile_search_reward": -0.16352014625852074
+      },
+      {
+        "behavior_family_count": 187,
+        "beta_smoothed_positive_rate": 0.12041884816753927,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_CBC7F168D60FF094B9B5975CFD2903F9"
+        },
+        "mean_search_reward": -0.37800095278016843,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 22,
+        "positive_search_reward_rate": 0.1164021164021164,
+        "shrunk_mean_search_reward": -0.39678661217919636,
+        "strict_evaluated_count": 189,
+        "top_decile_search_reward": 0.1256701769343907
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.07317073170731707,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_CC9F8A781A69A332964CE3A25271619E"
+        },
+        "mean_search_reward": -0.4385946477026947,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.05128205128205128,
+        "shrunk_mean_search_reward": -0.4697584855852909,
+        "strict_evaluated_count": 39,
+        "top_decile_search_reward": 0.008118011368886357
+      },
+      {
+        "behavior_family_count": 43,
+        "beta_smoothed_positive_rate": 0.022222222222222223,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D152C78D2230C2200B70E44214DA560E"
+        },
+        "mean_search_reward": -0.6064317720505885,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5643230321910117,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.2272695173462588
+      },
+      {
+        "behavior_family_count": 45,
+        "beta_smoothed_positive_rate": 0.02127659574468085,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D372124F7F28EF2E089DECF99359C636"
+        },
+        "mean_search_reward": -0.49409998451378406,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.49976831843208896,
+        "strict_evaluated_count": 45,
+        "top_decile_search_reward": -0.12130433448440762
+      },
+      {
+        "behavior_family_count": 22,
+        "beta_smoothed_positive_rate": 0.041666666666666664,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D6EFD678AA5AEB22565639F233E21373"
+        },
+        "mean_search_reward": -0.3321392681655176,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.43619861325540654,
+        "strict_evaluated_count": 22,
+        "top_decile_search_reward": -0.05969138379846533
+      },
+      {
+        "behavior_family_count": 143,
+        "beta_smoothed_positive_rate": 0.034482758620689655,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D730B38C0D2D0A71641C35982CBC497A"
+        },
+        "mean_search_reward": -0.3200696691377682,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 4,
+        "positive_search_reward_rate": 0.027972027972027972,
+        "shrunk_mean_search_reward": -0.35438642230200806,
+        "strict_evaluated_count": 143,
+        "top_decile_search_reward": -0.002867295983326575
+      },
+      {
+        "behavior_family_count": 40,
+        "beta_smoothed_positive_rate": 0.023809523809523808,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D7336CB82AD84E8EA9E122B889752455"
+        },
+        "mean_search_reward": -0.538248758078703,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5246890491569263,
+        "strict_evaluated_count": 40,
+        "top_decile_search_reward": -0.25743291407412433
+      },
+      {
+        "behavior_family_count": 49,
+        "beta_smoothed_positive_rate": 0.0392156862745098,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_D8E81A61F4D087C477764B7F049185A8"
+        },
+        "mean_search_reward": -0.32451249479027994,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02040816326530612,
+        "shrunk_mean_search_reward": -0.39689843778857137,
+        "strict_evaluated_count": 49,
+        "top_decile_search_reward": -0.015756245432517114
+      },
+      {
+        "behavior_family_count": 60,
+        "beta_smoothed_positive_rate": 0.016129032258064516,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_DCFC3F9AFBB593648802A0E11CCB986C"
+        },
+        "mean_search_reward": -0.7705353537127072,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6791280699881846,
+        "strict_evaluated_count": 60,
+        "top_decile_search_reward": -0.40014792757004014
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.020833333333333332,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_DDC5E48BCB43AFE3E597B77830816B6D"
+        },
+        "mean_search_reward": -0.6331053759703613,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5816731860357331,
+        "strict_evaluated_count": 46,
+        "top_decile_search_reward": -0.31428602162252833
+      },
+      {
+        "behavior_family_count": 42,
+        "beta_smoothed_positive_rate": 0.022727272727272728,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_DFCE8E9FD99C5509B48D9B894BE16EF8"
+        },
+        "mean_search_reward": -0.4821939931756546,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4932406612098386,
+        "strict_evaluated_count": 42,
+        "top_decile_search_reward": -0.15180613119322967
+      },
+      {
+        "behavior_family_count": 127,
+        "beta_smoothed_positive_rate": 0.022900763358778626,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_E26919317E3CAD8CAEB129035D44761A"
+        },
+        "mean_search_reward": -0.30123342465757663,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.015503875968992248,
+        "shrunk_mean_search_reward": -0.3422780931489314,
+        "strict_evaluated_count": 129,
+        "top_decile_search_reward": -0.03612992107510766
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.020833333333333332,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_E34CC2F7CF0823C7562BA0314E8A2626"
+        },
+        "mean_search_reward": -0.6723416028703031,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6048124993356989,
+        "strict_evaluated_count": 46,
+        "top_decile_search_reward": -0.24859577730497615
+      },
+      {
+        "behavior_family_count": 36,
+        "beta_smoothed_positive_rate": 0.05128205128205128,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_E47755F267F10A7985F607C2959486A6"
+        },
+        "mean_search_reward": -0.3799022897117352,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02702702702702703,
+        "shrunk_mean_search_reward": -0.43918907152876474,
+        "strict_evaluated_count": 37,
+        "top_decile_search_reward": -0.011244259214657664
+      },
+      {
+        "behavior_family_count": 61,
+        "beta_smoothed_positive_rate": 0.07936507936507936,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_E8EE04630E3C12529A4A365B5CF7F5C3"
+        },
+        "mean_search_reward": -0.48006673763108315,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 4,
+        "positive_search_reward_rate": 0.06557377049180328,
+        "shrunk_mean_search_reward": -0.4895885184048026,
+        "strict_evaluated_count": 61,
+        "top_decile_search_reward": 0.1831080763631623
+      },
+      {
+        "behavior_family_count": 53,
+        "beta_smoothed_positive_rate": 0.01818181818181818,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_E9459852FDF92815DA6E2A1A48EB1D28"
+        },
+        "mean_search_reward": -0.6320605461698425,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.585257296037085,
+        "strict_evaluated_count": 53,
+        "top_decile_search_reward": -0.28454372451794274
+      },
+      {
+        "behavior_family_count": 66,
+        "beta_smoothed_positive_rate": 0.014705882352941176,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_EA37BEBC55FCE425E16C6715E57A5978"
+        },
+        "mean_search_reward": -0.6065692805072667,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.574298303363573,
+        "strict_evaluated_count": 66,
+        "top_decile_search_reward": -0.2448018476964933
+      },
+      {
+        "behavior_family_count": 38,
+        "beta_smoothed_positive_rate": 0.025,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_EAE5273632638880981BD9AF0EA612A3"
+        },
+        "mean_search_reward": -0.8174843844143304,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6758866831985018,
+        "strict_evaluated_count": 38,
+        "top_decile_search_reward": -0.20063126843622509
+      },
+      {
+        "behavior_family_count": 37,
+        "beta_smoothed_positive_rate": 0.05128205128205128,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_EB530C4209442B4F84F372A82EFE4BFD"
+        },
+        "mean_search_reward": -0.4020312245757575,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.02702702702702703,
+        "shrunk_mean_search_reward": -0.45105531196309556,
+        "strict_evaluated_count": 37,
+        "top_decile_search_reward": -0.054066211502582215
+      },
+      {
+        "behavior_family_count": 46,
+        "beta_smoothed_positive_rate": 0.02040816326530612,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_EF55755BD81FAE5B7FC4A7BF85960883"
+        },
+        "mean_search_reward": -0.8240977159528641,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.695952580581458,
+        "strict_evaluated_count": 47,
+        "top_decile_search_reward": -0.43887562168266897
+      },
+      {
+        "behavior_family_count": 41,
+        "beta_smoothed_positive_rate": 0.023255813953488372,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_EFFF4DB9339735FA4C40C9F7FCC7CC0F"
+        },
+        "mean_search_reward": -0.48802396427079503,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4966663527568927,
+        "strict_evaluated_count": 41,
+        "top_decile_search_reward": -0.09607801144715669
+      },
+      {
+        "behavior_family_count": 43,
+        "beta_smoothed_positive_rate": 0.022222222222222223,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F0893EEB5473D5AE912136DFD5128881"
+        },
+        "mean_search_reward": -0.8522969895322957,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.7052857568805238,
+        "strict_evaluated_count": 43,
+        "top_decile_search_reward": -0.3934685674335082
+      },
+      {
+        "behavior_family_count": 61,
+        "beta_smoothed_positive_rate": 0.015873015873015872,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F0C245A710B50D6B7D96DCCB435FD3A5"
+        },
+        "mean_search_reward": -0.6599855729424411,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6075997974799943,
+        "strict_evaluated_count": 61,
+        "top_decile_search_reward": -0.3457299989306556
+      },
+      {
+        "behavior_family_count": 7,
+        "beta_smoothed_positive_rate": 0.1111111111111111,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F0CE2A27AAA654AE8FC0EDF47FE05345"
+        },
+        "mean_search_reward": -1.036644112816468,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6026710257914318,
+        "strict_evaluated_count": 7,
+        "top_decile_search_reward": -0.15581599836620494
+      },
+      {
+        "behavior_family_count": 35,
+        "beta_smoothed_positive_rate": 0.02702702702702703,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F2078AA9790B93EDAB331334E26EC590"
+        },
+        "mean_search_reward": -0.776034633392427,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.6478936326102315,
+        "strict_evaluated_count": 35,
+        "top_decile_search_reward": -0.4008385151297225
+      },
+      {
+        "behavior_family_count": 14,
+        "beta_smoothed_positive_rate": 0.0625,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F34F6CEC11D7B4D82969727C006F2542"
+        },
+        "mean_search_reward": -0.7169862413998226,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5714232303423497,
+        "strict_evaluated_count": 14,
+        "top_decile_search_reward": -0.2617926937189482
+      },
+      {
+        "behavior_family_count": 70,
+        "beta_smoothed_positive_rate": 0.09722222222222222,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_F56F921FE6FAFDB6F38659C13DBB01DB"
+        },
+        "mean_search_reward": -0.42886524961523403,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 6,
+        "positive_search_reward_rate": 0.08571428571428572,
+        "shrunk_mean_search_reward": -0.45361008518840146,
+        "strict_evaluated_count": 70,
+        "top_decile_search_reward": 0.24669240838514986
+      },
+      {
+        "behavior_family_count": 30,
+        "beta_smoothed_positive_rate": 0.03125,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FA66027C8F737DC7AFE52727F73C42CF"
+        },
+        "mean_search_reward": -0.5778354799551794,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5416568647549346,
+        "strict_evaluated_count": 30,
+        "top_decile_search_reward": -0.08128294000133494
+      },
+      {
+        "behavior_family_count": 19,
+        "beta_smoothed_positive_rate": 0.047619047619047616,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FBDCC0DA0CE4839653700A9FA5F440F6"
+        },
+        "mean_search_reward": -0.5626570255283155,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5281989157095797,
+        "strict_evaluated_count": 19,
+        "top_decile_search_reward": -0.14831867611080535
+      },
+      {
+        "behavior_family_count": 62,
+        "beta_smoothed_positive_rate": 0.015625,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FBF8698E4C71C3E82F183C75179EDE5A"
+        },
+        "mean_search_reward": -0.589067282524833,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5613811992839384,
+        "strict_evaluated_count": 62,
+        "top_decile_search_reward": -0.3071760376912977
+      },
+      {
+        "behavior_family_count": 44,
+        "beta_smoothed_positive_rate": 0.021739130434782608,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FCD2219553E8D0568DCF5360D32F455A"
+        },
+        "mean_search_reward": -0.6046300530427007,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.5638339940793342,
+        "strict_evaluated_count": 44,
+        "top_decile_search_reward": -0.2686111221034194
+      },
+      {
+        "behavior_family_count": 15,
+        "beta_smoothed_positive_rate": 0.058823529411764705,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FE4EFE771CF5BD46878C811F7D3EB404"
+        },
+        "mean_search_reward": -0.3590875999838737,
+        "minimum_support_met": false,
+        "positive_search_reward_count": 0,
+        "positive_search_reward_rate": 0.0,
+        "shrunk_mean_search_reward": -0.4602973450193334,
+        "strict_evaluated_count": 15,
+        "top_decile_search_reward": -0.10513224160559179
+      },
+      {
+        "behavior_family_count": 130,
+        "beta_smoothed_positive_rate": 0.07246376811594203,
+        "dimensions": {
+          "mechanism_id": "MECHANISM_V2_FEE5EDEEC5F5F8894E6631F39299E807"
+        },
+        "mean_search_reward": -0.3643522094943464,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 9,
+        "positive_search_reward_rate": 0.0661764705882353,
+        "shrunk_mean_search_reward": -0.3916640577820337,
+        "strict_evaluated_count": 136,
+        "top_decile_search_reward": 0.04543064314139901
+      }
+    ],
+    "payload_operator|payload_mode": [
+      {
+        "behavior_family_count": 1554,
+        "beta_smoothed_positive_rate": 0.02564102564102564,
+        "dimensions": {
+          "payload_mode": null,
+          "payload_operator": "NormalizedDifference"
+        },
+        "mean_search_reward": -0.6046376308118514,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 39,
+        "positive_search_reward_rate": 0.02503209242618742,
+        "shrunk_mean_search_reward": -0.6026874780006385,
+        "strict_evaluated_count": 1558,
+        "top_decile_search_reward": -0.014993926837295822
+      },
+      {
+        "behavior_family_count": 2286,
+        "beta_smoothed_positive_rate": 0.02032871972318339,
+        "dimensions": {
+          "payload_mode": null,
+          "payload_operator": "RatioInteraction"
+        },
+        "mean_search_reward": -0.5107820907673734,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 46,
+        "positive_search_reward_rate": 0.019913419913419914,
+        "shrunk_mean_search_reward": -0.5107405170319312,
+        "strict_evaluated_count": 2310,
+        "top_decile_search_reward": -0.038896904605970596
+      },
+      {
+        "behavior_family_count": 2688,
+        "beta_smoothed_positive_rate": 0.04383057090239411,
+        "dimensions": {
+          "payload_mode": null,
+          "payload_operator": "Residual"
+        },
+        "mean_search_reward": -0.46872881660135846,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 118,
+        "positive_search_reward_rate": 0.043494286767416145,
+        "shrunk_mean_search_reward": -0.469183584938301,
+        "strict_evaluated_count": 2713,
+        "top_decile_search_reward": 0.10519026661612553
+      },
+      {
+        "behavior_family_count": 1069,
+        "beta_smoothed_positive_rate": 0.028864059590316574,
+        "dimensions": {
+          "payload_mode": null,
+          "payload_operator": "SafeDiv"
+        },
+        "mean_search_reward": -0.4880698853048275,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 30,
+        "positive_search_reward_rate": 0.027985074626865673,
+        "shrunk_mean_search_reward": -0.48864001654250516,
+        "strict_evaluated_count": 1072,
+        "top_decile_search_reward": -0.015044089864154985
+      },
+      {
+        "behavior_family_count": 2308,
+        "beta_smoothed_positive_rate": 0.031928480204342274,
+        "dimensions": {
+          "payload_mode": null,
+          "payload_operator": "SafeMul"
+        },
+        "mean_search_reward": -0.4944993076622471,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 74,
+        "positive_search_reward_rate": 0.031529612270984234,
+        "shrunk_mean_search_reward": -0.49467740071435246,
+        "strict_evaluated_count": 2347,
+        "top_decile_search_reward": -0.0035983526823228397
+      }
+    ],
+    "right_normalizer": [
+      {
+        "behavior_family_count": 3157,
+        "beta_smoothed_positive_rate": 0.027426810477657937,
+        "dimensions": {
+          "right_normalizer": "HistoricalPercentile"
+        },
+        "mean_search_reward": -0.49497483980131124,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 88,
+        "positive_search_reward_rate": 0.027135368485969782,
+        "shrunk_mean_search_reward": -0.4950995623486421,
+        "strict_evaluated_count": 3243,
+        "top_decile_search_reward": -0.013650584718853895
+      },
+      {
+        "behavior_family_count": 3172,
+        "beta_smoothed_positive_rate": 0.028774752475247526,
+        "dimensions": {
+          "right_normalizer": "RollingZScore"
+        },
+        "mean_search_reward": -0.5263388237822222,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 92,
+        "positive_search_reward_rate": 0.02848297213622291,
+        "shrunk_mean_search_reward": -0.5261563648169002,
+        "strict_evaluated_count": 3230,
+        "top_decile_search_reward": 0.042468590301409925
+      },
+      {
+        "behavior_family_count": 3430,
+        "beta_smoothed_positive_rate": 0.036270898271465006,
+        "dimensions": {
+          "right_normalizer": "VolatilityScale"
+        },
+        "mean_search_reward": -0.5024429610872757,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 127,
+        "positive_search_reward_rate": 0.036007938758151406,
+        "shrunk_mean_search_reward": -0.5024905830207845,
+        "strict_evaluated_count": 3527,
+        "top_decile_search_reward": 0.026877819858447286
+      }
+    ],
+    "right_window": [
+      {
+        "behavior_family_count": 1142,
+        "beta_smoothed_positive_rate": 0.019691780821917807,
+        "dimensions": {
+          "right_window": 6
+        },
+        "mean_search_reward": -0.591194025339544,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 22,
+        "positive_search_reward_rate": 0.018867924528301886,
+        "shrunk_mean_search_reward": -0.5889648537245902,
+        "strict_evaluated_count": 1166,
+        "top_decile_search_reward": -0.05116780262059461
+      },
+      {
+        "behavior_family_count": 1124,
+        "beta_smoothed_positive_rate": 0.014022787028921999,
+        "dimensions": {
+          "right_window": 12
+        },
+        "mean_search_reward": -0.572846319035016,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 15,
+        "positive_search_reward_rate": 0.013169446883230905,
+        "shrunk_mean_search_reward": -0.571067137999175,
+        "strict_evaluated_count": 1139,
+        "top_decile_search_reward": -0.08852301026185529
+      },
+      {
+        "behavior_family_count": 1129,
+        "beta_smoothed_positive_rate": 0.014873140857392825,
+        "dimensions": {
+          "right_window": 24
+        },
+        "mean_search_reward": -0.5830333590940651,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 16,
+        "positive_search_reward_rate": 0.014022787028921999,
+        "shrunk_mean_search_reward": -0.5809793042987884,
+        "strict_evaluated_count": 1141,
+        "top_decile_search_reward": -0.05347599915881924
+      },
+      {
+        "behavior_family_count": 1100,
+        "beta_smoothed_positive_rate": 0.011680143755615454,
+        "dimensions": {
+          "right_window": 48
+        },
+        "mean_search_reward": -0.564397248988555,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 12,
+        "positive_search_reward_rate": 0.010801080108010801,
+        "shrunk_mean_search_reward": -0.5628110278586486,
+        "strict_evaluated_count": 1111,
+        "top_decile_search_reward": -0.07430737016699543
+      },
+      {
+        "behavior_family_count": 1362,
+        "beta_smoothed_positive_rate": 0.022840827980014276,
+        "dimensions": {
+          "right_window": 72
+        },
+        "mean_search_reward": -0.4752091068827577,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 31,
+        "positive_search_reward_rate": 0.02215868477483917,
+        "shrunk_mean_search_reward": -0.4759365490881402,
+        "strict_evaluated_count": 1399,
+        "top_decile_search_reward": -0.03231565835202825
+      },
+      {
+        "behavior_family_count": 1349,
+        "beta_smoothed_positive_rate": 0.03561253561253561,
+        "dimensions": {
+          "right_window": 168
+        },
+        "mean_search_reward": -0.46414876069906824,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 49,
+        "positive_search_reward_rate": 0.03495007132667618,
+        "shrunk_mean_search_reward": -0.46512149492067245,
+        "strict_evaluated_count": 1402,
+        "top_decile_search_reward": 0.006598356041705204
+      },
+      {
+        "behavior_family_count": 1219,
+        "beta_smoothed_positive_rate": 0.08146964856230032,
+        "dimensions": {
+          "right_window": 336
+        },
+        "mean_search_reward": -0.41451465884682864,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 101,
+        "positive_search_reward_rate": 0.0808,
+        "shrunk_mean_search_reward": -0.416841641789927,
+        "strict_evaluated_count": 1250,
+        "top_decile_search_reward": 0.35071148178268086
+      },
+      {
+        "behavior_family_count": 1356,
+        "beta_smoothed_positive_rate": 0.04447632711621234,
+        "dimensions": {
+          "right_window": 720
+        },
+        "mean_search_reward": -0.43793542110635014,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 61,
+        "positive_search_reward_rate": 0.04382183908045977,
+        "shrunk_mean_search_reward": -0.43950405013777394,
+        "strict_evaluated_count": 1392,
+        "top_decile_search_reward": 0.011690230243918036
+      }
+    ],
+    "template_id": [
+      {
+        "behavior_family_count": 544,
+        "beta_smoothed_positive_rate": 0.005474452554744526,
+        "dimensions": {
+          "template_id": "BASIS_FLOW_DISLOCATION"
+        },
+        "mean_search_reward": -0.7324252541587473,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.003663003663003663,
+        "shrunk_mean_search_reward": -0.7199858996311879,
+        "strict_evaluated_count": 546,
+        "top_decile_search_reward": -0.20593015897806227
+      },
+      {
+        "behavior_family_count": 906,
+        "beta_smoothed_positive_rate": 0.11320754716981132,
+        "dimensions": {
+          "template_id": "BASIS_OI_CROWDING"
+        },
+        "mean_search_reward": -0.4499489435232851,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 107,
+        "positive_search_reward_rate": 0.11239495798319328,
+        "shrunk_mean_search_reward": -0.4518283083844695,
+        "strict_evaluated_count": 952,
+        "top_decile_search_reward": 0.439463856414304
+      },
+      {
+        "behavior_family_count": 657,
+        "beta_smoothed_positive_rate": 0.013493253373313344,
+        "dimensions": {
+          "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT"
+        },
+        "mean_search_reward": -0.6263758064136309,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 8,
+        "positive_search_reward_rate": 0.012030075187969926,
+        "shrunk_mean_search_reward": -0.6209290853389026,
+        "strict_evaluated_count": 665,
+        "top_decile_search_reward": -0.12922022572619696
+      },
+      {
+        "behavior_family_count": 983,
+        "beta_smoothed_positive_rate": 0.04859086491739553,
+        "dimensions": {
+          "template_id": "FLOW_INTENSITY_CONVICTION"
+        },
+        "mean_search_reward": -0.40700013602478713,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 49,
+        "positive_search_reward_rate": 0.04771178188899708,
+        "shrunk_mean_search_reward": -0.4100441934972681,
+        "strict_evaluated_count": 1027,
+        "top_decile_search_reward": 0.043642211822169256
+      },
+      {
+        "behavior_family_count": 661,
+        "beta_smoothed_positive_rate": 0.00904977375565611,
+        "dimensions": {
+          "template_id": "FLOW_PRICE_ABSORPTION"
+        },
+        "mean_search_reward": -0.5936306929811037,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 5,
+        "positive_search_reward_rate": 0.007564296520423601,
+        "shrunk_mean_search_reward": -0.5896645732707938,
+        "strict_evaluated_count": 661,
+        "top_decile_search_reward": -0.14111903060586217
+      },
+      {
+        "behavior_family_count": 2122,
+        "beta_smoothed_positive_rate": 0.04938271604938271,
+        "dimensions": {
+          "template_id": "FUNDING_FLOW_CROWDING"
+        },
+        "mean_search_reward": -0.331883172132189,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 111,
+        "positive_search_reward_rate": 0.048984995586937335,
+        "shrunk_mean_search_reward": -0.33433199707036154,
+        "strict_evaluated_count": 2266,
+        "top_decile_search_reward": 0.034325255868340065
+      },
+      {
+        "behavior_family_count": 671,
+        "beta_smoothed_positive_rate": 0.022123893805309734,
+        "dimensions": {
+          "template_id": "LARGE_TRADE_OI_CROWDING"
+        },
+        "mean_search_reward": -0.48928731389215674,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 14,
+        "positive_search_reward_rate": 0.020710059171597635,
+        "shrunk_mean_search_reward": -0.4901213070723849,
+        "strict_evaluated_count": 676,
+        "top_decile_search_reward": -0.02618015297628826
+      },
+      {
+        "behavior_family_count": 503,
+        "beta_smoothed_positive_rate": 0.005940594059405941,
+        "dimensions": {
+          "template_id": "LARGE_TRADE_PRICE_RESPONSE"
+        },
+        "mean_search_reward": -0.58708119597399,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.003976143141153081,
+        "shrunk_mean_search_reward": -0.5823355192356403,
+        "strict_evaluated_count": 503,
+        "top_decile_search_reward": -0.20378769847158257
+      },
+      {
+        "behavior_family_count": 539,
+        "beta_smoothed_positive_rate": 0.005545286506469501,
+        "dimensions": {
+          "template_id": "OI_ACTIVITY_EXPANSION"
+        },
+        "mean_search_reward": -0.5850611169775024,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 2,
+        "positive_search_reward_rate": 0.0037105751391465678,
+        "shrunk_mean_search_reward": -0.580727851605997,
+        "strict_evaluated_count": 539,
+        "top_decile_search_reward": -0.14210707652802934
+      },
+      {
+        "behavior_family_count": 745,
+        "beta_smoothed_positive_rate": 0.005326231691078562,
+        "dimensions": {
+          "template_id": "OI_FLOW_CONFIRMATION_V2"
+        },
+        "mean_search_reward": -0.6803360836717489,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 3,
+        "positive_search_reward_rate": 0.004005340453938585,
+        "shrunk_mean_search_reward": -0.6732642610579904,
+        "strict_evaluated_count": 749,
+        "top_decile_search_reward": -0.1817465800291111
+      },
+      {
+        "behavior_family_count": 561,
+        "beta_smoothed_positive_rate": 0.003527336860670194,
+        "dimensions": {
+          "template_id": "OI_NOTIONAL_PRICE_ABSORPTION"
+        },
+        "mean_search_reward": -0.5565326076947228,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 1,
+        "positive_search_reward_rate": 0.0017699115044247787,
+        "shrunk_mean_search_reward": -0.5539172270748224,
+        "strict_evaluated_count": 565,
+        "top_decile_search_reward": -0.1525733816264208
+      },
+      {
+        "behavior_family_count": 848,
+        "beta_smoothed_positive_rate": 0.004689331770222743,
+        "dimensions": {
+          "template_id": "OI_PRICE_DIVERGENCE_V2"
+        },
+        "mean_search_reward": -0.5931277110847124,
+        "minimum_support_met": true,
+        "positive_search_reward_count": 3,
+        "positive_search_reward_rate": 0.0035252643948296123,
+        "shrunk_mean_search_reward": -0.5900332314260938,
+        "strict_evaluated_count": 851,
+        "top_decile_search_reward": -0.13548543373089736
+      }
+    ]
+  },
+  "included_expanded_grammar_count": 10000,
+  "knowledge_id": "CRYPTO_SEARCH_MECHANISM_V2_AGGREGATE_KNOWLEDGE",
+  "minimum_support": 32,
+  "schema_version": 1,
+  "shrinkage_prior_strength": 32.0,
+  "source_campaign": "crypto_search_mechanism_v2",
+  "source_candidate_ledger": "runtime/crypto_search_mechanism_v2_20260801/candidate_ledger.parquet",
+  "source_candidate_ledger_sha256": "6B481CAB7037752D9AF97DCD85CC9F9F41BF434D85E6A2BA9E50DFE527ECD96A",
+  "source_runtime": "runtime/crypto_search_mechanism_v2_20260801",
+  "source_strict_evaluated_count": 12000,
+  "usage_contract": {
+    "candidate_or_reward_import": false,
+    "catalog_design_and_lifecycle_only": true,
+    "individual_candidate_identity_persisted": false,
+    "population_or_distribution_import": false,
+    "rng_or_policy_state_import": false,
+    "sampling_probability_prior": false
+  }
+}

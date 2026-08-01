@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260801_crypto_search_engine_v2_1_mechanism_basis",
+  "authorization": "ONE_FRESH_STATE_10000_STRICT_MECHANISM_BASIS_CAMPAIGN",
+  "legacy_catalog_path": "config/crypto_typed_mechanism_catalog_v2.json",
+  "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+  "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+  "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+  "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+  "stages": [
+    {
+      "stage_id": "OLD_GRAMMAR_TYPED_RANDOM_CONTROL",
+      "checkpoint_indexes": [0],
+      "strict_count": 2000,
+      "allocation_per_checkpoint": {
+        "legacy_mechanism_random_v2": 2000,
+        "expanded_mechanism_random_v2_1": 0,
+        "mechanism_evolution_v2_1": 0
+      }
+    },
+    {
+      "stage_id": "EXPANDED_BASIS_TYPED_RANDOM",
+      "checkpoint_indexes": [1, 2],
+      "strict_count": 4000,
+      "allocation_per_checkpoint": {
+        "legacy_mechanism_random_v2": 0,
+        "expanded_mechanism_random_v2_1": 2000,
+        "mechanism_evolution_v2_1": 0
+      }
+    },
+    {
+      "stage_id": "FRESH_EVOLUTION_ON_EXPANDED_BASIS",
+      "checkpoint_indexes": [3, 4],
+      "strict_count": 4000,
+      "allocation_per_checkpoint": {
+        "legacy_mechanism_random_v2": 0,
+        "expanded_mechanism_random_v2_1": 0,
+        "mechanism_evolution_v2_1": 2000
+      }
+    }
+  ],
+  "search": {
+    "strict_evaluated_target": 10000,
+    "checkpoint_size": 2000,
+    "checkpoint_count": 5,
+    "raw_generation_attempts_maximum": 100000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true
+  },
+  "policy_parameters": {
+    "legacy_mechanism_random_v2": {
+      "duplicate_resample_limit": 64
+    },
+    "expanded_mechanism_random_v2_1": {
+      "duplicate_resample_limit": 64
+    },
+    "mechanism_evolution_v2_1": {
+      "duplicate_resample_limit": 64,
+      "warmup": 32,
+      "tournament_size": 4,
+      "population_limit": 256,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2
+    }
+  },
+  "train_gate": {
+    "same_matched_evaluated_count": 4000,
+    "minimum_expanded_positive_search_reward_count": 40,
+    "minimum_expanded_positive_search_reward_rate": 0.01,
+    "evolution_mean_search_reward_must_exceed_random": true,
+    "evolution_top_decile_search_reward_must_exceed_random": true,
+    "evolution_positive_search_reward_rate_must_exceed_random": true,
+    "minimum_evolution_behavior_family_yield": 0.9,
+    "maximum_evolution_behavior_duplicate_rate": 0.1,
+    "failure_action": "STOP_WITHOUT_VALIDATION"
+  },
+  "validation": {
+    "trigger_after_checkpoint_index": 4,
+    "run_only_if_train_gate_passes": true,
+    "per_arm_absolute_qualification": true,
+    "candidate_generation_allowed": false,
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "holdout_read": false
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "persistent_mechanism_knowledge": {
+    "declarative_mechanism_specs": true,
+    "aggregate_outcomes": true,
+    "behavior_yield": true,
+    "lifecycle": true,
+    "individual_candidate_reward": false,
+    "population": false,
+    "cem_distribution": false,
+    "rng_state": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "latent_priority": false,
+    "relational_training": false,
+    "liquidation": "HOLD"
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schema_version": 2,
+  "catalog_id": "CRYPTO_TYPED_MECHANISM_CATALOG_V2_1_20260801",
+  "lifecycle": "EXPERIMENTAL",
+  "authority": "NON_FORMAL_DEVELOPMENT_MECHANISM_GRAMMAR",
+  "compiler_route": "EXISTING_EXPRESSION_TYPED_REGISTRY_CANDIDATE_SPEC",
+  "maximum_generation": 2,
+  "maximum_expression_depth": 4,
+  "maximum_raw_fields": 4,
+  "maximum_rolling_windows": 3,
+  "maximum_regime_gates": 2,
+  "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+  "payload_operator_sets": {
+    "RELATION_BASIS": [
+      "NormalizedDifference",
+      "Residual",
+      "RatioInteraction",
+      "SafeMul",
+      "ConditionGate"
+    ],
+    "RESPONSE_BASIS": [
+      "SafeDiv",
+      "NormalizedDifference",
+      "Residual",
+      "RatioInteraction",
+      "ConditionGate"
+    ],
+    "CONVICTION_BASIS": [
+      "SafeDiv",
+      "SafeMul",
+      "RatioInteraction",
+      "Residual",
+      "ConditionGate"
+    ]
+  },
+  "payload_operator_modes": {
+    "ConditionGate": [
+      "SIGN_CONFIRMATION",
+      "SIGN_DISAGREEMENT"
+    ]
+  },
+  "condition_operator_set": [
+    "ConditionGate",
+    "StateModulation"
+  ],
+  "condition_operator_modes": {
+    "ConditionGate": [
+      null,
+      "NEGATIVE"
+    ],
+    "StateModulation": [
+      null,
+      "ABSOLUTE_MAGNITUDE",
+      "POSITIVE_MAGNITUDE",
+      "NEGATIVE_MAGNITUDE",
+      "SIGN_ROUTING"
+    ]
+  },
+  "mapping_derivation": {
+    "ConditionGate": "SPARSE_EVENT_CARRY",
+    "DIRECTIONAL_TEMPLATE": "DIRECTIONAL_STATEFUL",
+    "default": "CROSS_SECTIONAL_RELATIVE"
+  },
+  "templates": [
+    {
+      "template_id": "OI_PRICE_DIVERGENCE_V2",
+      "hypothesis": "Open-interest expansion is informative when contemporaneous price response confirms or diverges from positioning growth.",
+      "left_role": "OI_LEVEL",
+      "right_role": "PRICE_RESPONSE",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FUNDING", "BASIS_BUNDLE"],
+      "directional": false
+    },
+    {
+      "template_id": "OI_FLOW_CONFIRMATION_V2",
+      "hypothesis": "Open-interest state and aggressor flow jointly distinguish position opening from passive inventory transfer.",
+      "left_role": "OI_LEVEL",
+      "right_role": "FLOW_IMBALANCE",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FUNDING", "BASIS_BUNDLE"],
+      "directional": false
+    },
+    {
+      "template_id": "OI_NOTIONAL_PRICE_ABSORPTION",
+      "hypothesis": "Notional open-interest change relative to price response identifies leveraged absorption or displacement.",
+      "left_role": "OI_NOTIONAL",
+      "right_role": "PRICE_RESPONSE",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["TRADE_INTENSITY"],
+      "directional": false
+    },
+    {
+      "template_id": "FLOW_PRICE_ABSORPTION",
+      "hypothesis": "Price response per unit of aggressor imbalance separates impact from absorption.",
+      "left_role": "PRICE_RESPONSE",
+      "right_role": "FLOW_IMBALANCE",
+      "payload_operator_set": "RESPONSE_BASIS",
+      "condition_roles": ["OI_LEVEL", "TRADE_INTENSITY"],
+      "directional": true
+    },
+    {
+      "template_id": "LARGE_TRADE_PRICE_RESPONSE",
+      "hypothesis": "Price response relative to large-trade participation distinguishes informed pressure from absorbed block flow.",
+      "left_role": "PRICE_RESPONSE",
+      "right_role": "LARGE_TRADE",
+      "payload_operator_set": "RESPONSE_BASIS",
+      "condition_roles": ["OI_LEVEL"],
+      "directional": false
+    },
+    {
+      "template_id": "FLOW_INTENSITY_CONVICTION",
+      "hypothesis": "Aggressor imbalance conditional on trade intensity measures directional conviction rather than sparse prints.",
+      "left_role": "FLOW_IMBALANCE",
+      "right_role": "TRADE_INTENSITY",
+      "payload_operator_set": "CONVICTION_BASIS",
+      "condition_roles": ["OI_LEVEL"],
+      "directional": true
+    },
+    {
+      "template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+      "hypothesis": "Cross-venue open-interest disagreement combined with Binance aggressor flow identifies venue-specific crowding pressure.",
+      "left_role": "CROSS_VENUE_OI_BUNDLE",
+      "right_role": "FLOW_IMBALANCE",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FUNDING"],
+      "directional": false
+    },
+    {
+      "template_id": "BASIS_FLOW_DISLOCATION",
+      "hypothesis": "Mark-index dislocation and aggressor flow together identify pressure that is confirmed or rejected by derivatives basis.",
+      "left_role": "BASIS_BUNDLE",
+      "right_role": "FLOW_IMBALANCE",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FUNDING", "OI_LEVEL"],
+      "directional": false
+    },
+    {
+      "template_id": "FUNDING_FLOW_CROWDING",
+      "hypothesis": "Funding and aggressor flow jointly measure directional crowding and unwind pressure.",
+      "left_role": "FUNDING",
+      "right_role": "FLOW_IMBALANCE",
+      "payload_operator_set": "CONVICTION_BASIS",
+      "condition_roles": ["OI_LEVEL", "TRADE_INTENSITY"],
+      "directional": true
+    },
+    {
+      "template_id": "OI_ACTIVITY_EXPANSION",
+      "hypothesis": "Open-interest expansion accompanied by trade intensity separates broad participation from inactive inventory drift.",
+      "left_role": "OI_LEVEL",
+      "right_role": "TRADE_INTENSITY",
+      "payload_operator_set": "CONVICTION_BASIS",
+      "condition_roles": ["FLOW_IMBALANCE"],
+      "directional": false
+    },
+    {
+      "template_id": "LARGE_TRADE_OI_CROWDING",
+      "hypothesis": "Large-trade participation relative to open interest measures concentrated position formation.",
+      "left_role": "LARGE_TRADE",
+      "right_role": "OI_LEVEL",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FUNDING"],
+      "directional": false
+    },
+    {
+      "template_id": "BASIS_OI_CROWDING",
+      "hypothesis": "Basis dislocation relative to open-interest state measures crowded leverage demand across venues.",
+      "left_role": "BASIS_BUNDLE",
+      "right_role": "OI_LEVEL",
+      "payload_operator_set": "RELATION_BASIS",
+      "condition_roles": ["FLOW_IMBALANCE"],
+      "directional": false
+    }
+  ],
+  "state_policy": {
+    "catalog_and_aggregate_mechanism_evidence_persist": true,
+    "candidate_population_persists_across_campaigns": false,
+    "cem_distribution_persists_across_campaigns": false,
+    "rng_state_persists_across_campaigns": false,
+    "individual_reward_persists_across_campaigns": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "second_ast": false,
+    "second_compiler": false,
+    "new_evaluator": false
+  }
+}

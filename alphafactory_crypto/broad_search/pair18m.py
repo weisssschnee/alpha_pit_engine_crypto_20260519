@@ -764,6 +764,7 @@ def evaluate_pair(
                 "NormalizedDifference",
                 "Residual",
                 "RatioInteraction",
+                "ConditionGate",
             }
             or len(interaction.inputs) != 2
         ):

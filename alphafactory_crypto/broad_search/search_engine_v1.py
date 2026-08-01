@@ -182,6 +182,36 @@ MECHANISM_SEARCH_V2_CHECKPOINT_COUNT = 6
 MECHANISM_SEARCH_V2_STRICT_TARGET = 12_000
 MECHANISM_SEARCH_V2_RAW_ATTEMPT_LIMIT = 100_000
 MECHANISM_SEARCH_V2_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
+MECHANISM_SEARCH_V21_CAMPAIGN = "crypto_search_mechanism_v2_1"
+MECHANISM_SEARCH_V21_EPOCH_ID = (
+    "CRYPTO_SEARCH_ENGINE_V2_1_MECHANISM_BASIS_20260801"
+)
+MECHANISM_SEARCH_V21_CONFIG = (
+    "config/crypto_search_engine_v2_1_mechanism_basis.json"
+)
+MECHANISM_SEARCH_V21_CATALOG = "config/crypto_typed_mechanism_catalog_v2_1.json"
+MECHANISM_SEARCH_V21_KNOWLEDGE = (
+    "config/crypto_search_mechanism_v2_aggregate_knowledge.json"
+)
+MECHANISM_SEARCH_V21_SEEDS = (
+    1690649940,
+    1761225687,
+    4212849294,
+    1880069717,
+)
+MECHANISM_SEARCH_V21_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+)
+MECHANISM_SEARCH_V21_ARMS = (
+    "legacy_mechanism_random_v2",
+    "expanded_mechanism_random_v2_1",
+    "mechanism_evolution_v2_1",
+)
+MECHANISM_SEARCH_V21_CHECKPOINT_SIZE = 2_000
+MECHANISM_SEARCH_V21_CHECKPOINT_COUNT = 5
+MECHANISM_SEARCH_V21_STRICT_TARGET = 10_000
+MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT = 100_000
+MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
@@ -190,6 +220,7 @@ ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_V5_CAMPAIGN,
     ECONOMIC_SEARCH_V6_CAMPAIGN,
     MECHANISM_SEARCH_V2_CAMPAIGN,
+    MECHANISM_SEARCH_V21_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -264,6 +295,23 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "raw_attempt_limit": MECHANISM_SEARCH_V2_RAW_ATTEMPT_LIMIT,
         "wall_time_limit_seconds": MECHANISM_SEARCH_V2_WALL_TIME_LIMIT_SECONDS,
         "arms": MECHANISM_SEARCH_V2_ARMS,
+    },
+    MECHANISM_SEARCH_V21_CAMPAIGN: {
+        "epoch_id": MECHANISM_SEARCH_V21_EPOCH_ID,
+        "runtime_date": "20260801",
+        "runtime_prefix": "crypto_search_mechanism_v2_1",
+        "report_prefix": "CRYPTO_SEARCH_MECHANISM_V2_1",
+        "report_title": "Crypto Search Engine V2.1 Mechanism Basis",
+        "receipt_path": "config/crypto_search_mechanism_v2_1_receipt.json",
+        "cli_suffix": "mechanism-v2-1",
+        "seeds": MECHANISM_SEARCH_V21_SEEDS,
+        "seed_derivation": MECHANISM_SEARCH_V21_SEED_DERIVATION,
+        "strict_target": MECHANISM_SEARCH_V21_STRICT_TARGET,
+        "checkpoint_size": MECHANISM_SEARCH_V21_CHECKPOINT_SIZE,
+        "checkpoint_count": MECHANISM_SEARCH_V21_CHECKPOINT_COUNT,
+        "raw_attempt_limit": MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS,
+        "arms": MECHANISM_SEARCH_V21_ARMS,
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -448,6 +496,25 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
             raise ValueError("Mechanism V2 seed derivation changed")
         if set(seeds) & (set(SEEDS) | set(ECONOMIC_SEARCH_V6_SEEDS)):
             raise ValueError("Mechanism V2 seed set overlaps a prior campaign")
+    if campaign == MECHANISM_SEARCH_V21_CAMPAIGN:
+        expected = tuple(
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{MECHANISM_SEARCH_V21_EPOCH_ID}|seed|{ordinal}".encode()
+                ).digest()[:4],
+                "big",
+            )
+            for ordinal in range(4)
+        )
+        if seeds != MECHANISM_SEARCH_V21_SEEDS or seeds != expected:
+            raise ValueError("Mechanism V2.1 seed set changed")
+        if config.get("seed_derivation") != MECHANISM_SEARCH_V21_SEED_DERIVATION:
+            raise ValueError("Mechanism V2.1 seed derivation changed")
+        prior = set(SEEDS) | set(ECONOMIC_SEARCH_V6_SEEDS) | set(
+            MECHANISM_SEARCH_V2_SEEDS
+        )
+        if set(seeds) & prior:
+            raise ValueError("Mechanism V2.1 seed set overlaps a prior campaign")
     return seeds
 
 
@@ -1658,6 +1725,125 @@ def _mechanism_v2_frozen_contract(
         "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
         "latent_status": "LATENT_SEARCH_PRIORITY_MODEL_DEFERRED",
         "relational_status": "STAGE1_CLOSED_READ_ONLY_BRIDGES_ONLY",
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _mechanism_v21_frozen_contract(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+    carrier_id: str,
+) -> dict[str, Any]:
+    config, legacy_catalog, expanded_catalog, knowledge = (
+        _load_mechanism_v21_contract(repo_root)
+    )
+    payload = {
+        "schema_version": 1,
+        "epoch_id": MECHANISM_SEARCH_V21_EPOCH_ID,
+        "source_sha": source_sha,
+        "base_sha": BASE_SHA,
+        "search_engine_version": "EVOLUTION_GUIDED_MECHANISM_BASIS_V2_1",
+        "objective": (
+            "Test whether frozen gate, confirmation, disagreement, magnitude, "
+            "and regime-routing modes improve mechanism-space reward ordering "
+            "under fresh typed-random and Evolution policies"
+        ),
+        "authorization": (
+            "ONE_FRESH_STATE_10000_STRICT_MECHANISM_BASIS_CAMPAIGN"
+        ),
+        "surface": {
+            "context_id": str(carrier_id),
+            "fields": len(contracts),
+            "field_ids": [item.field_id for item in contracts],
+            "carrier_reused": True,
+            "new_materializer": False,
+        },
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "seeds": [int(value) for value in MECHANISM_SEARCH_V21_SEEDS],
+        "seed_contract": {
+            "derivation": MECHANISM_SEARCH_V21_SEED_DERIVATION,
+            "pre_registered_before_candidate_one": True,
+            "disjoint_from_v1_v6_and_mechanism_v2": True,
+            "within_campaign_seed_change_allowed": False,
+            "additional_seed_campaign_allowed": False,
+        },
+        "mechanism_grammar": {
+            "legacy_catalog_path": MECHANISM_SEARCH_V2_CATALOG,
+            "legacy_catalog_file_sha256": sha256_file(
+                repo_root / MECHANISM_SEARCH_V2_CATALOG
+            ),
+            "legacy_compiled_catalog_sha256": _mechanism_catalog_sha(
+                legacy_catalog
+            ),
+            "legacy_compiled_mechanism_count": len(legacy_catalog),
+            "expanded_catalog_path": MECHANISM_SEARCH_V21_CATALOG,
+            "expanded_catalog_file_sha256": sha256_file(
+                repo_root / MECHANISM_SEARCH_V21_CATALOG
+            ),
+            "expanded_compiled_catalog_sha256": _mechanism_catalog_sha(
+                expanded_catalog
+            ),
+            "expanded_compiled_mechanism_count": len(expanded_catalog),
+            "template_count": len(
+                {item.template_id for item in expanded_catalog}
+            ),
+            "existing_expression_ast_reused": True,
+            "existing_typed_registry_reused": True,
+            "existing_candidate_spec_reused": True,
+            "existing_compiler_reused": True,
+            "existing_pair_evaluator_reused": True,
+            "second_ast_or_compiler_created": False,
+        },
+        "aggregate_knowledge": {
+            "path": MECHANISM_SEARCH_V21_KNOWLEDGE,
+            "file_sha256": sha256_file(repo_root / MECHANISM_SEARCH_V21_KNOWLEDGE),
+            "source_candidate_ledger_sha256": knowledge[
+                "source_candidate_ledger_sha256"
+            ],
+            "usage_contract": dict(knowledge["usage_contract"]),
+            "sampling_probability_prior": False,
+        },
+        "stages": list(config["stages"]),
+        "arms": {
+            "active": list(MECHANISM_SEARCH_V21_ARMS),
+            "same_frozen_seed_set_for_every_arm": True,
+            "arm_local_adaptive_memory": True,
+            "cem_budget": 0,
+        },
+        "policies": dict(config["policy_parameters"]),
+        "train_gate": dict(config["train_gate"]),
+        "validation_contract": dict(config["validation"]),
+        "fresh_state": dict(config["fresh_state"]),
+        "persistent_mechanism_knowledge": dict(
+            config["persistent_mechanism_knowledge"]
+        ),
+        "budget": {
+            **dict(config["search"]),
+            "fail_closed_attempt_reservation_per_proposal": (
+                MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+            ),
+        },
+        "boundaries": {
+            **dict(config["boundaries"]),
+            "sealed_reads": 0,
+            "report_only_feedback": False,
+            "cross_sprint_adaptive_memory": False,
+        },
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and pair "
+            "evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
     }
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
@@ -4934,6 +5120,152 @@ def _load_mechanism_v2_contract(
     return config, catalog
 
 
+def _load_mechanism_v21_contract(
+    repo_root: Path,
+) -> tuple[
+    dict[str, Any],
+    tuple[MechanismSpec, ...],
+    tuple[MechanismSpec, ...],
+    dict[str, Any],
+]:
+    """Load the fresh V2.1 campaign without importing V2 adaptive state."""
+
+    config = _read_json(repo_root / MECHANISM_SEARCH_V21_CONFIG)
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_10000_STRICT_MECHANISM_BASIS_CAMPAIGN"
+    ):
+        raise PermissionError("Mechanism V2.1 authorization changed")
+    if any(bool(value) for value in config.get("fresh_state", {}).values()):
+        raise PermissionError("Mechanism V2.1 imported prior adaptive state")
+    search = dict(config["search"])
+    expected = {
+        "strict_evaluated_target": MECHANISM_SEARCH_V21_STRICT_TARGET,
+        "checkpoint_size": MECHANISM_SEARCH_V21_CHECKPOINT_SIZE,
+        "checkpoint_count": MECHANISM_SEARCH_V21_CHECKPOINT_COUNT,
+        "raw_generation_attempts_maximum": MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT,
+        "wall_time_seconds_maximum": MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS,
+    }
+    if any(int(search.get(key, -1)) != value for key, value in expected.items()):
+        raise ValueError("Mechanism V2.1 search budget changed")
+    if search.get("workers_12_forbidden") is not True:
+        raise PermissionError("Mechanism V2.1 worker boundary changed")
+
+    checkpoint_owners: dict[int, str] = {}
+    strict_total = 0
+    for stage in config.get("stages") or ():
+        indexes = tuple(int(value) for value in stage["checkpoint_indexes"])
+        allocation = {
+            str(arm): int(count)
+            for arm, count in stage["allocation_per_checkpoint"].items()
+        }
+        if (
+            not indexes
+            or set(allocation) != set(MECHANISM_SEARCH_V21_ARMS)
+            or sum(allocation.values()) != MECHANISM_SEARCH_V21_CHECKPOINT_SIZE
+            or int(stage["strict_count"])
+            != len(indexes) * MECHANISM_SEARCH_V21_CHECKPOINT_SIZE
+        ):
+            raise ValueError("Mechanism V2.1 stage allocation changed")
+        for checkpoint_index in indexes:
+            if checkpoint_index in checkpoint_owners:
+                raise ValueError("Mechanism V2.1 checkpoint has two owners")
+            checkpoint_owners[checkpoint_index] = str(stage["stage_id"])
+        strict_total += int(stage["strict_count"])
+    if (
+        set(checkpoint_owners) != set(range(MECHANISM_SEARCH_V21_CHECKPOINT_COUNT))
+        or strict_total != MECHANISM_SEARCH_V21_STRICT_TARGET
+    ):
+        raise ValueError("Mechanism V2.1 stages do not cover the campaign")
+
+    evolution = dict(config["policy_parameters"]["mechanism_evolution_v2_1"])
+    if not math.isclose(
+        sum(
+            float(evolution[key])
+            for key in (
+                "parameter_mutation_probability",
+                "mechanism_mutation_probability",
+                "crossover_probability",
+            )
+        ),
+        1.0,
+        rel_tol=0.0,
+        abs_tol=1.0e-15,
+    ):
+        raise ValueError("Mechanism V2.1 evolution probabilities changed")
+    persistence = dict(config["persistent_mechanism_knowledge"])
+    if any(
+        bool(persistence.get(key))
+        for key in (
+            "individual_candidate_reward",
+            "population",
+            "cem_distribution",
+            "rng_state",
+        )
+    ):
+        raise PermissionError("Mechanism V2.1 crossed campaign-local memory")
+    if any(
+        bool(config["boundaries"].get(key))
+        for key in (
+            "oos",
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "latent_priority",
+            "relational_training",
+        )
+    ):
+        raise PermissionError("Mechanism V2.1 crossed a research boundary")
+
+    legacy_path = repo_root / str(config["legacy_catalog_path"])
+    expanded_path = repo_root / str(config["catalog_path"])
+    knowledge_path = repo_root / str(config["aggregate_knowledge_path"])
+    if legacy_path != repo_root / MECHANISM_SEARCH_V2_CATALOG:
+        raise ValueError("Mechanism V2.1 legacy catalog changed")
+    if expanded_path != repo_root / MECHANISM_SEARCH_V21_CATALOG:
+        raise ValueError("Mechanism V2.1 expanded catalog changed")
+    if knowledge_path != repo_root / MECHANISM_SEARCH_V21_KNOWLEDGE:
+        raise ValueError("Mechanism V2.1 aggregate knowledge path changed")
+    legacy_catalog = compile_mechanism_catalog(_read_json(legacy_path))
+    expanded_catalog = compile_mechanism_catalog(_read_json(expanded_path))
+    if len(expanded_catalog) <= len(legacy_catalog):
+        raise ValueError("Mechanism V2.1 did not expand the mechanism basis")
+    knowledge = _read_json(knowledge_path)
+    usage = dict(knowledge.get("usage_contract") or {})
+    if (
+        usage.get("catalog_design_and_lifecycle_only") is not True
+        or any(
+            bool(usage.get(key))
+            for key in (
+                "sampling_probability_prior",
+                "candidate_or_reward_import",
+                "population_or_distribution_import",
+                "rng_or_policy_state_import",
+                "individual_candidate_identity_persisted",
+            )
+        )
+    ):
+        raise PermissionError("Mechanism V2 aggregate knowledge crossed its boundary")
+    source_manifest = _read_json(
+        repo_root / "runtime/crypto_search_mechanism_v2_20260801/run_manifest.json"
+    )
+    source_ledger_path = str(knowledge["source_candidate_ledger"])
+    source_records = [
+        row
+        for row in source_manifest.get("artifacts") or ()
+        if str(row.get("path")) == source_ledger_path
+    ]
+    if (
+        len(source_records) != 1
+        or str(source_records[0].get("sha256"))
+        != str(knowledge["source_candidate_ledger_sha256"])
+    ):
+        raise ValueError("Mechanism V2 aggregate knowledge source identity changed")
+    return config, legacy_catalog, expanded_catalog, knowledge
+
+
 def _balanced_lane_choice(
     *,
     lane_order: Sequence[str],
@@ -4983,10 +5315,20 @@ def _initial_policies(
     output: dict[str, PolicyType] = {}
     mechanism_config: dict[str, Any] | None = None
     mechanism_catalog: tuple[MechanismSpec, ...] | None = None
+    mechanism_v21_config: dict[str, Any] | None = None
+    mechanism_v21_legacy: tuple[MechanismSpec, ...] | None = None
+    mechanism_v21_expanded: tuple[MechanismSpec, ...] | None = None
     if set(arms) & set(MECHANISM_SEARCH_V2_ARMS[1:]):
         mechanism_config, mechanism_catalog = _load_mechanism_v2_contract(
             Path(__file__).resolve().parents[2]
         )
+    if set(arms) & set(MECHANISM_SEARCH_V21_ARMS):
+        (
+            mechanism_v21_config,
+            mechanism_v21_legacy,
+            mechanism_v21_expanded,
+            _,
+        ) = _load_mechanism_v21_contract(Path(__file__).resolve().parents[2])
     compatible_skeleton_ids = field_role_surface(
         tuple(registry.fields.values())
     )["compatible_skeleton_ids"]
@@ -5057,6 +5399,39 @@ def _initial_policies(
                     registry,
                     mechanism_catalog,
                     dict(mechanism_config["policy_parameters"][arm]),
+                )
+            elif arm == "legacy_mechanism_random_v2":
+                assert (
+                    mechanism_v21_config is not None
+                    and mechanism_v21_legacy is not None
+                )
+                output[key] = MechanismRandomV2(
+                    seed,
+                    registry,
+                    mechanism_v21_legacy,
+                    dict(mechanism_v21_config["policy_parameters"][arm]),
+                )
+            elif arm == "expanded_mechanism_random_v2_1":
+                assert (
+                    mechanism_v21_config is not None
+                    and mechanism_v21_expanded is not None
+                )
+                output[key] = MechanismRandomV2(
+                    seed,
+                    registry,
+                    mechanism_v21_expanded,
+                    dict(mechanism_v21_config["policy_parameters"][arm]),
+                )
+            elif arm == "mechanism_evolution_v2_1":
+                assert (
+                    mechanism_v21_config is not None
+                    and mechanism_v21_expanded is not None
+                )
+                output[key] = MechanismEvolutionV2(
+                    seed,
+                    registry,
+                    mechanism_v21_expanded,
+                    dict(mechanism_v21_config["policy_parameters"][arm]),
                 )
             else:
                 raise ValueError(f"unsupported search policy arm: {arm}")
@@ -5435,6 +5810,34 @@ def _mechanism_v2_checkpoint_allocation(
         raise ValueError("Mechanism V2 stage allocation changed")
     if any(value % len(seeds) for value in allocation.values()):
         raise ValueError("Mechanism V2 stage allocation is not seed balanced")
+    return allocation
+
+
+def _mechanism_v21_checkpoint_allocation(
+    checkpoint_index: int,
+    *,
+    repo_root: Path,
+    seeds: Sequence[int],
+) -> dict[str, int]:
+    config, _, _, _ = _load_mechanism_v21_contract(repo_root)
+    matches = [
+        stage
+        for stage in config["stages"]
+        if int(checkpoint_index)
+        in {int(value) for value in stage["checkpoint_indexes"]}
+    ]
+    if len(matches) != 1:
+        raise ValueError("Mechanism V2.1 checkpoint has no unique stage")
+    allocation = {
+        str(arm): int(count)
+        for arm, count in matches[0]["allocation_per_checkpoint"].items()
+    }
+    if set(allocation) != set(MECHANISM_SEARCH_V21_ARMS):
+        raise ValueError("Mechanism V2.1 stage arm set changed")
+    if sum(allocation.values()) != MECHANISM_SEARCH_V21_CHECKPOINT_SIZE:
+        raise ValueError("Mechanism V2.1 stage allocation changed")
+    if any(value % len(seeds) for value in allocation.values()):
+        raise ValueError("Mechanism V2.1 allocation is not seed balanced")
     return allocation
 
 
@@ -7374,6 +7777,294 @@ def _final_decision(
     }
 
 
+def _mechanism_v21_train_gate(
+    *,
+    repo_root: Path,
+    ledger: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    config, _, _, _ = _load_mechanism_v21_contract(repo_root)
+    contract = dict(config["train_gate"])
+
+    def ordered(arm: str) -> list[Mapping[str, Any]]:
+        return sorted(
+            (row for row in ledger if str(row["arm"]) == arm),
+            key=lambda row: (
+                int(row["arm_completion_ordinal"]),
+                str(row["candidate_id"]),
+            ),
+        )
+
+    count = int(contract["same_matched_evaluated_count"])
+    random_rows = ordered("expanded_mechanism_random_v2_1")[:count]
+    evolution_rows = ordered("mechanism_evolution_v2_1")[:count]
+    if len(random_rows) != count or len(evolution_rows) != count:
+        raise ValueError("Mechanism V2.1 train gate lacks equal-count rows")
+
+    def metrics(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+        rewards = [float(row["search_reward"]) for row in rows]
+        families = {str(row["behavior_family_id"]) for row in rows}
+        positive_count = sum(value > 0.0 for value in rewards)
+        yield_rate = len(families) / len(rows)
+        return {
+            "matched_evaluated_count": len(rows),
+            "mean_search_reward": float(np.mean(rewards)),
+            "top_decile_search_reward": _top_decile_mean(rewards),
+            "positive_search_reward_count": positive_count,
+            "positive_search_reward_rate": positive_count / len(rows),
+            "behavior_family_count": len(families),
+            "behavior_family_yield": yield_rate,
+            "behavior_duplicate_rate": 1.0 - yield_rate,
+        }
+
+    random_metrics = metrics(random_rows)
+    evolution_metrics = metrics(evolution_rows)
+    checks = {
+        "expanded_positive_count": (
+            random_metrics["positive_search_reward_count"]
+            >= int(contract["minimum_expanded_positive_search_reward_count"])
+        ),
+        "expanded_positive_rate": (
+            random_metrics["positive_search_reward_rate"]
+            >= float(contract["minimum_expanded_positive_search_reward_rate"])
+        ),
+        "evolution_mean_reward_increment": (
+            evolution_metrics["mean_search_reward"]
+            > random_metrics["mean_search_reward"]
+        ),
+        "evolution_top_decile_increment": (
+            evolution_metrics["top_decile_search_reward"]
+            > random_metrics["top_decile_search_reward"]
+        ),
+        "evolution_positive_rate_increment": (
+            evolution_metrics["positive_search_reward_rate"]
+            > random_metrics["positive_search_reward_rate"]
+        ),
+        "evolution_behavior_family_yield": (
+            evolution_metrics["behavior_family_yield"]
+            >= float(contract["minimum_evolution_behavior_family_yield"])
+        ),
+        "evolution_duplicate_rate": (
+            evolution_metrics["behavior_duplicate_rate"]
+            <= float(contract["maximum_evolution_behavior_duplicate_rate"])
+        ),
+    }
+    return {
+        "schema_version": 1,
+        "status": "PASS" if all(checks.values()) else "TRAIN_GATE_NEGATIVE",
+        "contract": contract,
+        "expanded_random": random_metrics,
+        "evolution": evolution_metrics,
+        "checks": checks,
+        "validation_authorized_by_gate": all(checks.values()),
+        "threshold_tuning_performed": False,
+        "candidate_generation_performed": False,
+        "sealed_reads": 0,
+    }
+
+
+def _mechanism_v21_final_decision(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+    validation_result: Mapping[str, Any],
+) -> dict[str, Any]:
+    config, legacy_catalog, expanded_catalog, _ = _load_mechanism_v21_contract(
+        repo_root
+    )
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    restore_verified = (
+        len(checkpoints) == MECHANISM_SEARCH_V21_CHECKPOINT_COUNT
+        and all(
+            bool(_read_json(path / "manifest.json").get("restore_verified"))
+            for path in checkpoints
+        )
+    )
+    by_arm = {
+        arm: sorted(
+            (row for row in ledger if str(row["arm"]) == arm),
+            key=lambda row: (
+                int(row["arm_completion_ordinal"]),
+                str(row["candidate_id"]),
+            ),
+        )
+        for arm in MECHANISM_SEARCH_V21_ARMS
+    }
+
+    def summary(arm: str) -> dict[str, Any]:
+        rows = by_arm[arm]
+        rewards = [float(row["search_reward"]) for row in rows]
+        pair_rewards = [float(row["pair_reward"]) for row in rows]
+        families = {str(row["behavior_family_id"]) for row in rows}
+        counter = state["arm_counters"][arm]
+        cpu_hours = float(counter["cpu_seconds"]) / 3600.0
+        positive = sum(value > 0.0 for value in rewards)
+        return {
+            "generation_attempts": int(counter["generation_attempts"]),
+            "strict_evaluated": len(rows),
+            "valid_exact_unique_per_cpu_hour": int(counter["exact_unique"])
+            / max(cpu_hours, 1.0e-12),
+            "behavior_family_count": len(families),
+            "behavior_family_yield": len(families) / max(1, len(rows)),
+            "behavior_duplicate_rate": 1.0 - len(families) / max(1, len(rows)),
+            "mean_search_reward": float(np.mean(rewards)) if rewards else None,
+            "top_decile_search_reward": _top_decile_mean(rewards),
+            "positive_search_reward_count": positive,
+            "positive_search_reward_rate": positive / max(1, len(rows)),
+            "mean_pair_reward": float(np.mean(pair_rewards)) if pair_rewards else None,
+            "top_decile_pair_reward": _top_decile_mean(pair_rewards),
+            "cost_killed_rate": sum(bool(row["cost_killed"]) for row in rows)
+            / max(1, len(rows)),
+            "turnover_killed_rate": sum(
+                bool(row["turnover_killed"]) for row in rows
+            )
+            / max(1, len(rows)),
+            "verified_parameter_mutations": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[0]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+            "verified_mechanism_mutations": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[1]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+            "verified_crossovers": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[2]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+        }
+
+    arm_summaries = {arm: summary(arm) for arm in MECHANISM_SEARCH_V21_ARMS}
+
+    def comparison(arm: str, baseline: str, count: int) -> dict[str, Any]:
+        local = by_arm[arm][:count]
+        control = by_arm[baseline][:count]
+        local_rewards = [float(row["search_reward"]) for row in local]
+        control_rewards = [float(row["search_reward"]) for row in control]
+        return {
+            "baseline_arm": baseline,
+            "matched_evaluated_count": min(len(local), len(control)),
+            "mean_search_reward_delta": float(np.mean(local_rewards))
+            - float(np.mean(control_rewards)),
+            "top_decile_search_reward_delta": _top_decile_mean(local_rewards)
+            - _top_decile_mean(control_rewards),
+            "positive_search_reward_rate_delta": sum(
+                value > 0.0 for value in local_rewards
+            )
+            / len(local_rewards)
+            - sum(value > 0.0 for value in control_rewards) / len(control_rewards),
+            "behavior_family_yield_delta": (
+                len({str(row["behavior_family_id"]) for row in local}) / len(local)
+                - len({str(row["behavior_family_id"]) for row in control})
+                / len(control)
+            ),
+        }
+
+    train_gate = _read_json(runtime_root / "train_gate.json")
+    validation_decisions = dict(validation_result.get("arm_decisions") or {})
+    qualified = sorted(
+        arm
+        for arm, row in validation_decisions.items()
+        if bool(dict(row).get("passed"))
+    )
+    return {
+        "schema_version": 1,
+        "epoch_id": MECHANISM_SEARCH_V21_EPOCH_ID,
+        "status": (
+            "PASS_SEARCH_ENGINE_V2_1_COMPLETED"
+            if train_gate["validation_authorized_by_gate"]
+            else "PASS_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE"
+        ),
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": restore_verified,
+        "legacy_compiled_mechanism_count": len(legacy_catalog),
+        "expanded_compiled_mechanism_count": len(expanded_catalog),
+        "template_count": len({item.template_id for item in expanded_catalog}),
+        "stage_contract": list(config["stages"]),
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+        "arm_summaries": arm_summaries,
+        "equal_count_comparisons": {
+            "expanded_basis_random_vs_old_grammar_random": comparison(
+                "expanded_mechanism_random_v2_1",
+                "legacy_mechanism_random_v2",
+                2_000,
+            ),
+            "evolution_vs_expanded_basis_random": comparison(
+                "mechanism_evolution_v2_1",
+                "expanded_mechanism_random_v2_1",
+                4_000,
+            ),
+        },
+        "train_gate": train_gate,
+        "validation_status": validation_result.get("status"),
+        "future_development_data_arena_qualified_arms": qualified,
+        "future_new_data_arena_qualified_arms": qualified,
+        "research_decision": "HOLD_DEVELOPMENT_ONLY_NO_PROMOTION",
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": "FORBIDDEN",
+        "next_arena_started": False,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def _mechanism_v21_report_text(decision: Mapping[str, Any]) -> str:
+    arm_rows = []
+    for arm, values in decision["arm_summaries"].items():
+        arm_rows.append(
+            "| {arm} | {strict:,} | {families:,} | {duplicate:.2%} | "
+            "{mean:.6f} | {top:.6f} | {positive:.2%} |".format(
+                arm=arm,
+                strict=int(values["strict_evaluated"]),
+                families=int(values["behavior_family_count"]),
+                duplicate=float(values["behavior_duplicate_rate"]),
+                mean=float(values["mean_search_reward"]),
+                top=float(values["top_decile_search_reward"]),
+                positive=float(values["positive_search_reward_rate"]),
+            )
+        )
+    qualified = ", ".join(
+        decision["future_development_data_arena_qualified_arms"]
+    ) or "none"
+    return f"""# Crypto Search Engine V2.1 Mechanism Basis
+
+- Status: `{decision['status']}`; development-only; sealed reads `0`.
+- Producer source: `{decision['producer_source_sha']}`.
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Catalog: `{decision['legacy_compiled_mechanism_count']}` legacy and `{decision['expanded_compiled_mechanism_count']}` expanded mechanisms through the existing AST/compiler/evaluator.
+- Checkpoints: `{decision['checkpoint_count']}/5`; exact restore: `{decision['checkpoint_restore_verified']}`.
+- Train gate: `{decision['train_gate']['status']}`; terminal validation: `{decision['validation_status']}`.
+
+| Arm | Strict | Families | Duplicate | Mean search reward | Top-decile | Positive search reward |
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(arm_rows)}
+
+Validation-qualified arms: **{qualified}**. This run does not create an Alpha,
+OOS, challenge, recent, May-stress, forward, or promotion claim and starts no
+subsequent Arena.
+"""
+
+
 def _mechanism_v2_final_decision(
     *,
     repo_root: Path,
@@ -7691,8 +8382,14 @@ def _write_mechanism_v2_knowledge(
     runtime_root: Path,
     ledger: Sequence[Mapping[str, Any]],
     validation_result: Mapping[str, Any],
+    campaign: str = MECHANISM_SEARCH_V2_CAMPAIGN,
 ) -> None:
-    _, catalog = _load_mechanism_v2_contract(repo_root)
+    if campaign == MECHANISM_SEARCH_V21_CAMPAIGN:
+        _, _, catalog, _ = _load_mechanism_v21_contract(repo_root)
+    elif campaign == MECHANISM_SEARCH_V2_CAMPAIGN:
+        _, catalog = _load_mechanism_v2_contract(repo_root)
+    else:
+        raise ValueError("unsupported mechanism knowledge campaign")
     catalog_by_id = {item.mechanism_id: item for item in catalog}
     rows_by_mechanism: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     candidate_to_mechanism: dict[str, str] = {}
@@ -10325,6 +11022,8 @@ def run_engine(
     is_carrier_gate = campaign == "carrier_gate_v1"
     is_v13 = campaign == "search_engine_v1_3_cross_carrier"
     is_mechanism_v2 = campaign == MECHANISM_SEARCH_V2_CAMPAIGN
+    is_mechanism_v21 = campaign == MECHANISM_SEARCH_V21_CAMPAIGN
+    is_mechanism_campaign = is_mechanism_v2 or is_mechanism_v21
     is_system_campaign = (
         is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
     )
@@ -10554,7 +11253,18 @@ def run_engine(
     )
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_mechanism_v2:
+    if is_mechanism_v21:
+        frozen = _mechanism_v21_frozen_contract(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            contracts=contracts,
+            carrier_id=str(carrier_id),
+        )
+    elif is_mechanism_v2:
         frozen = _mechanism_v2_frozen_contract(
             repo_root=repo_root,
             source_sha=source_sha,
@@ -10808,6 +11518,25 @@ def run_engine(
         ):
             return False
         stop_executor()
+        if is_mechanism_v21:
+            train_gate = _mechanism_v21_train_gate(
+                repo_root=repo_root,
+                ledger=ledger,
+            )
+            _write_json(runtime_root / "train_gate.json", train_gate)
+            if train_gate["validation_authorized_by_gate"] is not True:
+                validation_result = {
+                    "schema_version": 1,
+                    "status": "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE",
+                    "arm_decisions": {},
+                    "train_gate_sha256": _payload_sha(train_gate),
+                    "candidate_generation_performed": False,
+                    "optimizer_feedback_written": False,
+                    "policy_memory_written": False,
+                    "holdout_read": False,
+                    "threshold_tuning_performed": False,
+                }
+                return True
         from alphafactory_crypto.broad_search.replay_v14_binance_target import (
             BinanceTargetStore,
         )
@@ -10847,7 +11576,7 @@ def run_engine(
 
     try:
         execute_frozen_validation_if_due()
-        if _validation_control_arm_stopped(state) and not is_mechanism_v2:
+        if _validation_control_arm_stopped(state) and not is_mechanism_campaign:
             raise _ValidationControlArmStopped(
                 "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
             )
@@ -10856,7 +11585,13 @@ def run_engine(
             int(state["next_checkpoint_index"]), checkpoint_count
         ):
             allocation = (
-                _mechanism_v2_checkpoint_allocation(
+                _mechanism_v21_checkpoint_allocation(
+                    checkpoint_index,
+                    repo_root=repo_root,
+                    seeds=campaign_seeds,
+                )
+                if is_mechanism_v21
+                else _mechanism_v2_checkpoint_allocation(
                     checkpoint_index,
                     repo_root=repo_root,
                     seeds=campaign_seeds,
@@ -11401,7 +12136,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    MECHANISM_SEARCH_V2_ARMS
+                    MECHANISM_SEARCH_V21_ARMS
+                    if is_mechanism_v21
+                    else MECHANISM_SEARCH_V2_ARMS
                     if is_mechanism_v2
                     else V13_ARMS
                     if is_v13
@@ -11418,7 +12155,7 @@ def run_engine(
             )
             gates = (
                 {}
-                if is_system_campaign or is_mechanism_v2
+                if is_system_campaign or is_mechanism_campaign
                 else _apply_exit_gate(
                     checkpoint_index=checkpoint_index,
                     checkpoint_metrics=checkpoint_metrics,
@@ -11452,7 +12189,7 @@ def run_engine(
                 expected_identities=identities,
             )
             validation_ran = execute_frozen_validation_if_due()
-            if _validation_control_arm_stopped(state) and not is_mechanism_v2:
+            if _validation_control_arm_stopped(state) and not is_mechanism_campaign:
                 raise _ValidationControlArmStopped(
                     "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
                 )
@@ -11708,7 +12445,18 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _mechanism_v2_final_decision(
+        _mechanism_v21_final_decision(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+            validation_result=validation_result or {},
+        )
+        if is_mechanism_v21
+        else _mechanism_v2_final_decision(
             repo_root=repo_root,
             source_sha=source_sha,
             state=state,
@@ -11797,18 +12545,21 @@ def run_engine(
                 "search_campaign": campaign,
             }
         )
-    if is_mechanism_v2:
+    if is_mechanism_campaign:
         _write_mechanism_v2_knowledge(
             repo_root=repo_root,
             runtime_root=runtime_root,
             ledger=ledger,
             validation_result=validation_result or {},
+            campaign=campaign,
         )
     _write_json(runtime_root / "final_decision.json", decision)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _mechanism_v2_report_text(decision)
+            _mechanism_v21_report_text(decision)
+            if is_mechanism_v21
+            else _mechanism_v2_report_text(decision)
             if is_mechanism_v2
             else _report_text(decision)
             if is_economic
@@ -15790,6 +16541,277 @@ def check_mechanism_v2(
     }
 
 
+def check_mechanism_v21(
+    repo_root: Path,
+    *,
+    runtime_date: str = "20260801",
+) -> dict[str, Any]:
+    config = _economic_campaign_config(MECHANISM_SEARCH_V21_CAMPAIGN)
+    runtime_root = repo_root / f"runtime/{config['runtime_prefix']}_{runtime_date}"
+    report_path = repo_root / f"reports/{config['report_prefix']}_{runtime_date}.md"
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "train_gate.json",
+        "mechanism_knowledge.parquet",
+        "mechanism_knowledge_summary.json",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    preflight = _read_json(runtime_root / "embedded_preflight.json")
+    train_gate = _read_json(runtime_root / "train_gate.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    knowledge_summary = _read_json(
+        runtime_root / "mechanism_knowledge_summary.json"
+    )
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
+    knowledge = pd.read_parquet(runtime_root / "mechanism_knowledge.parquet")
+    _, legacy_catalog, expanded_catalog, _ = _load_mechanism_v21_contract(
+        repo_root
+    )
+
+    frozen_body = {
+        key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
+    }
+    grammar = dict(frozen.get("mechanism_grammar") or {})
+    if _payload_sha(frozen_body) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if (
+        frozen.get("source_sha") != manifest.get("producer_source_sha")
+        or frozen.get("authorization")
+        != "ONE_FRESH_STATE_10000_STRICT_MECHANISM_BASIS_CAMPAIGN"
+        or grammar.get("legacy_compiled_mechanism_count") != len(legacy_catalog)
+        or grammar.get("expanded_compiled_mechanism_count")
+        != len(expanded_catalog)
+        or grammar.get("expanded_compiled_catalog_sha256")
+        != _mechanism_catalog_sha(expanded_catalog)
+        or grammar.get("second_ast_or_compiler_created") is not False
+    ):
+        errors.append("frozen_mechanism_contract")
+    if tuple(int(value) for value in frozen.get("seeds") or ()) != (
+        MECHANISM_SEARCH_V21_SEEDS
+    ):
+        errors.append("frozen_seed_set")
+    if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
+        errors.append("preflight_external_budget")
+
+    if len(ledger) != MECHANISM_SEARCH_V21_STRICT_TARGET:
+        errors.append("strict_count")
+    if ledger["candidate_id"].nunique() != MECHANISM_SEARCH_V21_STRICT_TARGET:
+        errors.append("exact_unique")
+    if set(ledger["arm"].astype(str).unique()) != set(MECHANISM_SEARCH_V21_ARMS):
+        errors.append("arm_set")
+    if set(int(value) for value in ledger["seed"].unique()) != set(
+        MECHANISM_SEARCH_V21_SEEDS
+    ):
+        errors.append("ledger_seed_set")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    expected_allocations = {
+        0: {"legacy_mechanism_random_v2": 2_000},
+        1: {"expanded_mechanism_random_v2_1": 2_000},
+        2: {"expanded_mechanism_random_v2_1": 2_000},
+        3: {"mechanism_evolution_v2_1": 2_000},
+        4: {"mechanism_evolution_v2_1": 2_000},
+    }
+    for checkpoint_index, expected in expected_allocations.items():
+        local = ledger.loc[
+            ledger["checkpoint_index"].astype(int) == checkpoint_index
+        ]
+        observed = {
+            str(arm): int(count)
+            for arm, count in local.groupby("arm").size().items()
+        }
+        if observed != expected:
+            errors.append(f"checkpoint_allocation:{checkpoint_index}")
+    if set(metrics["checkpoint_index"].astype(int).unique()) != set(range(5)):
+        errors.append("checkpoint_metrics")
+    evolution_rows = ledger.loc[
+        ledger["arm"].astype(str) == "mechanism_evolution_v2_1"
+    ]
+    for operation in MECHANISM_EVOLUTION_OPERATIONS:
+        operation_rows = evolution_rows.loc[
+            evolution_rows["operation"].astype(str) == operation
+        ]
+        if operation_rows.empty or not bool(
+            operation_rows["receipt_verified"]
+            .astype("boolean")
+            .fillna(False)
+            .all()
+        ):
+            errors.append(f"operation_not_verified:{operation}")
+
+    if len(archive) != len(ledger):
+        errors.append("archive_row_count")
+    champions = archive.loc[archive["is_family_champion"].fillna(False)]
+    if champions["behavior_family_id"].nunique() != archive[
+        "behavior_family_id"
+    ].nunique():
+        errors.append("archive_family_champion")
+    if (
+        len(knowledge) != len(expanded_catalog)
+        or knowledge["mechanism_id"].nunique() != len(expanded_catalog)
+        or knowledge_summary.get("declared_mechanism_count")
+        != len(expanded_catalog)
+        or knowledge_summary.get("individual_candidate_reward_persisted")
+        is not False
+        or knowledge_summary.get("population_or_distribution_persisted")
+        is not False
+    ):
+        errors.append("mechanism_knowledge_boundary")
+
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != MECHANISM_SEARCH_V21_CHECKPOINT_COUNT:
+        errors.append("checkpoint_count")
+    try:
+        _, contracts, _, _, _ = _load_v14_inputs(repo_root)
+        registry = TypedExpressionRegistry(contracts)
+        identities = {
+            "raw_cache": manifest["data_cache_identity"],
+            "compiler_identity": manifest["compiler_identity"],
+        }
+        for index, checkpoint in enumerate(checkpoints):
+            checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+            if int(checkpoint_manifest["completed_ledger_row_count"]) != (
+                index + 1
+            ) * MECHANISM_SEARCH_V21_CHECKPOINT_SIZE:
+                errors.append(f"checkpoint_rows:{index}")
+            _load_checkpoint(
+                checkpoint_path=checkpoint,
+                registry=registry,
+                expected_source_sha=str(manifest["producer_source_sha"]),
+                expected_frozen_hash=str(frozen["frozen_contract_sha256"]),
+                expected_identities=identities,
+            )
+    except (KeyError, OSError, ValueError) as exc:
+        errors.append(f"checkpoint_exact_restore:{type(exc).__name__}:{exc}")
+
+    validation_authorized = bool(train_gate.get("validation_authorized_by_gate"))
+    qualified: list[str] = []
+    validation_names = (
+        "validation_candidate_ledger.parquet",
+        "validation_arm_metrics.parquet",
+        "validation_decisions.json",
+    )
+    if validation_authorized:
+        for name in validation_names:
+            if not (runtime_root / name).is_file():
+                errors.append(f"missing:{name}")
+        validation_checkpoint = runtime_root / "checkpoints/checkpoint_validation"
+        if not validation_checkpoint.is_dir() or _read_json(
+            validation_checkpoint / "manifest.json"
+        ).get("restore_verified") is not True:
+            errors.append("validation_checkpoint_restore")
+        if not errors:
+            validation = _read_json(runtime_root / "validation_decisions.json")
+            if (
+                validation.get("status") != "VALIDATION_STAGE_COMPLETE"
+                or set(dict(validation.get("arm_decisions") or {}))
+                != set(MECHANISM_SEARCH_V21_ARMS)
+            ):
+                errors.append("validation_contract")
+            qualified = sorted(
+                arm
+                for arm, row in dict(
+                    validation.get("arm_decisions") or {}
+                ).items()
+                if bool(dict(row).get("passed"))
+            )
+    else:
+        if any((runtime_root / name).exists() for name in validation_names):
+            errors.append("train_gate_negative_has_validation_artifacts")
+        if decision.get("validation_status") != (
+            "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE"
+        ):
+            errors.append("train_gate_negative_status")
+
+    if (
+        decision.get("strict_evaluated_count") != MECHANISM_SEARCH_V21_STRICT_TARGET
+        or decision.get("checkpoint_restore_verified") is not True
+        or decision.get("future_development_data_arena_qualified_arms")
+        != qualified
+        or decision.get("sealed_reads") != 0
+        or decision.get("next_arena_started") is not False
+    ):
+        errors.append("final_decision")
+    if int(
+        decision.get(
+            "generation_attempts", MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT + 1
+        )
+    ) > MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT:
+        errors.append("raw_attempt_budget")
+    if float(
+        decision.get(
+            "active_wall_seconds",
+            MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS + 1,
+        )
+    ) > MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS:
+        errors.append("wall_time_budget")
+
+    if (
+        manifest.get("producer_source_sha") != frozen.get("source_sha")
+        or manifest.get("strict_evaluated_count")
+        != MECHANISM_SEARCH_V21_STRICT_TARGET
+        or manifest.get("frozen_contract_sha256")
+        != frozen.get("frozen_contract_sha256")
+        or manifest.get("sealed_reads") != 0
+        or _payload_sha(manifest.get("artifacts", []))
+        != manifest.get("artifact_bundle_sha256")
+    ):
+        errors.append("run_manifest")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "legacy_compiled_mechanism_count": len(legacy_catalog),
+        "expanded_compiled_mechanism_count": len(expanded_catalog),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "train_gate_status": train_gate.get("status"),
+        "validation_qualified_arms": qualified,
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -15819,6 +16841,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-mechanism-v2",
             "close-validation-blocked-mechanism-v2",
             "check-mechanism-v2",
+            "run-mechanism-v2-1",
+            "check-mechanism-v2-1",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -15851,6 +16875,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-economic-v5": ECONOMIC_SEARCH_V5_CAMPAIGN,
         "run-economic-v6": ECONOMIC_SEARCH_V6_CAMPAIGN,
         "run-mechanism-v2": MECHANISM_SEARCH_V2_CAMPAIGN,
+        "run-mechanism-v2-1": MECHANISM_SEARCH_V21_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -15951,6 +16976,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or "20260801"),
             source_sha=args.source_sha,
             campaign=MECHANISM_SEARCH_V2_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
+    elif args.command == "run-mechanism-v2-1":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+            source_sha=args.source_sha,
+            campaign=MECHANISM_SEARCH_V21_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
     elif args.command == "close-economic-v1":
@@ -16064,6 +17097,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     elif args.command == "check-mechanism-v2":
         result = check_mechanism_v2(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+        )
+    elif args.command == "check-mechanism-v2-1":
+        result = check_mechanism_v21(
             repo_root,
             runtime_date=str(args.runtime_date or "20260801"),
         )

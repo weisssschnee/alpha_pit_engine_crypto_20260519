@@ -27,8 +27,10 @@ from scipy.stats import rankdata
 
 from .expression import (
     BINARY_OPERATORS,
+    CONDITION_GATE_MODES,
     Expression,
     FieldContract,
+    STATE_MODULATION_MODES,
     TypedExpressionRegistry,
     ablate_expression,
     materialize_expression,
@@ -154,8 +156,10 @@ class MechanismSpec:
     left_role: str
     right_role: str
     payload_operator: str
+    payload_mode: str | None
     condition_role: str | None
     condition_operator: str | None
+    condition_mode: str | None
     mapping_class: str
     matched_control_schema: str
     parent_mechanism_ids: tuple[str, ...] = ()
@@ -168,8 +172,14 @@ class MechanismSpec:
             "left_role": self.left_role,
             "right_role": self.right_role,
             "payload_operator": self.payload_operator,
+            **({"payload_mode": self.payload_mode} if self.payload_mode else {}),
             "condition_role": self.condition_role,
             "condition_operator": self.condition_operator,
+            **(
+                {"condition_mode": self.condition_mode}
+                if self.condition_mode
+                else {}
+            ),
             "mapping_class": self.mapping_class,
             "matched_control_schema": self.matched_control_schema,
         }
@@ -194,8 +204,10 @@ class MechanismSpec:
         left_role: str,
         right_role: str,
         payload_operator: str,
+        payload_mode: str | None = None,
         condition_role: str | None,
         condition_operator: str | None,
+        condition_mode: str | None = None,
         mapping_class: str,
         matched_control_schema: str,
         parent_mechanism_ids: Sequence[str] = (),
@@ -207,9 +219,15 @@ class MechanismSpec:
             "left_role": str(left_role),
             "right_role": str(right_role),
             "payload_operator": str(payload_operator),
+            **({"payload_mode": str(payload_mode)} if payload_mode else {}),
             "condition_role": str(condition_role) if condition_role else None,
             "condition_operator": (
                 str(condition_operator) if condition_operator else None
+            ),
+            **(
+                {"condition_mode": str(condition_mode)}
+                if condition_mode
+                else {}
             ),
             "mapping_class": str(mapping_class),
             "matched_control_schema": str(matched_control_schema),
@@ -223,8 +241,10 @@ class MechanismSpec:
             str(left_role),
             str(right_role),
             str(payload_operator),
+            semantic.get("payload_mode"),
             semantic["condition_role"],
             semantic["condition_operator"],
+            semantic.get("condition_mode"),
             str(mapping_class),
             str(matched_control_schema),
             tuple(str(value) for value in parent_mechanism_ids),
@@ -240,8 +260,10 @@ class MechanismSpec:
             left_role=str(payload["left_role"]),
             right_role=str(payload["right_role"]),
             payload_operator=str(payload["payload_operator"]),
+            payload_mode=payload.get("payload_mode"),
             condition_role=payload.get("condition_role"),
             condition_operator=payload.get("condition_operator"),
+            condition_mode=payload.get("condition_mode"),
             mapping_class=str(payload["mapping_class"]),
             matched_control_schema=str(payload["matched_control_schema"]),
             parent_mechanism_ids=payload.get("parent_mechanism_ids", ()),
@@ -352,7 +374,8 @@ def skeleton_registry() -> tuple[Skeleton, ...]:
 def compile_mechanism_catalog(payload: Mapping[str, Any]) -> tuple[MechanismSpec, ...]:
     """Expand declarative semantic templates into a bounded typed catalog."""
 
-    if int(payload.get("schema_version", -1)) != 1:
+    schema_version = int(payload.get("schema_version", -1))
+    if schema_version not in {1, 2}:
         raise ValueError("unsupported typed mechanism catalog schema")
     if payload.get("compiler_route") != (
         "EXISTING_EXPRESSION_TYPED_REGISTRY_CANDIDATE_SPEC"
@@ -367,12 +390,29 @@ def compile_mechanism_catalog(payload: Mapping[str, Any]) -> tuple[MechanismSpec
     condition_operators = tuple(
         str(value) for value in payload["condition_operator_set"]
     )
+    payload_modes = {
+        str(operator): tuple(
+            None if value is None else str(value) for value in values
+        )
+        for operator, values in dict(
+            payload.get("payload_operator_modes") or {}
+        ).items()
+    }
+    condition_modes = {
+        str(operator): tuple(
+            None if value is None else str(value) for value in values
+        )
+        for operator, values in dict(
+            payload.get("condition_operator_modes") or {}
+        ).items()
+    }
     allowed_payload = {
         "SafeMul",
         "SafeDiv",
         "NormalizedDifference",
         "Residual",
         "RatioInteraction",
+        "ConditionGate",
     }
     if (
         any(not values for values in operator_sets.values())
@@ -384,6 +424,26 @@ def compile_mechanism_catalog(payload: Mapping[str, Any]) -> tuple[MechanismSpec
         or set(condition_operators) != {"ConditionGate", "StateModulation"}
     ):
         raise ValueError("typed mechanism catalog operator basis is unsafe")
+    if schema_version == 1 and (payload_modes or condition_modes):
+        raise ValueError("V2 catalog cannot carry V2.1 operator modes")
+    if schema_version == 2:
+        if set(payload_modes) - {"ConditionGate"}:
+            raise ValueError("unsupported payload-mode operator")
+        if any(
+            value not in {"SIGN_CONFIRMATION", "SIGN_DISAGREEMENT"}
+            for value in payload_modes.get("ConditionGate", ())
+        ):
+            raise ValueError("unsafe payload ConditionGate mode")
+        if set(condition_modes) != {"ConditionGate", "StateModulation"}:
+            raise ValueError("V2.1 condition modes are incomplete")
+        if any(
+            value is not None and value not in CONDITION_GATE_MODES
+            for value in condition_modes["ConditionGate"]
+        ) or any(
+            value is not None and value not in STATE_MODULATION_MODES
+            for value in condition_modes["StateModulation"]
+        ):
+            raise ValueError("unsafe V2.1 condition mode")
     mapping = dict(payload["mapping_derivation"])
     expected_mapping_classes = {
         CROSS_SECTIONAL_RELATIVE,
@@ -407,44 +467,56 @@ def compile_mechanism_catalog(payload: Mapping[str, Any]) -> tuple[MechanismSpec
             mapping["DIRECTIONAL_TEMPLATE"] if directional else mapping["default"]
         )
         for payload_operator in operator_sets[operator_set]:
-            parent = MechanismSpec.build(
-                template_id=template_id,
-                generation=1,
-                hypothesis=hypothesis,
-                left_role=left_role,
-                right_role=right_role,
-                payload_operator=payload_operator,
-                condition_role=None,
-                condition_operator=None,
-                mapping_class=binary_mapping,
-                matched_control_schema="DUAL_AXIS_A_B_AB",
-            )
-            output.append(parent)
-            for condition_role in template.get("condition_roles", ()):
-                for condition_operator in condition_operators:
-                    mapping_class = str(
-                        mapping[condition_operator]
-                        if condition_operator == "ConditionGate"
-                        else binary_mapping
-                    )
-                    output.append(
-                        MechanismSpec.build(
-                            template_id=template_id,
-                            generation=2,
-                            hypothesis=(
-                                f"{hypothesis} The {condition_role} state controls "
-                                "whether or how strongly the payload is expressed."
-                            ),
-                            left_role=left_role,
-                            right_role=right_role,
-                            payload_operator=payload_operator,
-                            condition_role=str(condition_role),
-                            condition_operator=condition_operator,
-                            mapping_class=mapping_class,
-                            matched_control_schema="HIERARCHICAL_A_B_AB_ABC",
-                            parent_mechanism_ids=(parent.mechanism_id,),
+            operator_payload_modes = payload_modes.get(payload_operator, (None,))
+            for payload_mode in operator_payload_modes:
+                parent = MechanismSpec.build(
+                    template_id=template_id,
+                    generation=1,
+                    hypothesis=hypothesis,
+                    left_role=left_role,
+                    right_role=right_role,
+                    payload_operator=payload_operator,
+                    payload_mode=payload_mode,
+                    condition_role=None,
+                    condition_operator=None,
+                    condition_mode=None,
+                    mapping_class=binary_mapping,
+                    matched_control_schema="DUAL_AXIS_A_B_AB",
+                )
+                output.append(parent)
+                for condition_role in template.get("condition_roles", ()):
+                    for condition_operator in condition_operators:
+                        mapping_class = str(
+                            mapping[condition_operator]
+                            if condition_operator == "ConditionGate"
+                            else binary_mapping
                         )
-                    )
+                        for condition_mode in condition_modes.get(
+                            condition_operator, (None,)
+                        ):
+                            output.append(
+                                MechanismSpec.build(
+                                    template_id=template_id,
+                                    generation=2,
+                                    hypothesis=(
+                                        f"{hypothesis} The {condition_role} state "
+                                        "controls whether or how strongly the payload "
+                                        "is expressed."
+                                    ),
+                                    left_role=left_role,
+                                    right_role=right_role,
+                                    payload_operator=payload_operator,
+                                    payload_mode=payload_mode,
+                                    condition_role=str(condition_role),
+                                    condition_operator=condition_operator,
+                                    condition_mode=condition_mode,
+                                    mapping_class=mapping_class,
+                                    matched_control_schema=(
+                                        "HIERARCHICAL_A_B_AB_ABC"
+                                    ),
+                                    parent_mechanism_ids=(parent.mechanism_id,),
+                                )
+                            )
     ids = [item.mechanism_id for item in output]
     if len(ids) != len(set(ids)):
         raise ValueError("typed mechanism catalog contains semantic duplicates")
@@ -1186,11 +1258,11 @@ def mechanism_candidate_from_genes(
         window=int(genes["right_window"]),
         normalizer=str(genes["right_normalizer"]),
     )
-    payload_parameters = (
-        {"beta": float(genes["beta"])}
-        if spec.payload_operator == "Residual"
-        else {}
-    )
+    payload_parameters: dict[str, float | str] = {}
+    if spec.payload_operator == "Residual":
+        payload_parameters["beta"] = float(genes["beta"])
+    if spec.payload_mode:
+        payload_parameters["mode"] = spec.payload_mode
     payload_expression = Expression(
         spec.payload_operator,
         (left, right),
@@ -1207,11 +1279,18 @@ def mechanism_candidate_from_genes(
         expression = Expression(
             str(spec.condition_operator),
             (payload_expression, condition),
-            parameters=(
-                {"threshold": 0.0}
-                if spec.condition_operator == "ConditionGate"
-                else {}
-            ),
+            parameters={
+                **(
+                    {"threshold": 0.0}
+                    if spec.condition_operator == "ConditionGate"
+                    else {}
+                ),
+                **(
+                    {"mode": spec.condition_mode}
+                    if spec.condition_mode
+                    else {}
+                ),
+            },
         )
         mechanism_family = f"CONDITIONAL_V2_{spec.template_id}"
     else:

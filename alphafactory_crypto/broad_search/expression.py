@@ -71,6 +71,25 @@ BINARY_OPERATORS = frozenset(
 
 CONTROL_OPERATORS = frozenset({"SupportMatchedPayload"})
 
+CONDITION_GATE_MODES = frozenset(
+    {
+        "POSITIVE",
+        "NEGATIVE",
+        "SIGN_CONFIRMATION",
+        "SIGN_DISAGREEMENT",
+    }
+)
+
+STATE_MODULATION_MODES = frozenset(
+    {
+        "SIGNED_LINEAR",
+        "ABSOLUTE_MAGNITUDE",
+        "POSITIVE_MAGNITUDE",
+        "NEGATIVE_MAGNITUDE",
+        "SIGN_ROUTING",
+    }
+)
+
 
 @dataclass(frozen=True, slots=True)
 class FieldContract:
@@ -140,7 +159,9 @@ class TypedExpressionRegistry:
     MAX_RAW_INPUTS = 4
     MAX_ROLLING_WINDOWS = 3
     MAX_CROSS_ASSET_NORMALIZATIONS = 1
-    MAX_REGIME_GATES = 1
+    # One AB confirmation/disagreement gate may be nested under one frozen
+    # third-axis regime operator without changing the existing AST shape.
+    MAX_REGIME_GATES = 2
 
     def __init__(self, fields: Sequence[FieldContract]) -> None:
         self.fields = {item.field_id: item for item in fields}
@@ -267,6 +288,9 @@ class TypedExpressionRegistry:
         elif expression.operator == "ConditionGate":
             if right.value_type not in {"STATE", "EVENT", "RATIO", "UNIT_INTERVAL"}:
                 raise ValueError("ConditionGate requires state-like second input")
+            mode = str(expression.parameters.get("mode", "POSITIVE"))
+            if mode not in CONDITION_GATE_MODES:
+                raise ValueError("ConditionGate mode is outside the frozen grammar")
             output_type, output_unit = left.value_type, left.unit
             gates += 1
         elif expression.operator == "StateModulation":
@@ -274,6 +298,9 @@ class TypedExpressionRegistry:
                 raise ValueError("StateModulation payload must be normalized")
             if right.value_type not in {"STATE", "EVENT", "RATIO", "UNIT_INTERVAL", "AGE"}:
                 raise ValueError("StateModulation requires state-like second input")
+            mode = str(expression.parameters.get("mode", "SIGNED_LINEAR"))
+            if mode not in STATE_MODULATION_MODES:
+                raise ValueError("StateModulation mode is outside the frozen grammar")
             output_type, output_unit = left.value_type, left.unit
             gates += 1
         elif expression.operator == "RatioInteraction":
@@ -465,7 +492,7 @@ def materialize_expression(
                 result = left + right
             elif node.operator in {"SafeSub", "ShortMinusLong"}:
                 result = left - right
-            elif node.operator in {"SafeMul", "RatioInteraction", "StateModulation"}:
+            elif node.operator in {"SafeMul", "RatioInteraction"}:
                 result = left * right
             elif node.operator in {"SafeDiv", "FlowPerTrade", "FlowPerNotional", "PriceImpactRatio"}:
                 denominator = np.where(
@@ -485,12 +512,38 @@ def materialize_expression(
                 result = left - beta * right
             elif node.operator == "ConditionGate":
                 threshold = float(node.parameters.get("threshold", 0.0))
+                mode = str(node.parameters.get("mode", "POSITIVE"))
                 finite_support = np.isfinite(left) & np.isfinite(right)
+                if mode == "POSITIVE":
+                    active = right > threshold
+                elif mode == "NEGATIVE":
+                    active = right < threshold
+                elif mode == "SIGN_CONFIRMATION":
+                    active = left * right > 0.0
+                elif mode == "SIGN_DISAGREEMENT":
+                    active = left * right < 0.0
+                else:  # pragma: no cover - validator owns this branch
+                    raise ValueError(mode)
                 result = np.where(
                     finite_support,
-                    np.where(right > threshold, left, 0.0),
+                    np.where(active, left, 0.0),
                     np.nan,
                 )
+            elif node.operator == "StateModulation":
+                mode = str(node.parameters.get("mode", "SIGNED_LINEAR"))
+                if mode == "SIGNED_LINEAR":
+                    multiplier = right
+                elif mode == "ABSOLUTE_MAGNITUDE":
+                    multiplier = np.abs(right)
+                elif mode == "POSITIVE_MAGNITUDE":
+                    multiplier = np.maximum(right, 0.0)
+                elif mode == "NEGATIVE_MAGNITUDE":
+                    multiplier = np.maximum(-right, 0.0)
+                elif mode == "SIGN_ROUTING":
+                    multiplier = np.where(right >= 0.0, 1.0, -1.0)
+                else:  # pragma: no cover - validator owns this branch
+                    raise ValueError(mode)
+                result = left * multiplier
             elif node.operator == "CrossAssetRelative":
                 result = left - _cross_sectional_robust_zscore(right, epsilon)
             elif node.operator == "SupportMatchedPayload":
@@ -528,8 +581,10 @@ def ablate_expression(expression: Expression) -> Expression:
 
 __all__ = [
     "BINARY_OPERATORS",
+    "CONDITION_GATE_MODES",
     "CONTROL_OPERATORS",
     "NORMALIZERS",
+    "STATE_MODULATION_MODES",
     "VALUE_TYPES",
     "Expression",
     "ExpressionAssurance",
