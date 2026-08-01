@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2 mechanism grammar authorized; 12k run pending; development only)",
+                      "label":  "Search Engine conditional-development campaigns (V2 mechanism grammar: 12k train complete, validation blocked; development only)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -486,6 +486,10 @@
                                     "runtime/crypto_search_economic_v6_20260801/run_manifest.json",
                                     "runtime/crypto_search_economic_v6_20260801/final_decision.json",
                                     "reports/CRYPTO_SEARCH_ECONOMIC_V6_20260801.md"
+                                    ,"runtime/crypto_search_mechanism_v2_20260801/run_manifest.json"
+                                    ,"runtime/crypto_search_mechanism_v2_20260801/final_decision.json"
+                                    ,"runtime/crypto_search_mechanism_v2_20260801/validation_failure.json"
+                                    ,"reports/CRYPTO_SEARCH_MECHANISM_V2_20260801.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -493,18 +497,18 @@
                       "authority":  {
                                         "path":  "config/crypto_search_mechanism_v2_receipt.json",
                                         "repo_ref":  "experiment/crypto-search-engine-v2-mechanism-grammar-20260801",
-                                        "verified_sha":  "fbc396aef80c1d1749479e2b3eb0ade923585968",
-                                        "sha256":  "A3F50301B6E261D87EBAD58968CC570F8F6031A542E048AC339C9813C1CECE69"
+                                        "verified_sha":  "c46adeacaff394174bfd49fcaf629cb8ab9bf468",
+                                        "sha256":  "8C9D7055202776FB334000BAC485E25CD123B637CF3A683258249B1EC7602254"
                                     },
                       "contracts":  [
                                         {
-                                            "id":  "crypto_search_mechanism_v2_authorization",
+                                            "id":  "crypto_search_mechanism_v2_consumed_outcome",
                                             "type":  "AUTHORITY",
-                                            "rule":  "ADR 0017 and the content-hashed V2 receipt authorize exactly one fresh-state 12,000-strict-candidate development campaign on the existing 71 OI/mark plus 44 aggTrades aligned carrier. The engine compiles 12 declarative templates into 184 typed mechanism specs through the existing AST, registry, CandidateSpec, compiler, matched controls, evaluator, Binance target, and frozen 5 bps cost. Checkpoint 0 is a 2,000-candidate fixed-Skeleton typed-random baseline; checkpoints 1-2 contain 4,000 expanded-mechanism random candidates; checkpoints 3-5 contain 3,000 mechanism CEM and 3,000 mechanism Evolution candidates. There is no pre-adaptive positivity gate; final development validation is per arm after checkpoint 5. Adaptive memory is arm-local and campaign-local. No prior state, holdout/OOS, challenge, recent, May stress, forward, promotion, tuning, reseed, rescue, or second campaign is authorized.",
+                                            "rule":  "The one-run V2 mechanism receipt is consumed and run_authorized is false. Producer ef688d89ca0e89654015bf5f76a6b9c26494d837 retained exactly 12,000 strict train candidates from 20,386 attempts across six restore-verified 2,000-candidate checkpoints, compiled 184 legal mechanism specs, and produced 11,738 behavior families. Final validation stopped before equal-count arm aggregation because binary and hierarchical candidates legally exposed different control schemas while the producer required identical control names. The consumed outcome is ENGINE_VALIDATION_BLOCKED; no arm qualifies and no Alpha, carrier-information, OOS, promotion, or next-Arena claim is created. Closure 8a526e8683874e3bdbcfd54e49adfbd0c1f290ff repaired future heterogeneous-control aggregation without re-evaluating this campaign; later source added reward-authority-aligned productivity metrics without rewriting producer artifacts. No prior state, tuning, reseed, rescue, validation rerun, holdout/OOS, challenge, recent, May stress, forward, promotion, or second campaign is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2/check-mechanism-v2, and ADR 0017",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_mechanism_v2_receipt.json"
+                                            "evidence_ref":  "runtime/crypto_search_mechanism_v2_20260801/final_decision.json"
                                         },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
@@ -725,9 +729,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "reports/CRYPTO_SEARCH_ENGINE_V2_SOURCE_GAP_REPORT_20260801.md",
-                                         "evidence_sha256":  "AE0834611A6727214C92E356B66BE0433D1075B19E05E4342223949E16C297E5",
-                                         "verified_at_sha":  "fbc396aef80c1d1749479e2b3eb0ade923585968"
+                                         "evidence_ref":  "runtime/crypto_search_mechanism_v2_20260801/final_decision.json",
+                                         "evidence_sha256":  "FF3B06F93940EF53909358F615B58DCBB2F0F711B08A9D188B9182D171630F79",
+                                         "verified_at_sha":  "c46adeacaff394174bfd49fcaf629cb8ab9bf468"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -810,9 +814,12 @@
                                             "NO MARKET REPLAY FOR SOURCE REPAIR",
                                             "NO RESCUE RERUN",
                                            "NO ARM QUALIFIED"
-                                           ,"V2 MECHANISM GRAMMAR AUTHORIZED"
-                                           ,"V2 12K RUN PENDING"
-                                           ,"V2 NO PRE-ADAPTIVE POSITIVITY GATE"
+                                           ,"V2 MECHANISM GRAMMAR AUTHORIZATION CONSUMED"
+                                           ,"V2 MECHANISM 12K TRAIN COMPLETE"
+                                           ,"V2 MECHANISM SIX CHECKPOINTS RESTORE VERIFIED"
+                                           ,"V2 MECHANISM VALIDATION AGGREGATION BLOCKED"
+                                           ,"V2 MECHANISM NO RESCUE RERUN"
+                                           ,"V2 MECHANISM FUTURE ARENA ARMS NONE"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
@@ -2108,11 +2115,11 @@
                       "contract":  {
                                        "id":  "future_new_data_policy_admission",
                                        "type":  "ADMISSION",
-                                       "rule":  "No arm or archive from the real policy-upgrade canary or any Search Engine campaign is admitted to a future Arena; V1.1 rejected both behavior-niched increments, and any future requalification requires separate authorization, an admitted new carrier, fresh state, a frozen budget, and matched typed-random control",
+                                       "rule":  "No arm or archive from the real policy-upgrade canary or any Search Engine campaign is admitted to a future Arena. V2 mechanism grammar completed 12,000 train candidates but its equal-count validation aggregation was blocked, so its train reward gradient grants no qualification. Any future requalification requires separate authorization, an admitted data role, fresh state, a frozen budget, matched typed-random control, and a completed validation gate.",
                                        "severity":  "HARD",
                                        "enforced_by":  "ADR 0008, data_adequacy_gate, and future Arena contract",
                                        "bypass_forbidden":  true,
-                                       "evidence_ref":  "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md"
+                                       "evidence_ref":  "runtime/crypto_search_mechanism_v2_20260801/final_decision.json"
                                    },
                       "validation":  {
                                          "level":  "STATIC_VERIFIED",
