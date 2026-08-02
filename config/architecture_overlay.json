@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.2 Evolution qualification: 8k train gate pass, validation control gate negative; development only)",
+                      "label":  "Search Engine conditional-development campaigns (V2.3: 16k train plus 1,024 four-cohort attribution, full-policy gate negative; development only)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -500,15 +500,22 @@
                                     ,"runtime/crypto_search_mechanism_v2_2_20260802/final_decision.json"
                                     ,"runtime/crypto_search_mechanism_v2_2_20260802/official_checker_result.json"
                                     ,"reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md"
+                                    ,"config/crypto_search_mechanism_v2_3_receipt.json"
+                                    ,"config/crypto_search_engine_v2_3_policy_attribution.json"
+                                    ,"docs/adr/0020-evolution-policy-attribution-v2-3.md"
+                                    ,"runtime/crypto_search_mechanism_v2_3_20260802/run_manifest.json"
+                                    ,"runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json"
+                                    ,"runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json"
+                                    ,"reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_mechanism_v2_2_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-engine-v2-2-evolution-qualification-20260802",
-                                        "verified_sha":  "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722",
-                                        "sha256":  "EC3CFF1841C0F05D65BE8E69BA748A187111F92C7692D78DA33BF69BC546401D"
+                                        "path":  "config/crypto_search_mechanism_v2_3_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-engine-v2-3-policy-attribution-20260802",
+                                        "verified_sha":  "5e1ec9a65cc024a0a010eea99d01aaae2d13159b",
+                                        "sha256":  "4A7536C1E4963D93A2BD6DCB4F392A6B46A970BF1755E00A7CB1D2DB08C532E7"
                                     },
                       "contracts":  [
                                         {
@@ -537,6 +544,15 @@
                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2-2/check-mechanism-v2-2, and ADR 0019",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_mechanism_v2_2_20260802/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_mechanism_v2_3_consumed_outcome",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "The one-run V2.3 receipt is consumed and run_authorized is false. Producer 06512e01876345d9921d56405d8254a82933a9b7 retained exactly 16,000 strict, exact-unique, matched-control-valid, full-cost train candidates from 23,869 attempts across eight restore-verified 2,000-candidate checkpoints on the unchanged 115-field carrier and 786-mechanism catalog. Frozen validation evaluated exactly 1,024 candidates across four disjoint 256-candidate cohorts, both preregistered fresh seeds, and the 1h/4h horizons. Proposal distribution, train ranker, and total policy all failed the replicated all-cell gate; the conditional 4,000-candidate continuation was not allocated and no arm qualifies. Independent PC2 and local checkers pass with artifact bundle SHA256 A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5. No prior state, tuning, reseed, rescue, holdout/OOS, challenge, recent, May stress, forward, promotion, next Arena, or second campaign is authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2-3/check-mechanism-v2-3, and ADR 0020",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json"
                                         },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
@@ -757,97 +773,17 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "runtime/crypto_search_mechanism_v2_2_20260802/official_checker_result.json",
-                                          "evidence_sha256":  "D3149E000AADE81C69B718AA0F99EE2B0CCFB76586FAA205E29482B2F41892D4",
-                                          "verified_at_sha":  "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722"
+                                          "evidence_ref":  "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
+                                          "evidence_sha256":  "1F96839CDCFC867505FFEFC311FA13052BC3775D89B6F893553CA77951947400",
+                                          "verified_at_sha":  "5e1ec9a65cc024a0a010eea99d01aaae2d13159b"
                                      },
                       "claim_badges":  [
-                                           "V2.2 8K TRAIN GATE PASS",
-                                           "V2.2 FOUR CHECKPOINTS RESTORE VERIFIED",
-                                           "V2.2 VALIDATION CONTROL FAILED",
-                                           "EVOLUTION VALIDATION ECONOMICS POSITIVE",
-                                           "V2.2 STAGE C NOT RUN",
-                                           "V2.2 FUTURE ARENA ARMS NONE",
-                                           "PROCESS CPU CONTRACT FROZEN",
-                                           "RESTORE BEFORE ATOMIC RENAME",
-                                           "PIT LEDGER PROVISIONAL HOLD",
-                                           "SCHEMA2 INTERSECTION NOT SEARCH CACHE",
-                                           "ACTUAL SYMBOL-DATE GAPS PERSISTED",
-                                           "2K FRESH-STATE SYSTEM CANARY PASS",
-                                           "CEM UNIT-COMPUTE DENSITY INCREMENT",
-                                           "EVOLUTION REPAIR VERIFIED DISCOVERY HOLD",
-                                           "ARCHIVE CHAMPION REPLACEMENT VERIFIED",
-                                           "FIXED COHORT RESEARCH HOLD",
-                                           "3K V1.1 SYSTEM ARENA PASS",
-                                           "V2.1 SEARCH INCREMENTS REJECTED",
-                                           "2K V1.2 BALANCED ARENA PASS",
-                                           "CAMPAIGN-LOCAL COLLISION MEMORY VERIFIED",
-                                           "V2.2 SEARCH INCREMENT REJECTED",
-                                           "235 RUNTIME-ACTIVE SEARCH FIELDS",
-                                           "25 DECLARED FIELD HOLDS",
-                                           "CONTEXT-BOUND CARRIERS",
-                                           "NO ALPHA-SPACE CONCLUSION",
-                                           "FUTURE ARENA ARMS NONE",
-                                           "NO OOS OR PROMOTION",
-                                           "4K V1.3 CROSS-SOURCE ARENA PASS",
-                                           "DUAL-AXIS LEDGER TRACE VERIFIED",
-                                           "V1.3 FUTURE ARENA ARMS NONE",
-                                           "V1.4 OI-FLOW ALIGNED CARRIER PASS",
-                                           "HIERARCHICAL A-B-AB-ABC EXECUTION VERIFIED",
-                                           "1.2K V1.4 SEMANTIC GATE HOLD",
-                                           "V1.4 ADAPTIVE STAGE NOT RUN",
-                                           "V1.4 FUTURE ARENA ARMS NONE",
-                                           "V1.4 LEDGER FAILURE DECOMPOSITION PASS",
-                                           "V1.4 FULL WATERFALL PERSISTED",
-                                           "V1.4 TARGET EXECUTION REPAIR DIAGNOSTIC",
-                                           "V1.4 BINANCE TARGET EXACT REPLAY PASS",
-                                           "GROSS PERSISTENCE DIAGNOSTIC PASS",
-                                           "95.16% GROSS POSITIVES COST-KILLED",
-                                           "V1-V4 ECONOMIC RECEIPTS CONSUMED",
-                                           "V5 AUTHORIZATION CONSUMED",
-                                           "V5 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
-                                           "V5 EQUAL-COUNT VALIDATION COMPLETE",
-                                           "V5 RANDOM CONTROL KILL-LINE FAILED",
-                                           "V5 REMAINING 18K NOT ALLOCATED",
-                                           "V5 FUTURE ARENA ARMS NONE",
-                                           "V5 PRIOR-STATE IMPORT FORBIDDEN",
-                                           "V6 AUTHORIZATION CONSUMED",
-                                           "V6 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
-                                           "V6 FOUR-SEED BALANCE VERIFIED",
-                                           "V6 EQUAL-COUNT VALIDATION COMPLETE",
-                                           "V6 RANDOM CONTROL KILL-LINE FAILED",
-                                           "V6 REMAINING 18K NOT ALLOCATED",
-                                           "V6 FUTURE ARENA ARMS NONE",
-                                           "V6 THIRD SEED CAMPAIGN FORBIDDEN",
-                                           "ENGINEERING SEARCH CHAIN RETAINED",
-                                           "PAIR REWARD DIAGNOSTIC ONLY",
-                                           "CONDITIONAL 5 BPS INTERPRETATION",
-                                            "1,190 STRICT PARTIAL RUN BUDGET EXHAUSTED",
-                                            "EMERGENCY CHECKPOINT RESTORE VERIFIED",
-                                            "V1 CONTROL PARTIAL-CARRIER ROLE PATH REPAIRED",
-                                            "V2 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
-                                            "V2 VALIDATION CONSTRUCTIBILITY BLOCKED",
-                                            "V2 AUTHORIZATION CONSUMED",
-                                            "V3 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
-                                            "V3 VALIDATION BLOCKED CHECKPOINT VERIFIED",
-                                            "V3 AUTHORIZATION CONSUMED",
-                                            "V4 SUPPORT SEMANTICS REPAIRED",
-                                            "V4 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
-                                            "V4 VALIDATION BLOCKED CHECKPOINT VERIFIED",
-                                            "V4 AUTHORIZATION CONSUMED",
-                                            "V4 ARM-LOCAL VALIDATION FAILURE SOURCE REPAIRED",
-                                            "FROZEN TRAIN-RANK BACKFILL VERIFIED",
-                                            "RANDOM CONTROL FAILURE BLOCKS ARM QUALIFICATION",
-                                            "RANDOM CONTROL KILL-LINE CLEAN TERMINAL VERIFIED",
-                                            "NO MARKET REPLAY FOR SOURCE REPAIR",
-                                            "NO RESCUE RERUN",
-                                           "NO ARM QUALIFIED"
-                                           ,"V2 MECHANISM GRAMMAR AUTHORIZATION CONSUMED"
-                                           ,"V2 MECHANISM 12K TRAIN COMPLETE"
-                                           ,"V2 MECHANISM SIX CHECKPOINTS RESTORE VERIFIED"
-                                           ,"V2 MECHANISM VALIDATION AGGREGATION BLOCKED"
-                                           ,"V2 MECHANISM NO RESCUE RERUN"
-                                           ,"V2 MECHANISM FUTURE ARENA ARMS NONE"
+                                           "V2.3 16K TRAIN COMPLETE",
+                                           "V2.3 1,024 FOUR-COHORT VALIDATION COMPLETE",
+                                           "PROPOSAL DISTRIBUTION NOT QUALIFIED",
+                                           "TRAIN RANKER NOT QUALIFIED",
+                                           "TOTAL POLICY NOT QUALIFIED",
+                                           "NO CONTINUATION OOS OR PROMOTION"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",

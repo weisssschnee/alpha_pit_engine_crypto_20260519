@@ -17,10 +17,15 @@
           "alphafactory_crypto/broad_search/experiment_authority.py",
           "alphafactory_crypto/broad_search/search_engine_v1.py",
           "config/crypto_search_engine_v2_2_evolution_qualification.json",
+          "config/crypto_search_engine_v2_3_policy_attribution.json",
           "config/crypto_search_mechanism_v2_2_receipt.json",
+          "config/crypto_search_mechanism_v2_3_receipt.json",
           "docs/adr/0019-fresh-state-evolution-qualification-v2-2.md",
+          "docs/adr/0020-evolution-policy-attribution-v2-3.md",
           "reports/CRYPTO_SEARCH_ENGINE_V2_2_SOURCE_GAP_REPORT_20260802.md",
+          "reports/CRYPTO_SEARCH_ENGINE_V2_3_SOURCE_GAP_REPORT_20260802.md",
           "reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md",
+          "reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md",
           "runtime/crypto_search_mechanism_v2_2_20260802/arm_checkpoint_metrics.parquet",
           "runtime/crypto_search_mechanism_v2_2_20260802/behavior_archive.parquet",
           "runtime/crypto_search_mechanism_v2_2_20260802/behavior_family_summary.json",
@@ -67,10 +72,76 @@
           "runtime/crypto_search_mechanism_v2_2_20260802/validation_arm_metrics.parquet",
           "runtime/crypto_search_mechanism_v2_2_20260802/validation_candidate_ledger.parquet",
           "runtime/crypto_search_mechanism_v2_2_20260802/validation_decisions.json",
-          "tests/test_crypto_search_engine_v2_2_evolution_qualification.py"
+          "runtime/crypto_search_mechanism_v2_3_20260802/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/behavior_family_summary.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/behavior_archive.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/state.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_arm_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_cohort_paths.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_decisions.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/embedded_preflight.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/frozen_contract.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/mechanism_knowledge.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/mechanism_knowledge_summary.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/producer_status.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/run_manifest.json",
+          "runtime/crypto_search_mechanism_v2_3_20260802/validation_arm_metrics.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/validation_candidate_ledger.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/validation_cohort_paths.parquet",
+          "runtime/crypto_search_mechanism_v2_3_20260802/validation_decisions.json",
+          "tests/test_crypto_search_engine_v2_2_evolution_qualification.py",
+          "tests/test_crypto_search_engine_v2_3_policy_attribution.py"
         ],
         "raw_sha": "ee6151288a7172a19bfa58890b3eb48eee01bd70",
-        "repo_head": "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722"
+        "repo_head": "5e1ec9a65cc024a0a010eea99d01aaae2d13159b"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1152,7 +1223,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-02T11:54:28.921848+00:00",
+  "generated_at": "2026-08-02T23:25:28.622485+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3078,10 +3149,10 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "config/crypto_search_mechanism_v2_2_receipt.json",
-        "repo_ref": "experiment/crypto-search-engine-v2-2-evolution-qualification-20260802",
-        "sha256": "EC3CFF1841C0F05D65BE8E69BA748A187111F92C7692D78DA33BF69BC546401D",
-        "verified_sha": "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722"
+        "path": "config/crypto_search_mechanism_v2_3_receipt.json",
+        "repo_ref": "experiment/crypto-search-engine-v2-3-policy-attribution-20260802",
+        "sha256": "4A7536C1E4963D93A2BD6DCB4F392A6B46A970BF1755E00A7CB1D2DB08C532E7",
+        "verified_sha": "5e1ec9a65cc024a0a010eea99d01aaae2d13159b"
       },
       "authority_bindings": [
         {
@@ -3106,12 +3177,12 @@
         }
       ],
       "claim_badges": [
-        "V2.2 8K TRAIN GATE PASS",
-        "V2.2 FOUR CHECKPOINTS RESTORE VERIFIED",
-        "V2.2 VALIDATION CONTROL FAILED",
-        "EVOLUTION VALIDATION ECONOMICS POSITIVE",
-        "V2.2 STAGE C NOT RUN",
-        "V2.2 FUTURE ARENA ARMS NONE"
+        "V2.3 16K TRAIN COMPLETE",
+        "V2.3 1,024 FOUR-COHORT VALIDATION COMPLETE",
+        "PROPOSAL DISTRIBUTION NOT QUALIFIED",
+        "TRAIN RANKER NOT QUALIFIED",
+        "TOTAL POLICY NOT QUALIFIED",
+        "NO CONTINUATION OOS OR PROMOTION"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -3139,6 +3210,15 @@
           "evidence_ref": "runtime/crypto_search_mechanism_v2_2_20260802/final_decision.json",
           "id": "crypto_search_mechanism_v2_2_consumed_outcome",
           "rule": "The one-run V2.2 receipt is consumed and run_authorized is false. Producer e84b35c76a4cfc139f1c351286489b83fce61250 retained exactly 8,000 strict train candidates from 12,240 attempts across four restore-verified 2,000-candidate checkpoints, compiled 786 legal mechanisms, and produced 7,774 behavior families. The train gate passed with Evolution improving positive rate and equal-count reward ordering over expanded random. Frozen validation then completed 128 matched evaluations per arm with 64 at each 1h and 4h horizon: Evolution had positive worst-horizon net mean, Sortino, and matched increment, but the mandatory random control failed its economic survival kill-line, so both arms exited, no arm qualified, and conditional Stage C did not run. Five candidate-local validation failures were persisted and deterministically backfilled without optimizer, policy, or archive feedback. No prior state, tuning, reseed, rescue, holdout/OOS, challenge, recent, May stress, forward, promotion, next Arena, or second campaign is authorized.",
+          "severity": "HARD",
+          "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2-3/check-mechanism-v2-3, and ADR 0020",
+          "evidence_ref": "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json",
+          "id": "crypto_search_mechanism_v2_3_consumed_outcome",
+          "rule": "The one-run V2.3 receipt is consumed and run_authorized is false. Producer 06512e01876345d9921d56405d8254a82933a9b7 retained exactly 16,000 strict, exact-unique, matched-control-valid, full-cost train candidates from 23,869 attempts across eight restore-verified 2,000-candidate checkpoints on the unchanged 115-field carrier and 786-mechanism catalog. Frozen validation evaluated exactly 1,024 candidates across four disjoint 256-candidate cohorts, both preregistered fresh seeds, and the 1h/4h horizons. Proposal distribution, train ranker, and total policy all failed the replicated all-cell gate; the conditional 4,000-candidate continuation was not allocated and no arm qualifies. Independent PC2 and local checkers pass with artifact bundle SHA256 A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5. No prior state, tuning, reseed, rescue, holdout/OOS, challenge, recent, May stress, forward, promotion, next Arena, or second campaign is authorized.",
           "severity": "HARD",
           "type": "AUTHORITY"
         },
@@ -3364,7 +3444,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (V2.2 Evolution qualification: 8k train gate pass, validation control gate negative; development only)",
+      "label": "Search Engine conditional-development campaigns (V2.3: 16k train plus 1,024 four-cohort attribution, full-policy gate negative; development only)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3468,7 +3548,14 @@
         "runtime/crypto_search_mechanism_v2_2_20260802/run_manifest.json",
         "runtime/crypto_search_mechanism_v2_2_20260802/final_decision.json",
         "runtime/crypto_search_mechanism_v2_2_20260802/official_checker_result.json",
-        "reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md"
+        "reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md",
+        "config/crypto_search_mechanism_v2_3_receipt.json",
+        "config/crypto_search_engine_v2_3_policy_attribution.json",
+        "docs/adr/0020-evolution-policy-attribution-v2-3.md",
+        "runtime/crypto_search_mechanism_v2_3_20260802/run_manifest.json",
+        "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json",
+        "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
+        "reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -5246,14 +5333,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-02T11:54:28.921848+00:00",
-        "evidence_ref": "runtime/crypto_search_mechanism_v2_2_20260802/official_checker_result.json",
-        "evidence_sha256": "D3149E000AADE81C69B718AA0F99EE2B0CCFB76586FAA205E29482B2F41892D4",
+        "checked_at": "2026-08-02T23:25:28.622485+00:00",
+        "evidence_ref": "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
+        "evidence_sha256": "1F96839CDCFC867505FFEFC311FA13052BC3775D89B6F893553CA77951947400",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722"
+        "verified_at_sha": "5e1ec9a65cc024a0a010eea99d01aaae2d13159b"
       },
       "visible_by_default": true
     },
@@ -8107,7 +8194,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "F70F3723994980A4605C047089970702A41595136C4CB4DD0E62798270AD567B"
+    "sha256": "495B454103C01213D9E434C746031D148E012446EFD8C840EB4FE3801C2D19BE"
   },
   "profile_id": null,
   "profiles": [
@@ -8144,7 +8231,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "C17F26934B40B717D0C8A45329A114AC42B32EE8AED49AE7435804C0559A3926"
   },
-  "repo_head": "d3ca569605a63d6c4d92ba1bfcaa0fcf71fad722",
+  "repo_head": "5e1ec9a65cc024a0a010eea99d01aaae2d13159b",
   "schema_version": 1,
   "semantic_authorities": [
     {
