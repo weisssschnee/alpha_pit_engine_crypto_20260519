@@ -226,7 +226,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "067B4405B5AA490078E680E53F2F6DB2ED3FD4BDB03C919EC79A38BCE9AC248B"
+      "sha256": "640436C43AC6BD697542FE7EB5DDF7492CFE0F1D9E68A7AE5FD08BCBACEDDF54"
     },
     "expanded_mechanism_catalog": {
       "path": "config/crypto_typed_mechanism_catalog_v2_1.json",

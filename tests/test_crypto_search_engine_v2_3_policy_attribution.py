@@ -89,6 +89,44 @@ def test_v23_receipt_makes_random_comparator_only() -> None:
     assert receipt["formal_claims_authorized"] is False
 
 
+def test_v23_search_surface_accepts_its_frozen_seed_derivation() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_mechanism_v2_3_receipt.json",
+    )
+    train = receipt["evidence_partition"]["train"]
+    identities = {
+        "raw_cache": {
+            "identity_sha256": receipt["search_campaign"][
+                "carrier_cache_identity_sha256"
+            ]
+        },
+        "aligned_carrier_manifest": {
+            "path": receipt["search_campaign"]["carrier_manifest"]
+        },
+        "behavior_contract_window": {
+            "start": train["start"],
+            "end_exclusive": train["end_exclusive"],
+            "validation_read": False,
+            "holdout_read": False,
+        },
+    }
+    assert search_engine._validate_economic_search_surface(
+        receipt=receipt,
+        identities=identities,
+        contracts=tuple(range(115)),
+        expected_campaign=MECHANISM_SEARCH_V23_CAMPAIGN,
+        expected_seeds=MECHANISM_SEARCH_V23_SEEDS,
+        expected_strict_target=search_engine.MECHANISM_SEARCH_V23_STRICT_TARGET,
+        expected_checkpoint_size=(
+            search_engine.MECHANISM_SEARCH_V23_CHECKPOINT_SIZE
+        ),
+        expected_checkpoint_count=(
+            search_engine.MECHANISM_SEARCH_V23_CHECKPOINT_COUNT
+        ),
+    ) == "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED"
+
+
 def test_v23_stratified_selection_is_reward_blind_deterministic_and_disjoint() -> None:
     rows = [
         {

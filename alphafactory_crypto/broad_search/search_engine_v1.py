@@ -11241,9 +11241,12 @@ def _validate_economic_search_surface(
         checks["campaign_seed_set"] = tuple(
             int(value) for value in campaign.get("seed_set") or ()
         ) == tuple(int(value) for value in expected_seeds)
+        expected_seed_derivation = _economic_campaign_config(
+            expected_campaign
+        ).get("seed_derivation")
         checks["campaign_seed_derivation"] = (
             campaign.get("seed_derivation")
-            == ECONOMIC_SEARCH_V6_SEED_DERIVATION
+            == expected_seed_derivation
         )
     failed = sorted(key for key, value in checks.items() if not value)
     if failed:
