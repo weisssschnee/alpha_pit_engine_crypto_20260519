@@ -1,0 +1,389 @@
+{
+  "active_wall_seconds": 22906.13521050004,
+  "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+  "artifacts": [
+    {
+      "bytes": 1237,
+      "path": "reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md",
+      "sha256": "2C5AB9C28A9029CE9623EC363C5CFB9A12C7B60684912DB1BE9101D616A32821"
+    },
+    {
+      "bytes": 51602,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/arm_checkpoint_metrics.parquet",
+      "sha256": "C416AE32723DC1DA1FC3515ACF25CA71617384A1B4DA354078C9559B4B1A4091"
+    },
+    {
+      "bytes": 14051881,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/behavior_archive.parquet",
+      "sha256": "A82B104EB5050D24C16390B8AFCB7E09751087D2F8CCECBD22006139D56A02EA"
+    },
+    {
+      "bytes": 6221297,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/behavior_family_summary.json",
+      "sha256": "16970465A0472992B2BAD6139C0B996138DC8EEF392A79FEB494482C8964878D"
+    },
+    {
+      "bytes": 81689188,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+      "sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+    },
+    {
+      "bytes": 46544,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "E4BFA36405FB2D113F621986A2E985F87D93DE75D6820EC1C206730DD22258D1"
+    },
+    {
+      "bytes": 1932666,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "1905F7DECFE2CB2996204AEAEA5FF0CC08594B6EF4F31B3192CEFC3CE3E31BEC"
+    },
+    {
+      "bytes": 10538282,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "DFD0C76B34695DB33CEEABA7C5A167CC95D3DF2DDA42C126B8787B4F057914E3"
+    },
+    {
+      "bytes": 3636,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "950EB50535B9FA705E23F4A582D4EA852E3713230A3B14D09F97EDD763E73787"
+    },
+    {
+      "bytes": 6643474,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_000/state.json",
+      "sha256": "B2156DE041E98607B3A34CE1A61AB182728FEFB93A27661C68C302C1D9794990"
+    },
+    {
+      "bytes": 47474,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/arm_checkpoint_metrics.parquet",
+      "sha256": "846C64EB21F137D77A7BB76E26B566E6DFC5C0BF5BCE658379534059AED75F0D"
+    },
+    {
+      "bytes": 3759841,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/behavior_archive.parquet",
+      "sha256": "7AC572EE19F9CE17425F7E0288973652E5FA477179F7DBE340C5FD68E76EB87A"
+    },
+    {
+      "bytes": 20865981,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/candidate_ledger.parquet",
+      "sha256": "426B31254023B19315115A8D2ABC924A1CB59520C1ADA61A16C83B071E73D0A8"
+    },
+    {
+      "bytes": 3637,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/manifest.json",
+      "sha256": "856FF26E765ECA0424CEA2D3A3B10E7ED209A5CEEB52A26A3A751D5578E895E2"
+    },
+    {
+      "bytes": 7162896,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_001/state.json",
+      "sha256": "FDBF05988C25D6EEB825CF286FCC518E353C794107153D82BD3144427DFB4E3A"
+    },
+    {
+      "bytes": 48307,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/arm_checkpoint_metrics.parquet",
+      "sha256": "64FED6A74EA7C3236F1C41FE4EF29523107ABF53CC50657E35A74209CEA21C80"
+    },
+    {
+      "bytes": 5571259,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/behavior_archive.parquet",
+      "sha256": "4A1DC2CA7403CBA61D7F60924CF5FE42B34366363779525764DEE3C08AF789A9"
+    },
+    {
+      "bytes": 31233771,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/candidate_ledger.parquet",
+      "sha256": "9BF50DF3ACF3F361131A0040813951783EC95024EC039FB5A8BAC5D759E94D85"
+    },
+    {
+      "bytes": 3637,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/manifest.json",
+      "sha256": "3D9EA60B9AADDD1FE3109BE90CF18D8AD0788E0BD6C5CE53C3AB1F3581CF6B5C"
+    },
+    {
+      "bytes": 7680663,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_002/state.json",
+      "sha256": "6DFF37B5B0DA41FE254D3C17BC877836D1AF4FF407548EAC6ED4D9C6E5DF0DEC"
+    },
+    {
+      "bytes": 48957,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/arm_checkpoint_metrics.parquet",
+      "sha256": "F3D4C919E0C6EF2E729EB6E4FA21738329100ECA3D8024846F14D101D12D9D6F"
+    },
+    {
+      "bytes": 7293849,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/behavior_archive.parquet",
+      "sha256": "D760E5B810648991991142C9C6C0D99ACFFAFD2214A4C04A7305348B223AC93D"
+    },
+    {
+      "bytes": 41369278,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/candidate_ledger.parquet",
+      "sha256": "49B8728C8B147A5F0750F796C319F5D2B0EFF2B82D542EB18899CAFB3055853D"
+    },
+    {
+      "bytes": 3637,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/manifest.json",
+      "sha256": "576B70F0F09A2918D0A70D65513C31D1EB383F9194F18749FCECF132C2E7DB9B"
+    },
+    {
+      "bytes": 8217639,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_003/state.json",
+      "sha256": "A6D135D0718DB110FD00194FD610957EF8FF4628587DC2196BC4442E127B2DD7"
+    },
+    {
+      "bytes": 49663,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/arm_checkpoint_metrics.parquet",
+      "sha256": "1D8CE015A9CCCDFFA7CDFCD9E2653D952801616612D4C4FE6C2ACE619662BBC6"
+    },
+    {
+      "bytes": 9024467,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/behavior_archive.parquet",
+      "sha256": "FC8E79ACB40323FAED5FEB34496FF9B7A38E6304C21A2AF2FE2F3A641FB84350"
+    },
+    {
+      "bytes": 51571667,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/candidate_ledger.parquet",
+      "sha256": "C944C2DECC0A81439D8A53303691BF98DB59DC0EEE2CDF0E391E3212BF7A6402"
+    },
+    {
+      "bytes": 3638,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/manifest.json",
+      "sha256": "FAE29D8CCAF9A063F54C2A884F3C64B8641F3CE315576CDBAFA4695A55821070"
+    },
+    {
+      "bytes": 8745369,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_004/state.json",
+      "sha256": "AE732980E9B8475AC1805CA4D427A349CBB6ECDB64635FBBEC2ECFC86394CF71"
+    },
+    {
+      "bytes": 50365,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/arm_checkpoint_metrics.parquet",
+      "sha256": "E0CF1678F8BF3BB6DEED58759CB93B7A3BC5D017E6739AFE115509B93FCAFE38"
+    },
+    {
+      "bytes": 10724453,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/behavior_archive.parquet",
+      "sha256": "AB3DC63E15BBE9663C20A818CAF3B69604618CEB4B5DD17E971AF041AF9D4ED0"
+    },
+    {
+      "bytes": 61703795,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/candidate_ledger.parquet",
+      "sha256": "34BAAFF4A544DA1C891F80F1EDED279405DCA3C58A0B1D5EFCBFEF970708EA51"
+    },
+    {
+      "bytes": 3639,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/manifest.json",
+      "sha256": "984DD04687A572FDDAA6877EA82D4508ECA5EE822C79CCA991E0E70779D3E2B0"
+    },
+    {
+      "bytes": 9286514,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_005/state.json",
+      "sha256": "2B56760DC91C529B7B384BC07EDE2C317CFB21E0A2A718EC1143E07C81803CD7"
+    },
+    {
+      "bytes": 50988,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/arm_checkpoint_metrics.parquet",
+      "sha256": "96D12995CBDFB02F526C53311FACB75537CCC288BFFC723561283F9DE20E0830"
+    },
+    {
+      "bytes": 12407208,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/behavior_archive.parquet",
+      "sha256": "41BA8A8C55420412F189CE612364E53AAEB27F9C3171A33C998028D0D116CAC6"
+    },
+    {
+      "bytes": 71748729,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/candidate_ledger.parquet",
+      "sha256": "149324B267EE1001C5506B0B3188B7EA41A3B65E47E990607BDF3DDDE7CA7373"
+    },
+    {
+      "bytes": 3639,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/manifest.json",
+      "sha256": "BB2FC7E9AE8E7D2EEF325F46F3AD2096A294C2BE28289B3BA32C654AEDE14DB5"
+    },
+    {
+      "bytes": 9823320,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_006/state.json",
+      "sha256": "7A7A7EF6761E743E074AEE75287495C15234FCE4BD33E88B0344D6CB06A45D97"
+    },
+    {
+      "bytes": 51602,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/arm_checkpoint_metrics.parquet",
+      "sha256": "C416AE32723DC1DA1FC3515ACF25CA71617384A1B4DA354078C9559B4B1A4091"
+    },
+    {
+      "bytes": 14051881,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/behavior_archive.parquet",
+      "sha256": "A82B104EB5050D24C16390B8AFCB7E09751087D2F8CCECBD22006139D56A02EA"
+    },
+    {
+      "bytes": 81689188,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/candidate_ledger.parquet",
+      "sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+    },
+    {
+      "bytes": 3640,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/manifest.json",
+      "sha256": "8F469E060D8157DBFE49135415E2F04DBFE22C36796BCDCA7F346371BEEC4D9E"
+    },
+    {
+      "bytes": 10336547,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_007/state.json",
+      "sha256": "189C41A5853E7BE63B0BF1E3A233E3E0C9A5A215DD74771F925E253D0FB22084"
+    },
+    {
+      "bytes": 51602,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/arm_checkpoint_metrics.parquet",
+      "sha256": "C416AE32723DC1DA1FC3515ACF25CA71617384A1B4DA354078C9559B4B1A4091"
+    },
+    {
+      "bytes": 14051881,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/behavior_archive.parquet",
+      "sha256": "A82B104EB5050D24C16390B8AFCB7E09751087D2F8CCECBD22006139D56A02EA"
+    },
+    {
+      "bytes": 81689188,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/candidate_ledger.parquet",
+      "sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+    },
+    {
+      "bytes": 4371,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/manifest.json",
+      "sha256": "5099E009396F44623A9AF13F93211A45CADD4FB106D906A85494112B0DFBE1AB"
+    },
+    {
+      "bytes": 10364162,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/state.json",
+      "sha256": "0F5D21A89FB17AC9367C3FC7E17FFB0B0215C0BDC8B4F152035B578CD5B14CD2"
+    },
+    {
+      "bytes": 9957,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_arm_metrics.parquet",
+      "sha256": "4B479DF3A96E9ACC27558F553B98F290F30353D84D4C041726400B1D7FCFCBF0"
+    },
+    {
+      "bytes": 123066,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_candidate_ledger.parquet",
+      "sha256": "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F"
+    },
+    {
+      "bytes": 32393,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_cohort_paths.parquet",
+      "sha256": "DC93AD602A54FA70F5F5845BA2D957885CF5A9BE6FA85CD3BDA1B08FA8CBC6A7"
+    },
+    {
+      "bytes": 25729,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/checkpoints/checkpoint_validation/validation_decisions.json",
+      "sha256": "A5B5EBA2F22F31CC1EBBA855CB83AC193D129F2E290EE119C14D742C958FBC08"
+    },
+    {
+      "bytes": 3431,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/embedded_preflight.json",
+      "sha256": "1B6BECEE4717751A6EB82CD21E55344012A22D9510568D3B90E8C105D5C692F6"
+    },
+    {
+      "bytes": 30800,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json",
+      "sha256": "603BD614174B811BE647E9A2BA15464B0B0C9B10E09F42CA1BBE96C7CFE834A9"
+    },
+    {
+      "bytes": 32402,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/frozen_contract.json",
+      "sha256": "09198B17D4FF9B4CA362976C815264639F77BB96D1577ED05759FCC5B34704D9"
+    },
+    {
+      "bytes": 90526,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/mechanism_knowledge.parquet",
+      "sha256": "B355EC75BC7869FF239F953801D4726F20E6D6A1D6BD16A494C12AAE7604CB6B"
+    },
+    {
+      "bytes": 425,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/mechanism_knowledge_summary.json",
+      "sha256": "89EB12F756F5C14928C6DC61F73C6300D16F07DDF040DF16F10C84F87F1B9AAA"
+    },
+    {
+      "bytes": 9957,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_arm_metrics.parquet",
+      "sha256": "4B479DF3A96E9ACC27558F553B98F290F30353D84D4C041726400B1D7FCFCBF0"
+    },
+    {
+      "bytes": 123066,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_candidate_ledger.parquet",
+      "sha256": "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F"
+    },
+    {
+      "bytes": 32393,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_cohort_paths.parquet",
+      "sha256": "DC93AD602A54FA70F5F5845BA2D957885CF5A9BE6FA85CD3BDA1B08FA8CBC6A7"
+    },
+    {
+      "bytes": 25729,
+      "path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_decisions.json",
+      "sha256": "A5B5EBA2F22F31CC1EBBA855CB83AC193D129F2E290EE119C14D742C958FBC08"
+    }
+  ],
+  "base_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+  "closure_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+  "compiler_identity": {
+    "bundle_sha256": "67F0B2427BB40C6DDAE03175290DBB82C5745C8C7C8901E51E9A6A05171E4B95",
+    "paths": [
+      {
+        "bytes": 55404,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "E27B8296AD1A6239A21F406F19DDBF86EA53BA0FFD9A3BB7B7A9418B8C4568A4"
+      },
+      {
+        "bytes": 24801,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "4D6A71912470A78547FC533825F70FB94DEED534E7892B535E5B1FC3102C090F"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 87685,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+      },
+      {
+        "bytes": 66411,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "52E7297518FE157C3566E695067A4EFAC4F9470BE98D55F5D4462A2B5F2B177E"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 841405,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "A6052B6744CFC5AF4E2C9B48EDA71671893C0D06C9F4BF9C0F6A56B2F5168284"
+      },
+      {
+        "bytes": 35617,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "31541B6DE35AC7E96DC847709D1CF58516D3FC9035B2CFBDF8DC9B9291242641"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-mechanism-v2-3 --runtime-date 20260802",
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_20260802",
+  "frozen_contract_sha256": "AFEBF0BB2A3F3DE08D93FFBEA91E220603C32144E4E58B0AE2E6EF999473AA9D",
+  "generation_attempts": 23869,
+  "memory_fallback_used": false,
+  "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "COMPLETED",
+  "strict_evaluated_count": 16000,
+  "workers_final": 10
+}

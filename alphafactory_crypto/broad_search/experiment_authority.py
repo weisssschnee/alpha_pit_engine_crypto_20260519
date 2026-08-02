@@ -492,7 +492,26 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
         },
-        "expected_run_outcome": {},
+        "expected_run_outcome": {
+            "status": "PASS_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+            "reason": "FULL_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+            "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+            "producer_source_sha": (
+                "06512e01876345d9921d56405d8254a82933a9b7"
+            ),
+            "generation_attempts": 23_869,
+            "strict_evaluated_count": 16_000,
+            "validation_candidate_cohort_evaluated_count": 1_024,
+            "checkpoint": "checkpoint_validation",
+            "proposal_distribution_qualified": False,
+            "train_ranker_qualified": False,
+            "full_evolution_policy_pass": False,
+            "continuation_authorized": False,
+            "artifact_bundle_sha256": (
+                "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5"
+            ),
+            "rescue_rerun_started": False,
+        },
         "run_authorization_scope": (
             "ONE_FRESH_STATE_16000_STRICT_POLICY_ATTRIBUTION_PLUS_CONDITIONAL_"
             "4000_EVOLUTION_CONTINUATION"

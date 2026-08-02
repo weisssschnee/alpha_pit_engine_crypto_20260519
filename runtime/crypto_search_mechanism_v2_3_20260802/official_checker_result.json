@@ -1,0 +1,15 @@
+{
+  "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+  "checkpoint_count": 8,
+  "engineering_integrity": "PASS",
+  "errors": [],
+  "full_evolution_policy_pass": false,
+  "generation_attempts": 23869,
+  "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+  "proposal_distribution_qualified": false,
+  "result": "PASS",
+  "sealed_reads": 0,
+  "strict_evaluated_count": 16000,
+  "train_ranker_qualified": false,
+  "validation_candidate_cohort_evaluated_count": 1024
+}

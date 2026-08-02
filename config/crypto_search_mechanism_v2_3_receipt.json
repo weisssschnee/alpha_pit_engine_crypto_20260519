@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_MECHANISM_V2_3_RECEIPT",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_EVOLUTION_POLICY_ATTRIBUTION_V2_3_20260802",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -17,7 +17,22 @@
     "additional_seed_campaign_allowed": false,
     "random_profitability_survival_required": false
   },
-  "run_outcome": {},
+  "run_outcome": {
+    "status": "PASS_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+    "reason": "FULL_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+    "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+    "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+    "generation_attempts": 23869,
+    "strict_evaluated_count": 16000,
+    "validation_candidate_cohort_evaluated_count": 1024,
+    "checkpoint": "checkpoint_validation",
+    "proposal_distribution_qualified": false,
+    "train_ranker_qualified": false,
+    "full_evolution_policy_pass": false,
+    "continuation_authorized": false,
+    "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+    "rescue_rerun_started": false
+  },
   "market": {
     "asset_class": "CRYPTO",
     "calendar": "CONTINUOUS_UTC"

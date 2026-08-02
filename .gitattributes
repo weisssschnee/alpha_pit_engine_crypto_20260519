@@ -52,3 +52,8 @@ reports/CRYPTO_POLICY_ACCELERATION_CANARY_V1_REPORT.md text eol=lf
 runtime/crypto_search_mechanism_v2_2_20260802/**/*.json text eol=lf
 reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md text eol=lf
 config/crypto_search_mechanism_v2_2_receipt.json text eol=lf
+
+# Byte-stable evidence produced by Search Engine V2.3.
+runtime/crypto_search_mechanism_v2_3_20260802/**/*.json text eol=lf
+reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md text eol=lf
+config/crypto_search_mechanism_v2_3_receipt.json text eol=lf

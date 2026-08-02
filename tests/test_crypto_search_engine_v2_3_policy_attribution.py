@@ -73,13 +73,31 @@ def test_v23_train_and_conditional_continuation_allocations_are_exact() -> None:
     assert set(config["policy_parameters"]) == set(MECHANISM_SEARCH_V23_ARMS)
 
 
-def test_v23_receipt_makes_random_comparator_only() -> None:
+def test_v23_receipt_is_consumed_after_policy_attribution_gate() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_mechanism_v2_3_receipt.json",
     )
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE"
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "PASS_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+        "reason": "FULL_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+        "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+        "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+        "generation_attempts": 23_869,
+        "strict_evaluated_count": 16_000,
+        "validation_candidate_cohort_evaluated_count": 1_024,
+        "checkpoint": "checkpoint_validation",
+        "proposal_distribution_qualified": False,
+        "train_ranker_qualified": False,
+        "full_evolution_policy_pass": False,
+        "continuation_authorized": False,
+        "artifact_bundle_sha256": (
+            "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5"
+        ),
+        "rescue_rerun_started": False,
+    }
     assert receipt["validation_kill_line"][
         "random_control_survival_required"
     ] is False

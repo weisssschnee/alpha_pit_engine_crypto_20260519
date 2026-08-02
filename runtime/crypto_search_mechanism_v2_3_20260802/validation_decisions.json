@@ -1,0 +1,772 @@
+{
+  "absolute_cells": [
+    {
+      "candidate_generation_performed": false,
+      "conditions": {
+        "validation_control_not_dominant": true,
+        "validation_matched_increment_positive": true,
+        "validation_net_mean_positive": true,
+        "validation_nonoverlap_floor_sortino_positive": true
+      },
+      "holdout_read": false,
+      "horizon_hours": 1,
+      "optimizer_feedback_written": false,
+      "passed": true,
+      "policy_memory_written": false,
+      "result": "PASS_CONTINUE_FROZEN_ARM",
+      "seed": 359914106
+    },
+    {
+      "candidate_generation_performed": false,
+      "conditions": {
+        "validation_control_not_dominant": true,
+        "validation_matched_increment_positive": true,
+        "validation_net_mean_positive": true,
+        "validation_nonoverlap_floor_sortino_positive": true
+      },
+      "holdout_read": false,
+      "horizon_hours": 4,
+      "optimizer_feedback_written": false,
+      "passed": true,
+      "policy_memory_written": false,
+      "result": "PASS_CONTINUE_FROZEN_ARM",
+      "seed": 359914106
+    },
+    {
+      "candidate_generation_performed": false,
+      "conditions": {
+        "validation_control_not_dominant": true,
+        "validation_matched_increment_positive": false,
+        "validation_net_mean_positive": true,
+        "validation_nonoverlap_floor_sortino_positive": true
+      },
+      "holdout_read": false,
+      "horizon_hours": 1,
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "seed": 1141399971
+    },
+    {
+      "candidate_generation_performed": false,
+      "conditions": {
+        "validation_control_not_dominant": false,
+        "validation_matched_increment_positive": false,
+        "validation_net_mean_positive": false,
+        "validation_nonoverlap_floor_sortino_positive": false
+      },
+      "holdout_read": false,
+      "horizon_hours": 4,
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "seed": 1141399971
+    }
+  ],
+  "absolute_evolution_top_passed": false,
+  "absolute_kill_line_applies_to": "evolution_train_top",
+  "archive_state_sha256_after": "7C1EC395AD1FB1B73934D2DF26C6DEAD3282A02BEC8067A0C9D348501294DC88",
+  "archive_state_sha256_before": "7C1EC395AD1FB1B73934D2DF26C6DEAD3282A02BEC8067A0C9D348501294DC88",
+  "arm_state_after": {
+    "expanded_mechanism_random_v2_3": "EXITED",
+    "mechanism_evolution_v2_3": "EXITED"
+  },
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 30,
+  "candidate_local_failures": [
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "89707A7306538D727A1508551A47304BFBE026E9C0B55C84A9B2BF17B7467D3B",
+      "cohort": "random_train_top",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 359914106,
+      "selection_rank": 3,
+      "stratum": null
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "9624927F9AF0A04B6D8B4F799E1AB24619EDE6BFC4ACD24E25CC5D156340B88C",
+      "cohort": "random_train_top",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 359914106,
+      "selection_rank": 48,
+      "stratum": null
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "D8E5E2585CA6A7A14386AEDB067A67F4BA1EB90AA575A07B6E538E9AEC8B978E",
+      "cohort": "random_stratified",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 359914106,
+      "selection_rank": 2,
+      "stratum": 3
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "6A5F03D7DD27709BE2348822C8170F399709AADBAAE8E7114B7227F6E303A5CA",
+      "cohort": "random_train_top",
+      "horizon_hours": 4,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 359914106,
+      "selection_rank": 28,
+      "stratum": null
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "EBEBE0B8621D991CD5492336F4C39656685C7879DF9B72900700945171D63897",
+      "cohort": "random_train_top",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 359914106,
+      "selection_rank": 31,
+      "stratum": null
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "F9CD6075E3A37A79F61D31ACBC97745AE42CAD2AA62F18A61173CE310A2EDF14",
+      "cohort": "random_train_top",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 18,
+      "stratum": null
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "2B4909B7A0217F258DD63CB6E9E6EAD822A7CED4CC29B4252FBB565F62091BBC",
+      "cohort": "random_stratified",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 7,
+      "stratum": 2
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "1126632567C27058041F247EAEF47711303FB17F75C1ACBA29DF0E7A135B7E26",
+      "cohort": "random_stratified",
+      "horizon_hours": 1,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 4,
+      "stratum": 6
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "28C046C3AD550A5600AEDFA2E4CFBC18CBDFE32D000593389A40F5D4C834C747",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 43,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "E100214C3DE57DBC6306F77F7DAF4E9D7158E397FA21F0E8B0282B01932756C1",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 46,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "D74D0137AD30F4E7ECC67CA6C0B7456BC1944470A418E6E52C98B62E83A40953",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 47,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "FDFB9360F739DE2016A064456CB2219A11A6A1E3F6ED3A23AE4FEEA93256D2EE",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 48,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "7105C02865B93307609AC7FF22486AA4CC0FAA47DD5943E3575341DA10745DBA",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 50,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "259377625CA5576D47BAFFA8C5BE41EB22DF811FBCF4EB94AC890691F68B7D99",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 52,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "54B53A2E64C720DBF922C541C8C048EC66D6FB8976EEC075640020F639C4699F",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 54,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "81C32674E912625C41C49365C1DE3A20ACEC00B8A149ED3FF1A2180993F67276",
+      "cohort": "evolution_train_top",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 56,
+      "stratum": null
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "16AF343D3EA7C7BE39E2B96CED863F36C4CB77B254039BCA8339423399006372",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 4,
+      "stratum": 0
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "2F1927A55EF218762B07E77D8608A44EA0148759339D0667D203D08661A119BA",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 1,
+      "stratum": 2
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "842B16C6D2E88822983D4379D1A2CB4689FB63A2EC30506DBB0F594CD79DC1D0",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 2,
+      "stratum": 3
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "78BC9C7520C3CBC7C2C5FFD5FAE88F92C9911DE911C8D49A4D6C04C715C290C9",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 6,
+      "stratum": 3
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "1EEF5411FB2463AF20707C0CFAC85D34E09489345EB7E22E3BE9DB7A7F06C43A",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 3,
+      "stratum": 4
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "4B221D0848768918338A9E384CD580E221EC9420B5C4CBFA780B10644920099F",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 8,
+      "stratum": 4
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "E9CE69558FE7DEA84BF90FE01BA920C85321D7B0A4A15D7B211246CE4DC705A7",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 1,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 4,
+      "stratum": 7
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_3",
+      "candidate_id": "F5FEE896665C9B3393EB6913948C3AB4CCB33333922F5BC61D4E9A64609550CB",
+      "cohort": "random_stratified",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 3,
+      "stratum": 0
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "C71FE2CF29D6F115AE6499C3B16A697F662ED49EDC79CFC61E408E6F697370C8",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 2,
+      "stratum": 0
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "7E8B346FE94DD70EAA1A4A2DBAD1BD182CC63E0BFFFFD7235600E5EFC55C84FB",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 7,
+      "stratum": 1
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "827BC48288482D882BAD714306CB74C8BE3F1F92795B2720A2DF0B406B2A4764",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 2,
+      "stratum": 3
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "D5ADEC23139C40ED872AB5B920E0FB782096EF205F0DAF3BD5F12FE5ED86E106",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 4,
+      "stratum": 4
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "40DFCBAFBBD837BFBD8A13224D44276509C51B5091DE05999F63154F24B2A2A4",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 1141399971,
+      "selection_rank": 6,
+      "stratum": 4
+    },
+    {
+      "arm": "mechanism_evolution_v2_3",
+      "candidate_id": "C057035D4A88F3632C83ACA766422AAFAE6A719595128BF28730B7E92FA486FA",
+      "cohort": "evolution_stratified",
+      "horizon_hours": 4,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "seed": 1141399971,
+      "selection_rank": 3,
+      "stratum": 5
+    }
+  ],
+  "cohort_evaluated_counts": {
+    "evolution_stratified": 256,
+    "evolution_train_top": 256,
+    "random_stratified": 256,
+    "random_train_top": 256
+  },
+  "component_pass": {
+    "proposal_distribution": false,
+    "total_policy": false,
+    "train_ranker": false
+  },
+  "continuation_authorized": false,
+  "economic_receipt_sha256": "650AD076914CAA39E81F255E313A9FA19B93994A372710AEB3DB34B7CA982E96",
+  "full_evolution_policy_pass": false,
+  "holdout_read": false,
+  "optimizer_feedback_written": false,
+  "orchestration_campaign": "crypto_search_mechanism_v2_3",
+  "policy_memory_written": false,
+  "policy_state_sha256_after": "8CF29442CA2149A341DF5D55B6C77ED0757C60187BD3B27B2D605A136517FD51",
+  "policy_state_sha256_before": "8CF29442CA2149A341DF5D55B6C77ED0757C60187BD3B27B2D605A136517FD51",
+  "proposal_distribution_qualified": false,
+  "random_profitability_survival_required": false,
+  "random_role": "COMPARATOR_ONLY_NO_PROFITABILITY_SURVIVAL_REQUIREMENT",
+  "relative_cells": [
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -6.878388317560698e-05,
+          "bootstrap_seed": 2607053603,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": -3.660987774673557e-05,
+          "paired_day_count": 61,
+          "passed": false,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -0.00010349296528257046,
+          "bootstrap_seed": 2068135989,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": -7.475595139574094e-05,
+          "paired_day_count": 61,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_stratified",
+      "passed": false,
+      "right_cohort": "evolution_stratified",
+      "seed": 359914106
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 1.1806132429524898e-05,
+          "bootstrap_seed": 737978698,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 4.543316685277925e-05,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -1.618416646016119e-05,
+          "bootstrap_seed": 1577865826,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 2.3455103516267225e-05,
+          "paired_day_count": 61,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_stratified",
+      "passed": false,
+      "right_cohort": "evolution_stratified",
+      "seed": 359914106
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -0.00012905636968064455,
+          "bootstrap_seed": 1323534409,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": -2.0865192637779915e-05,
+          "paired_day_count": 61,
+          "passed": false,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -1.747655890118522e-05,
+          "bootstrap_seed": 1841353041,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 3.2803413373358605e-05,
+          "paired_day_count": 61,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_stratified",
+      "passed": false,
+      "right_cohort": "evolution_stratified",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 5.709441797430865e-05,
+          "bootstrap_seed": 324951219,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 8.451216825139068e-05,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 4.182105893352107e-05,
+          "bootstrap_seed": 981525436,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 7.366423201903826e-05,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_stratified",
+      "passed": true,
+      "right_cohort": "evolution_stratified",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.0007100407348812946,
+          "bootstrap_seed": 2093868598,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0007561253456771436,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.00045377405565041385,
+          "bootstrap_seed": 933586590,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0005394085943575415,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "evolution_stratified",
+      "passed": true,
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.00013353185769195272,
+          "bootstrap_seed": 3297965380,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.00016407776790444207,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 8.538369987969533e-05,
+          "bootstrap_seed": 3208018628,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0001277586335691288,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "evolution_stratified",
+      "passed": true,
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.0002087105364039259,
+          "bootstrap_seed": 1164133765,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0002605092281676721,
+          "paired_day_count": 32,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.0001814395255538682,
+          "bootstrap_seed": 2783962259,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.00022441078874906397,
+          "paired_day_count": 32,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "evolution_stratified",
+      "passed": true,
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 1.9755144503370447e-05,
+          "bootstrap_seed": 1760036205,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 6.962416042718657e-05,
+          "paired_day_count": 32,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -3.8808663883642306e-05,
+          "bootstrap_seed": 3676956065,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 8.914291336554821e-05,
+          "paired_day_count": 32,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "evolution_stratified",
+      "passed": false,
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.00026284413472741914,
+          "bootstrap_seed": 1627767964,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0003157701640179341,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 8.18285933148207e-05,
+          "bootstrap_seed": 1940218268,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.00018432382044237554,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_train_top",
+      "passed": true,
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 8.565933339604677e-05,
+          "bootstrap_seed": 4190996476,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.00012134676240921081,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 5.108199582873022e-05,
+          "bootstrap_seed": 1109727839,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.00010362921440473616,
+          "paired_day_count": 61,
+          "passed": true,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_train_top",
+      "passed": true,
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 0.00010973773602964196,
+          "bootstrap_seed": 1187893383,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 0.0001536176621604445,
+          "paired_day_count": 32,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -1.0498486456754439e-05,
+          "bootstrap_seed": 2101919686,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 1.579334219562669e-05,
+          "paired_day_count": 32,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_train_top",
+      "passed": false,
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": 3.6865341229794224e-05,
+          "bootstrap_seed": 4060060703,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 9.977461366778386e-05,
+          "paired_day_count": 32,
+          "passed": true,
+          "replications": 2048
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_lower_quantile": -9.861471407529977e-05,
+          "bootstrap_seed": 1796645862,
+          "lower_quantile": 0.25,
+          "observed_mean_delta": 3.44700229334699e-05,
+          "paired_day_count": 32,
+          "passed": false,
+          "replications": 2048
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_train_top",
+      "passed": false,
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    }
+  ],
+  "schema_version": 1,
+  "status": "VALIDATION_STAGE_COMPLETE",
+  "strict_candidate_cohort_evaluated_count": 1024,
+  "threshold_tuning_performed": false,
+  "total_policy_relative_qualified": false,
+  "train_ranker_qualified": false,
+  "trigger_after_train_checkpoint_index": 7
+}
