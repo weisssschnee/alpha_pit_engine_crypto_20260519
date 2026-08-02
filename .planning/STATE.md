@@ -598,7 +598,8 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
 
-No performance search other than this single frozen V2 campaign is authorized by this plan.
+No V2 or V2.1 receipt remains authorized, and no further performance search is
+authorized by this plan.
 
 ## Qualified policy components
 
@@ -621,7 +622,9 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
 - Search Engine V2 completed all 12,000 train candidates but its final arm aggregator rejected legal heterogeneous control schemas before equal-count validation artifacts were persisted. Future source now aggregates controls equal-weight within candidate and then equal-weight across candidates; the consumed run remains blocked and cannot be rescued.
-- V1-V6 are consumed and `run_authorized=false`; their component hashes resolve against each run's frozen producer source. Only the V2 mechanism receipt authorizes one current market-development run.
+- V1-V6, V2 mechanism, and V2.1 mechanism-basis receipts are consumed with
+  `run_authorized=false`; their component hashes resolve against each run's
+  frozen producer source. None authorizes a current market-development run.
 - V4 confirms the NaN/support and rolling-warm-up repairs but exposes a distinct orchestration defect: validation-period mapped-control equality for one selected candidate terminates all active arms before equal-count metrics exist. This is an engine-validation failure, not a market or Alpha negative.
 - V3 proves the repaired failure path: the exact validation candidate identity and all campaign state are persisted in `checkpoint_validation_blocked`, and the process terminates as `ENGINE_VALIDATION_BLOCKED` instead of crashing. This is a validation-constructibility result, not a portfolio-reward, Alpha-space, or carrier-information negative. All retained results remain development-only and conditional on 5 bps.
 
