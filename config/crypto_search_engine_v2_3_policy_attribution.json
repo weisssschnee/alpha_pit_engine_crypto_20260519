@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260802_crypto_search_engine_v2_3_policy_attribution",
+  "authorization": "ONE_FRESH_STATE_16000_STRICT_POLICY_ATTRIBUTION_PLUS_CONDITIONAL_4000_EVOLUTION_CONTINUATION",
+  "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+  "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+  "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+  "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+  "stages": [
+    {
+      "stage_id": "FRESH_TWO_SEED_EQUAL_COUNT_POLICY_ATTRIBUTION_TRAIN",
+      "checkpoint_indexes": [0, 1, 2, 3, 4, 5, 6, 7],
+      "strict_count": 16000,
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_3": 1000,
+        "mechanism_evolution_v2_3": 1000
+      }
+    },
+    {
+      "stage_id": "CONDITIONAL_EVOLUTION_ONLY_CONTINUATION",
+      "checkpoint_indexes": [8, 9],
+      "strict_count": 4000,
+      "requires_full_evolution_policy_gate": true,
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_3": 0,
+        "mechanism_evolution_v2_3": 2000
+      }
+    }
+  ],
+  "search": {
+    "strict_evaluated_target": 20000,
+    "qualification_strict_count": 16000,
+    "checkpoint_size": 2000,
+    "checkpoint_count": 10,
+    "raw_generation_attempts_maximum": 100000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "required_pairs_per_hour": 1111.1111111111,
+    "stateless_random_inflight_rule": "CEIL(workers / active_policy_lanes)",
+    "adaptive_inflight_per_policy_lane": 1,
+    "cache_scope": "EXISTING_CANDIDATE_LOCAL_DAG_ONLY",
+    "minimum_free_memory_reserve_bytes": 12884901888
+  },
+  "policy_parameters": {
+    "expanded_mechanism_random_v2_3": {
+      "duplicate_resample_limit": 64
+    },
+    "mechanism_evolution_v2_3": {
+      "duplicate_resample_limit": 64,
+      "warmup": 32,
+      "tournament_size": 4,
+      "population_limit": 256,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2
+    }
+  },
+  "validation": {
+    "trigger_after_checkpoint_index": 7,
+    "candidate_generation_allowed": false,
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "holdout_read": false,
+    "required_horizons_hours": [1, 4],
+    "cohort_size_per_seed_horizon": 64,
+    "cohorts": [
+      "random_stratified",
+      "random_train_top",
+      "evolution_stratified",
+      "evolution_train_top"
+    ],
+    "selection": {
+      "train_top": "DESCENDING_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL_THEN_CANDIDATE_ID",
+      "stratified": "EIGHT_CONTIGUOUS_ARM_COMPLETION_ORDINAL_STRATA_THEN_SHA256_CANDIDATE_TIEBREAK",
+      "stratum_count": 8,
+      "successful_candidates_per_stratum": 8,
+      "cohort_overlap_allowed": false,
+      "candidate_local_failure": "DETERMINISTIC_BACKFILL_WITHIN_COHORT_SEED_HORIZON_STRATUM"
+    },
+    "path_artifact": {
+      "path": "validation_cohort_paths.parquet",
+      "grain": "UTC_DAY_EQUAL_WEIGHT_COHORT_ENSEMBLE",
+      "primary_net": true,
+      "matched_increment": true,
+      "control_net": true,
+      "reward_or_identity_fields_forbidden": true
+    },
+    "paired_block_bootstrap": {
+      "block_unit": "UTC_DAY",
+      "block_length_days": 7,
+      "replications": 2048,
+      "lower_quantile": 0.25,
+      "seed_derivation": "SHA256_U32_BIG_ENDIAN(epoch_id|validation-bootstrap|seed|horizon|comparison)"
+    },
+    "comparisons": {
+      "proposal_distribution": "evolution_stratified_minus_random_stratified",
+      "train_ranker": "evolution_train_top_minus_evolution_stratified",
+      "total_policy": "evolution_train_top_minus_random_train_top"
+    },
+    "relative_pass": "PRIMARY_NET_DELTA_AND_MATCHED_INCREMENT_DELTA_OBSERVED_MEAN_AND_BOOTSTRAP_Q25_ALL_POSITIVE",
+    "absolute_kill_line_applies_to": "evolution_train_top",
+    "random_role": "COMPARATOR_ONLY_NO_PROFITABILITY_SURVIVAL_REQUIREMENT",
+    "full_policy_pass": "ABSOLUTE_EVOLUTION_TOP_AND_ALL_THREE_RELATIVE_COMPARISONS_PASS_EVERY_SEED_AND_HORIZON",
+    "pass_action": "CONTINUE_SAME_FRESH_EVOLUTION_STATE_FOR_4000_STRICT",
+    "failure_action": "STOP_AT_16000_WITH_COMPLETED_RESULTS"
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "persistent_mechanism_knowledge": {
+    "declarative_mechanism_specs": true,
+    "aggregate_outcomes": true,
+    "behavior_yield": true,
+    "lifecycle": true,
+    "sampling_probability_prior": false,
+    "individual_candidate_reward": false,
+    "population": false,
+    "cem_distribution": false,
+    "rng_state": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "new_fields": false,
+    "new_grammar": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "target_change": false,
+    "cost_change": false,
+    "v22_state_import": false,
+    "liquidation": "HOLD"
+  }
+}

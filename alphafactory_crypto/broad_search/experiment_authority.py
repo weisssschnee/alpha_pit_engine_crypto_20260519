@@ -60,6 +60,9 @@ SEARCH_MECHANISM_V21_RECEIPT_PATH = (
 SEARCH_MECHANISM_V22_RECEIPT_PATH = (
     "config/crypto_search_mechanism_v2_2_receipt.json"
 )
+SEARCH_MECHANISM_V23_RECEIPT_PATH = (
+    "config/crypto_search_mechanism_v2_3_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -478,6 +481,85 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "campaign_contract",
         },
     },
+    "CRYPTO_SEARCH_MECHANISM_V2_3_RECEIPT": {
+        "path": SEARCH_MECHANISM_V23_RECEIPT_PATH,
+        "decision_id": "USER_AUTHORIZED_EVOLUTION_POLICY_ATTRIBUTION_V2_3_20260802",
+        "runner_campaign": "crypto_search_mechanism_v2_3",
+        "runtime_date": "20260802",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
+        "run_authorization_scope": (
+            "ONE_FRESH_STATE_16000_STRICT_POLICY_ATTRIBUTION_PLUS_CONDITIONAL_"
+            "4000_EVOLUTION_CONTINUATION"
+        ),
+        "run_authorization_extras": {
+            "mechanism_catalog_persistence_authorized": True,
+            "aggregate_mechanism_knowledge_authorized": True,
+            "candidate_or_policy_state_persistence_authorized": False,
+            "additional_seed_campaign_allowed": False,
+            "random_profitability_survival_required": False,
+        },
+        "mechanism_registry_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "compile_mechanism_catalog"
+        ),
+        "mapping_adapter_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "mapping_id_for_mechanism_spec"
+        ),
+        "economic_hypothesis_field": "hypothesis",
+        "mapping_classes": {
+            "CROSS_SECTIONAL_RELATIVE",
+            "DIRECTIONAL_STATEFUL",
+            "SPARSE_EVENT_CARRY",
+        },
+        "strict_evaluated_target": 20_000,
+        "checkpoint_size": 2_000,
+        "checkpoint_count": 10,
+        "validation_trigger": 7,
+        "validation_minimum_evaluated_per_active_arm": 512,
+        "validation_evaluated_per_active_arm": 512,
+        "validation_candidate_selection": (
+            "FOUR_DISJOINT_TWO_SEED_TRAIN_TOP_AND_ORDINAL_STRATIFIED_COHORTS"
+        ),
+        "validation_arm_aggregation": (
+            "SEED_HORIZON_COHORT_EQUAL_WEIGHT_WITH_PAIRED_DAILY_BLOCK_EFFECTS"
+        ),
+        "validation_failure_action": "STOP_AT_16000_WITH_COMPLETED_RESULTS",
+        "validation_failed_arm_allocation": "NO_CONTINUATION_ALLOCATION",
+        "validation_continuation_action": (
+            "CONTINUE_SAME_FRESH_EVOLUTION_STATE_FOR_4000_STRICT"
+        ),
+        "validation_runtime_symbol": (
+            "alphafactory_crypto.broad_search.search_engine_v1."
+            "run_v23_policy_attribution_validation"
+        ),
+        "random_control_survival_required": False,
+        "control_arm_id": "expanded_mechanism_random_v2_3",
+        "seed_set": (359914106, 1141399971),
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)"
+        ),
+        "required_component_sources": {
+            "mechanism",
+            "mechanism_mapping",
+            "direction",
+            "validation_kill_line",
+            "portfolio_mapping_and_cost",
+            "target_execution",
+            "optimizer_reward_and_matched_attribution",
+            "target_contract",
+            "runtime_binding",
+            "expanded_mechanism_catalog",
+            "aggregate_mechanism_knowledge",
+            "campaign_contract",
+        },
+    },
 }
 
 _INVALID_INTENT = {
@@ -721,9 +803,12 @@ def _validate_search_economic_receipt(
         "alphafactory_crypto.broad_search.experiment_authority."
         "evaluate_search_validation_kill_line"
     )
-    expected_validation_runtime = (
-        "alphafactory_crypto.broad_search.search_engine_v1."
-        "apply_search_validation_kill_line"
+    expected_validation_runtime = str(
+        receipt_spec.get(
+            "validation_runtime_symbol",
+            "alphafactory_crypto.broad_search.search_engine_v1."
+            "apply_search_validation_kill_line",
+        )
     )
     expected_target_store = (
         "alphafactory_crypto.broad_search.replay_v14_binance_target."
@@ -1026,9 +1111,13 @@ def _validate_search_economic_receipt(
         blockers.append(
             "validation_kill_line.trigger_after_train_checkpoint_index"
         )
-    if kill_line.get("minimum_evaluated_per_active_arm") != 128:
+    if kill_line.get("minimum_evaluated_per_active_arm") != int(
+        receipt_spec.get("validation_minimum_evaluated_per_active_arm", 128)
+    ):
         blockers.append("validation_kill_line.minimum_evaluated_per_active_arm")
-    if kill_line.get("evaluated_per_active_arm") != 128:
+    if kill_line.get("evaluated_per_active_arm") != int(
+        receipt_spec.get("validation_evaluated_per_active_arm", 128)
+    ):
         blockers.append("validation_kill_line.evaluated_per_active_arm")
     if kill_line.get("required_horizons_hours") != [1, 4]:
         blockers.append("validation_kill_line.required_horizons_hours")
@@ -1038,22 +1127,32 @@ def _validate_search_economic_receipt(
         )
     if (
         kill_line.get("candidate_selection")
-        != (
+        != receipt_spec.get(
+            "validation_candidate_selection",
             "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_"
-            "THEN_COMPLETION_ORDINAL"
+            "THEN_COMPLETION_ORDINAL",
         )
     ):
         blockers.append("validation_kill_line.candidate_selection")
     if (
         kill_line.get("arm_aggregation")
-        != "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+        != receipt_spec.get(
+            "validation_arm_aggregation",
+            "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+        )
     ):
         blockers.append("validation_kill_line.arm_aggregation")
     if kill_line.get("threshold_tuning_allowed") is not False:
         blockers.append("validation_kill_line.threshold_tuning_allowed")
-    if kill_line.get("failure_action") != "STOP_ARM_AND_WRITE_CHECKPOINT":
+    if kill_line.get("failure_action") != receipt_spec.get(
+        "validation_failure_action",
+        "STOP_ARM_AND_WRITE_CHECKPOINT",
+    ):
         blockers.append("validation_kill_line.failure_action")
-    if kill_line.get("failed_arm_allocation") != "EXISTING_ARM_STATE_EXITED":
+    if kill_line.get("failed_arm_allocation") != receipt_spec.get(
+        "validation_failed_arm_allocation",
+        "EXISTING_ARM_STATE_EXITED",
+    ):
         blockers.append("validation_kill_line.failed_arm_allocation")
     if (
         kill_line.get("continuation_action")
@@ -1516,6 +1615,7 @@ __all__ = [
     "SEARCH_ECONOMIC_V4_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V5_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V6_RECEIPT_PATH",
+    "SEARCH_MECHANISM_V23_RECEIPT_PATH",
     "ECONOMIC_SEARCH_V6_EPOCH_ID",
     "ECONOMIC_SEARCH_V6_SEED_DERIVATION",
     "ECONOMIC_SEARCH_V6_SEEDS",

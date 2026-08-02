@@ -4,6 +4,24 @@ Last updated: 2026-08-02 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_AUTHORIZED_IMPLEMENTING`
+
+ADR 0020 authorizes one fresh-state, development-only V2.3 run. It reuses the
+existing 115-field carrier, 786-mechanism catalog, compiler, evaluator, target,
+mapping, reward, cost, archive, and checkpoint authorities. Two preregistered
+fresh seeds will train expanded random and Evolution at equal count to 16,000
+strict candidates, then a four-cohort 1,024-evaluation validation will separate
+proposal-distribution, train-ranker, and total-policy effects. Random is a
+comparator only. A replicated full-policy pass is the sole authority for a
+4,000-candidate Evolution-only continuation. No V2.2 adaptive state, new field,
+grammar, evaluator, OOS, promotion, tuning, rescue, or subsequent Arena is
+authorized. The producer implementation now passes 387 repository tests,
+including an end-to-end synthetic 1,024-evaluation attribution replay with
+exact cohort counts, disjoint candidates, daily-path persistence, deterministic
+paired-block effects, and continuation projection. Deployment has not started.
+
+The preceding durable state remains:
+
 `CRYPTO_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE_COMPLETE`
 
 ADR 0019's one fresh-state, development-only Search Engine V2.2 authorization
