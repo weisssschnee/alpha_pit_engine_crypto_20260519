@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2 mechanism grammar: 12k train complete, validation blocked; development only)",
+                      "label":  "Search Engine conditional-development campaigns (V2.1 mechanism basis: 10k train complete, gate negative; development only)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -490,15 +490,18 @@
                                     ,"runtime/crypto_search_mechanism_v2_20260801/final_decision.json"
                                     ,"runtime/crypto_search_mechanism_v2_20260801/validation_failure.json"
                                     ,"reports/CRYPTO_SEARCH_MECHANISM_V2_20260801.md"
+                                    ,"config/crypto_search_mechanism_v2_1_receipt.json"
+                                    ,"runtime/crypto_search_mechanism_v2_1_20260801/final_decision.json"
+                                    ,"reports/CRYPTO_SEARCH_MECHANISM_V2_1_20260801.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_mechanism_v2_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-engine-v2-mechanism-grammar-20260801",
-                                        "verified_sha":  "c46adeacaff394174bfd49fcaf629cb8ab9bf468",
-                                        "sha256":  "8C9D7055202776FB334000BAC485E25CD123B637CF3A683258249B1EC7602254"
+                                        "path":  "config/crypto_search_mechanism_v2_1_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-engine-v2-1-mechanism-basis-20260801",
+                                        "verified_sha":  "c67d8d4aa1a76cb275fb7071154e27a451e70c3a",
+                                        "sha256":  "A6B69A055433B509E145F3BF614D88E22489496105AB25042461B1C364DAEB7E"
                                     },
                       "contracts":  [
                                         {
@@ -509,6 +512,15 @@
                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2/check-mechanism-v2, and ADR 0017",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_mechanism_v2_20260801/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_mechanism_v2_1_consumed_outcome",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "The one-run V2.1 mechanism-basis receipt is consumed and run_authorized is false. Producer 94b016fa7847d5c5b06db1e6144bda7062064151 retained exactly 10,000 strict, exact-unique, matched-control-valid, full-cost train candidates from 14,237 attempts across five restore-verified checkpoints, compiled 184 legacy plus 786 expanded mechanisms, and produced 9,754 behavior families. Expanded random missed the frozen 40-count and 1% absolute positive-search-reward floors, so the train gate stopped before validation despite Evolution improving equal-count reward ordering and positive rate. No arm qualifies and no Alpha, OOS, promotion, or next-Arena claim is created. Closure 2c4cb156fbe886c13482ba7d2e0e460732f2be0e repaired only return assembly and frozen-allocation checking, rechecked the immutable producer artifacts on PC2 with errors=[], and performed no market evaluation. Prior-state import, tuning, reseed, rescue, validation, holdout/OOS, challenge, recent, May stress, forward, promotion, and another campaign remain forbidden.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2-1/check-mechanism-v2-1, and ADR 0018",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_search_mechanism_v2_1_20260801/final_decision.json"
                                         },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
@@ -729,17 +741,17 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_mechanism_v2_20260801/final_decision.json",
-                                         "evidence_sha256":  "FF3B06F93940EF53909358F615B58DCBB2F0F711B08A9D188B9182D171630F79",
-                                         "verified_at_sha":  "c46adeacaff394174bfd49fcaf629cb8ab9bf468"
+                                          "evidence_ref":  "runtime/crypto_search_mechanism_v2_1_20260801/official_checker_result.json",
+                                          "evidence_sha256":  "82DF662DF7B5CF0B5B1D83195D185236F1C0B2CD8D03B293E68CA810DF333746",
+                                          "verified_at_sha":  "c67d8d4aa1a76cb275fb7071154e27a451e70c3a"
                                      },
                       "claim_badges":  [
-                                           "LEGACY 20K ENGINEERING PASS",
-                                           "RESEARCH QUALIFICATION HOLD",
-                                           "CODE AUTHORITY ALIGNMENT VERIFIED",
-                                           "FUTURE REQUALIFICATION FAIL CLOSED",
-                                           "PANEL CONTEXT REMEDIATED",
-                                           "HAC LCB REQUIRED",
+                                           "V2.1 10K TRAIN COMPLETE",
+                                           "V2.1 FIVE CHECKPOINTS RESTORE VERIFIED",
+                                           "V2.1 TRAIN GATE NEGATIVE",
+                                           "V2.1 VALIDATION NOT RUN",
+                                           "V2.1 FUTURE ARENA ARMS NONE",
+                                           "NO OOS OR PROMOTION",
                                            "PROCESS CPU CONTRACT FROZEN",
                                            "RESTORE BEFORE ATOMIC RENAME",
                                            "PIT LEDGER PROVISIONAL HOLD",
