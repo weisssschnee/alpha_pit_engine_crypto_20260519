@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_MECHANISM_V2_2_RECEIPT",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_FRESH_STATE_EVOLUTION_QUALIFICATION_20K_20260802",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -15,6 +15,16 @@
     "aggregate_mechanism_knowledge_authorized": true,
     "candidate_or_policy_state_persistence_authorized": false,
     "additional_seed_campaign_allowed": false
+  },
+  "run_outcome": {
+    "status": "PASS_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE",
+    "reason": "VALIDATION_GATE_NEGATIVE",
+    "runtime": "runtime/crypto_search_mechanism_v2_2_20260802",
+    "producer_source_sha": "e84b35c76a4cfc139f1c351286489b83fce61250",
+    "generation_attempts": 12240,
+    "strict_evaluated_count": 8000,
+    "checkpoint": "checkpoint_validation",
+    "rescue_rerun_started": false
   },
   "market": {
     "asset_class": "CRYPTO",
@@ -196,7 +206,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "7BCFC48F554572F5E4093E157A67F9A188268FE383E086E3EE89A382CEE45A05"
+      "sha256": "84DB8D2373F180278C3249E8FF73293B4D0EDDFEBE42BB72BE6342627D6C6FDE"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",

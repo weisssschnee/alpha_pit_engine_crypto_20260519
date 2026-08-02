@@ -137,13 +137,23 @@ def test_v22_validation_requires_both_random_control_and_evolution() -> None:
         assert _mechanism_v22_validation_allows_expansion(failed) is False
 
 
-def test_v22_receipt_is_narrow_fresh_state_authority() -> None:
+def test_v22_receipt_is_consumed_narrow_fresh_state_authority() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_mechanism_v2_2_receipt.json",
     )
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE"
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "PASS_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE",
+        "reason": "VALIDATION_GATE_NEGATIVE",
+        "runtime": "runtime/crypto_search_mechanism_v2_2_20260802",
+        "producer_source_sha": "e84b35c76a4cfc139f1c351286489b83fce61250",
+        "generation_attempts": 12_240,
+        "strict_evaluated_count": 8_000,
+        "checkpoint": "checkpoint_validation",
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["seed_set"] == list(
         MECHANISM_SEARCH_V22_SEEDS
     )

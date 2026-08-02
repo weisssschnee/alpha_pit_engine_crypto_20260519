@@ -1,0 +1,306 @@
+{
+  "active_wall_seconds": 8915.456705000019,
+  "alpha_claim": false,
+  "archive_duplicate_replacements": 91,
+  "arm_summaries": {
+    "expanded_mechanism_random_v2_2": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_family_count": 4000,
+      "behavior_family_yield": 1.0,
+      "cost_killed_rate": 0.46025,
+      "generation_attempts": 5664,
+      "mean_pair_reward": -6.453407675822015,
+      "mean_search_reward": -0.8315556118587804,
+      "positive_search_reward_count": 16,
+      "positive_search_reward_rate": 0.004,
+      "strict_evaluated": 4000,
+      "top_decile_pair_reward": -3.6831985165668697,
+      "top_decile_search_reward": -0.16143642816672638,
+      "turnover_killed_rate": 0.22,
+      "valid_exact_unique_per_cpu_hour": 1506.1116967734106,
+      "verified_crossovers": 0,
+      "verified_mechanism_mutations": 0,
+      "verified_parameter_mutations": 0
+    },
+    "mechanism_evolution_v2_2": {
+      "behavior_duplicate_rate": 0.05525000000000002,
+      "behavior_family_count": 3779,
+      "behavior_family_yield": 0.94475,
+      "cost_killed_rate": 0.26875,
+      "generation_attempts": 6576,
+      "mean_pair_reward": -5.466667978073061,
+      "mean_search_reward": -0.363292589491961,
+      "positive_search_reward_count": 406,
+      "positive_search_reward_rate": 0.1015,
+      "strict_evaluated": 4000,
+      "top_decile_pair_reward": -1.6839094724102028,
+      "top_decile_search_reward": 0.11756959479039011,
+      "turnover_killed_rate": 0.0395,
+      "valid_exact_unique_per_cpu_hour": 1214.934341823274,
+      "verified_crossovers": 680,
+      "verified_mechanism_mutations": 1068,
+      "verified_parameter_mutations": 2124
+    }
+  },
+  "behavior_duplicate_rate": 0.028249999999999997,
+  "behavior_family_count": 7774,
+  "checkpoint_count": 4,
+  "checkpoint_restore_verified": true,
+  "compiled_mechanism_count": 786,
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V2_2_EVOLUTION_QUALIFICATION_20260802",
+  "future_development_data_arena_qualified_arms": [],
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 12240,
+  "next_arena_started": false,
+  "oos": false,
+  "parameters_changed": false,
+  "producer_source_sha": "e84b35c76a4cfc139f1c351286489b83fce61250",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 100000,
+  "reason": "VALIDATION_GATE_NEGATIVE",
+  "report_title": "Crypto Search Engine V2.2 Evolution Qualification",
+  "rescue_rerun_started": false,
+  "research_decision": "HOLD_DEVELOPMENT_ONLY_NO_PROMOTION",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_campaign": "crypto_search_mechanism_v2_2",
+  "seed_changed": false,
+  "stage_contract": [
+    {
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_2": 1000,
+        "mechanism_evolution_v2_2": 1000
+      },
+      "checkpoint_indexes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "stage_id": "FRESH_EQUAL_COUNT_EVOLUTION_QUALIFICATION",
+      "strict_count": 8000
+    },
+    {
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_2": 400,
+        "mechanism_evolution_v2_2": 1600
+      },
+      "checkpoint_indexes": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "requires_train_and_validation_gate": true,
+      "stage_id": "CONDITIONAL_CONTINUOUS_EVOLUTION_EXPANSION",
+      "strict_count": 12000
+    }
+  ],
+  "status": "PASS_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE",
+  "strict_evaluated_count": 8000,
+  "surface_description": "existing 115-field OI/mark x aggTrades aligned carrier; receipt-bound Binance USD-M target",
+  "template_count": 12,
+  "train_gate": {
+    "absolute_floor_applies_to": "mechanism_evolution_v2_2",
+    "candidate_generation_performed": false,
+    "checks": {
+      "evolution_behavior_family_yield": true,
+      "evolution_duplicate_rate": true,
+      "evolution_mean_reward_increment": true,
+      "evolution_positive_count": true,
+      "evolution_positive_rate": true,
+      "evolution_positive_rate_increment": true,
+      "evolution_top_decile_increment": true
+    },
+    "contract": {
+      "evolution_mean_search_reward_must_exceed_random": true,
+      "evolution_positive_search_reward_rate_must_exceed_random": true,
+      "evolution_top_decile_search_reward_must_exceed_random": true,
+      "failure_action": "STOP_WITHOUT_VALIDATION",
+      "maximum_evolution_behavior_duplicate_rate": 0.1,
+      "minimum_evolution_behavior_family_yield": 0.9,
+      "minimum_evolution_positive_search_reward_count": 40,
+      "minimum_evolution_positive_search_reward_rate": 0.01,
+      "same_matched_evaluated_count": 4000
+    },
+    "evolution": {
+      "behavior_duplicate_rate": 0.05525000000000002,
+      "behavior_family_count": 3779,
+      "behavior_family_yield": 0.94475,
+      "matched_evaluated_count": 4000,
+      "mean_search_reward": -0.363292589491961,
+      "positive_search_reward_count": 406,
+      "positive_search_reward_rate": 0.1015,
+      "top_decile_search_reward": 0.11756959479039011
+    },
+    "expanded_random": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_family_count": 4000,
+      "behavior_family_yield": 1.0,
+      "matched_evaluated_count": 4000,
+      "mean_search_reward": -0.8315556118587804,
+      "positive_search_reward_count": 16,
+      "positive_search_reward_rate": 0.004,
+      "top_decile_search_reward": -0.16143642816672638
+    },
+    "random_role": "EQUAL_COUNT_COMPARATOR",
+    "schema_version": 1,
+    "sealed_reads": 0,
+    "status": "PASS",
+    "threshold_tuning_performed": false,
+    "validation_authorized_by_gate": true
+  },
+  "validation_allows_continuous_expansion": false,
+  "validation_arm_decisions": {
+    "expanded_mechanism_random_v2_2": {
+      "arm_id": "expanded_mechanism_random_v2_2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "checkpoint_path": "D:\\HermesWorker\\workspace\\crypto_search_v2_2_e84b35c7\\runtime\\crypto_search_mechanism_v2_2_20260802\\checkpoints\\validation_kill_expanded_mechanism_random_v2_2.json",
+      "conditions": {
+        "validation_control_not_dominant": true,
+        "validation_matched_increment_positive": false,
+        "validation_net_mean_positive": false,
+        "validation_nonoverlap_floor_sortino_positive": false
+      },
+      "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    },
+    "mechanism_evolution_v2_2": {
+      "arm_id": "mechanism_evolution_v2_2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "candidate_local_failure_count": 3,
+      "checkpoint_path": "D:\\HermesWorker\\workspace\\crypto_search_v2_2_e84b35c7\\runtime\\crypto_search_mechanism_v2_2_20260802\\checkpoints\\validation_kill_mechanism_evolution_v2_2.json",
+      "conditions": {
+        "validation_control_arm_constructible": true,
+        "validation_control_arm_passed": false,
+        "validation_equal_count_constructible": true
+      },
+      "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+      "equal_count_comparison_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    }
+  },
+  "validation_stage": {
+    "archive_state_sha256_after": "1CF09B0A170D1479E381C3416B6D63FAB7C2D6305FB6584DF7592A734395DC2A",
+    "archive_state_sha256_before": "1CF09B0A170D1479E381C3416B6D63FAB7C2D6305FB6584DF7592A734395DC2A",
+    "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+    "arm_state_after": {
+      "expanded_mechanism_random_v2_2": "EXITED",
+      "mechanism_evolution_v2_2": "EXITED"
+    },
+    "candidate_generation_performed": false,
+    "candidate_local_failure_counts": {
+      "expanded_mechanism_random_v2_2": 2,
+      "mechanism_evolution_v2_2": 3
+    },
+    "candidate_local_failure_handling": "RECORD_AND_DETERMINISTICALLY_BACKFILL_BY_FROZEN_TRAIN_RANK_WITHIN_ARM_HORIZON",
+    "candidate_local_failures": [
+      {
+        "arm": "expanded_mechanism_random_v2_2",
+        "candidate_id": "E331D685ABC876F00C9815EDE07C4D181DBC6BF55B05CC130018500FFD10143C",
+        "horizon_hours": 1,
+        "horizon_selection_rank": 38,
+        "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "selection_rank": 38
+      },
+      {
+        "arm": "expanded_mechanism_random_v2_2",
+        "candidate_id": "552C6AAEC0737B5E7383630823C1975F59931488279799B0E88E4D5AB052A3AD",
+        "horizon_hours": 4,
+        "horizon_selection_rank": 36,
+        "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+        "selection_rank": 101
+      },
+      {
+        "arm": "mechanism_evolution_v2_2",
+        "candidate_id": "A4D5D24DF01CADE9D202183BC3B377C38E54A773C53814272BCB40F37F410AA7",
+        "horizon_hours": 1,
+        "horizon_selection_rank": 43,
+        "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "selection_rank": 43
+      },
+      {
+        "arm": "mechanism_evolution_v2_2",
+        "candidate_id": "573FC1385DF1FB04DBBE9E82A8A6C39BB179DEDF1192EE20254BDBE321B749E2",
+        "horizon_hours": 1,
+        "horizon_selection_rank": 58,
+        "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "selection_rank": 58
+      },
+      {
+        "arm": "mechanism_evolution_v2_2",
+        "candidate_id": "3C288A9BF47DEEB537F1F032620B8DC9F30917D8393285ACCF31111B4FCCD6DC",
+        "horizon_hours": 4,
+        "horizon_selection_rank": 23,
+        "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "selection_rank": 89
+      }
+    ],
+    "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+    "control_arm_id": "expanded_mechanism_random_v2_2",
+    "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+    "equal_count_comparison_counts": {
+      "expanded_mechanism_random_v2_2": 128,
+      "mechanism_evolution_v2_2": 128
+    },
+    "evaluated_per_arm_per_horizon": 64,
+    "holdout_read": false,
+    "matched_evaluated_counts": {
+      "expanded_mechanism_random_v2_2": 128,
+      "mechanism_evolution_v2_2": 128
+    },
+    "optimizer_feedback_written": false,
+    "orchestration_campaign": "crypto_search_mechanism_v2_2",
+    "policy_memory_written": false,
+    "policy_state_sha256_after": "9441A63C9614C0A0613EB0D3BF9760807C6284D2052389B9D1C05818730EDF8F",
+    "policy_state_sha256_before": "9441A63C9614C0A0613EB0D3BF9760807C6284D2052389B9D1C05818730EDF8F",
+    "random_control_survival_required": true,
+    "required_horizons_hours": [
+      1,
+      4
+    ],
+    "resumed": false,
+    "schema_version": 1,
+    "status": "VALIDATION_STAGE_COMPLETE",
+    "threshold_tuning_performed": false,
+    "trigger_after_train_checkpoint_index": 3,
+    "validation_attempted_counts": {
+      "expanded_mechanism_random_v2_2": 130,
+      "mechanism_evolution_v2_2": 131
+    }
+  },
+  "validation_status": "VALIDATION_STAGE_COMPLETE",
+  "wall_time_limit_seconds": 64800
+}

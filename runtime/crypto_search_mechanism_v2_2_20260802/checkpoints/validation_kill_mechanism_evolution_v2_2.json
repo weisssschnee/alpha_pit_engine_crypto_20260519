@@ -1,0 +1,29 @@
+{
+  "arm_id": "mechanism_evolution_v2_2",
+  "arm_stopped": true,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 3,
+  "checkpoint_path": "D:\\HermesWorker\\workspace\\crypto_search_v2_2_e84b35c7\\runtime\\crypto_search_mechanism_v2_2_20260802\\checkpoints\\validation_kill_mechanism_evolution_v2_2.json",
+  "conditions": {
+    "validation_control_arm_constructible": true,
+    "validation_control_arm_passed": false,
+    "validation_equal_count_constructible": true
+  },
+  "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+  "equal_count_comparison_counts": {
+    "expanded_mechanism_random_v2_2": 128,
+    "mechanism_evolution_v2_2": 128
+  },
+  "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+  "holdout_read": false,
+  "matched_evaluated_counts": {
+    "expanded_mechanism_random_v2_2": 128,
+    "mechanism_evolution_v2_2": 128
+  },
+  "optimizer_feedback_written": false,
+  "passed": false,
+  "policy_memory_written": false,
+  "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+  "threshold_tuning_performed": false,
+  "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+}

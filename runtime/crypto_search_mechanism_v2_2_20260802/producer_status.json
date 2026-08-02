@@ -1,0 +1,22 @@
+{
+  "active_wall_seconds": 8915.448900000018,
+  "checkpoint_index": 3,
+  "evaluation_batches": 1340,
+  "evaluator_effective_cores": 3.2545021560410783,
+  "frozen_contract_sha256": "491E74969148CFD330182B35E57E1F2E113E2681B3C037D654C8EC21A2330565",
+  "generation_attempts": 12240,
+  "heartbeat_utc": "2026-08-02T10:27:02.829321+00:00",
+  "last_batch": {},
+  "observed_pairs_per_hour": 3230.3477169837115,
+  "producer_parent_pid": 24712,
+  "producer_pid": 23448,
+  "producer_source_sha": "e84b35c76a4cfc139f1c351286489b83fce61250",
+  "projected_remaining_hours": 3.7147703750000076,
+  "required_pairs_per_hour": 1111.111111111111,
+  "schema_version": 1,
+  "status": "CHECKPOINT_COMPLETE",
+  "strict_evaluated": 8000,
+  "strict_target": 20000,
+  "worker_slot_fill_ratio": 0.7517164179104477,
+  "workers": 10
+}

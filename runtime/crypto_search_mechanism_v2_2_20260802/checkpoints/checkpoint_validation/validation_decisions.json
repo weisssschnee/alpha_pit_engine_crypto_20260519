@@ -1,0 +1,147 @@
+{
+  "archive_state_sha256_after": "1CF09B0A170D1479E381C3416B6D63FAB7C2D6305FB6584DF7592A734395DC2A",
+  "archive_state_sha256_before": "1CF09B0A170D1479E381C3416B6D63FAB7C2D6305FB6584DF7592A734395DC2A",
+  "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+  "arm_decisions": {
+    "expanded_mechanism_random_v2_2": {
+      "arm_id": "expanded_mechanism_random_v2_2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "checkpoint_path": "D:\\HermesWorker\\workspace\\crypto_search_v2_2_e84b35c7\\runtime\\crypto_search_mechanism_v2_2_20260802\\checkpoints\\validation_kill_expanded_mechanism_random_v2_2.json",
+      "conditions": {
+        "validation_control_not_dominant": true,
+        "validation_matched_increment_positive": false,
+        "validation_net_mean_positive": false,
+        "validation_nonoverlap_floor_sortino_positive": false
+      },
+      "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    },
+    "mechanism_evolution_v2_2": {
+      "arm_id": "mechanism_evolution_v2_2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "candidate_local_failure_count": 3,
+      "checkpoint_path": "D:\\HermesWorker\\workspace\\crypto_search_v2_2_e84b35c7\\runtime\\crypto_search_mechanism_v2_2_20260802\\checkpoints\\validation_kill_mechanism_evolution_v2_2.json",
+      "conditions": {
+        "validation_control_arm_constructible": true,
+        "validation_control_arm_passed": false,
+        "validation_equal_count_constructible": true
+      },
+      "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+      "equal_count_comparison_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "expanded_mechanism_random_v2_2": 128,
+        "mechanism_evolution_v2_2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    }
+  },
+  "arm_state_after": {
+    "expanded_mechanism_random_v2_2": "EXITED",
+    "mechanism_evolution_v2_2": "EXITED"
+  },
+  "candidate_generation_performed": false,
+  "candidate_local_failure_counts": {
+    "expanded_mechanism_random_v2_2": 2,
+    "mechanism_evolution_v2_2": 3
+  },
+  "candidate_local_failure_handling": "RECORD_AND_DETERMINISTICALLY_BACKFILL_BY_FROZEN_TRAIN_RANK_WITHIN_ARM_HORIZON",
+  "candidate_local_failures": [
+    {
+      "arm": "expanded_mechanism_random_v2_2",
+      "candidate_id": "E331D685ABC876F00C9815EDE07C4D181DBC6BF55B05CC130018500FFD10143C",
+      "horizon_hours": 1,
+      "horizon_selection_rank": 38,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "selection_rank": 38
+    },
+    {
+      "arm": "expanded_mechanism_random_v2_2",
+      "candidate_id": "552C6AAEC0737B5E7383630823C1975F59931488279799B0E88E4D5AB052A3AD",
+      "horizon_hours": 4,
+      "horizon_selection_rank": 36,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "selection_rank": 101
+    },
+    {
+      "arm": "mechanism_evolution_v2_2",
+      "candidate_id": "A4D5D24DF01CADE9D202183BC3B377C38E54A773C53814272BCB40F37F410AA7",
+      "horizon_hours": 1,
+      "horizon_selection_rank": 43,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "selection_rank": 43
+    },
+    {
+      "arm": "mechanism_evolution_v2_2",
+      "candidate_id": "573FC1385DF1FB04DBBE9E82A8A6C39BB179DEDF1192EE20254BDBE321B749E2",
+      "horizon_hours": 1,
+      "horizon_selection_rank": 58,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "selection_rank": 58
+    },
+    {
+      "arm": "mechanism_evolution_v2_2",
+      "candidate_id": "3C288A9BF47DEEB537F1F032620B8DC9F30917D8393285ACCF31111B4FCCD6DC",
+      "horizon_hours": 4,
+      "horizon_selection_rank": 23,
+      "reason": "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "selection_rank": 89
+    }
+  ],
+  "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+  "control_arm_id": "expanded_mechanism_random_v2_2",
+  "economic_receipt_sha256": "F6307CADAF6958314A94443223ECE7546F6C40E6823C59F4DC2928C679E8BD91",
+  "equal_count_comparison_counts": {
+    "expanded_mechanism_random_v2_2": 128,
+    "mechanism_evolution_v2_2": 128
+  },
+  "evaluated_per_arm_per_horizon": 64,
+  "holdout_read": false,
+  "matched_evaluated_counts": {
+    "expanded_mechanism_random_v2_2": 128,
+    "mechanism_evolution_v2_2": 128
+  },
+  "optimizer_feedback_written": false,
+  "orchestration_campaign": "crypto_search_mechanism_v2_2",
+  "policy_memory_written": false,
+  "policy_state_sha256_after": "9441A63C9614C0A0613EB0D3BF9760807C6284D2052389B9D1C05818730EDF8F",
+  "policy_state_sha256_before": "9441A63C9614C0A0613EB0D3BF9760807C6284D2052389B9D1C05818730EDF8F",
+  "random_control_survival_required": true,
+  "required_horizons_hours": [
+    1,
+    4
+  ],
+  "schema_version": 1,
+  "status": "VALIDATION_STAGE_COMPLETE",
+  "threshold_tuning_performed": false,
+  "trigger_after_train_checkpoint_index": 3,
+  "validation_attempted_counts": {
+    "expanded_mechanism_random_v2_2": 130,
+    "mechanism_evolution_v2_2": 131
+  }
+}

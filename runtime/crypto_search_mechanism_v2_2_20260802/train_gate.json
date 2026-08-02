@@ -1,0 +1,50 @@
+{
+  "absolute_floor_applies_to": "mechanism_evolution_v2_2",
+  "candidate_generation_performed": false,
+  "checks": {
+    "evolution_behavior_family_yield": true,
+    "evolution_duplicate_rate": true,
+    "evolution_mean_reward_increment": true,
+    "evolution_positive_count": true,
+    "evolution_positive_rate": true,
+    "evolution_positive_rate_increment": true,
+    "evolution_top_decile_increment": true
+  },
+  "contract": {
+    "evolution_mean_search_reward_must_exceed_random": true,
+    "evolution_positive_search_reward_rate_must_exceed_random": true,
+    "evolution_top_decile_search_reward_must_exceed_random": true,
+    "failure_action": "STOP_WITHOUT_VALIDATION",
+    "maximum_evolution_behavior_duplicate_rate": 0.1,
+    "minimum_evolution_behavior_family_yield": 0.9,
+    "minimum_evolution_positive_search_reward_count": 40,
+    "minimum_evolution_positive_search_reward_rate": 0.01,
+    "same_matched_evaluated_count": 4000
+  },
+  "evolution": {
+    "behavior_duplicate_rate": 0.05525000000000002,
+    "behavior_family_count": 3779,
+    "behavior_family_yield": 0.94475,
+    "matched_evaluated_count": 4000,
+    "mean_search_reward": -0.363292589491961,
+    "positive_search_reward_count": 406,
+    "positive_search_reward_rate": 0.1015,
+    "top_decile_search_reward": 0.11756959479039011
+  },
+  "expanded_random": {
+    "behavior_duplicate_rate": 0.0,
+    "behavior_family_count": 4000,
+    "behavior_family_yield": 1.0,
+    "matched_evaluated_count": 4000,
+    "mean_search_reward": -0.8315556118587804,
+    "positive_search_reward_count": 16,
+    "positive_search_reward_rate": 0.004,
+    "top_decile_search_reward": -0.16143642816672638
+  },
+  "random_role": "EQUAL_COUNT_COMPARATOR",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "threshold_tuning_performed": false,
+  "validation_authorized_by_gate": true
+}

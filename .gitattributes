@@ -47,3 +47,8 @@ reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md text eol=l
 # Byte-stable evidence produced by the bounded policy acceleration canary.
 runtime/crypto_policy_acceleration_canary_v1_20260720/*.json text eol=lf
 reports/CRYPTO_POLICY_ACCELERATION_CANARY_V1_REPORT.md text eol=lf
+
+# Byte-stable evidence produced by Search Engine V2.2.
+runtime/crypto_search_mechanism_v2_2_20260802/**/*.json text eol=lf
+reports/CRYPTO_SEARCH_MECHANISM_V2_2_20260802.md text eol=lf
+config/crypto_search_mechanism_v2_2_receipt.json text eol=lf

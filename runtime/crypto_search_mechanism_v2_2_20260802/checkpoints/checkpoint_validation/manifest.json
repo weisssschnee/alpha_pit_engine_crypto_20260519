@@ -1,0 +1,109 @@
+{
+  "archive_state_sha256": "1CF09B0A170D1479E381C3416B6D63FAB7C2D6305FB6584DF7592A734395DC2A",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_validation",
+  "checkpoint_index": 4,
+  "compiler_identity": {
+    "bundle_sha256": "3D040380B7D3A061591A27AE69EFE9340218A61C8F3200F49AAAF176FAD541F5",
+    "paths": [
+      {
+        "bytes": 55404,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "E27B8296AD1A6239A21F406F19DDBF86EA53BA0FFD9A3BB7B7A9418B8C4568A4"
+      },
+      {
+        "bytes": 24801,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "4D6A71912470A78547FC533825F70FB94DEED534E7892B535E5B1FC3102C090F"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 87685,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+      },
+      {
+        "bytes": 66411,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "52E7297518FE157C3566E695067A4EFAC4F9470BE98D55F5D4462A2B5F2B177E"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 768058,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "67DCAFB2FC4573B41F5A3FC96B70AAB04D4F29C87EF9ED307DCB483C7EEBCBA6"
+      },
+      {
+        "bytes": 35617,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "31541B6DE35AC7E96DC847709D1CF58516D3FC9035B2CFBDF8DC9B9291242641"
+      }
+    ]
+  },
+  "completed_identity_sha256": "E85809597B77BAD5ABE2FCB420EB244B3AA72C79BAB5C3C8357A301F038001AC",
+  "completed_ledger_row_count": 8000,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 50922,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "4FC21DDE1038A421D2EF4D0D624784D3876958D02CEDBDC450C18A368D49ED5B"
+    },
+    {
+      "bytes": 7609101,
+      "name": "behavior_archive.parquet",
+      "sha256": "57D1E38390CDC2A346606D36C2D461DA234C4BBF9945B02E7BD0FB564BE8D314"
+    },
+    {
+      "bytes": 42207215,
+      "name": "candidate_ledger.parquet",
+      "sha256": "FF4B6CF94296257C15B4F723DCD358CA8945E18FA0DB5CAA90E0D1FD14EF1969"
+    },
+    {
+      "bytes": 14833382,
+      "name": "state.json",
+      "sha256": "B66053FAE9632CE3DE694D6809CFDDA4CDCABCF3119AE91271F1CA3B11DC6E26"
+    },
+    {
+      "bytes": 14884,
+      "name": "validation_arm_metrics.parquet",
+      "sha256": "9170B8E0591ADE61BAE5D668392820433F5C1F3F26CCC26FE44619439A23551C"
+    },
+    {
+      "bytes": 55111,
+      "name": "validation_candidate_ledger.parquet",
+      "sha256": "35CEDE949AE58E06F7C50FBD1765C9964B383C157EB963F263D65B8078A487F2"
+    },
+    {
+      "bytes": 6040,
+      "name": "validation_decisions.json",
+      "sha256": "611E3BD98C4970797F4EA3D40433B0B7D5609451D910874F5104C6A1C095A695"
+    }
+  ],
+  "frozen_contract_sha256": "491E74969148CFD330182B35E57E1F2E113E2681B3C037D654C8EC21A2330565",
+  "policy_state_sha256": "9441A63C9614C0A0613EB0D3BF9760807C6284D2052389B9D1C05818730EDF8F",
+  "receipt_count": 3872,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "e84b35c76a4cfc139f1c351286489b83fce61250",
+  "state_sha256": "0E3CACDC03B68AA6A249057548CC97CE5D9FA51D1DAB754E4B51B05E854DA509",
+  "validation_arm_metric_row_count": 2,
+  "validation_candidate_row_count": 261,
+  "validation_decisions_sha256": "25D31FF4689BF4B94250B14AC98AF240448F331E6AC94D51C0F5F27E029B5EC7"
+}
