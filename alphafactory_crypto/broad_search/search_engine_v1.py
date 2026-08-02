@@ -5870,6 +5870,41 @@ def _mechanism_v21_checkpoint_allocation(
     return allocation
 
 
+def _mechanism_v21_expected_checkpoint_allocations(
+    *,
+    stages: Sequence[Mapping[str, Any]],
+    seeds: Sequence[int],
+) -> dict[int, dict[str, int]]:
+    """Compile checkpoint allocations from the run-frozen stage contract."""
+
+    checkpoint_allocations: dict[int, dict[str, int]] = {}
+    for stage in stages:
+        allocation = {
+            str(arm): int(count)
+            for arm, count in dict(stage["allocation_per_checkpoint"]).items()
+        }
+        checkpoint_indexes = tuple(int(value) for value in stage["checkpoint_indexes"])
+        if (
+            not checkpoint_indexes
+            or set(allocation) != set(MECHANISM_SEARCH_V21_ARMS)
+            or sum(allocation.values()) != MECHANISM_SEARCH_V21_CHECKPOINT_SIZE
+            or int(stage["strict_count"])
+            != len(checkpoint_indexes) * MECHANISM_SEARCH_V21_CHECKPOINT_SIZE
+            or any(value % len(seeds) for value in allocation.values())
+        ):
+            raise ValueError("Mechanism V2.1 frozen stage allocation is invalid")
+        nonzero = {arm: count for arm, count in allocation.items() if count}
+        for checkpoint_index in checkpoint_indexes:
+            if checkpoint_index in checkpoint_allocations:
+                raise ValueError("Mechanism V2.1 frozen checkpoint has two owners")
+            checkpoint_allocations[checkpoint_index] = nonzero
+    if set(checkpoint_allocations) != set(
+        range(MECHANISM_SEARCH_V21_CHECKPOINT_COUNT)
+    ):
+        raise ValueError("Mechanism V2.1 frozen stages do not cover the campaign")
+    return checkpoint_allocations
+
+
 def _completed_checkpoint_seed_balance_errors(
     ledger: pd.DataFrame,
     *,
@@ -11608,6 +11643,7 @@ def run_engine(
                 validation_result = {
                     "schema_version": 1,
                     "status": "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE",
+                    "resumed": False,
                     "arm_decisions": {},
                     "train_gate_sha256": _payload_sha(train_gate),
                     "candidate_generation_performed": False,
@@ -16822,13 +16858,14 @@ def check_mechanism_v21(
     ):
         if column not in ledger or not bool(ledger[column].fillna(False).all()):
             errors.append(f"ledger_gate:{column}")
-    expected_allocations = {
-        0: {"legacy_mechanism_random_v2": 2_000},
-        1: {"expanded_mechanism_random_v2_1": 2_000},
-        2: {"expanded_mechanism_random_v2_1": 2_000},
-        3: {"mechanism_evolution_v2_1": 2_000},
-        4: {"mechanism_evolution_v2_1": 2_000},
-    }
+    try:
+        expected_allocations = _mechanism_v21_expected_checkpoint_allocations(
+            stages=tuple(frozen.get("stages") or ()),
+            seeds=MECHANISM_SEARCH_V21_SEEDS,
+        )
+    except (KeyError, TypeError, ValueError, ZeroDivisionError):
+        errors.append("frozen_stage_contract")
+        expected_allocations = {}
     for checkpoint_index, expected in expected_allocations.items():
         local = ledger.loc[
             ledger["checkpoint_index"].astype(int) == checkpoint_index

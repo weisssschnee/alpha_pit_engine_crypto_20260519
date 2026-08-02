@@ -5,6 +5,7 @@ import random
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 from alphafactory_crypto.broad_search.compositional18m import (
     compile_mechanism_catalog,
@@ -30,6 +31,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _economic_campaign_seeds,
     _load_mechanism_v21_contract,
     _mechanism_v21_checkpoint_allocation,
+    _mechanism_v21_expected_checkpoint_allocations,
     _mechanism_v21_train_gate,
     _policy_inflight_limit,
 )
@@ -193,6 +195,47 @@ def test_v21_budget_seed_and_stage_contract_are_exact() -> None:
         assert {key: value for key, value in allocation.items() if value} == nonzero
 
 
+def test_v21_checker_allocations_compile_the_run_frozen_stage_contract() -> None:
+    config, _, _, _ = _load_mechanism_v21_contract(REPO_ROOT)
+    frozen_stages = json.loads(json.dumps(config["stages"]))
+    expected = _mechanism_v21_expected_checkpoint_allocations(
+        stages=frozen_stages,
+        seeds=MECHANISM_SEARCH_V21_SEEDS,
+    )
+    assert expected == {
+        0: {"legacy_mechanism_random_v2": 2_000},
+        1: {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        2: {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        3: {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+        4: {
+            "expanded_mechanism_random_v2_1": 1_000,
+            "mechanism_evolution_v2_1": 1_000,
+        },
+    }
+
+
+def test_v21_checker_rejects_a_malformed_frozen_stage_contract() -> None:
+    config, _, _, _ = _load_mechanism_v21_contract(REPO_ROOT)
+    frozen_stages = json.loads(json.dumps(config["stages"]))
+    frozen_stages[1]["allocation_per_checkpoint"][
+        "mechanism_evolution_v2_1"
+    ] -= 1
+    with pytest.raises(ValueError, match="frozen stage allocation"):
+        _mechanism_v21_expected_checkpoint_allocations(
+            stages=frozen_stages,
+            seeds=MECHANISM_SEARCH_V21_SEEDS,
+        )
+
+
 def test_v21_scheduler_fills_random_slots_without_lookahead_in_adaptive_lanes() -> None:
     registry = TypedExpressionRegistry(_contracts())
     config, legacy, expanded, _ = _load_mechanism_v21_contract(REPO_ROOT)
@@ -241,8 +284,18 @@ def test_v21_receipt_is_narrow_fresh_state_authority() -> None:
         REPO_ROOT,
         "config/crypto_search_mechanism_v2_1_receipt.json",
     )
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE"
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "PASS_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE",
+        "reason": "TRAIN_GATE_NEGATIVE",
+        "runtime": "runtime/crypto_search_mechanism_v2_1_20260801",
+        "producer_source_sha": "94b016fa7847d5c5b06db1e6144bda7062064151",
+        "generation_attempts": 14_237,
+        "strict_evaluated_count": 10_000,
+        "checkpoint": "checkpoint_004",
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["strict_evaluated_target"] == 10_000
     assert receipt["search_campaign"]["seed_set"] == list(
         MECHANISM_SEARCH_V21_SEEDS
