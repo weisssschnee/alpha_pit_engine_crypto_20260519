@@ -5887,6 +5887,7 @@ def _mechanism_v21_expected_checkpoint_allocations(
         if (
             not checkpoint_indexes
             or set(allocation) != set(MECHANISM_SEARCH_V21_ARMS)
+            or any(count < 0 for count in allocation.values())
             or sum(allocation.values()) != MECHANISM_SEARCH_V21_CHECKPOINT_SIZE
             or int(stage["strict_count"])
             != len(checkpoint_indexes) * MECHANISM_SEARCH_V21_CHECKPOINT_SIZE

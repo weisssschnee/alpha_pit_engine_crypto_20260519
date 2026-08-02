@@ -234,6 +234,18 @@ def test_v21_checker_rejects_a_malformed_frozen_stage_contract() -> None:
             stages=frozen_stages,
             seeds=MECHANISM_SEARCH_V21_SEEDS,
         )
+    frozen_stages = json.loads(json.dumps(config["stages"]))
+    frozen_stages[1]["allocation_per_checkpoint"][
+        "expanded_mechanism_random_v2_1"
+    ] = -1_000
+    frozen_stages[1]["allocation_per_checkpoint"][
+        "mechanism_evolution_v2_1"
+    ] = 3_000
+    with pytest.raises(ValueError, match="frozen stage allocation"):
+        _mechanism_v21_expected_checkpoint_allocations(
+            stages=frozen_stages,
+            seeds=MECHANISM_SEARCH_V21_SEEDS,
+        )
 
 
 def test_v21_scheduler_fills_random_slots_without_lookahead_in_adaptive_lanes() -> None:
