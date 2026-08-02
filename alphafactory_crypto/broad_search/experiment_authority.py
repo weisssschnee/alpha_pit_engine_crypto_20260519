@@ -57,6 +57,9 @@ SEARCH_MECHANISM_V2_RECEIPT_PATH = (
 SEARCH_MECHANISM_V21_RECEIPT_PATH = (
     "config/crypto_search_mechanism_v2_1_receipt.json"
 )
+SEARCH_MECHANISM_V22_RECEIPT_PATH = (
+    "config/crypto_search_mechanism_v2_2_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -389,6 +392,76 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "target_contract",
             "runtime_binding",
             "legacy_mechanism_catalog",
+            "expanded_mechanism_catalog",
+            "aggregate_mechanism_knowledge",
+            "campaign_contract",
+        },
+    },
+    "CRYPTO_SEARCH_MECHANISM_V2_2_RECEIPT": {
+        "path": SEARCH_MECHANISM_V22_RECEIPT_PATH,
+        "decision_id": (
+            "USER_AUTHORIZED_FRESH_STATE_EVOLUTION_QUALIFICATION_20K_20260802"
+        ),
+        "runner_campaign": "crypto_search_mechanism_v2_2",
+        "runtime_date": "20260802",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
+        "run_authorization_scope": (
+            "ONE_FRESH_STATE_UP_TO_20000_STRICT_EVOLUTION_QUALIFICATION_CAMPAIGN"
+        ),
+        "run_authorization_extras": {
+            "mechanism_catalog_persistence_authorized": True,
+            "aggregate_mechanism_knowledge_authorized": True,
+            "candidate_or_policy_state_persistence_authorized": False,
+            "additional_seed_campaign_allowed": False,
+        },
+        "mechanism_registry_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "compile_mechanism_catalog"
+        ),
+        "mapping_adapter_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "mapping_id_for_mechanism_spec"
+        ),
+        "economic_hypothesis_field": "hypothesis",
+        "mapping_classes": {
+            "CROSS_SECTIONAL_RELATIVE",
+            "DIRECTIONAL_STATEFUL",
+            "SPARSE_EVENT_CARRY",
+        },
+        "strict_evaluated_target": 20_000,
+        "checkpoint_size": 2_000,
+        "checkpoint_count": 10,
+        "validation_trigger": 3,
+        "validation_continuation_action": (
+            "CONTINUE_SAME_FRESH_STATE_TO_20000_IF_BOTH_ARMS_PASS"
+        ),
+        "random_control_survival_required": True,
+        "control_arm_id": "expanded_mechanism_random_v2_2",
+        "seed_set": (
+            1805313393,
+            1209455071,
+            1221486859,
+            2049360136,
+        ),
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+        ),
+        "required_component_sources": {
+            "mechanism",
+            "mechanism_mapping",
+            "direction",
+            "validation_kill_line",
+            "portfolio_mapping_and_cost",
+            "target_execution",
+            "optimizer_reward_and_matched_attribution",
+            "target_contract",
+            "runtime_binding",
             "expanded_mechanism_catalog",
             "aggregate_mechanism_knowledge",
             "campaign_contract",
@@ -986,6 +1059,10 @@ def _validate_search_economic_receipt(
         blockers.append(
             "validation_kill_line.random_control_survival_required"
         )
+    if "control_arm_id" in receipt_spec and (
+        kill_line.get("control_arm_id") != receipt_spec["control_arm_id"]
+    ):
+        blockers.append("validation_kill_line.control_arm_id")
     if (
         kill_line.get("checkpoint_action")
         != "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS"

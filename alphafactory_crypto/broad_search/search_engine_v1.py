@@ -213,6 +213,34 @@ MECHANISM_SEARCH_V21_CHECKPOINT_COUNT = 5
 MECHANISM_SEARCH_V21_STRICT_TARGET = 10_000
 MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT = 100_000
 MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
+MECHANISM_SEARCH_V22_CAMPAIGN = "crypto_search_mechanism_v2_2"
+MECHANISM_SEARCH_V22_EPOCH_ID = (
+    "CRYPTO_SEARCH_ENGINE_V2_2_EVOLUTION_QUALIFICATION_20260802"
+)
+MECHANISM_SEARCH_V22_CONFIG = (
+    "config/crypto_search_engine_v2_2_evolution_qualification.json"
+)
+MECHANISM_SEARCH_V22_CATALOG = MECHANISM_SEARCH_V21_CATALOG
+MECHANISM_SEARCH_V22_KNOWLEDGE = MECHANISM_SEARCH_V21_KNOWLEDGE
+MECHANISM_SEARCH_V22_SEEDS = (
+    1805313393,
+    1209455071,
+    1221486859,
+    2049360136,
+)
+MECHANISM_SEARCH_V22_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+)
+MECHANISM_SEARCH_V22_ARMS = (
+    "expanded_mechanism_random_v2_2",
+    "mechanism_evolution_v2_2",
+)
+MECHANISM_SEARCH_V22_CHECKPOINT_SIZE = 2_000
+MECHANISM_SEARCH_V22_CHECKPOINT_COUNT = 10
+MECHANISM_SEARCH_V22_QUALIFICATION_STRICT_COUNT = 8_000
+MECHANISM_SEARCH_V22_STRICT_TARGET = 20_000
+MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT = 100_000
+MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
@@ -222,6 +250,7 @@ ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_V6_CAMPAIGN,
     MECHANISM_SEARCH_V2_CAMPAIGN,
     MECHANISM_SEARCH_V21_CAMPAIGN,
+    MECHANISM_SEARCH_V22_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -313,6 +342,23 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "raw_attempt_limit": MECHANISM_SEARCH_V21_RAW_ATTEMPT_LIMIT,
         "wall_time_limit_seconds": MECHANISM_SEARCH_V21_WALL_TIME_LIMIT_SECONDS,
         "arms": MECHANISM_SEARCH_V21_ARMS,
+    },
+    MECHANISM_SEARCH_V22_CAMPAIGN: {
+        "epoch_id": MECHANISM_SEARCH_V22_EPOCH_ID,
+        "runtime_date": "20260802",
+        "runtime_prefix": "crypto_search_mechanism_v2_2",
+        "report_prefix": "CRYPTO_SEARCH_MECHANISM_V2_2",
+        "report_title": "Crypto Search Engine V2.2 Evolution Qualification",
+        "receipt_path": "config/crypto_search_mechanism_v2_2_receipt.json",
+        "cli_suffix": "mechanism-v2-2",
+        "seeds": MECHANISM_SEARCH_V22_SEEDS,
+        "seed_derivation": MECHANISM_SEARCH_V22_SEED_DERIVATION,
+        "strict_target": MECHANISM_SEARCH_V22_STRICT_TARGET,
+        "checkpoint_size": MECHANISM_SEARCH_V22_CHECKPOINT_SIZE,
+        "checkpoint_count": MECHANISM_SEARCH_V22_CHECKPOINT_COUNT,
+        "raw_attempt_limit": MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS,
+        "arms": MECHANISM_SEARCH_V22_ARMS,
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -516,6 +562,28 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
         )
         if set(seeds) & prior:
             raise ValueError("Mechanism V2.1 seed set overlaps a prior campaign")
+    if campaign == MECHANISM_SEARCH_V22_CAMPAIGN:
+        expected = tuple(
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{MECHANISM_SEARCH_V22_EPOCH_ID}|seed|{ordinal}".encode()
+                ).digest()[:4],
+                "big",
+            )
+            for ordinal in range(4)
+        )
+        if seeds != MECHANISM_SEARCH_V22_SEEDS or seeds != expected:
+            raise ValueError("Mechanism V2.2 seed set changed")
+        if config.get("seed_derivation") != MECHANISM_SEARCH_V22_SEED_DERIVATION:
+            raise ValueError("Mechanism V2.2 seed derivation changed")
+        prior = (
+            set(SEEDS)
+            | set(ECONOMIC_SEARCH_V6_SEEDS)
+            | set(MECHANISM_SEARCH_V2_SEEDS)
+            | set(MECHANISM_SEARCH_V21_SEEDS)
+        )
+        if set(seeds) & prior:
+            raise ValueError("Mechanism V2.2 seed set overlaps a prior campaign")
     return seeds
 
 
@@ -1817,6 +1885,112 @@ def _mechanism_v21_frozen_contract(
         "stages": list(config["stages"]),
         "arms": {
             "active": list(MECHANISM_SEARCH_V21_ARMS),
+            "same_frozen_seed_set_for_every_arm": True,
+            "arm_local_adaptive_memory": True,
+            "cem_budget": 0,
+        },
+        "policies": dict(config["policy_parameters"]),
+        "train_gate": dict(config["train_gate"]),
+        "validation_contract": dict(config["validation"]),
+        "fresh_state": dict(config["fresh_state"]),
+        "persistent_mechanism_knowledge": dict(
+            config["persistent_mechanism_knowledge"]
+        ),
+        "budget": {
+            **dict(config["search"]),
+            "fail_closed_attempt_reservation_per_proposal": (
+                MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+            ),
+        },
+        "boundaries": {
+            **dict(config["boundaries"]),
+            "sealed_reads": 0,
+            "report_only_feedback": False,
+            "cross_sprint_adaptive_memory": False,
+        },
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and pair "
+            "evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _mechanism_v22_frozen_contract(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+    carrier_id: str,
+) -> dict[str, Any]:
+    config, catalog, knowledge = _load_mechanism_v22_contract(repo_root)
+    payload = {
+        "schema_version": 1,
+        "epoch_id": MECHANISM_SEARCH_V22_EPOCH_ID,
+        "source_sha": source_sha,
+        "base_sha": BASE_SHA,
+        "search_engine_version": "FRESH_STATE_EVOLUTION_QUALIFICATION_V2_2",
+        "objective": (
+            "Qualify fresh Mechanism Evolution against an equal-count expanded "
+            "random control, then continuously expand only after both pass the "
+            "frozen validation kill-line"
+        ),
+        "authorization": (
+            "ONE_FRESH_STATE_UP_TO_20000_STRICT_EVOLUTION_QUALIFICATION_CAMPAIGN"
+        ),
+        "surface": {
+            "context_id": str(carrier_id),
+            "fields": len(contracts),
+            "field_ids": [item.field_id for item in contracts],
+            "carrier_reused": True,
+            "new_materializer": False,
+        },
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "seeds": [int(value) for value in MECHANISM_SEARCH_V22_SEEDS],
+        "seed_contract": {
+            "derivation": MECHANISM_SEARCH_V22_SEED_DERIVATION,
+            "pre_registered_before_candidate_one": True,
+            "disjoint_from_all_prior_crypto_search_campaigns": True,
+            "within_campaign_seed_change_allowed": False,
+            "additional_seed_campaign_allowed": False,
+        },
+        "mechanism_grammar": {
+            "catalog_path": MECHANISM_SEARCH_V22_CATALOG,
+            "catalog_file_sha256": sha256_file(
+                repo_root / MECHANISM_SEARCH_V22_CATALOG
+            ),
+            "compiled_catalog_sha256": _mechanism_catalog_sha(catalog),
+            "compiled_mechanism_count": len(catalog),
+            "template_count": len({item.template_id for item in catalog}),
+            "v21_catalog_reused_unchanged": True,
+            "existing_expression_ast_reused": True,
+            "existing_typed_registry_reused": True,
+            "existing_candidate_spec_reused": True,
+            "existing_compiler_reused": True,
+            "existing_pair_evaluator_reused": True,
+            "second_ast_or_compiler_created": False,
+        },
+        "aggregate_knowledge": {
+            "path": MECHANISM_SEARCH_V22_KNOWLEDGE,
+            "file_sha256": sha256_file(repo_root / MECHANISM_SEARCH_V22_KNOWLEDGE),
+            "source_candidate_ledger_sha256": knowledge[
+                "source_candidate_ledger_sha256"
+            ],
+            "usage_contract": dict(knowledge["usage_contract"]),
+            "sampling_probability_prior": False,
+        },
+        "stages": list(config["stages"]),
+        "arms": {
+            "active": list(MECHANISM_SEARCH_V22_ARMS),
             "same_frozen_seed_set_for_every_arm": True,
             "arm_local_adaptive_memory": True,
             "cem_budget": 0,
@@ -5044,7 +5218,10 @@ def _policy_inflight_limit(
     the preceding candidate's reward and behavior-family observation.
     """
 
-    if campaign == MECHANISM_SEARCH_V21_CAMPAIGN and type(policy) is MechanismRandomV2:
+    if campaign in {
+        MECHANISM_SEARCH_V21_CAMPAIGN,
+        MECHANISM_SEARCH_V22_CAMPAIGN,
+    } and type(policy) is MechanismRandomV2:
         return max(1, int(math.ceil(int(workers) / max(1, int(active_lane_count)))))
     return 1
 
@@ -5289,6 +5466,103 @@ def _load_mechanism_v21_contract(
     return config, legacy_catalog, expanded_catalog, knowledge
 
 
+def _load_mechanism_v22_contract(
+    repo_root: Path,
+) -> tuple[dict[str, Any], tuple[MechanismSpec, ...], dict[str, Any]]:
+    """Load V2.2 while reusing the V2.1 catalog and no adaptive state."""
+
+    config = _read_json(repo_root / MECHANISM_SEARCH_V22_CONFIG)
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_UP_TO_20000_STRICT_EVOLUTION_QUALIFICATION_CAMPAIGN"
+    ):
+        raise PermissionError("Mechanism V2.2 authorization changed")
+    if any(bool(value) for value in config.get("fresh_state", {}).values()):
+        raise PermissionError("Mechanism V2.2 imported prior adaptive state")
+    search = dict(config["search"])
+    expected = {
+        "strict_evaluated_target": MECHANISM_SEARCH_V22_STRICT_TARGET,
+        "qualification_strict_count": MECHANISM_SEARCH_V22_QUALIFICATION_STRICT_COUNT,
+        "checkpoint_size": MECHANISM_SEARCH_V22_CHECKPOINT_SIZE,
+        "checkpoint_count": MECHANISM_SEARCH_V22_CHECKPOINT_COUNT,
+        "raw_generation_attempts_maximum": MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT,
+        "wall_time_seconds_maximum": MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS,
+    }
+    if any(int(search.get(key, -1)) != value for key, value in expected.items()):
+        raise ValueError("Mechanism V2.2 search budget changed")
+    if search.get("workers_12_forbidden") is not True:
+        raise PermissionError("Mechanism V2.2 worker boundary changed")
+    if not math.isclose(
+        float(search.get("required_pairs_per_hour", -1.0)),
+        MECHANISM_SEARCH_V22_STRICT_TARGET
+        * 3600.0
+        / MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS,
+        rel_tol=0.0,
+        abs_tol=1.0e-9,
+    ):
+        raise ValueError("Mechanism V2.2 throughput floor changed")
+
+    expected_allocations = _mechanism_v22_expected_checkpoint_allocations(
+        stages=config.get("stages") or (),
+        seeds=MECHANISM_SEARCH_V22_SEEDS,
+    )
+    if set(expected_allocations) != set(range(MECHANISM_SEARCH_V22_CHECKPOINT_COUNT)):
+        raise ValueError("Mechanism V2.2 stages do not cover the campaign")
+    if sum(sum(row.values()) for row in expected_allocations.values()) != (
+        MECHANISM_SEARCH_V22_STRICT_TARGET
+    ):
+        raise ValueError("Mechanism V2.2 stage total changed")
+
+    evolution = dict(config["policy_parameters"]["mechanism_evolution_v2_2"])
+    if not math.isclose(
+        sum(
+            float(evolution[key])
+            for key in (
+                "parameter_mutation_probability",
+                "mechanism_mutation_probability",
+                "crossover_probability",
+            )
+        ),
+        1.0,
+        rel_tol=0.0,
+        abs_tol=1.0e-15,
+    ):
+        raise ValueError("Mechanism V2.2 evolution probabilities changed")
+    persistence = dict(config["persistent_mechanism_knowledge"])
+    if persistence.get("sampling_probability_prior") is not False or any(
+        bool(persistence.get(key))
+        for key in (
+            "individual_candidate_reward",
+            "population",
+            "cem_distribution",
+            "rng_state",
+        )
+    ):
+        raise PermissionError("Mechanism V2.2 crossed campaign-local memory")
+    if any(
+        bool(config["boundaries"].get(key))
+        for key in (
+            "oos",
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "latent_priority",
+            "relational_training",
+        )
+    ):
+        raise PermissionError("Mechanism V2.2 crossed a research boundary")
+    if repo_root / str(config["catalog_path"]) != repo_root / MECHANISM_SEARCH_V22_CATALOG:
+        raise ValueError("Mechanism V2.2 catalog changed")
+    if repo_root / str(config["aggregate_knowledge_path"]) != (
+        repo_root / MECHANISM_SEARCH_V22_KNOWLEDGE
+    ):
+        raise ValueError("Mechanism V2.2 knowledge path changed")
+    _, _, catalog, knowledge = _load_mechanism_v21_contract(repo_root)
+    return config, catalog, knowledge
+
+
 def _balanced_lane_choice(
     *,
     lane_order: Sequence[str],
@@ -5341,6 +5615,8 @@ def _initial_policies(
     mechanism_v21_config: dict[str, Any] | None = None
     mechanism_v21_legacy: tuple[MechanismSpec, ...] | None = None
     mechanism_v21_expanded: tuple[MechanismSpec, ...] | None = None
+    mechanism_v22_config: dict[str, Any] | None = None
+    mechanism_v22_catalog: tuple[MechanismSpec, ...] | None = None
     if set(arms) & set(MECHANISM_SEARCH_V2_ARMS[1:]):
         mechanism_config, mechanism_catalog = _load_mechanism_v2_contract(
             Path(__file__).resolve().parents[2]
@@ -5352,6 +5628,10 @@ def _initial_policies(
             mechanism_v21_expanded,
             _,
         ) = _load_mechanism_v21_contract(Path(__file__).resolve().parents[2])
+    if set(arms) & set(MECHANISM_SEARCH_V22_ARMS):
+        mechanism_v22_config, mechanism_v22_catalog, _ = (
+            _load_mechanism_v22_contract(Path(__file__).resolve().parents[2])
+        )
     compatible_skeleton_ids = field_role_surface(
         tuple(registry.fields.values())
     )["compatible_skeleton_ids"]
@@ -5455,6 +5735,22 @@ def _initial_policies(
                     registry,
                     mechanism_v21_expanded,
                     dict(mechanism_v21_config["policy_parameters"][arm]),
+                )
+            elif arm == "expanded_mechanism_random_v2_2":
+                assert mechanism_v22_config is not None and mechanism_v22_catalog is not None
+                output[key] = MechanismRandomV2(
+                    seed,
+                    registry,
+                    mechanism_v22_catalog,
+                    dict(mechanism_v22_config["policy_parameters"][arm]),
+                )
+            elif arm == "mechanism_evolution_v2_2":
+                assert mechanism_v22_config is not None and mechanism_v22_catalog is not None
+                output[key] = MechanismEvolutionV2(
+                    seed,
+                    registry,
+                    mechanism_v22_catalog,
+                    dict(mechanism_v22_config["policy_parameters"][arm]),
                 )
             else:
                 raise ValueError(f"unsupported search policy arm: {arm}")
@@ -5903,6 +6199,69 @@ def _mechanism_v21_expected_checkpoint_allocations(
         range(MECHANISM_SEARCH_V21_CHECKPOINT_COUNT)
     ):
         raise ValueError("Mechanism V2.1 frozen stages do not cover the campaign")
+    return checkpoint_allocations
+
+
+def _mechanism_v22_checkpoint_allocation(
+    checkpoint_index: int,
+    *,
+    repo_root: Path,
+    seeds: Sequence[int],
+) -> dict[str, int]:
+    config, _, _ = _load_mechanism_v22_contract(repo_root)
+    matches = [
+        stage
+        for stage in config["stages"]
+        if int(checkpoint_index)
+        in {int(value) for value in stage["checkpoint_indexes"]}
+    ]
+    if len(matches) != 1:
+        raise ValueError("Mechanism V2.2 checkpoint has no unique stage")
+    allocation = {
+        str(arm): int(count)
+        for arm, count in matches[0]["allocation_per_checkpoint"].items()
+    }
+    if set(allocation) != set(MECHANISM_SEARCH_V22_ARMS):
+        raise ValueError("Mechanism V2.2 stage arm set changed")
+    if sum(allocation.values()) != MECHANISM_SEARCH_V22_CHECKPOINT_SIZE:
+        raise ValueError("Mechanism V2.2 stage allocation changed")
+    if any(value % len(seeds) for value in allocation.values()):
+        raise ValueError("Mechanism V2.2 allocation is not seed balanced")
+    return allocation
+
+
+def _mechanism_v22_expected_checkpoint_allocations(
+    *,
+    stages: Sequence[Mapping[str, Any]],
+    seeds: Sequence[int],
+) -> dict[int, dict[str, int]]:
+    checkpoint_allocations: dict[int, dict[str, int]] = {}
+    for stage in stages:
+        allocation = {
+            str(arm): int(count)
+            for arm, count in dict(stage["allocation_per_checkpoint"]).items()
+        }
+        indexes = tuple(int(value) for value in stage["checkpoint_indexes"])
+        if (
+            not indexes
+            or set(allocation) != set(MECHANISM_SEARCH_V22_ARMS)
+            or any(count < 0 for count in allocation.values())
+            or sum(allocation.values()) != MECHANISM_SEARCH_V22_CHECKPOINT_SIZE
+            or int(stage["strict_count"])
+            != len(indexes) * MECHANISM_SEARCH_V22_CHECKPOINT_SIZE
+            or any(value % len(seeds) for value in allocation.values())
+        ):
+            raise ValueError("Mechanism V2.2 frozen stage allocation is invalid")
+        for checkpoint_index in indexes:
+            if checkpoint_index in checkpoint_allocations:
+                raise ValueError("Mechanism V2.2 frozen checkpoint has two owners")
+            checkpoint_allocations[checkpoint_index] = {
+                arm: count for arm, count in allocation.items() if count
+            }
+    if set(checkpoint_allocations) != set(
+        range(MECHANISM_SEARCH_V22_CHECKPOINT_COUNT)
+    ):
+        raise ValueError("Mechanism V2.2 frozen stages do not cover the campaign")
     return checkpoint_allocations
 
 
@@ -7930,6 +8289,106 @@ def _mechanism_v21_train_gate(
     }
 
 
+def _mechanism_v22_train_gate(
+    *,
+    repo_root: Path,
+    ledger: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    config, _, _ = _load_mechanism_v22_contract(repo_root)
+    contract = dict(config["train_gate"])
+
+    def ordered(arm: str) -> list[Mapping[str, Any]]:
+        return sorted(
+            (row for row in ledger if str(row["arm"]) == arm),
+            key=lambda row: (
+                int(row["arm_completion_ordinal"]),
+                str(row["candidate_id"]),
+            ),
+        )
+
+    count = int(contract["same_matched_evaluated_count"])
+    random_rows = ordered("expanded_mechanism_random_v2_2")[:count]
+    evolution_rows = ordered("mechanism_evolution_v2_2")[:count]
+    if len(random_rows) != count or len(evolution_rows) != count:
+        raise ValueError("Mechanism V2.2 train gate lacks equal-count rows")
+
+    def metrics(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+        rewards = [float(row["search_reward"]) for row in rows]
+        families = {str(row["behavior_family_id"]) for row in rows}
+        positive_count = sum(value > 0.0 for value in rewards)
+        yield_rate = len(families) / len(rows)
+        return {
+            "matched_evaluated_count": len(rows),
+            "mean_search_reward": float(np.mean(rewards)),
+            "top_decile_search_reward": _top_decile_mean(rewards),
+            "positive_search_reward_count": positive_count,
+            "positive_search_reward_rate": positive_count / len(rows),
+            "behavior_family_count": len(families),
+            "behavior_family_yield": yield_rate,
+            "behavior_duplicate_rate": 1.0 - yield_rate,
+        }
+
+    random_metrics = metrics(random_rows)
+    evolution_metrics = metrics(evolution_rows)
+    checks = {
+        "evolution_positive_count": (
+            evolution_metrics["positive_search_reward_count"]
+            >= int(contract["minimum_evolution_positive_search_reward_count"])
+        ),
+        "evolution_positive_rate": (
+            evolution_metrics["positive_search_reward_rate"]
+            >= float(contract["minimum_evolution_positive_search_reward_rate"])
+        ),
+        "evolution_mean_reward_increment": (
+            evolution_metrics["mean_search_reward"]
+            > random_metrics["mean_search_reward"]
+        ),
+        "evolution_top_decile_increment": (
+            evolution_metrics["top_decile_search_reward"]
+            > random_metrics["top_decile_search_reward"]
+        ),
+        "evolution_positive_rate_increment": (
+            evolution_metrics["positive_search_reward_rate"]
+            > random_metrics["positive_search_reward_rate"]
+        ),
+        "evolution_behavior_family_yield": (
+            evolution_metrics["behavior_family_yield"]
+            >= float(contract["minimum_evolution_behavior_family_yield"])
+        ),
+        "evolution_duplicate_rate": (
+            evolution_metrics["behavior_duplicate_rate"]
+            <= float(contract["maximum_evolution_behavior_duplicate_rate"])
+        ),
+    }
+    passed = all(checks.values())
+    return {
+        "schema_version": 1,
+        "status": "PASS" if passed else "TRAIN_GATE_NEGATIVE",
+        "contract": contract,
+        "expanded_random": random_metrics,
+        "evolution": evolution_metrics,
+        "checks": checks,
+        "absolute_floor_applies_to": "mechanism_evolution_v2_2",
+        "random_role": "EQUAL_COUNT_COMPARATOR",
+        "validation_authorized_by_gate": passed,
+        "threshold_tuning_performed": False,
+        "candidate_generation_performed": False,
+        "sealed_reads": 0,
+    }
+
+
+def _mechanism_v22_validation_allows_expansion(
+    validation_result: Mapping[str, Any],
+) -> bool:
+    if validation_result.get("status") != "VALIDATION_STAGE_COMPLETE":
+        return False
+    decisions = dict(validation_result.get("arm_decisions") or {})
+    return all(
+        bool(dict(decisions.get(arm) or {}).get("passed"))
+        for arm in MECHANISM_SEARCH_V22_ARMS
+    )
+
+
 def _mechanism_v21_final_decision(
     *,
     repo_root: Path,
@@ -8130,6 +8589,175 @@ def _mechanism_v21_report_text(decision: Mapping[str, Any]) -> str:
 Validation-qualified arms: **{qualified}**. This run does not create an Alpha,
 OOS, challenge, recent, May-stress, forward, or promotion claim and starts no
 subsequent Arena.
+"""
+
+
+def _mechanism_v22_final_decision(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    runtime_root: Path,
+    validation_result: Mapping[str, Any],
+) -> dict[str, Any]:
+    config, catalog, _ = _load_mechanism_v22_contract(repo_root)
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    restore_verified = all(
+        bool(_read_json(path / "manifest.json").get("restore_verified"))
+        for path in checkpoints
+    )
+    train_gate = _read_json(runtime_root / "train_gate.json")
+    validation_passed = _mechanism_v22_validation_allows_expansion(
+        validation_result
+    )
+    if train_gate["validation_authorized_by_gate"] is not True:
+        status = "PASS_SEARCH_ENGINE_V2_2_TRAIN_GATE_NEGATIVE"
+        reason = "TRAIN_GATE_NEGATIVE"
+    elif not validation_passed:
+        status = "PASS_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE"
+        reason = "VALIDATION_GATE_NEGATIVE"
+    elif len(ledger) == MECHANISM_SEARCH_V22_STRICT_TARGET:
+        status = "PASS_SEARCH_ENGINE_V2_2_CONTINUOUS_EXPANSION_COMPLETE"
+        reason = "FROZEN_STAGE_C_COMPLETE"
+    else:
+        raise RuntimeError("Mechanism V2.2 terminal state is incomplete")
+
+    by_arm = {
+        arm: sorted(
+            (row for row in ledger if str(row["arm"]) == arm),
+            key=lambda row: (
+                int(row["arm_completion_ordinal"]),
+                str(row["candidate_id"]),
+            ),
+        )
+        for arm in MECHANISM_SEARCH_V22_ARMS
+    }
+
+    def summary(arm: str) -> dict[str, Any]:
+        rows = by_arm[arm]
+        rewards = [float(row["search_reward"]) for row in rows]
+        pair_rewards = [float(row["pair_reward"]) for row in rows]
+        families = {str(row["behavior_family_id"]) for row in rows}
+        counter = state["arm_counters"][arm]
+        cpu_hours = float(counter["cpu_seconds"]) / 3600.0
+        positive = sum(value > 0.0 for value in rewards)
+        return {
+            "generation_attempts": int(counter["generation_attempts"]),
+            "strict_evaluated": len(rows),
+            "valid_exact_unique_per_cpu_hour": int(counter["exact_unique"])
+            / max(cpu_hours, 1.0e-12),
+            "behavior_family_count": len(families),
+            "behavior_family_yield": len(families) / max(1, len(rows)),
+            "behavior_duplicate_rate": 1.0 - len(families) / max(1, len(rows)),
+            "mean_search_reward": float(np.mean(rewards)) if rewards else None,
+            "top_decile_search_reward": _top_decile_mean(rewards),
+            "positive_search_reward_count": positive,
+            "positive_search_reward_rate": positive / max(1, len(rows)),
+            "mean_pair_reward": float(np.mean(pair_rewards)) if pair_rewards else None,
+            "top_decile_pair_reward": _top_decile_mean(pair_rewards),
+            "cost_killed_rate": sum(bool(row["cost_killed"]) for row in rows)
+            / max(1, len(rows)),
+            "turnover_killed_rate": sum(
+                bool(row["turnover_killed"]) for row in rows
+            )
+            / max(1, len(rows)),
+            "verified_parameter_mutations": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[0]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+            "verified_mechanism_mutations": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[1]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+            "verified_crossovers": sum(
+                str(row["operation"]) == MECHANISM_EVOLUTION_OPERATIONS[2]
+                and bool(row["receipt_verified"])
+                for row in rows
+            ),
+        }
+
+    qualified = ["mechanism_evolution_v2_2"] if validation_passed else []
+    return {
+        "schema_version": 1,
+        "epoch_id": MECHANISM_SEARCH_V22_EPOCH_ID,
+        "status": status,
+        "reason": reason,
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": restore_verified,
+        "compiled_mechanism_count": len(catalog),
+        "template_count": len({item.template_id for item in catalog}),
+        "stage_contract": list(config["stages"]),
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+        "arm_summaries": {
+            arm: summary(arm) for arm in MECHANISM_SEARCH_V22_ARMS
+        },
+        "train_gate": train_gate,
+        "validation_status": validation_result.get("status"),
+        "validation_allows_continuous_expansion": validation_passed,
+        "future_development_data_arena_qualified_arms": qualified,
+        "future_new_data_arena_qualified_arms": qualified,
+        "research_decision": "HOLD_DEVELOPMENT_ONLY_NO_PROMOTION",
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": "FORBIDDEN",
+        "next_arena_started": False,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def _mechanism_v22_report_text(decision: Mapping[str, Any]) -> str:
+    rows = []
+    for arm, values in decision["arm_summaries"].items():
+        rows.append(
+            "| {arm} | {strict:,} | {families:,} | {duplicate:.2%} | "
+            "{mean:.6f} | {top:.6f} | {positive:.2%} |".format(
+                arm=arm,
+                strict=int(values["strict_evaluated"]),
+                families=int(values["behavior_family_count"]),
+                duplicate=float(values["behavior_duplicate_rate"]),
+                mean=float(values["mean_search_reward"]),
+                top=float(values["top_decile_search_reward"]),
+                positive=float(values["positive_search_reward_rate"]),
+            )
+        )
+    qualified = ", ".join(
+        decision["future_development_data_arena_qualified_arms"]
+    ) or "none"
+    return f"""# Crypto Search Engine V2.2 Evolution Qualification
+
+- Status: `{decision['status']}` (`{decision['reason']}`); development-only.
+- Producer source: `{decision['producer_source_sha']}`.
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Catalog: `{decision['compiled_mechanism_count']}` existing V2.1 mechanisms; no new AST/compiler/evaluator.
+- Checkpoints: `{decision['checkpoint_count']}`; exact restore: `{decision['checkpoint_restore_verified']}`.
+- Train gate: `{decision['train_gate']['status']}`; validation: `{decision['validation_status']}`.
+
+| Arm | Strict | Families | Duplicate | Mean search reward | Top-decile | Positive search reward |
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(rows)}
+
+Development-qualified policy arms: **{qualified}**. The random arm is the
+receipt-bound validation control, not the policy being qualified. This run
+creates no Alpha, OOS, challenge, recent, May-stress, forward, or promotion
+claim and starts no subsequent Arena.
 """
 
 
@@ -8452,7 +9080,9 @@ def _write_mechanism_v2_knowledge(
     validation_result: Mapping[str, Any],
     campaign: str = MECHANISM_SEARCH_V2_CAMPAIGN,
 ) -> None:
-    if campaign == MECHANISM_SEARCH_V21_CAMPAIGN:
+    if campaign == MECHANISM_SEARCH_V22_CAMPAIGN:
+        _, catalog, _ = _load_mechanism_v22_contract(repo_root)
+    elif campaign == MECHANISM_SEARCH_V21_CAMPAIGN:
         _, _, catalog, _ = _load_mechanism_v21_contract(repo_root)
     elif campaign == MECHANISM_SEARCH_V2_CAMPAIGN:
         _, catalog = _load_mechanism_v2_contract(repo_root)
@@ -10473,6 +11103,9 @@ def run_frozen_validation_stage(
         kill_line.get("evaluated_per_arm_per_horizon", 0)
     )
     minimum = int(kill_line.get("minimum_evaluated_per_active_arm", 0))
+    control_arm_id = str(
+        kill_line.get("control_arm_id") or "canonical_typed_random"
+    )
     required_horizons = tuple(
         int(value) for value in kill_line.get("required_horizons_hours", ())
     )
@@ -10513,9 +11146,9 @@ def run_frozen_validation_stage(
     by_arm: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for row in train_ledger:
         by_arm[str(row["arm"])].append(row)
-    if "canonical_typed_random" in by_arm:
+    if control_arm_id in by_arm:
         mutable_state["arm_states"].setdefault(
-            "canonical_typed_random",
+            control_arm_id,
             "ACTIVE",
         )
     active_arms = sorted(
@@ -10525,6 +11158,8 @@ def run_frozen_validation_stage(
     )
     if not active_arms:
         raise RuntimeError("VALIDATION_HAS_NO_ACTIVE_ARMS")
+    if control_arm_id not in active_arms:
+        raise RuntimeError("VALIDATION_CONTROL_ARM_NOT_ACTIVE")
     selected: list[
         tuple[str, int, int, Mapping[str, Any], CandidateSpec]
     ] = []
@@ -10859,7 +11494,7 @@ def run_frozen_validation_stage(
     comparison_counts = {
         arm: counts[arm] for arm in sorted(constructible_arms)
     }
-    control_constructible = "canonical_typed_random" in constructible_arms
+    control_constructible = control_arm_id in constructible_arms
     random_control_survival_required = bool(
         kill_line.get("random_control_survival_required", True)
     )
@@ -10868,7 +11503,7 @@ def run_frozen_validation_stage(
     ordered_validation_metrics = sorted(
         validation_metrics,
         key=lambda metric: (
-            str(metric["arm"]) != "canonical_typed_random",
+            str(metric["arm"]) != control_arm_id,
             str(metric["arm"]),
         ),
     )
@@ -10878,7 +11513,7 @@ def run_frozen_validation_stage(
         constructible = metric["validation_constructibility_passed"] is True
         can_apply_economic_kill_line = constructible and (
             not random_control_survival_required
-            or arm == "canonical_typed_random"
+            or arm == control_arm_id
             or control_passed is True
         )
         if can_apply_economic_kill_line:
@@ -10933,7 +11568,7 @@ def run_frozen_validation_stage(
                 "checkpoint_path": str(checkpoint),
             }
             _write_json(checkpoint, decision)
-        if arm == "canonical_typed_random":
+        if arm == control_arm_id:
             control_passed = bool(decision["passed"])
         after = before if bool(decision["passed"]) else "EXITED"
         mutable_state["arm_states"][arm] = after
@@ -10974,6 +11609,7 @@ def run_frozen_validation_stage(
         "candidate_selection": kill_line["candidate_selection"],
         "arm_aggregation": kill_line["arm_aggregation"],
         "random_control_survival_required": random_control_survival_required,
+        "control_arm_id": control_arm_id,
         "arm_decisions": decisions,
         "arm_state_after": dict(sorted(mutable_state["arm_states"].items())),
         "policy_state_sha256_before": policy_hash_before,
@@ -11091,7 +11727,10 @@ def run_engine(
     is_v13 = campaign == "search_engine_v1_3_cross_carrier"
     is_mechanism_v2 = campaign == MECHANISM_SEARCH_V2_CAMPAIGN
     is_mechanism_v21 = campaign == MECHANISM_SEARCH_V21_CAMPAIGN
-    is_mechanism_campaign = is_mechanism_v2 or is_mechanism_v21
+    is_mechanism_v22 = campaign == MECHANISM_SEARCH_V22_CAMPAIGN
+    is_mechanism_campaign = (
+        is_mechanism_v2 or is_mechanism_v21 or is_mechanism_v22
+    )
     is_system_campaign = (
         is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
     )
@@ -11321,7 +11960,18 @@ def run_engine(
     )
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_mechanism_v21:
+    if is_mechanism_v22:
+        frozen = _mechanism_v22_frozen_contract(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            contracts=contracts,
+            carrier_id=str(carrier_id),
+        )
+    elif is_mechanism_v21:
         frozen = _mechanism_v21_frozen_contract(
             repo_root=repo_root,
             source_sha=source_sha,
@@ -11634,10 +12284,17 @@ def run_engine(
         ):
             return False
         stop_executor()
-        if is_mechanism_v21:
-            train_gate = _mechanism_v21_train_gate(
-                repo_root=repo_root,
-                ledger=ledger,
+        if is_mechanism_v21 or is_mechanism_v22:
+            train_gate = (
+                _mechanism_v22_train_gate(
+                    repo_root=repo_root,
+                    ledger=ledger,
+                )
+                if is_mechanism_v22
+                else _mechanism_v21_train_gate(
+                    repo_root=repo_root,
+                    ledger=ledger,
+                )
             )
             _write_json(runtime_root / "train_gate.json", train_gate)
             if train_gate["validation_authorized_by_gate"] is not True:
@@ -11700,12 +12357,34 @@ def run_engine(
             raise _ValidationControlArmStopped(
                 "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
             )
-        executor = start_executor(int(state["workers"]))
+        v22_terminal_after_gate = bool(
+            is_mechanism_v22
+            and validation_result is not None
+            and not _mechanism_v22_validation_allows_expansion(
+                validation_result
+            )
+        )
+        executor = (
+            None
+            if v22_terminal_after_gate
+            else start_executor(int(state["workers"]))
+        )
         for checkpoint_index in range(
-            int(state["next_checkpoint_index"]), checkpoint_count
+            (
+                checkpoint_count
+                if v22_terminal_after_gate
+                else int(state["next_checkpoint_index"])
+            ),
+            checkpoint_count,
         ):
             allocation = (
-                _mechanism_v21_checkpoint_allocation(
+                _mechanism_v22_checkpoint_allocation(
+                    checkpoint_index,
+                    repo_root=repo_root,
+                    seeds=campaign_seeds,
+                )
+                if is_mechanism_v22
+                else _mechanism_v21_checkpoint_allocation(
                     checkpoint_index,
                     repo_root=repo_root,
                     seeds=campaign_seeds,
@@ -12331,7 +13010,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    MECHANISM_SEARCH_V21_ARMS
+                    MECHANISM_SEARCH_V22_ARMS
+                    if is_mechanism_v22
+                    else MECHANISM_SEARCH_V21_ARMS
                     if is_mechanism_v21
                     else MECHANISM_SEARCH_V2_ARMS
                     if is_mechanism_v2
@@ -12388,9 +13069,18 @@ def run_engine(
                 raise _ValidationControlArmStopped(
                     "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
                 )
+            v22_terminal_after_gate = bool(
+                is_mechanism_v22
+                and validation_ran
+                and validation_result is not None
+                and not _mechanism_v22_validation_allows_expansion(
+                    validation_result
+                )
+            )
             if (
                 validation_ran
                 and int(state["next_checkpoint_index"]) < checkpoint_count
+                and not v22_terminal_after_gate
             ):
                 executor = start_executor(int(state["workers"]))
             if is_v13 and checkpoint_index == 0:
@@ -12426,6 +13116,8 @@ def run_engine(
                 ),
                 flush=True,
             )
+            if v22_terminal_after_gate:
+                break
         stop_executor()
     except _ValidationControlArmStopped as failure:
         stop_executor()
@@ -12663,9 +13355,21 @@ def run_engine(
     finally:
         stop_executor()
 
-    if len(ledger) != strict_target:
+    v22_terminal_count = (
+        MECHANISM_SEARCH_V22_STRICT_TARGET
+        if (
+            is_mechanism_v22
+            and validation_result is not None
+            and _mechanism_v22_validation_allows_expansion(validation_result)
+        )
+        else MECHANISM_SEARCH_V22_QUALIFICATION_STRICT_COUNT
+        if is_mechanism_v22
+        else strict_target
+    )
+    if len(ledger) != v22_terminal_count:
         raise AssertionError(
-            f"Search Engine V1 ended without exactly {strict_target:,} strict candidates"
+            "Search Engine V1 ended without exactly "
+            f"{v22_terminal_count:,} terminal strict candidates"
         )
     if is_economic and validation_result is None:
         raise RuntimeError(
@@ -12673,7 +13377,17 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _mechanism_v21_final_decision(
+        _mechanism_v22_final_decision(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            runtime_root=runtime_root,
+            validation_result=validation_result or {},
+        )
+        if is_mechanism_v22
+        else _mechanism_v21_final_decision(
             repo_root=repo_root,
             source_sha=source_sha,
             state=state,
@@ -12785,7 +13499,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _mechanism_v21_report_text(decision)
+            _mechanism_v22_report_text(decision)
+            if is_mechanism_v22
+            else _mechanism_v21_report_text(decision)
             if is_mechanism_v21
             else _mechanism_v2_report_text(decision)
             if is_mechanism_v2
@@ -17041,6 +17757,307 @@ def check_mechanism_v21(
     }
 
 
+def check_mechanism_v22(
+    repo_root: Path,
+    *,
+    runtime_date: str = "20260802",
+) -> dict[str, Any]:
+    config = _economic_campaign_config(MECHANISM_SEARCH_V22_CAMPAIGN)
+    runtime_root = repo_root / f"runtime/{config['runtime_prefix']}_{runtime_date}"
+    report_path = repo_root / f"reports/{config['report_prefix']}_{runtime_date}.md"
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "train_gate.json",
+        "mechanism_knowledge.parquet",
+        "mechanism_knowledge_summary.json",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    preflight = _read_json(runtime_root / "embedded_preflight.json")
+    train_gate = _read_json(runtime_root / "train_gate.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    knowledge_summary = _read_json(
+        runtime_root / "mechanism_knowledge_summary.json"
+    )
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
+    knowledge = pd.read_parquet(runtime_root / "mechanism_knowledge.parquet")
+    campaign_config, catalog, _ = _load_mechanism_v22_contract(repo_root)
+
+    frozen_body = {
+        key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
+    }
+    grammar = dict(frozen.get("mechanism_grammar") or {})
+    if _payload_sha(frozen_body) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if (
+        frozen.get("source_sha") != manifest.get("producer_source_sha")
+        or frozen.get("authorization")
+        != "ONE_FRESH_STATE_UP_TO_20000_STRICT_EVOLUTION_QUALIFICATION_CAMPAIGN"
+        or grammar.get("compiled_mechanism_count") != len(catalog)
+        or grammar.get("compiled_catalog_sha256")
+        != _mechanism_catalog_sha(catalog)
+        or grammar.get("v21_catalog_reused_unchanged") is not True
+        or grammar.get("second_ast_or_compiler_created") is not False
+    ):
+        errors.append("frozen_mechanism_contract")
+    if tuple(int(value) for value in frozen.get("seeds") or ()) != (
+        MECHANISM_SEARCH_V22_SEEDS
+    ):
+        errors.append("frozen_seed_set")
+    if dict(frozen.get("fresh_state") or {}) != dict(
+        campaign_config["fresh_state"]
+    ):
+        errors.append("fresh_state_contract")
+    if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
+        errors.append("preflight_external_budget")
+
+    validation_allowed = bool(
+        decision.get("validation_allows_continuous_expansion")
+    )
+    expected_strict = (
+        MECHANISM_SEARCH_V22_STRICT_TARGET
+        if validation_allowed
+        else MECHANISM_SEARCH_V22_QUALIFICATION_STRICT_COUNT
+    )
+    expected_checkpoint_count = 10 if validation_allowed else 4
+    if len(ledger) != expected_strict:
+        errors.append("strict_count")
+    if ledger["candidate_id"].nunique() != expected_strict:
+        errors.append("exact_unique")
+    if set(ledger["arm"].astype(str).unique()) != set(MECHANISM_SEARCH_V22_ARMS):
+        errors.append("arm_set")
+    if set(int(value) for value in ledger["seed"].unique()) != set(
+        MECHANISM_SEARCH_V22_SEEDS
+    ):
+        errors.append("ledger_seed_set")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    try:
+        expected_allocations = _mechanism_v22_expected_checkpoint_allocations(
+            stages=tuple(frozen.get("stages") or ()),
+            seeds=MECHANISM_SEARCH_V22_SEEDS,
+        )
+    except (KeyError, TypeError, ValueError, ZeroDivisionError):
+        errors.append("frozen_stage_contract")
+        expected_allocations = {}
+    for checkpoint_index in range(expected_checkpoint_count):
+        local = ledger.loc[
+            ledger["checkpoint_index"].astype(int) == checkpoint_index
+        ]
+        observed = {
+            str(arm): int(count)
+            for arm, count in local.groupby("arm").size().items()
+        }
+        if observed != expected_allocations.get(checkpoint_index):
+            errors.append(f"checkpoint_allocation:{checkpoint_index}")
+    if set(metrics["checkpoint_index"].astype(int).unique()) != set(
+        range(expected_checkpoint_count)
+    ):
+        errors.append("checkpoint_metrics")
+    evolution_rows = ledger.loc[
+        ledger["arm"].astype(str) == "mechanism_evolution_v2_2"
+    ]
+    for operation in MECHANISM_EVOLUTION_OPERATIONS:
+        operation_rows = evolution_rows.loc[
+            evolution_rows["operation"].astype(str) == operation
+        ]
+        if operation_rows.empty or not bool(
+            operation_rows["receipt_verified"]
+            .astype("boolean")
+            .fillna(False)
+            .all()
+        ):
+            errors.append(f"operation_not_verified:{operation}")
+
+    if len(archive) != len(ledger):
+        errors.append("archive_row_count")
+    champions = archive.loc[archive["is_family_champion"].fillna(False)]
+    if champions["behavior_family_id"].nunique() != archive[
+        "behavior_family_id"
+    ].nunique():
+        errors.append("archive_family_champion")
+    if (
+        len(knowledge) != len(catalog)
+        or knowledge["mechanism_id"].nunique() != len(catalog)
+        or knowledge_summary.get("declared_mechanism_count") != len(catalog)
+        or knowledge_summary.get("individual_candidate_reward_persisted") is not False
+        or knowledge_summary.get("population_or_distribution_persisted") is not False
+    ):
+        errors.append("mechanism_knowledge_boundary")
+
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != expected_checkpoint_count:
+        errors.append("checkpoint_count")
+    try:
+        _, contracts, _, _, _ = _load_v14_inputs(repo_root)
+        registry = TypedExpressionRegistry(contracts)
+        identities = {
+            "raw_cache": manifest["data_cache_identity"],
+            "compiler_identity": manifest["compiler_identity"],
+        }
+        for index, checkpoint in enumerate(checkpoints):
+            checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+            if int(checkpoint_manifest["completed_ledger_row_count"]) != (
+                index + 1
+            ) * MECHANISM_SEARCH_V22_CHECKPOINT_SIZE:
+                errors.append(f"checkpoint_rows:{index}")
+            _load_checkpoint(
+                checkpoint_path=checkpoint,
+                registry=registry,
+                expected_source_sha=str(manifest["producer_source_sha"]),
+                expected_frozen_hash=str(frozen["frozen_contract_sha256"]),
+                expected_identities=identities,
+            )
+    except (KeyError, OSError, ValueError) as exc:
+        errors.append(f"checkpoint_exact_restore:{type(exc).__name__}:{exc}")
+
+    validation_names = (
+        "validation_candidate_ledger.parquet",
+        "validation_arm_metrics.parquet",
+        "validation_decisions.json",
+    )
+    train_passed = bool(train_gate.get("validation_authorized_by_gate"))
+    if train_passed:
+        for name in validation_names:
+            if not (runtime_root / name).is_file():
+                errors.append(f"missing:{name}")
+        if all((runtime_root / name).is_file() for name in validation_names):
+            validation = _read_json(runtime_root / "validation_decisions.json")
+            validation_rows = pd.read_parquet(
+                runtime_root / "validation_candidate_ledger.parquet"
+            )
+            validation_metrics = pd.read_parquet(
+                runtime_root / "validation_arm_metrics.parquet"
+            )
+            if (
+                validation.get("status") != "VALIDATION_STAGE_COMPLETE"
+                or validation.get("control_arm_id")
+                != "expanded_mechanism_random_v2_2"
+                or validation.get("random_control_survival_required") is not True
+                or set(dict(validation.get("arm_decisions") or {}))
+                != set(MECHANISM_SEARCH_V22_ARMS)
+                or set(validation_metrics["arm"].astype(str))
+                != set(MECHANISM_SEARCH_V22_ARMS)
+            ):
+                errors.append("validation_contract")
+            evaluated_counts = (
+                validation_rows.loc[
+                    validation_rows["validation_status"].astype(str) == "EVALUATED"
+                ]
+                .groupby("arm")
+                .size()
+                .to_dict()
+            )
+            if any(int(evaluated_counts.get(arm, 0)) != 128 for arm in MECHANISM_SEARCH_V22_ARMS):
+                errors.append("validation_equal_count")
+            if _mechanism_v22_validation_allows_expansion(validation) != validation_allowed:
+                errors.append("validation_projection")
+    else:
+        if any((runtime_root / name).exists() for name in validation_names):
+            errors.append("train_negative_has_validation_artifacts")
+        if decision.get("validation_status") != "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE":
+            errors.append("train_negative_validation_status")
+
+    expected_status = (
+        "PASS_SEARCH_ENGINE_V2_2_CONTINUOUS_EXPANSION_COMPLETE"
+        if validation_allowed
+        else "PASS_SEARCH_ENGINE_V2_2_VALIDATION_GATE_NEGATIVE"
+        if train_passed
+        else "PASS_SEARCH_ENGINE_V2_2_TRAIN_GATE_NEGATIVE"
+    )
+    if (
+        decision.get("status") != expected_status
+        or decision.get("strict_evaluated_count") != expected_strict
+        or decision.get("checkpoint_restore_verified") is not True
+        or decision.get("sealed_reads") != 0
+        or decision.get("next_arena_started") is not False
+    ):
+        errors.append("final_decision")
+    if int(decision.get("generation_attempts", MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT + 1)) > (
+        MECHANISM_SEARCH_V22_RAW_ATTEMPT_LIMIT
+    ):
+        errors.append("raw_attempt_budget")
+    if float(
+        decision.get(
+            "active_wall_seconds", MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS + 1
+        )
+    ) > MECHANISM_SEARCH_V22_WALL_TIME_LIMIT_SECONDS:
+        errors.append("wall_time_budget")
+    if (
+        manifest.get("producer_source_sha") != frozen.get("source_sha")
+        or manifest.get("strict_evaluated_count") != expected_strict
+        or manifest.get("frozen_contract_sha256")
+        != frozen.get("frozen_contract_sha256")
+        or manifest.get("sealed_reads") != 0
+        or _payload_sha(manifest.get("artifacts", []))
+        != manifest.get("artifact_bundle_sha256")
+    ):
+        errors.append("run_manifest")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    try:
+        subprocess.check_call(
+            ["git", "cat-file", "-e", f"{manifest['producer_source_sha']}^{{commit}}"],
+            cwd=repo_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except (KeyError, subprocess.CalledProcessError):
+        errors.append("producer_source_commit")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "compiled_mechanism_count": len(catalog),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "train_gate_status": train_gate.get("status"),
+        "validation_allows_continuous_expansion": validation_allowed,
+        "validation_qualified_arms": decision.get(
+            "future_development_data_arena_qualified_arms"
+        ),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -17072,6 +18089,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-mechanism-v2",
             "run-mechanism-v2-1",
             "check-mechanism-v2-1",
+            "run-mechanism-v2-2",
+            "check-mechanism-v2-2",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -17105,6 +18124,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-economic-v6": ECONOMIC_SEARCH_V6_CAMPAIGN,
         "run-mechanism-v2": MECHANISM_SEARCH_V2_CAMPAIGN,
         "run-mechanism-v2-1": MECHANISM_SEARCH_V21_CAMPAIGN,
+        "run-mechanism-v2-2": MECHANISM_SEARCH_V22_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -17213,6 +18233,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or "20260801"),
             source_sha=args.source_sha,
             campaign=MECHANISM_SEARCH_V21_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
+    elif args.command == "run-mechanism-v2-2":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260802"),
+            source_sha=args.source_sha,
+            campaign=MECHANISM_SEARCH_V22_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
     elif args.command == "close-economic-v1":
@@ -17333,6 +18361,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_mechanism_v21(
             repo_root,
             runtime_date=str(args.runtime_date or "20260801"),
+        )
+    elif args.command == "check-mechanism-v2-2":
+        result = check_mechanism_v22(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260802"),
         )
     elif args.command == "close-validation-blocked-mechanism-v2":
         result = close_validation_blocked_engine(

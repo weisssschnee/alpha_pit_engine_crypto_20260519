@@ -4,6 +4,30 @@ Last updated: 2026-08-02 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_2_AUTHORIZED_IMPLEMENTATION_IN_PROGRESS`
+
+The current user instruction authorizes exactly one fresh-state,
+development-only Search Engine V2.2 Evolution qualification campaign under ADR
+0019. It reuses the existing 115-field aligned carrier, 786-mechanism V2.1
+catalog, compiler, evaluator, reward, archive, and checkpoint path. It imports
+no V2.1 candidate, reward, population, archive, RNG, or policy state. The first
+8,000 strict evaluations compare expanded random and fresh Evolution at equal
+count; the absolute positive floor applies to Evolution. Only a passing train
+gate followed by both arms passing the frozen 128-per-arm validation may
+continue the same campaign-local state to the 20,000 strict ceiling. PC2 is the
+only authorized market execution host. No OOS, holdout, promotion, rescue,
+seed change, new grammar, new data surface, or automatic next Arena is
+authorized.
+
+The V2.2 orchestration, receipt-bound control-arm selection, early-stop and
+conditional-continuation decisions, artifact checker, and source tests are
+implemented. The full local suite passes `379` tests with one pre-existing
+NumPy warning. Commit/push, PC2 deployment, and the first immutable checkpoint
+remain pending. Graph refresh is deferred until terminal closure and may update
+only the existing CURRENT search capability node.
+
+The preceding durable state remains:
+
 `CRYPTO_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE_COMPLETE`
 
 ADR 0018's one fresh-state, development-only Search Engine V2.1 authorization
