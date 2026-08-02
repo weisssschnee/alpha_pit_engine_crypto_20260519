@@ -1,0 +1,199 @@
+{
+  "active_wall_seconds": 13687.00663509997,
+  "alpha_claim": false,
+  "archive_duplicate_replacements": 106,
+  "arm_summaries": {
+    "expanded_mechanism_random_v2_1": {
+      "behavior_duplicate_rate": 0.00024999999999997247,
+      "behavior_family_count": 3999,
+      "behavior_family_yield": 0.99975,
+      "cost_killed_rate": 0.485,
+      "generation_attempts": 5632,
+      "mean_pair_reward": -6.569705409445187,
+      "mean_search_reward": -0.8077058383911752,
+      "positive_search_reward_count": 23,
+      "positive_search_reward_rate": 0.00575,
+      "strict_evaluated": 4000,
+      "top_decile_pair_reward": -3.6997096828260885,
+      "top_decile_search_reward": -0.15808975468687744,
+      "turnover_killed_rate": 0.2365,
+      "valid_exact_unique_per_cpu_hour": 1504.177672362676,
+      "verified_crossovers": 0,
+      "verified_mechanism_mutations": 0,
+      "verified_parameter_mutations": 0
+    },
+    "legacy_mechanism_random_v2": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_family_count": 2000,
+      "behavior_family_yield": 1.0,
+      "cost_killed_rate": 0.5035,
+      "generation_attempts": 2563,
+      "mean_pair_reward": -6.520967516317881,
+      "mean_search_reward": -0.6050919303267617,
+      "positive_search_reward_count": 10,
+      "positive_search_reward_rate": 0.005,
+      "strict_evaluated": 2000,
+      "top_decile_pair_reward": -3.4475366849250317,
+      "top_decile_search_reward": -0.13223362388833235,
+      "turnover_killed_rate": 0.2365,
+      "valid_exact_unique_per_cpu_hour": 876.5217391304348,
+      "verified_crossovers": 0,
+      "verified_mechanism_mutations": 0,
+      "verified_parameter_mutations": 0
+    },
+    "mechanism_evolution_v2_1": {
+      "behavior_duplicate_rate": 0.06074999999999997,
+      "behavior_family_count": 3757,
+      "behavior_family_yield": 0.93925,
+      "cost_killed_rate": 0.26775,
+      "generation_attempts": 6042,
+      "mean_pair_reward": -5.152918200934923,
+      "mean_search_reward": -0.3865972710602361,
+      "positive_search_reward_count": 327,
+      "positive_search_reward_rate": 0.08175,
+      "strict_evaluated": 4000,
+      "top_decile_pair_reward": -2.1883133189492474,
+      "top_decile_search_reward": 0.060864349962733176,
+      "turnover_killed_rate": 0.033,
+      "valid_exact_unique_per_cpu_hour": 1180.5000522596981,
+      "verified_crossovers": 683,
+      "verified_mechanism_mutations": 1053,
+      "verified_parameter_mutations": 2136
+    }
+  },
+  "behavior_duplicate_rate": 0.024599999999999955,
+  "behavior_family_count": 9754,
+  "checkpoint_count": 5,
+  "checkpoint_restore_verified": true,
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V2_1_MECHANISM_BASIS_20260801",
+  "equal_count_comparisons": {
+    "evolution_vs_expanded_basis_random": {
+      "baseline_arm": "expanded_mechanism_random_v2_1",
+      "behavior_family_yield_delta": -0.0605,
+      "matched_evaluated_count": 4000,
+      "mean_search_reward_delta": 0.42110856733093904,
+      "positive_search_reward_rate_delta": 0.076,
+      "top_decile_search_reward_delta": 0.21895410464961063
+    },
+    "expanded_basis_random_vs_old_grammar_random": {
+      "baseline_arm": "legacy_mechanism_random_v2",
+      "behavior_family_yield_delta": 0.0,
+      "matched_evaluated_count": 2000,
+      "mean_search_reward_delta": -0.20773367022049705,
+      "positive_search_reward_rate_delta": 0.0,
+      "top_decile_search_reward_delta": -0.030398498430520643
+    }
+  },
+  "expanded_compiled_mechanism_count": 786,
+  "future_development_data_arena_qualified_arms": [],
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 14237,
+  "legacy_compiled_mechanism_count": 184,
+  "next_arena_started": false,
+  "oos": false,
+  "parameters_changed": false,
+  "producer_source_sha": "94b016fa7847d5c5b06db1e6144bda7062064151",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 100000,
+  "report_title": "Crypto Search Engine V2.1 Mechanism Basis",
+  "rescue_rerun_started": false,
+  "research_decision": "HOLD_DEVELOPMENT_ONLY_NO_PROMOTION",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_campaign": "crypto_search_mechanism_v2_1",
+  "seed_changed": false,
+  "stage_contract": [
+    {
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_1": 0,
+        "legacy_mechanism_random_v2": 2000,
+        "mechanism_evolution_v2_1": 0
+      },
+      "checkpoint_indexes": [
+        0
+      ],
+      "stage_id": "OLD_GRAMMAR_TYPED_RANDOM_CONTROL",
+      "strict_count": 2000
+    },
+    {
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_1": 1000,
+        "legacy_mechanism_random_v2": 0,
+        "mechanism_evolution_v2_1": 1000
+      },
+      "checkpoint_indexes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "stage_id": "CONCURRENT_EXPANDED_RANDOM_AND_FRESH_EVOLUTION",
+      "strict_count": 8000
+    }
+  ],
+  "status": "PASS_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE",
+  "strict_evaluated_count": 10000,
+  "surface_description": "existing 115-field OI/mark x aggTrades aligned carrier; receipt-bound Binance USD-M target",
+  "template_count": 12,
+  "train_gate": {
+    "candidate_generation_performed": false,
+    "checks": {
+      "evolution_behavior_family_yield": true,
+      "evolution_duplicate_rate": true,
+      "evolution_mean_reward_increment": true,
+      "evolution_positive_rate_increment": true,
+      "evolution_top_decile_increment": true,
+      "expanded_positive_count": false,
+      "expanded_positive_rate": false
+    },
+    "contract": {
+      "evolution_mean_search_reward_must_exceed_random": true,
+      "evolution_positive_search_reward_rate_must_exceed_random": true,
+      "evolution_top_decile_search_reward_must_exceed_random": true,
+      "failure_action": "STOP_WITHOUT_VALIDATION",
+      "maximum_evolution_behavior_duplicate_rate": 0.1,
+      "minimum_evolution_behavior_family_yield": 0.9,
+      "minimum_expanded_positive_search_reward_count": 40,
+      "minimum_expanded_positive_search_reward_rate": 0.01,
+      "same_matched_evaluated_count": 4000
+    },
+    "evolution": {
+      "behavior_duplicate_rate": 0.06074999999999997,
+      "behavior_family_count": 3757,
+      "behavior_family_yield": 0.93925,
+      "matched_evaluated_count": 4000,
+      "mean_search_reward": -0.3865972710602361,
+      "positive_search_reward_count": 327,
+      "positive_search_reward_rate": 0.08175,
+      "top_decile_search_reward": 0.060864349962733176
+    },
+    "expanded_random": {
+      "behavior_duplicate_rate": 0.00024999999999997247,
+      "behavior_family_count": 3999,
+      "behavior_family_yield": 0.99975,
+      "matched_evaluated_count": 4000,
+      "mean_search_reward": -0.8077058383911752,
+      "positive_search_reward_count": 23,
+      "positive_search_reward_rate": 0.00575,
+      "top_decile_search_reward": -0.15808975468687744
+    },
+    "schema_version": 1,
+    "sealed_reads": 0,
+    "status": "TRAIN_GATE_NEGATIVE",
+    "threshold_tuning_performed": false,
+    "validation_authorized_by_gate": false
+  },
+  "validation_arm_decisions": {},
+  "validation_stage": {
+    "candidate_generation_performed": false,
+    "holdout_read": false,
+    "optimizer_feedback_written": false,
+    "policy_memory_written": false,
+    "schema_version": 1,
+    "status": "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE",
+    "threshold_tuning_performed": false,
+    "train_gate_sha256": "A34910D3B835FF842F688ABBF7DCA949333FCFFA6972B6EDFCDB51CE1DAE8847"
+  },
+  "validation_status": "VALIDATION_NOT_RUN_TRAIN_GATE_NEGATIVE",
+  "wall_time_limit_seconds": 64800
+}

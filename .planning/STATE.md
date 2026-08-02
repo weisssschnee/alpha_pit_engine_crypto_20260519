@@ -1,23 +1,32 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-01 Asia/Hong_Kong
+Last updated: 2026-08-02 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_1_THROUGHPUT_REPAIR_IN_PROGRESS`
+`CRYPTO_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE_COMPLETE`
 
-ADR 0018 accepts the current user's authorization for one fresh-state,
-development-only Search Engine V2.1 campaign. It preserves V2 as consumed and
-does not rerun its validation. The V2.1 implementation reuses the existing
-115-field aligned carrier, AST, compiler, controls, evaluator, archive, and
-checkpoint path; expands only frozen gate/modulation modes; assigns zero budget
-to CEM; and freezes five 2,000-candidate checkpoints as 2,000 old-grammar
-random followed by four concurrent 1,000-expanded-random plus
-1,000-fresh-Evolution checkpoints. Totals remain 4,000 per new arm and adaptive
-feedback stays sequential within each arm/seed lane. The terminal
-validation stage runs automatically only if the pre-registered equal-count
-train gate passes. No candidate, reward, population, distribution, archive,
-RNG, or policy state crosses from V2.
+ADR 0018's one fresh-state, development-only Search Engine V2.1 authorization
+is consumed. Producer `94b016fa7847d5c5b06db1e6144bda7062064151` retained
+exactly 10,000 strict, exact-unique, matched-control-valid, full-cost train
+candidates from 14,237 raw attempts across five exact-restored 2,000-candidate
+checkpoints. The run used the frozen eight-worker memory fallback, reused the
+existing 115-field aligned carrier, AST, compiler, controls, evaluator, archive,
+and checkpoint path, compiled 184 legacy plus 786 expanded mechanisms, and
+produced 9,754 behavior families. No V2 candidate, reward, population,
+distribution, archive, RNG, or policy state entered the campaign.
+
+The equal-count train gate was negative. Expanded random produced 23/4,000
+positive search rewards (0.575%), below the frozen 40-count and 1% absolute
+floors. Evolution produced 327/4,000 positives (8.175%), improved matched-count
+mean and top-decile search reward, retained 3,757 families, and stayed below the
+10% duplicate ceiling, but the random-control absolute floor correctly blocked
+validation. Terminal status is
+`PASS_SEARCH_ENGINE_V2_1_TRAIN_GATE_NEGATIVE`; validation, OOS, promotion, and
+the next Arena did not run, sealed reads are zero, and qualified arms are empty.
+Closure source `2c4cb156fbe886c13482ba7d2e0e460732f2be0e` repaired only
+the return/checker path and independently rechecked the immutable producer
+artifacts on PC2 with `errors=[]`; it generated no market candidate.
 
 The one fresh-state, development-only Search Engine V2 authorization is
 consumed. Producer `ef688d89ca0e89654015bf5f76a6b9c26494d837` retained exactly
@@ -571,20 +580,20 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-0. Finish the source-only V2.1 throughput repair, bind its producer source and
-   receipt hashes, then execute only ADR 0018's V2.1 campaign after the receipt,
-   catalog, aggregate-only knowledge, tests, budget, seeds, and hashes are
-   committed. Run continuously with exact 2,000-candidate checkpoints; stop on
-   the frozen train gate, validation result, raw-attempt limit, or 18-hour wall
-   limit. Then consume the receipt, independently check artifacts, update the
-   existing CURRENT Search Engine node, commit, push, and stop.
+0. Preserve the consumed V2.1 outcome at producer
+   `94b016fa7847d5c5b06db1e6144bda7062064151`: 10,000 strict candidates,
+   five exact-restored checkpoints, `TRAIN_GATE_NEGATIVE`, no validation, and
+   no qualified arms. Closure `2c4cb156fbe886c13482ba7d2e0e460732f2be0e`
+   is source/checker-only and must not be represented as a market replay.
 1. Preserve the consumed V2 mechanism campaign at producer `ef688d89ca0e89654015bf5f76a6b9c26494d837`: six exact checkpoints, 12,000 strict train candidates, and terminal `ENGINE_VALIDATION_BLOCKED`. Do not rerun its validation or reuse its adaptive state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for every V2 arm suspended. Train-only reward ordering suggests a potentially useful Evolution gradient, but the equal-count validation gate did not complete and grants no qualification. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
 5. Keep V1-V5 as consumed outcomes. V3 and V4 are each bound to their own `checkpoint_000` plus `checkpoint_validation_blocked`; V5 is bound to `checkpoint_000` plus completed `checkpoint_validation`. Do not reuse any receipt or run state.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. Complete only the V2 blocked-outcome Git/Graph closure: retain producer artifacts, failure record, compact report, consumed receipt, checker PASS, and existing CURRENT-node update. Push, verify local/tracking/remote SHA equality and a clean worktree, then stop.
+7. Preserve the completed V2 and V2.1 Git/Graph closures, their consumed
+   receipts, immutable producer artifacts, checker results, and empty qualified
+   arm sets. Do not reopen either campaign or reuse adaptive state.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -602,6 +611,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Search Engine V1 arm-productivity and behavior-family comparisons are research-invalid because panel-context identity and 4h reward uncertainty were defective; the historical run remains engineering-valid, and all trajectories, policies, and archive state are spent and cannot seed another campaign.
 - Search Engine V1.1 and V1.2 retain valid proposal, duplicate, family-yield, checkpoint, and receipt evidence. Their mean/top-decile `pair_reward` comparisons are matched-feasibility diagnostics and cannot qualify or reject CEM/Evolution as Alpha-search policies.
 - Search Engine V1.4 proved that OI/mark and aggTrades can share a real, PIT/lag-safe, dynamically eligible carrier and that hierarchical A/B/AB/ABC controls execute without a new AST or evaluator. Its zero matched-positive result is a strict attribution outcome, not a portfolio reward negative and not evidence that the supplied fields or crypto market contain no Alpha.
+- Search Engine V2.1 completed its 10,000-candidate train campaign, but expanded random missed both frozen absolute positive-reward floors. Evolution's stronger reward ordering and 8.175% positive rate therefore remain a train-only diagnostic; validation did not run and no arm is qualified. This does not authorize reseeding, rescue, OOS, promotion, or another Arena.
 - V1.4 failure decomposition: final-increment gross directionality exists frequently, but 96.10% of gross-positive rows are sign-killed after cost and only 0.25% of Stage-B rows are within one strict-distance unit of zero. This points first to target/execution and turnover economics, not a larger random or adaptive budget. Because standalone sleeves and monthly waterfalls were not persisted, the audit cannot distinguish A/B efficacy from AB/ABC incremental failure strongly enough to authorize a residual, gate, or regime-routing grammar.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - V1.4 target semantics are not a qualified execution contract. Binance order flow is evaluated against an availability-dependent non-Binance mark; 126/144 assets use more than one priority venue, and 0.205% of 1h plus 0.512% of 4h valid label endpoints cross venues. The generic 5 bps model is not tied to fees, slippage, mark-to-trade basis, or an executable instrument on those venues.
@@ -681,8 +691,7 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Freeze and commit the throughput-repaired V2.1 producer bundle, then run exactly one continuous
-10,000-strict-candidate campaign under ADR 0018. Do not rerun V2 validation,
-import V1-V6 or V2 adaptive state, tune, reseed, rescue, read
-holdout/OOS/challenge/forward, train latent/relational models, promote
-candidates, or start a subsequent campaign.
+Stop after Git and CURRENT Graph closure. No further market search, V2
+validation rerun, V2.1 validation, prior-state import, tuning, reseed, rescue,
+holdout/OOS/challenge/forward read, latent/relational training, promotion, or
+subsequent Arena is authorized.

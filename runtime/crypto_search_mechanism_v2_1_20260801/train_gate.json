@@ -1,0 +1,48 @@
+{
+  "candidate_generation_performed": false,
+  "checks": {
+    "evolution_behavior_family_yield": true,
+    "evolution_duplicate_rate": true,
+    "evolution_mean_reward_increment": true,
+    "evolution_positive_rate_increment": true,
+    "evolution_top_decile_increment": true,
+    "expanded_positive_count": false,
+    "expanded_positive_rate": false
+  },
+  "contract": {
+    "evolution_mean_search_reward_must_exceed_random": true,
+    "evolution_positive_search_reward_rate_must_exceed_random": true,
+    "evolution_top_decile_search_reward_must_exceed_random": true,
+    "failure_action": "STOP_WITHOUT_VALIDATION",
+    "maximum_evolution_behavior_duplicate_rate": 0.1,
+    "minimum_evolution_behavior_family_yield": 0.9,
+    "minimum_expanded_positive_search_reward_count": 40,
+    "minimum_expanded_positive_search_reward_rate": 0.01,
+    "same_matched_evaluated_count": 4000
+  },
+  "evolution": {
+    "behavior_duplicate_rate": 0.06074999999999997,
+    "behavior_family_count": 3757,
+    "behavior_family_yield": 0.93925,
+    "matched_evaluated_count": 4000,
+    "mean_search_reward": -0.3865972710602361,
+    "positive_search_reward_count": 327,
+    "positive_search_reward_rate": 0.08175,
+    "top_decile_search_reward": 0.060864349962733176
+  },
+  "expanded_random": {
+    "behavior_duplicate_rate": 0.00024999999999997247,
+    "behavior_family_count": 3999,
+    "behavior_family_yield": 0.99975,
+    "matched_evaluated_count": 4000,
+    "mean_search_reward": -0.8077058383911752,
+    "positive_search_reward_count": 23,
+    "positive_search_reward_rate": 0.00575,
+    "top_decile_search_reward": -0.15808975468687744
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "TRAIN_GATE_NEGATIVE",
+  "threshold_tuning_performed": false,
+  "validation_authorized_by_gate": false
+}

@@ -1,0 +1,16 @@
+{
+  "artifact_bundle_sha256": "EC4456CA4E72BDFC385EEBE9F897B54214C4B6EB917929E898AB12560653EBB5",
+  "behavior_family_count": 9754,
+  "checkpoint_count": 5,
+  "engineering_integrity": "PASS",
+  "errors": [],
+  "expanded_compiled_mechanism_count": 786,
+  "generation_attempts": 14237,
+  "legacy_compiled_mechanism_count": 184,
+  "producer_source_sha": "94b016fa7847d5c5b06db1e6144bda7062064151",
+  "result": "PASS",
+  "sealed_reads": 0,
+  "strict_evaluated_count": 10000,
+  "train_gate_status": "TRAIN_GATE_NEGATIVE",
+  "validation_qualified_arms": []
+}
