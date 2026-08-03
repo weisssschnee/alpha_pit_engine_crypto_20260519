@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "crypto_search_engine_v2_4_fresh_family_gate",
-  "status": "PENDING_SOURCE_COMMIT",
-  "run_authorized": false,
+  "status": "RUN_AUTHORIZED",
+  "run_authorized": true,
   "decision_id": "USER_AUTHORIZED_V24_FRESH_BEHAVIOR_FAMILY_GATE_20260803",
-  "source_implementation_sha": null,
+  "source_implementation_sha": "cb76e66dc41c566caebdfc6dab70e02f953e9ed9",
   "source_contract_path": "config/crypto_search_engine_v2_4_behavior_family.json",
   "component_sources": {
     "v24_adapter": {
