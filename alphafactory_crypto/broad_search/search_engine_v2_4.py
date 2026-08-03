@@ -12,11 +12,14 @@ import argparse
 import hashlib
 import json
 import math
+import os
+import shutil
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 import numpy as np
+import pandas as pd
 
 
 V24_CONTRACT_PATH = "config/crypto_search_engine_v2_4_behavior_family.json"
@@ -44,6 +47,14 @@ def _canonical_sha256(value: Any) -> str:
             default=str,
         ).encode("utf-8")
     ).hexdigest().upper()
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest().upper()
 
 
 def _family_key(row: Mapping[str, Any]) -> tuple[str, int, int, str]:
@@ -153,6 +164,7 @@ def select_behavior_family_cohort(
     rows: Sequence[Mapping[str, Any]],
     *,
     per_cell_count: int,
+    expected_cells: Sequence[tuple[str, int, int]],
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Return an equal-count top-family cohort for every arm/seed/horizon cell."""
 
@@ -163,6 +175,17 @@ def select_behavior_family_cohort(
     for row in champions:
         key = (str(row["arm"]), int(row["seed"]), int(row["horizon_hours"]))
         cells.setdefault(key, []).append(row)
+    normalized_expected = {
+        (str(arm), int(seed), int(horizon))
+        for arm, seed, horizon in expected_cells
+    }
+    if not normalized_expected or set(cells) != normalized_expected:
+        missing = sorted(normalized_expected - set(cells))
+        extra = sorted(set(cells) - normalized_expected)
+        raise RuntimeError(
+            "V24_BEHAVIOR_FAMILY_CELL_SET_CHANGED:"
+            f"missing={missing};extra={extra}"
+        )
     selected: list[dict[str, Any]] = []
     cell_proof: list[dict[str, Any]] = []
     for key in sorted(cells):
@@ -201,6 +224,10 @@ def select_behavior_family_cohort(
         "selection_unit": "BEHAVIOR_FAMILY",
         "per_arm_seed_horizon_count": int(per_cell_count),
         "cell_count": len(cells),
+        "expected_cells": [
+            {"arm": arm, "seed": seed, "horizon_hours": horizon}
+            for arm, seed, horizon in sorted(normalized_expected)
+        ],
         "selected_count": len(selected),
         "duplicate_family_backfill_used": False,
         "champion_selection_sha256": champion_receipt["selection_sha256"],
@@ -222,8 +249,8 @@ def build_economic_path_artifacts(
     arm: str,
     seed: int,
     horizon_hours: int,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Project pair18m economic paths to daily sleeves and sparse positions."""
+) -> dict[str, list[dict[str, Any]]]:
+    """Project pair18m paths to exact hourly, daily, and sparse asset rows."""
 
     payload = evaluation.get("_economic_paths")
     if not isinstance(payload, Mapping) or int(payload.get("schema_version", -1)) != 1:
@@ -252,6 +279,7 @@ def build_economic_path_artifacts(
             separators=(",", ":"),
         ),
     }
+    hourly_rows: list[dict[str, Any]] = []
     daily_rows: list[dict[str, Any]] = []
     position_rows: list[dict[str, Any]] = []
     sleeves = dict(payload.get("sleeves") or {})
@@ -283,18 +311,49 @@ def build_economic_path_artifacts(
             atol=1.0e-15,
         ):
             raise ValueError("V24_ECONOMIC_WATERFALL_NOT_ADDITIVE")
+        for time_index, timestamp in enumerate(timestamps):
+            objective = bool(mask[time_index])
+            gross_value = float(vectors["gross"][time_index])
+            turnover_value = float(vectors["turnover"][time_index])
+            cost_5bps = turnover_value * 5.0 / 10_000.0
+            cost_10bps = turnover_value * 10.0 / 10_000.0
+            hourly_rows.append(
+                {
+                    **common,
+                    "sleeve": str(sleeve_name),
+                    "timestamp_ns": int(timestamp),
+                    "utc_hour": str(utc_hours[time_index]),
+                    "objective_mask": objective,
+                    "gross": gross_value,
+                    "cost": float(vectors["cost"][time_index]),
+                    "turnover": turnover_value,
+                    "net": float(vectors["net"][time_index]),
+                    "cost_5bps": cost_5bps,
+                    "net_5bps": gross_value - cost_5bps,
+                    "cost_10bps": cost_10bps,
+                    "net_10bps": gross_value - cost_10bps,
+                }
+            )
         for day_ordinal, day in enumerate(unique_days):
             local = (utc_days == day) & mask
+            daily_gross = _finite_mean(vectors["gross"][local])
+            daily_turnover = _finite_mean(vectors["turnover"][local])
+            daily_cost_5bps = daily_turnover * 5.0 / 10_000.0
+            daily_cost_10bps = daily_turnover * 10.0 / 10_000.0
             daily_rows.append(
                 {
                     **common,
                     "sleeve": str(sleeve_name),
                     "day_ordinal": int(day_ordinal),
                     "utc_day": str(day),
-                    "gross": _finite_mean(vectors["gross"][local]),
+                    "gross": daily_gross,
                     "cost": _finite_mean(vectors["cost"][local]),
-                    "turnover": _finite_mean(vectors["turnover"][local]),
+                    "turnover": daily_turnover,
                     "net": _finite_mean(vectors["net"][local]),
+                    "cost_5bps": daily_cost_5bps,
+                    "net_5bps": daily_gross - daily_cost_5bps,
+                    "cost_10bps": daily_cost_10bps,
+                    "net_10bps": daily_gross - daily_cost_10bps,
                     "active_hour_count": int(local.sum()),
                 }
             )
@@ -319,7 +378,161 @@ def build_economic_path_artifacts(
                     ),
                 }
             )
-    return daily_rows, position_rows
+    return {
+        "hourly_sleeves": hourly_rows,
+        "daily_sleeves": daily_rows,
+        "asset_positions": position_rows,
+    }
+
+
+def _write_json(path: Path, payload: Any) -> None:
+    path.write_text(
+        json.dumps(
+            payload,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=True,
+            default=str,
+        )
+        + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+
+
+def persist_v24_gate_bundle(
+    *,
+    repo_root: Path,
+    output_root: Path,
+    train_rows: Sequence[Mapping[str, Any]],
+    evaluations: Sequence[Mapping[str, Any]],
+    expected_cells: Sequence[tuple[str, int, int]],
+    per_cell_count: int,
+    producer_source_sha: str,
+) -> dict[str, Any]:
+    """Atomically persist the only accepted V2.4 gate artifact bundle.
+
+    This adapter performs no market read or candidate evaluation.  It accepts
+    only already-frozen, family-first identities and evaluator-returned audit
+    paths, then fails closed on missing or extra evaluation identities.
+    """
+
+    contract = load_v24_contract(repo_root)
+    normalized_source_sha = str(producer_source_sha).lower()
+    if (
+        len(normalized_source_sha) != 40
+        or any(value not in "0123456789abcdef" for value in normalized_source_sha)
+    ):
+        raise ValueError("V24_GATE_PRODUCER_SOURCE_SHA_INVALID")
+    selected, selection_receipt = select_behavior_family_cohort(
+        train_rows,
+        per_cell_count=per_cell_count,
+        expected_cells=expected_cells,
+    )
+    required_arms = set(contract["gate_adapter"]["required_arms"])
+    if {str(row["arm"]) for row in selected} != required_arms:
+        raise RuntimeError("V24_GATE_REQUIRED_ARMS_CHANGED")
+    selected_ids = {str(row["candidate_id"]) for row in selected}
+    evaluation_lookup: dict[str, Mapping[str, Any]] = {}
+    for evaluation in evaluations:
+        candidate_id = str(evaluation.get("candidate_id") or "")
+        if not candidate_id or candidate_id in evaluation_lookup:
+            raise ValueError("V24_GATE_EVALUATION_ID_MISSING_OR_DUPLICATED")
+        evaluation_lookup[candidate_id] = evaluation
+    if set(evaluation_lookup) != selected_ids:
+        raise RuntimeError("V24_GATE_EVALUATION_ID_SET_CHANGED")
+    if output_root.exists():
+        raise FileExistsError(f"V24 gate output already exists: {output_root}")
+    temporary = output_root.with_name(
+        output_root.name + f".tmp-{os.getpid()}"
+    )
+    if temporary.exists():
+        raise FileExistsError(f"V24 temporary output already exists: {temporary}")
+    temporary.mkdir(parents=True)
+    try:
+        selection_projection = [
+            {
+                "candidate_id": str(row["candidate_id"]),
+                "behavior_family_id": str(row["behavior_family_id"]),
+                "arm": str(row["arm"]),
+                "seed": int(row["seed"]),
+                "horizon_hours": int(row["horizon_hours"]),
+                "search_reward": float(row["search_reward"]),
+                "arm_completion_ordinal": int(row["arm_completion_ordinal"]),
+            }
+            for row in selected
+        ]
+        hourly_rows: list[dict[str, Any]] = []
+        daily_rows: list[dict[str, Any]] = []
+        position_rows: list[dict[str, Any]] = []
+        for row in selected:
+            projection = build_economic_path_artifacts(
+                evaluation_lookup[str(row["candidate_id"])],
+                cohort="behavior_family_train_top",
+                arm=str(row["arm"]),
+                seed=int(row["seed"]),
+                horizon_hours=int(row["horizon_hours"]),
+            )
+            hourly_rows.extend(projection["hourly_sleeves"])
+            daily_rows.extend(projection["daily_sleeves"])
+            position_rows.extend(projection["asset_positions"])
+        artifacts = {
+            "behavior_family_selection.parquet": selection_projection,
+            "economic_hourly_sleeves.parquet": hourly_rows,
+            "economic_daily_sleeves.parquet": daily_rows,
+            "economic_asset_positions.parquet": position_rows,
+        }
+        _write_json(
+            temporary / "behavior_family_selection_receipt.json",
+            selection_receipt,
+        )
+        for name, rows in artifacts.items():
+            pd.DataFrame(rows).to_parquet(temporary / name, index=False)
+        file_rows = [
+            {
+                "path": name,
+                "rows": len(rows),
+                "sha256": _file_sha256(temporary / name),
+            }
+            for name, rows in artifacts.items()
+        ]
+        file_rows.append(
+            {
+                "path": "behavior_family_selection_receipt.json",
+                "rows": 1,
+                "sha256": _file_sha256(
+                    temporary / "behavior_family_selection_receipt.json"
+                ),
+            }
+        )
+        manifest = {
+            "schema_version": 1,
+            "status": "V24_GATE_BUNDLE_COMPLETE",
+            "producer_source_sha": normalized_source_sha,
+            "contract_path": V24_CONTRACT_PATH,
+            "contract_sha256": _file_sha256(
+                Path(repo_root) / V24_CONTRACT_PATH
+            ),
+            "selection_sha256": selection_receipt["cohort_sha256"],
+            "champion_selection_sha256": selection_receipt[
+                "champion_selection_sha256"
+            ],
+            "selected_behavior_family_count": len(selected),
+            "evaluation_count": len(evaluations),
+            "absolute_zero_benchmark": 0.0,
+            "cost_sensitivity_bps": [5.0, 10.0],
+            "candidate_generation_during_gate": False,
+            "adaptive_feedback_during_gate": False,
+            "files": file_rows,
+        }
+        manifest["bundle_sha256"] = _canonical_sha256(manifest)
+        _write_json(temporary / "manifest.json", manifest)
+        os.replace(temporary, output_root)
+        return manifest
+    except BaseException:
+        if temporary.exists():
+            shutil.rmtree(temporary)
+        raise
 
 
 def load_v24_contract(repo_root: Path) -> dict[str, Any]:
@@ -339,19 +552,99 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
         blockers.append("selection.family_key")
     if selection.get("champion_order") != list(V24_CHAMPION_ORDER):
         blockers.append("selection.champion_order")
+    expected_selection = {
+        "champion_authority": V24_SELECTION_AUTHORITY,
+        "expression_count_weighting": False,
+        "validation_feedback_allowed": False,
+        "oos_feedback_allowed": False,
+        "duplicate_family_backfill_allowed": False,
+        "seed_horizon_pooling_allowed": False,
+        "cohort_count_rule": "EQUAL_COUNT_PER_ARM_SEED_HORIZON",
+        "underfilled_cell_action": (
+            "FAIL_CLOSED_NO_DUPLICATE_FAMILY_BACKFILL"
+        ),
+    }
+    if any(selection.get(key) != value for key, value in expected_selection.items()):
+        blockers.append("selection.frozen_rules")
     fresh = dict(contract.get("fresh_data_gate") or {})
     if (
         fresh.get("prior_holdout_end_exclusive")
         != "2026-07-01T00:00:00Z"
         or fresh.get("candidate_generation_during_gate") is not False
         or fresh.get("adaptive_feedback_during_gate") is not False
+        or fresh.get("policy_memory_write_during_gate") is not False
+        or fresh.get("selection_frozen_before_read") is not True
+        or fresh.get("absolute_zero_benchmark_required") is not True
+        or fresh.get("typed_random_comparator_required") is not True
+        or fresh.get("cost_sensitivity_bps") != [5.0, 10.0]
+        or fresh.get("run_requires_new_user_authorization") is not True
     ):
         blockers.append("fresh_data_gate")
     required_paths = dict(contract.get("economic_path_artifacts") or {})
-    if required_paths.get("required") is not True:
-        blockers.append("economic_path_artifacts.required")
+    if (
+        required_paths.get("required") is not True
+        or required_paths.get("hourly_sleeve_path_fields")
+        != [
+            "objective_mask",
+            "gross",
+            "cost",
+            "turnover",
+            "net",
+            "cost_5bps",
+            "net_5bps",
+            "cost_10bps",
+            "net_10bps",
+        ]
+        or required_paths.get("daily_sleeve_path_fields")
+        != ["gross", "cost", "turnover", "net"]
+        or required_paths.get("sparse_asset_path_fields")
+        != ["weight", "asset_gross_contribution"]
+        or required_paths.get("new_evaluator") is not False
+    ):
+        blockers.append("economic_path_artifacts")
+    gate_adapter = dict(contract.get("gate_adapter") or {})
+    expected_gate_adapter = {
+        "symbol": (
+            "alphafactory_crypto.broad_search.search_engine_v2_4."
+            "persist_v24_gate_bundle"
+        ),
+        "required_arms": [
+            "expanded_mechanism_random_v2_4",
+            "mechanism_evolution_v2_4",
+        ],
+        "market_read_performed": False,
+        "candidate_evaluation_performed": False,
+        "atomic_directory_rename": True,
+        "manifest_required": True,
+    }
+    if gate_adapter != expected_gate_adapter:
+        blockers.append("gate_adapter")
+    component_sources = dict(contract.get("component_sources") or {})
+    if set(component_sources) != {"pair_evaluator", "v24_adapter"}:
+        blockers.append("component_sources.keys")
+    for name, binding in component_sources.items():
+        item = dict(binding)
+        source_path = Path(repo_root) / str(item.get("path") or "")
+        if (
+            not source_path.is_file()
+            or _file_sha256(source_path) != str(item.get("sha256") or "")
+        ):
+            blockers.append(f"component_sources.{name}")
     boundaries = dict(contract.get("boundaries") or {})
-    if any(value is not False for value in boundaries.values()):
+    expected_boundaries = {
+        "market_search": False,
+        "sealed_read": False,
+        "oos": False,
+        "forward": False,
+        "recent": False,
+        "challenge": False,
+        "promotion": False,
+        "new_evaluator": False,
+        "new_ast": False,
+        "new_compiler": False,
+        "cross_sprint_adaptive_memory": False,
+    }
+    if boundaries != expected_boundaries:
         blockers.append("boundaries")
     if blockers:
         raise RuntimeError("V24_SOURCE_CONTRACT_BLOCKED:" + ",".join(blockers))

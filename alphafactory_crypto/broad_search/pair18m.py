@@ -1246,20 +1246,21 @@ def evaluate_pair(
         execution_venue = str(
             dict(target_metadata).get("venue")
             or dict((economic_receipt or {}).get("execution") or {}).get("venue")
-            or "UNBOUND_EXECUTION_VENUE"
         )
+        if not execution_venue:
+            raise ValueError("ECONOMIC_PATH_EXECUTION_VENUE_UNBOUND")
+        store_symbols = getattr(store, "symbols", None)
+        if store_symbols is None:
+            raise ValueError("ECONOMIC_PATH_ASSET_IDENTITIES_UNBOUND")
         asset_ids = tuple(
             str(value)
-            for value in getattr(
-                store,
-                "symbols",
-                tuple(
-                    f"asset_{index:04d}"
-                    for index in range(primary_weight.shape[0])
-                ),
-            )
+            for value in store_symbols
         )
-        if len(asset_ids) != primary_weight.shape[0]:
+        if (
+            len(asset_ids) != primary_weight.shape[0]
+            or len(asset_ids) != len(set(asset_ids))
+            or any(not value for value in asset_ids)
+        ):
             raise ValueError("ECONOMIC_PATH_ASSET_IDENTITY_CHANGED")
 
         def sleeve_paths(

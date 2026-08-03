@@ -46,8 +46,30 @@
     "cost_sensitivity_bps": [5.0, 10.0],
     "run_requires_new_user_authorization": true
   },
+  "gate_adapter": {
+    "symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.persist_v24_gate_bundle",
+    "required_arms": [
+      "expanded_mechanism_random_v2_4",
+      "mechanism_evolution_v2_4"
+    ],
+    "market_read_performed": false,
+    "candidate_evaluation_performed": false,
+    "atomic_directory_rename": true,
+    "manifest_required": true
+  },
   "economic_path_artifacts": {
     "required": true,
+    "hourly_sleeve_path_fields": [
+      "objective_mask",
+      "gross",
+      "cost",
+      "turnover",
+      "net",
+      "cost_5bps",
+      "net_5bps",
+      "cost_10bps",
+      "net_10bps"
+    ],
     "daily_sleeve_path_fields": [
       "gross",
       "cost",
@@ -72,6 +94,16 @@
     "pair_evaluator_authority": "alphafactory_crypto.broad_search.pair18m.evaluate_pair",
     "projection_symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.build_economic_path_artifacts",
     "new_evaluator": false
+  },
+  "component_sources": {
+    "pair_evaluator": {
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "C110200E5BA06907B7653FDAAF0BDA309B95947147E6137F32BF207FFF9743BE"
+    },
+    "v24_adapter": {
+      "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
+      "sha256": "89759E23AFFA24241D36E6EA82C19374826060C54D5B16FB7398FEF8D75FC37E"
+    }
   },
   "boundaries": {
     "market_search": false,

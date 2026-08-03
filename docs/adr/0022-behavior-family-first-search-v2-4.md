@@ -32,7 +32,10 @@ opt-in audit projection for validation or holdout only. The projection retains
 every sleeve's gross, cost, turnover, net and objective mask, plus sparse
 asset/time weights and gross contributions with the execution venue. The V2.4
 adapter converts those paths to daily sleeve and sparse position artifacts; it
-does not recompute candidate economics.
+also preserves an exact hourly sleeve path with the objective mask and 5/10 bps
+cost projections. A single adapter must atomically write the family selection,
+selection receipt, hourly/daily sleeves, sparse positions, and hash manifest.
+It does not run a market evaluator or replace candidate economics.
 
 A future fresh-data gate must start at or after the prior holdout end
 (`2026-07-01T00:00:00Z`) or use an independently admitted new asset surface.

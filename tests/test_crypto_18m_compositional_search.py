@@ -300,6 +300,10 @@ class _FakeStore:
         start = np.datetime64("2023-07-01T00:00:00", "ns").astype(np.int64)
         self.timestamp_ns = start + np.arange(self.shape[1], dtype=np.int64) * 3_600_000_000_000
 
+    @property
+    def symbols(self) -> tuple[str, ...]:
+        return tuple(f"ASSET{index}" for index in range(self.shape[0]))
+
     def field(self, name: str) -> np.ndarray:
         return self._fields[name]
 
