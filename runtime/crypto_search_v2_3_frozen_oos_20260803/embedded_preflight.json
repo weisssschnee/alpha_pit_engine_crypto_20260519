@@ -1,0 +1,13 @@
+{
+  "candidate_generation_performed": false,
+  "producer_source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "receipt_sha256": "E7E7DFE5D6593243EE655A04654E31988B0B722D3B7EE0442978290B334BBE52",
+  "schema_version": 1,
+  "sealed_partition_reads_before_run": 0,
+  "selection_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+  "source_candidate_count": 1024,
+  "status": "READY_ONE_AUTHORIZED_HOLDOUT_PARTITION_READ",
+  "validation_performance_selection_performed": false,
+  "workers": 10,
+  "workers_12_forbidden": true
+}

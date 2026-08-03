@@ -4,6 +4,37 @@ Last updated: 2026-08-03 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_COMPLETE`
+
+ADR 0021's one read-only frozen V2.3 OOS authorization is consumed. Producer
+`3e593aaea93e9b521ba78d24186ad225e901eae7` replayed the exact four
+pre-validation cohorts over the frozen `2026-01-01` through `2026-07-01`
+holdout: 1,024 source identities, 1,023 completed evaluations, one persisted
+candidate-local constructibility failure with no backfill, and 16 exact
+64-candidate checkpoints with restore verification. The run performed exactly
+one sealed partition read and generated no candidates or optimizer, archive,
+policy, scheduler, or cross-sprint memory feedback.
+
+The pooled equal-weight daily total-policy effect across both preregistered
+seeds and the 1h/4h horizons is positive. Primary-net delta is
+`0.000201472686` with seven-day block-bootstrap `P(delta>0)=0.9983` and
+`q10=0.000121597033`; matched-increment delta is `0.000227422332` with
+`P(delta>0)=1.0000` and `q10=0.000175464575`. Proposal-distribution and
+train-ranker pooled effects are also positive. Seed/horizon cells remain
+heterogeneity evidence rather than an all-cell veto.
+
+Terminal classification is
+`OOS_TOTAL_POLICY_POSITIVE_DIRECTION_Q10_SUPPORTED`. Independent PC2 and local
+checkers pass with artifact bundle SHA256
+`EEAFD289233B6E39737A43896DFBB76BEE78D06869F4A6FC846D2D3647B3A5BA`.
+This is conditional OOS policy-attribution evidence under the frozen Binance
+USD-M target and 5 bps cost; it is not a binary qualification gate, Alpha
+claim, formal optimizer authority, or promotion. No second read, tuning,
+reseed, rescue rerun, challenge, recent, May-stress, forward, promotion, new
+search, or subsequent Arena occurred.
+
+The preceding durable state remains:
+
 `CRYPTO_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_GATE_NEGATIVE_COMPLETE`
 
 ADR 0020's one fresh-state, development-only V2.3 authorization is consumed.
@@ -643,12 +674,16 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-0. Preserve the consumed V2.3 outcome at producer
+0. Preserve the consumed V2.3 train/validation outcome at producer
    `06512e01876345d9921d56405d8254a82933a9b7`: 16,000 strict train
    candidates, eight exact-restored train checkpoints plus
    `checkpoint_validation`, exact 1,024-candidate four-cohort attribution,
    all three policy components unqualified, no continuation, and no qualified
-   arms. Do not reopen the campaign or reuse its adaptive state.
+   arms. Also preserve the separate frozen OOS replay at producer
+   `3e593aaea93e9b521ba78d24186ad225e901eae7`: 1,023/1,024 completed,
+   one persisted no-backfill failure, 16 exact-restored checkpoints, one sealed
+   read, and pooled total-policy positive direction with Q10 support. Do not
+   reopen either campaign, reread the holdout, or reuse adaptive state.
 1. Preserve the consumed V2.2 outcome at producer
    `e84b35c76a4cfc139f1c351286489b83fce61250`: 8,000 strict candidates,
    four exact-restored train checkpoints plus `checkpoint_validation`, train
@@ -661,23 +696,31 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
    is source/checker-only and must not be represented as a market replay.
 3. Preserve the consumed V2 mechanism campaign at producer `ef688d89ca0e89654015bf5f76a6b9c26494d837`: six exact checkpoints, 12,000 strict train candidates, and terminal `ENGINE_VALIDATION_BLOCKED`. Do not rerun its validation or reuse its adaptive state.
 4. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
-5. Keep future-Arena qualification empty. V2.3 found train ranking signal but failed replicated attribution across both seeds: proposal distribution, train ranker, and total policy are all unqualified, so its conditional 4k continuation did not run. V2.2's conditional 12k expansion also did not run. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
+5. Keep formal future-Arena qualification empty. V2.3's development all-cell
+   gate rejected proposal distribution, train ranker, and total policy, so its
+   conditional 4k continuation did not run. The separately authorized frozen
+   OOS replay now supports a positive pooled total-policy direction under the
+   existing target/cost contract, but ADR 0021 intentionally defines no binary
+   qualification or promotion gate. V2.2's conditional 12k expansion also did
+   not run. V1.1-V1.3 policy comparisons measured pair-feasibility optimization,
+   not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 6. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
 7. Keep V1-V5 as consumed outcomes. V3 and V4 are each bound to their own `checkpoint_000` plus `checkpoint_validation_blocked`; V5 is bound to `checkpoint_000` plus completed `checkpoint_validation`. Do not reuse any receipt or run state.
 8. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the V2.3 campaign passed and used 10. Do not use 12 workers.
-9. Preserve the completed V2, V2.1, V2.2, and V2.3 Git/Graph closures, their consumed
-   receipts, immutable producer artifacts, checker results, and empty qualified
-   arm sets. Do not reopen those campaigns or reuse adaptive state.
+9. Preserve the completed V2, V2.1, V2.2, V2.3, and V2.3 frozen-OOS Git/Graph
+   closures, their consumed receipts, immutable producer artifacts, checker
+   results, and empty formally qualified arm sets. Do not reopen those campaigns,
+   reread the holdout, or reuse adaptive state.
 10. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 11. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 12. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
 
-No V2, V2.1, V2.2, or V2.3 receipt remains authorized, and no further performance search is
-authorized by this plan.
+No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
+further performance search or sealed replay is authorized by this plan.
 
 ## Qualified policy components
 
-The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. No economic optimizer, search arm, or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
+The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. The frozen OOS replay provides positive pooled total-policy attribution and Q10 support, but no economic optimizer, search arm, or archive is formally qualified for a future Arena because the replay had no binary qualification or promotion authority. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
 
 ## Blockers
 
@@ -694,8 +737,12 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
   eight seed-horizon metric cells, but the second seed's 4h primary-net effect
   failed; proposal distribution and total policy also failed replication across
   both seeds. The conditional 4k continuation did not run, all qualification
-  remains empty, and the result does not authorize tuning, reseeding, OOS,
-  promotion, or another Arena.
+  remained empty. ADR 0021 subsequently authorized one exact frozen-cohort OOS
+  replay. That replay found positive pooled total-policy primary-net and matched
+  increments with positive Q10, while preserving cell heterogeneity and one
+  no-backfill candidate-local failure. It consumed the only OOS read and did not
+  retrofit a binary qualification gate, formal authority, promotion, tuning,
+  reseeding, rescue, or another Arena.
 - V1.4 failure decomposition: final-increment gross directionality exists frequently, but 96.10% of gross-positive rows are sign-killed after cost and only 0.25% of Stage-B rows are within one strict-distance unit of zero. This points first to target/execution and turnover economics, not a larger random or adaptive budget. Because standalone sleeves and monthly waterfalls were not persisted, the audit cannot distinguish A/B efficacy from AB/ABC incremental failure strongly enough to authorize a residual, gate, or regime-routing grammar.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - V1.4 target semantics are not a qualified execution contract. Binance order flow is evaluated against an availability-dependent non-Binance mark; 126/144 assets use more than one priority venue, and 0.205% of 1h plus 0.512% of 4h valid label endpoints cross venues. The generic 5 bps model is not tied to fees, slippage, mark-to-trade basis, or an executable instrument on those venues.
@@ -706,7 +753,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
 - Search Engine V2 completed all 12,000 train candidates but its final arm aggregator rejected legal heterogeneous control schemas before equal-count validation artifacts were persisted. Future source now aggregates controls equal-weight within candidate and then equal-weight across candidates; the consumed run remains blocked and cannot be rescued.
 - V1-V6, V2 mechanism, V2.1 mechanism-basis, V2.2 Evolution-qualification,
-  and V2.3 policy-attribution receipts are consumed with
+  V2.3 policy-attribution, and V2.3 frozen-OOS receipts are consumed with
   `run_authorized=false`; their component hashes resolve against each run's
   frozen producer source. None authorizes a current market-development run.
 - V4 confirms the NaN/support and rolling-warm-up repairs but exposes a distinct orchestration defect: validation-period mapped-control equality for one selected candidate terminates all active arms before equal-count metrics exist. This is an engine-validation failure, not a market or Alpha negative.
@@ -755,8 +802,9 @@ receipt binds those named experimental components only for the one conditional
 development campaign. Portfolio mapping remains formal; that does not promote
 the venue cost assumption. Canonical and direct `run*` entry points verify the
 content-hashed successor receipt and exact user authorization. Historical
-entrypoints cannot use this exception. OOS access, promotion, cost tuning, seed
-changes, and rescue reruns remain forbidden.
+entrypoints cannot use this exception. That one frozen OOS exception is now
+consumed; any further OOS access, promotion, cost tuning, seed changes, or rescue
+reruns remain forbidden.
 
 ## Crypto reward uncertainty V2 source repair
 

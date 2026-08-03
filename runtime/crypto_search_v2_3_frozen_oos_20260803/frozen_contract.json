@@ -1,0 +1,326 @@
+{
+  "aggregation": {
+    "binary_qualification_gate": false,
+    "block_length_days": 7,
+    "bootstrap_replications": 4096,
+    "cell_results_are_heterogeneity_not_kill_gates": true,
+    "primary_estimand": "EQUAL_WEIGHT_ACROSS_SEED_HORIZON_DAILY_TOTAL_POLICY_EFFECT",
+    "proposal_distribution": "evolution_stratified_minus_random_stratified",
+    "reported_quantiles": [
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95
+    ],
+    "total_policy": "evolution_train_top_minus_random_train_top",
+    "train_ranker": "evolution_train_top_minus_evolution_stratified"
+  },
+  "archive_written": false,
+  "authority_preflight": {
+    "authority_refs": {
+      "cost": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_data_mapping_cost_evaluator",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "execution_price": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "optimizer_reward": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "portfolio_mapping": {
+        "active_authority": true,
+        "authority_class": "FORMAL",
+        "component": "explicit_portfolio_mapping",
+        "lifecycle": "ACTIVE",
+        "status": "RESOLVED"
+      },
+      "promotion_gate": {
+        "active_authority": true,
+        "authority_class": "FORMAL",
+        "component": "sealed_research_boundaries",
+        "lifecycle": "FORBIDDEN",
+        "status": "RESOLVED"
+      },
+      "target": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "validation_role": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      }
+    },
+    "decision_to_change": "Whether the V2.3 proposal distribution, train ranker, and total policy transfer to the frozen holdout",
+    "economic_receipt": null,
+    "evidence_to_add": "Frozen OOS total-policy transfer evidence for all 1,024 precommitted V2.3 cohort identities",
+    "formal_claims_authorized": false,
+    "receipt_bound_non_formal_authorization": {
+      "authority": "CURRENT_USER_INSTRUCTION",
+      "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+      "receipt_path": "config/crypto_search_v2_3_frozen_oos_receipt.json",
+      "receipt_sha256": "E7E7DFE5D6593243EE655A04654E31988B0B722D3B7EE0442978290B334BBE52",
+      "run_authorized": true,
+      "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY"
+    },
+    "result": "READY_WITH_NON_FORMAL_BOUNDARIES"
+  },
+  "candidate_generation_performed": false,
+  "checkpoint_size": 64,
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_20260803",
+  "field_count": 115,
+  "frozen_contract_sha256": "0C5460C7D07138A6FD9E7B01D18BB7033961C6E09DE09FD0E950FE61296F8356",
+  "holdout": {
+    "candidate_generation_allowed": false,
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "read_allowed": true,
+    "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+    "start": "2026-01-01T00:00:00Z"
+  },
+  "input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "2C90C4A6B9221863A3129AAECBE512184796FA2BEE41EF64E23BEE65D14EFF76"
+    },
+    "behavior_contract_window": {
+      "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "holdout_read": false,
+      "start": "2025-08-29T07:00:00Z",
+      "validation_read": false
+    },
+    "compiler_identity": {
+      "bundle_sha256": "A0A0739B1C4E027DB04364D3726855EB2A833203F5FD5313B04A17A77478690C",
+      "paths": [
+        {
+          "bytes": 55404,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "E27B8296AD1A6239A21F406F19DDBF86EA53BA0FFD9A3BB7B7A9418B8C4568A4"
+        },
+        {
+          "bytes": 24801,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "4D6A71912470A78547FC533825F70FB94DEED534E7892B535E5B1FC3102C090F"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 87685,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+        },
+        {
+          "bytes": 67661,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "7B21745F0C8B98F061AF211811F60145D2D01C03A61D663A7507245A722BB549"
+        },
+        {
+          "bytes": 112828,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+        },
+        {
+          "bytes": 898286,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "4508C5F4DF27842D2CDD34A2441795B6E1B00F6D1E12ED2AD91CA3DFC88CCF67"
+        },
+        {
+          "bytes": 35617,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "31541B6DE35AC7E96DC847709D1CF58516D3FC9035B2CFBDF8DC9B9291242641"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "96705D21E35136FD54D9A0EE95666C1A1C5A731FD1CC7244977F3A77713DDED1"
+    }
+  },
+  "optimizer_feedback_written": false,
+  "policy_memory_written": false,
+  "promotion_authorized": false,
+  "receipt": {
+    "aggregation": {
+      "binary_qualification_gate": false,
+      "block_length_days": 7,
+      "bootstrap_replications": 4096,
+      "cell_results_are_heterogeneity_not_kill_gates": true,
+      "primary_estimand": "EQUAL_WEIGHT_ACROSS_SEED_HORIZON_DAILY_TOTAL_POLICY_EFFECT",
+      "proposal_distribution": "evolution_stratified_minus_random_stratified",
+      "reported_quantiles": [
+        0.05,
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95
+      ],
+      "total_policy": "evolution_train_top_minus_random_train_top",
+      "train_ranker": "evolution_train_top_minus_evolution_stratified"
+    },
+    "boundaries": {
+      "a_share_constraints_applied": false,
+      "challenge": false,
+      "cross_sprint_adaptive_memory": false,
+      "forward": false,
+      "may_stress": false,
+      "new_search": false,
+      "oos": true,
+      "promotion": false,
+      "recent": false,
+      "sealed_partition_reads": 1
+    },
+    "component_sources": {
+      "authority_preflight": {
+        "path": "alphafactory_crypto/broad_search/experiment_authority.py",
+        "sha256": "E62B496E3869D064EAACF008CB6F0E779DAB35AB32ED2E4F329F61BCB6EEE0ED"
+      },
+      "mapping_and_cost": {
+        "path": "alphafactory_crypto/instrument_capability/mapping.py",
+        "sha256": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036"
+      },
+      "mechanism_compiler": {
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+      },
+      "oos_runtime": {
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "DE1CEFE4AC44612A16C34CB6DCF4AF3BEB2CEBBF9EDAE07B6F14BDC32A4E5AC7"
+      },
+      "pair_evaluator": {
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "7B21745F0C8B98F061AF211811F60145D2D01C03A61D663A7507245A722BB549"
+      },
+      "target_store": {
+        "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+        "sha256": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629"
+      }
+    },
+    "holdout": {
+      "candidate_generation_allowed": false,
+      "end_exclusive": "2026-07-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "read_allowed": true,
+      "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+      "start": "2026-01-01T00:00:00Z"
+    },
+    "receipt_id": "CRYPTO_SEARCH_V2_3_FROZEN_OOS_RECEIPT",
+    "receipt_sha256": "E7E7DFE5D6593243EE655A04654E31988B0B722D3B7EE0442978290B334BBE52",
+    "replay": {
+      "candidate_count_per_cohort": 256,
+      "candidate_count_per_seed_horizon_cohort": 64,
+      "candidate_local_failure_action": "PERSIST_NO_BACKFILL",
+      "cohorts": [
+        "random_stratified",
+        "random_train_top",
+        "evolution_stratified",
+        "evolution_train_top"
+      ],
+      "horizons_hours": [
+        1,
+        4
+      ],
+      "matched_component": "FROZEN_TRAIN_LIMITING_COMPONENT",
+      "orientation": "FROZEN_TRAIN_ORIENTATION",
+      "same_target_mapping_cost": true,
+      "seeds": [
+        359914106,
+        1141399971
+      ]
+    },
+    "run_authorization": {
+      "archive_write_allowed": false,
+      "authority": "CURRENT_USER_INSTRUCTION",
+      "candidate_generation_allowed": false,
+      "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+      "optimizer_feedback_allowed": false,
+      "parameter_tuning_allowed": false,
+      "policy_memory_write_allowed": false,
+      "promotion_allowed": false,
+      "rescue_rerun_allowed": false,
+      "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
+      "seed_change_allowed": false,
+      "validation_performance_selection_allowed": false
+    },
+    "run_authorized": true,
+    "run_outcome": {},
+    "schema_version": 1,
+    "source_receipt_path": "config/crypto_search_mechanism_v2_3_receipt.json",
+    "source_receipt_sha256": "544C3E5B88271CC7B373A135186C4B37729AEA939B7A891A10CED21716E71291",
+    "source_v23": {
+      "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+      "candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+      "candidate_ledger_sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4",
+      "evaluated_candidate_count": 1024,
+      "evaluated_cohort_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+      "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+      "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+      "unique_candidate_count": 1024,
+      "validation_candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_candidate_ledger.parquet",
+      "validation_candidate_ledger_sha256": "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F"
+    },
+    "status": "RUN_AUTHORIZED_ONE_TIME_FROZEN_OOS_REPLAY"
+  },
+  "schema_version": 1,
+  "selection_candidate_count": 1024,
+  "selection_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+  "source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "source_v23": {
+    "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+    "candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4",
+    "evaluated_candidate_count": 1024,
+    "evaluated_cohort_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+    "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+    "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+    "unique_candidate_count": 1024,
+    "validation_candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_candidate_ledger.parquet",
+    "validation_candidate_ledger_sha256": "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F"
+  },
+  "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "validation_performance_selection_performed": false,
+  "workers": 10
+}

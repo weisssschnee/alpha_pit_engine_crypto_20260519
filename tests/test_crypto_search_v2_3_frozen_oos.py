@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from alphafactory_crypto.broad_search.experiment_authority import (
     require_real_experiment_authority,
 )
@@ -11,7 +13,6 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _load_v23_oos_candidates,
     _load_v23_oos_receipt,
     _payload_sha,
-    _require_bound_authority_preflight,
     _restore_v23_oos_checkpoint,
     _v23_oos_aggregate,
     _write_v23_oos_checkpoint,
@@ -22,7 +23,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_receipt_binds_exact_committed_v23_cohort_without_holdout_read() -> None:
-    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=True)
+    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=False)
     rows = _load_v23_oos_candidates(REPO_ROOT, receipt)
     projection = [
         {key: value for key, value in row.items() if key != "candidate"}
@@ -35,10 +36,12 @@ def test_receipt_binds_exact_committed_v23_cohort_without_holdout_read() -> None
     ]
     assert receipt["holdout"]["read_allowed"] is True
     assert receipt["run_authorization"]["candidate_generation_allowed"] is False
+    assert receipt["run_authorized"] is False
+    assert receipt["status"] == "RUN_AUTHORIZATION_CONSUMED_OOS_REPLAY_COMPLETE"
 
 
-def test_receipt_authorizes_only_bound_non_formal_oos_preflight() -> None:
-    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=True)
+def test_consumed_receipt_blocks_a_second_oos_preflight() -> None:
+    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=False)
     authorization = {
         "decision_id": receipt["run_authorization"]["decision_id"],
         "authority": receipt["run_authorization"]["authority"],
@@ -47,35 +50,18 @@ def test_receipt_authorizes_only_bound_non_formal_oos_preflight() -> None:
         "receipt_sha256": receipt["receipt_sha256"],
         "run_authorized": receipt["run_authorized"],
     }
-    result = require_real_experiment_authority(
-        REPO_ROOT,
-        evidence_to_add="frozen OOS total-policy transfer evidence",
-        decision_to_change="whether V2.3 transfers to the frozen holdout",
-        economic_receipt_required=False,
-        receipt_bound_non_formal_authorization=authorization,
-    )
-    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
-    assert result["formal_claims_authorized"] is False
-    assert {
-        role
-        for role, value in result["authority_refs"].items()
-        if value["status"] == "BOUND_NON_FORMAL_EXPERIMENT"
-    } == {
-        "target",
-        "optimizer_reward",
-        "execution_price",
-        "cost",
-        "validation_role",
-    }
-    assert _require_bound_authority_preflight(
-        REPO_ROOT,
-        result,
-        economic_receipt_required=False,
-    ) == result
+    with pytest.raises(RuntimeError, match="receipt_bound_non_formal_authorization"):
+        require_real_experiment_authority(
+            REPO_ROOT,
+            evidence_to_add="a forbidden second frozen OOS replay",
+            decision_to_change="whether the consumed receipt can be reused",
+            economic_receipt_required=False,
+            receipt_bound_non_formal_authorization=authorization,
+        )
 
 
 def test_pooled_oos_effect_reports_heterogeneity_without_all_cell_gate() -> None:
-    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=True)
+    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=False)
     cohorts = {
         "random_stratified": "expanded_mechanism_random_v2_3",
         "random_train_top": "expanded_mechanism_random_v2_3",

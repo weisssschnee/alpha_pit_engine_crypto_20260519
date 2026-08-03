@@ -1,0 +1,12 @@
+{
+  "artifact_bundle_sha256": "EEAFD289233B6E39737A43896DFBB76BEE78D06869F4A6FC846D2D3647B3A5BA",
+  "candidate_local_failure_count": 1,
+  "checkpoint_count": 16,
+  "classification": "OOS_TOTAL_POLICY_POSITIVE_DIRECTION_Q10_SUPPORTED",
+  "errors": [],
+  "evaluated_candidate_count": 1023,
+  "producer_source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "result": "PASS",
+  "sealed_partition_reads": 1,
+  "source_candidate_count": 1024
+}

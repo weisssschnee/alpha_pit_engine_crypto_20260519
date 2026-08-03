@@ -1,0 +1,30 @@
+{
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "candidate_path_row_count": 150592,
+  "checkpoint": "checkpoint_012",
+  "completed_candidate_count": 832,
+  "completed_identity_sha256": "F0B685BF1158DC03BC20E3929A97AB964C136F741C2885E3D3A550AACEE0A1A5",
+  "files": [
+    {
+      "bytes": 3444929,
+      "name": "oos_candidate_daily_paths.parquet",
+      "sha256": "22D1D09C5522287875AFF21DA5632050ABD8FD8E76675FD46D292C867E8DEE48"
+    },
+    {
+      "bytes": 116969,
+      "name": "oos_candidate_ledger.parquet",
+      "sha256": "FF97413C09E88130E9D03CB31AC062D80DDDCE766B7B9D8FFE06A3A0574CCDFF"
+    },
+    {
+      "bytes": 60457,
+      "name": "state.json",
+      "sha256": "B0B30A13CF7790DFD94261516DAA44DE417EB6893A24812D45841C09610C2A12"
+    }
+  ],
+  "frozen_contract_sha256": "0C5460C7D07138A6FD9E7B01D18BB7033961C6E09DE09FD0E950FE61296F8356",
+  "restore_verified": true,
+  "schema_version": 1,
+  "selection_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+  "source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "state_sha256": "74A7628EDC4B99EE3452AB376BB8B9E70EA955635350E1E7927BF46690BAA4AE"
+}

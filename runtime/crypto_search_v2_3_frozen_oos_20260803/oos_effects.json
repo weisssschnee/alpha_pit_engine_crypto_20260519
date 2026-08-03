@@ -1,0 +1,649 @@
+{
+  "binary_qualification_gate_applied": false,
+  "candidate_local_failure_count": 1,
+  "candidate_local_failures": [
+    {
+      "candidate_id": "A5809A0CC6474CC52B76FA56B38E3B960A3DA2565EC945D2CFD15D5BC13E9C44",
+      "cohort": "random_train_top",
+      "horizon_hours": 4,
+      "reason": "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "seed": 359914106
+    }
+  ],
+  "cell_effects": [
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": -2.4663030396152613e-05,
+            "q10": -1.1326153021622688e-05,
+            "q25": 1.4085679602531968e-05,
+            "q50": 4.192021901960081e-05,
+            "q75": 7.208081942563358e-05,
+            "q90": 9.844536656318071e-05,
+            "q95": 0.0001143092820829271
+          },
+          "bootstrap_seed": 2132214116,
+          "observed_mean_delta": 4.341447272045177e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.84326171875,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": -5.309053378400925e-05,
+            "q10": -3.82693920409814e-05,
+            "q25": -1.1295293106348728e-05,
+            "q50": 2.1113520213572058e-05,
+            "q75": 5.742804904909894e-05,
+            "q90": 9.305438218978215e-05,
+            "q95": 0.00011641755283526276
+          },
+          "bootstrap_seed": 3499754162,
+          "observed_mean_delta": 2.401414873527942e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.6650390625,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_stratified",
+      "right_cohort": "evolution_stratified",
+      "seed": 359914106
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 2.343710744067105e-05,
+            "q10": 3.665796412665632e-05,
+            "q25": 5.8999040521755956e-05,
+            "q50": 8.480260598653555e-05,
+            "q75": 0.00011009588384218997,
+            "q90": 0.00013330197657004846,
+            "q95": 0.0001470589142714638
+          },
+          "bootstrap_seed": 1429330617,
+          "observed_mean_delta": 8.446797685698186e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.985107421875,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 2.47917737020262e-05,
+            "q10": 3.7149917481362544e-05,
+            "q25": 5.851110800436171e-05,
+            "q50": 8.206570926893602e-05,
+            "q75": 0.00010947223061858906,
+            "q90": 0.00013248869569680864,
+            "q95": 0.00014789127871117543
+          },
+          "bootstrap_seed": 283741850,
+          "observed_mean_delta": 8.399352756598891e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.990966796875,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_stratified",
+      "right_cohort": "evolution_stratified",
+      "seed": 359914106
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00036152818975323744,
+            "q10": 0.00036779897511917347,
+            "q25": 0.0003791465299708157,
+            "q50": 0.0003912414929599628,
+            "q75": 0.0004041581031399591,
+            "q90": 0.0004151014519074081,
+            "q95": 0.000421313359099663
+          },
+          "bootstrap_seed": 4017187737,
+          "observed_mean_delta": 0.0003916188165114034,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00015189074319605647,
+            "q10": 0.00016227874200207542,
+            "q25": 0.0001784227524011602,
+            "q50": 0.00019622199004474067,
+            "q75": 0.0002135119819856386,
+            "q90": 0.00022874027554957855,
+            "q95": 0.0002373556596408524
+          },
+          "bootstrap_seed": 1308561421,
+          "observed_mean_delta": 0.0001962185502226897,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_stratified",
+      "right_cohort": "evolution_stratified",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "proposal_distribution",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 9.195567951589036e-05,
+            "q10": 9.526537913162043e-05,
+            "q25": 0.00010164272234474203,
+            "q50": 0.00010810848747335269,
+            "q75": 0.0001146718275780322,
+            "q90": 0.00012037239659704217,
+            "q95": 0.00012409887589537777
+          },
+          "bootstrap_seed": 1421094647,
+          "observed_mean_delta": 0.00010820870504145768,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 9.17499161954116e-05,
+            "q10": 9.625529345820051e-05,
+            "q25": 0.00010307333231128417,
+            "q50": 0.00011078236133299137,
+            "q75": 0.00011884710909740236,
+            "q90": 0.0001256661247361843,
+            "q95": 0.00012989507504641615
+          },
+          "bootstrap_seed": 3035731444,
+          "observed_mean_delta": 0.00011083648710373443,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_stratified",
+      "right_cohort": "evolution_stratified",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.0006633495755932121,
+            "q10": 0.0007076671228000972,
+            "q25": 0.0007850935607854753,
+            "q50": 0.0008680108593530887,
+            "q75": 0.0009622419059498678,
+            "q90": 0.0010494688869189639,
+            "q95": 0.0011066090278111914
+          },
+          "bootstrap_seed": 434667500,
+          "observed_mean_delta": 0.0008769171401439151,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.0004918405636519659,
+            "q10": 0.000543911335402271,
+            "q25": 0.0006425067247695295,
+            "q50": 0.0007525093384907332,
+            "q75": 0.0008675653228020093,
+            "q90": 0.0009799488239771695,
+            "q95": 0.0010464257247439354
+          },
+          "bootstrap_seed": 1063408760,
+          "observed_mean_delta": 0.0007625090238115736,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "evolution_stratified",
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00011343082143187844,
+            "q10": 0.00012697873264130882,
+            "q25": 0.00015153949666550458,
+            "q50": 0.00017785482223393949,
+            "q75": 0.000205090242480401,
+            "q90": 0.0002286970376187962,
+            "q95": 0.00024645815420033557
+          },
+          "bootstrap_seed": 1055979217,
+          "observed_mean_delta": 0.00017849222360576185,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 5.4552709701460945e-05,
+            "q10": 7.504649179821261e-05,
+            "q25": 0.00011135983090192577,
+            "q50": 0.00014675610049668416,
+            "q75": 0.00018405352605361925,
+            "q90": 0.00021594574047180924,
+            "q95": 0.0002362993344440695
+          },
+          "bootstrap_seed": 1982534798,
+          "observed_mean_delta": 0.0001476599176552267,
+          "paired_day_count": 181,
+          "probability_positive": 0.99462890625,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "evolution_stratified",
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 7.234528468304248e-05,
+            "q10": 9.378048348771354e-05,
+            "q25": 0.00012494292924492828,
+            "q50": 0.0001584105897202528,
+            "q75": 0.0001925738358353767,
+            "q90": 0.0002217834541034157,
+            "q95": 0.00024080937188632645
+          },
+          "bootstrap_seed": 3243072543,
+          "observed_mean_delta": 0.00015630706244288334,
+          "paired_day_count": 181,
+          "probability_positive": 0.998779296875,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 3.3579042787367214e-06,
+            "q10": 3.644427601305099e-05,
+            "q25": 8.62606293757902e-05,
+            "q50": 0.00013850744252933003,
+            "q75": 0.0001874766277238016,
+            "q90": 0.00022763204252717538,
+            "q95": 0.00024878734535527177
+          },
+          "bootstrap_seed": 291410268,
+          "observed_mean_delta": 0.0001360648422104576,
+          "paired_day_count": 181,
+          "probability_positive": 0.95263671875,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "evolution_stratified",
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "train_ranker",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 4.262396487553539e-06,
+            "q10": 1.9646732515377736e-05,
+            "q25": 4.4936482693729894e-05,
+            "q50": 6.912515782793432e-05,
+            "q75": 9.607711199191739e-05,
+            "q90": 0.00011874251302469558,
+            "q95": 0.0001319255676278943
+          },
+          "bootstrap_seed": 1749195539,
+          "observed_mean_delta": 6.949230471074171e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.9599609375,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": -5.6034217554070014e-05,
+            "q10": -2.9019404900724336e-05,
+            "q25": 7.724110028010746e-06,
+            "q50": 5.236940506163852e-05,
+            "q75": 9.47731552056743e-05,
+            "q90": 0.00013635653522776436,
+            "q95": 0.00016195864448522942
+          },
+          "bootstrap_seed": 3688828432,
+          "observed_mean_delta": 5.1088921875813936e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.787353515625,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "evolution_stratified",
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00030206994370261515,
+            "q10": 0.0003442578563748088,
+            "q25": 0.0004192420142178524,
+            "q50": 0.0005070977684582252,
+            "q75": 0.0006028553918017895,
+            "q90": 0.0006912117582259106,
+            "q95": 0.0007510791156274943
+          },
+          "bootstrap_seed": 1159488851,
+          "observed_mean_delta": 0.0005080847006183317,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00024191666329490552,
+            "q10": 0.0003029705598375206,
+            "q25": 0.000402898928061187,
+            "q50": 0.0005230461352469702,
+            "q75": 0.0006502429030494016,
+            "q90": 0.0007627135986333942,
+            "q95": 0.0008316842686809081
+          },
+          "bootstrap_seed": 3429994737,
+          "observed_mean_delta": 0.0005249648281970784,
+          "paired_day_count": 181,
+          "probability_positive": 0.99853515625,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_train_top",
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 0.00010025557463853936,
+            "q10": 0.00011782540392666672,
+            "q25": 0.0001476774778025861,
+            "q50": 0.000181700862156846,
+            "q75": 0.00021502639766288114,
+            "q90": 0.0002442865106880044,
+            "q95": 0.00026033463116049147
+          },
+          "bootstrap_seed": 1942002125,
+          "observed_mean_delta": 0.0001823386928619245,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 5.0394863976714504e-05,
+            "q10": 7.303407194576854e-05,
+            "q25": 0.00011704561393014625,
+            "q50": 0.00016617964983468023,
+            "q75": 0.0002134329151705234,
+            "q90": 0.00025813479758333356,
+            "q95": 0.0002842900323357427
+          },
+          "bootstrap_seed": 2532857807,
+          "observed_mean_delta": 0.00016523278383709952,
+          "paired_day_count": 181,
+          "probability_positive": 0.991943359375,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_train_top",
+      "right_cohort": "evolution_train_top",
+      "seed": 359914106
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 4.6708523994047805e-05,
+            "q10": 6.542681729971154e-05,
+            "q25": 9.579121396152164e-05,
+            "q50": 0.00012946576184252894,
+            "q75": 0.0001633413630616314,
+            "q90": 0.0001926021072834125,
+            "q95": 0.0002090355582953726
+          },
+          "bootstrap_seed": 1873755321,
+          "observed_mean_delta": 0.00012993168561651648,
+          "paired_day_count": 181,
+          "probability_positive": 0.993896484375,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": -7.885599668167582e-05,
+            "q10": -4.62544511299402e-05,
+            "q25": 8.039728968826782e-06,
+            "q50": 6.541498306934316e-05,
+            "q75": 0.00011837658020038592,
+            "q90": 0.00016056438164533483,
+            "q95": 0.0001849027691790163
+          },
+          "bootstrap_seed": 635002284,
+          "observed_mean_delta": 5.908145393807625e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.77685546875,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 1,
+      "left_cohort": "random_train_top",
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    },
+    {
+      "comparison": "total_policy",
+      "effects": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": 3.284010494342301e-05,
+            "q10": 4.6756995154467286e-05,
+            "q25": 6.603784878345863e-05,
+            "q50": 8.895722972262758e-05,
+            "q75": 0.00011229111550501323,
+            "q90": 0.00013298089623358083,
+            "q95": 0.0001443441740624878
+          },
+          "bootstrap_seed": 1025866032,
+          "observed_mean_delta": 8.933424806093594e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.994384765625,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_quantiles": {
+            "q05": -4.946950215209023e-05,
+            "q10": -2.688147717071023e-05,
+            "q25": 1.2044903269719169e-05,
+            "q50": 5.721134700158105e-05,
+            "q75": 0.00010196570168525828,
+            "q90": 0.0001390610052003107,
+            "q95": 0.00016442836410284102
+          },
+          "bootstrap_seed": 3622512067,
+          "observed_mean_delta": 5.661167747749008e-05,
+          "paired_day_count": 181,
+          "probability_positive": 0.806884765625,
+          "replications": 4096
+        }
+      },
+      "horizon_hours": 4,
+      "left_cohort": "random_train_top",
+      "right_cohort": "evolution_train_top",
+      "seed": 1141399971
+    }
+  ],
+  "cell_results_role": "HETEROGENEITY_ONLY",
+  "classification": "OOS_TOTAL_POLICY_POSITIVE_DIRECTION_Q10_SUPPORTED",
+  "evaluated_candidate_count": 1023,
+  "next_search_started": false,
+  "pooled_effects": {
+    "proposal_distribution": {
+      "matched_increment": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 0.0001285624969480292,
+          "q10": 0.0001343442394901333,
+          "q25": 0.00014463136836435344,
+          "q50": 0.00015667444981300058,
+          "q75": 0.00016853525534220993,
+          "q90": 0.000179164985476067,
+          "q95": 0.0001857460926754522
+        },
+        "bootstrap_seed": 3129302725,
+        "observed_mean_delta": 0.00015692749278257365,
+        "paired_day_count": 181,
+        "probability_positive": 1.0,
+        "replications": 4096
+      },
+      "primary_net": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 6.684081819643541e-05,
+          "q10": 7.437476868031346e-05,
+          "q25": 8.744821167545519e-05,
+          "q50": 0.00010269321225873346,
+          "q75": 0.00011851886808434238,
+          "q90": 0.0001337716604466562,
+          "q95": 0.00014243359368294707
+        },
+        "bootstrap_seed": 4275010319,
+        "observed_mean_delta": 0.00010376567840692312,
+        "paired_day_count": 181,
+        "probability_positive": 1.0,
+        "replications": 4096
+      }
+    },
+    "total_policy": {
+      "matched_increment": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 0.0001635074603811533,
+          "q10": 0.00017546457472011667,
+          "q25": 0.00019930166343163936,
+          "q50": 0.00022500212683869403,
+          "q75": 0.000252346672173699,
+          "q90": 0.0002799405448773109,
+          "q95": 0.0002987067179197432
+        },
+        "bootstrap_seed": 3939288306,
+        "observed_mean_delta": 0.00022742233178942714,
+        "paired_day_count": 181,
+        "probability_positive": 1.0,
+        "replications": 4096
+      },
+      "primary_net": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 9.884118134765995e-05,
+          "q10": 0.00012159703252854882,
+          "q25": 0.000159025256261189,
+          "q50": 0.00020168622150214152,
+          "q75": 0.000245115760419353,
+          "q90": 0.00028477017171864424,
+          "q95": 0.0003076198936163477
+        },
+        "bootstrap_seed": 1162093488,
+        "observed_mean_delta": 0.00020147268586243608,
+        "paired_day_count": 181,
+        "probability_positive": 0.998291015625,
+        "replications": 4096
+      }
+    },
+    "train_ranker": {
+      "matched_increment": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 0.00025769420743040574,
+          "q10": 0.0002705423857715483,
+          "q25": 0.000292616695329003,
+          "q50": 0.00031968638760678615,
+          "q75": 0.00034744827957877255,
+          "q90": 0.00037292174576501595,
+          "q95": 0.0003895683027440147
+        },
+        "bootstrap_seed": 3753433903,
+        "observed_mean_delta": 0.0003203021827258255,
+        "paired_day_count": 181,
+        "probability_positive": 1.0,
+        "replications": 4096
+      },
+      "primary_net": {
+        "block_length_days": 7,
+        "bootstrap_quantiles": {
+          "q05": 0.00017838521640573595,
+          "q10": 0.00020051224318410813,
+          "q25": 0.00023589111723187515,
+          "q50": 0.0002756904313203114,
+          "q75": 0.0003141921810873916,
+          "q90": 0.00035001488900944164,
+          "q95": 0.0003697194260274227
+        },
+        "bootstrap_seed": 3271304944,
+        "observed_mean_delta": 0.00027433067638826797,
+        "paired_day_count": 181,
+        "probability_positive": 1.0,
+        "replications": 4096
+      }
+    }
+  },
+  "primary_estimand": "EQUAL_WEIGHT_ACROSS_SEED_HORIZON_DAILY_TOTAL_POLICY_EFFECT",
+  "promotion_authorized": false,
+  "schema_version": 1,
+  "source_candidate_count": 1024
+}

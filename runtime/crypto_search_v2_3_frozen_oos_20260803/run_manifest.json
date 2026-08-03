@@ -1,0 +1,71 @@
+{
+  "archive_written": false,
+  "artifact_bundle_sha256": "EEAFD289233B6E39737A43896DFBB76BEE78D06869F4A6FC846D2D3647B3A5BA",
+  "candidate_generation_performed": false,
+  "checkpoint_count": 16,
+  "evaluated_candidate_count": 1023,
+  "experiment_id": "CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_20260803",
+  "files": [
+    {
+      "bytes": 13277,
+      "path": "frozen_contract.json",
+      "sha256": "ED7FE1199FF688AC2CD8A08774AC4FF0CB05450A00B43EFDB223F573314037DA"
+    },
+    {
+      "bytes": 566,
+      "path": "embedded_preflight.json",
+      "sha256": "E1ABF36474F504274D39442443956EE6E199088185F3D4F26D7C5117EB0C4BB0"
+    },
+    {
+      "bytes": 686,
+      "path": "producer_status.json",
+      "sha256": "3A9C6F3041869F99D45C789C550693716050B55B5B2727400455A6A97A49CCD4"
+    },
+    {
+      "bytes": 141063,
+      "path": "oos_candidate_ledger.parquet",
+      "sha256": "006D357CC43000BC4C2AC3DF2723CEED834D3E70B14C9996A5C877F79D06853D"
+    },
+    {
+      "bytes": 4334829,
+      "path": "oos_candidate_daily_paths.parquet",
+      "sha256": "FECFC77D8D0845CD0E7B0CB0A4009ABFDE7A9282E0A47BB86EA6757564D8F34F"
+    },
+    {
+      "bytes": 8021,
+      "path": "oos_cohort_metrics.parquet",
+      "sha256": "AEA3CA6C092B40B346DBB9EB0CFCF0BC079D1D1943455B2618EB740CE2B28C88"
+    },
+    {
+      "bytes": 90743,
+      "path": "oos_cohort_paths.parquet",
+      "sha256": "32FB62227BEF23CE66FF44C936AE5847C509E64E3D1DBF7B4EAF2B92130F3C2D"
+    },
+    {
+      "bytes": 21995,
+      "path": "oos_effects.json",
+      "sha256": "82B6291179D8EDD14D93935B4C2EC40F76C7FDD0D78628F307B850FF17AA6AD6"
+    },
+    {
+      "bytes": 938,
+      "path": "final_decision.json",
+      "sha256": "AE04F325937E1783F6656548FE8A54C64D4621D047A3C5CE9B6F2D76E2CC8447"
+    },
+    {
+      "bytes": 777,
+      "path": "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md",
+      "sha256": "703E893BCC8B0AA27A72B5D64FB3F89EE36720337C9E090971B7C838EA753059"
+    }
+  ],
+  "frozen_contract_sha256": "0C5460C7D07138A6FD9E7B01D18BB7033961C6E09DE09FD0E950FE61296F8356",
+  "holdout_read": true,
+  "optimizer_feedback_written": false,
+  "policy_memory_written": false,
+  "producer_source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "promotion_started": false,
+  "receipt_sha256": "E7E7DFE5D6593243EE655A04654E31988B0B722D3B7EE0442978290B334BBE52",
+  "schema_version": 1,
+  "sealed_partition_reads": 1,
+  "selection_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+  "source_candidate_count": 1024
+}

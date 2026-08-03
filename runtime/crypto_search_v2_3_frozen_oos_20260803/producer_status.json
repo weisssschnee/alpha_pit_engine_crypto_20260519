@@ -1,0 +1,19 @@
+{
+  "active_wall_seconds": 1520.2167495000176,
+  "archive_written": false,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 1,
+  "checkpoint": "checkpoint_015",
+  "completed_candidate_count": 1024,
+  "frozen_contract_sha256": "0C5460C7D07138A6FD9E7B01D18BB7033961C6E09DE09FD0E950FE61296F8356",
+  "heartbeat_utc": "2026-08-03T03:44:20.193256+00:00",
+  "optimizer_feedback_written": false,
+  "policy_memory_written": false,
+  "producer_pid": 23772,
+  "producer_source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+  "schema_version": 1,
+  "sealed_partition_reads": 1,
+  "source_candidate_count": 1024,
+  "status": "OOS_REPLAY_COMPLETE",
+  "workers": 10
+}
