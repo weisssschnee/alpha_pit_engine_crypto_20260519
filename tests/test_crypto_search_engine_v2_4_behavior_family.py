@@ -12,7 +12,9 @@ import pytest
 from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     build_economic_path_artifacts,
     freeze_v24_gate_selection,
+    load_v24_run_receipt,
     load_v24_contract,
+    prepare_v24_train_rows,
     persist_v24_gate_bundle,
     select_behavior_family_cohort,
     select_behavior_family_champions,
@@ -20,6 +22,78 @@ from alphafactory_crypto.broad_search.search_engine_v2_4 import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_v24_one_time_receipt_binds_exact_budget_and_fresh_interval() -> None:
+    receipt = load_v24_run_receipt(REPO_ROOT, require_authorized=False)
+    assert receipt["experiment_id"] == "crypto_search_engine_v2_4_fresh_family_gate"
+    assert receipt["selection"]["per_cell_count"] == 64
+    assert receipt["selection"]["cell_count"] == 8
+    assert receipt["selection"]["candidate_count_exact"] == 512
+    assert receipt["fresh_validation"] == {
+        "start": "2026-07-01T00:00:00Z",
+        "end_exclusive": "2026-07-18T00:00:00Z",
+        "role": "FRESH_DATA_VALIDATION_V2_4",
+        "execution_venue": "BINANCE_USD_M",
+        "baseline_cost_bps": 5.0,
+        "cost_sensitivity_bps": [5.0, 10.0],
+    }
+    assert receipt["compute"]["workers_default"] == 10
+    assert receipt["compute"]["workers_memory_fallback"] == 8
+    assert receipt["compute"]["workers_12_forbidden"] is True
+    assert receipt["compute"]["evaluation_wall_time_seconds_maximum"] == 14400
+    assert receipt["compute"]["minimum_pair_evaluated_per_hour"] == 128.0
+
+
+def test_v24_train_rows_map_only_frozen_v23_arms_without_changing_candidates() -> None:
+    rows = [
+        {
+            "candidate_id": "random-1",
+            "behavior_family_id": "family-r",
+            "arm": "expanded_mechanism_random_v2_3",
+            "seed": 11,
+            "horizon_hours": 1,
+            "search_reward": 1.0,
+            "arm_completion_ordinal": 2,
+            "candidate_spec_json": json.dumps({"candidate_id": "random-1"}),
+            "train_orientation": 1.0,
+        },
+        {
+            "candidate_id": "evolution-1",
+            "behavior_family_id": "family-e",
+            "arm": "mechanism_evolution_v2_3",
+            "seed": 22,
+            "horizon_hours": 4,
+            "search_reward": 2.0,
+            "arm_completion_ordinal": 3,
+            "candidate_spec_json": json.dumps({"candidate_id": "evolution-1"}),
+            "train_orientation": -1.0,
+        },
+    ]
+    mapped = prepare_v24_train_rows(
+        rows,
+        source_arm_mapping={
+            "expanded_mechanism_random_v2_3": "expanded_mechanism_random_v2_4",
+            "mechanism_evolution_v2_3": "mechanism_evolution_v2_4",
+        },
+    )
+    assert [row["candidate_id"] for row in mapped] == ["random-1", "evolution-1"]
+    assert [row["arm"] for row in mapped] == [
+        "expanded_mechanism_random_v2_4",
+        "mechanism_evolution_v2_4",
+    ]
+    assert [row["source_arm"] for row in mapped] == [
+        "expanded_mechanism_random_v2_3",
+        "mechanism_evolution_v2_3",
+    ]
+    with pytest.raises(RuntimeError, match="SOURCE_ARM_SET_CHANGED"):
+        prepare_v24_train_rows(
+            [*rows, {**rows[0], "candidate_id": "other", "arm": "other"}],
+            source_arm_mapping={
+                "expanded_mechanism_random_v2_3": "expanded_mechanism_random_v2_4",
+                "mechanism_evolution_v2_3": "mechanism_evolution_v2_4",
+            },
+        )
 
 
 def test_behavior_family_champion_selection_gives_each_family_one_vote() -> None:

@@ -108,7 +108,7 @@
     },
     "v24_adapter": {
       "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
-      "sha256": "0046E02BCB29560F20F4DA847DB915E2DC6BBFA8674B423FC384DF59EFAAABAA"
+      "sha256": "E77EC0207A2EB06CF2B436BBCCE38DD97F3FCD70CCA8B1FF77B5CF36818134B5"
     }
   },
   "boundaries": {

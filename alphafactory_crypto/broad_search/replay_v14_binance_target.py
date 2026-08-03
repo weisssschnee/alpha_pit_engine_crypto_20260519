@@ -163,6 +163,7 @@ def build_binance_target_cache(
     *,
     source_store: RawPanelStore,
     config: Mapping[str, Any],
+    target_cache_root: Path | None = None,
 ) -> dict[str, Any]:
     target_config = dict(config["target"])
     if str(target_config["price_field"]) != "open_price":
@@ -194,7 +195,11 @@ def build_binance_target_cache(
         ),
     }
     identity = _payload_sha(identity_payload)
-    cache_root = repo_root / TARGET_CACHE_PATH
+    cache_root = (
+        Path(target_cache_root)
+        if target_cache_root is not None
+        else repo_root / TARGET_CACHE_PATH
+    )
     if cache_root.exists():
         metadata = _read_json(cache_root / "metadata.json")
         if metadata.get("identity_sha256") != identity:
