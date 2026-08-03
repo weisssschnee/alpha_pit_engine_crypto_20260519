@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.3: 16k train plus 1,024 four-cohort attribution, full-policy gate negative; development only)",
+                      "label":  "Search Engine conditional-development campaigns (V2.3 frozen 1,024-candidate OOS replay authorized once; non-formal)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -507,15 +507,17 @@
                                     ,"runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json"
                                     ,"runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json"
                                     ,"reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md"
+                                    ,"config/crypto_search_v2_3_frozen_oos_receipt.json"
+                                    ,"docs/adr/0021-v2-3-frozen-cohort-oos-replay.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_mechanism_v2_3_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-engine-v2-3-policy-attribution-20260802",
-                                        "verified_sha":  "5e1ec9a65cc024a0a010eea99d01aaae2d13159b",
-                                        "sha256":  "4A7536C1E4963D93A2BD6DCB4F392A6B46A970BF1755E00A7CB1D2DB08C532E7"
+                                        "path":  "config/crypto_search_v2_3_frozen_oos_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-v2-3-frozen-oos-20260803",
+                                        "verified_sha":  "6874d8a544331c7f2aea8d4f6bb2ac4261f3116f",
+                                        "sha256":  "198579DCBA5AECC275224E4C3D83CCBCBE0AED265A6940BBB6C2136052B75FB4"
                                     },
                       "contracts":  [
                                         {
@@ -553,6 +555,15 @@
                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2-3/check-mechanism-v2-3, and ADR 0020",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_mechanism_v2_3_20260802/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_v2_3_frozen_oos_authorization",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "Current user instruction plus accepted ADR 0021 authorize exactly one read-only OOS replay of all 1,024 already frozen V2.3 validation-cohort identities on the 2026-01-01 through 2026-07-01 holdout. Train orientation, limiting matched component, target, mapping, cost, seeds, horizons, and cohort membership are frozen. No candidate generation, validation-performance selection, optimizer or archive feedback, tuning, reseed, rescue rerun, challenge, recent, May-stress, forward, or promotion is authorized. The primary estimand is the pooled equal-weight total-policy daily effect; seed-by-horizon cells are heterogeneity diagnostics rather than kill gates.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.search_engine_v1 run-oos-v2-3/check-oos-v2-3, broad_search.pair18m.evaluate_pair, the hash-bound one-time receipt, and ADR 0021",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_search_v2_3_frozen_oos_receipt.json"
                                         },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
@@ -647,7 +658,7 @@
                                         {
                                             "id":  "policy_canary_sealed_boundary",
                                             "type":  "BOUNDARY",
-                                            "rule":  "Search Engine campaigns use only their explicitly frozen surface with campaign-local per-run memory; V1.4 uses only its aligned OI/mark plus aggTrades carrier while Broad, Core3, and liquidation remain excluded, and sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
+                                            "rule":  "Search Engine campaigns use only their explicitly frozen surface with campaign-local per-run memory. The sole sealed-read exception is the receipt-bound V2.3 frozen 1,024-candidate OOS replay authorized by ADR 0021; every other sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive-memory access remains forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v1 frozen loaders, check_engine, check_canary, check_v11, check_v12, check_v13, and check_v14",
                                             "bypass_forbidden":  true,
@@ -753,7 +764,7 @@
                                         {
                                             "id":  "search_engine_economic_reward_suspension",
                                             "type":  "BOUNDARY",
-                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V6 schema-2 receipts are consumed. V6 preserved the same explicitly NON_FORMAL train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward bindings; its validation-blocked outcome does not promote those bindings to active formal authority. Prior-state import, formal claims, holdout/OOS, promotion, parameter tuning, seed changes, rescue reruns, a third seed campaign, and any unregistered additional campaign remain forbidden.",
+                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V6 schema-2 receipts are consumed. The exact frozen V2.3 OOS receipt may reuse the explicitly NON_FORMAL train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and matched Sortino bindings only for read-only transfer attribution. It does not reactivate an optimizer authority or authorize prior-state import, formal claims, promotion, tuning, seed changes, rescue reruns, a third seed campaign, or any unregistered campaign.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
                                             "bypass_forbidden":  true,
@@ -780,10 +791,10 @@
                       "claim_badges":  [
                                            "V2.3 16K TRAIN COMPLETE",
                                            "V2.3 1,024 FOUR-COHORT VALIDATION COMPLETE",
-                                           "PROPOSAL DISTRIBUTION NOT QUALIFIED",
-                                           "TRAIN RANKER NOT QUALIFIED",
-                                           "TOTAL POLICY NOT QUALIFIED",
-                                           "NO CONTINUATION OOS OR PROMOTION"
+                                           "FROZEN OOS REPLAY AUTHORIZED ONCE",
+                                           "ALL-CELL GATE NOT USED AS OOS VETO",
+                                           "NON-FORMAL ATTRIBUTION ONLY",
+                                           "NO PROMOTION"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
