@@ -516,8 +516,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_v2_3_frozen_oos_receipt.json",
                                         "repo_ref":  "experiment/crypto-search-v2-3-frozen-oos-20260803",
-                                        "verified_sha":  "6874d8a544331c7f2aea8d4f6bb2ac4261f3116f",
-                                        "sha256":  "198579DCBA5AECC275224E4C3D83CCBCBE0AED265A6940BBB6C2136052B75FB4"
+                                        "verified_sha":  "61634c51b1e0f873523c24d5b9e05cf5a1b3352c",
+                                        "sha256":  "1FF0FDE15D10C889299253044B3A50B9CABDC6CF0B26AE1D80291C8AD659FA3C"
                                     },
                       "contracts":  [
                                         {

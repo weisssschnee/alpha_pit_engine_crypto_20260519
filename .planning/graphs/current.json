@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-03T02:23:13.916649+00:00",
+  "generated_at": "2026-08-03T02:45:17.335246+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3020,8 +3020,8 @@
       "authority": {
         "path": "config/crypto_search_v2_3_frozen_oos_receipt.json",
         "repo_ref": "experiment/crypto-search-v2-3-frozen-oos-20260803",
-        "sha256": "198579DCBA5AECC275224E4C3D83CCBCBE0AED265A6940BBB6C2136052B75FB4",
-        "verified_sha": "6874d8a544331c7f2aea8d4f6bb2ac4261f3116f"
+        "sha256": "1FF0FDE15D10C889299253044B3A50B9CABDC6CF0B26AE1D80291C8AD659FA3C",
+        "verified_sha": "61634c51b1e0f873523c24d5b9e05cf5a1b3352c"
       },
       "authority_bindings": [
         {
@@ -5272,7 +5272,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-03T02:23:13.916649+00:00",
+        "checked_at": "2026-08-03T02:45:17.335246+00:00",
         "evidence_ref": "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
         "evidence_sha256": "1F96839CDCFC867505FFEFC311FA13052BC3775D89B6F893553CA77951947400",
         "level": "STATIC_VERIFIED",
@@ -8133,7 +8133,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "83A65BC269C7B378DC55ADB561088B320A976174F045E6FB816A4F6B93E00B69"
+    "sha256": "A978E418E098392F2501C874CF12187BA37C0765BA7CA872C73A1EF22B3BAF48"
   },
   "profile_id": null,
   "profiles": [
@@ -8164,13 +8164,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "6874d8a544331c7f2aea8d4f6bb2ac4261f3116f",
-    "edge_count": 39246,
+    "built_at_commit": "61634c51b1e0f873523c24d5b9e05cf5a1b3352c",
+    "edge_count": 39248,
     "node_count": 21035,
     "path": ".planning/graphs/graph.json",
-    "sha256": "499359A7FC003B7F38FEB904A646C78A977A7C7CB9B77586E819B1C4793B25B3"
+    "sha256": "BCFB22519642C36ED7AA21E7D160231CB9C7F8722C0B2E05445916AEC6C25655"
   },
-  "repo_head": "6874d8a544331c7f2aea8d4f6bb2ac4261f3116f",
+  "repo_head": "61634c51b1e0f873523c24d5b9e05cf5a1b3352c",
   "schema_version": 1,
   "semantic_authorities": [
     {
