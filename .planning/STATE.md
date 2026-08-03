@@ -4,6 +4,43 @@ Last updated: 2026-08-03 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_4_SOURCE_GATE_IMPLEMENTED_RUN_NOT_AUTHORIZED`
+
+ADR 0022 is accepted and source commit
+`2f512c72` implements the next search-policy boundary without starting another
+market experiment. V2.4 selection is behavior-family-first: every
+`arm x seed x horizon x behavior_family_id` cell receives one vote, represented
+only by its deterministic train-`search_reward` champion. Missing cells and
+duplicate-family backfill fail closed. The existing Evolution population,
+typed mutation receipts, AST, compiler, pair evaluator, mapping, and cost
+authority are reused; no second search or evaluation stack was added.
+
+The gate is now ordered rather than advisory. A pre-read atomic receipt freezes
+the selected candidate/spec identities, equal cell counts, fresh interval,
+contract hash, producer commit, and component Git blobs. V2.4 currently admits
+only an interval starting at or after `2026-07-01T00:00:00Z`. The post-read
+adapter rejects missing/extra candidates or mismatched spec, horizon, baseline
+5 bps cost, economic receipt, partition, venue, assets, or timestamps. It then
+atomically persists the selection receipt, exact hourly sleeve waterfall and
+objective mask, daily sleeve waterfall, 5/10 bps sensitivity, sparse
+asset-weight/gross-contribution paths, and a row-count/hash manifest.
+
+`pair18m.evaluate_pair` remains the sole evaluator and exposes these paths only
+through an opt-in validation/holdout audit projection. The V2.4 contract status
+is `SOURCE_IMPLEMENTED_RUN_NOT_AUTHORIZED`; market search, sealed reads, OOS,
+forward/recent/challenge, promotion, new grammar, and cross-sprint adaptive
+memory remain false. The historical V2.3 OOS receipt loader also now verifies
+its producer Git blobs rather than mutable current working-tree files. No new
+performance evidence or Alpha claim was produced.
+
+The existing CURRENT Search Engine capability node records this source-only
+boundary without promotion or a new Graph node. Its overlay projection is
+current. The global RAW Graph remains stale at source SHA `98607fb7` because
+the required semantic refresh failed closed on the external Graphify provider's
+`402 Insufficient Balance`; global Graph freshness is therefore not claimed.
+
+The preceding evidence state remains:
+
 `CRYPTO_SEARCH_ENGINE_V2_3_OOS_POLICY_BIAS_AUDIT_COMPLETE_HOLD`
 
 ADR 0021's one read-only frozen V2.3 OOS authorization is consumed. Producer
