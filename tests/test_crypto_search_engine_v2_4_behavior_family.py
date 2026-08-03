@@ -177,6 +177,9 @@ def test_complete_economic_paths_project_to_daily_and_sparse_asset_tables() -> N
         seed=11,
         horizon_hours=1,
         candidate_spec_sha256="C" * 64,
+        economic_receipt_sha256="E" * 64,
+        evaluation_partition="validation",
+        execution_venue="BINANCE_USD_M",
     )
     hourly = artifacts["hourly_sleeves"]
     daily = artifacts["daily_sleeves"]
@@ -240,6 +243,9 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
         producer_source_sha=producer_source_sha,
         evaluation_start="2026-07-01T00:00:00Z",
         evaluation_end_exclusive="2026-07-02T00:00:00Z",
+        economic_receipt_sha256="E" * 64,
+        evaluation_partition="validation",
+        execution_venue="BINANCE_USD_M",
     )
     evaluations = []
     for arm_index, arm in enumerate(

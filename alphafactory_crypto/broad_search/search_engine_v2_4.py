@@ -308,6 +308,9 @@ def build_economic_path_artifacts(
     seed: int,
     horizon_hours: int,
     candidate_spec_sha256: str,
+    economic_receipt_sha256: str,
+    evaluation_partition: str,
+    execution_venue: str,
 ) -> dict[str, list[dict[str, Any]]]:
     """Project pair18m paths to exact hourly, daily, and sparse asset rows."""
 
@@ -323,9 +326,11 @@ def build_economic_path_artifacts(
         or float(payload.get("cost_bps", float("nan"))) != 5.0
         or str(payload.get("authority") or "")
         != "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_PATH_PROJECTION_V1"
-        or not str(payload.get("economic_receipt_sha256") or "")
+        or str(payload.get("economic_receipt_sha256") or "")
+        != str(economic_receipt_sha256)
         or str(payload.get("evaluation_partition") or "")
-        not in {"validation", "holdout"}
+        != str(evaluation_partition)
+        or str(payload.get("execution_venue") or "") != str(execution_venue)
     ):
         raise ValueError("V24_ECONOMIC_PATH_IDENTITY_CHANGED")
     timestamps = np.asarray(payload["timestamp_ns"], dtype=np.int64)
@@ -346,6 +351,8 @@ def build_economic_path_artifacts(
         "seed": int(seed),
         "horizon_hours": int(horizon_hours),
         "execution_venue": execution_venue,
+        "economic_receipt_sha256": str(payload["economic_receipt_sha256"]),
+        "evaluation_partition": str(payload["evaluation_partition"]),
         "raw_fields_json": json.dumps(
             list(payload.get("raw_fields") or ()),
             sort_keys=True,
@@ -483,6 +490,9 @@ def freeze_v24_gate_selection(
     producer_source_sha: str,
     evaluation_start: str,
     evaluation_end_exclusive: str,
+    economic_receipt_sha256: str,
+    evaluation_partition: str,
+    execution_venue: str,
 ) -> dict[str, Any]:
     """Freeze family champions and the fresh interval before any data read."""
 
@@ -502,6 +512,18 @@ def freeze_v24_gate_selection(
     )
     if start < prior_end or end <= start:
         raise ValueError("V24_FRESH_DATA_INTERVAL_NOT_ADMITTED")
+    if (
+        len(str(economic_receipt_sha256)) != 64
+        or any(
+            value not in "0123456789abcdefABCDEF"
+            for value in str(economic_receipt_sha256)
+        )
+        or str(evaluation_partition)
+        != str(contract["fresh_data_gate"]["evaluation_partition"])
+        or str(execution_venue)
+        != str(contract["fresh_data_gate"]["execution_venue"])
+    ):
+        raise ValueError("V24_FRESH_DATA_ECONOMIC_IDENTITY_INVALID")
     selected, selection_receipt = select_behavior_family_cohort(
         train_rows,
         per_cell_count=per_cell_count,
@@ -532,6 +554,9 @@ def freeze_v24_gate_selection(
         "evaluation_start": str(evaluation_start),
         "evaluation_end_exclusive": str(evaluation_end_exclusive),
         "fresh_data_admission": "AFTER_PRIOR_HOLDOUT_END",
+        "economic_receipt_sha256": str(economic_receipt_sha256).upper(),
+        "evaluation_partition": str(evaluation_partition),
+        "execution_venue": str(execution_venue),
         "market_read_performed": False,
         "candidate_generation_performed": False,
         "adaptive_feedback_written": False,
@@ -626,6 +651,13 @@ def persist_v24_gate_bundle(
                 seed=int(row["seed"]),
                 horizon_hours=int(row["horizon_hours"]),
                 candidate_spec_sha256=str(row["candidate_spec_sha256"]),
+                economic_receipt_sha256=str(
+                    selection_receipt["economic_receipt_sha256"]
+                ),
+                evaluation_partition=str(
+                    selection_receipt["evaluation_partition"]
+                ),
+                execution_venue=str(selection_receipt["execution_venue"]),
             )
             hourly_rows.extend(projection["hourly_sleeves"])
             daily_rows.extend(projection["daily_sleeves"])
@@ -680,6 +712,13 @@ def persist_v24_gate_bundle(
             "evaluation_count": len(evaluations),
             "absolute_zero_benchmark": 0.0,
             "cost_sensitivity_bps": [5.0, 10.0],
+            "economic_receipt_sha256": str(
+                selection_receipt["economic_receipt_sha256"]
+            ),
+            "evaluation_partition": str(
+                selection_receipt["evaluation_partition"]
+            ),
+            "execution_venue": str(selection_receipt["execution_venue"]),
             "candidate_generation_during_gate": False,
             "adaptive_feedback_during_gate": False,
             "files": file_rows,
@@ -746,6 +785,8 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
         "typed_random_comparator_required": True,
         "cost_sensitivity_bps": [5.0, 10.0],
         "run_requires_new_user_authorization": True,
+        "evaluation_partition": "validation",
+        "execution_venue": "BINANCE_USD_M",
     }
     if fresh != expected_fresh:
         blockers.append("fresh_data_gate")
@@ -774,6 +815,8 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
             "horizon_hours",
             "sleeve",
             "execution_venue",
+            "economic_receipt_sha256",
+            "evaluation_partition",
             "asset_id",
             "timestamp_ns",
         ],
