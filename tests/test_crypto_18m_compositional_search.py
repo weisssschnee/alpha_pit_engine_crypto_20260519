@@ -617,6 +617,94 @@ def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
         )
 
 
+def test_holdout_requires_explicit_read_and_preserves_frozen_orientation() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("a", "RATIO", "dimensionless"),
+            FieldContract("b", "RATIO", "dimensionless"),
+        )
+    )
+    primary = Expression(
+        "RatioInteraction",
+        (Expression.raw("a"), Expression.raw("b")),
+    )
+    assurance = registry.validate(primary)
+    spec = CandidateSpec(
+        "candidate-holdout",
+        "skeleton",
+        "OI_ACTIVITY_INTERACTION",
+        primary,
+        ablate_expression(primary),
+        1,
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        ("family_a", "family_b"),
+        assurance.rolling_windows,
+        assurance.depth,
+        "RatioInteraction(Raw,Raw)",
+    )
+    holdout_start = "2023-08-01T00:00:00Z"
+    holdout_end = "2023-09-01T00:00:00Z"
+    receipt = {
+        "receipt_sha256": "C" * 64,
+        "train": {
+            "start": "2023-07-01T00:00:00Z",
+            "end_exclusive": holdout_start,
+        },
+        "validation": {},
+        "holdout": {
+            "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+            "start": holdout_start,
+            "end_exclusive": holdout_end,
+            "read_allowed": True,
+            "optimizer_feedback_allowed": False,
+            "policy_memory_write_allowed": False,
+            "candidate_generation_allowed": False,
+        },
+        "direction": {
+            "rule": "TRAIN_FROZEN_SIGN_ORIENTATION",
+            "allowed_values": [-1, 1],
+        },
+        "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
+        "cost": {"cost_bps": 7.0},
+        "execution": {
+            **_FakeStore().target_metadata,
+            "target_cache_identity_sha256": "B" * 64,
+            "partition_tail_purge_hours": 6,
+        },
+    }
+    result = evaluate_pair(
+        store=_FakeStore(),
+        registry=registry,
+        candidate=spec,
+        block_start=holdout_start,
+        block_end=holdout_end,
+        block_role="READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+        economic_receipt=receipt,
+        frozen_train_orientation=-1.0,
+        include_validation_paths=True,
+    )
+    assert result["evaluation_partition"] == "holdout"
+    assert result["train_orientation"] == -1.0
+    assert result["train_orientation_fitted"] is False
+    assert result["_validation_paths"]["primary_net"].shape == (400,)
+    blocked = {**receipt, "holdout": {**receipt["holdout"], "read_allowed": False}}
+    with pytest.raises(
+        PermissionError,
+        match="ECONOMIC_RECEIPT_HOLDOUT_READ_NOT_AUTHORIZED",
+    ):
+        evaluate_pair(
+            store=_FakeStore(),
+            registry=registry,
+            candidate=spec,
+            block_start=holdout_start,
+            block_end=holdout_end,
+            block_role="READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+            economic_receipt=blocked,
+            frozen_train_orientation=-1.0,
+        )
+
+
 def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     tmp_path: Path,
 ) -> None:

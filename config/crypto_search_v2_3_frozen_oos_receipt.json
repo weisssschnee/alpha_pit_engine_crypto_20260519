@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_SEARCH_V2_3_FROZEN_OOS_RECEIPT",
+  "status": "RUN_AUTHORIZED_ONE_TIME_FROZEN_OOS_REPLAY",
+  "run_authorized": true,
+  "run_authorization": {
+    "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
+    "candidate_generation_allowed": false,
+    "validation_performance_selection_allowed": false,
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "archive_write_allowed": false,
+    "parameter_tuning_allowed": false,
+    "seed_change_allowed": false,
+    "rescue_rerun_allowed": false,
+    "promotion_allowed": false
+  },
+  "run_outcome": {},
+  "source_receipt_path": "config/crypto_search_mechanism_v2_3_receipt.json",
+  "source_receipt_sha256": "544C3E5B88271CC7B373A135186C4B37729AEA939B7A891A10CED21716E71291",
+  "source_v23": {
+    "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+    "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+    "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+    "candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4",
+    "validation_candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/validation_candidate_ledger.parquet",
+    "validation_candidate_ledger_sha256": "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F",
+    "evaluated_cohort_projection_sha256": "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF",
+    "evaluated_candidate_count": 1024,
+    "unique_candidate_count": 1024
+  },
+  "holdout": {
+    "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+    "start": "2026-01-01T00:00:00Z",
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "read_allowed": true,
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "candidate_generation_allowed": false
+  },
+  "replay": {
+    "cohorts": [
+      "random_stratified",
+      "random_train_top",
+      "evolution_stratified",
+      "evolution_train_top"
+    ],
+    "candidate_count_per_cohort": 256,
+    "candidate_count_per_seed_horizon_cohort": 64,
+    "seeds": [
+      359914106,
+      1141399971
+    ],
+    "horizons_hours": [
+      1,
+      4
+    ],
+    "candidate_local_failure_action": "PERSIST_NO_BACKFILL",
+    "orientation": "FROZEN_TRAIN_ORIENTATION",
+    "matched_component": "FROZEN_TRAIN_LIMITING_COMPONENT",
+    "same_target_mapping_cost": true
+  },
+  "aggregation": {
+    "primary_estimand": "EQUAL_WEIGHT_ACROSS_SEED_HORIZON_DAILY_TOTAL_POLICY_EFFECT",
+    "total_policy": "evolution_train_top_minus_random_train_top",
+    "proposal_distribution": "evolution_stratified_minus_random_stratified",
+    "train_ranker": "evolution_train_top_minus_evolution_stratified",
+    "cell_results_are_heterogeneity_not_kill_gates": true,
+    "block_length_days": 7,
+    "bootstrap_replications": 4096,
+    "reported_quantiles": [
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95
+    ],
+    "binary_qualification_gate": false
+  },
+  "boundaries": {
+    "oos": true,
+    "sealed_partition_reads": 1,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "new_search": false,
+    "cross_sprint_adaptive_memory": false,
+    "a_share_constraints_applied": false
+  },
+  "component_sources": {
+    "pair_evaluator": {
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "7B21745F0C8B98F061AF211811F60145D2D01C03A61D663A7507245A722BB549"
+    },
+    "oos_runtime": {
+      "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+      "sha256": "8F69C7DFED24D001990893221F448D7D54CB1DF7C7191FD0AE4528E7FFCC7223"
+    },
+    "target_store": {
+      "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+      "sha256": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629"
+    },
+    "mapping_and_cost": {
+      "path": "alphafactory_crypto/instrument_capability/mapping.py",
+      "sha256": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036"
+    },
+    "mechanism_compiler": {
+      "path": "alphafactory_crypto/broad_search/compositional18m.py",
+      "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+    }
+  }
+}

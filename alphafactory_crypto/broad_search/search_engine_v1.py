@@ -264,6 +264,15 @@ MECHANISM_SEARCH_V23_QUALIFICATION_STRICT_COUNT = 16_000
 MECHANISM_SEARCH_V23_STRICT_TARGET = 20_000
 MECHANISM_SEARCH_V23_RAW_ATTEMPT_LIMIT = 100_000
 MECHANISM_SEARCH_V23_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
+V23_OOS_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_20260803"
+V23_OOS_DEFAULT_RUNTIME_DATE = "20260803"
+V23_OOS_RECEIPT_PATH = "config/crypto_search_v2_3_frozen_oos_receipt.json"
+V23_OOS_SOURCE_RUNTIME = "runtime/crypto_search_mechanism_v2_3_20260802"
+V23_OOS_RUNTIME_PREFIX = "crypto_search_v2_3_frozen_oos"
+V23_OOS_REPORT_PREFIX = "CRYPTO_SEARCH_V2_3_FROZEN_OOS"
+V23_OOS_COHORT_COUNT = 1_024
+V23_OOS_CHECKPOINT_SIZE = 64
+V23_OOS_WORKERS = 10
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
@@ -6327,6 +6336,100 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
         "evaluation": evaluation,
         "error": error,
         "memory_error": memory_error,
+        "process_cpu_seconds": time.process_time() - cpu_started,
+        "wall_seconds": time.perf_counter() - wall_started,
+        "worker_rss_bytes": int(memory.rss),
+        "worker_private_bytes": int(getattr(memory, "private", memory.rss)),
+    }
+
+
+def _worker_evaluate_frozen_oos(payload: Mapping[str, Any]) -> dict[str, Any]:
+    if _WORKER_STORE is None or _WORKER_REGISTRY is None:
+        raise RuntimeError("V2.3 OOS worker was not initialized")
+    candidate = CandidateSpec.from_dict(dict(payload["candidate"]))
+    orientation = float(payload["frozen_train_orientation"])
+    matched_component = str(payload["frozen_matched_component"])
+    process = psutil.Process(os.getpid())
+    cpu_started = time.process_time()
+    wall_started = time.perf_counter()
+    try:
+        evaluation = evaluate_pair(
+            store=_WORKER_STORE,
+            registry=_WORKER_REGISTRY,
+            candidate=candidate,
+            block_start=_WORKER_BLOCK_START,
+            block_end=_WORKER_BLOCK_END,
+            block_role=_WORKER_BLOCK_ROLE,
+            behavior_contract=None,
+            economic_receipt=_WORKER_ECONOMIC_RECEIPT,
+            frozen_train_orientation=orientation,
+            include_validation_paths=True,
+        )
+    except ValueError as failure:
+        reason = str(failure)
+        if reason not in VALIDATION_CANDIDATE_FAIL_CLOSED_ERRORS:
+            raise
+        memory = process.memory_info()
+        return {
+            "candidate_id": candidate.candidate_id,
+            "status": "CANDIDATE_LOCAL_FAILURE",
+            "reason": reason,
+            "process_cpu_seconds": time.process_time() - cpu_started,
+            "wall_seconds": time.perf_counter() - wall_started,
+            "worker_rss_bytes": int(memory.rss),
+            "worker_private_bytes": int(getattr(memory, "private", memory.rss)),
+        }
+    if (
+        evaluation.get("candidate_id") != candidate.candidate_id
+        or evaluation.get("evaluation_partition") != "holdout"
+        or evaluation.get("train_orientation_fitted") is not False
+        or float(evaluation.get("train_orientation", float("nan"))) != orientation
+    ):
+        raise RuntimeError("V23_OOS_EVALUATION_CONTRACT_CHANGED")
+    paths = evaluation.get("_validation_paths")
+    if not isinstance(paths, Mapping):
+        raise RuntimeError("V23_OOS_PATHS_MISSING")
+    matched_paths = paths.get("matched_component_net")
+    if not isinstance(matched_paths, Mapping) or matched_component not in matched_paths:
+        raise RuntimeError("V23_OOS_FROZEN_MATCHED_COMPONENT_MISSING")
+    primary = np.asarray(paths["primary_net"], dtype=float)
+    matched = np.asarray(matched_paths[matched_component], dtype=float)
+    controls = dict(paths.get("control_net") or {})
+    if not controls:
+        raise RuntimeError("V23_OOS_CONTROLS_MISSING")
+    control = _equal_weight_path(
+        [np.asarray(values, dtype=float) for _, values in sorted(controls.items())]
+    )
+    primary_mean, floor_sortino = _validation_path_summary(
+        primary,
+        horizon=int(candidate.horizon_hours),
+    )
+    finite_matched = matched[np.isfinite(matched)]
+    finite_control = control[np.isfinite(control)]
+    memory = process.memory_info()
+    return {
+        "candidate_id": candidate.candidate_id,
+        "status": "EVALUATED",
+        "reason": None,
+        "effective_block_end_exclusive": evaluation.get(
+            "effective_block_end_exclusive"
+        ),
+        "holdout_primary_net_mean": primary_mean,
+        "holdout_primary_nonoverlap_floor_sortino": floor_sortino,
+        "holdout_matched_increment": (
+            float(np.mean(finite_matched)) if finite_matched.size else float("nan")
+        ),
+        "holdout_control_net_mean": (
+            float(np.mean(finite_control)) if finite_control.size else float("nan")
+        ),
+        "control_not_dominant": bool(
+            math.isfinite(primary_mean)
+            and finite_control.size
+            and primary_mean > float(np.mean(finite_control))
+        ),
+        "primary_daily": _v23_daily_path(primary).tolist(),
+        "matched_daily": _v23_daily_path(matched).tolist(),
+        "control_daily": _v23_daily_path(control).tolist(),
         "process_cpu_seconds": time.process_time() - cpu_started,
         "wall_seconds": time.perf_counter() - wall_started,
         "worker_rss_bytes": int(memory.rss),
@@ -12976,6 +13079,1184 @@ def run_v23_policy_attribution_validation(
         validation_decisions=validation_decisions,
     )
     return (*restored, {**validation_decisions, "resumed": False})
+
+
+def _v23_oos_projection_rows(frame: pd.DataFrame) -> list[dict[str, Any]]:
+    selected = frame[
+        frame["validation_status"].eq("EVALUATED")
+        & frame["matched_evaluated"].eq(True)
+    ].copy()
+    selected = selected.sort_values(
+        ["cohort", "seed", "horizon_hours", "selection_rank", "candidate_id"],
+        kind="stable",
+    )
+    columns = (
+        "cohort",
+        "arm",
+        "seed",
+        "horizon_hours",
+        "selection_rank",
+        "stratum",
+        "candidate_id",
+        "frozen_train_orientation",
+        "frozen_matched_component",
+    )
+    integer_columns = {
+        "seed",
+        "horizon_hours",
+        "selection_rank",
+        "stratum",
+        "frozen_train_orientation",
+    }
+    rows: list[dict[str, Any]] = []
+    for record in selected[list(columns)].to_dict("records"):
+        rows.append(
+            {
+                key: (
+                    None
+                    if pd.isna(value)
+                    else int(value)
+                    if key in integer_columns
+                    else str(value)
+                )
+                for key, value in record.items()
+            }
+        )
+    return rows
+
+
+def _load_v23_oos_receipt(
+    repo_root: Path,
+    *,
+    require_authorized: bool,
+) -> dict[str, Any]:
+    path = repo_root / V23_OOS_RECEIPT_PATH
+    if not path.is_file():
+        raise RuntimeError("V23_OOS_RECEIPT_MISSING")
+    receipt = _read_json(path)
+    blockers: list[str] = []
+    status = str(receipt.get("status") or "")
+    allowed_statuses = {
+        "RUN_AUTHORIZED_ONE_TIME_FROZEN_OOS_REPLAY",
+        "RUN_AUTHORIZATION_CONSUMED_OOS_REPLAY_COMPLETE",
+    }
+    if receipt.get("schema_version") != 1:
+        blockers.append("schema_version")
+    if receipt.get("receipt_id") != "CRYPTO_SEARCH_V2_3_FROZEN_OOS_RECEIPT":
+        blockers.append("receipt_id")
+    if status not in allowed_statuses:
+        blockers.append("status")
+    expected_authorized = status == "RUN_AUTHORIZED_ONE_TIME_FROZEN_OOS_REPLAY"
+    if receipt.get("run_authorized") is not expected_authorized:
+        blockers.append("run_authorized")
+    if require_authorized and not expected_authorized:
+        blockers.append("authorization_consumed")
+    expected_authorization = {
+        "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+        "authority": "CURRENT_USER_INSTRUCTION",
+        "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
+        "candidate_generation_allowed": False,
+        "validation_performance_selection_allowed": False,
+        "optimizer_feedback_allowed": False,
+        "policy_memory_write_allowed": False,
+        "archive_write_allowed": False,
+        "parameter_tuning_allowed": False,
+        "seed_change_allowed": False,
+        "rescue_rerun_allowed": False,
+        "promotion_allowed": False,
+    }
+    if dict(receipt.get("run_authorization") or {}) != expected_authorization:
+        blockers.append("run_authorization")
+    expected_outcome = {
+        "status": "PASS_CRYPTO_SEARCH_V2_3_FROZEN_OOS_REPLAY_COMPLETE",
+        "reason": "FROZEN_COHORT_OOS_REPLAY_TERMINAL",
+        "runtime": f"runtime/{V23_OOS_RUNTIME_PREFIX}_{V23_OOS_DEFAULT_RUNTIME_DATE}",
+        "source_candidate_count": V23_OOS_COHORT_COUNT,
+        "candidate_generation_performed": False,
+        "validation_performance_selection_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "promotion_started": False,
+    }
+    run_outcome = dict(receipt.get("run_outcome") or {})
+    if expected_authorized and run_outcome:
+        blockers.append("run_outcome_before_consumption")
+    if not expected_authorized and run_outcome != expected_outcome:
+        blockers.append("run_outcome")
+    source = dict(receipt.get("source_v23") or {})
+    expected_source = {
+        "runtime": V23_OOS_SOURCE_RUNTIME,
+        "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+        "artifact_bundle_sha256": (
+            "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5"
+        ),
+        "candidate_ledger_path": f"{V23_OOS_SOURCE_RUNTIME}/candidate_ledger.parquet",
+        "candidate_ledger_sha256": (
+            "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+        ),
+        "validation_candidate_ledger_path": (
+            f"{V23_OOS_SOURCE_RUNTIME}/validation_candidate_ledger.parquet"
+        ),
+        "validation_candidate_ledger_sha256": (
+            "8D113E8DB68D4E79D99A4717CBB8561CF288784D8260BC08FA9FA732B981208F"
+        ),
+        "evaluated_cohort_projection_sha256": (
+            "78AD6586EFBC54FBFAEA2C81879DDD938CBFB51AA2AB97BC49EF1FA20BF81FAF"
+        ),
+        "evaluated_candidate_count": V23_OOS_COHORT_COUNT,
+        "unique_candidate_count": V23_OOS_COHORT_COUNT,
+    }
+    if source != expected_source:
+        blockers.append("source_v23")
+    source_receipt_path = str(receipt.get("source_receipt_path") or "")
+    if source_receipt_path != "config/crypto_search_mechanism_v2_3_receipt.json":
+        blockers.append("source_receipt_path")
+    source_receipt_file = repo_root / source_receipt_path
+    if not source_receipt_file.is_file():
+        blockers.append("source_receipt_missing")
+        base_receipt: dict[str, Any] = {}
+    else:
+        base_receipt = _read_json(source_receipt_file)
+        if _payload_sha(base_receipt) != str(
+            receipt.get("source_receipt_sha256") or ""
+        ):
+            blockers.append("source_receipt_sha256")
+        if dict(base_receipt.get("run_outcome") or {}).get(
+            "artifact_bundle_sha256"
+        ) != expected_source["artifact_bundle_sha256"]:
+            blockers.append("source_receipt_outcome")
+    holdout = dict(receipt.get("holdout") or {})
+    expected_holdout = {
+        "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+        "start": "2026-01-01T00:00:00Z",
+        "end_exclusive": "2026-07-01T00:00:00Z",
+        "read_allowed": True,
+        "optimizer_feedback_allowed": False,
+        "policy_memory_write_allowed": False,
+        "candidate_generation_allowed": False,
+    }
+    if holdout != expected_holdout:
+        blockers.append("holdout")
+    replay = dict(receipt.get("replay") or {})
+    expected_replay = {
+        "cohorts": [
+            "random_stratified",
+            "random_train_top",
+            "evolution_stratified",
+            "evolution_train_top",
+        ],
+        "candidate_count_per_cohort": 256,
+        "candidate_count_per_seed_horizon_cohort": 64,
+        "seeds": [int(value) for value in MECHANISM_SEARCH_V23_SEEDS],
+        "horizons_hours": [1, 4],
+        "candidate_local_failure_action": "PERSIST_NO_BACKFILL",
+        "orientation": "FROZEN_TRAIN_ORIENTATION",
+        "matched_component": "FROZEN_TRAIN_LIMITING_COMPONENT",
+        "same_target_mapping_cost": True,
+    }
+    if replay != expected_replay:
+        blockers.append("replay")
+    aggregation = dict(receipt.get("aggregation") or {})
+    expected_aggregation = {
+        "primary_estimand": (
+            "EQUAL_WEIGHT_ACROSS_SEED_HORIZON_DAILY_TOTAL_POLICY_EFFECT"
+        ),
+        "total_policy": "evolution_train_top_minus_random_train_top",
+        "proposal_distribution": (
+            "evolution_stratified_minus_random_stratified"
+        ),
+        "train_ranker": "evolution_train_top_minus_evolution_stratified",
+        "cell_results_are_heterogeneity_not_kill_gates": True,
+        "block_length_days": 7,
+        "bootstrap_replications": 4096,
+        "reported_quantiles": [0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95],
+        "binary_qualification_gate": False,
+    }
+    if aggregation != expected_aggregation:
+        blockers.append("aggregation")
+    boundaries = dict(receipt.get("boundaries") or {})
+    expected_boundaries = {
+        "oos": True,
+        "sealed_partition_reads": 1,
+        "challenge": False,
+        "recent": False,
+        "may_stress": False,
+        "forward": False,
+        "promotion": False,
+        "new_search": False,
+        "cross_sprint_adaptive_memory": False,
+        "a_share_constraints_applied": False,
+    }
+    if boundaries != expected_boundaries:
+        blockers.append("boundaries")
+    component_sources = dict(receipt.get("component_sources") or {})
+    expected_component_names = {
+        "pair_evaluator",
+        "oos_runtime",
+        "target_store",
+        "mapping_and_cost",
+        "mechanism_compiler",
+    }
+    if set(component_sources) != expected_component_names:
+        blockers.append("component_sources.keys")
+    for name, component in component_sources.items():
+        item = dict(component)
+        component_path = repo_root / str(item.get("path") or "")
+        if not component_path.is_file() or sha256_file(component_path) != str(
+            item.get("sha256") or ""
+        ):
+            blockers.append(f"component_sources.{name}")
+    for label in (
+        expected_source["candidate_ledger_path"],
+        expected_source["validation_candidate_ledger_path"],
+    ):
+        artifact = repo_root / label
+        expected_hash = expected_source[
+            "candidate_ledger_sha256"
+            if label.endswith("/candidate_ledger.parquet")
+            and "validation_" not in label
+            else "validation_candidate_ledger_sha256"
+        ]
+        if not artifact.is_file() or sha256_file(artifact) != expected_hash:
+            blockers.append(f"source_artifact.{artifact.name}")
+    if blockers:
+        raise RuntimeError("V23_OOS_RECEIPT_BLOCKED:" + ",".join(sorted(set(blockers))))
+    return {
+        **receipt,
+        "receipt_sha256": _payload_sha(receipt),
+        "source_receipt": base_receipt,
+    }
+
+
+def _v23_oos_economic_context(receipt: Mapping[str, Any]) -> dict[str, Any]:
+    base = dict(receipt["source_receipt"])
+    partitions = {
+        key: dict(value)
+        for key, value in dict(base.get("evidence_partition") or {}).items()
+    }
+    partitions["holdout"] = dict(receipt["holdout"])
+    context = {
+        **base,
+        "status": receipt["status"],
+        "run_authorized": receipt["run_authorized"],
+        "run_authorization": dict(receipt["run_authorization"]),
+        "evidence_partition": partitions,
+        "train": dict(partitions["train"]),
+        "validation": dict(partitions["validation"]),
+        "holdout": dict(partitions["holdout"]),
+        "boundaries": dict(receipt["boundaries"]),
+        "receipt_sha256": str(receipt["receipt_sha256"]),
+    }
+    return context
+
+
+def _load_v23_oos_candidates(
+    repo_root: Path,
+    receipt: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    source = dict(receipt["source_v23"])
+    validation_frame = pd.read_parquet(
+        repo_root / str(source["validation_candidate_ledger_path"])
+    )
+    projection = _v23_oos_projection_rows(validation_frame)
+    if (
+        len(projection) != V23_OOS_COHORT_COUNT
+        or len({row["candidate_id"] for row in projection})
+        != V23_OOS_COHORT_COUNT
+        or _payload_sha(projection)
+        != str(source["evaluated_cohort_projection_sha256"])
+    ):
+        raise RuntimeError("V23_OOS_COHORT_PROJECTION_CHANGED")
+    if Counter(row["cohort"] for row in projection) != {
+        value: 256 for value in receipt["replay"]["cohorts"]
+    }:
+        raise RuntimeError("V23_OOS_COHORT_BALANCE_CHANGED")
+    train_frame = pd.read_parquet(repo_root / str(source["candidate_ledger_path"]))
+    if train_frame["candidate_id"].duplicated().any():
+        raise RuntimeError("V23_OOS_TRAIN_LEDGER_IDENTITY_DUPLICATED")
+    train_lookup = train_frame.set_index("candidate_id").to_dict("index")
+    selected: list[dict[str, Any]] = []
+    for frozen in projection:
+        candidate_id = str(frozen["candidate_id"])
+        train = dict(train_lookup.get(candidate_id) or {})
+        if not train:
+            raise RuntimeError("V23_OOS_TRAIN_CANDIDATE_MISSING")
+        candidate = CandidateSpec.from_dict(
+            json.loads(str(train["candidate_spec_json"]))
+        )
+        if (
+            candidate.candidate_id != candidate_id
+            or int(candidate.horizon_hours) != int(frozen["horizon_hours"])
+            or int(float(train["train_orientation"]))
+            != int(frozen["frozen_train_orientation"])
+            or str(train["search_reward_matched_limiting_component"])
+            != str(frozen["frozen_matched_component"])
+        ):
+            raise RuntimeError("V23_OOS_FROZEN_CANDIDATE_BINDING_CHANGED")
+        selected.append({**frozen, "candidate": candidate.to_dict()})
+    return selected
+
+
+def _v23_oos_block_effect(
+    delta: np.ndarray,
+    *,
+    label: str,
+    block_length: int,
+    replications: int,
+    quantiles: Sequence[float],
+) -> dict[str, Any]:
+    values = np.asarray(delta, dtype=float)
+    values = values[np.isfinite(values)]
+    if values.size < block_length:
+        raise RuntimeError("V23_OOS_PAIRED_DAILY_PATH_TOO_SHORT")
+    seed = int.from_bytes(
+        hashlib.sha256(f"{V23_OOS_EPOCH_ID}|{label}".encode()).digest()[:4],
+        "big",
+    )
+    rng = np.random.default_rng(seed)
+    block_count = int(math.ceil(values.size / block_length))
+    offsets = np.arange(block_length, dtype=int)
+    sample_means = np.empty(replications, dtype=float)
+    for ordinal in range(replications):
+        starts = rng.integers(0, values.size, size=block_count)
+        indexes = (starts[:, None] + offsets[None, :]) % values.size
+        sample_means[ordinal] = float(
+            np.mean(values[indexes.reshape(-1)[: values.size]])
+        )
+    return {
+        "observed_mean_delta": float(np.mean(values)),
+        "probability_positive": float(np.mean(sample_means > 0.0)),
+        "bootstrap_quantiles": {
+            f"q{int(round(value * 100)):02d}": float(np.quantile(sample_means, value))
+            for value in quantiles
+        },
+        "paired_day_count": int(values.size),
+        "block_length_days": int(block_length),
+        "replications": int(replications),
+        "bootstrap_seed": seed,
+    }
+
+
+def _v23_oos_aggregate(
+    *,
+    candidate_rows: Sequence[Mapping[str, Any]],
+    candidate_path_rows: Sequence[Mapping[str, Any]],
+    receipt: Mapping[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    successful = [row for row in candidate_rows if row["oos_status"] == "EVALUATED"]
+    path_frame = pd.DataFrame(list(candidate_path_rows))
+    if not successful or path_frame.empty:
+        raise RuntimeError("V23_OOS_NO_EVALUATED_PATHS")
+    group_keys = ["cohort", "arm", "seed", "horizon_hours", "day_ordinal", "utc_day"]
+    cohort_paths = (
+        path_frame.groupby(group_keys, as_index=False, sort=True)[
+            ["primary_net", "matched_increment", "control_net"]
+        ]
+        .mean()
+        .sort_values(group_keys, kind="stable")
+    )
+    metrics: list[dict[str, Any]] = []
+    for (cohort, arm, seed, horizon), local in cohort_paths.groupby(
+        ["cohort", "arm", "seed", "horizon_hours"], sort=True
+    ):
+        candidate_count = sum(
+            row["cohort"] == cohort
+            and int(row["seed"]) == int(seed)
+            and int(row["horizon_hours"]) == int(horizon)
+            and row["oos_status"] == "EVALUATED"
+            for row in candidate_rows
+        )
+        primary = local["primary_net"].to_numpy(dtype=float)
+        matched = local["matched_increment"].to_numpy(dtype=float)
+        control = local["control_net"].to_numpy(dtype=float)
+        from scripts.crypto_a7reward1_portfolio_reward_model import sortino
+
+        metrics.append(
+            {
+                "cohort": str(cohort),
+                "arm": str(arm),
+                "seed": int(seed),
+                "horizon_hours": int(horizon),
+                "matched_evaluated_count": int(candidate_count),
+                "oos_primary_net_mean": float(np.nanmean(primary)),
+                "oos_primary_daily_sortino": float(sortino(primary, 365.0)),
+                "oos_matched_increment": float(np.nanmean(matched)),
+                "oos_control_net_mean": float(np.nanmean(control)),
+                "oos_control_not_dominant": bool(
+                    float(np.nanmean(primary)) > float(np.nanmean(control))
+                ),
+                "daily_path_row_count": int(len(local)),
+            }
+        )
+    path_lookup: dict[tuple[str, int, int, str], np.ndarray] = {}
+    for row in metrics:
+        local = cohort_paths[
+            cohort_paths["cohort"].eq(row["cohort"])
+            & cohort_paths["seed"].eq(row["seed"])
+            & cohort_paths["horizon_hours"].eq(row["horizon_hours"])
+        ].sort_values("day_ordinal")
+        for field in ("primary_net", "matched_increment", "control_net"):
+            path_lookup[(row["cohort"], row["seed"], row["horizon_hours"], field)] = (
+                local[field].to_numpy(dtype=float)
+            )
+    comparisons = {
+        "proposal_distribution": ("random_stratified", "evolution_stratified"),
+        "train_ranker": ("evolution_stratified", "evolution_train_top"),
+        "total_policy": ("random_train_top", "evolution_train_top"),
+    }
+    aggregation = dict(receipt["aggregation"])
+    block_length = int(aggregation["block_length_days"])
+    replications = int(aggregation["bootstrap_replications"])
+    quantiles = tuple(float(value) for value in aggregation["reported_quantiles"])
+    cell_effects: list[dict[str, Any]] = []
+    pooled_deltas: dict[tuple[str, str], list[np.ndarray]] = defaultdict(list)
+    for comparison, (left, right) in comparisons.items():
+        for seed in MECHANISM_SEARCH_V23_SEEDS:
+            for horizon in (1, 4):
+                effects: dict[str, Any] = {}
+                for metric in ("primary_net", "matched_increment"):
+                    delta = (
+                        path_lookup[(right, seed, horizon, metric)]
+                        - path_lookup[(left, seed, horizon, metric)]
+                    )
+                    pooled_deltas[(comparison, metric)].append(delta)
+                    effects[metric] = _v23_oos_block_effect(
+                        delta,
+                        label=f"cell|{comparison}|{seed}|{horizon}|{metric}",
+                        block_length=block_length,
+                        replications=replications,
+                        quantiles=quantiles,
+                    )
+                cell_effects.append(
+                    {
+                        "comparison": comparison,
+                        "left_cohort": left,
+                        "right_cohort": right,
+                        "seed": int(seed),
+                        "horizon_hours": int(horizon),
+                        "effects": effects,
+                    }
+                )
+    pooled_effects: dict[str, Any] = {}
+    for comparison in comparisons:
+        pooled_effects[comparison] = {}
+        for metric in ("primary_net", "matched_increment"):
+            values = pooled_deltas[(comparison, metric)]
+            shape = {item.shape for item in values}
+            if len(shape) != 1:
+                raise RuntimeError("V23_OOS_CELL_PATH_SHAPE_CHANGED")
+            pooled = np.nanmean(np.stack(values, axis=0), axis=0)
+            pooled_effects[comparison][metric] = _v23_oos_block_effect(
+                pooled,
+                label=f"pooled|{comparison}|{metric}",
+                block_length=block_length,
+                replications=replications,
+                quantiles=quantiles,
+            )
+    primary_effect = pooled_effects["total_policy"]["primary_net"]
+    matched_effect = pooled_effects["total_policy"]["matched_increment"]
+    primary_positive = float(primary_effect["observed_mean_delta"]) > 0.0
+    matched_positive = float(matched_effect["observed_mean_delta"]) > 0.0
+    q10_supported = (
+        float(primary_effect["bootstrap_quantiles"]["q10"]) > 0.0
+        and float(matched_effect["bootstrap_quantiles"]["q10"]) > 0.0
+    )
+    if primary_positive and matched_positive:
+        classification = (
+            "OOS_TOTAL_POLICY_POSITIVE_DIRECTION_Q10_SUPPORTED"
+            if q10_supported
+            else "OOS_TOTAL_POLICY_POSITIVE_DIRECTION_UNCERTAIN"
+        )
+    elif not primary_positive and not matched_positive:
+        classification = "OOS_TOTAL_POLICY_NEGATIVE_DIRECTION"
+    else:
+        classification = "OOS_TOTAL_POLICY_MIXED_DIRECTION"
+    failures = [row for row in candidate_rows if row["oos_status"] != "EVALUATED"]
+    effects = {
+        "schema_version": 1,
+        "primary_estimand": aggregation["primary_estimand"],
+        "classification": classification,
+        "binary_qualification_gate_applied": False,
+        "cell_results_role": "HETEROGENEITY_ONLY",
+        "source_candidate_count": len(candidate_rows),
+        "evaluated_candidate_count": len(successful),
+        "candidate_local_failure_count": len(failures),
+        "candidate_local_failures": [
+            {
+                "candidate_id": str(row["candidate_id"]),
+                "cohort": str(row["cohort"]),
+                "seed": int(row["seed"]),
+                "horizon_hours": int(row["horizon_hours"]),
+                "reason": str(row["reason"]),
+            }
+            for row in failures
+        ],
+        "pooled_effects": pooled_effects,
+        "cell_effects": cell_effects,
+        "promotion_authorized": False,
+        "next_search_started": False,
+    }
+    return metrics, cohort_paths.to_dict("records"), effects
+
+
+def _write_v23_oos_checkpoint(
+    *,
+    runtime_root: Path,
+    label: str,
+    source_sha: str,
+    frozen_hash: str,
+    selection_hash: str,
+    candidate_rows: Sequence[Mapping[str, Any]],
+    candidate_path_rows: Sequence[Mapping[str, Any]],
+) -> Path:
+    checkpoint_root = runtime_root / "checkpoints"
+    checkpoint_root.mkdir(parents=True, exist_ok=True)
+    target = checkpoint_root / label
+    if target.exists():
+        raise FileExistsError(target)
+    temporary = checkpoint_root / f".{label}.tmp-{os.getpid()}"
+    if temporary.exists():
+        shutil.rmtree(temporary)
+    temporary.mkdir(parents=True)
+    completed_ids = [str(row["candidate_id"]) for row in candidate_rows]
+    state = {
+        "schema_version": 1,
+        "source_sha": source_sha,
+        "frozen_contract_sha256": frozen_hash,
+        "selection_projection_sha256": selection_hash,
+        "completed_candidate_ids": completed_ids,
+        "completed_candidate_count": len(candidate_rows),
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "holdout_read": True,
+        "sealed_partition_reads": 1,
+    }
+    _write_json(temporary / "state.json", state)
+    _write_parquet(temporary / "oos_candidate_ledger.parquet", candidate_rows)
+    _write_parquet(
+        temporary / "oos_candidate_daily_paths.parquet",
+        candidate_path_rows,
+    )
+    files = [
+        {
+            "name": path.name,
+            "bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(temporary.iterdir())
+    ]
+    manifest = {
+        "schema_version": 1,
+        "checkpoint": label,
+        "source_sha": source_sha,
+        "frozen_contract_sha256": frozen_hash,
+        "selection_projection_sha256": selection_hash,
+        "completed_candidate_count": len(candidate_rows),
+        "completed_identity_sha256": _payload_sha(completed_ids),
+        "candidate_path_row_count": len(candidate_path_rows),
+        "state_sha256": _payload_sha(state),
+        "files": files,
+        "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+        "restore_verified": False,
+    }
+    _write_json(temporary / "manifest.json", manifest)
+    restored_state = _read_json(temporary / "state.json")
+    restored_rows = pd.read_parquet(
+        temporary / "oos_candidate_ledger.parquet"
+    ).to_dict("records")
+    restored_paths = pd.read_parquet(
+        temporary / "oos_candidate_daily_paths.parquet"
+    ).to_dict("records")
+    if (
+        _payload_sha(restored_state) != manifest["state_sha256"]
+        or _payload_sha([str(row["candidate_id"]) for row in restored_rows])
+        != manifest["completed_identity_sha256"]
+        or len(restored_paths) != int(manifest["candidate_path_row_count"])
+    ):
+        shutil.rmtree(temporary)
+        raise RuntimeError("V23_OOS_CHECKPOINT_RESTORE_FAILED")
+    manifest["restore_verified"] = True
+    _write_json(temporary / "manifest.json", manifest)
+    os.replace(temporary, target)
+    return target
+
+
+def _restore_v23_oos_checkpoint(
+    *,
+    runtime_root: Path,
+    source_sha: str,
+    frozen_hash: str,
+    selection_hash: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]] | None:
+    checkpoints = sorted(
+        path
+        for path in (runtime_root / "checkpoints").glob(
+            "checkpoint_[0-9][0-9][0-9]"
+        )
+        if path.is_dir()
+    )
+    if not checkpoints:
+        return None
+    path = checkpoints[-1]
+    manifest = _read_json(path / "manifest.json")
+    if (
+        manifest.get("restore_verified") is not True
+        or manifest.get("source_sha") != source_sha
+        or manifest.get("frozen_contract_sha256") != frozen_hash
+        or manifest.get("selection_projection_sha256") != selection_hash
+    ):
+        raise RuntimeError("V23_OOS_CHECKPOINT_AUTHORITY_CHANGED")
+    for item in manifest["files"]:
+        local = path / str(item["name"])
+        if (
+            not local.is_file()
+            or local.stat().st_size != int(item["bytes"])
+            or sha256_file(local) != str(item["sha256"])
+        ):
+            raise RuntimeError("V23_OOS_CHECKPOINT_FILE_CHANGED")
+    state = _read_json(path / "state.json")
+    candidate_rows = pd.read_parquet(
+        path / "oos_candidate_ledger.parquet"
+    ).to_dict("records")
+    candidate_path_rows = pd.read_parquet(
+        path / "oos_candidate_daily_paths.parquet"
+    ).to_dict("records")
+    if (
+        _payload_sha(state) != manifest["state_sha256"]
+        or len(candidate_rows) != int(manifest["completed_candidate_count"])
+        or len(candidate_path_rows) != int(manifest["candidate_path_row_count"])
+        or _payload_sha([str(row["candidate_id"]) for row in candidate_rows])
+        != manifest["completed_identity_sha256"]
+    ):
+        raise RuntimeError("V23_OOS_CHECKPOINT_CONTENT_CHANGED")
+    return candidate_rows, candidate_path_rows
+
+
+def _v23_oos_artifact_bundle(
+    runtime_root: Path,
+    report_path: Path,
+) -> tuple[list[dict[str, Any]], str]:
+    names = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "producer_status.json",
+        "oos_candidate_ledger.parquet",
+        "oos_candidate_daily_paths.parquet",
+        "oos_cohort_metrics.parquet",
+        "oos_cohort_paths.parquet",
+        "oos_effects.json",
+        "final_decision.json",
+    )
+    files = []
+    for name in names:
+        path = runtime_root / name
+        files.append(
+            {
+                "path": name,
+                "bytes": path.stat().st_size,
+                "sha256": sha256_file(path),
+            }
+        )
+    files.append(
+        {
+            "path": report_path.relative_to(runtime_root.parents[1]).as_posix(),
+            "bytes": report_path.stat().st_size,
+            "sha256": sha256_file(report_path),
+        }
+    )
+    return files, _payload_sha(files)
+
+
+def run_v23_frozen_oos_replay(
+    repo_root: Path,
+    *,
+    runtime_date: str = V23_OOS_DEFAULT_RUNTIME_DATE,
+    source_sha: str | None = None,
+    authority_preflight: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    if runtime_date != V23_OOS_DEFAULT_RUNTIME_DATE:
+        raise ValueError("V2.3 OOS runtime date changed")
+    runtime_root = repo_root / f"runtime/{V23_OOS_RUNTIME_PREFIX}_{runtime_date}"
+    report_path = repo_root / f"reports/{V23_OOS_REPORT_PREFIX}_{runtime_date}.md"
+    verified_preflight = _require_bound_authority_preflight(
+        repo_root,
+        authority_preflight,
+        economic_receipt_required=False,
+    )
+    observed_source = _git_sha(repo_root)
+    producer_source = str(source_sha or observed_source).lower()
+    if producer_source != observed_source:
+        raise RuntimeError("V23_OOS_SOURCE_SHA_CHANGED")
+    if not _source_tree_clean_for_run(
+        repo_root,
+        allowed_paths=(runtime_root, report_path),
+    ):
+        raise RuntimeError("V23_OOS_REQUIRES_CLEAN_PRODUCER_TREE")
+    receipt = _load_v23_oos_receipt(repo_root, require_authorized=True)
+    economic_context = _v23_oos_economic_context(receipt)
+    train_partition = dict(economic_context["train"])
+    store, contracts, _, identities, _ = _load_v14_inputs(
+        repo_root,
+        behavior_window=train_partition,
+    )
+    cache_root = repo_root / str(identities["raw_cache"]["root"])
+    target_root = repo_root / str(economic_context["execution"]["target_cache_path"])
+    target_metadata = _validate_receipt_target_store_binding(
+        store,
+        target_root,
+        economic_context["execution"],
+    )
+    selection = _load_v23_oos_candidates(repo_root, receipt)
+    selection_projection = [
+        {key: value for key, value in row.items() if key != "candidate"}
+        for row in selection
+    ]
+    selection_hash = _payload_sha(selection_projection)
+    frozen_payload = {
+        "schema_version": 1,
+        "epoch_id": V23_OOS_EPOCH_ID,
+        "source_sha": producer_source,
+        "receipt": {
+            key: value for key, value in receipt.items() if key != "source_receipt"
+        },
+        "authority_preflight": dict(verified_preflight),
+        "source_v23": dict(receipt["source_v23"]),
+        "selection_projection_sha256": selection_hash,
+        "selection_candidate_count": len(selection),
+        "input_identities": identities,
+        "target_cache_identity_sha256": target_metadata["identity_sha256"],
+        "field_count": len(contracts),
+        "holdout": dict(receipt["holdout"]),
+        "aggregation": dict(receipt["aggregation"]),
+        "workers": V23_OOS_WORKERS,
+        "checkpoint_size": V23_OOS_CHECKPOINT_SIZE,
+        "candidate_generation_performed": False,
+        "validation_performance_selection_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "promotion_authorized": False,
+    }
+    frozen = {
+        **frozen_payload,
+        "frozen_contract_sha256": _payload_sha(frozen_payload),
+    }
+    frozen_hash = str(frozen["frozen_contract_sha256"])
+    if runtime_root.exists():
+        frozen_path = runtime_root / "frozen_contract.json"
+        if not frozen_path.is_file() or _read_json(frozen_path) != frozen:
+            raise RuntimeError("V23_OOS_EXISTING_RUNTIME_CONTRACT_CHANGED")
+        if (runtime_root / "final_decision.json").is_file():
+            raise FileExistsError("V2.3 OOS replay already completed")
+    else:
+        runtime_root.mkdir(parents=True)
+        _write_json(runtime_root / "frozen_contract.json", frozen)
+        _write_json(
+            runtime_root / "embedded_preflight.json",
+            {
+                "schema_version": 1,
+                "status": "READY_ONE_AUTHORIZED_HOLDOUT_PARTITION_READ",
+                "producer_source_sha": producer_source,
+                "receipt_sha256": receipt["receipt_sha256"],
+                "selection_projection_sha256": selection_hash,
+                "source_candidate_count": len(selection),
+                "workers": V23_OOS_WORKERS,
+                "workers_12_forbidden": True,
+                "sealed_partition_reads_before_run": 0,
+                "candidate_generation_performed": False,
+                "validation_performance_selection_performed": False,
+            },
+        )
+    restored = _restore_v23_oos_checkpoint(
+        runtime_root=runtime_root,
+        source_sha=producer_source,
+        frozen_hash=frozen_hash,
+        selection_hash=selection_hash,
+    )
+    if restored is None:
+        candidate_rows: list[dict[str, Any]] = []
+        candidate_path_rows: list[dict[str, Any]] = []
+    else:
+        candidate_rows, candidate_path_rows = restored
+    completed_ids = {str(row["candidate_id"]) for row in candidate_rows}
+    expected_prefix = [str(row["candidate_id"]) for row in selection[: len(candidate_rows)]]
+    if [str(row["candidate_id"]) for row in candidate_rows] != expected_prefix:
+        raise RuntimeError("V23_OOS_CHECKPOINT_SELECTION_ORDER_CHANGED")
+    holdout = dict(receipt["holdout"])
+    started = time.perf_counter()
+
+    def write_status(status: str, *, checkpoint: str | None = None) -> None:
+        elapsed = time.perf_counter() - started
+        _write_json(
+            runtime_root / "producer_status.json",
+            {
+                "schema_version": 1,
+                "status": status,
+                "producer_pid": os.getpid(),
+                "producer_source_sha": producer_source,
+                "frozen_contract_sha256": frozen_hash,
+                "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+                "completed_candidate_count": len(candidate_rows),
+                "source_candidate_count": len(selection),
+                "candidate_local_failure_count": sum(
+                    row["oos_status"] != "EVALUATED" for row in candidate_rows
+                ),
+                "checkpoint": checkpoint,
+                "workers": V23_OOS_WORKERS,
+                "active_wall_seconds": elapsed,
+                "sealed_partition_reads": 1 if candidate_rows else 0,
+                "candidate_generation_performed": False,
+                "optimizer_feedback_written": False,
+                "policy_memory_written": False,
+                "archive_written": False,
+            },
+        )
+
+    write_status("OOS_REPLAY_STARTING")
+    executor = concurrent.futures.ProcessPoolExecutor(
+        max_workers=V23_OOS_WORKERS,
+        initializer=_worker_initialize,
+        initargs=(
+            str(cache_root),
+            _contracts_payload(contracts),
+            {},
+            str(holdout["start"]),
+            str(holdout["end_exclusive"]),
+            str(holdout["role"]),
+            economic_context,
+        ),
+    )
+    try:
+        while len(candidate_rows) < len(selection):
+            batch = selection[
+                len(candidate_rows) : len(candidate_rows) + V23_OOS_CHECKPOINT_SIZE
+            ]
+            futures = [
+                executor.submit(
+                    _worker_evaluate_frozen_oos,
+                    {
+                        "candidate": row["candidate"],
+                        "frozen_train_orientation": row[
+                            "frozen_train_orientation"
+                        ],
+                        "frozen_matched_component": row[
+                            "frozen_matched_component"
+                        ],
+                    },
+                )
+                for row in batch
+            ]
+            results = [future.result() for future in futures]
+            for selected, worker in zip(batch, results):
+                candidate_id = str(selected["candidate_id"])
+                if candidate_id in completed_ids or worker["candidate_id"] != candidate_id:
+                    raise RuntimeError("V23_OOS_WORKER_IDENTITY_CHANGED")
+                completed_ids.add(candidate_id)
+                base_row = {
+                    key: value for key, value in selected.items() if key != "candidate"
+                }
+                candidate_rows.append(
+                    {
+                        **base_row,
+                        "oos_status": str(worker["status"]),
+                        "reason": worker.get("reason"),
+                        "effective_block_end_exclusive": worker.get(
+                            "effective_block_end_exclusive"
+                        ),
+                        "oos_primary_net_mean": worker.get(
+                            "holdout_primary_net_mean"
+                        ),
+                        "oos_primary_nonoverlap_floor_sortino": worker.get(
+                            "holdout_primary_nonoverlap_floor_sortino"
+                        ),
+                        "oos_matched_increment": worker.get(
+                            "holdout_matched_increment"
+                        ),
+                        "oos_control_net_mean": worker.get(
+                            "holdout_control_net_mean"
+                        ),
+                        "oos_control_not_dominant": worker.get(
+                            "control_not_dominant"
+                        ),
+                        "process_cpu_seconds": float(worker["process_cpu_seconds"]),
+                        "wall_seconds": float(worker["wall_seconds"]),
+                        "worker_rss_bytes": int(worker["worker_rss_bytes"]),
+                        "candidate_generation_performed": False,
+                        "validation_performance_selection_performed": False,
+                        "optimizer_feedback_written": False,
+                        "policy_memory_written": False,
+                        "archive_written": False,
+                        "holdout_read": True,
+                    }
+                )
+                if worker["status"] == "EVALUATED":
+                    daily_count = len(worker["primary_daily"])
+                    if not (
+                        len(worker["matched_daily"]) == daily_count
+                        and len(worker["control_daily"]) == daily_count
+                    ):
+                        raise RuntimeError("V23_OOS_WORKER_DAILY_PATH_CHANGED")
+                    start = pd.Timestamp(str(holdout["start"]))
+                    candidate_path_rows.extend(
+                        {
+                            "candidate_id": candidate_id,
+                            "cohort": str(selected["cohort"]),
+                            "arm": str(selected["arm"]),
+                            "seed": int(selected["seed"]),
+                            "horizon_hours": int(selected["horizon_hours"]),
+                            "day_ordinal": int(day),
+                            "utc_day": (start + pd.Timedelta(days=day)).strftime(
+                                "%Y-%m-%d"
+                            ),
+                            "primary_net": float(worker["primary_daily"][day]),
+                            "matched_increment": float(
+                                worker["matched_daily"][day]
+                            ),
+                            "control_net": float(worker["control_daily"][day]),
+                        }
+                        for day in range(daily_count)
+                    )
+            checkpoint_index = len(candidate_rows) // V23_OOS_CHECKPOINT_SIZE - 1
+            label = f"checkpoint_{checkpoint_index:03d}"
+            _write_v23_oos_checkpoint(
+                runtime_root=runtime_root,
+                label=label,
+                source_sha=producer_source,
+                frozen_hash=frozen_hash,
+                selection_hash=selection_hash,
+                candidate_rows=candidate_rows,
+                candidate_path_rows=candidate_path_rows,
+            )
+            write_status("OOS_REPLAY_RUNNING", checkpoint=label)
+    except BaseException:
+        write_status("OOS_REPLAY_FAILED")
+        raise
+    finally:
+        executor.shutdown(wait=True, cancel_futures=False)
+    metrics, cohort_paths, effects = _v23_oos_aggregate(
+        candidate_rows=candidate_rows,
+        candidate_path_rows=candidate_path_rows,
+        receipt=receipt,
+    )
+    _write_parquet(runtime_root / "oos_candidate_ledger.parquet", candidate_rows)
+    _write_parquet(
+        runtime_root / "oos_candidate_daily_paths.parquet", candidate_path_rows
+    )
+    _write_parquet(runtime_root / "oos_cohort_metrics.parquet", metrics)
+    _write_parquet(runtime_root / "oos_cohort_paths.parquet", cohort_paths)
+    _write_json(runtime_root / "oos_effects.json", effects)
+    write_status("OOS_REPLAY_COMPLETE", checkpoint="checkpoint_015")
+    decision = {
+        "schema_version": 1,
+        "status": "PASS_CRYPTO_SEARCH_V2_3_FROZEN_OOS_REPLAY_COMPLETE",
+        "reason": "FROZEN_COHORT_OOS_REPLAY_TERMINAL",
+        "classification": effects["classification"],
+        "producer_source_sha": producer_source,
+        "source_candidate_count": len(candidate_rows),
+        "evaluated_candidate_count": effects["evaluated_candidate_count"],
+        "candidate_local_failure_count": effects["candidate_local_failure_count"],
+        "checkpoint_count": 16,
+        "checkpoint_restore_verified": True,
+        "holdout_read": True,
+        "sealed_partition_reads": 1,
+        "oos": True,
+        "candidate_generation_performed": False,
+        "validation_performance_selection_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "binary_qualification_gate_applied": False,
+        "promotion_authorized": False,
+        "promotion_started": False,
+        "next_search_started": False,
+        "research_scope": "CONDITIONAL_OOS_POLICY_ATTRIBUTION_NO_PROMOTION",
+    }
+    _write_json(runtime_root / "final_decision.json", decision)
+    total = effects["pooled_effects"]["total_policy"]
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_lines = [
+        f"# Crypto Search V2.3 Frozen OOS Replay ({runtime_date})",
+        "",
+        (
+            f"- Source candidates: `{len(candidate_rows):,}`; evaluated: "
+            f"`{effects['evaluated_candidate_count']:,}`; local failures: "
+            f"`{effects['candidate_local_failure_count']}`."
+        ),
+        (
+            f"- Holdout: `{holdout['start']}` to `{holdout['end_exclusive']}`; "
+            "one sealed partition read."
+        ),
+        f"- Classification: **{effects['classification']}**.",
+        (
+            "- Total-policy primary-net delta: "
+            f"`{total['primary_net']['observed_mean_delta']:.12f}`; bootstrap "
+            f"P(delta>0): `{total['primary_net']['probability_positive']:.4f}`."
+        ),
+        (
+            "- Total-policy matched-increment delta: "
+            f"`{total['matched_increment']['observed_mean_delta']:.12f}`; "
+            "bootstrap P(delta>0): "
+            f"`{total['matched_increment']['probability_positive']:.4f}`."
+        ),
+        "",
+        (
+            "All four frozen cohorts were replayed without validation-performance "
+            "selection, candidate generation, backfill, optimizer/archive/policy "
+            "feedback, parameter tuning, or promotion."
+        ),
+        (
+            "Seed/horizon cells are heterogeneity reports, not kill gates. Results "
+            "remain conditional on the frozen Binance USD-M target and 5 bps cost."
+        ),
+        "",
+    ]
+    report_path.write_text(
+        "\n".join(report_lines),
+        encoding="utf-8",
+        newline="\n",
+    )
+    files, bundle = _v23_oos_artifact_bundle(runtime_root, report_path)
+    manifest = {
+        "schema_version": 1,
+        "experiment_id": V23_OOS_EPOCH_ID,
+        "producer_source_sha": producer_source,
+        "frozen_contract_sha256": frozen_hash,
+        "receipt_sha256": receipt["receipt_sha256"],
+        "selection_projection_sha256": selection_hash,
+        "source_candidate_count": len(candidate_rows),
+        "evaluated_candidate_count": effects["evaluated_candidate_count"],
+        "checkpoint_count": 16,
+        "holdout_read": True,
+        "sealed_partition_reads": 1,
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "promotion_started": False,
+        "files": files,
+        "artifact_bundle_sha256": bundle,
+    }
+    _write_json(runtime_root / "run_manifest.json", manifest)
+    return {**decision, "artifact_bundle_sha256": bundle}
+
+
+def check_v23_frozen_oos_replay(
+    repo_root: Path,
+    *,
+    runtime_date: str = V23_OOS_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = repo_root / f"runtime/{V23_OOS_RUNTIME_PREFIX}_{runtime_date}"
+    report_path = repo_root / f"reports/{V23_OOS_REPORT_PREFIX}_{runtime_date}.md"
+    errors: list[str] = []
+    receipt = _load_v23_oos_receipt(repo_root, require_authorized=False)
+    selection = _load_v23_oos_candidates(repo_root, receipt)
+    selection_hash = _payload_sha(
+        [
+            {key: value for key, value in row.items() if key != "candidate"}
+            for row in selection
+        ]
+    )
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    candidate_rows = pd.read_parquet(
+        runtime_root / "oos_candidate_ledger.parquet"
+    ).to_dict("records")
+    candidate_path_rows = pd.read_parquet(
+        runtime_root / "oos_candidate_daily_paths.parquet"
+    ).to_dict("records")
+    observed_metrics = pd.read_parquet(
+        runtime_root / "oos_cohort_metrics.parquet"
+    ).to_dict("records")
+    observed_paths = pd.read_parquet(
+        runtime_root / "oos_cohort_paths.parquet"
+    ).to_dict("records")
+    observed_effects = _read_json(runtime_root / "oos_effects.json")
+    recomputed_metrics, recomputed_paths, recomputed_effects = _v23_oos_aggregate(
+        candidate_rows=candidate_rows,
+        candidate_path_rows=candidate_path_rows,
+        receipt=receipt,
+    )
+    if (
+        len(candidate_rows) != V23_OOS_COHORT_COUNT
+        or len({str(row["candidate_id"]) for row in candidate_rows})
+        != V23_OOS_COHORT_COUNT
+        or [str(row["candidate_id"]) for row in candidate_rows]
+        != [str(row["candidate_id"]) for row in selection]
+    ):
+        errors.append("candidate_ledger")
+    if _payload_sha(observed_metrics) != _payload_sha(recomputed_metrics):
+        errors.append("cohort_metrics")
+    if _payload_sha(observed_paths) != _payload_sha(recomputed_paths):
+        errors.append("cohort_paths")
+    if observed_effects != recomputed_effects:
+        errors.append("effects")
+    checkpoints = sorted(
+        path
+        for path in (runtime_root / "checkpoints").glob(
+            "checkpoint_[0-9][0-9][0-9]"
+        )
+        if path.is_dir()
+    )
+    if len(checkpoints) != 16 or not all(
+        _read_json(path / "manifest.json").get("restore_verified") is True
+        for path in checkpoints
+    ):
+        errors.append("checkpoints")
+    if frozen.get("selection_projection_sha256") != selection_hash:
+        errors.append("frozen_selection")
+    if (
+        decision.get("status")
+        != "PASS_CRYPTO_SEARCH_V2_3_FROZEN_OOS_REPLAY_COMPLETE"
+        or decision.get("classification") != observed_effects["classification"]
+        or decision.get("holdout_read") is not True
+        or decision.get("sealed_partition_reads") != 1
+        or decision.get("candidate_generation_performed") is not False
+        or decision.get("optimizer_feedback_written") is not False
+        or decision.get("policy_memory_written") is not False
+        or decision.get("archive_written") is not False
+        or decision.get("promotion_started") is not False
+    ):
+        errors.append("final_decision")
+    if (
+        manifest.get("producer_source_sha") != frozen.get("source_sha")
+        or manifest.get("selection_projection_sha256") != selection_hash
+        or manifest.get("source_candidate_count") != V23_OOS_COHORT_COUNT
+        or manifest.get("holdout_read") is not True
+        or manifest.get("sealed_partition_reads") != 1
+    ):
+        errors.append("run_manifest")
+    for item in manifest.get("files") or []:
+        label = str(item["path"])
+        path = repo_root / label if label.startswith("reports/") else runtime_root / label
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(item["bytes"])
+            or sha256_file(path) != str(item["sha256"])
+        ):
+            errors.append(f"artifact:{label}")
+    if not report_path.is_file():
+        errors.append("report")
+    bundle = _payload_sha(list(manifest.get("files") or []))
+    if bundle != manifest.get("artifact_bundle_sha256"):
+        errors.append("artifact_bundle")
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "errors": sorted(set(errors)),
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "source_candidate_count": len(candidate_rows),
+        "evaluated_candidate_count": observed_effects["evaluated_candidate_count"],
+        "candidate_local_failure_count": observed_effects[
+            "candidate_local_failure_count"
+        ],
+        "classification": observed_effects["classification"],
+        "checkpoint_count": len(checkpoints),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "sealed_partition_reads": manifest.get("sealed_partition_reads"),
+    }
 
 
 def _frozen_validation_due(
@@ -19763,6 +21044,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-mechanism-v2-2",
             "run-mechanism-v2-3",
             "check-mechanism-v2-3",
+            "run-oos-v2-3",
+            "check-oos-v2-3",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -19924,6 +21207,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=MECHANISM_SEARCH_V23_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-oos-v2-3":
+        result = run_v23_frozen_oos_replay(
+            repo_root,
+            runtime_date=str(args.runtime_date or V23_OOS_DEFAULT_RUNTIME_DATE),
+            source_sha=args.source_sha,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "close-economic-v1":
         result = close_budget_exhausted_engine(
             repo_root,
@@ -20052,6 +21342,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_mechanism_v23(
             repo_root,
             runtime_date=str(args.runtime_date or "20260802"),
+        )
+    elif args.command == "check-oos-v2-3":
+        result = check_v23_frozen_oos_replay(
+            repo_root,
+            runtime_date=str(args.runtime_date or V23_OOS_DEFAULT_RUNTIME_DATE),
         )
     elif args.command == "close-validation-blocked-mechanism-v2":
         result = close_validation_blocked_engine(

@@ -872,6 +872,7 @@ def evaluate_pair(
         receipt = dict(economic_receipt)
         train = dict(receipt.get("train") or {})
         validation = dict(receipt.get("validation") or {})
+        holdout = dict(receipt.get("holdout") or {})
         portfolio = dict(receipt.get("portfolio") or {})
         direction = dict(receipt.get("direction") or {})
         cost_contract = dict(receipt.get("cost") or {})
@@ -914,6 +915,11 @@ def evaluate_pair(
             str(block_start) == str(validation.get("start"))
             and str(block_end) == str(validation.get("end_exclusive"))
             and str(block_role) == str(validation.get("role"))
+        )
+        is_holdout = (
+            str(block_start) == str(holdout.get("start"))
+            and str(block_end) == str(holdout.get("end_exclusive"))
+            and str(block_role) == str(holdout.get("role"))
         )
         evaluation_cost_bps = float(cost_contract["cost_bps"])
         if is_train:
@@ -994,6 +1000,26 @@ def evaluate_pair(
                 )
             train_orientation = float(frozen_train_orientation)
             evaluation_partition = "validation"
+        elif is_holdout:
+            if holdout.get("read_allowed") is not True:
+                raise PermissionError("ECONOMIC_RECEIPT_HOLDOUT_READ_NOT_AUTHORIZED")
+            if any(
+                holdout.get(field) is not False
+                for field in (
+                    "optimizer_feedback_allowed",
+                    "policy_memory_write_allowed",
+                    "candidate_generation_allowed",
+                )
+            ):
+                raise ValueError("ECONOMIC_RECEIPT_HOLDOUT_WRITE_BOUNDARY_CHANGED")
+            if frozen_train_orientation is None or float(
+                frozen_train_orientation
+            ) not in {-1.0, 1.0}:
+                raise ValueError(
+                    "ECONOMIC_RECEIPT_HOLDOUT_REQUIRES_FROZEN_ORIENTATION"
+                )
+            train_orientation = float(frozen_train_orientation)
+            evaluation_partition = "holdout"
         else:
             raise ValueError("ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED")
         primary_signal = primary_signal * train_orientation
@@ -1201,8 +1227,13 @@ def evaluate_pair(
                 min(left_feedback["distance"], right_feedback["distance"])
             ),
         }
-    if include_validation_paths and evaluation_partition != "validation":
-        raise ValueError("VALIDATION_PATHS_REQUIRE_VALIDATION_PARTITION")
+    if include_validation_paths and evaluation_partition not in {
+        "validation",
+        "holdout",
+    }:
+        raise ValueError(
+            "EVALUATION_PATHS_REQUIRE_VALIDATION_OR_HOLDOUT_PARTITION"
+        )
     validation_paths: dict[str, Any] | None = None
     if include_validation_paths:
         validation_paths = {
