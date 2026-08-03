@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.4 source gate implemented, run not authorized; economic Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V2.4 fresh gate consumed; engine validation blocked before economics; economic Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -518,16 +518,21 @@
                                     ,"reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.json"
                                     ,"reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md"
                                     ,"config/crypto_search_engine_v2_4_behavior_family.json"
+                                    ,"config/crypto_search_engine_v2_4_fresh_gate_receipt.json"
+                                    ,"runtime/crypto_search_engine_v2_4_fresh_gate_20260803/run_manifest.json"
+                                    ,"runtime/crypto_search_engine_v2_4_fresh_gate_20260803/final_decision.json"
+                                    ,"runtime/crypto_search_engine_v2_4_fresh_gate_20260803/independent_terminal_check.json"
+                                    ,"reports/CRYPTO_SEARCH_ENGINE_V2_4_20260803.md"
                                     ,"docs/adr/0022-behavior-family-first-search-v2-4.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_v2_3_frozen_oos_receipt.json",
+                                        "path":  "config/crypto_search_engine_v2_4_fresh_gate_receipt.json",
                                         "repo_ref":  "experiment/crypto-search-v2-3-frozen-oos-20260803",
-                                        "verified_sha":  "eaf3d3e003d005cd9875d7452922e8b86059f868",
-                                        "sha256":  "BA67D2B5901A2AFB2A5B478289AFE4536B978A3E56D3338FE3D51851860D3D53"
+                                        "verified_sha":  "75c7d3abf39223fe12034e42cfa9b880eb45624b",
+                                        "sha256":  "676D04D9649F7836E21F638B66C026415AAACC7AADFD5F663A7659CFE56259F4"
                                     },
                       "contracts":  [
                                         {
@@ -686,11 +691,11 @@
                                         {
                                             "id":  "crypto_search_v2_4_behavior_family_source_gate",
                                             "type":  "AUTHORITY",
-                                            "rule":  "ADR 0022 accepts a source-only V2.4 gate and authorizes no market run. Selection is behavior-family-first: each arm x seed x horizon x behavior_family_id cell contributes one deterministic train-search_reward champion, equal family counts are required across the exact frozen cell set, and missing cells or duplicate-family backfill fail closed. The selection receipt must be atomically frozen before any fresh-data read and bind candidate/spec identities, the interval beginning no earlier than 2026-07-01T00:00:00Z, producer commit and Git blobs, validation partition, Binance USD-M execution venue, 5 bps baseline cost, and the existing evaluator economic receipt. Post-read persistence must verify the receipt and write exact hourly objective-mask/gross/cost/turnover/net sleeves, daily sleeves, 5/10 bps sensitivity, and sparse asset weights plus gross contributions. pair18m remains the sole evaluator; the existing AST, compiler, mapping, cost, Evolution population, mutation receipts, and archive are reused. run_authorized is false. No search, market read, sealed/OOS/forward/recent/challenge read, tuning, reseed, rescue, cross-sprint memory, Alpha claim, or promotion is authorized.",
+                                            "rule":  "ADR 0022's one-time V2.4 fresh-family gate is consumed and run_authorized is false. July acquisition and independent content verification passed; the aligned July 1-18 carrier qualified with 115 fields, Binance USD-M target, dynamic eligibility, PIT/lag identities, and no fill. The selection receipt was frozen before fresh-data access with exactly 512 unique candidates, 64 in each of eight arm-seed-horizon cells. The single producer at 83a38d56fc2b362aed65ba246ea3fbd7993dfc4a failed closed on frozen candidate ordinal 0 with CONTROL_BEHAVIOR_EQUALS_PRIMARY, before any strict evaluation or checkpoint. Strict evaluated and checkpoint counts are zero, no arm qualifies, and no candidate substitution, backfill, generation, optimizer feedback, policy/archive memory, OOS read, promotion, tuning, reseed, rescue, or second search occurred. This is an engine-validation constructibility block only, not an Alpha, carrier, field, or behavior-family negative.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v2_4, broad_search.pair18m.evaluate_pair, config/crypto_search_engine_v2_4_behavior_family.json, and ADR 0022",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_engine_v2_4_behavior_family.json"
+                                            "evidence_ref":  "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/final_decision.json"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
@@ -802,21 +807,20 @@
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "STATIC_VERIFIED",
+                                         "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "config/crypto_search_engine_v2_4_behavior_family.json",
-                                          "evidence_sha256":  "565990F5552C0A8E9F42AA9074BE1FA34BC2226FCE6E17A2E0F02CAE40EC2CC9",
-                                          "verified_at_sha":  "2f512c72ed61223d32ab56eac62c63d9f423d925"
+                                         "evidence_ref":  "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/independent_terminal_check.json",
+                                         "evidence_sha256":  "5DB5D1F00280B0E111C2054524B020D02FC24A26C38E1BA64EE7486E9CFFC993",
+                                         "verified_at_sha":  "75c7d3abf39223fe12034e42cfa9b880eb45624b"
                                      },
                       "claim_badges":  [
-                                           "V2.4 SOURCE GATE IMPLEMENTED",
-                                           "BEHAVIOR-FAMILY-FIRST SELECTION",
-                                           "COMPLETE ECONOMIC PATHS REQUIRED",
-                                           "RUN NOT AUTHORIZED",
-                                           "ECONOMIC ALPHA HOLD",
-                                           "NO NEW MARKET OR SEALED READ",
-                                           "NO PROMOTION"
+                                           "V2.4 RECEIPT CONSUMED",
+                                           "JULY CARRIER QUALIFIED",
+                                           "ENGINE VALIDATION BLOCKED",
+                                           "STRICT EVALUATED 0",
+                                           "NO ALPHA OR CARRIER CONCLUSION",
+                                           "NO OOS OR PROMOTION"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
