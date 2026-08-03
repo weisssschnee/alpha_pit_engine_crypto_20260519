@@ -33,6 +33,9 @@ CONDITIONAL_RUN_NON_FORMAL_COMPONENTS = {
     "cost": "real_data_mapping_cost_evaluator",
     "validation_role": "real_policy_upgrade_canary",
 }
+V23_FROZEN_OOS_RECEIPT_PATH = (
+    "config/crypto_search_v2_3_frozen_oos_receipt.json"
+)
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
@@ -1565,10 +1568,49 @@ def require_real_experiment_authority(
     decision_to_change: str | None,
     economic_receipt_required: bool = True,
     economic_receipt_path: str | None = None,
+    receipt_bound_non_formal_authorization: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     resolution = resolve_real_experiment_authorities(repo_root)
     blockers = list(resolution["blockers"])
     economic_receipt = None
+    non_formal_binding_authorized = False
+    if receipt_bound_non_formal_authorization is not None:
+        authorization = dict(receipt_bound_non_formal_authorization)
+        expected_authorization = {
+            "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
+            "receipt_path": V23_FROZEN_OOS_RECEIPT_PATH,
+            "receipt_sha256": str(authorization.get("receipt_sha256") or ""),
+            "run_authorized": True,
+        }
+        receipt_path = repo_root / V23_FROZEN_OOS_RECEIPT_PATH
+        if authorization != expected_authorization:
+            blockers.append("receipt_bound_non_formal_authorization:INVALID")
+        elif not receipt_path.is_file():
+            blockers.append("receipt_bound_non_formal_authorization:MISSING")
+        else:
+            receipt_payload = json.loads(
+                receipt_path.read_text(encoding="utf-8-sig")
+            )
+            if (
+                _canonical_sha256(receipt_payload)
+                != authorization["receipt_sha256"]
+                or receipt_payload.get("run_authorized") is not True
+                or dict(receipt_payload.get("run_authorization") or {}).get(
+                    "decision_id"
+                )
+                != authorization["decision_id"]
+                or dict(receipt_payload.get("run_authorization") or {}).get(
+                    "scope"
+                )
+                != authorization["scope"]
+            ):
+                blockers.append(
+                    "receipt_bound_non_formal_authorization:HASH_OR_SCOPE"
+                )
+            else:
+                non_formal_binding_authorized = True
     if economic_receipt_required:
         economic_receipt = resolve_search_economic_receipt(
             repo_root,
@@ -1577,34 +1619,34 @@ def require_real_experiment_authority(
         if economic_receipt["run_authorized"] is not True:
             blockers.append("economic_receipt:RUN_NOT_AUTHORIZED")
         else:
-            authority_refs = {
-                role: dict(value)
-                for role, value in resolution["authority_refs"].items()
-            }
-            non_formal_roles = set(resolution["non_formal_roles"])
-            for role, expected_component in (
-                CONDITIONAL_RUN_NON_FORMAL_COMPONENTS.items()
+            non_formal_binding_authorized = True
+    if non_formal_binding_authorized:
+        authority_refs = {
+            role: dict(value)
+            for role, value in resolution["authority_refs"].items()
+        }
+        non_formal_roles = set(resolution["non_formal_roles"])
+        for role, expected_component in (
+            CONDITIONAL_RUN_NON_FORMAL_COMPONENTS.items()
+        ):
+            ref = authority_refs.get(role, {})
+            if (
+                ref.get("status") == "INACTIVE_AUTHORITY"
+                and ref.get("component") == expected_component
+                and ref.get("authority_class") == "NON_FORMAL"
+                and ref.get("lifecycle") == "EXPERIMENTAL"
+                and ref.get("active_authority") is False
             ):
-                ref = authority_refs.get(role, {})
-                if (
-                    ref.get("status") == "INACTIVE_AUTHORITY"
-                    and ref.get("component") == expected_component
-                    and ref.get("authority_class") == "NON_FORMAL"
-                    and ref.get("lifecycle") == "EXPERIMENTAL"
-                    and ref.get("active_authority") is False
-                ):
-                    blocker = f"{role}:INACTIVE_AUTHORITY"
-                    blockers = [
-                        value for value in blockers if value != blocker
-                    ]
-                    ref["status"] = "BOUND_NON_FORMAL_EXPERIMENT"
-                    authority_refs[role] = ref
-                    non_formal_roles.add(role)
-            resolution = {
-                **resolution,
-                "authority_refs": authority_refs,
-                "non_formal_roles": sorted(non_formal_roles),
-            }
+                blocker = f"{role}:INACTIVE_AUTHORITY"
+                blockers = [value for value in blockers if value != blocker]
+                ref["status"] = "BOUND_NON_FORMAL_EXPERIMENT"
+                authority_refs[role] = ref
+                non_formal_roles.add(role)
+        resolution = {
+            **resolution,
+            "authority_refs": authority_refs,
+            "non_formal_roles": sorted(non_formal_roles),
+        }
     if not _meaningful(evidence_to_add):
         blockers.append("evidence_to_add:MISSING")
     if not _meaningful(decision_to_change):
@@ -1624,6 +1666,11 @@ def require_real_experiment_authority(
         "decision_to_change": str(decision_to_change).strip(),
         "formal_claims_authorized": not bool(resolution["non_formal_roles"]),
         "economic_receipt": economic_receipt,
+        "receipt_bound_non_formal_authorization": (
+            dict(receipt_bound_non_formal_authorization)
+            if receipt_bound_non_formal_authorization is not None
+            else None
+        ),
     }
 
 

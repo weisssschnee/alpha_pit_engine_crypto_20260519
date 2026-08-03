@@ -101,7 +101,7 @@
     },
     "oos_runtime": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "8F69C7DFED24D001990893221F448D7D54CB1DF7C7191FD0AE4528E7FFCC7223"
+      "sha256": "5701EFB6B2B8D8347A70CA1E769902DBEDB344D0DC41AE0E2B431DD6CEC8FC53"
     },
     "target_store": {
       "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
@@ -114,6 +114,10 @@
     "mechanism_compiler": {
       "path": "alphafactory_crypto/broad_search/compositional18m.py",
       "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+    },
+    "authority_preflight": {
+      "path": "alphafactory_crypto/broad_search/experiment_authority.py",
+      "sha256": "E62B496E3869D064EAACF008CB6F0E779DAB35AB32ED2E4F329F61BCB6EEE0ED"
     }
   }
 }

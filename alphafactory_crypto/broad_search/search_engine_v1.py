@@ -13297,6 +13297,7 @@ def _load_v23_oos_receipt(
         "target_store",
         "mapping_and_cost",
         "mechanism_compiler",
+        "authority_preflight",
     }
     if set(component_sources) != expected_component_names:
         blockers.append("component_sources.keys")
@@ -21087,6 +21088,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             require_real_experiment_authority,
         )
 
+        receipt_bound_authorization = None
+        if args.command == "run-oos-v2-3":
+            oos_receipt = _load_v23_oos_receipt(
+                repo_root,
+                require_authorized=True,
+            )
+            receipt_bound_authorization = {
+                "decision_id": oos_receipt["run_authorization"][
+                    "decision_id"
+                ],
+                "authority": oos_receipt["run_authorization"]["authority"],
+                "scope": oos_receipt["run_authorization"]["scope"],
+                "receipt_path": V23_OOS_RECEIPT_PATH,
+                "receipt_sha256": oos_receipt["receipt_sha256"],
+                "run_authorized": oos_receipt["run_authorized"],
+            }
         authority_preflight = require_real_experiment_authority(
             repo_root,
             evidence_to_add=args.evidence_to_add,
@@ -21100,6 +21117,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 ]
                 if economic_command_campaign is not None
                 else None
+            ),
+            receipt_bound_non_formal_authorization=(
+                receipt_bound_authorization
             ),
         )
         print(

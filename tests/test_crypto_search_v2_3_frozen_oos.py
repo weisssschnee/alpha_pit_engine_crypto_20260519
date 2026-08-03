@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from alphafactory_crypto.broad_search.experiment_authority import (
+    require_real_experiment_authority,
+)
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     MECHANISM_SEARCH_V23_SEEDS,
     V23_OOS_COHORT_COUNT,
@@ -31,6 +34,38 @@ def test_receipt_binds_exact_committed_v23_cohort_without_holdout_read() -> None
     ]
     assert receipt["holdout"]["read_allowed"] is True
     assert receipt["run_authorization"]["candidate_generation_allowed"] is False
+
+
+def test_receipt_authorizes_only_bound_non_formal_oos_preflight() -> None:
+    receipt = _load_v23_oos_receipt(REPO_ROOT, require_authorized=True)
+    authorization = {
+        "decision_id": receipt["run_authorization"]["decision_id"],
+        "authority": receipt["run_authorization"]["authority"],
+        "scope": receipt["run_authorization"]["scope"],
+        "receipt_path": "config/crypto_search_v2_3_frozen_oos_receipt.json",
+        "receipt_sha256": receipt["receipt_sha256"],
+        "run_authorized": receipt["run_authorized"],
+    }
+    result = require_real_experiment_authority(
+        REPO_ROOT,
+        evidence_to_add="frozen OOS total-policy transfer evidence",
+        decision_to_change="whether V2.3 transfers to the frozen holdout",
+        economic_receipt_required=False,
+        receipt_bound_non_formal_authorization=authorization,
+    )
+    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
+    assert result["formal_claims_authorized"] is False
+    assert {
+        role
+        for role, value in result["authority_refs"].items()
+        if value["status"] == "BOUND_NON_FORMAL_EXPERIMENT"
+    } == {
+        "target",
+        "optimizer_reward",
+        "execution_price",
+        "cost",
+        "validation_role",
+    }
 
 
 def test_pooled_oos_effect_reports_heterogeneity_without_all_cell_gate() -> None:
