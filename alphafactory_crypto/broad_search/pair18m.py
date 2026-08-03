@@ -630,6 +630,7 @@ def evaluate_pair(
     economic_receipt: Mapping[str, Any] | None = None,
     frozen_train_orientation: float | None = None,
     include_validation_paths: bool = False,
+    include_economic_paths: bool = False,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -1102,7 +1103,9 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
-        include_internal_objective_paths=include_validation_paths,
+        include_internal_objective_paths=(
+            include_validation_paths or include_economic_paths
+        ),
     )
     right_control = _series_metrics(
         weights=right_control_weight,
@@ -1111,7 +1114,9 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
-        include_internal_objective_paths=include_validation_paths,
+        include_internal_objective_paths=(
+            include_validation_paths or include_economic_paths
+        ),
     )
     interaction_left_control = (
         _series_metrics(
@@ -1121,7 +1126,9 @@ def evaluate_pair(
             evaluation_mask=evaluation_mask,
             horizon=candidate.horizon_hours,
             cost_bps=evaluation_cost_bps,
-            include_internal_objective_paths=include_validation_paths,
+            include_internal_objective_paths=(
+                include_validation_paths or include_economic_paths
+            ),
         )
         if interaction_left_control_weight is not None
         else None
@@ -1227,13 +1234,113 @@ def evaluate_pair(
                 min(left_feedback["distance"], right_feedback["distance"])
             ),
         }
-    if include_validation_paths and evaluation_partition not in {
-        "validation",
-        "holdout",
-    }:
+    if (
+        include_validation_paths or include_economic_paths
+    ) and evaluation_partition not in {"validation", "holdout"}:
         raise ValueError(
             "EVALUATION_PATHS_REQUIRE_VALIDATION_OR_HOLDOUT_PARTITION"
         )
+    economic_paths: dict[str, Any] | None = None
+    if include_economic_paths:
+        target_metadata = getattr(store, "target_metadata", {})
+        execution_venue = str(
+            dict(target_metadata).get("venue")
+            or dict((economic_receipt or {}).get("execution") or {}).get("venue")
+            or "UNBOUND_EXECUTION_VENUE"
+        )
+        asset_ids = tuple(
+            str(value)
+            for value in getattr(
+                store,
+                "symbols",
+                tuple(
+                    f"asset_{index:04d}"
+                    for index in range(primary_weight.shape[0])
+                ),
+            )
+        )
+        if len(asset_ids) != primary_weight.shape[0]:
+            raise ValueError("ECONOMIC_PATH_ASSET_IDENTITY_CHANGED")
+
+        def sleeve_paths(
+            metrics: Mapping[str, Any],
+            weights: np.ndarray,
+        ) -> dict[str, np.ndarray]:
+            mask = np.asarray(metrics["_objective_mask"], dtype=bool)
+            turnover = np.asarray(metrics["_objective_turnover_path"], dtype=float)
+            net = np.asarray(metrics["_objective_net_path"], dtype=float)
+            cost = turnover * float(evaluation_cost_bps) / 10_000.0
+            gross = net + cost
+            asset_gross = (
+                np.asarray(weights, dtype=float)
+                * np.asarray(target, dtype=float)
+                / float(candidate.horizon_hours)
+            )
+            return {
+                "weights": np.where(mask[np.newaxis, :], weights, np.nan),
+                "asset_gross_contribution": np.where(
+                    mask[np.newaxis, :], asset_gross, np.nan
+                ),
+                "gross": np.where(mask, gross, np.nan),
+                "cost": np.where(mask, cost, np.nan),
+                "turnover": np.where(mask, turnover, np.nan),
+                "net": np.where(mask, net, np.nan),
+                "mask": mask.copy(),
+            }
+
+        economic_sleeves = {
+            "primary": sleeve_paths(primary, primary_weight),
+            "control_left": sleeve_paths(control, control_weight),
+            "control_right": sleeve_paths(right_control, right_control_weight),
+        }
+        if hierarchical_conditional:
+            assert interaction_left_control is not None
+            assert interaction_left_control_weight is not None
+            assert interaction_left_incremental is not None
+            economic_sleeves.update(
+                {
+                    "interaction_left_control": sleeve_paths(
+                        interaction_left_control,
+                        interaction_left_control_weight,
+                    ),
+                    "interaction_ab_minus_a": sleeve_paths(
+                        interaction_left_incremental,
+                        control_weight - interaction_left_control_weight,
+                    ),
+                    "interaction_ab_minus_b": sleeve_paths(
+                        right_incremental,
+                        right_delta_weight,
+                    ),
+                    "conditional_abc_minus_ab": sleeve_paths(
+                        left_incremental,
+                        left_delta_weight,
+                    ),
+                }
+            )
+        else:
+            economic_sleeves.update(
+                {
+                    "primary_minus_left_control": sleeve_paths(
+                        left_incremental,
+                        left_delta_weight,
+                    ),
+                    "primary_minus_right_control": sleeve_paths(
+                        right_incremental,
+                        right_delta_weight,
+                    ),
+                }
+            )
+        economic_paths = {
+            "schema_version": 1,
+            "authority": "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_PATH_PROJECTION_V1",
+            "execution_venue": execution_venue,
+            "asset_ids": list(asset_ids),
+            "timestamp_ns": np.asarray(timestamp_ns, dtype=np.int64).copy(),
+            "raw_fields": list(candidate.raw_fields),
+            "cost_bps": float(evaluation_cost_bps),
+            "horizon_hours": int(candidate.horizon_hours),
+            "sleeves": economic_sleeves,
+        }
     validation_paths: dict[str, Any] | None = None
     if include_validation_paths:
         validation_paths = {
@@ -1257,6 +1364,17 @@ def evaluate_pair(
                 np.asarray(section.pop("_objective_net_path"), dtype=float),
                 np.nan,
             )
+            section.pop("_objective_turnover_path")
+    elif include_economic_paths:
+        control_sections = {
+            "left": control,
+            "right": right_control,
+        }
+        if interaction_left_control is not None:
+            control_sections["interaction_left"] = interaction_left_control
+        for section in control_sections.values():
+            section.pop("_objective_mask")
+            section.pop("_objective_net_path")
             section.pop("_objective_turnover_path")
 
     objective_components: dict[str, dict[str, np.ndarray]] = {}
@@ -1464,6 +1582,11 @@ def evaluate_pair(
         **(
             {"_validation_paths": validation_paths}
             if validation_paths is not None
+            else {}
+        ),
+        **(
+            {"_economic_paths": economic_paths}
+            if economic_paths is not None
             else {}
         ),
     }

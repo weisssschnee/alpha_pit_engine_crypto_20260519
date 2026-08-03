@@ -711,6 +711,13 @@ def _git_blob_sha(repo_root: Path, path: str) -> str:
     ).strip().lower()
 
 
+def _git_file_sha256(repo_root: Path, revision: str, path: str) -> str:
+    payload = subprocess.check_output(
+        ["git", "show", f"{revision}:{path}"], cwd=repo_root
+    )
+    return hashlib.sha256(payload).hexdigest().upper()
+
+
 def _json_rng_state(state: tuple[Any, ...]) -> Any:
     return [_json_rng_state(value) if isinstance(value, tuple) else value for value in state]
 
@@ -13311,16 +13318,28 @@ def _load_v23_oos_receipt(
     }
     if set(component_sources) != expected_component_names:
         blockers.append("component_sources.keys")
-    from alphafactory_crypto.broad_search.experiment_authority import (
-        _file_sha256 as source_file_sha256,
+    frozen_contract_path = (
+        repo_root / str(run_outcome.get("runtime") or "") / "frozen_contract.json"
     )
-
+    if frozen_contract_path.is_file():
+        producer_source_sha = str(
+            _read_json(frozen_contract_path).get("source_sha") or ""
+        )
+    else:
+        producer_source_sha = ""
+        blockers.append("run_outcome.frozen_contract")
     for name, component in component_sources.items():
         item = dict(component)
-        component_path = repo_root / str(item.get("path") or "")
-        if not component_path.is_file() or source_file_sha256(component_path) != str(
-            item.get("sha256") or ""
-        ):
+        relative_path = str(item.get("path") or "")
+        try:
+            observed_sha256 = _git_file_sha256(
+                repo_root,
+                producer_source_sha,
+                relative_path,
+            )
+        except (OSError, subprocess.CalledProcessError):
+            observed_sha256 = ""
+        if observed_sha256 != str(item.get("sha256") or ""):
             blockers.append(f"component_sources.{name}")
     for label in (
         expected_source["candidate_ledger_path"],

@@ -617,6 +617,98 @@ def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
         )
 
 
+def test_validation_can_expose_complete_economic_paths_without_new_evaluator() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("a", "RATIO", "dimensionless"),
+            FieldContract("b", "RATIO", "dimensionless"),
+        )
+    )
+    primary = Expression(
+        "RatioInteraction",
+        (Expression.raw("a"), Expression.raw("b")),
+    )
+    assurance = registry.validate(primary)
+    spec = CandidateSpec(
+        "candidate-economic-paths",
+        "skeleton",
+        "OI_ACTIVITY_INTERACTION",
+        primary,
+        ablate_expression(primary),
+        1,
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        ("family_a", "family_b"),
+        assurance.rolling_windows,
+        assurance.depth,
+        "RatioInteraction(Raw,Raw)",
+    )
+    store = _FakeStore()
+    result = evaluate_pair(
+        store=store,
+        registry=registry,
+        candidate=spec,
+        block_start="2023-08-01T00:00:00Z",
+        block_end="2023-09-01T00:00:00Z",
+        block_role="FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+        economic_receipt={
+            "receipt_sha256": "A" * 64,
+            "train": {
+                "start": "2023-07-01T00:00:00Z",
+                "end_exclusive": "2023-08-01T00:00:00Z",
+            },
+            "validation": {
+                "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+                "start": "2023-08-01T00:00:00Z",
+                "end_exclusive": "2023-09-01T00:00:00Z",
+                "optimizer_feedback_allowed": False,
+                "policy_memory_write_allowed": False,
+                "candidate_generation_allowed": False,
+            },
+            "direction": {
+                "rule": "TRAIN_FROZEN_SIGN_ORIENTATION",
+                "allowed_values": [-1, 1],
+            },
+            "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
+            "cost": {"cost_bps": 7.0},
+            "execution": {
+                **store.target_metadata,
+                "target_cache_identity_sha256": "B" * 64,
+                "partition_tail_purge_hours": 6,
+            },
+        },
+        frozen_train_orientation=1.0,
+        include_economic_paths=True,
+    )
+    paths = result["_economic_paths"]
+    assert paths["schema_version"] == 1
+    assert paths["execution_venue"] == "BINANCE_USD_M"
+    assert paths["timestamp_ns"].shape == (400,)
+    assert len(paths["asset_ids"]) == 6
+    assert {
+        "primary",
+        "control_left",
+        "control_right",
+        "primary_minus_left_control",
+        "primary_minus_right_control",
+    } <= set(paths["sleeves"])
+    for sleeve in paths["sleeves"].values():
+        assert sleeve["weights"].shape == (6, 400)
+        assert sleeve["gross"].shape == (400,)
+        assert sleeve["cost"].shape == (400,)
+        assert sleeve["turnover"].shape == (400,)
+        assert sleeve["net"].shape == (400,)
+        assert sleeve["asset_gross_contribution"].shape == (6, 400)
+        assert np.allclose(
+            sleeve["gross"] - sleeve["cost"],
+            sleeve["net"],
+            equal_nan=True,
+        )
+        assert np.allclose(
+            np.nansum(sleeve["asset_gross_contribution"], axis=0),
+            sleeve["gross"],
+            equal_nan=True,
+        )
 def test_holdout_requires_explicit_read_and_preserves_frozen_orientation() -> None:
     registry = TypedExpressionRegistry(
         (

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "crypto_search_engine_v2_4_behavior_family_first",
+  "status": "SOURCE_IMPLEMENTED_RUN_NOT_AUTHORIZED",
+  "run_authorized": false,
+  "selection": {
+    "unit": "BEHAVIOR_FAMILY",
+    "family_key": [
+      "arm",
+      "seed",
+      "horizon_hours",
+      "behavior_family_id"
+    ],
+    "champion_authority": "TRAIN_SEARCH_REWARD_ONLY",
+    "champion_order": [
+      "search_reward_desc",
+      "arm_completion_ordinal_asc",
+      "candidate_id_asc"
+    ],
+    "expression_count_weighting": false,
+    "validation_feedback_allowed": false,
+    "oos_feedback_allowed": false,
+    "duplicate_family_backfill_allowed": false,
+    "seed_horizon_pooling_allowed": false,
+    "cohort_count_rule": "EQUAL_COUNT_PER_ARM_SEED_HORIZON",
+    "underfilled_cell_action": "FAIL_CLOSED_NO_DUPLICATE_FAMILY_BACKFILL"
+  },
+  "evolution": {
+    "population_unit": "EXISTING_BEHAVIOR_FAMILY_REWARD_CHAMPION",
+    "parent_order_primary": "TRAIN_SEARCH_REWARD",
+    "behavior_novelty_role": "DETERMINISTIC_TIE_BREAK_ONLY",
+    "existing_typed_mutation_receipts_reused": true,
+    "existing_compiler_reused": true,
+    "existing_ast_reused": true,
+    "existing_evaluator_reused": true
+  },
+  "fresh_data_gate": {
+    "prior_holdout_end_exclusive": "2026-07-01T00:00:00Z",
+    "admission_rule": "START_AT_OR_AFTER_PRIOR_HOLDOUT_END_OR_INDEPENDENTLY_ADMITTED_NEW_ASSET_SURFACE",
+    "candidate_generation_during_gate": false,
+    "adaptive_feedback_during_gate": false,
+    "policy_memory_write_during_gate": false,
+    "selection_frozen_before_read": true,
+    "absolute_zero_benchmark_required": true,
+    "typed_random_comparator_required": true,
+    "cost_sensitivity_bps": [5.0, 10.0],
+    "run_requires_new_user_authorization": true
+  },
+  "economic_path_artifacts": {
+    "required": true,
+    "daily_sleeve_path_fields": [
+      "gross",
+      "cost",
+      "turnover",
+      "net"
+    ],
+    "sparse_asset_path_fields": [
+      "weight",
+      "asset_gross_contribution"
+    ],
+    "identity_fields": [
+      "candidate_id",
+      "cohort",
+      "arm",
+      "seed",
+      "horizon_hours",
+      "sleeve",
+      "execution_venue",
+      "asset_id",
+      "timestamp_ns"
+    ],
+    "pair_evaluator_authority": "alphafactory_crypto.broad_search.pair18m.evaluate_pair",
+    "projection_symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.build_economic_path_artifacts",
+    "new_evaluator": false
+  },
+  "boundaries": {
+    "market_search": false,
+    "sealed_read": false,
+    "oos": false,
+    "forward": false,
+    "recent": false,
+    "challenge": false,
+    "promotion": false,
+    "new_evaluator": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "cross_sprint_adaptive_memory": false
+  }
+}
