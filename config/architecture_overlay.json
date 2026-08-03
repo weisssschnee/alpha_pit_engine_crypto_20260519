@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.3 frozen OOS total-policy direction supported; non-formal)",
+                      "label":  "Search Engine conditional-development campaigns (V2.3 OOS policy-ranking direction supported; economic Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -513,6 +513,9 @@
                                     ,"runtime/crypto_search_v2_3_frozen_oos_20260803/final_decision.json"
                                     ,"runtime/crypto_search_v2_3_frozen_oos_20260803/official_checker_result.json"
                                     ,"reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md"
+                                    ,"scripts/crypto_search_v2_3_oos_policy_bias_audit.py"
+                                    ,"reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.json"
+                                    ,"reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -671,9 +674,9 @@
                                         {
                                             "id":  "policy_canary_claim_scope",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The consumed V2.3 frozen OOS replay supports positive pooled total-policy direction with positive Q10 under the frozen Binance target and 5 bps cost, but ADR 0021 defined no binary qualification or promotion gate. No Search Engine arm, optimizer, or archive is therefore formally qualified for a future Arena, and no Alpha claim or subsequent search is authorized.",
+                                            "rule":  "The consumed V2.3 frozen OOS replay supports positive pooled search-policy direction with positive Q10 under the frozen Binance target and 5 bps cost. The existing-ledger-only bias audit shows that proposal cohorts remain absolutely negative, Evolution train-top is absolutely positive, and behavior-family de-overlap retains the pooled sign; it also shows 256 top expressions collapse to 161 behavior families and about 7.3 effective primary path dimensions, while the strongest mechanism appears in only one seed. This is policy-ranking evidence, not broad mechanism Alpha. The single 181-day window is WEAK, OOS cost/turnover/asset-concentration paths were not persisted, ADR 0021 defined no binary qualification or promotion gate, and no Search Engine arm, optimizer, or archive is formally qualified for a future Arena. Economic Alpha remains HOLD; no subsequent search or sealed read is authorized.",
                                             "severity":  "HARD",
-                                            "evidence_ref":  "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md"
+                                            "evidence_ref":  "reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
@@ -795,8 +798,8 @@
                       "claim_badges":  [
                                            "V2.3 FROZEN OOS REPLAY COMPLETE",
                                            "1,023/1,024; ONE NO-BACKFILL FAILURE",
-                                           "POOLED TOTAL-POLICY DIRECTION SUPPORTED",
-                                           "PRIMARY AND MATCHED Q10 POSITIVE",
+                                           "POLICY-RANKING DIRECTION SUPPORTED",
+                                           "ECONOMIC ALPHA HOLD",
                                            "ONE SEALED READ CONSUMED",
                                            "NO PROMOTION"
                                        ],

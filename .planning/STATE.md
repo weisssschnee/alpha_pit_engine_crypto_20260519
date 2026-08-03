@@ -4,7 +4,7 @@ Last updated: 2026-08-03 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_COMPLETE`
+`CRYPTO_SEARCH_ENGINE_V2_3_OOS_POLICY_BIAS_AUDIT_COMPLETE_HOLD`
 
 ADR 0021's one read-only frozen V2.3 OOS authorization is consumed. Producer
 `3e593aaea93e9b521ba78d24186ad225e901eae7` replayed the exact four
@@ -32,6 +32,35 @@ USD-M target and 5 bps cost; it is not a binary qualification gate, Alpha
 claim, formal optimizer authority, or promotion. No second read, tuning,
 reseed, rescue rerun, challenge, recent, May-stress, forward, promotion, new
 search, or subsequent Arena occurred.
+
+The subsequent existing-artifact-only policy bias audit changes no runtime
+result or authority. It independently joins all 1,024 frozen identities to the
+16,000-row train ledger and recomputes the absolute cohort economics. Evolution
+stratified remains negative at `-0.0000964991` primary net per day; Evolution
+train-top is positive at `0.0001778316`, versus random train-top
+`-0.0000236411`. The OOS evidence therefore supports train ranking/selection,
+not broad proposal-level Alpha.
+
+Evolution train-top collapses from 256 exact expressions to 221 canonical
+expressions and 161 behavior families, a `37.109%` behavior-duplicate rate. Its
+primary daily-path correlation participation-ratio effective rank is only
+`7.306`. The 97 `FLOW_INTENSITY_CONVICTION` candidates occur only in seed
+`359914106`; the other seed selects 128/128 `FUNDING_FLOW_CROWDING` candidates.
+Flow-intensity is the principal positive post-hoc mechanism contributor, while
+funding-flow is mixed and positive in only two of six OOS months. Deterministic
+equal-family and train-reward-champion sensitivities retain positive pooled
+policy direction, so duplicate weighting does not create the sign, but the low
+effective diversity and seed-mechanism confounding prevent a broad mechanism
+claim.
+
+The persisted OOS paths contain net, matched-increment, and control returns but
+not gross, turnover, cost-path, asset-weight, venue-concentration, or capacity
+paths. The single 181-day OOS window grades `WEAK` under the project bias-audit
+rule. Result: `HOLD_RESEARCH`; economic Alpha remains unestablished, every
+optimizer/search-arm authority remains NON_FORMAL or empty, and no additional
+sealed read or market evaluation occurred. Canonical audit evidence is
+`reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md` with its
+deterministic JSON companion.
 
 The preceding durable state remains:
 
@@ -720,7 +749,7 @@ further performance search or sealed replay is authorized by this plan.
 
 ## Qualified policy components
 
-The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. The frozen OOS replay provides positive pooled total-policy attribution and Q10 support, but no economic optimizer, search arm, or archive is formally qualified for a future Arena because the replay had no binary qualification or promotion authority. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
+The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. The frozen OOS replay provides positive pooled total-policy attribution and Q10 support, and the read-only bias audit supports ranking/selection value after deterministic behavior-family de-overlap. It does not establish broad mechanism Alpha: 256 Evolution train-top expressions collapse to 161 behavior families and about 7.3 effective primary path dimensions, while the strongest mechanism occurs in only one seed. No economic optimizer, search arm, or archive is formally qualified for a future Arena because the replay had no binary qualification or promotion authority. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
 
 ## Blockers
 
@@ -743,6 +772,14 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
   no-backfill candidate-local failure. It consumed the only OOS read and did not
   retrofit a binary qualification gate, formal authority, promotion, tuning,
   reseeding, rescue, or another Arena.
+- The V2.3 frozen-OOS read-only bias audit grades the single 181-day window
+  `WEAK`. Evolution train-top is absolutely positive, and behavior-family
+  de-overlap retains the pooled policy sign, but its 256 expressions contain
+  only 161 behavior families and about 7.3 effective primary path dimensions.
+  `FLOW_INTENSITY_CONVICTION` appears only in the first seed; the persisted OOS
+  paths omit gross, turnover, cost-path, asset-weight, venue, and capacity
+  contributions. Policy-ranking direction remains supported; broad mechanism
+  Alpha, cost robustness, concentration robustness, and promotion remain HOLD.
 - V1.4 failure decomposition: final-increment gross directionality exists frequently, but 96.10% of gross-positive rows are sign-killed after cost and only 0.25% of Stage-B rows are within one strict-distance unit of zero. This points first to target/execution and turnover economics, not a larger random or adaptive budget. Because standalone sleeves and monthly waterfalls were not persisted, the audit cannot distinguish A/B efficacy from AB/ABC incremental failure strongly enough to authorize a residual, gate, or regime-routing grammar.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - V1.4 target semantics are not a qualified execution contract. Binance order flow is evaluated against an availability-dependent non-Binance mark; 126/144 assets use more than one priority venue, and 0.205% of 1h plus 0.512% of 4h valid label endpoints cross venues. The generic 5 bps model is not tied to fees, slippage, mark-to-trade basis, or an executable instrument on those venues.

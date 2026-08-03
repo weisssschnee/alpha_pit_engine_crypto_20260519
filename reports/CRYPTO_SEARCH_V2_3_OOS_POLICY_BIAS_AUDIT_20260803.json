@@ -1,0 +1,639 @@
+{
+  "absolute_cohort_economics": {
+    "evolution_stratified": {
+      "cell_count": 4,
+      "equal_seed_horizon_matched_increment_mean": -0.0002118471584506788,
+      "equal_seed_horizon_primary_net_mean": -9.649911734899098e-05,
+      "positive_matched_cells": 0,
+      "positive_primary_cells": 2
+    },
+    "evolution_train_top": {
+      "cell_count": 4,
+      "equal_seed_horizon_matched_increment_mean": 0.00010845502427514666,
+      "equal_seed_horizon_primary_net_mean": 0.000177831559039277,
+      "positive_matched_cells": 3,
+      "positive_primary_cells": 4
+    },
+    "random_stratified": {
+      "cell_count": 4,
+      "equal_seed_horizon_matched_increment_mean": -0.00036877465123325254,
+      "equal_seed_horizon_primary_net_mean": -0.0002002647957559141,
+      "positive_matched_cells": 0,
+      "positive_primary_cells": 0
+    },
+    "random_train_top": {
+      "cell_count": 4,
+      "equal_seed_horizon_matched_increment_mean": -0.00011896730751428048,
+      "equal_seed_horizon_primary_net_mean": -2.3641126823159074e-05,
+      "positive_matched_cells": 0,
+      "positive_primary_cells": 2
+    }
+  },
+  "audit_id": "CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803",
+  "audit_role": "POST_HOC_READ_ONLY_EXISTING_LEDGER_NO_MARKET_EVALUATION",
+  "authority_boundary": {
+    "alpha_claim": "NOT_ESTABLISHED",
+    "decision": "HOLD_RESEARCH",
+    "new_search_or_holdout_read": "NOT_PERFORMED_AND_NOT_AUTHORIZED",
+    "optimizer_authority": "NON_FORMAL_UNCHANGED",
+    "policy_claim": "OOS_TOTAL_POLICY_DIRECTION_SUPPORTED",
+    "promotion": "FORBIDDEN_UNCHANGED"
+  },
+  "blocking_limitations": [
+    "The 181-day single OOS window is WEAK under the audit rule and does not establish multi-regime stability.",
+    "Evolution train-top contains 256 expressions but only 161 behavior families and a low correlation participation-ratio effective rank.",
+    "FLOW_INTENSITY_CONVICTION appears only in seed 359914106, so its mechanism result is not seed replicated.",
+    "The persisted OOS paths contain net, matched-increment, and control paths but no gross, turnover, cost-path, asset-weight, or venue-concentration paths; cost and concentration stress cannot be reconstructed without another market evaluation.",
+    "The aligned observed-archive universe is dynamically eligible but not a survivorship-complete exchange universe.",
+    "Mechanism and family reweighting results are post-hoc attribution only and cannot become a new qualification gate after the sealed read."
+  ],
+  "cohort_identity": {
+    "evolution_stratified": {
+      "behavior_duplicate_rate": 0.00390625,
+      "behavior_family_count": 255,
+      "candidate_count": 256,
+      "canonical_expression_count": 256,
+      "evaluated_count": 256,
+      "exact_expression_count": 256,
+      "mechanism_counts": {
+        "BASIS_FLOW_DISLOCATION": 1,
+        "BASIS_OI_CROWDING": 2,
+        "FLOW_INTENSITY_CONVICTION": 110,
+        "FLOW_PRICE_ABSORPTION": 1,
+        "FUNDING_FLOW_CROWDING": 137,
+        "LARGE_TRADE_OI_CROWDING": 1,
+        "OI_FLOW_CONFIRMATION_V2": 3,
+        "OI_PRICE_DIVERGENCE_V2": 1
+      }
+    },
+    "evolution_train_top": {
+      "behavior_duplicate_rate": 0.37109375,
+      "behavior_family_count": 161,
+      "candidate_count": 256,
+      "canonical_expression_count": 221,
+      "evaluated_count": 256,
+      "exact_expression_count": 256,
+      "mechanism_counts": {
+        "FLOW_INTENSITY_CONVICTION": 97,
+        "FUNDING_FLOW_CROWDING": 159
+      }
+    },
+    "random_stratified": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_family_count": 256,
+      "candidate_count": 256,
+      "canonical_expression_count": 256,
+      "evaluated_count": 256,
+      "exact_expression_count": 256,
+      "mechanism_counts": {
+        "BASIS_FLOW_DISLOCATION": 26,
+        "BASIS_OI_CROWDING": 5,
+        "CROSS_VENUE_OI_FLOW_DISAGREEMENT": 15,
+        "FLOW_INTENSITY_CONVICTION": 19,
+        "FLOW_PRICE_ABSORPTION": 36,
+        "FUNDING_FLOW_CROWDING": 27,
+        "LARGE_TRADE_OI_CROWDING": 6,
+        "LARGE_TRADE_PRICE_RESPONSE": 15,
+        "OI_ACTIVITY_EXPANSION": 27,
+        "OI_FLOW_CONFIRMATION_V2": 34,
+        "OI_NOTIONAL_PRICE_ABSORPTION": 14,
+        "OI_PRICE_DIVERGENCE_V2": 32
+      }
+    },
+    "random_train_top": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_family_count": 256,
+      "candidate_count": 256,
+      "canonical_expression_count": 256,
+      "evaluated_count": 255,
+      "exact_expression_count": 256,
+      "mechanism_counts": {
+        "BASIS_FLOW_DISLOCATION": 11,
+        "BASIS_OI_CROWDING": 9,
+        "CROSS_VENUE_OI_FLOW_DISAGREEMENT": 16,
+        "FLOW_INTENSITY_CONVICTION": 11,
+        "FLOW_PRICE_ABSORPTION": 22,
+        "FUNDING_FLOW_CROWDING": 97,
+        "LARGE_TRADE_OI_CROWDING": 21,
+        "LARGE_TRADE_PRICE_RESPONSE": 4,
+        "OI_ACTIVITY_EXPANSION": 11,
+        "OI_FLOW_CONFIRMATION_V2": 18,
+        "OI_NOTIONAL_PRICE_ABSORPTION": 6,
+        "OI_PRICE_DIVERGENCE_V2": 30
+      }
+    }
+  },
+  "evidence_grade": {
+    "grade": "WEAK",
+    "paired_daily_observations": 181,
+    "rule": "fewer than 250 daily observations",
+    "single_window": true,
+    "window_end_exclusive": "2026-07-01T00:00:00Z",
+    "window_start": "2026-01-01T00:00:00Z"
+  },
+  "evolution_train_top_concentration": {
+    "behavior_cells": [
+      {
+        "behavior_duplicate_rate": 0.34375,
+        "behavior_family_count": 42,
+        "candidate_count": 64,
+        "horizon_hours": 1,
+        "largest_family_member_count": 6,
+        "repeated_family_count": 15,
+        "seed": 359914106
+      },
+      {
+        "behavior_duplicate_rate": 0.390625,
+        "behavior_family_count": 39,
+        "candidate_count": 64,
+        "horizon_hours": 4,
+        "largest_family_member_count": 4,
+        "repeated_family_count": 15,
+        "seed": 359914106
+      },
+      {
+        "behavior_duplicate_rate": 0.171875,
+        "behavior_family_count": 53,
+        "candidate_count": 64,
+        "horizon_hours": 1,
+        "largest_family_member_count": 3,
+        "repeated_family_count": 9,
+        "seed": 1141399971
+      },
+      {
+        "behavior_duplicate_rate": 0.578125,
+        "behavior_family_count": 27,
+        "candidate_count": 64,
+        "horizon_hours": 4,
+        "largest_family_member_count": 6,
+        "repeated_family_count": 18,
+        "seed": 1141399971
+      }
+    ],
+    "behavior_duplicate_rate": 0.37109375,
+    "behavior_family_count": 161,
+    "candidate_count": 256,
+    "canonical_expression_count": 221,
+    "matched_path_correlation": {
+      "candidate_count": 256,
+      "correlation_participation_ratio_effective_rank": 11.007771189075953,
+      "median_pair_correlation": 0.0570408237602862,
+      "p90_pair_correlation": 0.3908759993968625,
+      "p95_pair_correlation": 0.6331732146209315,
+      "pair_count": 32640,
+      "pair_share_above_0_90": 0.03704044117647059,
+      "pair_share_above_0_95": 0.03458946078431373,
+      "top_eigenvalue_share": 0.24346302908964107
+    },
+    "mechanism_cells": [
+      {
+        "horizon_hours": 1,
+        "mechanism_counts": {
+          "FLOW_INTENSITY_CONVICTION": 51,
+          "FUNDING_FLOW_CROWDING": 13
+        },
+        "seed": 359914106
+      },
+      {
+        "horizon_hours": 4,
+        "mechanism_counts": {
+          "FLOW_INTENSITY_CONVICTION": 46,
+          "FUNDING_FLOW_CROWDING": 18
+        },
+        "seed": 359914106
+      },
+      {
+        "horizon_hours": 1,
+        "mechanism_counts": {
+          "FUNDING_FLOW_CROWDING": 64
+        },
+        "seed": 1141399971
+      },
+      {
+        "horizon_hours": 4,
+        "mechanism_counts": {
+          "FUNDING_FLOW_CROWDING": 64
+        },
+        "seed": 1141399971
+      }
+    ],
+    "mechanism_count": 2,
+    "mechanism_counts": {
+      "FLOW_INTENSITY_CONVICTION": 97,
+      "FUNDING_FLOW_CROWDING": 159
+    },
+    "primary_path_correlation": {
+      "candidate_count": 256,
+      "correlation_participation_ratio_effective_rank": 7.306390821425674,
+      "median_pair_correlation": 0.16747059699018602,
+      "p90_pair_correlation": 0.6337051002913503,
+      "p95_pair_correlation": 0.9912531001864252,
+      "pair_count": 32640,
+      "pair_share_above_0_90": 0.060355392156862746,
+      "pair_share_above_0_95": 0.056372549019607844,
+      "top_eigenvalue_share": 0.30841024657222
+    }
+  },
+  "formal_total_policy_effect": {
+    "matched_increment": {
+      "block_length_days": 7,
+      "bootstrap_quantiles": {
+        "q05": 0.0001635074603811533,
+        "q10": 0.00017546457472011667,
+        "q25": 0.00019930166343163936,
+        "q50": 0.00022500212683869403,
+        "q75": 0.000252346672173699,
+        "q90": 0.0002799405448773109,
+        "q95": 0.0002987067179197432
+      },
+      "bootstrap_seed": 3939288306,
+      "observed_mean_delta": 0.00022742233178942714,
+      "paired_day_count": 181,
+      "probability_positive": 1.0,
+      "replications": 4096
+    },
+    "primary_net": {
+      "block_length_days": 7,
+      "bootstrap_quantiles": {
+        "q05": 9.884118134765995e-05,
+        "q10": 0.00012159703252854882,
+        "q25": 0.000159025256261189,
+        "q50": 0.00020168622150214152,
+        "q75": 0.000245115760419353,
+        "q90": 0.00028477017171864424,
+        "q95": 0.0003076198936163477
+      },
+      "bootstrap_seed": 1162093488,
+      "observed_mean_delta": 0.00020147268586243608,
+      "paired_day_count": 181,
+      "probability_positive": 0.998291015625,
+      "replications": 4096
+    }
+  },
+  "input_integrity": {
+    "candidate_local_failure_count": 1,
+    "evaluated_candidate_count": 1023,
+    "holdout": {
+      "candidate_generation_allowed": false,
+      "end_exclusive": "2026-07-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "read_allowed": true,
+      "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+      "start": "2026-01-01T00:00:00Z"
+    },
+    "official_checker_classification": "OOS_TOTAL_POLICY_POSITIVE_DIRECTION_Q10_SUPPORTED",
+    "oos_ledger_sha256": "006D357CC43000BC4C2AC3DF2723CEED834D3E70B14C9996A5C877F79D06853D",
+    "oos_paths_sha256": "FECFC77D8D0845CD0E7B0CB0A4009ABFDE7A9282E0A47BB86EA6757564D8F34F",
+    "selection_candidate_count": 1024,
+    "source_sha": "3e593aaea93e9b521ba78d24186ad225e901eae7",
+    "train_ledger_sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+  },
+  "mechanism_attribution": {
+    "FLOW_INTENSITY_CONVICTION": {
+      "available_seed_horizon_cell_count": 2,
+      "candidate_count": 97,
+      "cells": [
+        {
+          "candidate_count": 51,
+          "control_net_mean": -5.863503234817335e-05,
+          "horizon_hours": 1,
+          "matched_increment_mean": 0.0004144044869981817,
+          "primary_net_mean": 0.0006961082068619287,
+          "seed": 359914106
+        },
+        {
+          "candidate_count": 46,
+          "control_net_mean": 4.640547131003267e-05,
+          "horizon_hours": 4,
+          "matched_increment_mean": 0.0001609138376555985,
+          "primary_net_mean": 0.00029581676840444285,
+          "seed": 359914106
+        }
+      ],
+      "matched_path_correlation": {
+        "candidate_count": 97,
+        "correlation_participation_ratio_effective_rank": 7.143320038494018,
+        "median_pair_correlation": 0.16986358403804191,
+        "p90_pair_correlation": 0.6015007172912238,
+        "p95_pair_correlation": 0.8690405180228886,
+        "pair_count": 4656,
+        "pair_share_above_0_90": 0.04338487972508591,
+        "pair_share_above_0_95": 0.027706185567010308,
+        "top_eigenvalue_share": 0.286320310744895
+      },
+      "month_count": 6,
+      "monthly_equal_available_cell_means": {
+        "2026-01": {
+          "control_net": 8.149605688410526e-05,
+          "matched_increment": 0.0003191661187057719,
+          "primary_net": 0.000579779493597377
+        },
+        "2026-02": {
+          "control_net": 0.000151307101795678,
+          "matched_increment": 0.00036978309998180945,
+          "primary_net": 0.0007301949472209788
+        },
+        "2026-03": {
+          "control_net": 0.00011030296461969613,
+          "matched_increment": -6.82114687981455e-05,
+          "primary_net": 7.059172471045537e-05
+        },
+        "2026-04": {
+          "control_net": -0.00022719503890589608,
+          "matched_increment": 0.00131870839552733,
+          "primary_net": 0.0014454574550916554
+        },
+        "2026-05": {
+          "control_net": 1.4531953630043334e-05,
+          "matched_increment": 0.00012950795673845238,
+          "primary_net": 0.0001117062302513838
+        },
+        "2026-06": {
+          "control_net": -0.00012188804501280289,
+          "matched_increment": 0.0004849539336538186,
+          "primary_net": 0.0006488477897704292
+        }
+      },
+      "positive_matched_month_count": 5,
+      "positive_primary_month_count": 6,
+      "primary_path_correlation": {
+        "candidate_count": 97,
+        "correlation_participation_ratio_effective_rank": 5.020955194335353,
+        "median_pair_correlation": 0.31457661489321875,
+        "p90_pair_correlation": 0.8317610165961413,
+        "p95_pair_correlation": 0.9437528645631365,
+        "pair_count": 4656,
+        "pair_share_above_0_90": 0.07066151202749141,
+        "pair_share_above_0_95": 0.046176975945017185,
+        "top_eigenvalue_share": 0.37799757028708736
+      },
+      "role": "POST_HOC_MECHANISM_ATTRIBUTION_NOT_FRESH_CONFIRMATION"
+    },
+    "FUNDING_FLOW_CROWDING": {
+      "available_seed_horizon_cell_count": 4,
+      "candidate_count": 159,
+      "cells": [
+        {
+          "candidate_count": 13,
+          "control_net_mean": -0.00011422266432542717,
+          "horizon_hours": 1,
+          "matched_increment_mean": 5.293125800184172e-05,
+          "primary_net_mean": -4.67582994554947e-05,
+          "seed": 359914106
+        },
+        {
+          "candidate_count": 18,
+          "control_net_mean": -6.696673046279357e-05,
+          "horizon_hours": 4,
+          "matched_increment_mean": -3.759279788247537e-06,
+          "primary_net_mean": -4.8975981946882494e-05,
+          "seed": 359914106
+        },
+        {
+          "candidate_count": 64,
+          "control_net_mean": 4.303391299399136e-05,
+          "horizon_hours": 1,
+          "matched_increment_mean": -5.1126028353951685e-05,
+          "primary_net_mean": 1.3743939211958393e-05,
+          "seed": 1141399971
+        },
+        {
+          "candidate_count": 64,
+          "control_net_mean": 4.325913825155905e-05,
+          "horizon_hours": 4,
+          "matched_increment_mean": 3.1516569335557534e-05,
+          "primary_net_mean": 8.132138772668945e-05,
+          "seed": 1141399971
+        }
+      ],
+      "matched_path_correlation": {
+        "candidate_count": 159,
+        "correlation_participation_ratio_effective_rank": 6.874314885196072,
+        "median_pair_correlation": 0.051755729353640784,
+        "p90_pair_correlation": 0.6272912749235698,
+        "p95_pair_correlation": 0.992671495368583,
+        "pair_count": 12561,
+        "pair_share_above_0_90": 0.08016877637130802,
+        "pair_share_above_0_95": 0.07961149590000796,
+        "top_eigenvalue_share": 0.32450213716540904
+      },
+      "month_count": 6,
+      "monthly_equal_available_cell_means": {
+        "2026-01": {
+          "control_net": -1.9538908810339448e-05,
+          "matched_increment": 0.0001502871989228159,
+          "primary_net": 0.00014858699208405526
+        },
+        "2026-02": {
+          "control_net": 3.543249704752495e-05,
+          "matched_increment": 3.7368720635269325e-05,
+          "primary_net": 7.914915199335075e-05
+        },
+        "2026-03": {
+          "control_net": -0.00011543987120736328,
+          "matched_increment": -9.078311961015993e-06,
+          "primary_net": -2.62330310938372e-05
+        },
+        "2026-04": {
+          "control_net": -2.4794554003198734e-05,
+          "matched_increment": -2.654378885269233e-05,
+          "primary_net": -0.00011674282197033778
+        },
+        "2026-05": {
+          "control_net": 1.9523020249003598e-05,
+          "matched_increment": -0.00010493370577071563,
+          "primary_net": -3.8079984764382966e-05
+        },
+        "2026-06": {
+          "control_net": -2.693406408417915e-05,
+          "matched_increment": -1.8448851814641318e-05,
+          "primary_net": -6.554560783514785e-05
+        }
+      },
+      "positive_matched_month_count": 2,
+      "positive_primary_month_count": 2,
+      "primary_path_correlation": {
+        "candidate_count": 159,
+        "correlation_participation_ratio_effective_rank": 4.299235355369065,
+        "median_pair_correlation": 0.21624676302822365,
+        "p90_pair_correlation": 0.9952747441835633,
+        "p95_pair_correlation": 0.998204257862125,
+        "pair_count": 12561,
+        "pair_share_above_0_90": 0.13064246477191307,
+        "pair_share_above_0_95": 0.12936868083751293,
+        "top_eigenvalue_share": 0.4368414640805113
+      },
+      "role": "POST_HOC_MECHANISM_ATTRIBUTION_NOT_FRESH_CONFIRMATION"
+    }
+  },
+  "post_hoc_behavior_deduplication_sensitivity": {
+    "equal_behavior_family_weighting": {
+      "cells": [
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": -1.6401786019580625e-05,
+          "right_matched_increment_mean": 0.00035655737922606496,
+          "right_primary_net_mean": 0.0006295173736243717,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 6.188308968714137e-05,
+          "right_matched_increment_mean": 0.00014869701545526016,
+          "right_primary_net_mean": 0.00026345745958005834,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": 3.817623069342728e-05,
+          "right_matched_increment_mean": -5.4327466366740104e-05,
+          "right_primary_net_mean": 8.382698931620351e-08,
+          "seed": 1141399971
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 4.351933299386064e-05,
+          "right_matched_increment_mean": 1.827707383946485e-05,
+          "right_primary_net_mean": 7.247335898644836e-05,
+          "seed": 1141399971
+        }
+      ],
+      "role": "POST_HOC_WEIGHTING_SENSITIVITY_NOT_QUALIFICATION",
+      "total_policy_minus_original_random_train_top": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_seed": 664631731,
+          "observed_mean": 0.00023626830805279292,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "q05": 0.00015303976100279176,
+          "q10": 0.00016886647157473582,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_seed": 2063742342,
+          "observed_mean": 0.00026502413161820775,
+          "paired_day_count": 181,
+          "probability_positive": 0.999755859375,
+          "q05": 0.00013667089954068614,
+          "q10": 0.00016419804749301563,
+          "replications": 4096
+        }
+      }
+    },
+    "original_candidate_weighting": {
+      "cells": [
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": -8.794684335520909e-05,
+          "right_matched_increment_mean": 0.00034510900324287024,
+          "right_primary_net_mean": 0.0004469120310904537,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 2.0546127945593423e-05,
+          "right_matched_increment_mean": 0.00011977451184901929,
+          "right_primary_net_mean": 0.00018279300221844382,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": 4.7553856827573726e-05,
+          "right_matched_increment_mean": -5.6089937187066624e-05,
+          "right_primary_net_mean": 1.5251698735248541e-06,
+          "seed": 1141399971
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 4.208868484984417e-05,
+          "right_matched_increment_mean": 2.502651919576374e-05,
+          "right_primary_net_mean": 8.009603297468562e-05,
+          "seed": 1141399971
+        }
+      ],
+      "role": "POST_HOC_WEIGHTING_SENSITIVITY_NOT_QUALIFICATION",
+      "total_policy_minus_original_random_train_top": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_seed": 2479271254,
+          "observed_mean": 0.00022742233178942714,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "q05": 0.0001635835502824466,
+          "q10": 0.0001776753282000905,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_seed": 1882203139,
+          "observed_mean": 0.00020147268586243608,
+          "paired_day_count": 181,
+          "probability_positive": 0.998291015625,
+          "q05": 9.388065533441284e-05,
+          "q10": 0.00011726210259178845,
+          "replications": 4096
+        }
+      }
+    },
+    "train_reward_champion_per_family": {
+      "cells": [
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": -1.3691022882553692e-05,
+          "right_matched_increment_mean": 0.00035405899833294797,
+          "right_primary_net_mean": 0.0006277861416357564,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 6.196111866694227e-05,
+          "right_matched_increment_mean": 0.0001488584863714872,
+          "right_primary_net_mean": 0.0002615460297112834,
+          "seed": 359914106
+        },
+        {
+          "horizon_hours": 1,
+          "right_control_net_mean": 3.817623069342728e-05,
+          "right_matched_increment_mean": -5.448083971401396e-05,
+          "right_primary_net_mean": -1.2080099505800705e-07,
+          "seed": 1141399971
+        },
+        {
+          "horizon_hours": 4,
+          "right_control_net_mean": 4.3134617377496406e-05,
+          "right_matched_increment_mean": 1.271690931050148e-05,
+          "right_primary_net_mean": 7.323260386719306e-05,
+          "seed": 1141399971
+        }
+      ],
+      "role": "POST_HOC_WEIGHTING_SENSITIVITY_NOT_QUALIFICATION",
+      "total_policy_minus_original_random_train_top": {
+        "matched_increment": {
+          "block_length_days": 7,
+          "bootstrap_seed": 3074927836,
+          "observed_mean": 0.00023425569608951112,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "q05": 0.0001496486845313552,
+          "q10": 0.00016599220313160722,
+          "replications": 4096
+        },
+        "primary_net": {
+          "block_length_days": 7,
+          "bootstrap_seed": 2647234255,
+          "observed_mean": 0.0002642521203779528,
+          "paired_day_count": 181,
+          "probability_positive": 1.0,
+          "q05": 0.0001387590843515371,
+          "q10": 0.00016404020585886092,
+          "replications": 4096
+        }
+      }
+    }
+  },
+  "required_next_action": "NO_NEW_SEARCH. Preserve policy-direction evidence and Alpha HOLD. Any future economic qualification requires separately authorized fresh data, preregistered family-deoverlap, absolute-zero benchmark, persisted OOS gross/turnover/cost/asset-weight paths, and multi-window evidence.",
+  "schema_version": 1
+}
