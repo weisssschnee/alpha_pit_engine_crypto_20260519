@@ -13301,10 +13301,14 @@ def _load_v23_oos_receipt(
     }
     if set(component_sources) != expected_component_names:
         blockers.append("component_sources.keys")
+    from alphafactory_crypto.broad_search.experiment_authority import (
+        _file_sha256 as source_file_sha256,
+    )
+
     for name, component in component_sources.items():
         item = dict(component)
         component_path = repo_root / str(item.get("path") or "")
-        if not component_path.is_file() or sha256_file(component_path) != str(
+        if not component_path.is_file() or source_file_sha256(component_path) != str(
             item.get("sha256") or ""
         ):
             blockers.append(f"component_sources.{name}")
