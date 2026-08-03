@@ -101,7 +101,7 @@
     },
     "oos_runtime": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "F0A98A0CAEE3510E9DE1FEBC10AF6D774C0EBC628876350AF70C0F847CACD63C"
+      "sha256": "DE1CEFE4AC44612A16C34CB6DCF4AF3BEB2CEBBF9EDAE07B6F14BDC32A4E5AC7"
     },
     "target_store": {
       "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",

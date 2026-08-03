@@ -11213,11 +11213,18 @@ def _require_bound_authority_preflight(
     )
 
     receipt_path = None
+    receipt_bound_authorization = None
     if economic_receipt_required:
         incoming_receipt = authority_preflight.get("economic_receipt")
         if not isinstance(incoming_receipt, Mapping):
             raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
         receipt_path = str(incoming_receipt.get("receipt_path") or "")
+    else:
+        incoming_authorization = authority_preflight.get(
+            "receipt_bound_non_formal_authorization"
+        )
+        if isinstance(incoming_authorization, Mapping):
+            receipt_bound_authorization = dict(incoming_authorization)
     verified = require_real_experiment_authority(
         repo_root,
         evidence_to_add=str(authority_preflight.get("evidence_to_add") or ""),
@@ -11226,6 +11233,9 @@ def _require_bound_authority_preflight(
         ),
         economic_receipt_required=economic_receipt_required,
         economic_receipt_path=receipt_path,
+        receipt_bound_non_formal_authorization=(
+            receipt_bound_authorization
+        ),
     )
     if verified != dict(authority_preflight):
         raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_CHANGED")

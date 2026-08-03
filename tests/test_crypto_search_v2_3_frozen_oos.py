@@ -11,6 +11,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _load_v23_oos_candidates,
     _load_v23_oos_receipt,
     _payload_sha,
+    _require_bound_authority_preflight,
     _restore_v23_oos_checkpoint,
     _v23_oos_aggregate,
     _write_v23_oos_checkpoint,
@@ -66,6 +67,11 @@ def test_receipt_authorizes_only_bound_non_formal_oos_preflight() -> None:
         "cost",
         "validation_role",
     }
+    assert _require_bound_authority_preflight(
+        REPO_ROOT,
+        result,
+        economic_receipt_required=False,
+    ) == result
 
 
 def test_pooled_oos_effect_reports_heterogeneity_without_all_cell_gate() -> None:
