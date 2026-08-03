@@ -1,0 +1,36 @@
+{
+  "archive_written": false,
+  "candidate_count": 512,
+  "candidate_generation_performed": false,
+  "carrier_cache_identity_sha256": "56C3F44FCF374ECB3A14927C32CA582F139FBA7C2A0F38CB083C151A47183CC8",
+  "carrier_manifest_sha256": "A709DF8F5E4ABE598DD88C89647CC27C76936FCD4F60A0961254719983D5429B",
+  "checkpoint_count": 8,
+  "checkpoint_size": 64,
+  "experiment_id": "crypto_search_engine_v2_4_fresh_family_gate",
+  "fresh_validation": {
+    "baseline_cost_bps": 5.0,
+    "cost_sensitivity_bps": [
+      5.0,
+      10.0
+    ],
+    "end_exclusive": "2026-07-18T00:00:00Z",
+    "execution_venue": "BINANCE_USD_M",
+    "role": "FRESH_DATA_VALIDATION_V2_4",
+    "start": "2026-07-01T00:00:00Z"
+  },
+  "frozen_contract_sha256": "FBF7A1648BBE6FE671CAA7D65804BAF17AC95DC822DF80D65C8423F2C7705316",
+  "optimizer_feedback_written": false,
+  "policy_memory_written": false,
+  "producer_source_sha": "83a38d56fc2b362aed65ba246ea3fbd7993dfc4a",
+  "promotion_authorized": false,
+  "run_receipt_file_sha256": "A843E5388DB584A86444C586377B87D90562717110A44AE91BEB9717D7283E0C",
+  "run_receipt_path": "config/crypto_search_engine_v2_4_fresh_gate_receipt.json",
+  "schema_version": 1,
+  "selection_cohort_sha256": "CB057272361B6D466D2841803C4B5CBFBCF6D85A8EA0CABC625F88BFBD4BFF0F",
+  "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+  "source_contract_path": "config/crypto_search_engine_v2_4_behavior_family.json",
+  "source_contract_sha256": "5FB665BFB6585691FD42BB4BE461C6FD73370223115CDE1D54FE7CFA54EE6E9D",
+  "target_cache_identity_sha256": "039A58D8661513AE02445F41C9E5983E0D4FA39BF355CD854CA895EC84848C15",
+  "workers_initial": 10,
+  "workers_memory_fallback": 8
+}

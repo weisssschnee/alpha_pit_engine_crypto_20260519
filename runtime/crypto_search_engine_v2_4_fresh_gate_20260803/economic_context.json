@@ -1,0 +1,221 @@
+{
+  "component_sha256": {
+    "aggregate_mechanism_knowledge": "2C83DAC8C8414D428D06C4DF8CC2D6ADDF0F48AE6C28D100D2081DA9E9E5F88D",
+    "campaign_contract": "5D1A63D1BCC87907E2C216D1ED614B404EE2C0A45DCA2C784391A8E615FF3A9D",
+    "direction": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9",
+    "expanded_mechanism_catalog": "DF7DF713592AA1A1F722B998D0A262C9F12F021E3F10B741C3451182EFC5A748",
+    "mechanism": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477",
+    "mechanism_mapping": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
+    "optimizer_reward_and_matched_attribution": "52E7297518FE157C3566E695067A4EFAC4F9470BE98D55F5D4462A2B5F2B177E",
+    "portfolio_mapping_and_cost": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036",
+    "runtime_binding": "640436C43AC6BD697542FE7EB5DDF7492CFE0F1D9E68A7AE5FD08BCBACEDDF54",
+    "target_contract": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+    "target_execution": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629",
+    "validation_kill_line": "7D0CBF661396885C85C5F389B8C894478B36A49587E06D9A6FC39BDE2E84041B"
+  },
+  "cost": {
+    "cost_bps": 5.0,
+    "initial_establishment_charged": true,
+    "model_id": "FULL_L1_FIXED_BPS"
+  },
+  "direction": {
+    "allowed_values": [
+      -1,
+      1
+    ],
+    "authority_symbol": "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation",
+    "fit_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+    "persist_in_candidate_ledger": true,
+    "rule": "TRAIN_FROZEN_SIGN_ORIENTATION"
+  },
+  "evidence_partition": {
+    "holdout": {
+      "end_exclusive": "2026-07-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "read_allowed": false,
+      "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+      "start": "2026-01-01T00:00:00Z"
+    },
+    "train": {
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "optimizer_feedback_allowed": true,
+      "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "start": "2025-08-29T07:00:00Z"
+    },
+    "validation": {
+      "candidate_generation_allowed": false,
+      "end_exclusive": "2026-07-18T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "role": "FRESH_DATA_VALIDATION_V2_4",
+      "start": "2026-07-01T00:00:00Z"
+    }
+  },
+  "execution": {
+    "authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+    "execution_delay_hours": 2,
+    "formula": "log(open_price[t+2+h] / open_price[t+2])",
+    "horizons_hours": [
+      1,
+      4
+    ],
+    "instrument_type": "LINEAR_PERPETUAL",
+    "missing_value_fill": null,
+    "partition_tail_purge_hours": 6,
+    "positive_price_required": true,
+    "price_field": "open_price",
+    "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+    "target_cache_identity_sha256": "039A58D8661513AE02445F41C9E5983E0D4FA39BF355CD854CA895EC84848C15",
+    "target_cache_path": ".cache/crypto_search_engine_v2_4/binance_open_target_20260701_20260718",
+    "target_store_symbol": "alphafactory_crypto.broad_search.replay_v14_binance_target.BinanceTargetStore",
+    "venue": "BINANCE_USD_M"
+  },
+  "formal_claims_authorized": false,
+  "holdout": {
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "read_allowed": false,
+    "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+    "start": "2026-01-01T00:00:00Z"
+  },
+  "market": {
+    "asset_class": "CRYPTO",
+    "calendar": "CONTINUOUS_UTC"
+  },
+  "mechanism": {
+    "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+    "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+    "economic_hypothesis_field": "hypothesis",
+    "mapping_adapter_symbol": "alphafactory_crypto.broad_search.compositional18m.mapping_id_for_mechanism_spec",
+    "mapping_authority_symbol": "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING",
+    "mapping_classes": [
+      "CROSS_SECTIONAL_RELATIVE",
+      "DIRECTIONAL_STATEFUL",
+      "SPARSE_EVENT_CARRY"
+    ],
+    "registry_symbol": "alphafactory_crypto.broad_search.compositional18m.compile_mechanism_catalog"
+  },
+  "optimizer_reward": {
+    "authority_id": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+    "authority_symbol": "alphafactory_crypto.broad_search.pair18m.SEARCH_REWARD_AUTHORITY",
+    "feedback_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+    "pair_reward_role": "MATCHED_ATTRIBUTION_DIAGNOSTIC_ONLY"
+  },
+  "portfolio": {
+    "mapping_authority_component": "explicit_portfolio_mapping",
+    "mapping_ids": [
+      "CROSS_SECTIONAL_ZERO_NET",
+      "TIME_SERIES_DIRECTIONAL_STATEFUL",
+      "SPARSE_EVENT_OR_CARRY"
+    ],
+    "mapping_symbol": "alphafactory_crypto.instrument_capability.mapping.DEFAULT_MAPPING_CONTRACTS",
+    "matched_roles": [
+      "PRIMARY_MINUS_LEFT_CONTROL",
+      "PRIMARY_MINUS_RIGHT_CONTROL",
+      "AB_MINUS_A",
+      "AB_MINUS_B",
+      "ABC_MINUS_AB"
+    ],
+    "primary_role": "STANDALONE_MAPPED_PORTFOLIO",
+    "shared_support_execution_horizon_cost": true
+  },
+  "receipt_path": "config/crypto_search_mechanism_v2_3_receipt.json",
+  "receipt_sha256": "A843E5388DB584A86444C586377B87D90562717110A44AE91BEB9717D7283E0C",
+  "result": "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+  "run_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "decision_id": "USER_AUTHORIZED_V24_FRESH_BEHAVIOR_FAMILY_GATE_20260803",
+    "parameter_tuning_allowed": false,
+    "rescue_rerun_allowed": false,
+    "scope": "ONE_FROZEN_512_FAMILY_FRESH_DATA_VALIDATION_GATE",
+    "seed_change_allowed": false
+  },
+  "run_authorized": true,
+  "run_outcome": {
+    "artifact_bundle_sha256": "A593CAB511326F30ABC426329E71F1451AD73250E5D4FEF4552CFD8F46AEDAF5",
+    "checkpoint": "checkpoint_validation",
+    "continuation_authorized": false,
+    "full_evolution_policy_pass": false,
+    "generation_attempts": 23869,
+    "producer_source_sha": "06512e01876345d9921d56405d8254a82933a9b7",
+    "proposal_distribution_qualified": false,
+    "reason": "FULL_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+    "rescue_rerun_started": false,
+    "runtime": "runtime/crypto_search_mechanism_v2_3_20260802",
+    "status": "PASS_SEARCH_ENGINE_V2_3_POLICY_ATTRIBUTION_GATE_NEGATIVE",
+    "strict_evaluated_count": 16000,
+    "train_ranker_qualified": false,
+    "validation_candidate_cohort_evaluated_count": 1024
+  },
+  "search_campaign": {
+    "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+    "carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "checkpoint_count": 10,
+    "checkpoint_size": 2000,
+    "field_count": 115,
+    "fresh_state": true,
+    "runner_campaign": "crypto_search_mechanism_v2_3",
+    "runtime_date": "20260802",
+    "seed_derivation": "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)",
+    "seed_set": [
+      359914106,
+      1141399971
+    ],
+    "strict_evaluated_target": 20000
+  },
+  "train": {
+    "end_exclusive": "2025-11-01T00:00:00Z",
+    "optimizer_feedback_allowed": true,
+    "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+    "start": "2025-08-29T07:00:00Z"
+  },
+  "validation": {
+    "candidate_generation_allowed": false,
+    "end_exclusive": "2026-07-18T00:00:00Z",
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "role": "FRESH_DATA_VALIDATION_V2_4",
+    "start": "2026-07-01T00:00:00Z"
+  },
+  "validation_kill_line": {
+    "absolute_kill_line_applies_to": "evolution_train_top",
+    "arm_aggregation": "SEED_HORIZON_COHORT_EQUAL_WEIGHT_WITH_PAIRED_DAILY_BLOCK_EFFECTS",
+    "authority_symbol": "alphafactory_crypto.broad_search.experiment_authority.evaluate_search_validation_kill_line",
+    "candidate_selection": "FOUR_DISJOINT_TWO_SEED_TRAIN_TOP_AND_ORDINAL_STRATIFIED_COHORTS",
+    "checkpoint_action": "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS",
+    "cohorts": [
+      "random_stratified",
+      "random_train_top",
+      "evolution_stratified",
+      "evolution_train_top"
+    ],
+    "continuation_action": "CONTINUE_SAME_FRESH_EVOLUTION_STATE_FOR_4000_STRICT",
+    "control_arm_id": "expanded_mechanism_random_v2_3",
+    "equal_matched_evaluated_count": true,
+    "evaluated_per_active_arm": 512,
+    "evaluated_per_arm_per_horizon": 64,
+    "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
+    "failed_arm_allocation": "NO_CONTINUATION_ALLOCATION",
+    "failure_action": "STOP_AT_16000_WITH_COMPLETED_RESULTS",
+    "minimum_evaluated_per_active_arm": 512,
+    "orchestration_campaign": "crypto_search_mechanism_v2_3",
+    "path_artifact": "validation_cohort_paths.parquet",
+    "random_control_survival_required": false,
+    "required_conditions": [
+      "evolution_train_top_absolute_kill_line_every_seed_horizon",
+      "proposal_distribution_primary_and_matched_paired_block_effect",
+      "train_ranker_primary_and_matched_paired_block_effect",
+      "total_policy_primary_and_matched_paired_block_effect"
+    ],
+    "required_horizons_hours": [
+      1,
+      4
+    ],
+    "runtime_symbol": "alphafactory_crypto.broad_search.search_engine_v1.run_v23_policy_attribution_validation",
+    "threshold_tuning_allowed": false,
+    "trigger_after_train_checkpoint_index": 7
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "candidate_count": 512,
+  "cell_counts": {
+    "expanded_mechanism_random_v2_4|1141399971|1": 64,
+    "expanded_mechanism_random_v2_4|1141399971|4": 64,
+    "expanded_mechanism_random_v2_4|359914106|1": 64,
+    "expanded_mechanism_random_v2_4|359914106|4": 64,
+    "mechanism_evolution_v2_4|1141399971|1": 64,
+    "mechanism_evolution_v2_4|1141399971|4": 64,
+    "mechanism_evolution_v2_4|359914106|1": 64,
+    "mechanism_evolution_v2_4|359914106|4": 64
+  },
+  "directory_bundle": {
+    "bundle_sha256": "B00D7669047A61E6A1127B3D4812035D435BA96EDA35C600C59872F1919E513C",
+    "bytes": 27313962,
+    "file_count": 122
+  },
+  "eligible_assets_per_hour_max": 136,
+  "eligible_assets_per_hour_min": 59,
+  "eligible_assets_per_hour_unique_counts": 70,
+  "eligible_coordinates": 39646,
+  "field_count": 115,
+  "field_origin_counts": {
+    "aggtrades": 44,
+    "oi_mark": 71
+  },
+  "fields_with_finite_support": 115,
+  "finite_values_outside_observed": 0,
+  "interval": {
+    "end_exclusive": "2026-07-18T00:00:00Z",
+    "start": "2026-07-01T00:00:00Z"
+  },
+  "manifest_sha256": "A709DF8F5E4ABE598DD88C89647CC27C76936FCD4F60A0961254719983D5429B",
+  "missing_value_fill": null,
+  "observed_coordinates": 39646,
+  "pit_lag_hours": 1,
+  "producer_source_sha": "83a38d56fc2b362aed65ba246ea3fbd7993dfc4a",
+  "schema_version": 1,
+  "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+  "shape": [
+    142,
+    408
+  ],
+  "status": "PASS_V24_ALIGNED_CARRIER_INDEPENDENT_VERIFICATION",
+  "target": {
+    "checks": {
+      "1": {
+        "finite_count": 34052,
+        "sha256_verified": 1
+      },
+      "4": {
+        "finite_count": 32386,
+        "sha256_verified": 1
+      }
+    },
+    "execution_delay_hours": 2,
+    "price_field": "open_price",
+    "venue": "BINANCE_USD_M"
+  }
+}

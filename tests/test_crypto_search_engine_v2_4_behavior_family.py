@@ -45,6 +45,94 @@ def test_v24_one_time_receipt_binds_exact_budget_and_fresh_interval() -> None:
     assert receipt["compute"]["minimum_pair_evaluated_per_hour"] == 128.0
 
 
+def test_v24_one_time_receipt_is_consumed_by_exact_blocked_outcome() -> None:
+    receipt = load_v24_run_receipt(REPO_ROOT, require_authorized=False)
+    assert receipt["status"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED"
+    )
+    assert receipt["run_authorized"] is False
+    assert receipt["outcome"] == {
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "producer_status": "V24_FRESH_GATE_FAILED_CANDIDATE_LOCAL",
+        "producer_source_sha": "83a38d56fc2b362aed65ba246ea3fbd7993dfc4a",
+        "runtime_path": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803",
+        "selection_receipt_sha256": (
+            "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48"
+        ),
+        "selected_candidate_count": 512,
+        "failure_candidate_id": (
+            "949A5E2EDAE1E2117B9C9E49C9ABCA229F7E080A429285D3A57D0FFFBAF40D37"
+        ),
+        "failure_reason": "ValueError:CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "strict_evaluated_count": 0,
+        "checkpoint_count": 0,
+        "workers": 10,
+        "memory_fallback_used": False,
+        "carrier_qualification": "PASS",
+        "carrier_field_count": 115,
+        "carrier_identity_sha256": (
+            "56C3F44FCF374ECB3A14927C32CA582F139FBA7C2A0F38CB083C151A47183CC8"
+        ),
+        "aligned_carrier_manifest_sha256": (
+            "A709DF8F5E4ABE598DD88C89647CC27C76936FCD4F60A0961254719983D5429B"
+        ),
+        "arm_qualified": [],
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "sealed_read_count": 0,
+        "oos": False,
+        "promotion_authorized": False,
+        "research_interpretation": (
+            "VALIDATION_CONSTRUCTIBILITY_BLOCK_ONLY_NOT_ALPHA_OR_CARRIER_NEGATIVE"
+        ),
+    }
+    with pytest.raises(RuntimeError, match="V24_RUN_RECEIPT_BLOCKED"):
+        load_v24_run_receipt(REPO_ROOT, require_authorized=True)
+
+
+def test_v24_terminal_artifacts_preserve_fail_closed_boundaries() -> None:
+    runtime_root = (
+        REPO_ROOT / "runtime" / "crypto_search_engine_v2_4_fresh_gate_20260803"
+    )
+    producer = json.loads((runtime_root / "producer_status.json").read_text())
+    decision = json.loads((runtime_root / "final_decision.json").read_text())
+    checker = json.loads(
+        (runtime_root / "independent_terminal_check.local.json").read_text()
+    )
+    assert producer["status"] == "V24_FRESH_GATE_FAILED_CANDIDATE_LOCAL"
+    assert decision["status"] == "ENGINE_VALIDATION_BLOCKED"
+    assert checker["status"] == "PASS_V24_TERMINAL_BLOCKED_INDEPENDENT_CHECK"
+    for artifact in (producer, decision, checker):
+        completed = artifact.get(
+            "strict_evaluated_count", artifact.get("completed_candidate_count")
+        )
+        assert completed == 0
+    assert decision["checkpoint_count"] == checker["checkpoint_count"] == 0
+    assert decision["arm_qualified"] == checker["arm_qualified"] == []
+    assert decision["sealed_read_count"] == checker["sealed_read_count"] == 0
+    assert decision["oos"] is checker["oos"] is False
+    assert decision["promotion_authorized"] is False
+    assert decision["next_search_started"] is False
+    manifest = json.loads((runtime_root / "run_manifest.json").read_text())
+    observed_files = []
+    for row in manifest["files"]:
+        payload = (runtime_root / row["path"]).read_bytes()
+        assert len(payload) == row["bytes"]
+        assert hashlib.sha256(payload).hexdigest().upper() == row["sha256"]
+        observed_files.append(row)
+    bundle_payload = json.dumps(
+        observed_files,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    assert hashlib.sha256(bundle_payload).hexdigest().upper() == (
+        manifest["artifact_bundle_sha256"]
+    )
+
+
 def test_v24_train_rows_map_only_frozen_v23_arms_without_changing_candidates() -> None:
     rows = [
         {

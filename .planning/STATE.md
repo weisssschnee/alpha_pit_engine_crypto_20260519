@@ -4,6 +4,34 @@ Last updated: 2026-08-03 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_4_ENGINE_VALIDATION_BLOCKED_CLOSED`
+
+The single authorized V2.4 fresh-family gate is consumed and closed. July
+aggTrades acquisition and independent TAR-content verification passed, and the
+new July 1-18 aligned carrier independently qualified with 115 fields (71
+OI/mark plus 44 aggTrades), a Binance USD-M target, dynamic eligibility,
+PIT/lag identities, and no missing-value fill. The selection receipt was
+frozen before fresh-data access with exactly 512 unique candidates, 64 in each
+of eight arm-seed-horizon cells.
+
+The unique 10-worker PC2 producer at
+`83a38d56fc2b362aed65ba246ea3fbd7993dfc4a` failed closed on frozen
+candidate ordinal 0 (`949A5E2E...40D37`) with
+`CONTROL_BEHAVIOR_EQUALS_PRIMARY`. It stopped before any strict evaluation or
+checkpoint: strict evaluated `0`, checkpoints `0`, memory fallback unused.
+Independent PC2 and local checkers both pass the blocked terminal state. No
+candidate was substituted or backfilled, and no generation, optimizer
+feedback, policy/archive memory, OOS read, promotion, tuning, reseed, rescue,
+or second search occurred. This is a validation-constructibility block only;
+it is not a negative conclusion about the carrier, fields, behavior families,
+or crypto Alpha space. No arm qualified.
+
+The one-time V2.4 receipt now has
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED` and
+`run_authorized=false`.
+
+The preceding source implementation record was:
+
 `CRYPTO_SEARCH_ENGINE_V2_4_SOURCE_GATE_IMPLEMENTED_RUN_NOT_AUTHORIZED`
 
 ADR 0022 is accepted and source commit

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "crypto_search_engine_v2_4_fresh_family_gate",
+  "status": "ENGINE_VALIDATION_BLOCKED",
+  "producer_source_sha": "83a38d56fc2b362aed65ba246ea3fbd7993dfc4a",
+  "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+  "selected_candidate_count": 512,
+  "strict_evaluated_count": 0,
+  "checkpoint_count": 0,
+  "artifact_bundle_sha256": "1AE3D46435545B7A6DB62E6B200AB58BD3E65CD6441E90629FFC7A43586C2883",
+  "files": [
+    {
+      "path": "behavior_family_selection_receipt.json",
+      "bytes": 287104,
+      "sha256": "904DB2F571E1C7B498A0F8FFFC69BBE791125985B1E915D890AC6CC6387744BC"
+    },
+    {
+      "path": "aligned_carrier_manifest.json",
+      "bytes": 31139,
+      "sha256": "40B2081F92C8DC4A3813DF4465EE3800980DCC5652135BB680EEA1B3932A132E"
+    },
+    {
+      "path": "economic_context.json",
+      "bytes": 9485,
+      "sha256": "7CD78ACD0322188F257E70CF480F57778995A99ED6ADFE42FA237DEBDE1B5864"
+    },
+    {
+      "path": "frozen_contract.json",
+      "bytes": 1703,
+      "sha256": "7F8DEBA259E295D41F8F0A82C892DE77AC6E85955357D554B039D1B324F10F72"
+    },
+    {
+      "path": "producer_status.json",
+      "bytes": 846,
+      "sha256": "6BA3AB77F3D56CF740A95E8DC7B942CBBBF23C39A554BEC1E1A8A38DD1F9B345"
+    },
+    {
+      "path": "carrier_independent_verification.json",
+      "bytes": 1879,
+      "sha256": "B8E06A9A504221A1CB0EF6FC7EDA2916E91A6649B3EAA14147C386B9FCDC53E4"
+    },
+    {
+      "path": "independent_terminal_check.json",
+      "bytes": 1781,
+      "sha256": "19C02EBF031E034D8AA6554B7073E39BF81B7A354A3D185B4DF5EC7ACC5C62B4"
+    },
+    {
+      "path": "independent_terminal_check.local.json",
+      "bytes": 1781,
+      "sha256": "19C02EBF031E034D8AA6554B7073E39BF81B7A354A3D185B4DF5EC7ACC5C62B4"
+    },
+    {
+      "path": "gate_launch_status.json",
+      "bytes": 507,
+      "sha256": "3E361205D3426D90466117A46B008CF05461BCDCEC91C1F37BF21C4F53E44942"
+    },
+    {
+      "path": "final_decision.json",
+      "bytes": 1524,
+      "sha256": "C06822C9D9383F00FD60D57045393AD3F246DF867E4B7894117041DF1AF786D2"
+    }
+  ],
+  "boundaries": {
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "policy_memory_written": false,
+    "archive_written": false,
+    "sealed_read_count": 0,
+    "oos": false,
+    "promotion_authorized": false,
+    "next_search_started": false
+  }
+}
