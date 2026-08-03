@@ -676,6 +676,8 @@
                                             "type":  "EVIDENCE",
                                             "rule":  "The consumed V2.3 frozen OOS replay supports positive pooled search-policy direction with positive Q10 under the frozen Binance target and 5 bps cost. The existing-ledger-only bias audit shows that proposal cohorts remain absolutely negative, Evolution train-top is absolutely positive, and behavior-family de-overlap retains the pooled sign; it also shows 256 top expressions collapse to 161 behavior families and about 7.3 effective primary path dimensions, while the strongest mechanism appears in only one seed. This is policy-ranking evidence, not broad mechanism Alpha. The single 181-day window is WEAK, OOS cost/turnover/asset-concentration paths were not persisted, ADR 0021 defined no binary qualification or promotion gate, and no Search Engine arm, optimizer, or archive is formally qualified for a future Arena. Economic Alpha remains HOLD; no subsequent search or sealed read is authorized.",
                                             "severity":  "HARD",
+                                            "enforced_by":  "ADR 0021, the consumed one-time OOS receipt, and scripts.crypto_search_v2_3_oos_policy_bias_audit",
+                                            "bypass_forbidden":  true,
                                             "evidence_ref":  "reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md"
                                         },
                                         {

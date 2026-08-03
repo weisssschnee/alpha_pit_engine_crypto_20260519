@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-03T04:41:38.034132+00:00",
+  "generated_at": "2026-08-03T06:17:22.060098+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2724,6 +2724,16 @@
         "scripts_crypto_latest_instrument_semantics_audit_source_evidence",
         "scripts_crypto_latest_instrument_semantics_audit_synthetic_values",
         "scripts_crypto_latest_instrument_semantics_audit_temporal_matrix",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_build_audit",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_cohort_paths",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_correlation_summary",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_family_reweighted_paths",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_main",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_mechanism_template",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_moving_block_bootstrap",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_policy_sensitivity",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_sha256",
         "tests_test_broad_search_expression",
         "tests_test_broad_search_expression_test_condition_gate_preserves_both_child_support",
         "tests_test_broad_search_expression_test_data_gate_does_not_promote_six_month_archive",
@@ -2731,6 +2741,9 @@
         "tests_test_broad_search_expression_test_flow_per_notional_is_lazy_and_matched_ablation_removes_interaction",
         "tests_test_broad_search_expression_test_trailing_scale_has_no_future_influence",
         "tests_test_broad_search_expression_test_unit_incompatible_add_is_rejected",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_effective_rank_detects_duplicates",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_helpers_are_deterministic",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_chain_gate_inventory",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_classify_occurrence",
@@ -2764,7 +2777,7 @@
       "required": false,
       "semantic_role": "experimental_broad_compositional_qualification",
       "validation": {
-        "checked_at": "2026-08-02T11:54:28.921848+00:00",
+        "checked_at": "2026-08-03T06:13:16.629500+00:00",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
         "evidence_sha256": "B8EA6C50B0D65482812791EC3731E08B0609A4E9C14858C1B8087E2125E40FD1",
         "level": "STATIC_VERIFIED",
@@ -3048,8 +3061,8 @@
       "claim_badges": [
         "V2.3 FROZEN OOS REPLAY COMPLETE",
         "1,023/1,024; ONE NO-BACKFILL FAILURE",
-        "POOLED TOTAL-POLICY DIRECTION SUPPORTED",
-        "PRIMARY AND MATCHED Q10 POSITIVE",
+        "POLICY-RANKING DIRECTION SUPPORTED",
+        "ECONOMIC ALPHA HOLD",
         "ONE SEALED READ CONSUMED",
         "NO PROMOTION"
       ],
@@ -3200,11 +3213,11 @@
           "type": "BOUNDARY"
         },
         {
-          "bypass_forbidden": false,
-          "enforced_by": "",
-          "evidence_ref": "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md",
+          "bypass_forbidden": true,
+          "enforced_by": "ADR 0021, the consumed one-time OOS receipt, and scripts.crypto_search_v2_3_oos_policy_bias_audit",
+          "evidence_ref": "reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md",
           "id": "policy_canary_claim_scope",
-          "rule": "The consumed V2.3 frozen OOS replay supports positive pooled total-policy direction with positive Q10 under the frozen Binance target and 5 bps cost, but ADR 0021 defined no binary qualification or promotion gate. No Search Engine arm, optimizer, or archive is therefore formally qualified for a future Arena, and no Alpha claim or subsequent search is authorized.",
+          "rule": "The consumed V2.3 frozen OOS replay supports positive pooled search-policy direction with positive Q10 under the frozen Binance target and 5 bps cost. The existing-ledger-only bias audit shows that proposal cohorts remain absolutely negative, Evolution train-top is absolutely positive, and behavior-family de-overlap retains the pooled sign; it also shows 256 top expressions collapse to 161 behavior families and about 7.3 effective primary path dimensions, while the strongest mechanism appears in only one seed. This is policy-ranking evidence, not broad mechanism Alpha. The single 181-day window is WEAK, OOS cost/turnover/asset-concentration paths were not persisted, ADR 0021 defined no binary qualification or promotion gate, and no Search Engine arm, optimizer, or archive is formally qualified for a future Arena. Economic Alpha remains HOLD; no subsequent search or sealed read is authorized.",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -3322,7 +3335,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (V2.3 frozen OOS total-policy direction supported; non-formal)",
+      "label": "Search Engine conditional-development campaigns (V2.3 OOS policy-ranking direction supported; economic Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3439,7 +3452,10 @@
         "runtime/crypto_search_v2_3_frozen_oos_20260803/run_manifest.json",
         "runtime/crypto_search_v2_3_frozen_oos_20260803/final_decision.json",
         "runtime/crypto_search_v2_3_frozen_oos_20260803/official_checker_result.json",
-        "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md"
+        "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md",
+        "scripts/crypto_search_v2_3_oos_policy_bias_audit.py",
+        "reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.json",
+        "reports/CRYPTO_SEARCH_V2_3_OOS_POLICY_BIAS_AUDIT_20260803.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -4586,6 +4602,18 @@
         "reports_crypto_search_surface_integration_v1_20260728_data_planes",
         "reports_crypto_search_v2_3_frozen_oos_20260803",
         "reports_crypto_search_v2_3_frozen_oos_20260803_crypto_search_v2_3_frozen_oos_replay_20260803",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_absolute_economics",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_authority_consequence",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_bias_audit",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_bias_findings",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_blocking_issues",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_crypto_search_v2_3_oos_policy_attribution_bias_audit",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_decision",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_diversity_and_dependence",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_flow_intensity_conviction",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_funding_flow_crowding",
+        "reports_crypto_search_v2_3_oos_policy_bias_audit_20260803_mechanism_attribution",
         "scripts_crypto_a7ad1_ranked_label_translation_audit",
         "scripts_crypto_a7ad1_ranked_label_translation_audit_main",
         "scripts_crypto_a7ad1_ranked_label_translation_audit_md_table",
@@ -5212,6 +5240,16 @@
         "scripts_crypto_latest_instrument_semantics_audit_source_evidence",
         "scripts_crypto_latest_instrument_semantics_audit_synthetic_values",
         "scripts_crypto_latest_instrument_semantics_audit_temporal_matrix",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_build_audit",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_cohort_paths",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_correlation_summary",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_family_reweighted_paths",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_main",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_mechanism_template",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_moving_block_bootstrap",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_policy_sensitivity",
+        "scripts_crypto_search_v2_3_oos_policy_bias_audit_sha256",
         "tests_test_crypto_data_admission_v1",
         "tests_test_crypto_data_admission_v1_test_daily_context_is_cross_sectionally_authoritative",
         "tests_test_crypto_data_admission_v1_test_hourly_schema2_cache_rebuilds_context_after_symbol_join",
@@ -5245,6 +5283,9 @@
         "tests_test_crypto_experiment_authority_test_validation_kill_line_is_pure_and_fail_closed",
         "tests_test_crypto_experiment_authority_test_validation_kill_line_stops_arm_and_writes_atomic_checkpoint",
         "tests_test_crypto_experiment_authority_write_current",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_effective_rank_detects_duplicates",
+        "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_helpers_are_deterministic",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_chain_gate_inventory",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_classify_occurrence",
@@ -5278,7 +5319,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-03T04:38:13.425665+00:00",
+        "checked_at": "2026-08-03T06:17:22.060098+00:00",
         "evidence_ref": "runtime/crypto_search_v2_3_frozen_oos_20260803/official_checker_result.json",
         "evidence_sha256": "274560465FFFAD0B57C276263386F09A51FA98D4983277AA9C7A7DDCBEB77754",
         "level": "STATIC_VERIFIED",
@@ -8139,7 +8180,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "C65B91B0FB8449E1D6D42032BCC1361DBCC2ED13D3692A1CAE7F60D2A38CF862"
+    "sha256": "16DD36801AB032F8CE98FE5C0910D3F78BE33042F1C7D3FC20FCEF45E067522E"
   },
   "profile_id": null,
   "profiles": [
@@ -8170,13 +8211,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "eaf3d3e003d005cd9875d7452922e8b86059f868",
-    "edge_count": 39441,
-    "node_count": 21245,
+    "built_at_commit": "98607fb7a659d502c603d7eab121db8194108837",
+    "edge_count": 39492,
+    "node_count": 21274,
     "path": ".planning/graphs/graph.json",
-    "sha256": "93CFEC18BEF8AA998DF11DCA11504ED56DD28821AB3F5EC980B0E4D21BF48557"
+    "sha256": "51F4BB1E509D6812E6878E6C40E7510BF2E729B5FA54130D7E01FAD310A35CB0"
   },
-  "repo_head": "eaf3d3e003d005cd9875d7452922e8b86059f868",
+  "repo_head": "98607fb7a659d502c603d7eab121db8194108837",
   "schema_version": 1,
   "semantic_authorities": [
     {
