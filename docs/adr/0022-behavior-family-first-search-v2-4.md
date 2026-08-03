@@ -37,8 +37,8 @@ cost projections. A single adapter must atomically write the family selection,
 selection receipt, hourly/daily sleeves, sparse positions, and hash manifest.
 It does not run a market evaluator or replace candidate economics.
 
-A future fresh-data gate must start at or after the prior holdout end
-(`2026-07-01T00:00:00Z`) or use an independently admitted new asset surface.
+A future V2.4 fresh-data gate must start at or after the prior holdout end
+(`2026-07-01T00:00:00Z`).
 The family selection is frozen before any read. Candidate generation,
 adaptation, policy/archive writes, tuning, and threshold changes are forbidden
 during the gate. Absolute zero, typed random, and frozen 5/10 bps cost

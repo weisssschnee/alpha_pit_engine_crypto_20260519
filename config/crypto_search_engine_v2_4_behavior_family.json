@@ -36,7 +36,7 @@
   },
   "fresh_data_gate": {
     "prior_holdout_end_exclusive": "2026-07-01T00:00:00Z",
-    "admission_rule": "START_AT_OR_AFTER_PRIOR_HOLDOUT_END_OR_INDEPENDENTLY_ADMITTED_NEW_ASSET_SURFACE",
+    "admission_rule": "START_AT_OR_AFTER_PRIOR_HOLDOUT_END",
     "candidate_generation_during_gate": false,
     "adaptive_feedback_during_gate": false,
     "policy_memory_write_during_gate": false,
@@ -47,7 +47,8 @@
     "run_requires_new_user_authorization": true
   },
   "gate_adapter": {
-    "symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.persist_v24_gate_bundle",
+    "selection_freeze_symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.freeze_v24_gate_selection",
+    "persistence_symbol": "alphafactory_crypto.broad_search.search_engine_v2_4.persist_v24_gate_bundle",
     "required_arms": [
       "expanded_mechanism_random_v2_4",
       "mechanism_evolution_v2_4"
@@ -59,6 +60,7 @@
   },
   "economic_path_artifacts": {
     "required": true,
+    "baseline_cost_bps": 5.0,
     "hourly_sleeve_path_fields": [
       "objective_mask",
       "gross",
@@ -98,11 +100,11 @@
   "component_sources": {
     "pair_evaluator": {
       "path": "alphafactory_crypto/broad_search/pair18m.py",
-      "sha256": "C110200E5BA06907B7653FDAAF0BDA309B95947147E6137F32BF207FFF9743BE"
+      "sha256": "647D9A88B931D4B58B999C5CA21A236463494B6B0BD16755FC2E61B5E97245CD"
     },
     "v24_adapter": {
       "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
-      "sha256": "89759E23AFFA24241D36E6EA82C19374826060C54D5B16FB7398FEF8D75FC37E"
+      "sha256": "2B77F9238F63DAA9FA2E257B2BDC2BCC8BA737E51FC9DBF06BF9BE5628512E07"
     }
   },
   "boundaries": {

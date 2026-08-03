@@ -14,6 +14,7 @@ import json
 import math
 import os
 import shutil
+import subprocess
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -55,6 +56,63 @@ def _file_sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest().upper()
+
+
+def _git_file_sha256(repo_root: Path, revision: str, path: str) -> str:
+    payload = subprocess.check_output(
+        ["git", "show", f"{revision}:{path}"], cwd=repo_root
+    )
+    return hashlib.sha256(payload).hexdigest().upper()
+
+
+def _candidate_spec_sha256(row: Mapping[str, Any]) -> str:
+    raw = row.get("candidate_spec_json")
+    if isinstance(raw, Mapping):
+        payload = dict(raw)
+    elif isinstance(raw, str) and raw:
+        payload = json.loads(raw)
+    else:
+        raise ValueError("V24_CANDIDATE_SPEC_MISSING")
+    if str(payload.get("candidate_id") or "") != str(row["candidate_id"]):
+        raise ValueError("V24_CANDIDATE_SPEC_IDENTITY_CHANGED")
+    return _canonical_sha256(payload)
+
+
+def _verify_producer_source(
+    repo_root: Path,
+    contract: Mapping[str, Any],
+    producer_source_sha: str,
+) -> str:
+    normalized = str(producer_source_sha).lower()
+    if (
+        len(normalized) != 40
+        or any(value not in "0123456789abcdef" for value in normalized)
+    ):
+        raise ValueError("V24_GATE_PRODUCER_SOURCE_SHA_INVALID")
+    try:
+        subprocess.check_call(
+            ["git", "cat-file", "-e", f"{normalized}^{{commit}}"],
+            cwd=repo_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        for binding in dict(contract["component_sources"]).values():
+            item = dict(binding)
+            if _git_file_sha256(
+                repo_root,
+                normalized,
+                str(item["path"]),
+            ) != str(item["sha256"]):
+                raise RuntimeError("V24_GATE_PRODUCER_COMPONENT_HASH_CHANGED")
+        if _git_file_sha256(
+            repo_root,
+            normalized,
+            V24_CONTRACT_PATH,
+        ) != _file_sha256(Path(repo_root) / V24_CONTRACT_PATH):
+            raise RuntimeError("V24_GATE_PRODUCER_CONTRACT_HASH_CHANGED")
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError("V24_GATE_PRODUCER_SOURCE_NOT_COMMITTED") from exc
+    return normalized
 
 
 def _family_key(row: Mapping[str, Any]) -> tuple[str, int, int, str]:
@@ -249,12 +307,27 @@ def build_economic_path_artifacts(
     arm: str,
     seed: int,
     horizon_hours: int,
+    candidate_spec_sha256: str,
 ) -> dict[str, list[dict[str, Any]]]:
     """Project pair18m paths to exact hourly, daily, and sparse asset rows."""
 
     payload = evaluation.get("_economic_paths")
     if not isinstance(payload, Mapping) or int(payload.get("schema_version", -1)) != 1:
         raise ValueError("V24_ECONOMIC_PATHS_MISSING")
+    if (
+        str(payload.get("candidate_id") or "")
+        != str(evaluation.get("candidate_id") or "")
+        or str(payload.get("candidate_spec_sha256") or "")
+        != str(candidate_spec_sha256)
+        or int(payload.get("horizon_hours", -1)) != int(horizon_hours)
+        or float(payload.get("cost_bps", float("nan"))) != 5.0
+        or str(payload.get("authority") or "")
+        != "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_PATH_PROJECTION_V1"
+        or not str(payload.get("economic_receipt_sha256") or "")
+        or str(payload.get("evaluation_partition") or "")
+        not in {"validation", "holdout"}
+    ):
+        raise ValueError("V24_ECONOMIC_PATH_IDENTITY_CHANGED")
     timestamps = np.asarray(payload["timestamp_ns"], dtype=np.int64)
     if timestamps.ndim != 1 or timestamps.size == 0:
         raise ValueError("V24_ECONOMIC_TIMESTAMPS_INVALID")
@@ -400,30 +473,35 @@ def _write_json(path: Path, payload: Any) -> None:
     )
 
 
-def persist_v24_gate_bundle(
+def freeze_v24_gate_selection(
     *,
     repo_root: Path,
-    output_root: Path,
+    receipt_path: Path,
     train_rows: Sequence[Mapping[str, Any]],
-    evaluations: Sequence[Mapping[str, Any]],
     expected_cells: Sequence[tuple[str, int, int]],
     per_cell_count: int,
     producer_source_sha: str,
+    evaluation_start: str,
+    evaluation_end_exclusive: str,
 ) -> dict[str, Any]:
-    """Atomically persist the only accepted V2.4 gate artifact bundle.
-
-    This adapter performs no market read or candidate evaluation.  It accepts
-    only already-frozen, family-first identities and evaluator-returned audit
-    paths, then fails closed on missing or extra evaluation identities.
-    """
+    """Freeze family champions and the fresh interval before any data read."""
 
     contract = load_v24_contract(repo_root)
-    normalized_source_sha = str(producer_source_sha).lower()
-    if (
-        len(normalized_source_sha) != 40
-        or any(value not in "0123456789abcdef" for value in normalized_source_sha)
-    ):
-        raise ValueError("V24_GATE_PRODUCER_SOURCE_SHA_INVALID")
+    normalized_source_sha = _verify_producer_source(
+        repo_root,
+        contract,
+        producer_source_sha,
+    )
+    start = np.datetime64(str(evaluation_start).replace("Z", ""), "ns")
+    end = np.datetime64(str(evaluation_end_exclusive).replace("Z", ""), "ns")
+    prior_end = np.datetime64(
+        str(contract["fresh_data_gate"]["prior_holdout_end_exclusive"]).replace(
+            "Z", ""
+        ),
+        "ns",
+    )
+    if start < prior_end or end <= start:
+        raise ValueError("V24_FRESH_DATA_INTERVAL_NOT_ADMITTED")
     selected, selection_receipt = select_behavior_family_cohort(
         train_rows,
         per_cell_count=per_cell_count,
@@ -432,6 +510,75 @@ def persist_v24_gate_bundle(
     required_arms = set(contract["gate_adapter"]["required_arms"])
     if {str(row["arm"]) for row in selected} != required_arms:
         raise RuntimeError("V24_GATE_REQUIRED_ARMS_CHANGED")
+    selection_projection = [
+        {
+            "candidate_id": str(row["candidate_id"]),
+            "candidate_spec_sha256": _candidate_spec_sha256(row),
+            "behavior_family_id": str(row["behavior_family_id"]),
+            "arm": str(row["arm"]),
+            "seed": int(row["seed"]),
+            "horizon_hours": int(row["horizon_hours"]),
+            "search_reward": float(row["search_reward"]),
+            "arm_completion_ordinal": int(row["arm_completion_ordinal"]),
+        }
+        for row in selected
+    ]
+    receipt = {
+        "schema_version": 1,
+        "status": "V24_SELECTION_FROZEN_BEFORE_DATA_READ",
+        "producer_source_sha": normalized_source_sha,
+        "contract_path": V24_CONTRACT_PATH,
+        "contract_sha256": _file_sha256(Path(repo_root) / V24_CONTRACT_PATH),
+        "evaluation_start": str(evaluation_start),
+        "evaluation_end_exclusive": str(evaluation_end_exclusive),
+        "fresh_data_admission": "AFTER_PRIOR_HOLDOUT_END",
+        "market_read_performed": False,
+        "candidate_generation_performed": False,
+        "adaptive_feedback_written": False,
+        "selection_receipt": selection_receipt,
+        "selected_candidates": selection_projection,
+    }
+    receipt["receipt_sha256"] = _canonical_sha256(receipt)
+    if receipt_path.exists():
+        raise FileExistsError(f"V24 selection receipt exists: {receipt_path}")
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = receipt_path.with_name(receipt_path.name + f".tmp-{os.getpid()}")
+    if temporary.exists():
+        raise FileExistsError(f"V24 selection temporary exists: {temporary}")
+    _write_json(temporary, receipt)
+    os.replace(temporary, receipt_path)
+    return receipt
+
+
+def persist_v24_gate_bundle(
+    *,
+    repo_root: Path,
+    output_root: Path,
+    selection_receipt_path: Path,
+    evaluations: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Persist paths only for an already-frozen, fresh-data selection."""
+
+    contract = load_v24_contract(repo_root)
+    selection_receipt = json.loads(
+        selection_receipt_path.read_text(encoding="utf-8")
+    )
+    receipt_hash = str(selection_receipt.pop("receipt_sha256", ""))
+    if (
+        selection_receipt.get("status")
+        != "V24_SELECTION_FROZEN_BEFORE_DATA_READ"
+        or _canonical_sha256(selection_receipt) != receipt_hash
+        or selection_receipt.get("market_read_performed") is not False
+        or selection_receipt.get("contract_sha256")
+        != _file_sha256(Path(repo_root) / V24_CONTRACT_PATH)
+    ):
+        raise RuntimeError("V24_SELECTION_RECEIPT_INVALID")
+    normalized_source_sha = _verify_producer_source(
+        repo_root,
+        contract,
+        str(selection_receipt["producer_source_sha"]),
+    )
+    selected = [dict(row) for row in selection_receipt["selected_candidates"]]
     selected_ids = {str(row["candidate_id"]) for row in selected}
     evaluation_lookup: dict[str, Mapping[str, Any]] = {}
     for evaluation in evaluations:
@@ -441,6 +588,23 @@ def persist_v24_gate_bundle(
         evaluation_lookup[candidate_id] = evaluation
     if set(evaluation_lookup) != selected_ids:
         raise RuntimeError("V24_GATE_EVALUATION_ID_SET_CHANGED")
+    start_ns = np.datetime64(
+        str(selection_receipt["evaluation_start"]).replace("Z", ""), "ns"
+    ).astype(np.int64)
+    end_ns = np.datetime64(
+        str(selection_receipt["evaluation_end_exclusive"]).replace("Z", ""),
+        "ns",
+    ).astype(np.int64)
+    for evaluation in evaluations:
+        paths = dict(evaluation.get("_economic_paths") or {})
+        timestamps = np.asarray(paths.get("timestamp_ns"), dtype=np.int64)
+        if (
+            timestamps.ndim != 1
+            or timestamps.size == 0
+            or int(timestamps.min()) < int(start_ns)
+            or int(timestamps.max()) >= int(end_ns)
+        ):
+            raise RuntimeError("V24_GATE_EVALUATION_OUTSIDE_FROZEN_INTERVAL")
     if output_root.exists():
         raise FileExistsError(f"V24 gate output already exists: {output_root}")
     temporary = output_root.with_name(
@@ -450,18 +614,7 @@ def persist_v24_gate_bundle(
         raise FileExistsError(f"V24 temporary output already exists: {temporary}")
     temporary.mkdir(parents=True)
     try:
-        selection_projection = [
-            {
-                "candidate_id": str(row["candidate_id"]),
-                "behavior_family_id": str(row["behavior_family_id"]),
-                "arm": str(row["arm"]),
-                "seed": int(row["seed"]),
-                "horizon_hours": int(row["horizon_hours"]),
-                "search_reward": float(row["search_reward"]),
-                "arm_completion_ordinal": int(row["arm_completion_ordinal"]),
-            }
-            for row in selected
-        ]
+        selection_projection = selected
         hourly_rows: list[dict[str, Any]] = []
         daily_rows: list[dict[str, Any]] = []
         position_rows: list[dict[str, Any]] = []
@@ -472,6 +625,7 @@ def persist_v24_gate_bundle(
                 arm=str(row["arm"]),
                 seed=int(row["seed"]),
                 horizon_hours=int(row["horizon_hours"]),
+                candidate_spec_sha256=str(row["candidate_spec_sha256"]),
             )
             hourly_rows.extend(projection["hourly_sleeves"])
             daily_rows.extend(projection["daily_sleeves"])
@@ -484,7 +638,7 @@ def persist_v24_gate_bundle(
         }
         _write_json(
             temporary / "behavior_family_selection_receipt.json",
-            selection_receipt,
+            {**selection_receipt, "receipt_sha256": receipt_hash},
         )
         for name, rows in artifacts.items():
             pd.DataFrame(rows).to_parquet(temporary / name, index=False)
@@ -513,8 +667,13 @@ def persist_v24_gate_bundle(
             "contract_sha256": _file_sha256(
                 Path(repo_root) / V24_CONTRACT_PATH
             ),
-            "selection_sha256": selection_receipt["cohort_sha256"],
+            "selection_receipt_sha256": receipt_hash,
+            "selection_sha256": selection_receipt["selection_receipt"][
+                "cohort_sha256"
+            ],
             "champion_selection_sha256": selection_receipt[
+                "selection_receipt"
+            ][
                 "champion_selection_sha256"
             ],
             "selected_behavior_family_count": len(selected),
@@ -546,14 +705,11 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
     if contract.get("run_authorized") is not False:
         blockers.append("run_authorized")
     selection = dict(contract.get("selection") or {})
-    if selection.get("unit") != "BEHAVIOR_FAMILY":
-        blockers.append("selection.unit")
-    if selection.get("family_key") != list(V24_FAMILY_KEY):
-        blockers.append("selection.family_key")
-    if selection.get("champion_order") != list(V24_CHAMPION_ORDER):
-        blockers.append("selection.champion_order")
     expected_selection = {
+        "unit": "BEHAVIOR_FAMILY",
+        "family_key": list(V24_FAMILY_KEY),
         "champion_authority": V24_SELECTION_AUTHORITY,
+        "champion_order": list(V24_CHAMPION_ORDER),
         "expression_count_weighting": False,
         "validation_feedback_allowed": False,
         "oos_feedback_allowed": False,
@@ -564,27 +720,40 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
             "FAIL_CLOSED_NO_DUPLICATE_FAMILY_BACKFILL"
         ),
     }
-    if any(selection.get(key) != value for key, value in expected_selection.items()):
-        blockers.append("selection.frozen_rules")
+    if selection != expected_selection:
+        blockers.append("selection")
+    evolution = dict(contract.get("evolution") or {})
+    expected_evolution = {
+        "population_unit": "EXISTING_BEHAVIOR_FAMILY_REWARD_CHAMPION",
+        "parent_order_primary": "TRAIN_SEARCH_REWARD",
+        "behavior_novelty_role": "DETERMINISTIC_TIE_BREAK_ONLY",
+        "existing_typed_mutation_receipts_reused": True,
+        "existing_compiler_reused": True,
+        "existing_ast_reused": True,
+        "existing_evaluator_reused": True,
+    }
+    if evolution != expected_evolution:
+        blockers.append("evolution")
     fresh = dict(contract.get("fresh_data_gate") or {})
-    if (
-        fresh.get("prior_holdout_end_exclusive")
-        != "2026-07-01T00:00:00Z"
-        or fresh.get("candidate_generation_during_gate") is not False
-        or fresh.get("adaptive_feedback_during_gate") is not False
-        or fresh.get("policy_memory_write_during_gate") is not False
-        or fresh.get("selection_frozen_before_read") is not True
-        or fresh.get("absolute_zero_benchmark_required") is not True
-        or fresh.get("typed_random_comparator_required") is not True
-        or fresh.get("cost_sensitivity_bps") != [5.0, 10.0]
-        or fresh.get("run_requires_new_user_authorization") is not True
-    ):
+    expected_fresh = {
+        "prior_holdout_end_exclusive": "2026-07-01T00:00:00Z",
+        "admission_rule": "START_AT_OR_AFTER_PRIOR_HOLDOUT_END",
+        "candidate_generation_during_gate": False,
+        "adaptive_feedback_during_gate": False,
+        "policy_memory_write_during_gate": False,
+        "selection_frozen_before_read": True,
+        "absolute_zero_benchmark_required": True,
+        "typed_random_comparator_required": True,
+        "cost_sensitivity_bps": [5.0, 10.0],
+        "run_requires_new_user_authorization": True,
+    }
+    if fresh != expected_fresh:
         blockers.append("fresh_data_gate")
     required_paths = dict(contract.get("economic_path_artifacts") or {})
-    if (
-        required_paths.get("required") is not True
-        or required_paths.get("hourly_sleeve_path_fields")
-        != [
+    expected_paths = {
+        "required": True,
+        "baseline_cost_bps": 5.0,
+        "hourly_sleeve_path_fields": [
             "objective_mask",
             "gross",
             "cost",
@@ -594,17 +763,38 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
             "net_5bps",
             "cost_10bps",
             "net_10bps",
-        ]
-        or required_paths.get("daily_sleeve_path_fields")
-        != ["gross", "cost", "turnover", "net"]
-        or required_paths.get("sparse_asset_path_fields")
-        != ["weight", "asset_gross_contribution"]
-        or required_paths.get("new_evaluator") is not False
-    ):
+        ],
+        "daily_sleeve_path_fields": ["gross", "cost", "turnover", "net"],
+        "sparse_asset_path_fields": ["weight", "asset_gross_contribution"],
+        "identity_fields": [
+            "candidate_id",
+            "cohort",
+            "arm",
+            "seed",
+            "horizon_hours",
+            "sleeve",
+            "execution_venue",
+            "asset_id",
+            "timestamp_ns",
+        ],
+        "pair_evaluator_authority": (
+            "alphafactory_crypto.broad_search.pair18m.evaluate_pair"
+        ),
+        "projection_symbol": (
+            "alphafactory_crypto.broad_search.search_engine_v2_4."
+            "build_economic_path_artifacts"
+        ),
+        "new_evaluator": False,
+    }
+    if required_paths != expected_paths:
         blockers.append("economic_path_artifacts")
     gate_adapter = dict(contract.get("gate_adapter") or {})
     expected_gate_adapter = {
-        "symbol": (
+        "selection_freeze_symbol": (
+            "alphafactory_crypto.broad_search.search_engine_v2_4."
+            "freeze_v24_gate_selection"
+        ),
+        "persistence_symbol": (
             "alphafactory_crypto.broad_search.search_engine_v2_4."
             "persist_v24_gate_bundle"
         ),

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import time
 from datetime import datetime, timedelta
@@ -1334,6 +1335,19 @@ def evaluate_pair(
         economic_paths = {
             "schema_version": 1,
             "authority": "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_PATH_PROJECTION_V1",
+            "candidate_id": candidate.candidate_id,
+            "candidate_spec_sha256": hashlib.sha256(
+                json.dumps(
+                    candidate.to_dict(),
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=True,
+                ).encode("utf-8")
+            ).hexdigest().upper(),
+            "economic_receipt_sha256": str(
+                (economic_receipt or {}).get("receipt_sha256") or ""
+            ),
+            "evaluation_partition": evaluation_partition,
             "execution_venue": execution_venue,
             "asset_ids": list(asset_ids),
             "timestamp_ns": np.asarray(timestamp_ns, dtype=np.int64).copy(),

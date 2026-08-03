@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import hashlib
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -9,6 +11,7 @@ import pytest
 
 from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     build_economic_path_artifacts,
+    freeze_v24_gate_selection,
     load_v24_contract,
     persist_v24_gate_bundle,
     select_behavior_family_cohort,
@@ -144,9 +147,16 @@ def test_complete_economic_paths_project_to_daily_and_sparse_asset_tables() -> N
         "candidate_id": "candidate-1",
         "_economic_paths": {
             "schema_version": 1,
+            "authority": "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_PATH_PROJECTION_V1",
+            "candidate_id": "candidate-1",
+            "candidate_spec_sha256": "C" * 64,
+            "economic_receipt_sha256": "E" * 64,
+            "evaluation_partition": "validation",
             "execution_venue": "BINANCE_USD_M",
             "asset_ids": ["BTCUSDT", "ETHUSDT"],
             "timestamp_ns": timestamps,
+            "horizon_hours": 1,
+            "cost_bps": 5.0,
             "sleeves": {
                 "primary": {
                     "weights": weights,
@@ -166,6 +176,7 @@ def test_complete_economic_paths_project_to_daily_and_sparse_asset_tables() -> N
         arm="mechanism_evolution_v2_4",
         seed=11,
         horizon_hours=1,
+        candidate_spec_sha256="C" * 64,
     )
     hourly = artifacts["hourly_sleeves"]
     daily = artifacts["daily_sleeves"]
@@ -186,7 +197,6 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
     tmp_path: Path,
 ) -> None:
     train_rows = []
-    evaluations = []
     timestamps = (
         np.datetime64("2026-07-01T00:00:00", "ns").astype(np.int64)
         + np.arange(4, dtype=np.int64) * 3_600_000_000_000
@@ -204,8 +214,50 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
                 "horizon_hours": 1,
                 "search_reward": float(arm_index),
                 "arm_completion_ordinal": 1,
+                "candidate_spec_json": json.dumps(
+                    {
+                        "candidate_id": candidate_id,
+                        "horizon_hours": 1,
+                        "arm": arm,
+                    },
+                    sort_keys=True,
+                ),
             }
         )
+    producer_source_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
+    ).strip()
+    selection_receipt_path = tmp_path / "selection_receipt.json"
+    freeze_v24_gate_selection(
+        repo_root=REPO_ROOT,
+        receipt_path=selection_receipt_path,
+        train_rows=train_rows,
+        expected_cells=(
+            ("expanded_mechanism_random_v2_4", 11, 1),
+            ("mechanism_evolution_v2_4", 11, 1),
+        ),
+        per_cell_count=1,
+        producer_source_sha=producer_source_sha,
+        evaluation_start="2026-07-01T00:00:00Z",
+        evaluation_end_exclusive="2026-07-02T00:00:00Z",
+    )
+    evaluations = []
+    for arm_index, arm in enumerate(
+        ("expanded_mechanism_random_v2_4", "mechanism_evolution_v2_4")
+    ):
+        candidate_id = f"candidate-{arm_index}"
+        candidate_spec_sha256 = hashlib.sha256(
+            json.dumps(
+                {
+                    "candidate_id": candidate_id,
+                    "horizon_hours": 1,
+                    "arm": arm,
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ).encode("utf-8")
+        ).hexdigest().upper()
         weights = np.full((1, 4), 0.5, dtype=float)
         gross_by_asset = weights * 0.001
         gross = gross_by_asset.sum(axis=0)
@@ -216,10 +268,20 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
                 "candidate_id": candidate_id,
                 "_economic_paths": {
                     "schema_version": 1,
+                    "authority": (
+                        "PAIR18M_EXISTING_MAPPING_COST_EVALUATOR_"
+                        "PATH_PROJECTION_V1"
+                    ),
+                    "candidate_id": candidate_id,
+                    "candidate_spec_sha256": candidate_spec_sha256,
+                    "economic_receipt_sha256": "E" * 64,
+                    "evaluation_partition": "validation",
                     "execution_venue": "BINANCE_USD_M",
                     "asset_ids": ["BTCUSDT"],
                     "timestamp_ns": timestamps,
                     "raw_fields": ["volume_imbalance"],
+                    "horizon_hours": 1,
+                    "cost_bps": 5.0,
                     "sleeves": {
                         "primary": {
                             "weights": weights,
@@ -238,14 +300,8 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
     manifest = persist_v24_gate_bundle(
         repo_root=REPO_ROOT,
         output_root=output,
-        train_rows=train_rows,
+        selection_receipt_path=selection_receipt_path,
         evaluations=evaluations,
-        expected_cells=(
-            ("expanded_mechanism_random_v2_4", 11, 1),
-            ("mechanism_evolution_v2_4", 11, 1),
-        ),
-        per_cell_count=1,
-        producer_source_sha="a" * 40,
     )
     assert manifest["status"] == "V24_GATE_BUNDLE_COMPLETE"
     assert manifest["selected_behavior_family_count"] == 2
