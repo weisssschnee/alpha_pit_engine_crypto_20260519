@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.3 frozen 1,024-candidate OOS replay authorized once; non-formal)",
+                      "label":  "Search Engine conditional-development campaigns (V2.3 frozen OOS total-policy direction supported; non-formal)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -509,6 +509,10 @@
                                     ,"reports/CRYPTO_SEARCH_MECHANISM_V2_3_20260802.md"
                                     ,"config/crypto_search_v2_3_frozen_oos_receipt.json"
                                     ,"docs/adr/0021-v2-3-frozen-cohort-oos-replay.md"
+                                    ,"runtime/crypto_search_v2_3_frozen_oos_20260803/run_manifest.json"
+                                    ,"runtime/crypto_search_v2_3_frozen_oos_20260803/final_decision.json"
+                                    ,"runtime/crypto_search_v2_3_frozen_oos_20260803/official_checker_result.json"
+                                    ,"reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -516,8 +520,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_v2_3_frozen_oos_receipt.json",
                                         "repo_ref":  "experiment/crypto-search-v2-3-frozen-oos-20260803",
-                                        "verified_sha":  "45dd14c612c7d97d23d2c094eb2a96dbb84d0d59",
-                                        "sha256":  "D1B98D39907C8C3D0B0D9B2AD5FBA5BCD43BC45F069865F4E340574F38572F51"
+                                        "verified_sha":  "eaf3d3e003d005cd9875d7452922e8b86059f868",
+                                        "sha256":  "BA67D2B5901A2AFB2A5B478289AFE4536B978A3E56D3338FE3D51851860D3D53"
                                     },
                       "contracts":  [
                                         {
@@ -559,11 +563,11 @@
                                         {
                                             "id":  "crypto_search_v2_3_frozen_oos_authorization",
                                             "type":  "AUTHORITY",
-                                            "rule":  "Current user instruction plus accepted ADR 0021 authorize exactly one read-only OOS replay of all 1,024 already frozen V2.3 validation-cohort identities on the 2026-01-01 through 2026-07-01 holdout. Train orientation, limiting matched component, target, mapping, cost, seeds, horizons, and cohort membership are frozen. No candidate generation, validation-performance selection, optimizer or archive feedback, tuning, reseed, rescue rerun, challenge, recent, May-stress, forward, or promotion is authorized. The primary estimand is the pooled equal-weight total-policy daily effect; seed-by-horizon cells are heterogeneity diagnostics rather than kill gates.",
+                                            "rule":  "ADR 0021's one read-only OOS authorization is consumed and run_authorized is false. Producer 3e593aaea93e9b521ba78d24186ad225e901eae7 replayed all 1,024 frozen V2.3 validation-cohort identities on the 2026-01-01 through 2026-07-01 holdout, completed 1,023, persisted one candidate-local failure without backfill, wrote 16 restore-verified checkpoints, and performed exactly one sealed read. The pooled equal-weight total-policy primary-net delta was 0.000201472686 with P(delta>0)=0.9983 and positive Q10; matched-increment delta was 0.000227422332 with P(delta>0)=1.0 and positive Q10. This is conditional non-formal OOS policy-attribution evidence under the frozen Binance USD-M target and 5 bps cost, not a binary qualification gate, Alpha claim, optimizer authority, or promotion. No second read, candidate generation, feedback, tuning, reseed, rescue, challenge, recent, May-stress, forward, promotion, or new search is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v1 run-oos-v2-3/check-oos-v2-3, broad_search.pair18m.evaluate_pair, the hash-bound one-time receipt, and ADR 0021",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_v2_3_frozen_oos_receipt.json"
+                                            "evidence_ref":  "runtime/crypto_search_v2_3_frozen_oos_20260803/final_decision.json"
                                         },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
@@ -658,18 +662,18 @@
                                         {
                                             "id":  "policy_canary_sealed_boundary",
                                             "type":  "BOUNDARY",
-                                            "rule":  "Search Engine campaigns use only their explicitly frozen surface with campaign-local per-run memory. The sole sealed-read exception is the receipt-bound V2.3 frozen 1,024-candidate OOS replay authorized by ADR 0021; every other sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive-memory access remains forbidden.",
+                                            "rule":  "Search Engine campaigns use only their explicitly frozen surface with campaign-local per-run memory. ADR 0021's sole sealed-read exception has been consumed after one V2.3 frozen 1,024-candidate OOS replay. Every further sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive-memory access remains forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v1 frozen loaders, check_engine, check_canary, check_v11, check_v12, check_v13, and check_v14",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "runtime/crypto_search_engine_v1_4_oi_flow_20260728/frozen_contract.json"
+                                            "evidence_ref":  "config/crypto_search_v2_3_frozen_oos_receipt.json"
                                         },
                                         {
                                             "id":  "policy_canary_claim_scope",
                                             "type":  "EVIDENCE",
-                                            "rule":  "No Search Engine campaign currently qualifies an arm or archive for a future Arena; V1.4 qualified the OI/flow carrier and hierarchical execution path but found zero matched positives in its frozen typed-random semantic gate, so CEM and Evolution Stage C did not run",
+                                            "rule":  "The consumed V2.3 frozen OOS replay supports positive pooled total-policy direction with positive Q10 under the frozen Binance target and 5 bps cost, but ADR 0021 defined no binary qualification or promotion gate. No Search Engine arm, optimizer, or archive is therefore formally qualified for a future Arena, and no Alpha claim or subsequent search is authorized.",
                                             "severity":  "HARD",
-                                            "evidence_ref":  "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md"
+                                            "evidence_ref":  "reports/CRYPTO_SEARCH_V2_3_FROZEN_OOS_20260803.md"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
@@ -784,16 +788,16 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "runtime/crypto_search_mechanism_v2_3_20260802/official_checker_result.json",
-                                          "evidence_sha256":  "1F96839CDCFC867505FFEFC311FA13052BC3775D89B6F893553CA77951947400",
-                                          "verified_at_sha":  "5e1ec9a65cc024a0a010eea99d01aaae2d13159b"
+                                          "evidence_ref":  "runtime/crypto_search_v2_3_frozen_oos_20260803/official_checker_result.json",
+                                          "evidence_sha256":  "274560465FFFAD0B57C276263386F09A51FA98D4983277AA9C7A7DDCBEB77754",
+                                          "verified_at_sha":  "eaf3d3e003d005cd9875d7452922e8b86059f868"
                                      },
                       "claim_badges":  [
-                                           "V2.3 16K TRAIN COMPLETE",
-                                           "V2.3 1,024 FOUR-COHORT VALIDATION COMPLETE",
-                                           "FROZEN OOS REPLAY AUTHORIZED ONCE",
-                                           "ALL-CELL GATE NOT USED AS OOS VETO",
-                                           "NON-FORMAL ATTRIBUTION ONLY",
+                                           "V2.3 FROZEN OOS REPLAY COMPLETE",
+                                           "1,023/1,024; ONE NO-BACKFILL FAILURE",
+                                           "POOLED TOTAL-POLICY DIRECTION SUPPORTED",
+                                           "PRIMARY AND MATCHED Q10 POSITIVE",
+                                           "ONE SEALED READ CONSUMED",
                                            "NO PROMOTION"
                                        ],
                       "promotion_requirements":  [
