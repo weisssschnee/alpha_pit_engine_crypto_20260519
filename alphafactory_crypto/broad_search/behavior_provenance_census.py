@@ -155,8 +155,11 @@ def _verify_consumer_components(repo_root: Path) -> tuple[str, dict[str, str]]:
     blobs: dict[str, str] = {}
     for relative in CONSUMER_COMPONENT_PATHS:
         committed = _git_blob_sha256(repo_root, source_sha, relative)
-        observed = _file_sha256(repo_root / relative)
-        if committed != observed:
+        if subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", relative],
+            cwd=repo_root,
+            check=False,
+        ).returncode != 0:
             raise ValueError(f"CONSUMER_COMPONENT_NOT_COMMITTED:{relative}")
         blobs[relative] = committed
     return source_sha, blobs
