@@ -68,9 +68,16 @@ PAIR_SCALES: Mapping[str, float] = {
 class ControlBehaviorDegeneracyError(ValueError):
     """Preserve the existing kill-line while carrying outcome-free attribution."""
 
-    def __init__(self, reason: str, provenance: Mapping[str, Any]) -> None:
+    def __init__(
+        self,
+        reason: str,
+        provenance: Mapping[str, Any],
+        *,
+        evidence: Mapping[str, Any] | None = None,
+    ) -> None:
         super().__init__(str(reason))
         self.provenance = dict(provenance)
+        self.evidence = dict(evidence or {})
 
 
 def _array_sha(values: np.ndarray) -> str:
@@ -244,6 +251,19 @@ def control_degeneracy_provenance(
             if all(equalities[index:]):
                 first_equal_stage = stage
                 break
+    first_divergent_stage = next(
+        (stage for stage, equal in zip(stage_order, equalities) if not equal),
+        None,
+    )
+    first_reconverged_stage = (
+        first_equal_stage if first_divergent_stage is not None else None
+    )
+    finite = np.isfinite(left) & np.isfinite(right)
+    signal_difference_fraction = (
+        float(np.count_nonzero(left[finite] != right[finite]) / np.count_nonzero(finite))
+        if np.count_nonzero(finite)
+        else None
+    )
     payload: dict[str, Any] = {
         "schema_version": "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1",
         "primary_label": str(primary_label),
@@ -252,7 +272,11 @@ def control_degeneracy_provenance(
         "stage_order": stage_order,
         "stages": stages,
         "first_equal_stage": first_equal_stage,
+        "first_divergent_stage": first_divergent_stage,
+        "first_reconverged_stage": first_reconverged_stage,
+        "signal_difference_fraction": signal_difference_fraction,
         "final_weight_equal": final_equal,
+        "final_behavior_equal": final_equal,
         "primary_mapping_provenance_sha256": str(
             left_trace["provenance_sha256"]
         ),
@@ -283,6 +307,89 @@ def control_degeneracy_provenance(
         ensure_ascii=True,
     ).encode("utf-8")
     payload["provenance_sha256"] = hashlib.sha256(encoded).hexdigest().upper()
+    return payload
+
+
+def mechanism_realization_provenance(
+    *,
+    candidate: CandidateSpec,
+    hierarchical_three_axis: bool,
+    control_provenance: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Describe which declared mechanism axes changed outcome-free signal behavior."""
+
+    comparisons = dict(control_provenance.get("comparisons") or {})
+
+    def axis(axis_id: str, comparison_id: str) -> dict[str, Any]:
+        comparison = dict(comparisons.get(comparison_id) or {})
+        signal = dict(dict(comparison.get("stages") or {}).get("SIGNAL") or {})
+        if type(signal.get("equal")) is not bool:
+            raise ValueError("MECHANISM_REALIZATION_SIGNAL_COMPARISON_MISSING")
+        return {
+            "axis_id": axis_id,
+            "evidence_comparison": comparison_id,
+            "active": not bool(signal["equal"]),
+            "signal_difference_fraction": comparison.get(
+                "signal_difference_fraction"
+            ),
+        }
+
+    if hierarchical_three_axis:
+        axes = [
+            axis("A", "ab_vs_interaction_right_control"),
+            axis("B", "ab_vs_interaction_left_control"),
+            axis("C", "primary_vs_left_control"),
+        ]
+        condition_effect_rate = axes[-1]["signal_difference_fraction"]
+    else:
+        axes = [
+            axis("A", "primary_vs_right_control"),
+            axis("B", "primary_vs_left_control"),
+        ]
+        condition_effect_rate = None
+    active_axis_count = sum(bool(item["active"]) for item in axes)
+    declared_axis_count = len(axes)
+    status = (
+        "ALL_DECLARED_AXES_ACTIVE"
+        if active_axis_count == declared_axis_count
+        else "NO_DECLARED_AXIS_ACTIVE"
+        if active_axis_count == 0
+        else "PARTIAL_DECLARED_AXES_ACTIVE"
+    )
+    payload: dict[str, Any] = {
+        "schema_version": "CRYPTO_MECHANISM_REALIZATION_PROVENANCE_V1",
+        "candidate_id": candidate.candidate_id,
+        "mechanism_family": candidate.mechanism_family,
+        "skeleton_id": candidate.skeleton_id,
+        "operator_path": candidate.operator_path,
+        "hierarchical_three_axis": bool(hierarchical_three_axis),
+        "declared_axis_count": declared_axis_count,
+        "active_axis_count": active_axis_count,
+        "axes": axes,
+        "condition_effect_rate": condition_effect_rate,
+        "status": status,
+        "authority": (
+            "OUTCOME_FREE_SIGNAL_ABLATION_COMPARISONS_ON_SHARED_SUPPORT_MAPPING_"
+            "HORIZON_AND_EXECUTION"
+        ),
+        "identity_excludes": [
+            "target",
+            "target_ic",
+            "gross",
+            "net",
+            "turnover",
+            "cost",
+            "reward",
+        ],
+    }
+    payload["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("ascii")
+    ).hexdigest().upper()
     return payload
 
 
@@ -1362,6 +1469,17 @@ def evaluate_pair(
                     control_label="interaction_left_control",
                 )
             )
+            comparisons["ab_vs_interaction_right_control"] = (
+                control_degeneracy_provenance(
+                    primary_signal=control_signal,
+                    control_signal=right_control_signal,
+                    primary_mapping=control_mapped,
+                    control_mapping=right_control_mapped,
+                    timestamp_ns=timestamp_ns,
+                    primary_label="ab_control",
+                    control_label="interaction_right_control",
+                )
+            )
         control_provenance = {
             "schema_version": "CRYPTO_PAIR_CONTROL_PROVENANCE_V1",
             "comparisons": comparisons,
@@ -1383,6 +1501,15 @@ def evaluate_pair(
                 ensure_ascii=True,
             ).encode("utf-8")
         ).hexdigest().upper()
+    mechanism_realization = (
+        mechanism_realization_provenance(
+            candidate=candidate,
+            hierarchical_three_axis=hierarchical_conditional,
+            control_provenance=control_provenance,
+        )
+        if control_provenance is not None
+        else None
+    )
     if candidate.expression.expression_id == candidate.control.expression_id:
         raise ValueError("CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY")
     if np.array_equal(primary_weight, control_weight):
@@ -1394,6 +1521,10 @@ def evaluate_pair(
             raise ControlBehaviorDegeneracyError(
                 "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
                 failure,
+                evidence={
+                    "control_degeneracy_provenance": control_provenance,
+                    "mechanism_realization_provenance": mechanism_realization,
+                },
             )
         raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
     if np.array_equal(primary_weight, right_control_weight):
@@ -1405,6 +1536,10 @@ def evaluate_pair(
             raise ControlBehaviorDegeneracyError(
                 "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
                 failure,
+                evidence={
+                    "control_degeneracy_provenance": control_provenance,
+                    "mechanism_realization_provenance": mechanism_realization,
+                },
             )
         raise ValueError("RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY")
     if (
@@ -1421,6 +1556,10 @@ def evaluate_pair(
             raise ControlBehaviorDegeneracyError(
                 "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
                 failure,
+                evidence={
+                    "control_degeneracy_provenance": control_provenance,
+                    "mechanism_realization_provenance": mechanism_realization,
+                },
             )
         raise ValueError("INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB")
     active_union = (
@@ -1947,6 +2086,7 @@ def evaluate_pair(
         "feedback": feedback,
         "behavior": behavior,
         "control_degeneracy_provenance": control_provenance,
+        "mechanism_realization_provenance": mechanism_realization,
         "primary_control_weight_equal": False,
         "delta_weight_sha256": left_incremental["weight_sha256"],
         "left_delta_weight_sha256": left_incremental["weight_sha256"],
@@ -2083,6 +2223,20 @@ def pair_contract_payload() -> dict[str, Any]:
                 "reward",
             ],
             "kill_lines_unchanged": True,
+        },
+        "optional_mechanism_realization_provenance": {
+            "schema_version": "CRYPTO_MECHANISM_REALIZATION_PROVENANCE_V1",
+            "declared_axis_count": "two for binary, three for hierarchical",
+            "active_axis_rule": (
+                "the axis-specific support-matched signal ablation comparison "
+                "is not exactly equal at SIGNAL"
+            ),
+            "condition_effect_rate": (
+                "exact changed-coordinate fraction for ABC versus AB; not a "
+                "reward, gate, or optimizer input"
+            ),
+            "outcome_free": True,
+            "diagnostic_only": True,
         },
         "incremental_weight_formula": "primary_weight - each_axis_control_weight",
         "pair_reward_role": (

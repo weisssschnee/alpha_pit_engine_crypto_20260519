@@ -72,6 +72,7 @@ from .experiment_authority import (
     ECONOMIC_SEARCH_V6_SEEDS,
 )
 from .pair18m import (
+    ControlBehaviorDegeneracyError,
     FIXED_COST_BPS,
     SEARCH_REWARD_AUTHORITY,
     evaluate_pair,
@@ -264,6 +265,19 @@ MECHANISM_SEARCH_V23_QUALIFICATION_STRICT_COUNT = 16_000
 MECHANISM_SEARCH_V23_STRICT_TARGET = 20_000
 MECHANISM_SEARCH_V23_RAW_ATTEMPT_LIMIT = 100_000
 MECHANISM_SEARCH_V23_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
+SEARCH_EVIDENCE_V1_CAMPAIGN = "crypto_search_run_evidence_v1"
+SEARCH_EVIDENCE_V1_EPOCH_ID = "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_20260804"
+SEARCH_EVIDENCE_V1_CONFIG = "config/crypto_search_run_evidence_contract_v1.json"
+SEARCH_EVIDENCE_V1_SEEDS = (2109280669, 1412948873)
+SEARCH_EVIDENCE_V1_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)"
+)
+SEARCH_EVIDENCE_V1_ARMS = MECHANISM_SEARCH_V23_ARMS
+SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE = 2_000
+SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT = 4
+SEARCH_EVIDENCE_V1_STRICT_TARGET = 8_000
+SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT = 50_000
+SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS = 8 * 60 * 60
 V23_OOS_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_20260803"
 V23_OOS_DEFAULT_RUNTIME_DATE = "20260803"
 V23_OOS_RECEIPT_PATH = "config/crypto_search_v2_3_frozen_oos_receipt.json"
@@ -284,6 +298,7 @@ ECONOMIC_SEARCH_CAMPAIGNS = (
     MECHANISM_SEARCH_V21_CAMPAIGN,
     MECHANISM_SEARCH_V22_CAMPAIGN,
     MECHANISM_SEARCH_V23_CAMPAIGN,
+    SEARCH_EVIDENCE_V1_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -409,6 +424,25 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "raw_attempt_limit": MECHANISM_SEARCH_V23_RAW_ATTEMPT_LIMIT,
         "wall_time_limit_seconds": MECHANISM_SEARCH_V23_WALL_TIME_LIMIT_SECONDS,
         "arms": MECHANISM_SEARCH_V23_ARMS,
+    },
+    SEARCH_EVIDENCE_V1_CAMPAIGN: {
+        "epoch_id": SEARCH_EVIDENCE_V1_EPOCH_ID,
+        "runtime_date": "20260804",
+        "runtime_prefix": "crypto_search_run_evidence_v1",
+        "report_prefix": "CRYPTO_SEARCH_RUN_EVIDENCE_V1",
+        "report_title": "Crypto Search Run Evidence Contract V1",
+        "receipt_path": "config/crypto_search_run_evidence_v1_receipt.json",
+        "cli_suffix": "evidence-v1",
+        "seeds": SEARCH_EVIDENCE_V1_SEEDS,
+        "seed_derivation": SEARCH_EVIDENCE_V1_SEED_DERIVATION,
+        "strict_target": SEARCH_EVIDENCE_V1_STRICT_TARGET,
+        "checkpoint_size": SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE,
+        "checkpoint_count": SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT,
+        "raw_attempt_limit": SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        "arms": SEARCH_EVIDENCE_V1_ARMS,
+        "validation_required": False,
+        "behavior_provenance_required": True,
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -575,7 +609,11 @@ def _economic_campaign_config(campaign: str) -> dict[str, Any]:
 def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
     config = _economic_campaign_config(campaign)
     seeds = tuple(int(value) for value in config.get("seeds", SEEDS))
-    expected_seed_count = 2 if campaign == MECHANISM_SEARCH_V23_CAMPAIGN else len(SEEDS)
+    expected_seed_count = (
+        2
+        if campaign in {MECHANISM_SEARCH_V23_CAMPAIGN, SEARCH_EVIDENCE_V1_CAMPAIGN}
+        else len(SEEDS)
+    )
     if len(seeds) != expected_seed_count or len(set(seeds)) != len(seeds):
         raise ValueError(
             "economic campaign seed set must contain "
@@ -661,6 +699,30 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
         )
         if set(seeds) & prior:
             raise ValueError("Mechanism V2.3 seed set overlaps a prior campaign")
+    if campaign == SEARCH_EVIDENCE_V1_CAMPAIGN:
+        expected = tuple(
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{SEARCH_EVIDENCE_V1_EPOCH_ID}|seed|{ordinal}".encode()
+                ).digest()[:4],
+                "big",
+            )
+            for ordinal in range(2)
+        )
+        if seeds != SEARCH_EVIDENCE_V1_SEEDS or seeds != expected:
+            raise ValueError("Search Evidence V1 seed set changed")
+        if config.get("seed_derivation") != SEARCH_EVIDENCE_V1_SEED_DERIVATION:
+            raise ValueError("Search Evidence V1 seed derivation changed")
+        prior = (
+            set(SEEDS)
+            | set(ECONOMIC_SEARCH_V6_SEEDS)
+            | set(MECHANISM_SEARCH_V2_SEEDS)
+            | set(MECHANISM_SEARCH_V21_SEEDS)
+            | set(MECHANISM_SEARCH_V22_SEEDS)
+            | set(MECHANISM_SEARCH_V23_SEEDS)
+        )
+        if set(seeds) & prior:
+            raise ValueError("Search Evidence V1 seed set overlaps a prior campaign")
     return seeds
 
 
@@ -2207,6 +2269,80 @@ def _mechanism_v23_frozen_contract(
         ),
         "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
     }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _search_evidence_v1_frozen_contract(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+    carrier_id: str,
+) -> dict[str, Any]:
+    config, _, _ = _load_search_evidence_v1_contract(repo_root)
+    inherited = _mechanism_v23_frozen_contract(
+        repo_root=repo_root,
+        source_sha=source_sha,
+        compiler_binding=compiler_binding,
+        behavior_contract=behavior_contract,
+        input_identities=input_identities,
+        environment=environment,
+        contracts=contracts,
+        carrier_id=carrier_id,
+    )
+    payload = {
+        key: value for key, value in inherited.items() if key != "frozen_contract_sha256"
+    }
+    payload.update(
+        {
+            "epoch_id": SEARCH_EVIDENCE_V1_EPOCH_ID,
+            "search_engine_version": "SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+            "objective": (
+                "Run an unchanged V2.3 Random/Evolution development search while "
+                "joining target, exposure, optimizer, realization, matched, behavior, "
+                "economic, and lineage evidence without feeding diagnostics back"
+            ),
+            "authorization": config["authorization"],
+            "seeds": [int(value) for value in SEARCH_EVIDENCE_V1_SEEDS],
+            "seed_contract": {
+                "derivation": SEARCH_EVIDENCE_V1_SEED_DERIVATION,
+                "pre_registered_before_candidate_one": True,
+                "disjoint_from_all_prior_crypto_search_campaigns": True,
+                "within_campaign_seed_change_allowed": False,
+                "additional_seed_campaign_allowed": False,
+            },
+            "stages": list(config["stages"]),
+            "arms": {
+                "active": list(SEARCH_EVIDENCE_V1_ARMS),
+                "same_frozen_seed_set_for_every_arm": True,
+                "arm_local_adaptive_memory": True,
+                "random_role": "UNCHANGED_V2_3_COMPARATOR",
+                "cem_budget": 0,
+            },
+            "policies": dict(config["policy_parameters"]),
+            "evidence_contract": dict(config["evidence_contract"]),
+            "validation_contract": dict(config["validation"]),
+            "fresh_state": dict(config["fresh_state"]),
+            "persistent_mechanism_knowledge": dict(
+                config["persistent_mechanism_knowledge"]
+            ),
+            "budget": {
+                **dict(config["search"]),
+                "fail_closed_attempt_reservation_per_proposal": (
+                    MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+                ),
+            },
+            "boundaries": {
+                **dict(config["boundaries"]),
+                "sealed_reads": 0,
+                "report_only_feedback": False,
+            },
+        }
+    )
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
@@ -5409,6 +5545,7 @@ def _policy_inflight_limit(
         MECHANISM_SEARCH_V21_CAMPAIGN,
         MECHANISM_SEARCH_V22_CAMPAIGN,
         MECHANISM_SEARCH_V23_CAMPAIGN,
+        SEARCH_EVIDENCE_V1_CAMPAIGN,
     } and type(policy) is MechanismRandomV2:
         return max(1, int(math.ceil(int(workers) / max(1, int(active_lane_count)))))
     return 1
@@ -5875,6 +6012,106 @@ def _load_mechanism_v23_contract(
     return config, catalog, knowledge
 
 
+def _load_search_evidence_v1_contract(
+    repo_root: Path,
+) -> tuple[dict[str, Any], tuple[MechanismSpec, ...], dict[str, Any]]:
+    """Load the evidence run as immutable reuse of the V2.3 search policy."""
+
+    config = _read_json(repo_root / SEARCH_EVIDENCE_V1_CONFIG)
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_8000_STRICT_DEVELOPMENT_EVIDENCE_RUN"
+    ):
+        raise PermissionError("Search Evidence V1 authorization changed")
+    if any(bool(value) for value in config.get("fresh_state", {}).values()):
+        raise PermissionError("Search Evidence V1 imported prior adaptive state")
+    search = dict(config.get("search") or {})
+    expected = {
+        "strict_evaluated_target": SEARCH_EVIDENCE_V1_STRICT_TARGET,
+        "checkpoint_size": SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE,
+        "checkpoint_count": SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT,
+        "raw_generation_attempts_maximum": SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT,
+        "wall_time_seconds_maximum": SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+    }
+    if any(int(search.get(key, -1)) != value for key, value in expected.items()):
+        raise ValueError("Search Evidence V1 budget changed")
+    if (
+        search.get("workers_12_forbidden") is not True
+        or int(search.get("workers_default", -1)) != 10
+        or int(search.get("workers_memory_fallback", -1)) != 8
+    ):
+        raise PermissionError("Search Evidence V1 worker boundary changed")
+    if not math.isclose(
+        float(search.get("required_pairs_per_hour", -1.0)),
+        SEARCH_EVIDENCE_V1_STRICT_TARGET
+        * 3600.0
+        / SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        rel_tol=0.0,
+        abs_tol=1.0e-9,
+    ):
+        raise ValueError("Search Evidence V1 throughput floor changed")
+    allocations = _search_evidence_v1_expected_checkpoint_allocations(
+        stages=config.get("stages") or (),
+        seeds=SEARCH_EVIDENCE_V1_SEEDS,
+    )
+    if sum(sum(row.values()) for row in allocations.values()) != (
+        SEARCH_EVIDENCE_V1_STRICT_TARGET
+    ):
+        raise ValueError("Search Evidence V1 stage total changed")
+    v23_config, catalog, knowledge = _load_mechanism_v23_contract(repo_root)
+    if config.get("policy_parameters") != v23_config.get("policy_parameters"):
+        raise PermissionError("Search Evidence V1 changed the V2.3 search policy")
+    evidence = dict(config.get("evidence_contract") or {})
+    if (
+        evidence.get("contract_id") != "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1"
+        or evidence.get("passive_diagnostics_only") is not True
+        or evidence.get("optimizer_feedback_allowed") is not False
+        or evidence.get("reward_input_allowed") is not False
+        or evidence.get("archive_identity_input_allowed") is not False
+        or int(evidence.get("minimum_comparable_candidates_per_reported_stratum", 0))
+        != 30
+        or evidence.get("complexity_is_objective") is not False
+        or evidence.get("historical_inference_allowed") is not False
+    ):
+        raise PermissionError("Search Evidence V1 evidence authority changed")
+    validation = dict(config.get("validation") or {})
+    if (
+        validation.get("authorized") is not False
+        or validation.get("status") != "NOT_AUTHORIZED"
+        or validation.get("holdout_read") is not False
+    ):
+        raise PermissionError("Search Evidence V1 validation boundary changed")
+    forbidden = (
+        "validation",
+        "oos",
+        "challenge",
+        "recent",
+        "may_stress",
+        "forward",
+        "promotion",
+        "cross_sprint_adaptive_memory",
+        "new_fields",
+        "new_grammar",
+        "new_ast",
+        "new_compiler",
+        "new_evaluator",
+        "target_change",
+        "cost_change",
+        "search_policy_change",
+        "reward_change",
+        "mapping_change",
+        "historical_replay",
+    )
+    if any(bool(config["boundaries"].get(key)) for key in forbidden):
+        raise PermissionError("Search Evidence V1 crossed a research boundary")
+    if repo_root / str(config["catalog_path"]) != repo_root / MECHANISM_SEARCH_V23_CATALOG:
+        raise ValueError("Search Evidence V1 catalog changed")
+    if repo_root / str(config["aggregate_knowledge_path"]) != (
+        repo_root / MECHANISM_SEARCH_V23_KNOWLEDGE
+    ):
+        raise ValueError("Search Evidence V1 knowledge path changed")
+    return config, catalog, knowledge
+
+
 def _balanced_lane_choice(
     *,
     lane_order: Sequence[str],
@@ -6231,6 +6468,7 @@ _WORKER_ECONOMIC_RECEIPT: Mapping[str, Any] | None = None
 _WORKER_BLOCK_START = ADAPTIVE_START
 _WORKER_BLOCK_END = ADAPTIVE_END
 _WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
+_WORKER_INCLUDE_CONTROL_PROVENANCE = False
 
 
 def _validate_receipt_target_store_binding(
@@ -6274,10 +6512,12 @@ def _worker_initialize(
     block_end: str = ADAPTIVE_END,
     block_role: str = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1",
     economic_receipt: Mapping[str, Any] | None = None,
+    include_control_provenance: bool = False,
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
     global _WORKER_ECONOMIC_RECEIPT
     global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
+    global _WORKER_INCLUDE_CONTROL_PROVENANCE
     source_store = RawPanelStore.open(Path(cache_root))
     if economic_receipt is not None:
         from alphafactory_crypto.broad_search.replay_v14_binance_target import (
@@ -6305,6 +6545,7 @@ def _worker_initialize(
     _WORKER_BLOCK_START = str(block_start)
     _WORKER_BLOCK_END = str(block_end)
     _WORKER_BLOCK_ROLE = str(block_role)
+    _WORKER_INCLUDE_CONTROL_PROVENANCE = bool(include_control_provenance)
 
 
 def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -6331,7 +6572,11 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
             block_role=_WORKER_BLOCK_ROLE,
             behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
             economic_receipt=_WORKER_ECONOMIC_RECEIPT,
+            include_control_provenance=_WORKER_INCLUDE_CONTROL_PROVENANCE,
         )
+    except ControlBehaviorDegeneracyError as failure:
+        error = type(failure).__name__ + ":" + str(failure)
+        degeneracy_evidence = dict(failure.evidence)
     except MemoryError as failure:
         error = type(failure).__name__ + ":" + str(failure)
         memory_error = True
@@ -6343,6 +6588,9 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
         "evaluation": evaluation,
         "error": error,
         "memory_error": memory_error,
+        "degeneracy_evidence": (
+            degeneracy_evidence if "degeneracy_evidence" in locals() else None
+        ),
         "process_cpu_seconds": time.process_time() - cpu_started,
         "wall_seconds": time.perf_counter() - wall_started,
         "worker_rss_bytes": int(memory.rss),
@@ -6496,6 +6744,7 @@ def _new_campaign_state(
             }
             for arm in sorted(arm_set)
         },
+        "search_failure_evidence": [],
     }
 
 
@@ -6754,6 +7003,56 @@ def _mechanism_v23_expected_checkpoint_allocations(
     ):
         raise ValueError("Mechanism V2.3 frozen stages do not cover the campaign")
     return checkpoint_allocations
+
+
+def _search_evidence_v1_expected_checkpoint_allocations(
+    *,
+    stages: Sequence[Mapping[str, Any]],
+    seeds: Sequence[int],
+) -> dict[int, dict[str, int]]:
+    checkpoint_allocations: dict[int, dict[str, int]] = {}
+    for stage in stages:
+        allocation = {
+            str(arm): int(count)
+            for arm, count in dict(stage["allocation_per_checkpoint"]).items()
+        }
+        indexes = tuple(int(value) for value in stage["checkpoint_indexes"])
+        if (
+            not indexes
+            or set(allocation) != set(SEARCH_EVIDENCE_V1_ARMS)
+            or any(count < 0 for count in allocation.values())
+            or sum(allocation.values()) != SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE
+            or int(stage["strict_count"])
+            != len(indexes) * SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE
+            or any(value % len(seeds) for value in allocation.values())
+        ):
+            raise ValueError("Search Evidence V1 frozen stage allocation is invalid")
+        for checkpoint_index in indexes:
+            if checkpoint_index in checkpoint_allocations:
+                raise ValueError("Search Evidence V1 checkpoint has two owners")
+            checkpoint_allocations[checkpoint_index] = {
+                arm: count for arm, count in allocation.items() if count
+            }
+    if set(checkpoint_allocations) != set(range(SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT)):
+        raise ValueError("Search Evidence V1 stages do not cover the campaign")
+    return checkpoint_allocations
+
+
+def _search_evidence_v1_checkpoint_allocation(
+    checkpoint_index: int,
+    *,
+    repo_root: Path,
+    seeds: Sequence[int],
+) -> dict[str, int]:
+    config, _, _ = _load_search_evidence_v1_contract(repo_root)
+    allocations = _search_evidence_v1_expected_checkpoint_allocations(
+        stages=config.get("stages") or (),
+        seeds=seeds,
+    )
+    try:
+        return dict(allocations[int(checkpoint_index)])
+    except KeyError as exc:
+        raise ValueError("Search Evidence V1 checkpoint allocation missing") from exc
 
 
 def _completed_checkpoint_seed_balance_errors(
@@ -7395,6 +7694,7 @@ def _write_top_level_artifacts(
     ledger: Sequence[Mapping[str, Any]],
     archive: BehaviorArchive,
     metrics: Sequence[Mapping[str, Any]],
+    failure_evidence: Sequence[Mapping[str, Any]] | None = None,
 ) -> None:
     _write_parquet(runtime_root / "candidate_ledger.parquet", ledger)
     _write_parquet(runtime_root / "behavior_archive.parquet", archive.rows)
@@ -7410,6 +7710,11 @@ def _write_top_level_artifacts(
         },
     )
     _write_parquet(runtime_root / "arm_checkpoint_metrics.parquet", metrics)
+    if failure_evidence is not None:
+        _write_parquet(
+            runtime_root / "search_failure_evidence.parquet",
+            failure_evidence,
+        )
 
 
 def _checkpoint_state_payload(
@@ -7818,6 +8123,8 @@ def _ledger_row(
     incremental = evaluation["incremental"]
     behavior = evaluation["behavior"]
     economic_audit = _evaluation_audit_fields(evaluation)
+    control_provenance = evaluation.get("control_degeneracy_provenance")
+    mechanism_realization = evaluation.get("mechanism_realization_provenance")
     return {
         "completion_ordinal": int(completion_ordinal),
         "arm_completion_ordinal": int(arm_completion_ordinal),
@@ -7845,6 +8152,7 @@ def _ledger_row(
         "skeleton_id": candidate.skeleton_id,
         "mechanism_family": candidate.mechanism_family,
         "operator_path": candidate.operator_path,
+        "mapping_family": candidate.mapping_id,
         "horizon_hours": int(candidate.horizon_hours),
         "raw_fields_json": json.dumps(list(candidate.raw_fields)),
         "field_families_json": json.dumps(list(candidate.field_families)),
@@ -8116,6 +8424,209 @@ def _validation_blocked_decision(
         "rescue_rerun_started": False,
         "sealed_reads": 0,
     }
+
+
+def _write_search_evidence_v1_artifacts(
+    *,
+    runtime_root: Path,
+    ledger: Sequence[Mapping[str, Any]],
+    state: Mapping[str, Any],
+    economic_receipt: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Join existing run facts into one passive, run-local evidence table."""
+
+    failures = [dict(row) for row in state.get("search_failure_evidence", [])]
+    evidence_rows: list[dict[str, Any]] = []
+    for row in ledger:
+        evidence_rows.append(
+            {
+                **dict(row),
+                "proposal_status": "STRICT_EVALUATED",
+                "failure_reason": None,
+            }
+        )
+    for row in failures:
+        evidence_rows.append(
+            {
+                **dict(row),
+                "proposal_status": "CONTROL_DEGENERATE",
+                "search_reward": None,
+                "pair_reward": None,
+                "behavior_family_id": None,
+                "new_behavior_family_at_completion": False,
+            }
+        )
+    if not evidence_rows:
+        raise RuntimeError("SEARCH_EVIDENCE_V1_HAS_NO_OBSERVED_CANDIDATES")
+    evidence = pd.DataFrame(evidence_rows)
+    evidence = evidence.sort_values(
+        ["generation_attempt_ordinal", "candidate_id"], kind="mergesort"
+    ).reset_index(drop=True)
+    _write_parquet(runtime_root / "search_run_evidence.parquet", evidence_rows)
+
+    minimum = int(
+        dict(config.get("evidence_contract") or {}).get(
+            "minimum_comparable_candidates_per_reported_stratum", 30
+        )
+    )
+    exposure_rows: list[dict[str, Any]] = []
+    for dimensions in (
+        ("arm",),
+        ("arm", "mechanism_family"),
+        ("arm", "declared_axis_count"),
+        ("arm", "mapping_family"),
+        ("arm", "horizon_hours"),
+        ("arm", "operation"),
+    ):
+        for keys, local in evidence.groupby(list(dimensions), dropna=False):
+            if not isinstance(keys, tuple):
+                keys = (keys,)
+            successful = local.loc[local["strict_evaluated"].fillna(False).astype(bool)]
+            positives = (
+                int(successful["matched_positive"].fillna(False).astype(bool).sum())
+                if "matched_positive" in successful
+                else 0
+            )
+            families = (
+                int(successful["behavior_family_id"].dropna().astype(str).nunique())
+                if "behavior_family_id" in successful
+                else 0
+            )
+            exposure_rows.append(
+                {
+                    "slice_dimensions": "+".join(dimensions),
+                    "slice_key": "|".join(str(value) for value in keys),
+                    "observed_candidate_count": int(len(local)),
+                    "strict_evaluated_count": int(len(successful)),
+                    "control_degenerate_count": int(
+                        (local["proposal_status"] == "CONTROL_DEGENERATE").sum()
+                    ),
+                    "behavior_family_count": families,
+                    "matched_positive_count": positives,
+                    "inference_status": (
+                        "OBSERVED_SUFFICIENTLY"
+                        if len(local) >= minimum
+                        else "NOT_OBSERVED_SUFFICIENTLY"
+                    ),
+                    "minimum_comparable_count": minimum,
+                }
+            )
+    _write_parquet(runtime_root / "search_exposure_strata.parquet", exposure_rows)
+
+    arm_funnel: dict[str, Any] = {}
+    for arm in SEARCH_EVIDENCE_V1_ARMS:
+        local = evidence.loc[evidence["arm"].astype(str) == arm]
+        successful = local.loc[local["strict_evaluated"].fillna(False).astype(bool)]
+        counter = dict(state["arm_counters"][arm])
+        arm_funnel[arm] = {
+            "generation_attempts": int(counter["generation_attempts"]),
+            "compile_valid": int(counter["compile_valid"]),
+            "exact_unique": int(counter["exact_unique"]),
+            "behavior_attributed": int(len(local)),
+            "control_non_degenerate": int(len(successful)),
+            "strict_evaluated": int(len(successful)),
+            "behavior_family_count": int(
+                successful["behavior_family_id"].dropna().astype(str).nunique()
+            ),
+            "matched_positive": int(
+                successful["matched_positive"].fillna(False).astype(bool).sum()
+            ),
+            "mean_search_reward": (
+                float(pd.to_numeric(successful["search_reward"]).mean())
+                if len(successful)
+                else None
+            ),
+            "control_degenerate": int(
+                (local["proposal_status"] == "CONTROL_DEGENERATE").sum()
+            ),
+        }
+
+    successful = evidence.loc[evidence["strict_evaluated"].fillna(False).astype(bool)]
+    realization_counts = {
+        str(key): int(value)
+        for key, value in evidence["mechanism_realization_status"]
+        .fillna("NOT_OBSERVED")
+        .value_counts()
+        .sort_index()
+        .items()
+    }
+    failure_stage_counts: Counter[str] = Counter()
+    comparison_for_reason = {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": "primary_vs_left_control",
+        "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY": "primary_vs_right_control",
+        "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB": (
+            "ab_vs_interaction_left_control"
+        ),
+    }
+    for row in failures:
+        reason = str(row.get("failure_reason") or "UNKNOWN")
+        stage = "UNKNOWN"
+        try:
+            provenance = json.loads(str(row["control_degeneracy_provenance_json"]))
+            comparison = dict(provenance["comparisons"])[comparison_for_reason[reason]]
+            stage = str(comparison.get("first_equal_stage") or "UNKNOWN")
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            pass
+        failure_stage_counts[f"{reason}:{stage}"] += 1
+
+    summary = {
+        "schema_version": 1,
+        "status": "PASS_SEARCH_RUN_EVIDENCE_V1_NONEMPTY",
+        "contract_id": "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+        "target_and_execution_contract": {
+            "status": "PASS_RECEIPT_BOUND",
+            "venue": economic_receipt["execution"]["venue"],
+            "instrument_type": economic_receipt["execution"]["instrument_type"],
+            "target_cache_identity_sha256": economic_receipt["execution"][
+                "target_cache_identity_sha256"
+            ],
+            "cost_bps": economic_receipt["cost"]["cost_bps"],
+            "validation": "NOT_AUTHORIZED",
+            "oos": "NOT_AUTHORIZED",
+        },
+        "strict_evaluated_count": int(len(ledger)),
+        "behavior_attributed_proposal_count": int(len(evidence)),
+        "control_degenerate_count": int(len(failures)),
+        "arm_funnel": arm_funnel,
+        "mechanism_realization_status_counts": realization_counts,
+        "control_degeneracy_stage_counts": dict(sorted(failure_stage_counts.items())),
+        "economic_waterfall": {
+            "primary_gross_positive": int(
+                (pd.to_numeric(successful["primary_gross_mean"], errors="coerce") > 0).sum()
+            ),
+            "primary_net_positive": int(
+                (pd.to_numeric(successful["primary_net_mean"], errors="coerce") > 0).sum()
+            ),
+            "left_increment_gross_positive": int(
+                (pd.to_numeric(successful["gross_mean"], errors="coerce") > 0).sum()
+            ),
+            "left_increment_net_positive": int(
+                (pd.to_numeric(successful["net_mean"], errors="coerce") > 0).sum()
+            ),
+            "gross_positive_cost_sign_killed": int(
+                successful["gross_positive_cost_sign_killed"]
+                .fillna(False)
+                .astype(bool)
+                .sum()
+            ),
+            "turnover_killed": int(
+                successful["turnover_killed"].fillna(False).astype(bool).sum()
+            ),
+            "matched_positive": int(
+                successful["matched_positive"].fillna(False).astype(bool).sum()
+            ),
+        },
+        "exposure_stratum_count": len(exposure_rows),
+        "minimum_comparable_candidates_per_reported_stratum": minimum,
+        "diagnostics_used_by_optimizer": False,
+        "diagnostics_used_by_reward": False,
+        "diagnostics_used_by_archive_identity": False,
+        "historical_inference_performed": False,
+        "sealed_reads": 0,
+    }
+    _write_json(runtime_root / "search_run_evidence_summary.json", summary)
+    return summary
 
 
 def _validation_blocked_report_text(decision: Mapping[str, Any]) -> str:
@@ -9211,6 +9722,105 @@ def _mechanism_v23_final_decision(
     }
 
 
+def _search_evidence_v1_final_decision(
+    *,
+    repo_root: Path,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    runtime_root: Path,
+    evidence_summary: Mapping[str, Any],
+) -> dict[str, Any]:
+    config, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(ledger) != SEARCH_EVIDENCE_V1_STRICT_TARGET:
+        raise RuntimeError("Search Evidence V1 terminal strict count is incomplete")
+    return {
+        "schema_version": 1,
+        "epoch_id": SEARCH_EVIDENCE_V1_EPOCH_ID,
+        "status": "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE",
+        "reason": "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE",
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": all(
+            bool(_read_json(path / "manifest.json").get("restore_verified"))
+            for path in checkpoints
+        ),
+        "compiled_mechanism_count": len(catalog),
+        "template_count": len({item.template_id for item in catalog}),
+        "stage_contract": list(config["stages"]),
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "arm_summaries": dict(evidence_summary["arm_funnel"]),
+        "evidence_summary": dict(evidence_summary),
+        "validation_status": "NOT_AUTHORIZED",
+        "future_development_data_arena_qualified_arms": [],
+        "future_new_data_arena_qualified_arms": [],
+        "research_decision": "EVIDENCE_COLLECTED_NO_AUTOMATIC_POLICY_CHANGE",
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": "FORBIDDEN",
+        "next_arena_started": False,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def _search_evidence_v1_report_text(decision: Mapping[str, Any]) -> str:
+    summary = dict(decision["evidence_summary"])
+    waterfall = dict(summary["economic_waterfall"])
+    arm_rows = []
+    for arm, values in decision["arm_summaries"].items():
+        arm_rows.append(
+            "| {arm} | {attempts:,} | {attributed:,} | {strict:,} | "
+            "{degenerate:,} | {families:,} | {positive:,} |".format(
+                arm=arm,
+                attempts=int(values["generation_attempts"]),
+                attributed=int(values["behavior_attributed"]),
+                strict=int(values["strict_evaluated"]),
+                degenerate=int(values["control_degenerate"]),
+                families=int(values["behavior_family_count"]),
+                positive=int(values["matched_positive"]),
+            )
+        )
+    return f"""# Crypto Search Run Evidence Contract V1
+
+- Status: `{decision['status']}`; development-only; sealed reads `0`.
+- Producer source: `{decision['producer_source_sha']}`.
+- Strict evaluated: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Behavior-attributed proposals: `{summary['behavior_attributed_proposal_count']:,}`; control-degenerate: `{summary['control_degenerate_count']:,}`.
+- Checkpoints: `{decision['checkpoint_count']}/4`; exact restore: `{decision['checkpoint_restore_verified']}`.
+- Validation/OOS/promotion: `NOT_AUTHORIZED` / `NOT_AUTHORIZED` / `FORBIDDEN`.
+
+| Arm | Raw attempts | Behavior attributed | Strict | Control-degenerate | Families | Matched positive |
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(arm_rows)}
+
+## Economic waterfall
+
+- Primary gross/net positive: `{waterfall['primary_gross_positive']}` / `{waterfall['primary_net_positive']}`.
+- Left matched increment gross/net positive: `{waterfall['left_increment_gross_positive']}` / `{waterfall['left_increment_net_positive']}`.
+- Cost-sign-killed / turnover-killed / strict matched-positive: `{waterfall['gross_positive_cost_sign_killed']}` / `{waterfall['turnover_killed']}` / `{waterfall['matched_positive']}`.
+
+The evidence tables connect actual exposure, unchanged optimizer productivity,
+outcome-free mechanism realization, matched increment behavior, executable
+behavior, and economics. Diagnostics were not used by proposal policy, reward,
+or archive identity. This run creates no Alpha, OOS, promotion, challenge,
+recent, May-stress, forward, or automatic next-Arena claim.
+"""
+
+
 def _mechanism_v23_report_text(decision: Mapping[str, Any]) -> str:
     rows = []
     for arm, values in decision["arm_summaries"].items():
@@ -9738,7 +10348,9 @@ def _write_mechanism_v2_knowledge(
     validation_result: Mapping[str, Any],
     campaign: str = MECHANISM_SEARCH_V2_CAMPAIGN,
 ) -> None:
-    if campaign == MECHANISM_SEARCH_V23_CAMPAIGN:
+    if campaign == SEARCH_EVIDENCE_V1_CAMPAIGN:
+        _, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    elif campaign == MECHANISM_SEARCH_V23_CAMPAIGN:
         _, catalog, _ = _load_mechanism_v23_contract(repo_root)
     elif campaign == MECHANISM_SEARCH_V22_CAMPAIGN:
         _, catalog, _ = _load_mechanism_v22_contract(repo_root)
@@ -10617,6 +11229,10 @@ def _final_manifest(
         "validation_failure.json",
         "validation_failure_stdout.log",
         "validation_failure_stderr.log",
+        "search_failure_evidence.parquet",
+        "search_run_evidence.parquet",
+        "search_exposure_strata.parquet",
+        "search_run_evidence_summary.json",
     ):
         path = runtime_root / name
         if path.is_file():
@@ -14350,8 +14966,13 @@ def run_engine(
     is_mechanism_v21 = campaign == MECHANISM_SEARCH_V21_CAMPAIGN
     is_mechanism_v22 = campaign == MECHANISM_SEARCH_V22_CAMPAIGN
     is_mechanism_v23 = campaign == MECHANISM_SEARCH_V23_CAMPAIGN
+    is_search_evidence_v1 = campaign == SEARCH_EVIDENCE_V1_CAMPAIGN
     is_mechanism_campaign = (
-        is_mechanism_v2 or is_mechanism_v21 or is_mechanism_v22 or is_mechanism_v23
+        is_mechanism_v2
+        or is_mechanism_v21
+        or is_mechanism_v22
+        or is_mechanism_v23
+        or is_search_evidence_v1
     )
     is_system_campaign = (
         is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
@@ -14582,7 +15203,18 @@ def run_engine(
     )
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_mechanism_v23:
+    if is_search_evidence_v1:
+        frozen = _search_evidence_v1_frozen_contract(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            contracts=contracts,
+            carrier_id=str(carrier_id),
+        )
+    elif is_mechanism_v23:
         frozen = _mechanism_v23_frozen_contract(
             repo_root=repo_root,
             source_sha=source_sha,
@@ -14857,6 +15489,7 @@ def run_engine(
                 block_end,
                 block_role,
                 economic_receipt,
+                is_search_evidence_v1,
             ),
         )
 
@@ -15032,7 +15665,13 @@ def run_engine(
             checkpoint_count,
         ):
             allocation = (
-                _mechanism_v23_checkpoint_allocation(
+                _search_evidence_v1_checkpoint_allocation(
+                    checkpoint_index,
+                    repo_root=repo_root,
+                    seeds=campaign_seeds,
+                )
+                if is_search_evidence_v1
+                else _mechanism_v23_checkpoint_allocation(
                     checkpoint_index,
                     repo_root=repo_root,
                     seeds=campaign_seeds,
@@ -15372,6 +16011,102 @@ def run_engine(
                     if evaluation is None:
                         _policy_reject(policy, candidate)
                         reason = str(worker["error"] or "PAIR_EVALUATION_FAILED")
+                        degeneracy_evidence = worker.get("degeneracy_evidence")
+                        if is_search_evidence_v1 and isinstance(
+                            degeneracy_evidence, Mapping
+                        ):
+                            control_provenance = degeneracy_evidence.get(
+                                "control_degeneracy_provenance"
+                            )
+                            realization = degeneracy_evidence.get(
+                                "mechanism_realization_provenance"
+                            )
+                            state.setdefault("search_failure_evidence", []).append(
+                                {
+                                    "generation_attempt_ordinal": int(
+                                        proposal["generation_attempt_ordinal"]
+                                    ),
+                                    "checkpoint_index": int(checkpoint_index),
+                                    "candidate_id": candidate.candidate_id,
+                                    "candidate_spec_sha256": _payload_sha(
+                                        candidate.to_dict()
+                                    ),
+                                    "candidate_spec_json": json.dumps(
+                                        candidate.to_dict(), sort_keys=True
+                                    ),
+                                    "arm": arm,
+                                    "seed": int(proposal["seed"]),
+                                    "skeleton_id": candidate.skeleton_id,
+                                    "mechanism_family": candidate.mechanism_family,
+                                    "operator_path": candidate.operator_path,
+                                    "mapping_family": candidate.mapping_id,
+                                    "horizon_hours": int(candidate.horizon_hours),
+                                    "operation": str(proposal["operation"]),
+                                    "parent_ids_json": json.dumps(
+                                        list(proposal["parent_ids"])
+                                    ),
+                                    "failure_reason": reason.split(":", 1)[-1],
+                                    "control_degeneracy_provenance_sha256": (
+                                        control_provenance.get("provenance_sha256")
+                                        if isinstance(control_provenance, Mapping)
+                                        else None
+                                    ),
+                                    "control_degeneracy_provenance_json": (
+                                        json.dumps(
+                                            control_provenance,
+                                            sort_keys=True,
+                                            separators=(",", ":"),
+                                            ensure_ascii=True,
+                                        )
+                                        if isinstance(control_provenance, Mapping)
+                                        else None
+                                    ),
+                                    "mechanism_realization_sha256": (
+                                        realization.get("provenance_sha256")
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "mechanism_realization_json": (
+                                        json.dumps(
+                                            realization,
+                                            sort_keys=True,
+                                            separators=(",", ":"),
+                                            ensure_ascii=True,
+                                        )
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "declared_axis_count": (
+                                        realization.get("declared_axis_count")
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "active_axis_count": (
+                                        realization.get("active_axis_count")
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "mechanism_realization_status": (
+                                        realization.get("status")
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "condition_effect_rate": (
+                                        realization.get("condition_effect_rate")
+                                        if isinstance(realization, Mapping)
+                                        else None
+                                    ),
+                                    "proposal_compile_cpu_seconds": float(
+                                        proposal["proposal_cpu_seconds"]
+                                    ),
+                                    "pair_process_cpu_seconds": float(
+                                        worker["process_cpu_seconds"]
+                                    ),
+                                    "pair_wall_seconds": float(worker["wall_seconds"]),
+                                    "strict_evaluated": False,
+                                    "matched_positive": False,
+                                }
+                            )
                         _failure(state, arm, reason.split(":", 1)[0])
                         memory_failure = memory_failure or bool(
                             worker["memory_error"]
@@ -15670,7 +16405,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    MECHANISM_SEARCH_V23_ARMS
+                    SEARCH_EVIDENCE_V1_ARMS
+                    if is_search_evidence_v1
+                    else MECHANISM_SEARCH_V23_ARMS
                     if is_mechanism_v23
                     else MECHANISM_SEARCH_V22_ARMS
                     if is_mechanism_v22
@@ -15706,6 +16443,11 @@ def run_engine(
                 ledger=ledger,
                 archive=archive,
                 metrics=metrics,
+                failure_evidence=(
+                    state.get("search_failure_evidence", [])
+                    if is_search_evidence_v1
+                    else None
+                ),
             )
             checkpoint_path = _write_checkpoint(
                 runtime_root=runtime_root,
@@ -16043,13 +16785,44 @@ def run_engine(
             "Search Engine V1 ended without exactly "
             f"{v22_terminal_count:,} terminal strict candidates"
         )
+    if is_search_evidence_v1 and validation_result is None:
+        validation_result = {
+            "schema_version": 1,
+            "status": "NOT_AUTHORIZED",
+            "candidate_generation_performed": False,
+            "optimizer_feedback_written": False,
+            "policy_memory_written": False,
+            "holdout_read": False,
+            "arm_decisions": {},
+        }
     if is_economic and validation_result is None:
         raise RuntimeError(
             "VALIDATION_STAGE_NOT_COMPLETED_BEFORE_ADDITIONAL_BUDGET"
         )
     state["wall_elapsed_seconds"] = active_elapsed()
+    evidence_summary = (
+        _write_search_evidence_v1_artifacts(
+            runtime_root=runtime_root,
+            ledger=ledger,
+            state=state,
+            economic_receipt=economic_receipt or {},
+            config=_load_search_evidence_v1_contract(repo_root)[0],
+        )
+        if is_search_evidence_v1
+        else None
+    )
     decision = (
-        _mechanism_v23_final_decision(
+        _search_evidence_v1_final_decision(
+            repo_root=repo_root,
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            runtime_root=runtime_root,
+            evidence_summary=evidence_summary or {},
+        )
+        if is_search_evidence_v1
+        else _mechanism_v23_final_decision(
             repo_root=repo_root,
             source_sha=source_sha,
             state=state,
@@ -16181,7 +16954,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _mechanism_v23_report_text(decision)
+            _search_evidence_v1_report_text(decision)
+            if is_search_evidence_v1
+            else _mechanism_v23_report_text(decision)
             if is_mechanism_v23
             else _mechanism_v22_report_text(decision)
             if is_mechanism_v22
@@ -18582,6 +19357,7 @@ def _v14_candidate_row(
         ),
         "raw_fields_json": json.dumps(list(candidate.raw_fields)),
         "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
+        "candidate_spec_sha256": _payload_sha(candidate.to_dict()),
         "operation": operation,
         "receipt_json": (
             json.dumps(receipt, sort_keys=True) if receipt is not None else None
@@ -18601,6 +19377,56 @@ def _v14_candidate_row(
         "expression_hash_verified": _v14_replay_verified(registry, candidate),
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
+        "control_degeneracy_provenance_sha256": (
+            control_provenance.get("provenance_sha256")
+            if isinstance(control_provenance, Mapping)
+            else None
+        ),
+        "control_degeneracy_provenance_json": (
+            json.dumps(
+                control_provenance,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            )
+            if isinstance(control_provenance, Mapping)
+            else None
+        ),
+        "mechanism_realization_sha256": (
+            mechanism_realization.get("provenance_sha256")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "mechanism_realization_json": (
+            json.dumps(
+                mechanism_realization,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            )
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "declared_axis_count": (
+            mechanism_realization.get("declared_axis_count")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "active_axis_count": (
+            mechanism_realization.get("active_axis_count")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "mechanism_realization_status": (
+            mechanism_realization.get("status")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "condition_effect_rate": (
+            mechanism_realization.get("condition_effect_rate")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
         "interaction_matched_positive": feedback.get(
             "interaction_matched_positive"
         ),
@@ -21043,6 +21869,190 @@ def check_mechanism_v23(
     }
 
 
+def check_search_evidence_v1(
+    repo_root: Path,
+    *,
+    runtime_date: str = "20260804",
+) -> dict[str, Any]:
+    config = _economic_campaign_config(SEARCH_EVIDENCE_V1_CAMPAIGN)
+    runtime_root = repo_root / f"runtime/{config['runtime_prefix']}_{runtime_date}"
+    report_path = repo_root / f"reports/{config['report_prefix']}_{runtime_date}.md"
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "search_failure_evidence.parquet",
+        "search_run_evidence.parquet",
+        "search_exposure_strata.parquet",
+        "search_run_evidence_summary.json",
+        "mechanism_knowledge.parquet",
+        "mechanism_knowledge_summary.json",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    errors = [name for name in required if not (runtime_root / name).is_file()]
+    if not report_path.is_file():
+        errors.append("report")
+    if errors:
+        return {"result": "FAIL", "errors": [f"missing:{name}" for name in errors]}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    summary = _read_json(runtime_root / "search_run_evidence_summary.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    failures = pd.read_parquet(runtime_root / "search_failure_evidence.parquet")
+    evidence = pd.read_parquet(runtime_root / "search_run_evidence.parquet")
+    exposure = pd.read_parquet(runtime_root / "search_exposure_strata.parquet")
+    campaign_contract, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    frozen_body = {
+        key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
+    }
+    if _payload_sha(frozen_body) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if (
+        frozen.get("epoch_id") != SEARCH_EVIDENCE_V1_EPOCH_ID
+        or frozen.get("source_sha") != manifest.get("producer_source_sha")
+        or frozen.get("authorization") != campaign_contract["authorization"]
+        or tuple(int(value) for value in frozen.get("seeds") or ())
+        != SEARCH_EVIDENCE_V1_SEEDS
+        or dict(frozen.get("policies") or {})
+        != dict(campaign_contract["policy_parameters"])
+        or dict(frozen.get("evidence_contract") or {})
+        != dict(campaign_contract["evidence_contract"])
+    ):
+        errors.append("frozen_contract")
+    if (
+        len(ledger) != SEARCH_EVIDENCE_V1_STRICT_TARGET
+        or ledger["candidate_id"].astype(str).nunique() != len(ledger)
+        or set(ledger["arm"].astype(str).unique()) != set(SEARCH_EVIDENCE_V1_ARMS)
+        or set(int(value) for value in ledger["seed"].unique())
+        != set(SEARCH_EVIDENCE_V1_SEEDS)
+    ):
+        errors.append("strict_ledger_identity")
+    required_ledger_columns = (
+        "control_degeneracy_provenance_json",
+        "control_degeneracy_provenance_sha256",
+        "mechanism_realization_json",
+        "mechanism_realization_sha256",
+        "declared_axis_count",
+        "active_axis_count",
+        "mechanism_realization_status",
+        "primary_gross_mean",
+        "primary_net_mean",
+        "gross_mean",
+        "net_mean",
+        "search_reward",
+        "pair_reward",
+    )
+    for column in required_ledger_columns:
+        if column not in ledger or bool(ledger[column].isna().any()):
+            errors.append(f"ledger_evidence:{column}")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    if len(evidence) != len(ledger) + len(failures):
+        errors.append("joined_evidence_row_count")
+    elif evidence["candidate_id"].astype(str).duplicated().any():
+        errors.append("joined_evidence_candidate_identity")
+    if exposure.empty or summary.get("status") != "PASS_SEARCH_RUN_EVIDENCE_V1_NONEMPTY":
+        errors.append("evidence_consumer")
+    if (
+        int(summary.get("strict_evaluated_count", -1)) != len(ledger)
+        or int(summary.get("behavior_attributed_proposal_count", -1)) != len(evidence)
+        or int(summary.get("control_degenerate_count", -1)) != len(failures)
+        or summary.get("diagnostics_used_by_optimizer") is not False
+        or summary.get("diagnostics_used_by_reward") is not False
+        or summary.get("diagnostics_used_by_archive_identity") is not False
+        or summary.get("historical_inference_performed") is not False
+    ):
+        errors.append("evidence_summary")
+    try:
+        expected_allocations = _search_evidence_v1_expected_checkpoint_allocations(
+            stages=frozen.get("stages") or (),
+            seeds=SEARCH_EVIDENCE_V1_SEEDS,
+        )
+    except (KeyError, TypeError, ValueError, ZeroDivisionError):
+        expected_allocations = {}
+        errors.append("frozen_stage_contract")
+    for checkpoint_index in range(SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT):
+        local = ledger.loc[ledger["checkpoint_index"].astype(int) == checkpoint_index]
+        observed = {
+            str(arm): int(count) for arm, count in local.groupby("arm").size().items()
+        }
+        if observed != expected_allocations.get(checkpoint_index):
+            errors.append(f"checkpoint_allocation:{checkpoint_index}")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT:
+        errors.append("checkpoint_count")
+    elif not all(
+        bool(_read_json(path / "manifest.json").get("restore_verified"))
+        for path in checkpoints
+    ):
+        errors.append("checkpoint_restore")
+    if (
+        decision.get("status") != "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE"
+        or decision.get("validation_status") != "NOT_AUTHORIZED"
+        or decision.get("alpha_claim") is not False
+        or decision.get("oos") is not False
+        or decision.get("promotion") != "FORBIDDEN"
+        or decision.get("parameters_changed") is not False
+        or decision.get("rescue_rerun_started") is not False
+    ):
+        errors.append("final_decision")
+    if int(decision.get("generation_attempts", SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT + 1)) > (
+        SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT
+    ):
+        errors.append("raw_attempt_budget")
+    if float(decision.get("active_wall_seconds", SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS + 1)) > (
+        SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS
+    ):
+        errors.append("wall_time_budget")
+    manifest_paths = {str(item.get("path") or "") for item in manifest.get("artifacts", [])}
+    for name in (
+        "search_failure_evidence.parquet",
+        "search_run_evidence.parquet",
+        "search_exposure_strata.parquet",
+        "search_run_evidence_summary.json",
+    ):
+        if (runtime_root / name).relative_to(repo_root).as_posix() not in manifest_paths:
+            errors.append(f"manifest:{name}")
+    try:
+        subprocess.run(
+            ["git", "cat-file", "-e", f"{manifest['producer_source_sha']}^{{commit}}"],
+            cwd=repo_root,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except (KeyError, subprocess.CalledProcessError):
+        errors.append("producer_source_commit")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "behavior_attributed_proposal_count": len(evidence),
+        "control_degenerate_count": len(failures),
+        "checkpoint_count": len(checkpoints),
+        "compiled_mechanism_count": len(catalog),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -21078,6 +22088,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-mechanism-v2-2",
             "run-mechanism-v2-3",
             "check-mechanism-v2-3",
+            "run-evidence-v1",
+            "check-evidence-v1",
             "run-oos-v2-3",
             "check-oos-v2-3",
             "build-canary-cache",
@@ -21115,6 +22127,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-mechanism-v2-1": MECHANISM_SEARCH_V21_CAMPAIGN,
         "run-mechanism-v2-2": MECHANISM_SEARCH_V22_CAMPAIGN,
         "run-mechanism-v2-3": MECHANISM_SEARCH_V23_CAMPAIGN,
+        "run-evidence-v1": SEARCH_EVIDENCE_V1_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -21260,6 +22273,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=MECHANISM_SEARCH_V23_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-evidence-v1":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260804"),
+            source_sha=args.source_sha,
+            campaign=SEARCH_EVIDENCE_V1_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "run-oos-v2-3":
         result = run_v23_frozen_oos_replay(
             repo_root,
@@ -21395,6 +22416,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_mechanism_v23(
             repo_root,
             runtime_date=str(args.runtime_date or "20260802"),
+        )
+    elif args.command == "check-evidence-v1":
+        result = check_search_evidence_v1(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260804"),
         )
     elif args.command == "check-oos-v2-3":
         result = check_v23_frozen_oos_replay(

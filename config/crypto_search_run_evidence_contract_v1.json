@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260804_crypto_search_run_evidence_contract_v1",
+  "authorization": "ONE_FRESH_STATE_8000_STRICT_DEVELOPMENT_EVIDENCE_RUN",
+  "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+  "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+  "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+  "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+  "stages": [
+    {
+      "stage_id": "FRESH_TWO_SEED_SEARCH_EVIDENCE_TRAIN",
+      "checkpoint_indexes": [0, 1, 2, 3],
+      "strict_count": 8000,
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_3": 1000,
+        "mechanism_evolution_v2_3": 1000
+      }
+    }
+  ],
+  "search": {
+    "strict_evaluated_target": 8000,
+    "checkpoint_size": 2000,
+    "checkpoint_count": 4,
+    "raw_generation_attempts_maximum": 50000,
+    "wall_time_seconds_maximum": 28800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "required_pairs_per_hour": 1000.0,
+    "stateless_random_inflight_rule": "CEIL(workers / active_policy_lanes)",
+    "adaptive_inflight_per_policy_lane": 1,
+    "cache_scope": "EXISTING_CANDIDATE_LOCAL_DAG_ONLY",
+    "minimum_free_memory_reserve_bytes": 12884901888
+  },
+  "policy_parameters": {
+    "expanded_mechanism_random_v2_3": {
+      "duplicate_resample_limit": 64
+    },
+    "mechanism_evolution_v2_3": {
+      "duplicate_resample_limit": 64,
+      "warmup": 32,
+      "tournament_size": 4,
+      "population_limit": 256,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2
+    }
+  },
+  "evidence_contract": {
+    "contract_id": "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+    "passive_diagnostics_only": true,
+    "optimizer_feedback_allowed": false,
+    "reward_input_allowed": false,
+    "archive_identity_input_allowed": false,
+    "required_layers": [
+      "TARGET_AND_EXECUTION_CONTRACT",
+      "SEARCH_SPACE_EXPOSURE",
+      "OPTIMIZER_PRODUCTIVITY",
+      "MECHANISM_REALIZATION",
+      "MATCHED_INCREMENT",
+      "EXECUTABLE_BEHAVIOR",
+      "ECONOMIC_WATERFALL"
+    ],
+    "minimum_comparable_candidates_per_reported_stratum": 30,
+    "under_supported_stratum_status": "NOT_OBSERVED_SUFFICIENTLY",
+    "complexity_is_objective": false,
+    "historical_inference_allowed": false
+  },
+  "validation": {
+    "authorized": false,
+    "status": "NOT_AUTHORIZED",
+    "trigger_after_checkpoint_index": 999,
+    "candidate_generation_allowed": false,
+    "optimizer_feedback_allowed": false,
+    "policy_memory_write_allowed": false,
+    "holdout_read": false
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "persistent_mechanism_knowledge": {
+    "declarative_mechanism_specs": true,
+    "aggregate_outcomes": true,
+    "behavior_yield": true,
+    "lifecycle": true,
+    "sampling_probability_prior": false,
+    "individual_candidate_reward": false,
+    "population": false,
+    "cem_distribution": false,
+    "rng_state": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "validation": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "new_fields": false,
+    "new_grammar": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "target_change": false,
+    "cost_change": false,
+    "search_policy_change": false,
+    "reward_change": false,
+    "mapping_change": false,
+    "historical_replay": false,
+    "liquidation": "HOLD"
+  }
+}

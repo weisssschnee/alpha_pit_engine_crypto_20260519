@@ -1794,9 +1794,12 @@ def _v24_bind_control_provenance(
             "primary_vs_left_control",
             "primary_vs_right_control",
         }
+        allowed_comparison_sets = {frozenset(expected_comparisons)}
         if hierarchical_three_axis is True:
-            expected_comparisons.add("ab_vs_interaction_left_control")
-        if set(comparisons) != expected_comparisons:
+            legacy = expected_comparisons | {"ab_vs_interaction_left_control"}
+            complete = legacy | {"ab_vs_interaction_right_control"}
+            allowed_comparison_sets = {frozenset(legacy), frozenset(complete)}
+        if frozenset(comparisons) not in allowed_comparison_sets:
             raise RuntimeError("V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_INVALID")
         for comparison in comparisons.values():
             validated = _v24_validate_control_comparison_provenance(

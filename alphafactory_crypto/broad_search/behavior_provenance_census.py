@@ -421,8 +421,15 @@ def _parse_bound_provenance(
             raise ValueError("PAIR_PROVENANCE_COMPARISONS_MISSING")
         comparison_ids = set(comparisons)
         binary = {"primary_vs_left_control", "primary_vs_right_control"}
-        hierarchical = binary | {"ab_vs_interaction_left_control"}
-        if comparison_ids not in (binary, hierarchical):
+        hierarchical_legacy = binary | {"ab_vs_interaction_left_control"}
+        hierarchical_complete = hierarchical_legacy | {
+            "ab_vs_interaction_right_control"
+        }
+        if comparison_ids not in (
+            binary,
+            hierarchical_legacy,
+            hierarchical_complete,
+        ):
             raise ValueError("PAIR_PROVENANCE_COMPARISON_SET_CHANGED")
         for comparison_id, comparison in sorted(comparisons.items()):
             if not isinstance(comparison, Mapping):
