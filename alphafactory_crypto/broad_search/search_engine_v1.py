@@ -278,6 +278,23 @@ SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT = 4
 SEARCH_EVIDENCE_V1_STRICT_TARGET = 8_000
 SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT = 50_000
 SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS = 8 * 60 * 60
+SEARCH_EVIDENCE_V11_CAMPAIGN = "crypto_search_run_evidence_v1_1"
+SEARCH_EVIDENCE_V11_EPOCH_ID = "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_1_20260805"
+SEARCH_EVIDENCE_V11_CONFIG = "config/crypto_search_run_evidence_contract_v1_1.json"
+SEARCH_EVIDENCE_V11_SEEDS = (125908376, 3137011914)
+SEARCH_EVIDENCE_V11_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)"
+)
+SEARCH_EVIDENCE_V11_ARMS = MECHANISM_SEARCH_V23_ARMS
+SEARCH_EVIDENCE_V11_CHECKPOINT_SIZE = 2_000
+SEARCH_EVIDENCE_V11_CHECKPOINT_COUNT = 1
+SEARCH_EVIDENCE_V11_STRICT_TARGET = 2_000
+SEARCH_EVIDENCE_V11_RAW_ATTEMPT_LIMIT = 12_500
+SEARCH_EVIDENCE_V11_WALL_TIME_LIMIT_SECONDS = 3 * 60 * 60
+SEARCH_EVIDENCE_CAMPAIGNS = (
+    SEARCH_EVIDENCE_V1_CAMPAIGN,
+    SEARCH_EVIDENCE_V11_CAMPAIGN,
+)
 SEARCH_EVIDENCE_V1_PROVENANCE_COLUMNS = (
     "control_degeneracy_provenance_json",
     "control_degeneracy_provenance_sha256",
@@ -345,6 +362,7 @@ ECONOMIC_SEARCH_CAMPAIGNS = (
     MECHANISM_SEARCH_V22_CAMPAIGN,
     MECHANISM_SEARCH_V23_CAMPAIGN,
     SEARCH_EVIDENCE_V1_CAMPAIGN,
+    SEARCH_EVIDENCE_V11_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -478,6 +496,8 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "report_prefix": "CRYPTO_SEARCH_RUN_EVIDENCE_V1",
         "report_title": "Crypto Search Run Evidence Contract V1",
         "receipt_path": "config/crypto_search_run_evidence_v1_receipt.json",
+        "contract_path": SEARCH_EVIDENCE_V1_CONFIG,
+        "authorization": "ONE_FRESH_STATE_8000_STRICT_DEVELOPMENT_EVIDENCE_RUN",
         "cli_suffix": "evidence-v1",
         "seeds": SEARCH_EVIDENCE_V1_SEEDS,
         "seed_derivation": SEARCH_EVIDENCE_V1_SEED_DERIVATION,
@@ -489,6 +509,31 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "arms": SEARCH_EVIDENCE_V1_ARMS,
         "validation_required": False,
         "behavior_provenance_required": True,
+        "decision_status": "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE",
+        "search_engine_version": "SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+    },
+    SEARCH_EVIDENCE_V11_CAMPAIGN: {
+        "epoch_id": SEARCH_EVIDENCE_V11_EPOCH_ID,
+        "runtime_date": "20260805",
+        "runtime_prefix": "crypto_search_run_evidence_v1_1",
+        "report_prefix": "CRYPTO_SEARCH_RUN_EVIDENCE_V1_1",
+        "report_title": "Crypto Search Run Evidence V1.1 First Checkpoint",
+        "receipt_path": "config/crypto_search_run_evidence_v1_1_receipt.json",
+        "contract_path": SEARCH_EVIDENCE_V11_CONFIG,
+        "authorization": "ONE_FRESH_STATE_2000_STRICT_DEVELOPMENT_EVIDENCE_CHECKPOINT",
+        "cli_suffix": "evidence-v1-1",
+        "seeds": SEARCH_EVIDENCE_V11_SEEDS,
+        "seed_derivation": SEARCH_EVIDENCE_V11_SEED_DERIVATION,
+        "strict_target": SEARCH_EVIDENCE_V11_STRICT_TARGET,
+        "checkpoint_size": SEARCH_EVIDENCE_V11_CHECKPOINT_SIZE,
+        "checkpoint_count": SEARCH_EVIDENCE_V11_CHECKPOINT_COUNT,
+        "raw_attempt_limit": SEARCH_EVIDENCE_V11_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": SEARCH_EVIDENCE_V11_WALL_TIME_LIMIT_SECONDS,
+        "arms": SEARCH_EVIDENCE_V11_ARMS,
+        "validation_required": False,
+        "behavior_provenance_required": True,
+        "decision_status": "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE",
+        "search_engine_version": "SEARCH_RUN_EVIDENCE_CONTRACT_V1_1",
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -657,7 +702,7 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
     seeds = tuple(int(value) for value in config.get("seeds", SEEDS))
     expected_seed_count = (
         2
-        if campaign in {MECHANISM_SEARCH_V23_CAMPAIGN, SEARCH_EVIDENCE_V1_CAMPAIGN}
+        if campaign in {MECHANISM_SEARCH_V23_CAMPAIGN, *SEARCH_EVIDENCE_CAMPAIGNS}
         else len(SEEDS)
     )
     if len(seeds) != expected_seed_count or len(set(seeds)) != len(seeds):
@@ -769,6 +814,31 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
         )
         if set(seeds) & prior:
             raise ValueError("Search Evidence V1 seed set overlaps a prior campaign")
+    if campaign == SEARCH_EVIDENCE_V11_CAMPAIGN:
+        expected = tuple(
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{SEARCH_EVIDENCE_V11_EPOCH_ID}|seed|{ordinal}".encode()
+                ).digest()[:4],
+                "big",
+            )
+            for ordinal in range(2)
+        )
+        if seeds != SEARCH_EVIDENCE_V11_SEEDS or seeds != expected:
+            raise ValueError("Search Evidence V1.1 seed set changed")
+        if config.get("seed_derivation") != SEARCH_EVIDENCE_V11_SEED_DERIVATION:
+            raise ValueError("Search Evidence V1.1 seed derivation changed")
+        prior = (
+            set(SEEDS)
+            | set(ECONOMIC_SEARCH_V6_SEEDS)
+            | set(MECHANISM_SEARCH_V2_SEEDS)
+            | set(MECHANISM_SEARCH_V21_SEEDS)
+            | set(MECHANISM_SEARCH_V22_SEEDS)
+            | set(MECHANISM_SEARCH_V23_SEEDS)
+            | set(SEARCH_EVIDENCE_V1_SEEDS)
+        )
+        if set(seeds) & prior:
+            raise ValueError("Search Evidence V1.1 seed set overlaps a prior campaign")
     return seeds
 
 
@@ -2328,8 +2398,11 @@ def _search_evidence_v1_frozen_contract(
     environment: Mapping[str, Any],
     contracts: Sequence[FieldContract],
     carrier_id: str,
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> dict[str, Any]:
-    config, _, _ = _load_search_evidence_v1_contract(repo_root)
+    campaign_meta = _economic_campaign_config(campaign)
+    campaign_seeds = _economic_campaign_seeds(campaign)
+    config, _, _ = _load_search_evidence_v1_contract(repo_root, campaign=campaign)
     inherited = _mechanism_v23_frozen_contract(
         repo_root=repo_root,
         source_sha=source_sha,
@@ -2345,17 +2418,17 @@ def _search_evidence_v1_frozen_contract(
     }
     payload.update(
         {
-            "epoch_id": SEARCH_EVIDENCE_V1_EPOCH_ID,
-            "search_engine_version": "SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+            "epoch_id": campaign_meta["epoch_id"],
+            "search_engine_version": campaign_meta["search_engine_version"],
             "objective": (
                 "Run an unchanged V2.3 Random/Evolution development search while "
                 "joining target, exposure, optimizer, realization, matched, behavior, "
                 "economic, and lineage evidence without feeding diagnostics back"
             ),
             "authorization": config["authorization"],
-            "seeds": [int(value) for value in SEARCH_EVIDENCE_V1_SEEDS],
+            "seeds": [int(value) for value in campaign_seeds],
             "seed_contract": {
-                "derivation": SEARCH_EVIDENCE_V1_SEED_DERIVATION,
+                "derivation": campaign_meta["seed_derivation"],
                 "pre_registered_before_candidate_one": True,
                 "disjoint_from_all_prior_crypto_search_campaigns": True,
                 "within_campaign_seed_change_allowed": False,
@@ -2363,7 +2436,7 @@ def _search_evidence_v1_frozen_contract(
             },
             "stages": list(config["stages"]),
             "arms": {
-                "active": list(SEARCH_EVIDENCE_V1_ARMS),
+                "active": list(campaign_meta["arms"]),
                 "same_frozen_seed_set_for_every_arm": True,
                 "arm_local_adaptive_memory": True,
                 "random_role": "UNCHANGED_V2_3_COMPARATOR",
@@ -5591,7 +5664,7 @@ def _policy_inflight_limit(
         MECHANISM_SEARCH_V21_CAMPAIGN,
         MECHANISM_SEARCH_V22_CAMPAIGN,
         MECHANISM_SEARCH_V23_CAMPAIGN,
-        SEARCH_EVIDENCE_V1_CAMPAIGN,
+        *SEARCH_EVIDENCE_CAMPAIGNS,
     } and type(policy) is MechanismRandomV2:
         return max(1, int(math.ceil(int(workers) / max(1, int(active_lane_count)))))
     return 1
@@ -6060,23 +6133,26 @@ def _load_mechanism_v23_contract(
 
 def _load_search_evidence_v1_contract(
     repo_root: Path,
+    *,
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> tuple[dict[str, Any], tuple[MechanismSpec, ...], dict[str, Any]]:
     """Load the evidence run as immutable reuse of the V2.3 search policy."""
 
-    config = _read_json(repo_root / SEARCH_EVIDENCE_V1_CONFIG)
-    if config.get("authorization") != (
-        "ONE_FRESH_STATE_8000_STRICT_DEVELOPMENT_EVIDENCE_RUN"
-    ):
-        raise PermissionError("Search Evidence V1 authorization changed")
+    campaign_meta = _economic_campaign_config(campaign)
+    if campaign not in SEARCH_EVIDENCE_CAMPAIGNS:
+        raise ValueError("unsupported Search Evidence campaign")
+    config = _read_json(repo_root / str(campaign_meta["contract_path"]))
+    if config.get("authorization") != campaign_meta["authorization"]:
+        raise PermissionError("Search Evidence authorization changed")
     if any(bool(value) for value in config.get("fresh_state", {}).values()):
         raise PermissionError("Search Evidence V1 imported prior adaptive state")
     search = dict(config.get("search") or {})
     expected = {
-        "strict_evaluated_target": SEARCH_EVIDENCE_V1_STRICT_TARGET,
-        "checkpoint_size": SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE,
-        "checkpoint_count": SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT,
-        "raw_generation_attempts_maximum": SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT,
-        "wall_time_seconds_maximum": SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        "strict_evaluated_target": int(campaign_meta["strict_target"]),
+        "checkpoint_size": int(campaign_meta["checkpoint_size"]),
+        "checkpoint_count": int(campaign_meta["checkpoint_count"]),
+        "raw_generation_attempts_maximum": int(campaign_meta["raw_attempt_limit"]),
+        "wall_time_seconds_maximum": int(campaign_meta["wall_time_limit_seconds"]),
     }
     if any(int(search.get(key, -1)) != value for key, value in expected.items()):
         raise ValueError("Search Evidence V1 budget changed")
@@ -6088,19 +6164,22 @@ def _load_search_evidence_v1_contract(
         raise PermissionError("Search Evidence V1 worker boundary changed")
     if not math.isclose(
         float(search.get("required_pairs_per_hour", -1.0)),
-        SEARCH_EVIDENCE_V1_STRICT_TARGET
+        int(campaign_meta["strict_target"])
         * 3600.0
-        / SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        / int(campaign_meta["wall_time_limit_seconds"]),
         rel_tol=0.0,
         abs_tol=1.0e-9,
     ):
         raise ValueError("Search Evidence V1 throughput floor changed")
     allocations = _search_evidence_v1_expected_checkpoint_allocations(
         stages=config.get("stages") or (),
-        seeds=SEARCH_EVIDENCE_V1_SEEDS,
+        seeds=_economic_campaign_seeds(campaign),
+        arms=tuple(campaign_meta["arms"]),
+        checkpoint_size=int(campaign_meta["checkpoint_size"]),
+        checkpoint_count=int(campaign_meta["checkpoint_count"]),
     )
     if sum(sum(row.values()) for row in allocations.values()) != (
-        SEARCH_EVIDENCE_V1_STRICT_TARGET
+        int(campaign_meta["strict_target"])
     ):
         raise ValueError("Search Evidence V1 stage total changed")
     v23_config, catalog, knowledge = _load_mechanism_v23_contract(repo_root)
@@ -6146,6 +6225,7 @@ def _load_search_evidence_v1_contract(
         "reward_change",
         "mapping_change",
         "historical_replay",
+        "automatic_expansion",
     )
     if any(bool(config["boundaries"].get(key)) for key in forbidden):
         raise PermissionError("Search Evidence V1 crossed a research boundary")
@@ -7055,6 +7135,9 @@ def _search_evidence_v1_expected_checkpoint_allocations(
     *,
     stages: Sequence[Mapping[str, Any]],
     seeds: Sequence[int],
+    arms: Sequence[str] = SEARCH_EVIDENCE_V1_ARMS,
+    checkpoint_size: int = SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE,
+    checkpoint_count: int = SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT,
 ) -> dict[int, dict[str, int]]:
     checkpoint_allocations: dict[int, dict[str, int]] = {}
     for stage in stages:
@@ -7065,11 +7148,11 @@ def _search_evidence_v1_expected_checkpoint_allocations(
         indexes = tuple(int(value) for value in stage["checkpoint_indexes"])
         if (
             not indexes
-            or set(allocation) != set(SEARCH_EVIDENCE_V1_ARMS)
+            or set(allocation) != set(arms)
             or any(count < 0 for count in allocation.values())
-            or sum(allocation.values()) != SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE
+            or sum(allocation.values()) != int(checkpoint_size)
             or int(stage["strict_count"])
-            != len(indexes) * SEARCH_EVIDENCE_V1_CHECKPOINT_SIZE
+            != len(indexes) * int(checkpoint_size)
             or any(value % len(seeds) for value in allocation.values())
         ):
             raise ValueError("Search Evidence V1 frozen stage allocation is invalid")
@@ -7079,7 +7162,7 @@ def _search_evidence_v1_expected_checkpoint_allocations(
             checkpoint_allocations[checkpoint_index] = {
                 arm: count for arm, count in allocation.items() if count
             }
-    if set(checkpoint_allocations) != set(range(SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT)):
+    if set(checkpoint_allocations) != set(range(int(checkpoint_count))):
         raise ValueError("Search Evidence V1 stages do not cover the campaign")
     return checkpoint_allocations
 
@@ -7089,11 +7172,16 @@ def _search_evidence_v1_checkpoint_allocation(
     *,
     repo_root: Path,
     seeds: Sequence[int],
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> dict[str, int]:
-    config, _, _ = _load_search_evidence_v1_contract(repo_root)
+    campaign_meta = _economic_campaign_config(campaign)
+    config, _, _ = _load_search_evidence_v1_contract(repo_root, campaign=campaign)
     allocations = _search_evidence_v1_expected_checkpoint_allocations(
         stages=config.get("stages") or (),
         seeds=seeds,
+        arms=tuple(campaign_meta["arms"]),
+        checkpoint_size=int(campaign_meta["checkpoint_size"]),
+        checkpoint_count=int(campaign_meta["checkpoint_count"]),
     )
     try:
         return dict(allocations[int(checkpoint_index)])
@@ -8537,6 +8625,7 @@ def _write_search_evidence_v1_artifacts(
     state: Mapping[str, Any],
     economic_receipt: Mapping[str, Any],
     config: Mapping[str, Any],
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> dict[str, Any]:
     """Join existing run facts into one passive, run-local evidence table."""
 
@@ -8619,7 +8708,8 @@ def _write_search_evidence_v1_artifacts(
     _write_parquet(runtime_root / "search_exposure_strata.parquet", exposure_rows)
 
     arm_funnel: dict[str, Any] = {}
-    for arm in SEARCH_EVIDENCE_V1_ARMS:
+    campaign_meta = _economic_campaign_config(campaign)
+    for arm in tuple(campaign_meta["arms"]):
         local = evidence.loc[evidence["arm"].astype(str) == arm]
         successful = local.loc[local["strict_evaluated"].fillna(False).astype(bool)]
         counter = dict(state["arm_counters"][arm])
@@ -8690,6 +8780,7 @@ def _write_search_evidence_v1_artifacts(
             "oos": "NOT_AUTHORIZED",
         },
         "strict_evaluated_count": int(len(ledger)),
+        "joined_strict_provenance_count": int(len(successful)),
         "behavior_attributed_proposal_count": int(len(evidence)),
         "control_degenerate_count": int(len(failures)),
         "arm_funnel": arm_funnel,
@@ -8727,6 +8818,7 @@ def _write_search_evidence_v1_artifacts(
         "diagnostics_used_by_reward": False,
         "diagnostics_used_by_archive_identity": False,
         "historical_inference_performed": False,
+        "question_scope": dict(config.get("question_scope") or {}),
         "sealed_reads": 0,
     }
     _write_json(runtime_root / "search_run_evidence_summary.json", summary)
@@ -9835,24 +9927,39 @@ def _search_evidence_v1_final_decision(
     archive: BehaviorArchive,
     runtime_root: Path,
     evidence_summary: Mapping[str, Any],
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> dict[str, Any]:
-    config, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    campaign_meta = _economic_campaign_config(campaign)
+    config, catalog, _ = _load_search_evidence_v1_contract(
+        repo_root, campaign=campaign
+    )
     checkpoints = sorted(
         (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
     )
-    if len(ledger) != SEARCH_EVIDENCE_V1_STRICT_TARGET:
+    if len(ledger) != int(campaign_meta["strict_target"]):
         raise RuntimeError("Search Evidence V1 terminal strict count is incomplete")
+    joined_strict_count = int(
+        evidence_summary.get("joined_strict_provenance_count", -1)
+    )
+    if (
+        campaign == SEARCH_EVIDENCE_V11_CAMPAIGN
+        and joined_strict_count != len(ledger)
+    ):
+        raise RuntimeError(
+            "Search Evidence V1.1 strict provenance join is incomplete"
+        )
     return {
         "schema_version": 1,
-        "epoch_id": SEARCH_EVIDENCE_V1_EPOCH_ID,
-        "status": "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE",
+        "epoch_id": campaign_meta["epoch_id"],
+        "status": campaign_meta["decision_status"],
         "reason": "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE",
         "producer_source_sha": source_sha,
         "strict_evaluated_count": len(ledger),
+        "joined_strict_provenance_count": joined_strict_count,
         "generation_attempts": int(state["generation_attempts"]),
-        "raw_attempt_limit": SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT,
+        "raw_attempt_limit": int(campaign_meta["raw_attempt_limit"]),
         "active_wall_seconds": float(state["wall_elapsed_seconds"]),
-        "wall_time_limit_seconds": SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS,
+        "wall_time_limit_seconds": int(campaign_meta["wall_time_limit_seconds"]),
         "checkpoint_count": len(checkpoints),
         "checkpoint_restore_verified": all(
             bool(_read_json(path / "manifest.json").get("restore_verified"))
@@ -9898,13 +10005,13 @@ def _search_evidence_v1_report_text(decision: Mapping[str, Any]) -> str:
                 positive=int(values["matched_positive"]),
             )
         )
-    return f"""# Crypto Search Run Evidence Contract V1
+    return f"""# {decision.get('report_title', 'Crypto Search Run Evidence Contract V1')}
 
 - Status: `{decision['status']}`; development-only; sealed reads `0`.
 - Producer source: `{decision['producer_source_sha']}`.
 - Strict evaluated: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
 - Behavior-attributed proposals: `{summary['behavior_attributed_proposal_count']:,}`; control-degenerate: `{summary['control_degenerate_count']:,}`.
-- Checkpoints: `{decision['checkpoint_count']}/4`; exact restore: `{decision['checkpoint_restore_verified']}`.
+- Checkpoints: `{decision['checkpoint_count']}/{sum(len(stage['checkpoint_indexes']) for stage in decision['stage_contract'])}`; exact restore: `{decision['checkpoint_restore_verified']}`.
 - Validation/OOS/promotion: `NOT_AUTHORIZED` / `NOT_AUTHORIZED` / `FORBIDDEN`.
 
 | Arm | Raw attempts | Behavior attributed | Strict | Control-degenerate | Families | Matched positive |
@@ -10452,8 +10559,10 @@ def _write_mechanism_v2_knowledge(
     validation_result: Mapping[str, Any],
     campaign: str = MECHANISM_SEARCH_V2_CAMPAIGN,
 ) -> None:
-    if campaign == SEARCH_EVIDENCE_V1_CAMPAIGN:
-        _, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    if campaign in SEARCH_EVIDENCE_CAMPAIGNS:
+        _, catalog, _ = _load_search_evidence_v1_contract(
+            repo_root, campaign=campaign
+        )
     elif campaign == MECHANISM_SEARCH_V23_CAMPAIGN:
         _, catalog, _ = _load_mechanism_v23_contract(repo_root)
     elif campaign == MECHANISM_SEARCH_V22_CAMPAIGN:
@@ -15070,7 +15179,7 @@ def run_engine(
     is_mechanism_v21 = campaign == MECHANISM_SEARCH_V21_CAMPAIGN
     is_mechanism_v22 = campaign == MECHANISM_SEARCH_V22_CAMPAIGN
     is_mechanism_v23 = campaign == MECHANISM_SEARCH_V23_CAMPAIGN
-    is_search_evidence_v1 = campaign == SEARCH_EVIDENCE_V1_CAMPAIGN
+    is_search_evidence_v1 = campaign in SEARCH_EVIDENCE_CAMPAIGNS
     is_mechanism_campaign = (
         is_mechanism_v2
         or is_mechanism_v21
@@ -15317,6 +15426,7 @@ def run_engine(
             environment=environment,
             contracts=contracts,
             carrier_id=str(carrier_id),
+            campaign=campaign,
         )
     elif is_mechanism_v23:
         frozen = _mechanism_v23_frozen_contract(
@@ -15773,6 +15883,7 @@ def run_engine(
                     checkpoint_index,
                     repo_root=repo_root,
                     seeds=campaign_seeds,
+                    campaign=campaign,
                 )
                 if is_search_evidence_v1
                 else _mechanism_v23_checkpoint_allocation(
@@ -16510,7 +16621,7 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    SEARCH_EVIDENCE_V1_ARMS
+                    tuple(economic_config["arms"])
                     if is_search_evidence_v1
                     else MECHANISM_SEARCH_V23_ARMS
                     if is_mechanism_v23
@@ -16911,7 +17022,10 @@ def run_engine(
             ledger=ledger,
             state=state,
             economic_receipt=economic_receipt or {},
-            config=_load_search_evidence_v1_contract(repo_root)[0],
+            config=_load_search_evidence_v1_contract(
+                repo_root, campaign=campaign
+            )[0],
+            campaign=campaign,
         )
         if is_search_evidence_v1
         else None
@@ -16925,6 +17039,7 @@ def run_engine(
             archive=archive,
             runtime_root=runtime_root,
             evidence_summary=evidence_summary or {},
+            campaign=campaign,
         )
         if is_search_evidence_v1
         else _mechanism_v23_final_decision(
@@ -22493,8 +22608,10 @@ def check_search_evidence_v1(
     repo_root: Path,
     *,
     runtime_date: str = "20260804",
+    campaign: str = SEARCH_EVIDENCE_V1_CAMPAIGN,
 ) -> dict[str, Any]:
-    config = _economic_campaign_config(SEARCH_EVIDENCE_V1_CAMPAIGN)
+    config = _economic_campaign_config(campaign)
+    campaign_seeds = _economic_campaign_seeds(campaign)
     runtime_root = repo_root / f"runtime/{config['runtime_prefix']}_{runtime_date}"
     report_path = repo_root / f"reports/{config['report_prefix']}_{runtime_date}.md"
     required = (
@@ -22526,18 +22643,20 @@ def check_search_evidence_v1(
     failures = pd.read_parquet(runtime_root / "search_failure_evidence.parquet")
     evidence = pd.read_parquet(runtime_root / "search_run_evidence.parquet")
     exposure = pd.read_parquet(runtime_root / "search_exposure_strata.parquet")
-    campaign_contract, catalog, _ = _load_search_evidence_v1_contract(repo_root)
+    campaign_contract, catalog, _ = _load_search_evidence_v1_contract(
+        repo_root, campaign=campaign
+    )
     frozen_body = {
         key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
     }
     if _payload_sha(frozen_body) != frozen.get("frozen_contract_sha256"):
         errors.append("frozen_contract_sha256")
     if (
-        frozen.get("epoch_id") != SEARCH_EVIDENCE_V1_EPOCH_ID
+        frozen.get("epoch_id") != config["epoch_id"]
         or frozen.get("source_sha") != manifest.get("producer_source_sha")
         or frozen.get("authorization") != campaign_contract["authorization"]
         or tuple(int(value) for value in frozen.get("seeds") or ())
-        != SEARCH_EVIDENCE_V1_SEEDS
+        != campaign_seeds
         or dict(frozen.get("policies") or {})
         != dict(campaign_contract["policy_parameters"])
         or dict(frozen.get("evidence_contract") or {})
@@ -22545,11 +22664,11 @@ def check_search_evidence_v1(
     ):
         errors.append("frozen_contract")
     if (
-        len(ledger) != SEARCH_EVIDENCE_V1_STRICT_TARGET
+        len(ledger) != int(config["strict_target"])
         or ledger["candidate_id"].astype(str).nunique() != len(ledger)
-        or set(ledger["arm"].astype(str).unique()) != set(SEARCH_EVIDENCE_V1_ARMS)
+        or set(ledger["arm"].astype(str).unique()) != set(config["arms"])
         or set(int(value) for value in ledger["seed"].unique())
-        != set(SEARCH_EVIDENCE_V1_SEEDS)
+        != set(campaign_seeds)
     ):
         errors.append("strict_ledger_identity")
     errors.extend(_search_evidence_provenance_errors(ledger))
@@ -22589,15 +22708,22 @@ def check_search_evidence_v1(
         or summary.get("historical_inference_performed") is not False
     ):
         errors.append("evidence_summary")
+    if campaign == SEARCH_EVIDENCE_V11_CAMPAIGN and int(
+        summary.get("joined_strict_provenance_count", -1)
+    ) != len(ledger):
+        errors.append("joined_strict_provenance_count")
     try:
         expected_allocations = _search_evidence_v1_expected_checkpoint_allocations(
             stages=frozen.get("stages") or (),
-            seeds=SEARCH_EVIDENCE_V1_SEEDS,
+            seeds=campaign_seeds,
+            arms=tuple(config["arms"]),
+            checkpoint_size=int(config["checkpoint_size"]),
+            checkpoint_count=int(config["checkpoint_count"]),
         )
     except (KeyError, TypeError, ValueError, ZeroDivisionError):
         expected_allocations = {}
         errors.append("frozen_stage_contract")
-    for checkpoint_index in range(SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT):
+    for checkpoint_index in range(int(config["checkpoint_count"])):
         local = ledger.loc[ledger["checkpoint_index"].astype(int) == checkpoint_index]
         observed = {
             str(arm): int(count) for arm, count in local.groupby("arm").size().items()
@@ -22607,7 +22733,7 @@ def check_search_evidence_v1(
     checkpoints = sorted(
         (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
     )
-    if len(checkpoints) != SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT:
+    if len(checkpoints) != int(config["checkpoint_count"]):
         errors.append("checkpoint_count")
     elif not all(
         bool(_read_json(path / "manifest.json").get("restore_verified"))
@@ -22615,7 +22741,7 @@ def check_search_evidence_v1(
     ):
         errors.append("checkpoint_restore")
     if (
-        decision.get("status") != "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE"
+        decision.get("status") != config["decision_status"]
         or decision.get("validation_status") != "NOT_AUTHORIZED"
         or decision.get("alpha_claim") is not False
         or decision.get("oos") is not False
@@ -22624,12 +22750,12 @@ def check_search_evidence_v1(
         or decision.get("rescue_rerun_started") is not False
     ):
         errors.append("final_decision")
-    if int(decision.get("generation_attempts", SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT + 1)) > (
-        SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT
+    if int(decision.get("generation_attempts", int(config["raw_attempt_limit"]) + 1)) > (
+        int(config["raw_attempt_limit"])
     ):
         errors.append("raw_attempt_budget")
-    if float(decision.get("active_wall_seconds", SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS + 1)) > (
-        SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS
+    if float(decision.get("active_wall_seconds", int(config["wall_time_limit_seconds"]) + 1)) > (
+        int(config["wall_time_limit_seconds"])
     ):
         errors.append("wall_time_budget")
     manifest_paths = {str(item.get("path") or "") for item in manifest.get("artifacts", [])}
@@ -22704,6 +22830,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-mechanism-v2-3",
             "run-evidence-v1",
             "check-evidence-v1",
+            "run-evidence-v1-1",
+            "check-evidence-v1-1",
             "assess-evidence-v1-repair",
             "run-oos-v2-3",
             "check-oos-v2-3",
@@ -22743,6 +22871,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-mechanism-v2-2": MECHANISM_SEARCH_V22_CAMPAIGN,
         "run-mechanism-v2-3": MECHANISM_SEARCH_V23_CAMPAIGN,
         "run-evidence-v1": SEARCH_EVIDENCE_V1_CAMPAIGN,
+        "run-evidence-v1-1": SEARCH_EVIDENCE_V11_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -22896,6 +23025,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=SEARCH_EVIDENCE_V1_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-evidence-v1-1":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260805"),
+            source_sha=args.source_sha,
+            campaign=SEARCH_EVIDENCE_V11_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "run-oos-v2-3":
         result = run_v23_frozen_oos_replay(
             repo_root,
@@ -23036,6 +23173,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_search_evidence_v1(
             repo_root,
             runtime_date=str(args.runtime_date or "20260804"),
+        )
+    elif args.command == "check-evidence-v1-1":
+        result = check_search_evidence_v1(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260805"),
+            campaign=SEARCH_EVIDENCE_V11_CAMPAIGN,
         )
     elif args.command == "assess-evidence-v1-repair":
         result = assess_search_evidence_v1_repair(

@@ -19,6 +19,9 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     SEARCH_EVIDENCE_V1_ARMS,
     SEARCH_EVIDENCE_V1_CAMPAIGN,
     SEARCH_EVIDENCE_V1_SEEDS,
+    SEARCH_EVIDENCE_V11_ARMS,
+    SEARCH_EVIDENCE_V11_CAMPAIGN,
+    SEARCH_EVIDENCE_V11_SEEDS,
     _economic_campaign_seeds,
     _ledger_row,
     _load_search_evidence_v1_contract,
@@ -138,6 +141,77 @@ def test_evidence_campaign_receipt_is_consumed_after_verification_failure() -> N
     assert receipt["search_campaign"]["runner_campaign"] == (
         SEARCH_EVIDENCE_V1_CAMPAIGN
     )
+    assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
+    assert receipt["holdout"]["read_allowed"] is False
+
+
+def test_evidence_v11_freezes_one_fresh_checkpoint_without_policy_change() -> None:
+    config, catalog, _ = _load_search_evidence_v1_contract(
+        REPO_ROOT, campaign=SEARCH_EVIDENCE_V11_CAMPAIGN
+    )
+    allocations = _search_evidence_v1_expected_checkpoint_allocations(
+        stages=config["stages"],
+        seeds=SEARCH_EVIDENCE_V11_SEEDS,
+        arms=SEARCH_EVIDENCE_V11_ARMS,
+        checkpoint_size=2000,
+        checkpoint_count=1,
+    )
+
+    assert len(catalog) > 0
+    assert _economic_campaign_seeds(SEARCH_EVIDENCE_V11_CAMPAIGN) == (
+        SEARCH_EVIDENCE_V11_SEEDS
+    )
+    assert allocations == {
+        0: {arm: 1000 for arm in SEARCH_EVIDENCE_V11_ARMS}
+    }
+    expected_search_values = {
+        "strict_evaluated_target": 2000,
+        "checkpoint_size": 2000,
+        "checkpoint_count": 1,
+        "raw_generation_attempts_maximum": 12500,
+        "wall_time_seconds_maximum": 10800,
+    }
+    assert {
+        key: config["search"][key] for key in expected_search_values
+    } == expected_search_values
+    assert config["validation"]["authorized"] is False
+    assert config["boundaries"]["automatic_expansion"] is False
+    assert config["question_scope"]["Q03_ACTUAL_EXPOSURE"] == "IN_SCOPE"
+    assert config["question_scope"]["Q15_MIGRATION"].startswith(
+        "NOT_AUTHORIZED"
+    )
+
+
+def test_evidence_v11_receipt_is_one_time_authorized_and_hash_bound() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_run_evidence_v1_1_receipt.json",
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["run_outcome"] == {}
+    assert receipt["search_campaign"] == {
+        "runner_campaign": SEARCH_EVIDENCE_V11_CAMPAIGN,
+        "runtime_date": "20260805",
+        "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+        "carrier_manifest": (
+            "runtime/crypto_search_engine_v1_4_oi_flow_20260728/"
+            "aligned_carrier_manifest.json"
+        ),
+        "carrier_cache_identity_sha256": (
+            "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA"
+        ),
+        "field_count": 115,
+        "strict_evaluated_target": 2000,
+        "checkpoint_size": 2000,
+        "checkpoint_count": 1,
+        "fresh_state": True,
+        "seed_set": list(SEARCH_EVIDENCE_V11_SEEDS),
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)"
+        ),
+    }
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
 
