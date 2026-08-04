@@ -219,6 +219,16 @@ def test_v25_legacy_ledger_reports_unknown_not_fake_zero() -> None:
     assert result["candidate_provenance"].empty
     assert result["stage_counts"].empty
     assert result["funnel"].empty
+    contract = load_behavior_provenance_census_contract(REPO_ROOT)
+    assert list(result["candidate_provenance"].columns) == contract[
+        "output_schemas"
+    ]["candidate_behavior_provenance.parquet"]
+    assert list(result["stage_counts"].columns) == contract[
+        "output_schemas"
+    ]["degeneracy_stage_counts.parquet"]
+    assert list(result["funnel"].columns) == contract["output_schemas"][
+        "search_policy_funnel.parquet"
+    ]
 
 
 def test_v25_counts_first_equal_stage_exclusively_and_slices_funnel() -> None:
@@ -373,12 +383,15 @@ def test_v25_writer_persists_explicit_legacy_unknown_bundle(
     assert pd.read_parquet(
         output / "degeneracy_stage_counts.parquet"
     ).empty
+    for name, columns in contract["output_schemas"].items():
+        assert list(pd.read_parquet(output / name).columns) == columns
     manifest = json.loads(
         (output / "run_manifest.json").read_text(encoding="utf-8")
     )
     assert manifest["market_read_performed"] is False
     assert manifest["candidate_replay_performed"] is False
     assert manifest["reward_or_policy_feedback_written"] is False
+    assert "\\" not in manifest["input_authority"]["source_manifest_path"]
     with pytest.raises(FileExistsError):
         write_behavior_provenance_census(
             REPO_ROOT,

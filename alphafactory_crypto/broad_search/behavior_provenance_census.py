@@ -58,6 +58,56 @@ CONSUMER_COMPONENT_PATHS = (
     "config/crypto_behavior_provenance_census_v1.json",
     "scripts/crypto_behavior_provenance_census.py",
 )
+OUTPUT_SCHEMAS = {
+    "candidate_behavior_provenance.parquet": (
+        "candidate_id",
+        "comparison_id",
+        "stage_ordinal",
+        "stage",
+        "primary_fingerprint",
+        "control_fingerprint",
+        "equal",
+        "mapping_family",
+        "primary_label",
+        "control_label",
+        "arm",
+        "seed",
+        "skeleton_id",
+        "mechanism_family",
+        "horizon_hours",
+        "direction_authority",
+        "first_equal_stage",
+    ),
+    "degeneracy_stage_counts.parquet": (
+        "slice_dimension",
+        "slice_value",
+        "first_equal_stage",
+        "candidate_count",
+        "slice_candidate_count",
+        "candidate_rate",
+    ),
+    "search_policy_funnel.parquet": (
+        "slice_dimension",
+        "slice_value",
+        "proposal_count",
+        "typed_constructible_count",
+        "behavior_unique_count",
+        "control_non_degenerate_count",
+        "strict_evaluated_count",
+        "matched_positive_count",
+        "qualified_candidate_count",
+        "process_cpu_hours",
+        "behavior_unique_per_proposal",
+        "control_non_degenerate_per_proposal",
+        "strict_evaluated_per_proposal",
+        "matched_positive_per_proposal",
+        "qualified_candidate_per_proposal",
+        "behavior_unique_per_cpu_hour",
+        "control_non_degenerate_per_cpu_hour",
+        "strict_evaluated_per_cpu_hour",
+        "matched_positive_per_cpu_hour",
+    ),
+}
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -121,6 +171,11 @@ def load_behavior_provenance_census_contract(
         raise ValueError("BEHAVIOR_CENSUS_CONTRACT_CHANGED:allowed_stages")
     if dict(contract.get("slice_columns") or {}) != SLICE_COLUMNS:
         raise ValueError("BEHAVIOR_CENSUS_CONTRACT_CHANGED:slice_columns")
+    if {
+        name: tuple(columns)
+        for name, columns in dict(contract.get("output_schemas") or {}).items()
+    } != OUTPUT_SCHEMAS:
+        raise ValueError("BEHAVIOR_CENSUS_CONTRACT_CHANGED:output_schemas")
     return contract
 
 
@@ -203,7 +258,7 @@ def _validate_source_manifest(
         if not _git_commit_exists(repo_root, str(manifest.get(key) or "")):
             raise ValueError(f"SOURCE_MANIFEST_COMMIT_INVALID:{key}")
     try:
-        portable_manifest_path = str(manifest_path.relative_to(repo_root.resolve()))
+        portable_manifest_path = manifest_path.relative_to(repo_root.resolve()).as_posix()
     except ValueError:
         portable_manifest_path = str(manifest_path)
     return {
@@ -505,9 +560,17 @@ def build_behavior_provenance_census(
                 "legacy_final_equal_count": int(failures.isin(BEHAVIOR_FAILURES).sum()),
                 "first_equal_stage": None,
             },
-            "candidate_provenance": pd.DataFrame(),
-            "stage_counts": pd.DataFrame(),
-            "funnel": pd.DataFrame(),
+            "candidate_provenance": pd.DataFrame(
+                columns=OUTPUT_SCHEMAS[
+                    "candidate_behavior_provenance.parquet"
+                ]
+            ),
+            "stage_counts": pd.DataFrame(
+                columns=OUTPUT_SCHEMAS["degeneracy_stage_counts.parquet"]
+            ),
+            "funnel": pd.DataFrame(
+                columns=OUTPUT_SCHEMAS["search_policy_funnel.parquet"]
+            ),
         }
     if not bool(present.all()):
         raise ValueError("PARTIAL_PROVENANCE_ROWS")
@@ -647,9 +710,15 @@ def build_behavior_provenance_census(
             "candidate_replay_performed": False,
             "reward_or_policy_feedback_written": False,
         },
-        "candidate_provenance": pd.DataFrame(stage_rows),
-        "stage_counts": pd.DataFrame(stage_counts),
-        "funnel": pd.DataFrame(_funnel_rows(candidates)),
+        "candidate_provenance": pd.DataFrame(stage_rows).reindex(
+            columns=OUTPUT_SCHEMAS["candidate_behavior_provenance.parquet"]
+        ),
+        "stage_counts": pd.DataFrame(stage_counts).reindex(
+            columns=OUTPUT_SCHEMAS["degeneracy_stage_counts.parquet"]
+        ),
+        "funnel": pd.DataFrame(_funnel_rows(candidates)).reindex(
+            columns=OUTPUT_SCHEMAS["search_policy_funnel.parquet"]
+        ),
     }
 
 
@@ -699,7 +768,11 @@ def write_behavior_provenance_census(
             ("degeneracy_stage_counts.parquet", "stage_counts"),
             ("search_policy_funnel.parquet", "funnel"),
         ):
-            result[key].to_parquet(temporary / name, index=False)
+            frame = result[key]
+            expected_columns = list(contract["output_schemas"][name])
+            if list(frame.columns) != expected_columns:
+                raise ValueError(f"CENSUS_OUTPUT_SCHEMA_CHANGED:{name}")
+            frame.to_parquet(temporary / name, index=False)
         artifacts = []
         for path in sorted(temporary.iterdir()):
             artifacts.append(
