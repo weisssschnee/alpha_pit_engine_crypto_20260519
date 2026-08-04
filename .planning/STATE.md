@@ -4,7 +4,7 @@ Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_RUN_EVIDENCE_V1_COMPLETE_ENGINE_VERIFICATION_FAILED`
+`CRYPTO_SEARCH_RUN_EVIDENCE_V1_SOURCE_REPAIRED_HISTORICAL_VERIFICATION_FAILED`
 
 The one-time fresh-state development run is consumed and closed. Producer
 `fea74611c491d2d9a77d8013bc6cdaf427b4fd8c` completed exactly 8,000 strict
@@ -20,16 +20,36 @@ Observed degeneracy is concentrated at SIGNAL, RANK, and SELECTION. These rows
 are diagnostic only and were not used by reward, optimizer, or Behavior Archive
 identity.
 
-The independent PC2 checker and the independent local checker both return
-`FAIL` with artifact bundle SHA256
+The source defect is repaired for future authorized runs: the strict-success
+ledger path now persists the already computed control-degeneracy and
+mechanism-realization payloads, verifies their canonical hashes before writing,
+and projects the declared/active axis counts and realization status. The
+independent checker now verifies payload JSON, canonical hashes, candidate
+binding, and projected values; non-null placeholders cannot satisfy it.
+
+A deterministic, market-free repair assessment of the immutable run artifacts
+is recorded at
+`runtime/crypto_search_run_evidence_v1_20260804/closure_repair_assessment.json`.
+Candidate identities join exactly across all 8,000 strict rows, but none of
+those rows contains either required provenance payload. All 1,769
+control-degenerate failure rows physically carry legacy JSON/hash payloads,
+but their envelope predates the new candidate/spec and control-to-realization
+cross-binding, so the hardened full-provenance observed count is also zero.
+This does not weaken the strict-row loss finding. Consequently the assessment
+is `MARKET_FREE_REPAIR_NOT_POSSIBLE` with
+`fully_joined_strict_observation_count=0` and
+`missing_strict_provenance_count=8000`. Recovering those observations would
+require market re-evaluation, which is not authorized. The original ledger,
+manifest, report, and decision were not rewritten, and no historical stage was
+inferred.
+
+The independent PC2 checker and the hardened local checker therefore correctly
+remain `FAIL` for the historical run with artifact bundle SHA256
 `04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF`.
-The final 8,000-row candidate ledger lacks the seven required joined evidence
-columns: control-degeneracy JSON/hash, mechanism-realization JSON/hash,
-declared-axis count, active-axis count, and realization status. Therefore the
-run proves checkpoint/replay execution and non-empty side evidence, but it does
-not close the candidate-level Search Run Evidence Contract V1 chain and cannot
-support optimizer, mechanism, mapping, reward, Alpha, validation, OOS, or
-promotion conclusions.
+The run proves checkpoint/replay execution and non-empty side evidence, but it
+does not close the candidate-level Search Run Evidence Contract V1 chain and
+cannot support optimizer, mechanism, mapping, reward, Alpha, validation, OOS,
+or promotion conclusions.
 
 The receipt status is
 `RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
@@ -38,7 +58,13 @@ search-policy change, reward change, mapping change, OOS, promotion, new Arena,
 or new Graph node is authorized. Canonical evidence is
 `runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json`;
 the original run report remains an immutable producer artifact and must be read
-together with this failed independent check.
+together with this failed independent check and the market-free repair
+assessment. No search, replay, market-data read, validation/OOS/holdout read,
+or authorization-state change was performed by the source repair.
+
+Focused provenance/evidence verification is 28 passed. The two-axis Standards
+and originating-Spec review is PASS, and the full repository suite is 429
+passed with the existing NumPy degrees-of-freedom warning.
 
 The preceding source implementation record was:
 

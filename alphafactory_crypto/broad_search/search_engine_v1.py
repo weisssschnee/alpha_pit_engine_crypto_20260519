@@ -278,6 +278,52 @@ SEARCH_EVIDENCE_V1_CHECKPOINT_COUNT = 4
 SEARCH_EVIDENCE_V1_STRICT_TARGET = 8_000
 SEARCH_EVIDENCE_V1_RAW_ATTEMPT_LIMIT = 50_000
 SEARCH_EVIDENCE_V1_WALL_TIME_LIMIT_SECONDS = 8 * 60 * 60
+SEARCH_EVIDENCE_V1_PROVENANCE_COLUMNS = (
+    "control_degeneracy_provenance_json",
+    "control_degeneracy_provenance_sha256",
+    "mechanism_realization_json",
+    "mechanism_realization_sha256",
+    "declared_axis_count",
+    "active_axis_count",
+    "mechanism_realization_status",
+)
+SEARCH_EVIDENCE_V1_REALIZATION_STATUSES = frozenset(
+    {
+        "ALL_DECLARED_AXES_ACTIVE",
+        "PARTIAL_DECLARED_AXES_ACTIVE",
+        "NO_DECLARED_AXIS_ACTIVE",
+    }
+)
+SEARCH_EVIDENCE_V1_CONTROL_STAGE_ORDERS = {
+    "CROSS_SECTIONAL_ZERO_NET": (
+        "SIGNAL",
+        "ORIENTED_SIGNAL",
+        "RANK",
+        "NORMALIZED_SCORE",
+        "SELECTION",
+        "CAPPED_WEIGHT",
+        "MAPPED_WEIGHT",
+        "EXECUTABLE_WEIGHT",
+    ),
+    "SPARSE_EVENT_OR_CARRY": (
+        "SIGNAL",
+        "ORIENTED_SIGNAL",
+        "SELECTION",
+        "RAW_WEIGHT",
+        "CAPPED_WEIGHT",
+        "MAPPED_WEIGHT",
+        "EXECUTABLE_WEIGHT",
+    ),
+    "TIME_SERIES_DIRECTIONAL_STATEFUL": (
+        "SIGNAL",
+        "ORIENTED_SIGNAL",
+        "SELECTION",
+        "RAW_WEIGHT",
+        "CAPPED_WEIGHT",
+        "MAPPED_WEIGHT",
+        "EXECUTABLE_WEIGHT",
+    ),
+}
 V23_OOS_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V2_3_FROZEN_OOS_REPLAY_20260803"
 V23_OOS_DEFAULT_RUNTIME_DATE = "20260803"
 V23_OOS_RECEIPT_PATH = "config/crypto_search_v2_3_frozen_oos_receipt.json"
@@ -8117,6 +8163,7 @@ def _ledger_row(
     completion_ordinal: int,
     arm_completion_ordinal: int,
     worker: Mapping[str, Any],
+    require_evidence_provenance: bool = False,
 ) -> dict[str, Any]:
     feedback = evaluation["feedback"]
     violations = [str(value) for value in feedback.get("violations", [])]
@@ -8125,6 +8172,37 @@ def _ledger_row(
     economic_audit = _evaluation_audit_fields(evaluation)
     control_provenance = evaluation.get("control_degeneracy_provenance")
     mechanism_realization = evaluation.get("mechanism_realization_provenance")
+
+    def provenance_payload(value: Any) -> tuple[str | None, str | None]:
+        if not isinstance(value, Mapping):
+            return None, None
+        payload = dict(value)
+        observed_hash = str(payload.get("provenance_sha256") or "")
+        hash_body = {
+            key: item for key, item in payload.items() if key != "provenance_sha256"
+        }
+        if observed_hash != _payload_sha(hash_body):
+            raise RuntimeError("SEARCH_EVIDENCE_PROVENANCE_HASH_MISMATCH")
+        return (
+            json.dumps(
+                payload,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ),
+            observed_hash,
+        )
+
+    control_provenance_json, control_provenance_sha256 = provenance_payload(
+        control_provenance
+    )
+    realization_json, realization_sha256 = provenance_payload(
+        mechanism_realization
+    )
+    if require_evidence_provenance and (
+        control_provenance_json is None or realization_json is None
+    ):
+        raise RuntimeError("SEARCH_EVIDENCE_PROVENANCE_REQUIRED")
     return {
         "completion_ordinal": int(completion_ordinal),
         "arm_completion_ordinal": int(arm_completion_ordinal),
@@ -8178,11 +8256,37 @@ def _ledger_row(
         "expression_hash_verified": bool(proposal["expression_hash_verified"]),
         "policy_state_hash_before": str(proposal["policy_state_hash_before"]),
         "policy_state_hash_after": state_hash_after,
+        "candidate_spec_sha256": _payload_sha(candidate.to_dict()),
         "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
         "compile_valid": True,
         "exact_unique": True,
         "matched_control_valid": True,
         "strict_cost_evaluated": True,
+        "strict_evaluated": True,
+        "control_degeneracy_provenance_json": control_provenance_json,
+        "control_degeneracy_provenance_sha256": control_provenance_sha256,
+        "mechanism_realization_json": realization_json,
+        "mechanism_realization_sha256": realization_sha256,
+        "declared_axis_count": (
+            mechanism_realization.get("declared_axis_count")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "active_axis_count": (
+            mechanism_realization.get("active_axis_count")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "mechanism_realization_status": (
+            mechanism_realization.get("status")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
+        "condition_effect_rate": (
+            mechanism_realization.get("condition_effect_rate")
+            if isinstance(mechanism_realization, Mapping)
+            else None
+        ),
         "new_behavior_family_at_completion": bool(new_family),
         "new_policy_local_behavior_family_at_completion": bool(
             proposal.get(
@@ -16208,6 +16312,7 @@ def run_engine(
                         completion_ordinal=completion_ordinal,
                         arm_completion_ordinal=arm_completion[arm],
                         worker=worker,
+                        require_evidence_provenance=is_search_evidence_v1,
                     )
                     completion_cpu = time.process_time() - completion_cpu_started
                     state["arm_counters"][arm]["cpu_seconds"] += completion_cpu
@@ -21869,6 +21974,521 @@ def check_mechanism_v23(
     }
 
 
+def _search_evidence_provenance_observed_mask(
+    frame: pd.DataFrame,
+) -> pd.Series:
+    return pd.Series(
+        [
+            not _search_evidence_provenance_row_errors(
+                row,
+                require_strict_non_degenerate=(
+                    bool(row.get("strict_evaluated"))
+                    or str(row.get("proposal_status") or "")
+                    == "STRICT_EVALUATED"
+                ),
+            )
+            for row in frame.to_dict(orient="records")
+        ],
+        index=frame.index,
+        dtype=bool,
+    )
+
+
+def _search_evidence_provenance_row_errors(
+    row: Mapping[str, Any],
+    *,
+    require_strict_non_degenerate: bool = False,
+) -> set[str]:
+    errors: set[str] = set()
+    for column in SEARCH_EVIDENCE_V1_PROVENANCE_COLUMNS:
+        value = row.get(column)
+        if value is None or bool(pd.isna(value)):
+            errors.add(f"ledger_evidence:{column}")
+    if errors:
+        return errors
+    if str(row["mechanism_realization_status"]) not in (
+        SEARCH_EVIDENCE_V1_REALIZATION_STATUSES
+    ):
+        errors.add("ledger_evidence:mechanism_realization_status_value")
+    candidate_spec: dict[str, Any] = {}
+    try:
+        candidate_spec = json.loads(str(row["candidate_spec_json"]))
+        candidate_spec_sha256 = _payload_sha(candidate_spec)
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+        candidate_spec_sha256 = ""
+        errors.add("ledger_evidence:candidate_spec_json")
+    if candidate_spec_sha256 != str(row.get("candidate_spec_sha256") or ""):
+        errors.add("ledger_evidence:candidate_spec_hash")
+    if candidate_spec_sha256:
+        candidate_projection = {
+            "candidate_id": row.get("candidate_id"),
+            "skeleton_id": row.get("skeleton_id"),
+            "mechanism_family": row.get("mechanism_family"),
+            "operator_path": row.get("operator_path"),
+            "mapping_id": row.get("mapping_family"),
+            "horizon_hours": row.get("horizon_hours"),
+        }
+        if any(
+            str(candidate_spec.get(key)) != str(value)
+            for key, value in candidate_projection.items()
+        ):
+            errors.add("ledger_evidence:candidate_spec_projection")
+    try:
+        control = json.loads(str(row["control_degeneracy_provenance_json"]))
+        realization = json.loads(str(row["mechanism_realization_json"]))
+    except (TypeError, ValueError, json.JSONDecodeError):
+        errors.add("ledger_evidence:provenance_json")
+        return errors
+    if not isinstance(control, Mapping) or not isinstance(realization, Mapping):
+        errors.add("ledger_evidence:provenance_json")
+        return errors
+    control = dict(control)
+    realization = dict(realization)
+    control_body = {
+        key: value for key, value in control.items() if key != "provenance_sha256"
+    }
+    realization_body = {
+        key: value
+        for key, value in realization.items()
+        if key != "provenance_sha256"
+    }
+    control_hash = str(control.get("provenance_sha256") or "")
+    realization_hash = str(realization.get("provenance_sha256") or "")
+    if (
+        str(row["control_degeneracy_provenance_sha256"]) != control_hash
+        or _payload_sha(control_body) != control_hash
+    ):
+        errors.add("ledger_evidence:control_provenance_hash")
+    if (
+        str(row["mechanism_realization_sha256"]) != realization_hash
+        or _payload_sha(realization_body) != realization_hash
+    ):
+        errors.add("ledger_evidence:mechanism_realization_hash")
+    if (
+        control.get("schema_version") != "CRYPTO_PAIR_CONTROL_PROVENANCE_V1"
+        or realization.get("schema_version")
+        != "CRYPTO_MECHANISM_REALIZATION_PROVENANCE_V1"
+    ):
+        errors.add("ledger_evidence:provenance_schema")
+    candidate_id = str(row.get("candidate_id") or "")
+    if (
+        str(control.get("candidate_id") or "") != candidate_id
+        or str(realization.get("candidate_id") or "") != candidate_id
+        or str(control.get("candidate_spec_sha256") or "")
+        != candidate_spec_sha256
+    ):
+        errors.add("ledger_evidence:candidate_binding")
+    if (
+        str(realization.get("control_degeneracy_provenance_sha256") or "")
+        != control_hash
+    ):
+        errors.add("ledger_evidence:provenance_cross_binding")
+    if (
+        str(realization.get("mechanism_family") or "")
+        != str(candidate_spec.get("mechanism_family") or "")
+        or str(realization.get("skeleton_id") or "")
+        != str(candidate_spec.get("skeleton_id") or "")
+        or str(realization.get("operator_path") or "")
+        != str(candidate_spec.get("operator_path") or "")
+        or realization.get("authority")
+        != (
+            "OUTCOME_FREE_SIGNAL_ABLATION_COMPARISONS_ON_SHARED_SUPPORT_MAPPING_"
+            "HORIZON_AND_EXECUTION"
+        )
+    ):
+        errors.add("ledger_evidence:mechanism_realization_binding")
+    if type(realization.get("hierarchical_three_axis")) is not bool:
+        errors.add("ledger_evidence:mechanism_realization_schema")
+    hierarchical = bool(realization.get("hierarchical_three_axis"))
+    required_comparisons = {
+        "primary_vs_left_control",
+        "primary_vs_right_control",
+        *(
+            {
+                "ab_vs_interaction_left_control",
+                "ab_vs_interaction_right_control",
+            }
+            if hierarchical
+            else set()
+        ),
+    }
+    comparison_labels = {
+        "primary_vs_left_control": ("primary", "left_control"),
+        "primary_vs_right_control": ("primary", "right_control"),
+        "ab_vs_interaction_left_control": (
+            "ab_control",
+            "interaction_left_control",
+        ),
+        "ab_vs_interaction_right_control": (
+            "ab_control",
+            "interaction_right_control",
+        ),
+    }
+    comparisons = control.get("comparisons")
+    if not isinstance(comparisons, Mapping) or set(comparisons) != required_comparisons:
+        errors.add("ledger_evidence:control_comparison_set")
+    else:
+        for comparison_id, comparison in comparisons.items():
+            if not isinstance(comparison, Mapping):
+                errors.add("ledger_evidence:control_comparison_schema")
+                continue
+            comparison = dict(comparison)
+            comparison_body = {
+                key: value
+                for key, value in comparison.items()
+                if key != "provenance_sha256"
+            }
+            stage_order = comparison.get("stage_order")
+            stages = comparison.get("stages")
+            expected_stage_order = SEARCH_EVIDENCE_V1_CONTROL_STAGE_ORDERS.get(
+                str(candidate_spec.get("mapping_id") or "")
+            )
+            expected_primary_label, expected_control_label = comparison_labels[
+                comparison_id
+            ]
+            if (
+                comparison.get("schema_version")
+                != "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1"
+                or expected_stage_order is None
+                or tuple(stage_order or ()) != expected_stage_order
+                or not isinstance(stages, Mapping)
+                or set(stages) != set(stage_order)
+                or type(comparison.get("final_behavior_equal")) is not bool
+                or str(comparison.get("mapping_id") or "")
+                != str(candidate_spec.get("mapping_id") or "")
+                or comparison.get("primary_label") != expected_primary_label
+                or comparison.get("control_label") != expected_control_label
+            ):
+                errors.add("ledger_evidence:control_comparison_schema")
+            else:
+                stage_equalities: list[bool] = []
+                for stage in stage_order:
+                    stage_row = dict(stages[stage])
+                    if (
+                        set(stage_row)
+                        != {
+                            "primary_identity_sha256",
+                            "control_identity_sha256",
+                            "equal",
+                        }
+                        or len(str(stage_row.get("primary_identity_sha256") or ""))
+                        != 64
+                        or len(str(stage_row.get("control_identity_sha256") or ""))
+                        != 64
+                        or type(stage_row.get("equal")) is not bool
+                        or bool(stage_row.get("equal"))
+                        != (
+                            str(stage_row.get("primary_identity_sha256"))
+                            == str(stage_row.get("control_identity_sha256"))
+                        )
+                    ):
+                        errors.add("ledger_evidence:control_stage_schema")
+                        break
+                    stage_equalities.append(bool(stage_row["equal"]))
+                if len(stage_equalities) == len(stage_order):
+                    final_equal = stage_equalities[-1]
+                    first_equal = None
+                    if final_equal:
+                        first_equal = next(
+                            (
+                                stage
+                                for index, stage in enumerate(stage_order)
+                                if all(stage_equalities[index:])
+                            ),
+                            None,
+                        )
+                    first_divergent = next(
+                        (
+                            stage
+                            for stage, equal in zip(stage_order, stage_equalities)
+                            if not equal
+                        ),
+                        None,
+                    )
+                    first_reconverged = (
+                        first_equal if first_divergent is not None else None
+                    )
+                    if (
+                        type(comparison.get("final_weight_equal")) is not bool
+                        or type(comparison.get("final_behavior_equal")) is not bool
+                        or bool(comparison.get("final_weight_equal")) != final_equal
+                        or bool(comparison.get("final_behavior_equal"))
+                        != final_equal
+                        or comparison.get("first_equal_stage") != first_equal
+                        or comparison.get("first_divergent_stage")
+                        != first_divergent
+                        or comparison.get("first_reconverged_stage")
+                        != first_reconverged
+                    ):
+                        errors.add("ledger_evidence:control_stage_projection")
+                    required_non_degenerate = {
+                        "primary_vs_left_control",
+                        "primary_vs_right_control",
+                        *(
+                            {"ab_vs_interaction_left_control"}
+                            if hierarchical
+                            else set()
+                        ),
+                    }
+                    if (
+                        require_strict_non_degenerate
+                        and comparison_id in required_non_degenerate
+                        and (
+                            final_equal
+                            or comparison.get("first_equal_stage") is not None
+                        )
+                    ):
+                        errors.add("ledger_evidence:strict_control_degenerate")
+            if _payload_sha(comparison_body) != str(
+                comparison.get("provenance_sha256") or ""
+            ):
+                errors.add("ledger_evidence:control_comparison_hash")
+    axes = realization.get("axes")
+    expected_axes = (
+        (
+            ("A", "ab_vs_interaction_right_control"),
+            ("B", "ab_vs_interaction_left_control"),
+            ("C", "primary_vs_left_control"),
+        )
+        if hierarchical
+        else (
+            ("A", "primary_vs_right_control"),
+            ("B", "primary_vs_left_control"),
+        )
+    )
+    try:
+        axis_rows = [dict(axis) for axis in axes]
+        axis_projection_matches = all(
+            str(axis["axis_id"]) == axis_id
+            and str(axis["evidence_comparison"]) == comparison_id
+            and type(axis.get("active")) is bool
+            and bool(axis["active"])
+            == (not bool(
+                dict(dict(comparisons[comparison_id])["stages"])["SIGNAL"][
+                    "equal"
+                ]
+            ))
+            and axis.get("signal_difference_fraction")
+            == dict(comparisons[comparison_id]).get("signal_difference_fraction")
+            for axis, (axis_id, comparison_id) in zip(axis_rows, expected_axes)
+        ) and len(axis_rows) == len(expected_axes)
+        active_axis_count = sum(bool(axis["active"]) for axis in axis_rows)
+        declared_axis_count = len(axes)
+        expected_status = (
+            "ALL_DECLARED_AXES_ACTIVE"
+            if active_axis_count == declared_axis_count
+            else "NO_DECLARED_AXIS_ACTIVE"
+            if active_axis_count == 0
+            else "PARTIAL_DECLARED_AXES_ACTIVE"
+        )
+        projection_matches = (
+            declared_axis_count == (3 if hierarchical else 2)
+            and int(row["declared_axis_count"]) == declared_axis_count
+            and int(realization["declared_axis_count"]) == declared_axis_count
+            and int(row["active_axis_count"]) == active_axis_count
+            and int(realization["active_axis_count"]) == active_axis_count
+            and str(row["mechanism_realization_status"]) == expected_status
+            and str(realization["status"]) == expected_status
+            and axis_projection_matches
+            and realization.get("condition_effect_rate")
+            == (
+                axis_rows[-1].get("signal_difference_fraction")
+                if hierarchical
+                else None
+            )
+        )
+    except (KeyError, TypeError, ValueError):
+        projection_matches = False
+    if not projection_matches:
+        errors.add("ledger_evidence:mechanism_realization_projection")
+    return errors
+
+
+def _search_evidence_provenance_errors(ledger: pd.DataFrame) -> list[str]:
+    errors: set[str] = set()
+    for column in SEARCH_EVIDENCE_V1_PROVENANCE_COLUMNS:
+        if column not in ledger or bool(ledger[column].isna().any()):
+            errors.add(f"ledger_evidence:{column}")
+    if errors:
+        return sorted(errors)
+    for row in ledger.to_dict(orient="records"):
+        errors.update(
+            _search_evidence_provenance_row_errors(
+                row, require_strict_non_degenerate=True
+            )
+        )
+    return sorted(errors)
+
+
+def _search_evidence_repair_assessment(
+    ledger: pd.DataFrame,
+    evidence: pd.DataFrame,
+    failures: pd.DataFrame,
+) -> dict[str, Any]:
+    strict = (
+        evidence.loc[evidence["proposal_status"].astype(str).eq("STRICT_EVALUATED")]
+        if "proposal_status" in evidence
+        else evidence.iloc[0:0]
+    )
+    ledger_candidate_ids = ledger.get("candidate_id", pd.Series(dtype=str))
+    strict_candidate_ids = strict.get("candidate_id", pd.Series(dtype=str))
+    ledger_ids = set(ledger_candidate_ids.astype(str))
+    strict_ids = set(strict_candidate_ids.astype(str))
+    strict_observed = _search_evidence_provenance_observed_mask(strict)
+    failure_observed = _search_evidence_provenance_observed_mask(failures)
+    ledger_observed = _search_evidence_provenance_observed_mask(ledger)
+    observed_strict_ids = set(
+        strict.loc[strict_observed, "candidate_id"].astype(str)
+        if "candidate_id" in strict
+        else ()
+    )
+    exact_strict_identity = (
+        len(ledger) == len(strict)
+        and len(ledger) > 0
+        and not bool(ledger_candidate_ids.isna().any())
+        and not bool(strict_candidate_ids.isna().any())
+        and int(ledger_candidate_ids.astype(str).nunique()) == len(ledger)
+        and int(strict_candidate_ids.astype(str).nunique()) == len(strict)
+        and ledger_ids == strict_ids
+    )
+    strict_observed_count = int(strict_observed.sum())
+    ledger_observed_count = int(ledger_observed.sum())
+    fully_joined = len(ledger_ids & observed_strict_ids)
+    if ledger_observed_count == len(ledger) and len(ledger) > 0:
+        repair_status = "MARKET_FREE_REPAIR_NOT_REQUIRED"
+        reason = "STRICT_LEDGER_ALREADY_CONTAINS_OBSERVED_PROVENANCE"
+    elif exact_strict_identity and strict_observed_count == len(ledger) and len(ledger) > 0:
+        repair_status = "MARKET_FREE_REPAIR_POSSIBLE"
+        reason = "STRICT_PROVENANCE_AVAILABLE_IN_EXISTING_EVIDENCE_ROWS"
+    else:
+        repair_status = "MARKET_FREE_REPAIR_NOT_POSSIBLE"
+        reason = "STRICT_SUCCESS_PROVENANCE_WAS_NOT_PERSISTED"
+    missing_strict_count = max(0, len(ledger) - fully_joined)
+    return {
+        "schema_version": 1,
+        "repair_status": repair_status,
+        "reason": reason,
+        "candidate_ledger_row_count": int(len(ledger)),
+        "strict_evaluated_count": int(len(strict)),
+        "strict_candidate_identity_exact": bool(exact_strict_identity),
+        "strict_provenance_observed_count": strict_observed_count,
+        "ledger_provenance_observed_count": ledger_observed_count,
+        "control_degenerate_row_count": int(len(failures)),
+        "control_degenerate_provenance_observed_count": int(
+            failure_observed.sum()
+        ),
+        "fully_joined_strict_observation_count": int(fully_joined),
+        "missing_strict_provenance_count": int(missing_strict_count),
+        "market_reevaluation_required_for_missing_rows": bool(
+            repair_status == "MARKET_FREE_REPAIR_NOT_POSSIBLE"
+            and missing_strict_count > 0
+        ),
+    }
+
+
+def assess_search_evidence_v1_repair(
+    repo_root: Path,
+    *,
+    runtime_date: str = "20260804",
+) -> dict[str, Any]:
+    component_paths = (
+        "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "alphafactory_crypto/broad_search/pair18m.py",
+    )
+    source_components_clean = (
+        subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", *component_paths],
+            cwd=repo_root,
+            check=False,
+        ).returncode
+        == 0
+    )
+    if not source_components_clean:
+        return {
+            "result": "FAIL",
+            "errors": ["assessment_source_components_dirty"],
+            "market_data_read": False,
+            "candidate_evaluation_performed": False,
+        }
+    config = _economic_campaign_config(SEARCH_EVIDENCE_V1_CAMPAIGN)
+    runtime_root = repo_root / f"runtime/{config['runtime_prefix']}_{runtime_date}"
+    paths = {
+        "candidate_ledger": runtime_root / "candidate_ledger.parquet",
+        "search_run_evidence": runtime_root / "search_run_evidence.parquet",
+        "search_failure_evidence": runtime_root / "search_failure_evidence.parquet",
+        "run_manifest": runtime_root / "run_manifest.json",
+    }
+    missing = [name for name, path in paths.items() if not path.is_file()]
+    if missing:
+        return {
+            "result": "FAIL",
+            "errors": [f"missing:{name}" for name in missing],
+            "market_data_read": False,
+            "candidate_evaluation_performed": False,
+        }
+    ledger = pd.read_parquet(paths["candidate_ledger"])
+    evidence = pd.read_parquet(paths["search_run_evidence"])
+    failures = pd.read_parquet(paths["search_failure_evidence"])
+    manifest = _read_json(paths["run_manifest"])
+    manifest_records = {
+        str(record.get("path") or ""): dict(record)
+        for record in manifest.get("artifacts", [])
+    }
+    manifest_verified = (
+        _payload_sha(manifest.get("artifacts") or [])
+        == manifest.get("artifact_bundle_sha256")
+    )
+    for name in (
+        "candidate_ledger",
+        "search_run_evidence",
+        "search_failure_evidence",
+    ):
+        path = paths[name]
+        record = manifest_records.get(path.relative_to(repo_root).as_posix())
+        if (
+            record is None
+            or int(record.get("bytes", -1)) != path.stat().st_size
+            or str(record.get("sha256") or "") != sha256_file(path)
+        ):
+            manifest_verified = False
+    assessment = _search_evidence_repair_assessment(ledger, evidence, failures)
+    assessment_source_sha = _git_sha(repo_root)
+    output = {
+        "schema_version": 1,
+        "result": "PASS" if manifest_verified else "FAIL",
+        "errors": [] if manifest_verified else ["producer_manifest_artifact_binding"],
+        "assessment_authority": "IMMUTABLE_EXISTING_ARTIFACT_SCHEMA_AND_IDENTITY_JOIN",
+        "runtime_root": runtime_root.relative_to(repo_root).as_posix(),
+        "assessment_source_sha": assessment_source_sha,
+        "assessment_component_git_blobs": {
+            path: _git_blob_sha(repo_root, path)
+            for path in component_paths
+        },
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "producer_artifact_bundle_sha256": manifest.get(
+            "artifact_bundle_sha256"
+        ),
+        "original_artifact_manifest_verified": bool(manifest_verified),
+        "input_artifacts": {
+            name: {
+                "path": path.relative_to(repo_root).as_posix(),
+                "sha256": sha256_file(path),
+                "bytes": path.stat().st_size,
+            }
+            for name, path in paths.items()
+        },
+        **assessment,
+        "market_data_read": False,
+        "candidate_evaluation_performed": False,
+        "historical_inference_performed": False,
+        "original_artifacts_modified": False,
+        "authorization_consumed_or_changed": False,
+    }
+    output_path = runtime_root / "closure_repair_assessment.json"
+    _write_json(output_path, output)
+    return output
+
+
 def check_search_evidence_v1(
     repo_root: Path,
     *,
@@ -21932,14 +22552,8 @@ def check_search_evidence_v1(
         != set(SEARCH_EVIDENCE_V1_SEEDS)
     ):
         errors.append("strict_ledger_identity")
+    errors.extend(_search_evidence_provenance_errors(ledger))
     required_ledger_columns = (
-        "control_degeneracy_provenance_json",
-        "control_degeneracy_provenance_sha256",
-        "mechanism_realization_json",
-        "mechanism_realization_sha256",
-        "declared_axis_count",
-        "active_axis_count",
-        "mechanism_realization_status",
         "primary_gross_mean",
         "primary_net_mean",
         "gross_mean",
@@ -22090,6 +22704,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-mechanism-v2-3",
             "run-evidence-v1",
             "check-evidence-v1",
+            "assess-evidence-v1-repair",
             "run-oos-v2-3",
             "check-oos-v2-3",
             "build-canary-cache",
@@ -22419,6 +23034,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     elif args.command == "check-evidence-v1":
         result = check_search_evidence_v1(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260804"),
+        )
+    elif args.command == "assess-evidence-v1-repair":
+        result = assess_search_evidence_v1_repair(
             repo_root,
             runtime_date=str(args.runtime_date or "20260804"),
         )

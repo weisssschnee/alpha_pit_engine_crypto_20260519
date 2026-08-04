@@ -368,6 +368,9 @@ def mechanism_realization_provenance(
         "axes": axes,
         "condition_effect_rate": condition_effect_rate,
         "status": status,
+        "control_degeneracy_provenance_sha256": str(
+            control_provenance["provenance_sha256"]
+        ),
         "authority": (
             "OUTCOME_FREE_SIGNAL_ABLATION_COMPARISONS_ON_SHARED_SUPPORT_MAPPING_"
             "HORIZON_AND_EXECUTION"
@@ -1482,6 +1485,15 @@ def evaluate_pair(
             )
         control_provenance = {
             "schema_version": "CRYPTO_PAIR_CONTROL_PROVENANCE_V1",
+            "candidate_id": candidate.candidate_id,
+            "candidate_spec_sha256": hashlib.sha256(
+                json.dumps(
+                    candidate.to_dict(),
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=True,
+                ).encode("utf-8")
+            ).hexdigest().upper(),
             "comparisons": comparisons,
             "identity_excludes": [
                 "target",
