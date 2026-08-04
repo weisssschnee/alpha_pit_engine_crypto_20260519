@@ -41,6 +41,20 @@
     "legacy_final_equal_count": "observed final equality failures only",
     "first_equal_stage": null
   },
+  "legacy_authority": {
+    "candidate_ledger_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "453354C6CEB536E80391FE8CF60B23D4FC064E88306FD944777BBA344510DEA8",
+    "candidate_ledger_row_count": 512,
+    "source_manifest_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/run_manifest.json",
+    "source_manifest_sha256": "4C2FB8A8118B72903B77027A8A44CD691BA8E09B98C5878E2986EB261699C245",
+    "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+    "finalizer_source_sha": "0a25183f79350b19bc8ae961e8df12fa815c12f8",
+    "expected_result": {
+      "status": "NO_PROVENANCE_ROWS",
+      "legacy_final_equal_count": 372,
+      "first_equal_stage": null
+    }
+  },
   "funnel": [
     "proposal_count",
     "typed_constructible_count",

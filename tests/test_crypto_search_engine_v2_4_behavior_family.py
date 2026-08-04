@@ -228,6 +228,8 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
     assert row["comparison_included"] is False
     assert row["control_equality_stage"] == "RANK"
     assert row["typed_constructible"] is True
+    assert row["behavior_unique"] is True
+    assert row["behavior_unique_scope"] == "ARM_SEED_HORIZON_BEHAVIOR_FAMILY"
     assert row["skeleton_id"] == "skeleton-1"
     assert row["mechanism_family"] == "FLOW_CONFIRMATION"
     assert row["mapping_family"] == "CROSS_SECTIONAL_ZERO_NET"

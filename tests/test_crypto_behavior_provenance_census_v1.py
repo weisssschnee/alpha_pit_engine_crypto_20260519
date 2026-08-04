@@ -10,6 +10,7 @@ import pytest
 from alphafactory_crypto.broad_search.behavior_provenance_census import (
     build_behavior_provenance_census,
     load_behavior_provenance_census_contract,
+    verify_authoritative_legacy_v24,
     write_behavior_provenance_census,
 )
 
@@ -38,6 +39,7 @@ def _comparison(
         "SIGNAL",
         "RANK",
         "SELECTION",
+        "CAPPED_WEIGHT",
         "MAPPED_WEIGHT",
         "EXECUTABLE_WEIGHT",
     ]
@@ -137,10 +139,15 @@ def _row(
         "horizon_hours": 4,
         "direction_authority": "TRAIN_FROZEN_SIGN_ORIENTATION",
         "typed_constructible": True,
+        "behavior_unique": True,
+        "behavior_unique_scope": "ARM_SEED_HORIZON_BEHAVIOR_FAMILY",
         "strict_evaluated": strict_evaluated,
         "matched_positive": matched_positive,
         "qualified_candidate": None,
         "process_cpu_seconds": 2.0,
+        "validation_status": (
+            "EVALUATED" if strict_evaluated else "CANDIDATE_LOCAL_FAILURE"
+        ),
         "validation_failure_reason": (
             None
             if strict_evaluated
@@ -163,6 +170,20 @@ def test_v25_contract_is_observability_only() -> None:
     assert contract["candidate_replay_allowed"] is False
     assert contract["reward_or_policy_feedback_allowed"] is False
     assert contract["exclusive_counting_key"] == "first_equal_stage"
+    assert contract["legacy_authority"]["candidate_ledger_row_count"] == 512
+    assert contract["legacy_authority"]["expected_result"] == {
+        "status": "NO_PROVENANCE_ROWS",
+        "legacy_final_equal_count": 372,
+        "first_equal_stage": None,
+    }
+
+
+def test_v25_authoritative_legacy_closure_is_hash_bound_and_unknown() -> None:
+    assert verify_authoritative_legacy_v24(REPO_ROOT) == {
+        "status": "NO_PROVENANCE_ROWS",
+        "legacy_final_equal_count": 372,
+        "first_equal_stage": None,
+    }
 
 
 def test_v25_legacy_ledger_reports_unknown_not_fake_zero() -> None:
@@ -263,6 +284,16 @@ def test_v25_counts_first_equal_stage_exclusively_and_slices_funnel() -> None:
     assert rank["primary_fingerprint"] == "C" * 64
     assert rank["control_fingerprint"] == "C" * 64
     assert bool(rank["equal"]) is True
+    for row in result["funnel"].to_dict("records"):
+        chain = [
+            row["proposal_count"],
+            row["typed_constructible_count"],
+            row["behavior_unique_count"],
+            row["control_non_degenerate_count"],
+            row["strict_evaluated_count"],
+            row["matched_positive_count"],
+        ]
+        assert chain == sorted(chain, reverse=True)
 
 
 def test_v25_partial_or_tampered_provenance_fails_closed() -> None:
@@ -302,30 +333,30 @@ def test_v25_partial_or_tampered_provenance_fails_closed() -> None:
     with pytest.raises(ValueError, match="PROVENANCE_MAPPING_FAMILY_CHANGED"):
         build_behavior_provenance_census(wrong_mapping)
 
+    inconsistent = partial.iloc[[0]].copy()
+    inconsistent.loc[:, "strict_evaluated"] = True
+    inconsistent.loc[:, "matched_positive"] = True
+    inconsistent.loc[:, "validation_status"] = "EVALUATED"
+    with pytest.raises(ValueError, match="PROVENANCE_LEDGER_STATE_INCONSISTENT"):
+        build_behavior_provenance_census(inconsistent)
+
 
 def test_v25_writer_persists_explicit_legacy_unknown_bundle(
     tmp_path: Path,
 ) -> None:
-    ledger_path = tmp_path / "candidate_ledger.parquet"
-    pd.DataFrame(
-        [
-            {
-                "candidate_id": "legacy-1",
-                "validation_failure_reason": (
-                    "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
-                ),
-            }
-        ]
-    ).to_parquet(ledger_path, index=False)
+    contract = load_behavior_provenance_census_contract(REPO_ROOT)
+    ledger_path = REPO_ROOT / contract["legacy_authority"]["candidate_ledger_path"]
+    source_manifest = REPO_ROOT / contract["legacy_authority"]["source_manifest_path"]
     output = tmp_path / "census"
     result = write_behavior_provenance_census(
         REPO_ROOT,
         ledger_path=ledger_path,
         output_root=output,
+        source_manifest_path=source_manifest,
     )
     assert result["summary"] == {
         "status": "NO_PROVENANCE_ROWS",
-        "legacy_final_equal_count": 1,
+        "legacy_final_equal_count": 372,
         "first_equal_stage": None,
     }
     assert json.loads(
@@ -345,4 +376,5 @@ def test_v25_writer_persists_explicit_legacy_unknown_bundle(
             REPO_ROOT,
             ledger_path=ledger_path,
             output_root=output,
+            source_manifest_path=source_manifest,
         )

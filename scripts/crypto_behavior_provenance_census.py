@@ -15,12 +15,14 @@ def main() -> None:
     )
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
     parser.add_argument("--ledger", type=Path, required=True)
+    parser.add_argument("--source-manifest", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     args = parser.parse_args()
     result = write_behavior_provenance_census(
         args.repo_root.resolve(),
         ledger_path=args.ledger.resolve(),
         output_root=args.output_root.resolve(),
+        source_manifest_path=args.source_manifest.resolve(),
     )
     print(json.dumps(result["summary"], sort_keys=True))
 

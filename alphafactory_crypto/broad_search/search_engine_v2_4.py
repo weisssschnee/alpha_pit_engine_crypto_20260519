@@ -1849,6 +1849,8 @@ def _v25_observability_dimensions(
         **required,
         "direction_authority": "TRAIN_FROZEN_SIGN_ORIENTATION",
         "typed_constructible": True,
+        "behavior_unique": True,
+        "behavior_unique_scope": "ARM_SEED_HORIZON_BEHAVIOR_FAMILY",
     }
 
 
