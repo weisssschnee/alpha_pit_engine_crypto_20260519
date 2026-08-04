@@ -1,0 +1,19 @@
+﻿{
+    "status":  "PASS_READY_TO_LAUNCH",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_v1_1_67701ba7",
+    "source_sha":  "67701ba73ac16c3da6cbdf6d98431d6d1df998e1",
+    "worktree_clean":  true,
+    "python":  "D:\\HermesWorker\\python311\\python.exe",
+    "python_overlay":  "D:\\HermesWorker\\runtime\\crypto_search_py311_overlay_94b016fa\\site-packages",
+    "workers_default":  10,
+    "workers_memory_fallback":  8,
+    "workers_12_forbidden":  true,
+    "receipt_sha256":  "C04D33B4C5106FCF89B9DB6A0402C6E0DF4AC4FDAF1762E67ACD228EACBEBD89",
+    "carrier_identity_sha256":  "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "target_identity_sha256":  "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+    "field_count":  115,
+    "historical_v1_runtime_junction":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_v1_1_67701ba7\\runtime\\crypto_search_run_evidence_v1_20260804",
+    "authority_preflight":  [
+                                "{\"carrier_identity_sha256\": \"E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA\", \"receipt_sha256\": \"C04D33B4C5106FCF89B9DB6A0402C6E0DF4AC4FDAF1762E67ACD228EACBEBD89\", \"receipt_status\": \"RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT\", \"result\": \"READY_WITH_NON_FORMAL_BOUNDARIES\", \"target_identity_sha256\": \"27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0\"}"
+                            ]
+}

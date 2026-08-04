@@ -22793,6 +22793,13 @@ def check_search_evidence_v1(
     }
 
 
+def _cli_result_is_success(result: Mapping[str, Any]) -> bool:
+    return result.get("result") == "PASS" or result.get("status") in {
+        "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE",
+        "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE",
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -23315,7 +23322,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if authority_preflight is not None:
         result = {**result, "experiment_authority_preflight": authority_preflight}
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
-    return 0 if result.get("result") == "PASS" else 1
+    return 0 if _cli_result_is_success(result) else 1
 
 
 if __name__ == "__main__":

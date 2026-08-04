@@ -1,0 +1,10 @@
+﻿{
+    "schema_version":  1,
+    "status":  "PROCESS_FAILED",
+    "completed_at":  "2026-08-05T02:32:51.0092560+08:00",
+    "exit_code":  1,
+    "producer_source_sha":  "67701ba73ac16c3da6cbdf6d98431d6d1df998e1",
+    "run_root":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_v1_1_67701ba7\\runtime\\crypto_search_run_evidence_v1_1_20260805",
+    "final_decision_exists":  true,
+    "run_manifest_exists":  true
+}

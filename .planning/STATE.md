@@ -1,71 +1,56 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-04 Asia/Hong_Kong
+Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_RUN_EVIDENCE_V1_SOURCE_REPAIRED_HISTORICAL_VERIFICATION_FAILED`
+`CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE_ENGINEERING_PASS_RESEARCH_HOLD`
 
-The one-time fresh-state development run is consumed and closed. Producer
-`fea74611c491d2d9a77d8013bc6cdaf427b4fd8c` completed exactly 8,000 strict
-candidates from 12,034 generation attempts on the existing 115-field aligned
-OI/mark plus aggTrades carrier. All four 2,000-candidate checkpoints were
-atomically published and restore-verified; the run used 10 workers, stayed under
-the frozen eight-hour and 50,000-attempt limits, read no validation, OOS, or
-holdout partition, and started no rescue run.
+The one-time V1.1 fresh-state development run is consumed and closed. Producer
+`67701ba73ac16c3da6cbdf6d98431d6d1df998e1` completed exactly 2,000 strict
+candidates from 3,201 generation attempts on the existing 115-field aligned
+OI/mark plus aggTrades carrier. `checkpoint_000` is atomically published and
+restore-verified. The run used 10 workers, exceeded the frozen throughput floor,
+read no validation, OOS, or holdout partition, and started no rescue run.
 
-The passive evidence artifacts are non-empty: 9,769 proposal-attribution rows,
-1,769 control-degenerate rows, 63 exposure strata, and 786 compiled mechanisms.
-Observed degeneracy is concentrated at SIGNAL, RANK, and SELECTION. These rows
-are diagnostic only and were not used by reward, optimizer, or Behavior Archive
-identity.
+Independent PC2 and local checkers pass with artifact bundle SHA256
+`DE21BD375C420DCA93C7FAE8FFB4E461E519041611E34314E32C43AAC791241C`.
+All 2,000 strict ledger rows join exactly to their candidate-bound behavior and
+mechanism provenance. The passive evidence contains 2,320 attributed proposals,
+320 control-degenerate proposals, 1,942 behavior families, and 64 exposure
+strata. All strict candidates realized every declared mechanism axis. Of the
+320 proposal-level control degeneracies, the earliest stable equality is SIGNAL
+for 259, RANK for 7, SELECTION for 52, and MAPPED_WEIGHT for 2. Mapping is
+therefore not the dominant first failure layer.
 
-Source commit `fc21a049040882c856d32eca85f6d9e4c848d74f` repairs the
-defect for future authorized runs: the strict-success
-ledger path now persists the already computed control-degeneracy and
-mechanism-realization payloads, verifies their canonical hashes before writing,
-and projects the declared/active axis counts and realization status. The
-independent checker now verifies payload JSON, canonical hashes, candidate
-binding, and projected values; non-null placeholders cannot satisfy it.
+The first supported system-wide bottleneck is
+`GROSS_TO_NET_COST_THEN_DUAL_AXIS_NET_LCB_STABILITY`: primary gross/net is
+positive for 1,725/695 strict candidates; both matched axes are gross/net
+positive for 754/156, but neither axis has positive net LCB for any candidate.
+Cost sign-kills 834 gross-positive candidates and turnover kills 264. There are
+68 positive development `search_reward` candidates (63 Evolution, 5 random),
+but zero strict matched-positive candidates. Those 68 are train-only family
+champion inputs for a possible separately authorized validation, not Alpha,
+qualification, OOS, or promotion evidence.
 
-A deterministic, market-free repair assessment of the immutable run artifacts
-is recorded at
-`runtime/crypto_search_run_evidence_v1_20260804/closure_repair_assessment.json`.
-Candidate identities join exactly across all 8,000 strict rows, but none of
-those rows contains either required provenance payload. All 1,769
-control-degenerate failure rows physically carry legacy JSON/hash payloads,
-but their envelope predates the new candidate/spec and control-to-realization
-cross-binding, so the hardened full-provenance observed count is also zero.
-This does not weaken the strict-row loss finding. Consequently the assessment
-is `MARKET_FREE_REPAIR_NOT_POSSIBLE` with
-`fully_joined_strict_observation_count=0` and
-`missing_strict_provenance_count=8000`. Recovering those observations would
-require market re-evaluation, which is not authorized. The original ledger,
-manifest, report, and decision were not rewritten, and no historical stage was
-inferred.
+Evolution improves the conditional reward distribution but does not qualify as
+the more productive search policy: it requires 1,772 attempts for 1,000 strict
+evaluations and yields 943 families, versus random's 1,429 attempts and 999
+families. Rare mechanism strata remain under-supported, so the run supports the
+aggregate failure-layer conclusion, not a conclusion for every rare mechanism.
 
-The independent PC2 checker and the hardened local checker therefore correctly
-remain `FAIL` for the historical run with artifact bundle SHA256
-`04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF`.
-The run proves checkpoint/replay execution and non-empty side evidence, but it
-does not close the candidate-level Search Run Evidence Contract V1 chain and
-cannot support optimizer, mechanism, mapping, reward, Alpha, validation, OOS,
-or promotion conclusions.
+The detached wrapper recorded exit code 1 only because the CLI success mapper
+recognized `result=PASS` but omitted the valid V1/V1.1 terminal status values.
+The terminal artifact, checkpoint, and independent checks were already complete;
+the closure fixes that source-only mapping without a market rerun. The receipt is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE` with `run_authorized=false`.
 
-The receipt status is
-`RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
-`run_authorized=false`. No rerun, reseed, tuning, historical inference,
-search-policy change, reward change, mapping change, OOS, promotion, new Arena,
-or new Graph node is authorized. Canonical evidence is
-`runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json`;
-the original run report remains an immutable producer artifact and must be read
-together with this failed independent check and the market-free repair
-assessment. No search, replay, market-data read, validation/OOS/holdout read,
-or authorization-state change was performed by the source repair.
-
-Focused provenance/evidence verification is 28 passed. The two-axis Standards
-and originating-Spec review is PASS, and the full repository suite is 429
-passed with the existing NumPy degrees-of-freedom warning.
+No further development search, reward/mapping/search-policy change, validation,
+OOS, promotion, challenge, recent, May-stress, forward, new Arena, or new Graph
+node is authorized. The highest-information next experiment, only if separately
+authorized, is a small no-feedback fresh validation of deduplicated champions
+from the 68 positive development candidates under the unchanged target, mapping,
+cost, and evaluator contracts.
 
 The preceding source implementation record was:
 

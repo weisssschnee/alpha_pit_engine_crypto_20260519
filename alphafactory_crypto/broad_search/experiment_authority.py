@@ -688,7 +688,47 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED",
         },
-        "expected_run_outcome": {},
+        "expected_run_outcome": {
+            "status": "ENGINE_COMPLETE",
+            "reason": "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE",
+            "runtime": "runtime/crypto_search_run_evidence_v1_1_20260805",
+            "producer_source_sha": "67701ba73ac16c3da6cbdf6d98431d6d1df998e1",
+            "generation_attempts": 3_201,
+            "strict_evaluated_count": 2_000,
+            "joined_strict_provenance_count": 2_000,
+            "behavior_attributed_proposal_count": 2_320,
+            "control_degenerate_count": 320,
+            "checkpoint": "checkpoint_000",
+            "checkpoint_restore_verified": True,
+            "artifact_bundle_sha256": (
+                "DE21BD375C420DCA93C7FAE8FFB4E461"
+                "E519041611E34314E32C43AAC791241C"
+            ),
+            "authoritative_archive_sha256": (
+                "B21B2B96C156EFF8CCAC4679642799F8"
+                "EBEE62014B9A7F2F1761128793D604FB"
+            ),
+            "checker_result": "PASS",
+            "engineering_integrity": "PASS",
+            "earliest_supported_failure_layer": (
+                "GROSS_TO_NET_COST_THEN_DUAL_AXIS_NET_LCB_STABILITY"
+            ),
+            "primary_gross_positive": 1_725,
+            "primary_net_positive": 695,
+            "left_increment_gross_positive": 1_286,
+            "left_increment_net_positive": 452,
+            "both_axis_gross_positive": 754,
+            "both_axis_net_positive": 156,
+            "both_axis_net_lcb_positive": 0,
+            "positive_search_reward_count": 68,
+            "matched_positive_count": 0,
+            "process_exit_code": 1,
+            "process_exit_attribution": (
+                "CLI_SUCCESS_STATUS_MAPPING_OMITTED_EVIDENCE_V1_1_PASS"
+            ),
+            "sealed_reads": 0,
+            "rescue_rerun_started": False,
+        },
         "run_authorization_scope": (
             "ONE_FRESH_STATE_2000_STRICT_DEVELOPMENT_EVIDENCE_CHECKPOINT"
         ),

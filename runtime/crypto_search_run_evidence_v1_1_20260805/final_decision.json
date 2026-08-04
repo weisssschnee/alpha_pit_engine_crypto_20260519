@@ -1,0 +1,176 @@
+{
+  "active_wall_seconds": 3843.827188800089,
+  "alpha_claim": false,
+  "arm_summaries": {
+    "expanded_mechanism_random_v2_3": {
+      "behavior_attributed": 1259,
+      "behavior_family_count": 999,
+      "compile_valid": 1429,
+      "control_degenerate": 259,
+      "control_non_degenerate": 1000,
+      "exact_unique": 1350,
+      "generation_attempts": 1429,
+      "matched_positive": 0,
+      "mean_search_reward": -0.7924227447802381,
+      "strict_evaluated": 1000
+    },
+    "mechanism_evolution_v2_3": {
+      "behavior_attributed": 1061,
+      "behavior_family_count": 943,
+      "compile_valid": 1671,
+      "control_degenerate": 61,
+      "control_non_degenerate": 1000,
+      "exact_unique": 1091,
+      "generation_attempts": 1772,
+      "matched_positive": 0,
+      "mean_search_reward": -0.3827646072968035,
+      "strict_evaluated": 1000
+    }
+  },
+  "behavior_duplicate_rate": 0.029000000000000026,
+  "behavior_family_count": 1942,
+  "checkpoint_count": 1,
+  "checkpoint_restore_verified": true,
+  "compiled_mechanism_count": 786,
+  "epoch_id": "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_1_20260805",
+  "evidence_summary": {
+    "arm_funnel": {
+      "expanded_mechanism_random_v2_3": {
+        "behavior_attributed": 1259,
+        "behavior_family_count": 999,
+        "compile_valid": 1429,
+        "control_degenerate": 259,
+        "control_non_degenerate": 1000,
+        "exact_unique": 1350,
+        "generation_attempts": 1429,
+        "matched_positive": 0,
+        "mean_search_reward": -0.7924227447802381,
+        "strict_evaluated": 1000
+      },
+      "mechanism_evolution_v2_3": {
+        "behavior_attributed": 1061,
+        "behavior_family_count": 943,
+        "compile_valid": 1671,
+        "control_degenerate": 61,
+        "control_non_degenerate": 1000,
+        "exact_unique": 1091,
+        "generation_attempts": 1772,
+        "matched_positive": 0,
+        "mean_search_reward": -0.3827646072968035,
+        "strict_evaluated": 1000
+      }
+    },
+    "behavior_attributed_proposal_count": 2320,
+    "contract_id": "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+    "control_degeneracy_stage_counts": {
+      "CONTROL_BEHAVIOR_EQUALS_PRIMARY:MAPPED_WEIGHT": 1,
+      "CONTROL_BEHAVIOR_EQUALS_PRIMARY:RANK": 6,
+      "CONTROL_BEHAVIOR_EQUALS_PRIMARY:SELECTION": 42,
+      "CONTROL_BEHAVIOR_EQUALS_PRIMARY:SIGNAL": 226,
+      "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB:MAPPED_WEIGHT": 1,
+      "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB:SELECTION": 9,
+      "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB:SIGNAL": 33,
+      "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY:RANK": 1,
+      "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY:SELECTION": 1
+    },
+    "control_degenerate_count": 320,
+    "diagnostics_used_by_archive_identity": false,
+    "diagnostics_used_by_optimizer": false,
+    "diagnostics_used_by_reward": false,
+    "economic_waterfall": {
+      "gross_positive_cost_sign_killed": 834,
+      "left_increment_gross_positive": 1286,
+      "left_increment_net_positive": 452,
+      "matched_positive": 0,
+      "primary_gross_positive": 1725,
+      "primary_net_positive": 695,
+      "turnover_killed": 264
+    },
+    "exposure_stratum_count": 64,
+    "historical_inference_performed": false,
+    "joined_strict_provenance_count": 2000,
+    "mechanism_realization_status_counts": {
+      "ALL_DECLARED_AXES_ACTIVE": 2059,
+      "NO_DECLARED_AXIS_ACTIVE": 35,
+      "PARTIAL_DECLARED_AXES_ACTIVE": 226
+    },
+    "minimum_comparable_candidates_per_reported_stratum": 30,
+    "question_scope": {
+      "Q01_COST_FIDELITY": "NOT_APPLICABLE_FROZEN_COST_NO_COUNTERFACTUAL",
+      "Q02_INFORMATION_DECAY": "NOT_APPLICABLE_FROZEN_1H_4H_NO_NEW_HORIZON",
+      "Q03_ACTUAL_EXPOSURE": "IN_SCOPE",
+      "Q04_OPTIMIZER_CONCENTRATION": "IN_SCOPE",
+      "Q05_USEFUL_YIELD": "IN_SCOPE",
+      "Q06_AXIS_REALIZATION": "IN_SCOPE",
+      "Q07_CONDITION_OCCUPANCY": "IN_SCOPE",
+      "Q08_MATCHED_INCREMENT": "IN_SCOPE",
+      "Q09_OPERATOR_BASIS": "IN_SCOPE",
+      "Q10_BEHAVIOR_RECONVERGENCE": "IN_SCOPE",
+      "Q11_LINEAGE_NOVELTY": "NOT_APPLICABLE_NO_PARENT_BEHAVIOR_JOIN",
+      "Q12_FIELD_INCREMENT": "NOT_APPLICABLE_NO_FIELD_CLUSTER_COUNTERFACTUAL",
+      "Q13_ECONOMIC_KILL_STAGE": "IN_SCOPE",
+      "Q14_MAPPING_EXECUTION_TRADEOFF": "IN_SCOPE_WHERE_COMPARABLE",
+      "Q15_MIGRATION": "NOT_AUTHORIZED_NO_VALIDATION_OR_FRESH_PARTITION",
+      "Q16_REWARD_ALIGNMENT": "NOT_AUTHORIZED_NO_VALIDATION_OR_FRESH_RANKING_CHECK"
+    },
+    "schema_version": 1,
+    "sealed_reads": 0,
+    "status": "PASS_SEARCH_RUN_EVIDENCE_V1_NONEMPTY",
+    "strict_evaluated_count": 2000,
+    "target_and_execution_contract": {
+      "cost_bps": 5.0,
+      "instrument_type": "LINEAR_PERPETUAL",
+      "oos": "NOT_AUTHORIZED",
+      "status": "PASS_RECEIPT_BOUND",
+      "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+      "validation": "NOT_AUTHORIZED",
+      "venue": "BINANCE_USD_M"
+    }
+  },
+  "future_development_data_arena_qualified_arms": [],
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 3201,
+  "joined_strict_provenance_count": 2000,
+  "next_arena_started": false,
+  "oos": false,
+  "parameters_changed": false,
+  "producer_source_sha": "67701ba73ac16c3da6cbdf6d98431d6d1df998e1",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 12500,
+  "reason": "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE",
+  "report_title": "Crypto Search Run Evidence V1.1 First Checkpoint",
+  "rescue_rerun_started": false,
+  "research_decision": "EVIDENCE_COLLECTED_NO_AUTOMATIC_POLICY_CHANGE",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_campaign": "crypto_search_run_evidence_v1_1",
+  "seed_changed": false,
+  "stage_contract": [
+    {
+      "allocation_per_checkpoint": {
+        "expanded_mechanism_random_v2_3": 1000,
+        "mechanism_evolution_v2_3": 1000
+      },
+      "checkpoint_indexes": [
+        0
+      ],
+      "stage_id": "FRESH_TWO_SEED_SEARCH_EVIDENCE_FIRST_CHECKPOINT",
+      "strict_count": 2000
+    }
+  ],
+  "status": "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE",
+  "strict_evaluated_count": 2000,
+  "surface_description": "existing 115-field OI/mark x aggTrades aligned carrier; receipt-bound Binance USD-M target",
+  "template_count": 12,
+  "validation_arm_decisions": {},
+  "validation_stage": {
+    "candidate_generation_performed": false,
+    "holdout_read": false,
+    "optimizer_feedback_written": false,
+    "policy_memory_written": false,
+    "schema_version": 1,
+    "status": "NOT_AUTHORIZED"
+  },
+  "validation_status": "NOT_AUTHORIZED",
+  "wall_time_limit_seconds": 10800
+}

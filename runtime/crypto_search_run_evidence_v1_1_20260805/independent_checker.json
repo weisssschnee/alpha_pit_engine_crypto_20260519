@@ -1,0 +1,15 @@
+{
+    "artifact_bundle_sha256":  "DE21BD375C420DCA93C7FAE8FFB4E461E519041611E34314E32C43AAC791241C",
+    "behavior_attributed_proposal_count":  2320,
+    "checkpoint_count":  1,
+    "compiled_mechanism_count":  786,
+    "control_degenerate_count":  320,
+    "engineering_integrity":  "PASS",
+    "errors":  [
+
+               ],
+    "producer_source_sha":  "67701ba73ac16c3da6cbdf6d98431d6d1df998e1",
+    "result":  "PASS",
+    "sealed_reads":  0,
+    "strict_evaluated_count":  2000
+}

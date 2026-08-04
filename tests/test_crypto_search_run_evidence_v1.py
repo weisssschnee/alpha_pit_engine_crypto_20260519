@@ -22,6 +22,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     SEARCH_EVIDENCE_V11_ARMS,
     SEARCH_EVIDENCE_V11_CAMPAIGN,
     SEARCH_EVIDENCE_V11_SEEDS,
+    _cli_result_is_success,
     _economic_campaign_seeds,
     _ledger_row,
     _load_search_evidence_v1_contract,
@@ -182,15 +183,18 @@ def test_evidence_v11_freezes_one_fresh_checkpoint_without_policy_change() -> No
     )
 
 
-def test_evidence_v11_receipt_is_one_time_authorized_and_hash_bound() -> None:
+def test_evidence_v11_receipt_is_consumed_and_hash_bound() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_run_evidence_v1_1_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
-    assert receipt["run_outcome"] == {}
+    assert receipt["result"] == "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE"
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"]["strict_evaluated_count"] == 2000
+    assert receipt["run_outcome"]["joined_strict_provenance_count"] == 2000
+    assert receipt["run_outcome"]["checker_result"] == "PASS"
+    assert receipt["run_outcome"]["process_exit_code"] == 1
     assert receipt["search_campaign"] == {
         "runner_campaign": SEARCH_EVIDENCE_V11_CAMPAIGN,
         "runtime_date": "20260805",
@@ -214,6 +218,13 @@ def test_evidence_v11_receipt_is_one_time_authorized_and_hash_bound() -> None:
     }
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
+
+
+def test_evidence_v11_pass_status_is_a_successful_cli_result() -> None:
+    assert _cli_result_is_success(
+        {"status": "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE"}
+    )
+    assert not _cli_result_is_success({"status": "ENGINE_VERIFICATION_FAILED"})
 
 
 def test_strict_ledger_row_persists_observed_behavior_provenance() -> None:
