@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-04T16:33:52.985513+00:00",
+  "generated_at": "2026-08-04T19:06:06.002563+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3031,10 +3031,10 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "config/crypto_search_run_evidence_v1_receipt.json",
-        "repo_ref": "experiment/crypto-search-evidence-run-v1-20260804",
-        "sha256": "FA7FABB7ED60C1E2E35D107B5326B5ABC3992C4CDA22326268596F2C522FEBBC",
-        "verified_sha": "0353a49b7c955e17c8adb382bffd783df09cdd93"
+        "path": "config/crypto_search_run_evidence_v1_1_receipt.json",
+        "repo_ref": "experiment/crypto-search-evidence-v1-1-20260805",
+        "sha256": "42A11C085F73E953D2796FBE3E1EEB99C33D54CF8C76AE8E6DEFE1D26F5A040F",
+        "verified_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23"
       },
       "authority_bindings": [
         {
@@ -3059,10 +3059,10 @@
         }
       ],
       "claim_badges": [
-        "EVIDENCE RUN RECEIPT CONSUMED",
-        "8K CHECKPOINTS RESTORE PASS",
-        "JOINED LEDGER CHECK FAILED",
-        "9769 ATTRIBUTION ROWS",
+        "EVIDENCE V1.1 RECEIPT CONSUMED",
+        "2K CHECKPOINT RESTORE PASS",
+        "2000 OF 2000 STRICT PROVENANCE JOIN PASS",
+        "EARLIEST FAILURE COST THEN STABILITY",
         "NO POLICY QUALIFICATION",
         "NO OOS OR PROMOTION"
       ],
@@ -3259,6 +3259,15 @@
         },
         {
           "bypass_forbidden": true,
+          "enforced_by": "broad_search.experiment_authority and broad_search.search_engine_v1.check_search_evidence_v1",
+          "evidence_ref": "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
+          "id": "crypto_search_run_evidence_v1_1_consumed_outcome",
+          "rule": "The one-time V1.1 fresh-state development receipt is consumed with run_authorized false. Producer 67701ba73ac16c3da6cbdf6d98431d6d1df998e1 completed exactly 2,000 strict candidates from 3,201 attempts in one atomic restore-verified checkpoint with 2,000/2,000 candidate-bound strict provenance joins and zero sealed reads. Independent PC2 and local checkers pass. All strict candidates realized every declared axis; proposal degeneracy is concentrated at SIGNAL rather than mapping. The earliest supported system-wide failure layer is gross-to-net cost followed by dual-axis net-LCB and stability: 754 candidates were gross-positive on both matched axes, 156 were net-positive on both, and zero had positive net LCB on both. Sixty-eight positive development search_reward candidates are not Alpha or qualification evidence. Evolution improved conditional reward ranking but lost strict-attempt and behavior-family productivity to random; no arm qualifies. No rerun, tuning, reward/mapping/policy change, validation, OOS, promotion, challenge, forward, or automatic next Arena is authorized.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -3371,7 +3380,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (Evidence V1 source repaired; historical verification failed; economic Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (Evidence V1.1 runtime verified; earliest failure at cost then stability; economic Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3517,7 +3526,12 @@
         "runtime/crypto_search_run_evidence_v1_20260804/final_decision.json",
         "runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json",
         "runtime/crypto_search_run_evidence_v1_20260804/closure_repair_assessment.json",
-        "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_20260804.md"
+        "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_20260804.md",
+        "config/crypto_search_run_evidence_v1_1_receipt.json",
+        "runtime/crypto_search_run_evidence_v1_1_20260805/run_manifest.json",
+        "runtime/crypto_search_run_evidence_v1_1_20260805/final_decision.json",
+        "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
+        "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_20260805.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -3669,12 +3683,12 @@
         "alphafactory_crypto_broad_search_experiment_authority_node_id",
         "alphafactory_crypto_broad_search_experiment_authority_parse_utc",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_1",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_1447",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_1542",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_729",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_771",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_81",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_826",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_1563",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_1658",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_84",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_845",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_887",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_942",
         "alphafactory_crypto_broad_search_experiment_authority_require_real_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_real_experiment_authorities",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_search_economic_receipt",
@@ -3914,6 +3928,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_allocation",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_resume_order",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_state_payload",
+        "alphafactory_crypto_broad_search_search_engine_v1_cli_result_is_success",
         "alphafactory_crypto_broad_search_search_engine_v1_close_budget_exhausted_engine",
         "alphafactory_crypto_broad_search_search_engine_v1_close_validation_blocked_engine",
         "alphafactory_crypto_broad_search_search_engine_v1_completed_checkpoint_seed_balance_errors",
@@ -4040,24 +4055,24 @@
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure_init",
         "alphafactory_crypto_broad_search_search_engine_v1_qualify_v14_aligned_carrier",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_11385",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_11529",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_12107",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_12430",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1549",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1829",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1886",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5582",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5702",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5843",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5940",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6064",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6169",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6429",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6897",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7110",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_8084",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_8541",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_11494",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_11638",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_12216",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_12539",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1619",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1899",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1956",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5655",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5775",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5916",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6013",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6139",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6249",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6509",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6977",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7198",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_8172",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_8630",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_regularized_mechanism_probabilities",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
@@ -4821,6 +4836,9 @@
         "reports_crypto_search_reward_authority_audit_20260729_crypto_search_reward_authority_audit",
         "reports_crypto_search_reward_authority_audit_20260729_evidence_boundary",
         "reports_crypto_search_reward_authority_audit_20260729_implemented_authority_repair",
+        "reports_crypto_search_run_evidence_v1_1_20260805",
+        "reports_crypto_search_run_evidence_v1_1_20260805_crypto_search_run_evidence_v1_1_first_checkpoint",
+        "reports_crypto_search_run_evidence_v1_1_20260805_economic_waterfall",
         "reports_crypto_search_run_evidence_v1_20260804",
         "reports_crypto_search_run_evidence_v1_20260804_crypto_search_run_evidence_contract_v1",
         "reports_crypto_search_run_evidence_v1_20260804_economic_waterfall",
@@ -5569,16 +5587,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-04T16:21:04.257247+00:00",
-        "evidence_ref": "runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json",
-        "evidence_sha256": "DD508D469AD4437EABD1C2EE00EE0AA9F7F1B5619292C46D322087D2622AE56C",
-        "level": "PARTIAL",
-        "notes": [
-          "runtime assurance needs a completed matching trace with all contract bindings"
-        ],
+        "checked_at": "2026-08-04T19:06:06.002563+00:00",
+        "evidence_ref": "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
+        "evidence_sha256": "D112F6F8D026B5988A3889651A9892F14D07E04F4DB4724613720CD16BF00E14",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
         "profile": "crypto-development-research",
-        "result": "INSUFFICIENT_EVIDENCE",
-        "verified_at_sha": "0353a49b7c955e17c8adb382bffd783df09cdd93"
+        "result": "PASS",
+        "verified_at_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23"
       },
       "visible_by_default": true
     },
@@ -8441,7 +8457,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "D8B1E87C2A218FA8268250145EF6F1997AC2066067FF715DD1266E831D2726A6"
+    "sha256": "FFE1158F16A7C49C1BE0B10E9C21DFE2862073DF51933E776597376D37EF9FB5"
   },
   "profile_id": null,
   "profiles": [
@@ -8472,13 +8488,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "a06b958afe9a927da741146cbfbf6352c87bce1b",
-    "edge_count": 40065,
-    "node_count": 21725,
+    "built_at_commit": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
+    "edge_count": 40115,
+    "node_count": 21761,
     "path": ".planning/graphs/graph.json",
-    "sha256": "5C67F74EEB78415473EC1D235A47F3D5082875503B67F3D314E09C507E46B427"
+    "sha256": "05E9C4D4FCDC90707E2909EF6FD53ECCDB72D5F41A21A306E56F8FC37C137748"
   },
-  "repo_head": "a06b958afe9a927da741146cbfbf6352c87bce1b",
+  "repo_head": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
   "schema_version": 1,
   "semantic_authorities": [
     {
