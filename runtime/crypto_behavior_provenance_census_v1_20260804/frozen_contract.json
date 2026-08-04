@@ -1,0 +1,144 @@
+{
+  "allowed_stages": [
+    "SIGNAL",
+    "ORIENTED_SIGNAL",
+    "RANK",
+    "NORMALIZED_SCORE",
+    "SELECTION",
+    "RAW_WEIGHT",
+    "CAPPED_WEIGHT",
+    "MAPPED_WEIGHT",
+    "EXECUTABLE_WEIGHT"
+  ],
+  "candidate_replay_allowed": false,
+  "canonical_input": {
+    "candidate_binding": [
+      "candidate_id",
+      "candidate_spec_sha256"
+    ],
+    "duplicate_flat_fingerprint_authority": false,
+    "envelope_column": "control_degeneracy_provenance_json",
+    "envelope_hash_column": "control_degeneracy_provenance_sha256"
+  },
+  "consumer_id": "CRYPTO_BEHAVIOR_PROVENANCE_CENSUS_V1",
+  "cpu_rule": "SUM_PROCESS_CPU_SECONDS_NO_PAIR_REWARD_PER_CPU_HOUR",
+  "exclusive_counting_key": "first_equal_stage",
+  "funnel": [
+    "proposal_count",
+    "typed_constructible_count",
+    "behavior_unique_count",
+    "control_non_degenerate_count",
+    "strict_evaluated_count",
+    "matched_positive_count",
+    "qualified_candidate_count"
+  ],
+  "historical_inference_allowed": false,
+  "legacy_authority": {
+    "candidate_ledger_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/candidate_ledger.parquet",
+    "candidate_ledger_row_count": 512,
+    "candidate_ledger_sha256": "453354C6CEB536E80391FE8CF60B23D4FC064E88306FD944777BBA344510DEA8",
+    "expected_result": {
+      "first_equal_stage": null,
+      "legacy_final_equal_count": 372,
+      "status": "NO_PROVENANCE_ROWS"
+    },
+    "finalizer_source_sha": "0a25183f79350b19bc8ae961e8df12fa815c12f8",
+    "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+    "source_manifest_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/run_manifest.json",
+    "source_manifest_sha256": "4C2FB8A8118B72903B77027A8A44CD691BA8E09B98C5878E2986EB261699C245"
+  },
+  "legacy_no_provenance_result": {
+    "first_equal_stage": null,
+    "legacy_final_equal_count": "observed final equality failures only",
+    "status": "NO_PROVENANCE_ROWS"
+  },
+  "market_read_allowed": false,
+  "output_schemas": {
+    "candidate_behavior_provenance.parquet": [
+      "candidate_id",
+      "comparison_id",
+      "stage_ordinal",
+      "stage",
+      "primary_fingerprint",
+      "control_fingerprint",
+      "equal",
+      "mapping_family",
+      "primary_label",
+      "control_label",
+      "arm",
+      "seed",
+      "skeleton_id",
+      "mechanism_family",
+      "horizon_hours",
+      "direction_authority",
+      "first_equal_stage"
+    ],
+    "degeneracy_stage_counts.parquet": [
+      "slice_dimension",
+      "slice_value",
+      "first_equal_stage",
+      "candidate_count",
+      "slice_candidate_count",
+      "candidate_rate"
+    ],
+    "search_policy_funnel.parquet": [
+      "slice_dimension",
+      "slice_value",
+      "proposal_count",
+      "typed_constructible_count",
+      "behavior_unique_count",
+      "control_non_degenerate_count",
+      "strict_evaluated_count",
+      "matched_positive_count",
+      "qualified_candidate_count",
+      "process_cpu_hours",
+      "behavior_unique_per_proposal",
+      "control_non_degenerate_per_proposal",
+      "strict_evaluated_per_proposal",
+      "matched_positive_per_proposal",
+      "qualified_candidate_per_proposal",
+      "behavior_unique_per_cpu_hour",
+      "control_non_degenerate_per_cpu_hour",
+      "strict_evaluated_per_cpu_hour",
+      "matched_positive_per_cpu_hour"
+    ]
+  },
+  "phase_b_rule": "PROVENANCE_IS_EVALUATION_DIAGNOSTIC_ONLY_AND_WRITES_NO_REWARD_OPTIMIZER_ARCHIVE_OR_POLICY_FEEDBACK",
+  "proposal_denominator_rule": "PROPOSAL_COUNT_MEANS_INPUT_LEDGER_CANDIDATES_NOT_RAW_GENERATION_ATTEMPTS",
+  "qualified_candidate_rule": "EXPLICIT_LEDGER_BOOLEAN_OR_NULL_NOT_INFERRED",
+  "required_provenance_ledger_columns": [
+    "candidate_id",
+    "candidate_spec_sha256",
+    "behavior_family_id",
+    "arm",
+    "seed",
+    "skeleton_id",
+    "mechanism_family",
+    "mapping_family",
+    "horizon_hours",
+    "direction_authority",
+    "typed_constructible",
+    "behavior_unique",
+    "behavior_unique_scope",
+    "strict_evaluated",
+    "matched_positive",
+    "process_cpu_seconds",
+    "validation_status",
+    "validation_failure_reason",
+    "control_degeneracy_provenance_json",
+    "control_degeneracy_provenance_sha256"
+  ],
+  "reward_or_policy_feedback_allowed": false,
+  "reward_rule": "MATCHED_POSITIVE_FROM_EXISTING_EVALUATOR_ONLY",
+  "schema_version": 1,
+  "slice_columns": {
+    "arm": "arm",
+    "direction_authority": "direction_authority",
+    "horizon": "horizon_hours",
+    "mapping_family": "mapping_family",
+    "mechanism_family": "mechanism_family",
+    "seed": "seed",
+    "skeleton": "skeleton_id"
+  },
+  "status": "SOURCE_ONLY_OBSERVABILITY_INFRASTRUCTURE"
+}

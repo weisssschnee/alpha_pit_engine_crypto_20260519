@@ -4,6 +4,37 @@ Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_ENGINE_V2_5_BEHAVIOR_PROVENANCE_CENSUS_CONSUMER_IMPLEMENTED_NO_REPLAY`
+
+Source commits `e9f5d629`, `d66421cc`, `8be18c91`, `8f457091`,
+`e6bdfce0`, and `743a7d0775a3c7880b31323386c1d5b2daf48092` implement the
+source-only V2.5 Behavior Provenance Census Consumer. The consumer verifies a
+candidate/spec/hash-bound provenance envelope, recomputes the mutually
+exclusive earliest stable `first_equal_stage`, and produces fixed-schema
+candidate provenance, stage-count, and monotonic policy-funnel tables. Its
+frozen slices are arm, seed, skeleton, mechanism family, mapping family,
+horizon, and direction authority; behavior uniqueness is explicitly scoped to
+`ARM_SEED_HORIZON_BEHAVIOR_FAMILY`.
+
+The consumer has no market-data path and writes no reward, CEM, Evolution,
+archive, scheduler, or budget feedback. Partial or inconsistent provenance
+fails closed. The existing V2.4 evaluation rows now carry only the diagnostic
+dimensions required by future consumer runs; search generation, mapping,
+matched controls, evaluation, rewards, and kill-lines are unchanged. Spec and
+Standards reviews pass, the focused suite is 51 passed, and the full suite is
+423 passed with the existing NumPy warning.
+
+The verified source-only bundle at
+`runtime/crypto_behavior_provenance_census_v1_20260804` is bound to source SHA
+`743a7d0775a3c7880b31323386c1d5b2daf48092`, the immutable 512-row V2.4
+repair ledger, and its source manifest. Its historical result is exactly
+`NO_PROVENANCE_ROWS`, `legacy_final_equal_count=372`, and
+`first_equal_stage=null`. The three Parquet outputs contain zero rows while
+retaining their frozen schemas. No historical stage is inferred, no candidate
+is replayed, no market data is read, and no reward or policy authority changes.
+
+The preceding source implementation record was:
+
 `CRYPTO_SEARCH_ENGINE_V2_4_CONTROL_DEGENERACY_PROVENANCE_IMPLEMENTED_NO_REPLAY`
 
 Source commits `1ba4a36ef13fefaa7296bd7217af3c17b16d6c87`,
@@ -974,9 +1005,10 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Close the source-only provenance change in Git and the existing CURRENT Search
-Engine node. The exact 512-candidate stage-attribution replay is not authorized
-by this source repair; it would require a separate frozen same-cohort receipt
-and must generate no candidates or adaptive feedback. No further market search,
-prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,
-latent/relational training, promotion, or subsequent Arena is authorized.
+Wait for a separately authorized future Search Engine run. Its ordinary
+candidate-evaluation receipts may populate the V2.5 diagnostic schema, after
+which this consumer can report mutually exclusive degeneracy stages and the
+full policy funnel without influencing search. Historical stage-attribution
+replay remains unauthorized. No market search, prior-state import, tuning,
+reseed, rescue, holdout/OOS/challenge/forward read, latent/relational training,
+promotion, or subsequent Arena is authorized by this closure.

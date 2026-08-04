@@ -1,0 +1,52 @@
+{
+  "artifact_bundle_sha256": "C728B015F480C2CA8EBE10CF55269A4DCFFE14B9829C6020DFB8A2FC47D55F86",
+  "artifacts": [
+    {
+      "bytes": 8150,
+      "name": "candidate_behavior_provenance.parquet",
+      "sha256": "58A50AFAEA40BF98BA7227451169D452DAD982EA953DC6E29C370026D9ED9976"
+    },
+    {
+      "bytes": 101,
+      "name": "census_summary.json",
+      "sha256": "7CCADF28A2720AC2EDE2A0937D6A818843350A346980DA3B0229253700F0075A"
+    },
+    {
+      "bytes": 3426,
+      "name": "degeneracy_stage_counts.parquet",
+      "sha256": "7ADFD551F5647F2401A9FEC5E3E66E7F57DC7E4F12DC4316609EF93081A4088D"
+    },
+    {
+      "bytes": 4637,
+      "name": "frozen_contract.json",
+      "sha256": "072930A2BF66A490D9D77301E2B3096ED8A2D828C6D863D169F40136B4874B47"
+    },
+    {
+      "bytes": 10968,
+      "name": "search_policy_funnel.parquet",
+      "sha256": "E00993EEBA7668D6ACBA283E54480EFCBF8F168C293B8D5D5D0F2A390E278112"
+    }
+  ],
+  "candidate_replay_performed": false,
+  "consumer_component_blobs": {
+    "alphafactory_crypto/broad_search/behavior_provenance_census.py": "F44FE98BE62705681975A26A026A0F451396BCF06E606FF2D6668B4A0C6EA468",
+    "alphafactory_crypto/broad_search/search_engine_v2_4.py": "B6E7ACEBB5084566ED9462DDE8C364651B50FC859F3354831A36C2DFD86C132C",
+    "config/crypto_behavior_provenance_census_v1.json": "64BA9D51D291CBAEB8A365DCC428EB2259708C5C4C0B275565F0C5822FC42388",
+    "scripts/crypto_behavior_provenance_census.py": "7D03B84B30A94A9C95E0E51C5258D1BFBC335C952B12C382E3C621CCAA5124F8"
+  },
+  "consumer_id": "CRYPTO_BEHAVIOR_PROVENANCE_CENSUS_V1",
+  "input_authority": {
+    "candidate_ledger_row_count": 512,
+    "candidate_ledger_sha256": "453354C6CEB536E80391FE8CF60B23D4FC064E88306FD944777BBA344510DEA8",
+    "finalizer_source_sha": "0a25183f79350b19bc8ae961e8df12fa815c12f8",
+    "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+    "source_manifest_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/run_manifest.json",
+    "source_manifest_sha256": "4C2FB8A8118B72903B77027A8A44CD691BA8E09B98C5878E2986EB261699C245",
+    "verification_status": "VERIFIED_MANIFEST_BOUND_INPUT"
+  },
+  "market_read_performed": false,
+  "reward_or_policy_feedback_written": false,
+  "schema_version": 1,
+  "source_sha": "743a7d0775a3c7880b31323386c1d5b2daf48092",
+  "status": "NO_PROVENANCE_ROWS"
+}

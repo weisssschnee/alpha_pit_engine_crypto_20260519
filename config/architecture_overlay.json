@@ -529,6 +529,11 @@
                                     ,"runtime/crypto_search_engine_v2_4_repair_replay_20260804/final_decision.json"
                                     ,"runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json"
                                     ,"reports/CRYPTO_SEARCH_ENGINE_V2_4_20260804.md"
+                                    ,"alphafactory_crypto/broad_search/behavior_provenance_census.py"
+                                    ,"config/crypto_behavior_provenance_census_v1.json"
+                                    ,"scripts/crypto_behavior_provenance_census.py"
+                                    ,"runtime/crypto_behavior_provenance_census_v1_20260804/run_manifest.json"
+                                    ,"runtime/crypto_behavior_provenance_census_v1_20260804/census_summary.json"
                                     ,"docs/adr/0022-behavior-family-first-search-v2-4.md"
                                 ],
                       "critical":  true,
@@ -713,6 +718,15 @@
                                             "evidence_ref":  ".planning/STATE.md"
                                         },
                                         {
+                                            "id":  "crypto_search_v2_5_behavior_provenance_census_consumer",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "Source 743a7d0775a3c7880b31323386c1d5b2daf48092 implements a source-only Behavior Provenance Census Consumer with candidate/spec/hash-bound envelopes, mutually exclusive earliest-stable equality stages, frozen diagnostic slices, fixed output schemas, and a monotonic proposal-to-qualified policy funnel. The verified historical V2.4 bundle is bound to the immutable 512-row repair ledger and reports exactly NO_PROVENANCE_ROWS, legacy_final_equal_count 372, and first_equal_stage null; zero-row Parquet artifacts retain their frozen schemas. Historical stages are not inferred. The consumer has no market-read or replay path and cannot modify reward, CEM, Evolution, archive, scheduler, budget, mapping, evaluation, or research authority.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.behavior_provenance_census, config/crypto_behavior_provenance_census_v1.json, source-only CLI, and fail-closed schema/hash tests",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_behavior_provenance_census_v1_20260804/run_manifest.json"
+                                        },
+                                        {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
                                             "type":  "ADMISSION",
                                             "rule":  "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
@@ -833,6 +847,8 @@
                                            "V2.4 REPAIR RECEIPT CONSUMED",
                                            "STRICT EVALUATED 140",
                                            "CANDIDATE-LOCAL FAILURES 372",
+                                           "V2.5 PROVENANCE CONSUMER SOURCE-ONLY",
+                                           "LEGACY FIRST EQUAL STAGE UNKNOWN",
                                            "MATCHED POSITIVES 0",
                                            "NO ARM QUALIFIED",
                                            "NO OOS OR PROMOTION"
