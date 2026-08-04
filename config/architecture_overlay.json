@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.4 repair replay complete; 140 strict evaluations; zero matched positives; economic Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (Evidence V1 run complete; independent ledger-join verification failed; economic Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -535,15 +535,21 @@
                                     ,"runtime/crypto_behavior_provenance_census_v1_20260804/run_manifest.json"
                                     ,"runtime/crypto_behavior_provenance_census_v1_20260804/census_summary.json"
                                     ,"docs/adr/0022-behavior-family-first-search-v2-4.md"
+                                    ,"config/crypto_search_run_evidence_contract_v1.json"
+                                    ,"config/crypto_search_run_evidence_v1_receipt.json"
+                                    ,"runtime/crypto_search_run_evidence_v1_20260804/run_manifest.json"
+                                    ,"runtime/crypto_search_run_evidence_v1_20260804/final_decision.json"
+                                    ,"runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json"
+                                    ,"reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_20260804.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_engine_v2_4_repair_replay_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-v2-4-repair-replay-20260804",
-                                        "verified_sha":  "6d7d607a51853a4950f1d7993be37dc25b5eda46",
-                                        "sha256":  "43EB7434EEE177785790DD44E9D74784AAD41C608D3C3BDD6503FCDFD75F3DE5"
+                                        "path":  "config/crypto_search_run_evidence_v1_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-evidence-run-v1-20260804",
+                                        "verified_sha":  "0353a49b7c955e17c8adb382bffd783df09cdd93",
+                                        "sha256":  "FA7FABB7ED60C1E2E35D107B5326B5ABC3992C4CDA22326268596F2C522FEBBC"
                                     },
                       "contracts":  [
                                         {
@@ -727,6 +733,15 @@
                                             "evidence_ref":  "runtime/crypto_behavior_provenance_census_v1_20260804/run_manifest.json"
                                         },
                                         {
+                                            "id":  "crypto_search_run_evidence_v1_consumed_outcome",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The one-time fresh-state development receipt is consumed with run_authorized false. Producer fea74611c491d2d9a77d8013bc6cdaf427b4fd8c completed exactly 8,000 strict candidates from 12,034 attempts across four atomic restore-verified checkpoints, read zero sealed partitions, and produced 9,769 proposal-attribution plus 1,769 control-degenerate rows. Independent PC2 and local checkers both fail because the final candidate ledger omits seven required joined evidence columns. The run therefore verifies execution and non-empty side evidence but does not close candidate-level failure attribution or qualify any optimizer, mechanism, mapping, reward, Alpha, OOS, promotion, or future Arena conclusion. No rerun, reseed, tuning, historical inference, policy change, reward change, mapping change, new Arena, or new Graph node is authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority and broad_search.search_engine_v1.check_search_evidence_v1",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json"
+                                        },
+                                        {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
                                             "type":  "ADMISSION",
                                             "rule":  "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
@@ -837,20 +852,18 @@
                                     ],
                       "validation":  {
                                          "level":  "RUNTIME_VERIFIED",
-                                         "result":  "PASS",
+                                         "result":  "FAIL",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json",
-                                         "evidence_sha256":  "9A01C6C3F67871035A783C7045838DF048C260558C9C22E32D06401CA2903FF0",
-                                         "verified_at_sha":  "6d7d607a51853a4950f1d7993be37dc25b5eda46"
+                                         "evidence_ref":  "runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json",
+                                         "evidence_sha256":  "DD508D469AD4437EABD1C2EE00EE0AA9F7F1B5619292C46D322087D2622AE56C",
+                                         "verified_at_sha":  "0353a49b7c955e17c8adb382bffd783df09cdd93"
                                      },
                       "claim_badges":  [
-                                           "V2.4 REPAIR RECEIPT CONSUMED",
-                                           "STRICT EVALUATED 140",
-                                           "CANDIDATE-LOCAL FAILURES 372",
-                                           "V2.5 PROVENANCE CONSUMER SOURCE-ONLY",
-                                           "LEGACY FIRST EQUAL STAGE UNKNOWN",
-                                           "MATCHED POSITIVES 0",
-                                           "NO ARM QUALIFIED",
+                                           "EVIDENCE RUN RECEIPT CONSUMED",
+                                           "8K CHECKPOINTS RESTORE PASS",
+                                           "JOINED LEDGER CHECK FAILED",
+                                           "9769 ATTRIBUTION ROWS",
+                                           "NO POLICY QUALIFICATION",
                                            "NO OOS OR PROMOTION"
                                        ],
                       "promotion_requirements":  [
