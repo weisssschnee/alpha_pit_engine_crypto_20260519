@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_SEARCH_ENGINE_V2_4_REPAIR_REPLAY_RECEIPT",
+  "experiment_id": "crypto_search_engine_v2_4_repair_replay",
+  "status": "RUN_AUTHORIZED_ONE_TIME_REPAIR_REPLAY",
+  "run_authorized": true,
+  "decision_id": "USER_AUTHORIZED_V24_REPAIR_REPLAY_20260804",
+  "source_implementation_sha": "896dc0f0981f86272bd8ea4d346463dded49efa5",
+  "component_sources": {
+    "v24_adapter": {
+      "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
+      "sha256": "90F8F42F49F1276B2708387E76BFF76C406BB8506A61859209A8FCECFFCD5E76"
+    },
+    "pair_evaluator": {
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "647D9A88B931D4B58B999C5CA21A236463494B6B0BD16755FC2E61B5E97245CD"
+    },
+    "mechanism_compiler": {
+      "path": "alphafactory_crypto/broad_search/compositional18m.py",
+      "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+    },
+    "target_store": {
+      "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+      "sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
+    }
+  },
+  "source_train": {
+    "candidate_ledger_path": "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4",
+    "candidate_ledger_row_count": 16000,
+    "economic_receipt_path": "config/crypto_search_mechanism_v2_3_receipt.json",
+    "economic_receipt_file_sha256": "4A7536C1E4963D93A2BD6DCB4F392A6B46A970BF1755E00A7CB1D2DB08C532E7",
+    "source_arm_mapping": {
+      "expanded_mechanism_random_v2_3": "expanded_mechanism_random_v2_4",
+      "mechanism_evolution_v2_3": "mechanism_evolution_v2_4"
+    },
+    "candidate_generation_allowed": false,
+    "adaptive_state_import_allowed": false,
+    "validation_or_oos_feedback_selection_allowed": false
+  },
+  "carrier": {
+    "field_count": 115,
+    "oi_mark_field_count": 71,
+    "aggtrades_field_count": 44,
+    "source_oi_cache": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200",
+    "aligned_cache": ".cache/crypto_search_engine_v2_4/oi_mark_x_aggtrades_115_20260701_20260718",
+    "target_cache": ".cache/crypto_search_engine_v2_4/binance_open_target_20260701_20260718",
+    "missing_value_fill": null,
+    "dynamic_eligible_intersection": true,
+    "target_execution_delay_hours": 2,
+    "partition_tail_purge_hours": 6
+  },
+  "source_v24": {
+    "source_runtime": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803",
+    "selection_receipt_path": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/behavior_family_selection_receipt.json",
+    "selection_receipt_file_sha256": "904DB2F571E1C7B498A0F8FFFC69BBE791125985B1E915D890AC6CC6387744BC",
+    "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+    "aligned_carrier_manifest_path": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/aligned_carrier_manifest.json",
+    "aligned_carrier_manifest_file_sha256": "40B2081F92C8DC4A3813DF4465EE3800980DCC5652135BB680EEA1B3932A132E",
+    "economic_context_path": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/economic_context.json",
+    "economic_context_file_sha256": "7CD78ACD0322188F257E70CF480F57778995A99ED6ADFE42FA237DEBDE1B5864",
+    "prior_final_decision_path": "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/final_decision.json",
+    "prior_final_decision_file_sha256": "C06822C9D9383F00FD60D57045393AD3F246DF867E4B7894117041DF1AF786D2",
+    "candidate_count": 512,
+    "prior_terminal_status": "ENGINE_VALIDATION_BLOCKED",
+    "prior_strict_evaluated_count": 0,
+    "prior_reward_feedback_observed": false
+  },
+  "selection": {
+    "candidate_count_exact": 512,
+    "checkpoint_size": 64,
+    "checkpoint_count": 8,
+    "arms": [
+      "expanded_mechanism_random_v2_4",
+      "mechanism_evolution_v2_4"
+    ],
+    "seeds": [359914106, 1141399971],
+    "horizons_hours": [1, 4],
+    "candidate_replacement_allowed": false,
+    "candidate_backfill_allowed": false,
+    "candidate_reordering_allowed": false
+  },
+  "fresh_validation": {
+    "start": "2026-07-01T00:00:00Z",
+    "end_exclusive": "2026-07-18T00:00:00Z",
+    "role": "FRESH_DATA_VALIDATION_V2_4",
+    "execution_venue": "BINANCE_USD_M",
+    "baseline_cost_bps": 5.0,
+    "cost_sensitivity_bps": [5.0, 10.0]
+  },
+  "compute": {
+    "execution_host": "PC2",
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "evaluation_wall_time_seconds_maximum": 14400,
+    "minimum_pair_evaluated_per_hour": 128.0,
+    "local_heavy_compute_allowed": false
+  },
+  "repair": {
+    "static_constructibility_sweep_required": true,
+    "static_constructibility_expected_count": 512,
+    "candidate_local_failure_action": "PERSIST_NO_BACKFILL",
+    "candidate_local_failure_reasons": [
+      "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY",
+      "DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE",
+      "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+      "INTERACTION_LEFT_CONTROL_SUPPORT_DIFFERS_AB",
+      "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+      "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+      "RIGHT_AXIS_CONTROL_SUPPORT_DIFFERS_PRIMARY"
+    ],
+    "checkpoint_unit": "SOURCE_CANDIDATE_ORDINAL",
+    "source_candidates_per_checkpoint": 64,
+    "checkpoint_count": 8,
+    "economic_paths_for_strict_evaluated_only": true,
+    "arm_comparison": "DETERMINISTIC_EQUAL_COUNT_WITHIN_SEED_HORIZON_BY_SOURCE_ORDINAL"
+  },
+  "boundaries": {
+    "single_run": true,
+    "restart": false,
+    "seed_change": false,
+    "parameter_tuning": false,
+    "candidate_generation": false,
+    "candidate_backfill": false,
+    "optimizer_feedback": false,
+    "policy_memory_write": false,
+    "archive_write": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "new_evaluator": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_graph_node": false
+  }
+}
