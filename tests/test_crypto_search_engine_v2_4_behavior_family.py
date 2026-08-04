@@ -14,6 +14,7 @@ from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     _v24_bind_control_provenance,
     _v24_failure_reason,
     _v24_mark_equal_count_comparison,
+    _v24_require_hierarchical_three_axis,
     _v24_write_batch_projections,
     _v24_write_candidate_failure_projection,
     build_economic_path_artifacts,
@@ -295,6 +296,41 @@ def test_v24_evaluated_provenance_requires_exact_control_comparison_set() -> Non
             failure_reason=None,
             provenance=base,
             hierarchical_three_axis=True,
+        )
+
+
+def test_v24_hierarchical_marker_is_required_and_strictly_boolean() -> None:
+    base = _pair_control_provenance(hierarchical=False)
+    assert _v24_require_hierarchical_three_axis(
+        {"hierarchical_three_axis": True}
+    ) is True
+    assert _v24_require_hierarchical_three_axis(
+        {"hierarchical_three_axis": False}
+    ) is False
+    with pytest.raises(
+        RuntimeError,
+        match="V24_HIERARCHICAL_THREE_AXIS_MISSING",
+    ):
+        _v24_require_hierarchical_three_axis({})
+    for invalid in (None, 0, 1, "false", np.bool_(True)):
+        with pytest.raises(
+            RuntimeError,
+            match="V24_HIERARCHICAL_THREE_AXIS_INVALID",
+        ):
+            _v24_require_hierarchical_three_axis(
+                {"hierarchical_three_axis": invalid}
+            )
+
+    with pytest.raises(
+        RuntimeError,
+        match="V24_HIERARCHICAL_THREE_AXIS_INVALID",
+    ):
+        _v24_bind_control_provenance(
+            candidate_id="candidate-1",
+            candidate_spec_sha256="A" * 64,
+            failure_reason=None,
+            provenance=base,
+            hierarchical_three_axis=0,  # type: ignore[arg-type]
         )
 
 

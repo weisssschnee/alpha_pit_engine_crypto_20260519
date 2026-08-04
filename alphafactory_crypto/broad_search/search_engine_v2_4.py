@@ -1773,6 +1773,14 @@ def _v24_bind_control_provenance(
     provenance: Mapping[str, Any],
     hierarchical_three_axis: bool | None = None,
 ) -> dict[str, Any]:
+    if failure_reason is None and type(hierarchical_three_axis) is not bool:
+        raise RuntimeError("V24_HIERARCHICAL_THREE_AXIS_INVALID")
+    if (
+        failure_reason is not None
+        and hierarchical_three_axis is not None
+        and type(hierarchical_three_axis) is not bool
+    ):
+        raise RuntimeError("V24_HIERARCHICAL_THREE_AXIS_INVALID")
     raw = dict(provenance)
     if raw.get("schema_version") == "CRYPTO_PAIR_CONTROL_PROVENANCE_V1":
         if failure_reason is not None:
@@ -1811,6 +1819,17 @@ def _v24_bind_control_provenance(
     }
     envelope["provenance_sha256"] = _canonical_sha256(envelope)
     return envelope
+
+
+def _v24_require_hierarchical_three_axis(
+    evaluation: Mapping[str, Any],
+) -> bool:
+    if "hierarchical_three_axis" not in evaluation:
+        raise RuntimeError("V24_HIERARCHICAL_THREE_AXIS_MISSING")
+    value = evaluation["hierarchical_three_axis"]
+    if type(value) is not bool:
+        raise RuntimeError("V24_HIERARCHICAL_THREE_AXIS_INVALID")
+    return value
 
 
 def _v24_write_candidate_failure_projection(
@@ -2026,8 +2045,8 @@ def _v24_write_candidate_projection(
             candidate_spec_sha256=str(selected["candidate_spec_sha256"]),
             failure_reason=None,
             provenance=provenance,
-            hierarchical_three_axis=bool(
-                evaluation.get("hierarchical_three_axis")
+            hierarchical_three_axis=_v24_require_hierarchical_three_axis(
+                evaluation
             ),
         )
     )
