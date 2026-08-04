@@ -2,14 +2,19 @@ from __future__ import annotations
 
 import json
 import hashlib
-import subprocess
 from collections import Counter
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pytest
 
 from alphafactory_crypto.broad_search.search_engine_v2_4 import (
+    V24_CANDIDATE_LOCAL_FAILURES,
+    _v24_failure_reason,
+    _v24_mark_equal_count_comparison,
+    _v24_write_batch_projections,
+    _v24_write_candidate_failure_projection,
     build_economic_path_artifacts,
     freeze_v24_gate_selection,
     load_v24_run_receipt,
@@ -18,6 +23,7 @@ from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     persist_v24_gate_bundle,
     select_behavior_family_cohort,
     select_behavior_family_champions,
+    sweep_v24_static_constructibility,
 )
 
 
@@ -43,6 +49,190 @@ def test_v24_one_time_receipt_binds_exact_budget_and_fresh_interval() -> None:
     assert receipt["compute"]["workers_12_forbidden"] is True
     assert receipt["compute"]["evaluation_wall_time_seconds_maximum"] == 14400
     assert receipt["compute"]["minimum_pair_evaluated_per_hour"] == 128.0
+
+
+def test_v24_static_sweep_recompiles_all_frozen_candidates_without_market_read() -> None:
+    runtime_root = (
+        REPO_ROOT / "runtime" / "crypto_search_engine_v2_4_fresh_gate_20260803"
+    )
+    selection = json.loads(
+        (runtime_root / "behavior_family_selection_receipt.json").read_text()
+    )
+    carrier = json.loads(
+        (runtime_root / "aligned_carrier_manifest.json").read_text()
+    )
+    ledger = pd.read_parquet(
+        REPO_ROOT
+        / "runtime"
+        / "crypto_search_mechanism_v2_3_20260802"
+        / "candidate_ledger.parquet"
+    ).set_index("candidate_id")
+    selected_rows = []
+    for frozen in selection["selected_candidates"]:
+        row = ledger.loc[str(frozen["candidate_id"])]
+        selected_rows.append(
+            {
+                **dict(frozen),
+                "candidate": json.loads(str(row["candidate_spec_json"])),
+            }
+        )
+    sweep = sweep_v24_static_constructibility(
+        selected_rows=selected_rows,
+        contract_rows=carrier["contracts"],
+    )
+    assert sweep["status"] == "PASS_V24_STATIC_CONSTRUCTIBILITY_SWEEP"
+    assert sweep["market_read_performed"] is False
+    assert sweep["candidate_count"] == sweep["unique_candidate_count"] == 512
+
+
+def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
+    selected = {
+        "candidate_id": "candidate-1",
+        "candidate_spec_sha256": "A" * 64,
+        "behavior_family_id": "family-1",
+        "arm": "expanded_mechanism_random_v2_4",
+        "source_arm": "expanded_mechanism_random_v2_3",
+        "seed": 359914106,
+        "horizon_hours": 1,
+        "search_reward": 0.5,
+        "train_orientation": 1.0,
+    }
+    worker = {
+        "candidate_id": "candidate-1",
+        "error": "ValueError:CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "process_cpu_seconds": 1.5,
+        "wall_seconds": 2.0,
+        "worker_rss_bytes": 10,
+        "worker_private_bytes": 12,
+    }
+    row = _v24_write_candidate_failure_projection(
+        ordinal=0,
+        selected=selected,
+        worker=worker,
+        economic_receipt_sha256="E" * 64,
+    )
+    assert row["candidate_id"] == "candidate-1"
+    assert row["validation_status"] == "CANDIDATE_LOCAL_FAILURE"
+    assert row["validation_failure_reason"] in V24_CANDIDATE_LOCAL_FAILURES
+    assert row["strict_evaluated"] is False
+    assert row["comparison_included"] is False
+    with pytest.raises(RuntimeError, match="V24_UNEXPECTED_CANDIDATE_FAILURE"):
+        _v24_failure_reason(
+            {"error": "ValueError:UNREGISTERED_CANDIDATE_FAILURE"}
+        )
+
+
+def test_v24_repair_batch_continues_after_candidate_local_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def success_projection(
+        root: Path,
+        *,
+        ordinal: int,
+        selected: dict,
+        worker: dict,
+        economic_receipt_sha256: str,
+    ) -> dict:
+        del root, worker, economic_receipt_sha256
+        return {
+            "completion_ordinal": ordinal + 1,
+            "candidate_id": selected["candidate_id"],
+            "strict_evaluated": True,
+            "validation_status": "EVALUATED",
+        }
+
+    monkeypatch.setattr(
+        "alphafactory_crypto.broad_search.search_engine_v2_4."
+        "_v24_write_candidate_projection",
+        success_projection,
+    )
+    base = {
+        "candidate_spec_sha256": "A" * 64,
+        "behavior_family_id": "family",
+        "arm": "expanded_mechanism_random_v2_4",
+        "source_arm": "expanded_mechanism_random_v2_3",
+        "seed": 359914106,
+        "horizon_hours": 1,
+        "search_reward": 0.5,
+        "train_orientation": 1.0,
+    }
+    selected = [
+        {**base, "candidate_id": "candidate-failed"},
+        {**base, "candidate_id": "candidate-evaluated"},
+    ]
+    workers = [
+        {
+            "candidate_id": "candidate-failed",
+            "error": "ValueError:CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "process_cpu_seconds": 1.0,
+            "wall_seconds": 1.0,
+            "worker_rss_bytes": 10,
+            "worker_private_bytes": 10,
+        },
+        {"candidate_id": "candidate-evaluated", "error": None},
+    ]
+    projected = _v24_write_batch_projections(
+        tmp_path,
+        base_ordinal=0,
+        selected_rows=selected,
+        worker_rows=workers,
+        economic_receipt_sha256="E" * 64,
+        persist_candidate_local_failures=True,
+    )
+    assert [row["candidate_id"] for row in projected] == [
+        "candidate-failed",
+        "candidate-evaluated",
+    ]
+    assert [row["strict_evaluated"] for row in projected] == [False, True]
+
+
+def test_v24_equal_count_comparison_uses_source_ordinal_without_backfill() -> None:
+    rows = []
+    ordinal = 0
+    for seed in (359914106, 1141399971):
+        for horizon in (1, 4):
+            for arm, count in (
+                ("expanded_mechanism_random_v2_4", 3),
+                ("mechanism_evolution_v2_4", 2),
+            ):
+                for local in range(count):
+                    ordinal += 1
+                    rows.append(
+                        {
+                            "completion_ordinal": ordinal,
+                            "candidate_id": f"candidate-{ordinal}",
+                            "arm": arm,
+                            "seed": seed,
+                            "horizon_hours": horizon,
+                            "strict_evaluated": True,
+                        }
+                    )
+    marked, counts = _v24_mark_equal_count_comparison(rows)
+    assert counts == {
+        "359914106:1": 2,
+        "359914106:4": 2,
+        "1141399971:1": 2,
+        "1141399971:4": 2,
+    }
+    compared = [row for row in marked if row["comparison_included"]]
+    assert len(compared) == 16
+    assert all(
+        sum(
+            row["comparison_included"]
+            for row in marked
+            if row["arm"] == arm
+            and row["seed"] == seed
+            and row["horizon_hours"] == horizon
+        )
+        == 2
+        for arm in (
+            "expanded_mechanism_random_v2_4",
+            "mechanism_evolution_v2_4",
+        )
+        for seed in (359914106, 1141399971)
+        for horizon in (1, 4)
+    )
 
 
 def test_v24_one_time_receipt_is_consumed_by_exact_blocked_outcome() -> None:
@@ -389,9 +579,10 @@ def test_v24_gate_adapter_atomically_persists_selection_and_complete_paths(
                 ),
             }
         )
-    producer_source_sha = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
-    ).strip()
+    producer_source_sha = load_v24_run_receipt(
+        REPO_ROOT,
+        require_authorized=False,
+    )["source_implementation_sha"]
     selection_receipt_path = tmp_path / "selection_receipt.json"
     freeze_v24_gate_selection(
         repo_root=REPO_ROOT,

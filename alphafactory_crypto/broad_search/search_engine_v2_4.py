@@ -31,6 +31,11 @@ V24_CONTRACT_PATH = "config/crypto_search_engine_v2_4_behavior_family.json"
 V24_RUN_RECEIPT_PATH = "config/crypto_search_engine_v2_4_fresh_gate_receipt.json"
 V24_RUNTIME_PREFIX = "crypto_search_engine_v2_4_fresh_gate"
 V24_DEFAULT_RUNTIME_DATE = "20260803"
+V24_REPAIR_RUN_RECEIPT_PATH = (
+    "config/crypto_search_engine_v2_4_repair_replay_receipt.json"
+)
+V24_REPAIR_RUNTIME_PREFIX = "crypto_search_engine_v2_4_repair_replay"
+V24_REPAIR_DEFAULT_RUNTIME_DATE = "20260804"
 V24_SOURCE_LEDGER_PATH = (
     "runtime/crypto_search_mechanism_v2_3_20260802/candidate_ledger.parquet"
 )
@@ -49,6 +54,18 @@ V24_CHAMPION_ORDER = (
     "search_reward_desc",
     "arm_completion_ordinal_asc",
     "candidate_id_asc",
+)
+V24_CANDIDATE_LOCAL_FAILURES = frozenset(
+    {
+        "CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY",
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+        "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "RIGHT_AXIS_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "INTERACTION_LEFT_CONTROL_SUPPORT_DIFFERS_AB",
+        "DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE",
+    }
 )
 
 
@@ -235,13 +252,6 @@ def load_v24_run_receipt(
         "carrier_materializer",
     }:
         blockers.append("component_sources.keys")
-    for name, binding in components.items():
-        item = dict(binding)
-        path = Path(repo_root) / str(item.get("path") or "")
-        if not path.is_file() or _file_sha256(path) != str(
-            item.get("sha256") or ""
-        ):
-            blockers.append(f"component_sources.current.{name}")
     boundaries = dict(receipt.get("boundaries") or {})
     expected_boundary_keys = {
         "single_run",
@@ -278,30 +288,28 @@ def load_v24_run_receipt(
             blockers.append("status")
         if receipt.get("run_authorized") is not True:
             blockers.append("run_authorized")
-        source_sha = str(receipt.get("source_implementation_sha") or "").lower()
-        if len(source_sha) != 40:
-            blockers.append("source_implementation_sha")
-        else:
+    source_sha = str(receipt.get("source_implementation_sha") or "").lower()
+    if len(source_sha) != 40:
+        blockers.append("source_implementation_sha")
+    else:
+        try:
+            subprocess.check_call(
+                ["git", "cat-file", "-e", f"{source_sha}^{{commit}}"],
+                cwd=repo_root,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except subprocess.CalledProcessError:
+            blockers.append("source_implementation_commit")
+        for name, binding in components.items():
+            item = dict(binding)
+            relative = str(item.get("path") or "")
             try:
-                subprocess.check_call(
-                    ["git", "cat-file", "-e", f"{source_sha}^{{commit}}"],
-                    cwd=repo_root,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
-            except subprocess.CalledProcessError:
-                blockers.append("source_implementation_commit")
-            for name, binding in dict(
-                receipt.get("component_sources") or {}
-            ).items():
-                item = dict(binding)
-                relative = str(item.get("path") or "")
-                try:
-                    committed = _git_file_sha256(repo_root, source_sha, relative)
-                except (OSError, subprocess.CalledProcessError):
-                    committed = ""
-                if committed != str(item.get("sha256") or ""):
-                    blockers.append(f"component_sources.{name}")
+                committed = _git_file_sha256(repo_root, source_sha, relative)
+            except (OSError, subprocess.CalledProcessError):
+                committed = ""
+            if committed != str(item.get("sha256") or ""):
+                blockers.append(f"component_sources.{name}")
     if blockers:
         raise RuntimeError("V24_RUN_RECEIPT_BLOCKED:" + ",".join(blockers))
     return receipt
@@ -312,6 +320,225 @@ def _git_file_sha256(repo_root: Path, revision: str, path: str) -> str:
         ["git", "show", f"{revision}:{path}"], cwd=repo_root
     )
     return hashlib.sha256(payload).hexdigest().upper()
+
+
+def load_v24_repair_run_receipt(
+    repo_root: Path,
+    *,
+    require_authorized: bool = True,
+) -> dict[str, Any]:
+    """Load the one-time, same-cohort candidate-local isolation replay."""
+
+    path = Path(repo_root) / V24_REPAIR_RUN_RECEIPT_PATH
+    if not path.is_file():
+        raise RuntimeError("V24_REPAIR_RUN_RECEIPT_MISSING")
+    receipt = json.loads(path.read_text(encoding="utf-8-sig"))
+    blockers: list[str] = []
+    if receipt.get("schema_version") != 1:
+        blockers.append("schema_version")
+    if receipt.get("receipt_id") != (
+        "CRYPTO_SEARCH_ENGINE_V2_4_REPAIR_REPLAY_RECEIPT"
+    ):
+        blockers.append("receipt_id")
+    if receipt.get("experiment_id") != (
+        "crypto_search_engine_v2_4_repair_replay"
+    ):
+        blockers.append("experiment_id")
+    status = str(receipt.get("status") or "")
+    allowed_statuses = {
+        "RUN_AUTHORIZED_ONE_TIME_REPAIR_REPLAY",
+        "RUN_AUTHORIZATION_CONSUMED_REPAIR_REPLAY_COMPLETE",
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+    }
+    if status not in allowed_statuses:
+        blockers.append("status")
+    expected_authorized = status == "RUN_AUTHORIZED_ONE_TIME_REPAIR_REPLAY"
+    if receipt.get("run_authorized") is not expected_authorized:
+        blockers.append("run_authorized")
+    if require_authorized and not expected_authorized:
+        blockers.append("authorization_consumed")
+    historical_receipt = load_v24_run_receipt(
+        repo_root,
+        require_authorized=False,
+    )
+    for shared in ("source_train", "carrier"):
+        if dict(receipt.get(shared) or {}) != dict(
+            historical_receipt.get(shared) or {}
+        ):
+            blockers.append(shared)
+    source = dict(receipt.get("source_v24") or {})
+    expected_source_paths = {
+        "source_runtime": (
+            "runtime/crypto_search_engine_v2_4_fresh_gate_20260803"
+        ),
+        "selection_receipt_path": (
+            "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/"
+            "behavior_family_selection_receipt.json"
+        ),
+        "aligned_carrier_manifest_path": (
+            "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/"
+            "aligned_carrier_manifest.json"
+        ),
+        "economic_context_path": (
+            "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/"
+            "economic_context.json"
+        ),
+        "prior_final_decision_path": (
+            "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/"
+            "final_decision.json"
+        ),
+    }
+    for name, expected in expected_source_paths.items():
+        if str(source.get(name) or "") != expected:
+            blockers.append(f"source_v24.{name}")
+    source_file_bindings = (
+        ("selection_receipt_path", "selection_receipt_file_sha256"),
+        (
+            "aligned_carrier_manifest_path",
+            "aligned_carrier_manifest_file_sha256",
+        ),
+        ("economic_context_path", "economic_context_file_sha256"),
+        ("prior_final_decision_path", "prior_final_decision_file_sha256"),
+    )
+    for _path_name, name in source_file_bindings:
+        if len(str(source.get(name) or "")) != 64:
+            blockers.append(f"source_v24.{name}")
+    for path_name, hash_name in source_file_bindings:
+        source_path = Path(repo_root) / str(source.get(path_name) or "")
+        if (
+            not source_path.is_file()
+            or _file_sha256(source_path) != str(source.get(hash_name) or "")
+        ):
+            blockers.append(f"source_v24.file:{path_name}")
+    if (
+        str(source.get("selection_receipt_sha256") or "")
+        != "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48"
+        or int(source.get("candidate_count", -1)) != 512
+        or str(source.get("prior_terminal_status") or "")
+        != "ENGINE_VALIDATION_BLOCKED"
+        or int(source.get("prior_strict_evaluated_count", -1)) != 0
+        or source.get("prior_reward_feedback_observed") is not False
+    ):
+        blockers.append("source_v24.identity")
+    selection = dict(receipt.get("selection") or {})
+    if selection != {
+        "candidate_count_exact": 512,
+        "checkpoint_size": 64,
+        "checkpoint_count": 8,
+        "arms": [
+            "expanded_mechanism_random_v2_4",
+            "mechanism_evolution_v2_4",
+        ],
+        "seeds": [359914106, 1141399971],
+        "horizons_hours": [1, 4],
+        "candidate_replacement_allowed": False,
+        "candidate_backfill_allowed": False,
+        "candidate_reordering_allowed": False,
+    }:
+        blockers.append("selection")
+    if dict(receipt.get("fresh_validation") or {}) != {
+        "start": "2026-07-01T00:00:00Z",
+        "end_exclusive": "2026-07-18T00:00:00Z",
+        "role": "FRESH_DATA_VALIDATION_V2_4",
+        "execution_venue": "BINANCE_USD_M",
+        "baseline_cost_bps": 5.0,
+        "cost_sensitivity_bps": [5.0, 10.0],
+    }:
+        blockers.append("fresh_validation")
+    if dict(receipt.get("compute") or {}) != {
+        "execution_host": "PC2",
+        "workers_default": 10,
+        "workers_memory_fallback": 8,
+        "workers_12_forbidden": True,
+        "evaluation_wall_time_seconds_maximum": 14_400,
+        "minimum_pair_evaluated_per_hour": 128.0,
+        "local_heavy_compute_allowed": False,
+    }:
+        blockers.append("compute")
+    repair = dict(receipt.get("repair") or {})
+    if repair != {
+        "static_constructibility_sweep_required": True,
+        "static_constructibility_expected_count": 512,
+        "candidate_local_failure_action": "PERSIST_NO_BACKFILL",
+        "candidate_local_failure_reasons": sorted(
+            V24_CANDIDATE_LOCAL_FAILURES
+        ),
+        "checkpoint_unit": "SOURCE_CANDIDATE_ORDINAL",
+        "source_candidates_per_checkpoint": 64,
+        "checkpoint_count": 8,
+        "economic_paths_for_strict_evaluated_only": True,
+        "arm_comparison": (
+            "DETERMINISTIC_EQUAL_COUNT_WITHIN_SEED_HORIZON_BY_SOURCE_ORDINAL"
+        ),
+    }:
+        blockers.append("repair")
+    boundaries = dict(receipt.get("boundaries") or {})
+    if boundaries != {
+        "single_run": True,
+        "restart": False,
+        "seed_change": False,
+        "parameter_tuning": False,
+        "candidate_generation": False,
+        "candidate_backfill": False,
+        "optimizer_feedback": False,
+        "policy_memory_write": False,
+        "archive_write": False,
+        "oos": False,
+        "challenge": False,
+        "recent": False,
+        "may_stress": False,
+        "forward": False,
+        "promotion": False,
+        "new_evaluator": False,
+        "new_ast": False,
+        "new_compiler": False,
+        "new_graph_node": False,
+    }:
+        blockers.append("boundaries")
+    components = dict(receipt.get("component_sources") or {})
+    if set(components) != {
+        "v24_adapter",
+        "pair_evaluator",
+        "mechanism_compiler",
+        "target_store",
+    }:
+        blockers.append("component_sources.keys")
+    source_sha = str(receipt.get("source_implementation_sha") or "").lower()
+    if len(source_sha) != 40:
+        blockers.append("source_implementation_sha")
+    else:
+        try:
+            subprocess.check_call(
+                ["git", "cat-file", "-e", f"{source_sha}^{{commit}}"],
+                cwd=repo_root,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except subprocess.CalledProcessError:
+            blockers.append("source_implementation_commit")
+        for name, binding in components.items():
+            item = dict(binding)
+            relative = str(item.get("path") or "")
+            try:
+                committed = _git_file_sha256(repo_root, source_sha, relative)
+            except (OSError, subprocess.CalledProcessError):
+                committed = ""
+            if committed != str(item.get("sha256") or ""):
+                blockers.append(f"component_sources.{name}")
+            current = Path(repo_root) / relative
+            if require_authorized and (
+                not current.is_file()
+                or _file_sha256(current) != str(item.get("sha256") or "")
+            ):
+                blockers.append(f"component_sources.current.{name}")
+    if require_authorized and receipt.get("run_outcome"):
+        blockers.append("run_outcome_before_consumption")
+    if blockers:
+        raise RuntimeError(
+            "V24_REPAIR_RUN_RECEIPT_BLOCKED:" + ",".join(blockers)
+        )
+    return receipt
 
 
 def _candidate_spec_sha256(row: Mapping[str, Any]) -> str:
@@ -1263,6 +1490,68 @@ _V24_WORKER_END = ""
 _V24_WORKER_ROLE = ""
 
 
+def sweep_v24_static_constructibility(
+    *,
+    selected_rows: Sequence[Mapping[str, Any]],
+    contract_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Recompile the frozen genome identities without reading market arrays."""
+
+    from alphafactory_crypto.broad_search.compositional18m import (
+        CandidateSpec,
+        TypedExpressionRegistry,
+        mechanism_candidate_from_genes,
+    )
+    from alphafactory_crypto.broad_search.runner18m import _contracts_from_payload
+
+    registry = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
+    proofs: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for ordinal, raw in enumerate(selected_rows):
+        selected = dict(raw)
+        payload = dict(selected["candidate"])
+        stored = CandidateSpec.from_dict(payload)
+        rebuilt = mechanism_candidate_from_genes(
+            registry,
+            genes=stored.generation_genes,
+        )
+        candidate_id = str(selected["candidate_id"])
+        if (
+            candidate_id in seen
+            or stored.candidate_id != candidate_id
+            or rebuilt.to_dict() != stored.to_dict()
+            or _canonical_sha256(payload)
+            != str(selected["candidate_spec_sha256"])
+            or stored.expression.expression_id == stored.control.expression_id
+        ):
+            raise RuntimeError(
+                f"V24_STATIC_CONSTRUCTIBILITY_CHANGED:{ordinal}:{candidate_id}"
+            )
+        seen.add(candidate_id)
+        proofs.append(
+            {
+                "source_ordinal": int(ordinal),
+                "candidate_id": candidate_id,
+                "candidate_spec_sha256": str(
+                    selected["candidate_spec_sha256"]
+                ),
+                "expression_id": stored.expression.expression_id,
+                "control_expression_id": stored.control.expression_id,
+                "mechanism_id": str(
+                    stored.generation_genes.get("mechanism_id") or ""
+                ),
+            }
+        )
+    return {
+        "schema_version": 1,
+        "status": "PASS_V24_STATIC_CONSTRUCTIBILITY_SWEEP",
+        "market_read_performed": False,
+        "candidate_count": len(proofs),
+        "unique_candidate_count": len(seen),
+        "proofs_sha256": _canonical_sha256(proofs),
+    }
+
+
 def _v24_worker_initialize(
     cache_root: str,
     target_root: str,
@@ -1360,6 +1649,112 @@ def _v24_checkpoint_files(root: Path) -> list[dict[str, Any]]:
     ]
 
 
+def _v24_failure_reason(worker: Mapping[str, Any]) -> str | None:
+    error = str(worker.get("error") or "")
+    if not error:
+        return None
+    prefix, separator, reason = error.partition(":")
+    if prefix not in {"ValueError", "FloatingPointError"} or not separator:
+        raise RuntimeError(f"V24_UNEXPECTED_WORKER_FAILURE:{error}")
+    if reason not in V24_CANDIDATE_LOCAL_FAILURES:
+        raise RuntimeError(f"V24_UNEXPECTED_CANDIDATE_FAILURE:{error}")
+    return reason
+
+
+def _v24_write_candidate_failure_projection(
+    *,
+    ordinal: int,
+    selected: Mapping[str, Any],
+    worker: Mapping[str, Any],
+    economic_receipt_sha256: str,
+) -> dict[str, Any]:
+    candidate_id = str(selected["candidate_id"])
+    if str(worker.get("candidate_id") or "") != candidate_id:
+        raise RuntimeError("V24_WORKER_FAILURE_IDENTITY_CHANGED")
+    reason = _v24_failure_reason(worker)
+    if reason is None:
+        raise RuntimeError("V24_WORKER_FAILURE_REASON_MISSING")
+    return {
+        "completion_ordinal": int(ordinal + 1),
+        "candidate_id": candidate_id,
+        "candidate_spec_sha256": str(selected["candidate_spec_sha256"]),
+        "behavior_family_id": str(selected["behavior_family_id"]),
+        "arm": str(selected["arm"]),
+        "source_arm": str(selected["source_arm"]),
+        "seed": int(selected["seed"]),
+        "horizon_hours": int(selected["horizon_hours"]),
+        "train_search_reward": float(selected["search_reward"]),
+        "train_orientation": float(selected["train_orientation"]),
+        "evaluation_partition": "validation",
+        "validation_status": "CANDIDATE_LOCAL_FAILURE",
+        "validation_failure_reason": reason,
+        "strict_evaluated": False,
+        "comparison_included": False,
+        "pair_reward": float("nan"),
+        "matched_positive": False,
+        "primary_gross_mean": float("nan"),
+        "primary_net_mean": float("nan"),
+        "primary_turnover_mean": float("nan"),
+        "primary_cost_mean": float("nan"),
+        "primary_net_5bps_path_mean": float("nan"),
+        "primary_net_10bps_path_mean": float("nan"),
+        "matched_net_5bps_path_mean": float("nan"),
+        "matched_net_10bps_path_mean": float("nan"),
+        "economic_receipt_sha256": str(economic_receipt_sha256),
+        "process_cpu_seconds": float(worker["process_cpu_seconds"]),
+        "wall_seconds": float(worker["wall_seconds"]),
+        "worker_rss_bytes": int(worker["worker_rss_bytes"]),
+        "worker_private_bytes": int(worker["worker_private_bytes"]),
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "archive_written": False,
+        "fresh_data_read": True,
+    }
+
+
+def _v24_write_batch_projections(
+    root: Path,
+    *,
+    base_ordinal: int,
+    selected_rows: Sequence[Mapping[str, Any]],
+    worker_rows: Sequence[Mapping[str, Any]],
+    economic_receipt_sha256: str,
+    persist_candidate_local_failures: bool,
+) -> list[dict[str, Any]]:
+    if len(selected_rows) != len(worker_rows):
+        raise RuntimeError("V24_WORKER_BATCH_COUNT_CHANGED")
+    output: list[dict[str, Any]] = []
+    for offset, (selected, worker) in enumerate(
+        zip(selected_rows, worker_rows)
+    ):
+        if worker.get("error"):
+            if not persist_candidate_local_failures:
+                raise RuntimeError(
+                    "V24_CANDIDATE_LOCAL_FAILURE:"
+                    f"{worker['candidate_id']}:{worker['error']}"
+                )
+            output.append(
+                _v24_write_candidate_failure_projection(
+                    ordinal=base_ordinal + offset,
+                    selected=selected,
+                    worker=worker,
+                    economic_receipt_sha256=economic_receipt_sha256,
+                )
+            )
+        else:
+            output.append(
+                _v24_write_candidate_projection(
+                    root,
+                    ordinal=base_ordinal + offset,
+                    selected=selected,
+                    worker=worker,
+                    economic_receipt_sha256=economic_receipt_sha256,
+                )
+            )
+    return output
+
+
 def _v24_write_candidate_projection(
     root: Path,
     *,
@@ -1437,7 +1832,10 @@ def _v24_write_candidate_projection(
         "train_search_reward": float(selected["search_reward"]),
         "train_orientation": float(selected["train_orientation"]),
         "evaluation_partition": "validation",
+        "validation_status": "EVALUATED",
+        "validation_failure_reason": None,
         "strict_evaluated": True,
+        "comparison_included": False,
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
         "primary_gross_mean": float(primary_metrics.get("gross_mean", float("nan"))),
@@ -1461,6 +1859,44 @@ def _v24_write_candidate_projection(
         "archive_written": False,
         "fresh_data_read": True,
     }
+
+
+def _v24_mark_equal_count_comparison(
+    rows: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    """Mark an equal source-ordinal prefix per arm, seed, and horizon."""
+
+    output = [{**dict(row), "comparison_included": False} for row in rows]
+    arms = (
+        "expanded_mechanism_random_v2_4",
+        "mechanism_evolution_v2_4",
+    )
+    equal_counts: dict[str, int] = {}
+    for seed in (359914106, 1141399971):
+        for horizon in (1, 4):
+            by_arm: dict[str, list[int]] = {}
+            for arm in arms:
+                by_arm[arm] = sorted(
+                    (
+                        index
+                        for index, row in enumerate(output)
+                        if bool(row["strict_evaluated"])
+                        and str(row["arm"]) == arm
+                        and int(row["seed"]) == seed
+                        and int(row["horizon_hours"]) == horizon
+                    ),
+                    key=lambda index: int(output[index]["completion_ordinal"]),
+                )
+            count = min(len(by_arm[arm]) for arm in arms)
+            if count <= 0:
+                raise RuntimeError(
+                    f"V24_EQUAL_COUNT_CELL_EMPTY:{seed}:{horizon}"
+                )
+            equal_counts[f"{seed}:{horizon}"] = int(count)
+            for arm in arms:
+                for index in by_arm[arm][:count]:
+                    output[index]["comparison_included"] = True
+    return output, equal_counts
 
 
 def _v24_restore_checkpoints(
@@ -1523,17 +1959,35 @@ def run_v24_fresh_gate(
 ) -> dict[str, Any]:
     """Evaluate the one frozen 512-family cohort on fresh July data."""
 
-    if str(runtime_date) != V24_DEFAULT_RUNTIME_DATE:
+    is_repair_replay = str(runtime_date) == V24_REPAIR_DEFAULT_RUNTIME_DATE
+    if str(runtime_date) not in {
+        V24_DEFAULT_RUNTIME_DATE,
+        V24_REPAIR_DEFAULT_RUNTIME_DATE,
+    }:
         raise ValueError("V24_RUNTIME_DATE_CHANGED")
-    receipt = load_v24_run_receipt(repo_root, require_authorized=True)
-    selection = _load_v24_selection(repo_root, runtime_date=runtime_date)
+    if is_repair_replay:
+        receipt = load_v24_repair_run_receipt(
+            repo_root,
+            require_authorized=True,
+        )
+        runtime_prefix = V24_REPAIR_RUNTIME_PREFIX
+        run_receipt_path = V24_REPAIR_RUN_RECEIPT_PATH
+    else:
+        receipt = load_v24_run_receipt(repo_root, require_authorized=True)
+        runtime_prefix = V24_RUNTIME_PREFIX
+        run_receipt_path = V24_RUN_RECEIPT_PATH
+    selection = _load_v24_selection(
+        repo_root,
+        runtime_date=V24_DEFAULT_RUNTIME_DATE,
+    )
     observed_source = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
     ).strip().lower()
     source_sha = str(producer_source_sha or observed_source).lower()
-    if source_sha != observed_source or source_sha != str(
-        selection["producer_source_sha"]
-    ).lower():
+    if source_sha != observed_source or (
+        not is_repair_replay
+        and source_sha != str(selection["producer_source_sha"]).lower()
+    ):
         raise RuntimeError("V24_RUN_SOURCE_SHA_CHANGED")
     tracked = subprocess.check_output(
         ["git", "status", "--porcelain", "--untracked-files=no"],
@@ -1542,11 +1996,14 @@ def run_v24_fresh_gate(
     ).strip()
     if tracked:
         raise RuntimeError("V24_RUN_REQUIRES_CLEAN_TRACKED_TREE")
-    runtime_root = (
-        Path(repo_root) / "runtime" / f"{V24_RUNTIME_PREFIX}_{runtime_date}"
+    source_runtime_root = (
+        Path(repo_root)
+        / "runtime"
+        / f"{V24_RUNTIME_PREFIX}_{V24_DEFAULT_RUNTIME_DATE}"
     )
-    carrier_path = runtime_root / "aligned_carrier_manifest.json"
-    economic_path = runtime_root / "economic_context.json"
+    runtime_root = Path(repo_root) / "runtime" / f"{runtime_prefix}_{runtime_date}"
+    carrier_path = source_runtime_root / "aligned_carrier_manifest.json"
+    economic_path = source_runtime_root / "economic_context.json"
     if not carrier_path.is_file() or not economic_path.is_file():
         raise RuntimeError("V24_FRESH_CARRIER_NOT_PREPARED")
     carrier = json.loads(carrier_path.read_text(encoding="utf-8"))
@@ -1589,13 +2046,34 @@ def run_v24_fresh_gate(
         )
     if len(selected_rows) != int(receipt["selection"]["candidate_count_exact"]):
         raise RuntimeError("V24_SELECTED_COUNT_CHANGED")
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    if is_repair_replay:
+        sweep = sweep_v24_static_constructibility(
+            selected_rows=selected_rows,
+            contract_rows=carrier["contracts"],
+        )
+        if int(sweep["candidate_count"]) != 512:
+            raise RuntimeError("V24_STATIC_CONSTRUCTIBILITY_COUNT_CHANGED")
+        _write_json(runtime_root / "constructibility_sweep.json", sweep)
+        for name in (
+            "behavior_family_selection_receipt.json",
+            "aligned_carrier_manifest.json",
+            "economic_context.json",
+        ):
+            source_path = source_runtime_root / name
+            target_path = runtime_root / name
+            if target_path.is_file():
+                if _file_sha256(target_path) != _file_sha256(source_path):
+                    raise RuntimeError(f"V24_REPAIR_SOURCE_COPY_CHANGED:{name}")
+            else:
+                shutil.copyfile(source_path, target_path)
     frozen_payload = {
         "schema_version": 1,
         "experiment_id": str(receipt["experiment_id"]),
         "producer_source_sha": source_sha,
-        "run_receipt_path": V24_RUN_RECEIPT_PATH,
+        "run_receipt_path": run_receipt_path,
         "run_receipt_file_sha256": _file_sha256(
-            Path(repo_root) / V24_RUN_RECEIPT_PATH
+            Path(repo_root) / run_receipt_path
         ),
         "source_contract_path": V24_CONTRACT_PATH,
         "source_contract_sha256": _file_sha256(
@@ -1618,6 +2096,10 @@ def run_v24_fresh_gate(
         ),
         "checkpoint_size": int(receipt["selection"]["checkpoint_size"]),
         "checkpoint_count": int(receipt["selection"]["checkpoint_count"]),
+        "candidate_local_failure_action": (
+            "PERSIST_NO_BACKFILL" if is_repair_replay else "FAIL_CAMPAIGN"
+        ),
+        "source_runtime": source_runtime_root.relative_to(repo_root).as_posix(),
         "candidate_generation_performed": False,
         "optimizer_feedback_written": False,
         "policy_memory_written": False,
@@ -1665,13 +2147,28 @@ def run_v24_fresh_gate(
                 "frozen_contract_sha256": frozen_hash,
                 "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
                 "completed_candidate_count": len(completed_rows),
+                "strict_evaluated_count": sum(
+                    bool(row.get("strict_evaluated")) for row in completed_rows
+                ),
+                "candidate_local_failure_count": sum(
+                    str(row.get("validation_status"))
+                    == "CANDIDATE_LOCAL_FAILURE"
+                    for row in completed_rows
+                ),
                 "source_candidate_count": len(selected_rows),
                 "checkpoint": checkpoint,
                 "workers": active_workers,
                 "memory_fallback_used": memory_fallback_used,
                 "active_wall_seconds": elapsed,
                 "pair_evaluated_per_hour": (
-                    len(completed_rows) * 3600.0 / elapsed if elapsed > 0 else 0.0
+                    sum(
+                        bool(row.get("strict_evaluated"))
+                        for row in completed_rows
+                    )
+                    * 3600.0
+                    / elapsed
+                    if elapsed > 0
+                    else 0.0
                 ),
                 "candidate_generation_performed": False,
                 "optimizer_feedback_written": False,
@@ -1736,17 +2233,23 @@ def run_v24_fresh_gate(
                         for row in batch
                     ]
                 ]
-            failure = next((row for row in results if row["error"]), None)
-            if failure is not None:
-                write_status(
-                    "V24_FRESH_GATE_FAILED_CANDIDATE_LOCAL",
-                    failure_candidate_id=failure["candidate_id"],
-                    failure_reason=failure["error"],
-                )
-                raise RuntimeError(
-                    "V24_CANDIDATE_LOCAL_FAILURE:"
-                    f"{failure['candidate_id']}:{failure['error']}"
-                )
+                if any(bool(row["memory_error"]) for row in results):
+                    raise MemoryError("V24_MEMORY_FALLBACK_EXHAUSTED")
+            if not is_repair_replay:
+                failure = next((row for row in results if row["error"]), None)
+                if failure is not None:
+                    write_status(
+                        "V24_FRESH_GATE_FAILED_CANDIDATE_LOCAL",
+                        failure_candidate_id=failure["candidate_id"],
+                        failure_reason=failure["error"],
+                    )
+                    raise RuntimeError(
+                        "V24_CANDIDATE_LOCAL_FAILURE:"
+                        f"{failure['candidate_id']}:{failure['error']}"
+                    )
+            else:
+                for worker in results:
+                    _v24_failure_reason(worker)
             checkpoint_root = runtime_root / "checkpoints"
             checkpoint_root.mkdir(parents=True, exist_ok=True)
             target = checkpoint_root / f"checkpoint_{checkpoint_index:03d}"
@@ -1761,18 +2264,16 @@ def run_v24_fresh_gate(
             local_rows: list[dict[str, Any]] = []
             try:
                 base_ordinal = len(completed_rows)
-                for offset, (selected, worker) in enumerate(zip(batch, results)):
-                    local_rows.append(
-                        _v24_write_candidate_projection(
-                            temporary,
-                            ordinal=base_ordinal + offset,
-                            selected=selected,
-                            worker=worker,
-                            economic_receipt_sha256=str(
-                                selection["economic_receipt_sha256"]
-                            ),
-                        )
-                    )
+                local_rows = _v24_write_batch_projections(
+                    temporary,
+                    base_ordinal=base_ordinal,
+                    selected_rows=batch,
+                    worker_rows=results,
+                    economic_receipt_sha256=str(
+                        selection["economic_receipt_sha256"]
+                    ),
+                    persist_candidate_local_failures=is_repair_replay,
+                )
                 pd.DataFrame(local_rows).to_parquet(
                     temporary / "candidate_ledger.parquet", index=False
                 )
@@ -1786,6 +2287,18 @@ def run_v24_fresh_gate(
                     "completed_candidate_count": len(completed_rows)
                     + len(local_rows),
                     "checkpoint_candidate_count": len(local_rows),
+                    "strict_evaluated_count": sum(
+                        bool(row.get("strict_evaluated"))
+                        for row in (*completed_rows, *local_rows)
+                    ),
+                    "checkpoint_strict_evaluated_count": sum(
+                        bool(row.get("strict_evaluated")) for row in local_rows
+                    ),
+                    "candidate_local_failure_count": sum(
+                        str(row.get("validation_status"))
+                        == "CANDIDATE_LOCAL_FAILURE"
+                        for row in (*completed_rows, *local_rows)
+                    ),
                     "workers": active_workers,
                     "memory_fallback_used": memory_fallback_used,
                     "files": _v24_checkpoint_files(temporary),
@@ -1805,7 +2318,11 @@ def run_v24_fresh_gate(
             ):
                 write_status("ENGINE_BUDGET_EXHAUSTED", checkpoint=label)
                 raise RuntimeError("ENGINE_BUDGET_EXHAUSTED")
-            throughput = len(completed_rows) * 3600.0 / max(elapsed, 1.0e-9)
+            throughput = (
+                sum(bool(row.get("strict_evaluated")) for row in completed_rows)
+                * 3600.0
+                / max(elapsed, 1.0e-9)
+            )
             if throughput < float(
                 receipt["compute"]["minimum_pair_evaluated_per_hour"]
             ):
@@ -1823,6 +2340,30 @@ def run_v24_fresh_gate(
     pd.DataFrame(selection["selected_candidates"]).to_parquet(
         runtime_root / "behavior_family_selection.parquet", index=False
     )
+    if is_repair_replay:
+        completed_rows, equal_counts = _v24_mark_equal_count_comparison(
+            completed_rows
+        )
+    else:
+        completed_rows = [
+            {**dict(row), "comparison_included": True} for row in completed_rows
+        ]
+        equal_counts = {
+            f"{seed}:{horizon}": 64
+            for seed in (359914106, 1141399971)
+            for horizon in (1, 4)
+        }
+    evaluated_rows = [
+        row for row in completed_rows if bool(row.get("strict_evaluated"))
+    ]
+    failure_rows = [
+        row
+        for row in completed_rows
+        if str(row.get("validation_status")) == "CANDIDATE_LOCAL_FAILURE"
+    ]
+    comparison_rows = [
+        row for row in completed_rows if bool(row.get("comparison_included"))
+    ]
     pd.DataFrame(completed_rows).to_parquet(
         runtime_root / "candidate_ledger.parquet", index=False
     )
@@ -1837,38 +2378,63 @@ def run_v24_fresh_gate(
             for checkpoint in checkpoints
             for path in checkpoint.glob(f"paths/*/{source_name}")
         )
-        if len(inputs) != len(completed_rows):
+        if len(inputs) != len(evaluated_rows):
             raise RuntimeError("V24_ECONOMIC_PATH_SHARD_COUNT_CHANGED")
         _v24_concat_parquet(inputs, runtime_root / output_name)
-    arm_summaries: dict[str, Any] = {}
-    for arm, local in pd.DataFrame(completed_rows).groupby("arm"):
-        arm_summaries[str(arm)] = {
-            "candidate_count": int(len(local)),
-            "behavior_family_count": int(local["behavior_family_id"].nunique()),
-            "matched_positive_count": int(local["matched_positive"].sum()),
-            "mean_pair_reward": float(local["pair_reward"].mean()),
-            "primary_net_5bps_path_mean": float(
-                local["primary_net_5bps_path_mean"].mean()
-            ),
-            "primary_net_10bps_path_mean": float(
-                local["primary_net_10bps_path_mean"].mean()
-            ),
-            "matched_net_5bps_path_mean": float(
-                local["matched_net_5bps_path_mean"].mean()
-            ),
-            "matched_net_10bps_path_mean": float(
-                local["matched_net_10bps_path_mean"].mean()
-            ),
-        }
+
+    def summarize_arms(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+        summaries: dict[str, Any] = {}
+        for arm, local in pd.DataFrame(rows).groupby("arm"):
+            summaries[str(arm)] = {
+                "candidate_count": int(len(local)),
+                "behavior_family_count": int(
+                    local["behavior_family_id"].nunique()
+                ),
+                "matched_positive_count": int(local["matched_positive"].sum()),
+                "mean_pair_reward": float(local["pair_reward"].mean()),
+                "primary_net_5bps_path_mean": float(
+                    local["primary_net_5bps_path_mean"].mean()
+                ),
+                "primary_net_10bps_path_mean": float(
+                    local["primary_net_10bps_path_mean"].mean()
+                ),
+                "matched_net_5bps_path_mean": float(
+                    local["matched_net_5bps_path_mean"].mean()
+                ),
+                "matched_net_10bps_path_mean": float(
+                    local["matched_net_10bps_path_mean"].mean()
+                ),
+            }
+        return summaries
+
+    arm_summaries = summarize_arms(comparison_rows)
+    all_evaluated_arm_summaries = summarize_arms(evaluated_rows)
     random_arm = arm_summaries["expanded_mechanism_random_v2_4"]
     evolution_arm = arm_summaries["mechanism_evolution_v2_4"]
     decision = {
         "schema_version": 1,
-        "status": "PASS_V24_FRESH_BEHAVIOR_FAMILY_GATE_COMPLETE",
+        "status": (
+            "PASS_V24_REPAIR_REPLAY_COMPLETE"
+            if is_repair_replay
+            else "PASS_V24_FRESH_BEHAVIOR_FAMILY_GATE_COMPLETE"
+        ),
         "classification": "FRESH_DATA_VALIDATION_EVIDENCE_NO_PROMOTION",
         "producer_source_sha": source_sha,
         "selected_behavior_family_count": 512,
-        "strict_evaluated_count": 512,
+        "source_candidate_count": 512,
+        "strict_evaluated_count": len(evaluated_rows),
+        "candidate_local_failure_count": len(failure_rows),
+        "candidate_local_failures": [
+            {
+                "completion_ordinal": int(row["completion_ordinal"]),
+                "candidate_id": str(row["candidate_id"]),
+                "arm": str(row["arm"]),
+                "seed": int(row["seed"]),
+                "horizon_hours": int(row["horizon_hours"]),
+                "reason": str(row["validation_failure_reason"]),
+            }
+            for row in failure_rows
+        ],
         "checkpoint_count": 8,
         "checkpoint_restore_verified": True,
         "workers_final": active_workers,
@@ -1876,6 +2442,8 @@ def run_v24_fresh_gate(
         "active_wall_seconds": time.perf_counter() - started,
         "absolute_zero_benchmark": 0.0,
         "arm_summaries": arm_summaries,
+        "all_evaluated_arm_summaries": all_evaluated_arm_summaries,
+        "equal_comparison_count_by_seed_horizon": equal_counts,
         "evolution_minus_random": {
             key: float(evolution_arm[key]) - float(random_arm[key])
             for key in (
@@ -1891,11 +2459,19 @@ def run_v24_fresh_gate(
         "policy_memory_written": False,
         "archive_written": False,
         "oos": False,
+        "arm_qualified": [],
         "promotion_authorized": False,
         "next_search_started": False,
     }
     _write_json(runtime_root / "final_decision.json", decision)
-    write_status("V24_FRESH_GATE_COMPLETE", checkpoint="checkpoint_007")
+    write_status(
+        (
+            "V24_REPAIR_REPLAY_COMPLETE"
+            if is_repair_replay
+            else "V24_FRESH_GATE_COMPLETE"
+        ),
+        checkpoint="checkpoint_007",
+    )
     artifact_names = [
         "behavior_family_selection_receipt.json",
         "aligned_carrier_manifest.json",
@@ -1907,13 +2483,17 @@ def run_v24_fresh_gate(
         *path_names,
         "final_decision.json",
     ]
+    if is_repair_replay:
+        artifact_names.append("constructibility_sweep.json")
     manifest = {
         "schema_version": 1,
         "experiment_id": str(receipt["experiment_id"]),
         "producer_source_sha": source_sha,
         "frozen_contract_sha256": frozen_hash,
         "selection_receipt_sha256": selection["receipt_sha256"],
-        "strict_evaluated_count": 512,
+        "source_candidate_count": 512,
+        "strict_evaluated_count": len(evaluated_rows),
+        "candidate_local_failure_count": len(failure_rows),
         "checkpoint_count": 8,
         "files": [
             {
@@ -1931,7 +2511,11 @@ def run_v24_fresh_gate(
     }
     manifest["artifact_bundle_sha256"] = _canonical_sha256(manifest["files"])
     _write_json(runtime_root / "run_manifest.json", manifest)
-    report = Path(repo_root) / "reports" / f"CRYPTO_SEARCH_ENGINE_V2_4_{runtime_date}.md"
+    report = (
+        Path(repo_root)
+        / "reports"
+        / f"CRYPTO_SEARCH_ENGINE_V2_4_{runtime_date}.md"
+    )
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(
         "\n".join(
@@ -1939,7 +2523,11 @@ def run_v24_fresh_gate(
                 f"# Crypto Search Engine V2.4 ({runtime_date})",
                 "",
                 "- Evidence: fresh-data validation only; no OOS or promotion.",
-                "- Frozen behavior families: `512`; strict evaluated: `512`.",
+                (
+                    "- Frozen behavior families: `512`; strict evaluated: "
+                    f"`{len(evaluated_rows)}`; candidate-local failures: "
+                    f"`{len(failure_rows)}`."
+                ),
                 f"- Checkpoints: `8`; workers final: `{active_workers}`.",
                 (
                     "- Evolution minus random mean pair reward: "
@@ -1955,7 +2543,7 @@ def run_v24_fresh_gate(
                 ),
                 "",
                 "Complete hourly, daily, and sparse asset-level economic paths are persisted.",
-                "No candidate generation, optimizer/archive/policy write, tuning, reseed, rescue, OOS, or promotion occurred.",
+                "No candidate replacement/backfill, generation, optimizer/archive/policy write, tuning, reseed, OOS, or promotion occurred.",
                 "",
             ]
         ),
@@ -1970,9 +2558,23 @@ def check_v24_fresh_gate(
     *,
     runtime_date: str = V24_DEFAULT_RUNTIME_DATE,
 ) -> dict[str, Any]:
-    receipt = load_v24_run_receipt(repo_root, require_authorized=False)
+    is_repair_replay = str(runtime_date) == V24_REPAIR_DEFAULT_RUNTIME_DATE
+    if str(runtime_date) not in {
+        V24_DEFAULT_RUNTIME_DATE,
+        V24_REPAIR_DEFAULT_RUNTIME_DATE,
+    }:
+        raise ValueError("V24_RUNTIME_DATE_CHANGED")
+    if is_repair_replay:
+        receipt = load_v24_repair_run_receipt(
+            repo_root,
+            require_authorized=False,
+        )
+        runtime_prefix = V24_REPAIR_RUNTIME_PREFIX
+    else:
+        receipt = load_v24_run_receipt(repo_root, require_authorized=False)
+        runtime_prefix = V24_RUNTIME_PREFIX
     runtime_root = (
-        Path(repo_root) / "runtime" / f"{V24_RUNTIME_PREFIX}_{runtime_date}"
+        Path(repo_root) / "runtime" / f"{runtime_prefix}_{runtime_date}"
     )
     manifest = json.loads(
         (runtime_root / "run_manifest.json").read_text(encoding="utf-8")
@@ -1981,21 +2583,59 @@ def check_v24_fresh_gate(
         (runtime_root / "final_decision.json").read_text(encoding="utf-8")
     )
     errors: list[str] = []
+    strict_evaluated = int(decision.get("strict_evaluated_count", -1))
+    failure_count = int(decision.get("candidate_local_failure_count", -1))
     if (
-        manifest.get("strict_evaluated_count") != 512
+        strict_evaluated <= 0
+        or strict_evaluated + failure_count != 512
+        or manifest.get("source_candidate_count", 512) != 512
+        or manifest.get("strict_evaluated_count") != strict_evaluated
+        or manifest.get("candidate_local_failure_count", 0) != failure_count
         or manifest.get("checkpoint_count") != 8
-        or decision.get("strict_evaluated_count") != 512
         or decision.get("checkpoint_restore_verified") is not True
     ):
         errors.append("terminal_count")
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    selection = _load_v24_selection(
+        repo_root,
+        runtime_date=V24_DEFAULT_RUNTIME_DATE,
+    )
     if (
         len(ledger) != 512
         or ledger["candidate_id"].duplicated().any()
         or ledger["behavior_family_id"].isna().any()
-        or not bool(ledger["strict_evaluated"].all())
+        or int(ledger["strict_evaluated"].sum()) != strict_evaluated
+        or ledger["candidate_id"].astype(str).tolist()
+        != [
+            str(row["candidate_id"])
+            for row in selection["selected_candidates"]
+        ]
     ):
         errors.append("candidate_ledger")
+    failed = ledger.loc[~ledger["strict_evaluated"].astype(bool)]
+    if (
+        len(failed) != failure_count
+        or set(failed["validation_status"].astype(str))
+        - {"CANDIDATE_LOCAL_FAILURE"}
+        or set(failed["validation_failure_reason"].astype(str))
+        - set(V24_CANDIDATE_LOCAL_FAILURES)
+    ):
+        errors.append("candidate_local_failures")
+    compared = ledger.loc[ledger["comparison_included"].astype(bool)]
+    comparison_counts = {
+        (str(arm), int(seed), int(horizon)): int(len(local))
+        for (arm, seed, horizon), local in compared.groupby(
+            ["arm", "seed", "horizon_hours"]
+        )
+    }
+    for seed in (359914106, 1141399971):
+        for horizon in (1, 4):
+            if comparison_counts.get(
+                ("expanded_mechanism_random_v2_4", seed, horizon)
+            ) != comparison_counts.get(
+                ("mechanism_evolution_v2_4", seed, horizon)
+            ):
+                errors.append(f"equal_count:{seed}:{horizon}")
     for item in manifest.get("files") or ():
         path = runtime_root / str(item["path"])
         if (
@@ -2021,8 +2661,14 @@ def check_v24_fresh_gate(
     if errors:
         raise RuntimeError("V24_FRESH_GATE_CHECK_FAILED:" + ",".join(errors))
     return {
-        "status": "PASS_V24_FRESH_GATE_INDEPENDENT_CHECK",
-        "strict_evaluated_count": len(ledger),
+        "status": (
+            "PASS_V24_REPAIR_REPLAY_INDEPENDENT_CHECK"
+            if is_repair_replay
+            else "PASS_V24_FRESH_GATE_INDEPENDENT_CHECK"
+        ),
+        "source_candidate_count": len(ledger),
+        "strict_evaluated_count": strict_evaluated,
+        "candidate_local_failure_count": failure_count,
         "behavior_family_count": int(ledger["behavior_family_id"].nunique()),
         "checkpoint_count": len(checkpoints),
         "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
@@ -2152,13 +2798,27 @@ def load_v24_contract(repo_root: Path) -> dict[str, Any]:
     component_sources = dict(contract.get("component_sources") or {})
     if set(component_sources) != {"pair_evaluator", "v24_adapter"}:
         blockers.append("component_sources.keys")
+    historical_source_sha = ""
+    historical_receipt_path = Path(repo_root) / V24_RUN_RECEIPT_PATH
+    if historical_receipt_path.is_file():
+        historical_source_sha = str(
+            json.loads(
+                historical_receipt_path.read_text(encoding="utf-8-sig")
+            ).get("source_implementation_sha")
+            or ""
+        ).lower()
     for name, binding in component_sources.items():
         item = dict(binding)
-        source_path = Path(repo_root) / str(item.get("path") or "")
-        if (
-            not source_path.is_file()
-            or _file_sha256(source_path) != str(item.get("sha256") or "")
-        ):
+        relative = str(item.get("path") or "")
+        try:
+            committed = _git_file_sha256(
+                repo_root,
+                historical_source_sha,
+                relative,
+            )
+        except (OSError, subprocess.CalledProcessError):
+            committed = ""
+        if committed != str(item.get("sha256") or ""):
             blockers.append(f"component_sources.{name}")
     boundaries = dict(contract.get("boundaries") or {})
     expected_boundaries = {
@@ -2192,6 +2852,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "prepare-carrier",
             "run",
             "check",
+            "check-repair-authority",
+            "run-repair",
+            "check-repair",
         ),
     )
     parser.add_argument("--repo-root", type=Path, required=True)
@@ -2219,6 +2882,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 arguments.repo_root / V24_RUN_RECEIPT_PATH
             ),
         }
+    elif arguments.command == "check-repair-authority":
+        receipt = load_v24_repair_run_receipt(
+            arguments.repo_root,
+            require_authorized=True,
+        )
+        result = {
+            "status": "PASS_V24_REPAIR_ONE_TIME_RUN_AUTHORITY",
+            "run_authorized": receipt["run_authorized"],
+            "source_implementation_sha": receipt["source_implementation_sha"],
+            "receipt_file_sha256": _file_sha256(
+                arguments.repo_root / V24_REPAIR_RUN_RECEIPT_PATH
+            ),
+        }
     elif arguments.command == "freeze-selection":
         result = freeze_v24_authorized_selection(
             arguments.repo_root,
@@ -2240,6 +2916,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.repo_root,
             runtime_date=str(arguments.runtime_date),
             producer_source_sha=arguments.source_sha,
+        )
+    elif arguments.command == "run-repair":
+        result = run_v24_fresh_gate(
+            arguments.repo_root,
+            runtime_date=V24_REPAIR_DEFAULT_RUNTIME_DATE,
+            producer_source_sha=arguments.source_sha,
+        )
+    elif arguments.command == "check-repair":
+        result = check_v24_fresh_gate(
+            arguments.repo_root,
+            runtime_date=V24_REPAIR_DEFAULT_RUNTIME_DATE,
         )
     else:
         result = check_v24_fresh_gate(
