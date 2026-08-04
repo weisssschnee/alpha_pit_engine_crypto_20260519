@@ -70,11 +70,12 @@ memory remain false. The historical V2.3 OOS receipt loader also now verifies
 its producer Git blobs rather than mutable current working-tree files. No new
 performance evidence or Alpha claim was produced.
 
-The existing CURRENT Search Engine capability node records this source-only
-boundary without promotion or a new Graph node. Its overlay projection is
-current. The global RAW Graph remains stale at source SHA `98607fb7` because
-the required semantic refresh failed closed on the external Graphify provider's
-`402 Insufficient Balance`; global Graph freshness is therefore not claimed.
+The existing CURRENT Search Engine capability node records the completed repair
+replay without promotion or a new Graph node. Its overlay projection is current.
+The global RAW Graph remains stale at source SHA
+`75c7d3abf39223fe12034e42cfa9b880eb45624b`: the required RAW build command
+failed closed because the Graphify CLI is not installed, and this task did not
+install new dependencies. Global Graph freshness is therefore not claimed.
 
 The preceding evidence state remains:
 

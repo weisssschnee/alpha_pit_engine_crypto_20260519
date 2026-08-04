@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2.4 fresh gate consumed; engine validation blocked before economics; economic Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V2.4 repair replay complete; 140 strict evaluations; zero matched positives; economic Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -523,16 +523,21 @@
                                     ,"runtime/crypto_search_engine_v2_4_fresh_gate_20260803/final_decision.json"
                                     ,"runtime/crypto_search_engine_v2_4_fresh_gate_20260803/independent_terminal_check.json"
                                     ,"reports/CRYPTO_SEARCH_ENGINE_V2_4_20260803.md"
+                                    ,"config/crypto_search_engine_v2_4_repair_replay_receipt.json"
+                                    ,"runtime/crypto_search_engine_v2_4_repair_replay_20260804/run_manifest.json"
+                                    ,"runtime/crypto_search_engine_v2_4_repair_replay_20260804/final_decision.json"
+                                    ,"runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json"
+                                    ,"reports/CRYPTO_SEARCH_ENGINE_V2_4_20260804.md"
                                     ,"docs/adr/0022-behavior-family-first-search-v2-4.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_engine_v2_4_fresh_gate_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-v2-3-frozen-oos-20260803",
-                                        "verified_sha":  "75c7d3abf39223fe12034e42cfa9b880eb45624b",
-                                        "sha256":  "676D04D9649F7836E21F638B66C026415AAACC7AADFD5F663A7659CFE56259F4"
+                                        "path":  "config/crypto_search_engine_v2_4_repair_replay_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-v2-4-repair-replay-20260804",
+                                        "verified_sha":  "6d7d607a51853a4950f1d7993be37dc25b5eda46",
+                                        "sha256":  "43EB7434EEE177785790DD44E9D74784AAD41C608D3C3BDD6503FCDFD75F3DE5"
                                     },
                       "contracts":  [
                                         {
@@ -691,11 +696,11 @@
                                         {
                                             "id":  "crypto_search_v2_4_behavior_family_source_gate",
                                             "type":  "AUTHORITY",
-                                            "rule":  "ADR 0022's one-time V2.4 fresh-family gate is consumed and run_authorized is false. July acquisition and independent content verification passed; the aligned July 1-18 carrier qualified with 115 fields, Binance USD-M target, dynamic eligibility, PIT/lag identities, and no fill. The selection receipt was frozen before fresh-data access with exactly 512 unique candidates, 64 in each of eight arm-seed-horizon cells. The single producer at 83a38d56fc2b362aed65ba246ea3fbd7993dfc4a failed closed on frozen candidate ordinal 0 with CONTROL_BEHAVIOR_EQUALS_PRIMARY, before any strict evaluation or checkpoint. Strict evaluated and checkpoint counts are zero, no arm qualifies, and no candidate substitution, backfill, generation, optimizer feedback, policy/archive memory, OOS read, promotion, tuning, reseed, rescue, or second search occurred. This is an engine-validation constructibility block only, not an Alpha, carrier, field, or behavior-family negative.",
+                                            "rule":  "ADR 0022's original V2.4 fresh-family gate and the separately authorized repair replay are both consumed with run_authorized false. The repair reused the exact frozen 512-candidate July 1-18 cohort, qualified 115-field OI/mark plus aggTrades carrier, Binance USD-M target, seeds, horizons, order, and 5/10 bps cost paths. Evaluation source ecf951c179abc5a29e19ab840f878d0cc97ccd1f persisted all eight 64-candidate checkpoints with 140 strict matched cost evaluations and 372 candidate-local control/support constructibility failures; finalizer 0a25183f79350b19bc8ae961e8df12fa815c12f8 assembled the existing checkpoints without market re-evaluation. Independent PC2 and local checks pass with artifact bundle 85430B0965A88ADF64FE0F81B1168FF23D038C4454DD638D6C7E9241A008C18B. The 140 evaluated candidates contain 510 behavior families overall and zero matched positives; no arm qualifies. Evolution improved equal-count reward ordering and average net paths versus random, but this remains fresh validation diagnostic evidence only. No substitution, backfill, generation, adaptive feedback, policy/archive memory, OOS, promotion, tuning, reseed, rescue, new Arena, or second search is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_engine_v2_4, broad_search.pair18m.evaluate_pair, config/crypto_search_engine_v2_4_behavior_family.json, and ADR 0022",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/final_decision.json"
+                                            "evidence_ref":  "runtime/crypto_search_engine_v2_4_repair_replay_20260804/final_decision.json"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
@@ -810,16 +815,16 @@
                                          "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_engine_v2_4_fresh_gate_20260803/independent_terminal_check.json",
-                                         "evidence_sha256":  "5DB5D1F00280B0E111C2054524B020D02FC24A26C38E1BA64EE7486E9CFFC993",
-                                         "verified_at_sha":  "75c7d3abf39223fe12034e42cfa9b880eb45624b"
+                                         "evidence_ref":  "runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json",
+                                         "evidence_sha256":  "9A01C6C3F67871035A783C7045838DF048C260558C9C22E32D06401CA2903FF0",
+                                         "verified_at_sha":  "6d7d607a51853a4950f1d7993be37dc25b5eda46"
                                      },
                       "claim_badges":  [
-                                           "V2.4 RECEIPT CONSUMED",
-                                           "JULY CARRIER QUALIFIED",
-                                           "ENGINE VALIDATION BLOCKED",
-                                           "STRICT EVALUATED 0",
-                                           "NO ALPHA OR CARRIER CONCLUSION",
+                                           "V2.4 REPAIR RECEIPT CONSUMED",
+                                           "STRICT EVALUATED 140",
+                                           "CANDIDATE-LOCAL FAILURES 372",
+                                           "MATCHED POSITIVES 0",
+                                           "NO ARM QUALIFIED",
                                            "NO OOS OR PROMOTION"
                                        ],
                       "promotion_requirements":  [
