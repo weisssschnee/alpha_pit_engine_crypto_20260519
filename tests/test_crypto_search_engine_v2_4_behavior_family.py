@@ -235,6 +235,43 @@ def test_v24_equal_count_comparison_uses_source_ordinal_without_backfill() -> No
     )
 
 
+def test_v24_equal_count_comparison_records_empty_cell_without_backfill() -> None:
+    rows = []
+    ordinal = 0
+    for seed in (359914106, 1141399971):
+        for horizon in (1, 4):
+            for arm in (
+                "expanded_mechanism_random_v2_4",
+                "mechanism_evolution_v2_4",
+            ):
+                if (
+                    arm == "mechanism_evolution_v2_4"
+                    and seed == 1141399971
+                    and horizon == 1
+                ):
+                    continue
+                ordinal += 1
+                rows.append(
+                    {
+                        "completion_ordinal": ordinal,
+                        "candidate_id": f"candidate-{ordinal}",
+                        "arm": arm,
+                        "seed": seed,
+                        "horizon_hours": horizon,
+                        "strict_evaluated": True,
+                    }
+                )
+
+    marked, counts = _v24_mark_equal_count_comparison(rows)
+
+    assert counts["1141399971:1"] == 0
+    assert not any(
+        row["comparison_included"]
+        for row in marked
+        if row["seed"] == 1141399971 and row["horizon_hours"] == 1
+    )
+
+
 def test_v24_one_time_receipt_is_consumed_by_exact_blocked_outcome() -> None:
     receipt = load_v24_run_receipt(REPO_ROOT, require_authorized=False)
     assert receipt["status"] == (

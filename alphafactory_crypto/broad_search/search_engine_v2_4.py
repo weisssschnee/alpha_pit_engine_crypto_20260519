@@ -1889,9 +1889,8 @@ def _v24_mark_equal_count_comparison(
                 )
             count = min(len(by_arm[arm]) for arm in arms)
             if count <= 0:
-                raise RuntimeError(
-                    f"V24_EQUAL_COUNT_CELL_EMPTY:{seed}:{horizon}"
-                )
+                equal_counts[f"{seed}:{horizon}"] = 0
+                continue
             equal_counts[f"{seed}:{horizon}"] = int(count)
             for arm in arms:
                 for index in by_arm[arm][:count]:
@@ -1956,10 +1955,13 @@ def run_v24_fresh_gate(
     *,
     runtime_date: str = V24_DEFAULT_RUNTIME_DATE,
     producer_source_sha: str | None = None,
+    finalize_only: bool = False,
 ) -> dict[str, Any]:
     """Evaluate the one frozen 512-family cohort on fresh July data."""
 
     is_repair_replay = str(runtime_date) == V24_REPAIR_DEFAULT_RUNTIME_DATE
+    if finalize_only and not is_repair_replay:
+        raise ValueError("V24_FINALIZE_ONLY_REQUIRES_REPAIR_REPLAY")
     if str(runtime_date) not in {
         V24_DEFAULT_RUNTIME_DATE,
         V24_REPAIR_DEFAULT_RUNTIME_DATE,
@@ -1968,8 +1970,14 @@ def run_v24_fresh_gate(
     if is_repair_replay:
         receipt = load_v24_repair_run_receipt(
             repo_root,
-            require_authorized=True,
+            require_authorized=not finalize_only,
         )
+        if finalize_only and (
+            receipt.get("status")
+            != "RUN_AUTHORIZED_ONE_TIME_REPAIR_REPLAY"
+            or receipt.get("run_authorized") is not True
+        ):
+            raise RuntimeError("V24_REPAIR_FINALIZATION_AUTHORITY_CHANGED")
         runtime_prefix = V24_REPAIR_RUNTIME_PREFIX
         run_receipt_path = V24_REPAIR_RUN_RECEIPT_PATH
     else:
@@ -1984,9 +1992,13 @@ def run_v24_fresh_gate(
         ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
     ).strip().lower()
     source_sha = str(producer_source_sha or observed_source).lower()
-    if source_sha != observed_source or (
-        not is_repair_replay
-        and source_sha != str(selection["producer_source_sha"]).lower()
+    if not finalize_only and (
+        source_sha != observed_source
+        or (
+            not is_repair_replay
+            and source_sha
+            != str(selection["producer_source_sha"]).lower()
+        )
     ):
         raise RuntimeError("V24_RUN_SOURCE_SHA_CHANGED")
     tracked = subprocess.check_output(
@@ -2106,16 +2118,30 @@ def run_v24_fresh_gate(
         "archive_written": False,
         "promotion_authorized": False,
     }
-    frozen = {
-        **frozen_payload,
-        "frozen_contract_sha256": _canonical_sha256(frozen_payload),
-    }
     frozen_path = runtime_root / "frozen_contract.json"
-    if frozen_path.is_file():
-        if json.loads(frozen_path.read_text(encoding="utf-8")) != frozen:
-            raise RuntimeError("V24_EXISTING_FROZEN_CONTRACT_CHANGED")
+    if finalize_only:
+        if not frozen_path.is_file():
+            raise RuntimeError("V24_REPAIR_FROZEN_CONTRACT_MISSING")
+        frozen = json.loads(frozen_path.read_text(encoding="utf-8"))
+        saved_frozen_hash = str(frozen.get("frozen_contract_sha256") or "")
+        frozen_without_hash = dict(frozen)
+        frozen_without_hash.pop("frozen_contract_sha256", None)
+        if (
+            _canonical_sha256(frozen_without_hash) != saved_frozen_hash
+            or str(frozen.get("producer_source_sha") or "").lower()
+            != source_sha
+        ):
+            raise RuntimeError("V24_REPAIR_FROZEN_CONTRACT_CHANGED")
     else:
-        _write_json(frozen_path, frozen)
+        frozen = {
+            **frozen_payload,
+            "frozen_contract_sha256": _canonical_sha256(frozen_payload),
+        }
+        if frozen_path.is_file():
+            if json.loads(frozen_path.read_text(encoding="utf-8")) != frozen:
+                raise RuntimeError("V24_EXISTING_FROZEN_CONTRACT_CHANGED")
+        else:
+            _write_json(frozen_path, frozen)
     if (runtime_root / "final_decision.json").is_file():
         raise FileExistsError("V24_FRESH_GATE_ALREADY_TERMINAL")
     frozen_hash = str(frozen["frozen_contract_sha256"])
@@ -2420,6 +2446,7 @@ def run_v24_fresh_gate(
         ),
         "classification": "FRESH_DATA_VALIDATION_EVIDENCE_NO_PROMOTION",
         "producer_source_sha": source_sha,
+        "finalizer_source_sha": observed_source,
         "selected_behavior_family_count": 512,
         "source_candidate_count": 512,
         "strict_evaluated_count": len(evaluated_rows),
@@ -2489,6 +2516,7 @@ def run_v24_fresh_gate(
         "schema_version": 1,
         "experiment_id": str(receipt["experiment_id"]),
         "producer_source_sha": source_sha,
+        "finalizer_source_sha": observed_source,
         "frozen_contract_sha256": frozen_hash,
         "selection_receipt_sha256": selection["receipt_sha256"],
         "source_candidate_count": 512,
@@ -2854,6 +2882,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check",
             "check-repair-authority",
             "run-repair",
+            "finalize-repair",
             "check-repair",
         ),
     )
@@ -2922,6 +2951,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.repo_root,
             runtime_date=V24_REPAIR_DEFAULT_RUNTIME_DATE,
             producer_source_sha=arguments.source_sha,
+        )
+    elif arguments.command == "finalize-repair":
+        if not arguments.source_sha:
+            parser.error("finalize-repair requires the evaluation source SHA")
+        result = run_v24_fresh_gate(
+            arguments.repo_root,
+            runtime_date=V24_REPAIR_DEFAULT_RUNTIME_DATE,
+            producer_source_sha=arguments.source_sha,
+            finalize_only=True,
         )
     elif arguments.command == "check-repair":
         result = check_v24_fresh_gate(
