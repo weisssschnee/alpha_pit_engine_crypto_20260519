@@ -1,0 +1,54 @@
+{
+  "assessment_authority": "IMMUTABLE_EXISTING_ARTIFACT_SCHEMA_AND_IDENTITY_JOIN",
+  "assessment_component_git_blobs": {
+    "alphafactory_crypto/broad_search/pair18m.py": "e79ce285b4d59641336305a370eb410d7ab6f8b8",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "e50972a85716e549ec135bd4f8f8e346c755bd44"
+  },
+  "assessment_source_sha": "fc21a049040882c856d32eca85f6d9e4c848d74f",
+  "authorization_consumed_or_changed": false,
+  "candidate_evaluation_performed": false,
+  "candidate_ledger_row_count": 8000,
+  "control_degenerate_provenance_observed_count": 0,
+  "control_degenerate_row_count": 1769,
+  "errors": [],
+  "fully_joined_strict_observation_count": 0,
+  "historical_inference_performed": false,
+  "input_artifacts": {
+    "candidate_ledger": {
+      "bytes": 40764643,
+      "path": "runtime/crypto_search_run_evidence_v1_20260804/candidate_ledger.parquet",
+      "sha256": "5F64ACAEF8200E070E444432052F4F0B06569382C74D2154921ECEDB46F2A620"
+    },
+    "run_manifest": {
+      "bytes": 10463,
+      "path": "runtime/crypto_search_run_evidence_v1_20260804/run_manifest.json",
+      "sha256": "9473DFFD24B9B8B00CB387A24B79695CF81B8C81D6CD147E4A1A69F85D172DD1"
+    },
+    "search_failure_evidence": {
+      "bytes": 6107617,
+      "path": "runtime/crypto_search_run_evidence_v1_20260804/search_failure_evidence.parquet",
+      "sha256": "DA3E3A4C5BA14D6D251B505F20041ECE8014F5D5530F56DE2ED4F048E07053BD"
+    },
+    "search_run_evidence": {
+      "bytes": 46941541,
+      "path": "runtime/crypto_search_run_evidence_v1_20260804/search_run_evidence.parquet",
+      "sha256": "F7ED5BE2BF1067C78DAB616C707D1634B659C14135CEED4B262FC83408580CBE"
+    }
+  },
+  "ledger_provenance_observed_count": 0,
+  "market_data_read": false,
+  "market_reevaluation_required_for_missing_rows": true,
+  "missing_strict_provenance_count": 8000,
+  "original_artifact_manifest_verified": true,
+  "original_artifacts_modified": false,
+  "producer_artifact_bundle_sha256": "04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF",
+  "producer_source_sha": "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c",
+  "reason": "STRICT_SUCCESS_PROVENANCE_WAS_NOT_PERSISTED",
+  "repair_status": "MARKET_FREE_REPAIR_NOT_POSSIBLE",
+  "result": "PASS",
+  "runtime_root": "runtime/crypto_search_run_evidence_v1_20260804",
+  "schema_version": 1,
+  "strict_candidate_identity_exact": true,
+  "strict_evaluated_count": 8000,
+  "strict_provenance_observed_count": 0
+}

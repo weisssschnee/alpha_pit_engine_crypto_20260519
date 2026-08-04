@@ -20,7 +20,8 @@ Observed degeneracy is concentrated at SIGNAL, RANK, and SELECTION. These rows
 are diagnostic only and were not used by reward, optimizer, or Behavior Archive
 identity.
 
-The source defect is repaired for future authorized runs: the strict-success
+Source commit `fc21a049040882c856d32eca85f6d9e4c848d74f` repairs the
+defect for future authorized runs: the strict-success
 ledger path now persists the already computed control-degeneracy and
 mechanism-realization payloads, verifies their canonical hashes before writing,
 and projects the declared/active axis counts and realization status. The

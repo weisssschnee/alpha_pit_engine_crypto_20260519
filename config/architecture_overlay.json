@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (Evidence V1 run complete; independent ledger-join verification failed; economic Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (Evidence V1 source repaired; historical verification failed; economic Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -540,6 +540,7 @@
                                     ,"runtime/crypto_search_run_evidence_v1_20260804/run_manifest.json"
                                     ,"runtime/crypto_search_run_evidence_v1_20260804/final_decision.json"
                                     ,"runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json"
+                                    ,"runtime/crypto_search_run_evidence_v1_20260804/closure_repair_assessment.json"
                                     ,"reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_20260804.md"
                                 ],
                       "critical":  true,
@@ -735,11 +736,11 @@
                                         {
                                             "id":  "crypto_search_run_evidence_v1_consumed_outcome",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The one-time fresh-state development receipt is consumed with run_authorized false. Producer fea74611c491d2d9a77d8013bc6cdaf427b4fd8c completed exactly 8,000 strict candidates from 12,034 attempts across four atomic restore-verified checkpoints, read zero sealed partitions, and produced 9,769 proposal-attribution plus 1,769 control-degenerate rows. Independent PC2 and local checkers both fail because the final candidate ledger omits seven required joined evidence columns. The run therefore verifies execution and non-empty side evidence but does not close candidate-level failure attribution or qualify any optimizer, mechanism, mapping, reward, Alpha, OOS, promotion, or future Arena conclusion. No rerun, reseed, tuning, historical inference, policy change, reward change, mapping change, new Arena, or new Graph node is authorized.",
+                                            "rule":  "The one-time fresh-state development receipt is consumed with run_authorized false. Producer fea74611c491d2d9a77d8013bc6cdaf427b4fd8c completed exactly 8,000 strict candidates from 12,034 attempts across four atomic restore-verified checkpoints and read zero sealed partitions. Independent PC2 and local checkers fail because the final strict ledger discarded seven required provenance fields. Source fc21a049040882c856d32eca85f6d9e4c848d74f repairs future strict-row persistence, candidate/control/realization binding, mapping-specific stage validation, and fail-closed semantic checks without changing reward, mapping, or optimizer authority. The source-bound market-free assessment verifies the immutable producer bundle and exact 8,000-row identity join, but observes zero recoverable strict provenance rows; historical repair therefore requires unauthorized market re-evaluation and remains impossible. No optimizer, mechanism, mapping, reward, Alpha, OOS, promotion, or future Arena conclusion qualifies, and no rerun, reseed, tuning, historical inference, new Arena, or new Graph node is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority and broad_search.search_engine_v1.check_search_evidence_v1",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json"
+                                            "evidence_ref":  "runtime/crypto_search_run_evidence_v1_20260804/closure_repair_assessment.json"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
