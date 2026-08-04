@@ -14,6 +14,7 @@ import psutil
 
 from alphafactory_crypto.instrument_capability.mapping import (
     DEFAULT_MAPPING_CONTRACTS,
+    MappingResult,
     map_portfolio,
     mapping_contract_sha256,
 )
@@ -64,12 +65,246 @@ PAIR_SCALES: Mapping[str, float] = {
 }
 
 
+class ControlBehaviorDegeneracyError(ValueError):
+    """Preserve the existing kill-line while carrying outcome-free attribution."""
+
+    def __init__(self, reason: str, provenance: Mapping[str, Any]) -> None:
+        super().__init__(str(reason))
+        self.provenance = dict(provenance)
+
+
 def _array_sha(values: np.ndarray) -> str:
     array = np.nan_to_num(np.asarray(values, dtype="<f8"), nan=9.87654321e37)
     digest = hashlib.sha256()
     digest.update(str(array.shape).encode("ascii"))
     digest.update(array.tobytes(order="C"))
     return digest.hexdigest().upper()
+
+
+def _average_rank_vector(values: np.ndarray) -> np.ndarray:
+    order = np.argsort(values, kind="mergesort")
+    ranks = np.empty(values.size, dtype=float)
+    start = 0
+    while start < values.size:
+        end = start + 1
+        while end < values.size and values[order[end]] == values[order[start]]:
+            end += 1
+        ranks[order[start:end]] = 0.5 * (start + 1 + end)
+        start = end
+    return ranks
+
+
+def _jaccard(left: np.ndarray, right: np.ndarray) -> float:
+    union = int(np.count_nonzero(left | right))
+    if union == 0:
+        return 1.0
+    return float(np.count_nonzero(left & right) / union)
+
+
+def _rank_comparison(
+    primary_signal: np.ndarray,
+    control_signal: np.ndarray,
+    primary_weight: np.ndarray,
+    control_weight: np.ndarray,
+    timestamp_ns: np.ndarray,
+) -> dict[str, Any]:
+    correlations: list[float] = []
+    top_overlap: list[float] = []
+    bottom_overlap: list[float] = []
+    long_overlap: list[float] = []
+    short_overlap: list[float] = []
+    coordinate_dates: list[str] = []
+    for column in range(primary_signal.shape[1]):
+        left = primary_signal[:, column]
+        right = control_signal[:, column]
+        common = np.isfinite(left) & np.isfinite(right)
+        indices = np.flatnonzero(common)
+        if indices.size >= 2:
+            left_local = left[indices]
+            right_local = right[indices]
+            left_rank = _average_rank_vector(left_local)
+            right_rank = _average_rank_vector(right_local)
+            left_scale = float(np.std(left_rank))
+            right_scale = float(np.std(right_rank))
+            if left_scale <= 1.0e-18 or right_scale <= 1.0e-18:
+                correlation = 1.0 if np.array_equal(left_rank, right_rank) else 0.0
+            else:
+                correlation = float(np.corrcoef(left_rank, right_rank)[0, 1])
+            correlations.append(correlation)
+            bucket = max(1, int(math.ceil(indices.size * 0.20)))
+            left_order = indices[
+                np.lexsort((indices, left_local))
+            ]
+            right_order = indices[
+                np.lexsort((indices, right_local))
+            ]
+            top_overlap.append(
+                len(set(left_order[-bucket:]) & set(right_order[-bucket:]))
+                / float(bucket)
+            )
+            bottom_overlap.append(
+                len(set(left_order[:bucket]) & set(right_order[:bucket]))
+                / float(bucket)
+            )
+            coordinate_dates.append(
+                str(np.datetime64(int(timestamp_ns[column]), "ns").astype("datetime64[D]"))
+            )
+        long_overlap.append(
+            _jaccard(primary_weight[:, column] > ACTIVE_EPSILON, control_weight[:, column] > ACTIVE_EPSILON)
+        )
+        short_overlap.append(
+            _jaccard(primary_weight[:, column] < -ACTIVE_EPSILON, control_weight[:, column] < -ACTIVE_EPSILON)
+        )
+    daily: dict[str, list[float]] = {}
+    for date, correlation in zip(coordinate_dates, correlations):
+        daily.setdefault(date, []).append(correlation)
+    daily_means = [float(np.mean(values)) for values in daily.values()]
+    return {
+        "coordinate_count": len(correlations),
+        "daily_count": len(daily_means),
+        "mean_spearman": (
+            float(np.mean(correlations)) if correlations else None
+        ),
+        "daily_mean_spearman": (
+            float(np.mean(daily_means)) if daily_means else None
+        ),
+        "daily_minimum_spearman": (
+            float(np.min(daily_means)) if daily_means else None
+        ),
+        "top_bucket_fraction": 0.20,
+        "top_bucket_overlap_mean": (
+            float(np.mean(top_overlap)) if top_overlap else None
+        ),
+        "bottom_bucket_overlap_mean": (
+            float(np.mean(bottom_overlap)) if bottom_overlap else None
+        ),
+        "long_set_jaccard_mean": float(np.mean(long_overlap)),
+        "short_set_jaccard_mean": float(np.mean(short_overlap)),
+    }
+
+
+def control_degeneracy_provenance(
+    *,
+    primary_signal: np.ndarray,
+    control_signal: np.ndarray,
+    primary_mapping: MappingResult,
+    control_mapping: MappingResult,
+    timestamp_ns: np.ndarray,
+    primary_label: str,
+    control_label: str,
+) -> dict[str, Any]:
+    """Locate the first stable equality stage without using target outcomes."""
+
+    left = np.asarray(primary_signal, dtype=float)
+    right = np.asarray(control_signal, dtype=float)
+    left_weight = np.asarray(primary_mapping.weights, dtype=float)
+    right_weight = np.asarray(control_mapping.weights, dtype=float)
+    timestamps = np.asarray(timestamp_ns, dtype=np.int64)
+    if (
+        left.shape != right.shape
+        or left.shape != left_weight.shape
+        or left.shape != right_weight.shape
+        or left.shape[1] != timestamps.size
+        or primary_mapping.portfolio_mapping_id
+        != control_mapping.portfolio_mapping_id
+    ):
+        raise ValueError("CONTROL_DEGENERACY_COORDINATE_OR_MAPPING_CHANGED")
+    left_trace = dict(primary_mapping.behavior_provenance)
+    right_trace = dict(control_mapping.behavior_provenance)
+    if (
+        left_trace.get("schema_version")
+        != "CRYPTO_MAPPING_BEHAVIOR_PROVENANCE_V1"
+        or right_trace.get("schema_version")
+        != "CRYPTO_MAPPING_BEHAVIOR_PROVENANCE_V1"
+        or left_trace.get("stage_order") != right_trace.get("stage_order")
+    ):
+        raise ValueError("CONTROL_DEGENERACY_MAPPING_PROVENANCE_MISSING")
+    stage_order = [str(value) for value in left_trace["stage_order"]]
+    left_stages = dict(left_trace["stages"])
+    right_stages = dict(right_trace["stages"])
+    stages: dict[str, Any] = {}
+    equalities: list[bool] = []
+    for stage in stage_order:
+        left_stage = dict(left_stages[stage])
+        right_stage = dict(right_stages[stage])
+        equal = (
+            str(left_stage["identity_sha256"])
+            == str(right_stage["identity_sha256"])
+        )
+        equalities.append(equal)
+        stages[stage] = {
+            "primary_identity_sha256": str(left_stage["identity_sha256"]),
+            "control_identity_sha256": str(right_stage["identity_sha256"]),
+            "equal": bool(equal),
+        }
+    final_equal = bool(np.array_equal(left_weight, right_weight))
+    first_equal_stage = None
+    if final_equal:
+        for index, stage in enumerate(stage_order):
+            if all(equalities[index:]):
+                first_equal_stage = stage
+                break
+    payload: dict[str, Any] = {
+        "schema_version": "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1",
+        "primary_label": str(primary_label),
+        "control_label": str(control_label),
+        "mapping_id": str(primary_mapping.portfolio_mapping_id),
+        "stage_order": stage_order,
+        "stages": stages,
+        "first_equal_stage": first_equal_stage,
+        "final_weight_equal": final_equal,
+        "primary_mapping_provenance_sha256": str(
+            left_trace["provenance_sha256"]
+        ),
+        "control_mapping_provenance_sha256": str(
+            right_trace["provenance_sha256"]
+        ),
+        "rank_comparison": _rank_comparison(
+            left,
+            right,
+            left_weight,
+            right_weight,
+            timestamps,
+        ),
+        "identity_excludes": [
+            "target",
+            "target_ic",
+            "gross",
+            "net",
+            "turnover",
+            "cost",
+            "reward",
+        ],
+    }
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    payload["provenance_sha256"] = hashlib.sha256(encoded).hexdigest().upper()
+    return payload
+
+
+def _failure_degeneracy_provenance(
+    provenance: Mapping[str, Any],
+    reason: str,
+) -> dict[str, Any]:
+    payload = {
+        key: value
+        for key, value in dict(provenance).items()
+        if key != "provenance_sha256"
+    }
+    payload["failure_reason"] = str(reason)
+    payload["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    return payload
 
 
 def _mean_lcb(
@@ -632,6 +867,7 @@ def evaluate_pair(
     frozen_train_orientation: float | None = None,
     include_validation_paths: bool = False,
     include_economic_paths: bool = False,
+    include_control_provenance: bool = False,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -864,6 +1100,10 @@ def evaluate_pair(
         store.target_return(candidate.horizon_hours)[:, evaluation_block],
         dtype=float,
     )
+    provenance_primary_signal = primary_signal
+    provenance_control_signal = control_signal
+    provenance_right_control_signal = right_control_signal
+    provenance_interaction_left_control_signal = interaction_left_control_signal
     mapping_started = time.perf_counter()
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[candidate.mapping_id]
     train_orientation = 1.0
@@ -1031,11 +1271,43 @@ def evaluate_pair(
             interaction_left_control_signal = (
                 interaction_left_control_signal * train_orientation
             )
-    primary_mapped = map_portfolio(primary_signal, mapping_contract)
-    control_mapped = map_portfolio(control_signal, mapping_contract)
-    right_control_mapped = map_portfolio(right_control_signal, mapping_contract)
+    primary_mapped = map_portfolio(
+        primary_signal,
+        mapping_contract,
+        include_behavior_provenance=include_control_provenance,
+        source_signal_for_provenance=(
+            provenance_primary_signal if include_control_provenance else None
+        ),
+    )
+    control_mapped = map_portfolio(
+        control_signal,
+        mapping_contract,
+        include_behavior_provenance=include_control_provenance,
+        source_signal_for_provenance=(
+            provenance_control_signal if include_control_provenance else None
+        ),
+    )
+    right_control_mapped = map_portfolio(
+        right_control_signal,
+        mapping_contract,
+        include_behavior_provenance=include_control_provenance,
+        source_signal_for_provenance=(
+            provenance_right_control_signal
+            if include_control_provenance
+            else None
+        ),
+    )
     interaction_left_control_mapped = (
-        map_portfolio(interaction_left_control_signal, mapping_contract)
+        map_portfolio(
+            interaction_left_control_signal,
+            mapping_contract,
+            include_behavior_provenance=include_control_provenance,
+            source_signal_for_provenance=(
+                provenance_interaction_left_control_signal
+                if include_control_provenance
+                else None
+            ),
+        )
         if interaction_left_control_signal is not None
         else None
     )
@@ -1049,16 +1321,107 @@ def evaluate_pair(
         if interaction_left_control_mapped is not None
         else None
     )
+    timestamp_ns = np.asarray(
+        store.timestamp_ns[evaluation_block],
+        dtype=np.int64,
+    )
+    control_provenance: dict[str, Any] | None = None
+    if include_control_provenance:
+        comparisons: dict[str, Any] = {
+            "primary_vs_left_control": control_degeneracy_provenance(
+                primary_signal=primary_signal,
+                control_signal=control_signal,
+                primary_mapping=primary_mapped,
+                control_mapping=control_mapped,
+                timestamp_ns=timestamp_ns,
+                primary_label="primary",
+                control_label="left_control",
+            ),
+            "primary_vs_right_control": control_degeneracy_provenance(
+                primary_signal=primary_signal,
+                control_signal=right_control_signal,
+                primary_mapping=primary_mapped,
+                control_mapping=right_control_mapped,
+                timestamp_ns=timestamp_ns,
+                primary_label="primary",
+                control_label="right_control",
+            ),
+        }
+        if (
+            interaction_left_control_signal is not None
+            and interaction_left_control_mapped is not None
+        ):
+            comparisons["ab_vs_interaction_left_control"] = (
+                control_degeneracy_provenance(
+                    primary_signal=control_signal,
+                    control_signal=interaction_left_control_signal,
+                    primary_mapping=control_mapped,
+                    control_mapping=interaction_left_control_mapped,
+                    timestamp_ns=timestamp_ns,
+                    primary_label="ab_control",
+                    control_label="interaction_left_control",
+                )
+            )
+        control_provenance = {
+            "schema_version": "CRYPTO_PAIR_CONTROL_PROVENANCE_V1",
+            "comparisons": comparisons,
+            "identity_excludes": [
+                "target",
+                "target_ic",
+                "gross",
+                "net",
+                "turnover",
+                "cost",
+                "reward",
+            ],
+        }
+        control_provenance["provenance_sha256"] = hashlib.sha256(
+            json.dumps(
+                control_provenance,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ).encode("utf-8")
+        ).hexdigest().upper()
     if candidate.expression.expression_id == candidate.control.expression_id:
         raise ValueError("CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY")
     if np.array_equal(primary_weight, control_weight):
+        if control_provenance is not None:
+            failure = _failure_degeneracy_provenance(
+                control_provenance["comparisons"]["primary_vs_left_control"],
+                "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            )
+            raise ControlBehaviorDegeneracyError(
+                "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+                failure,
+            )
         raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
     if np.array_equal(primary_weight, right_control_weight):
+        if control_provenance is not None:
+            failure = _failure_degeneracy_provenance(
+                control_provenance["comparisons"]["primary_vs_right_control"],
+                "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            )
+            raise ControlBehaviorDegeneracyError(
+                "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+                failure,
+            )
         raise ValueError("RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY")
     if (
         interaction_left_control_weight is not None
         and np.array_equal(control_weight, interaction_left_control_weight)
     ):
+        if control_provenance is not None:
+            failure = _failure_degeneracy_provenance(
+                control_provenance["comparisons"][
+                    "ab_vs_interaction_left_control"
+                ],
+                "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+            )
+            raise ControlBehaviorDegeneracyError(
+                "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+                failure,
+            )
         raise ValueError("INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB")
     active_union = (
         (np.abs(primary_weight) > ACTIVE_EPSILON)
@@ -1072,7 +1435,6 @@ def evaluate_pair(
     evaluation_mask = raw_coordinate_support & ~missing_active_target
     if not np.any(evaluation_mask):
         raise ValueError("DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE")
-    timestamp_ns = store.timestamp_ns[evaluation_block]
     months = np.asarray(
         [str(np.datetime64(int(value), "ns"))[:7] for value in timestamp_ns], dtype=str
     )
@@ -1584,6 +1946,7 @@ def evaluate_pair(
         "matched_positive": bool(feedback["matched_positive"]),
         "feedback": feedback,
         "behavior": behavior,
+        "control_degeneracy_provenance": control_provenance,
         "primary_control_weight_equal": False,
         "delta_weight_sha256": left_incremental["weight_sha256"],
         "left_delta_weight_sha256": left_incremental["weight_sha256"],
@@ -1609,7 +1972,7 @@ def evaluate_pair(
 
 def pair_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 4,
+        "schema_version": 5,
         "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
         "market_semantics": {
             "asset_class": "CRYPTO",
@@ -1692,6 +2055,35 @@ def pair_contract_payload() -> dict[str, Any]:
         "control_exact_identity_forbidden": True,
         "control_behavior_identity_forbidden": True,
         "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+        "optional_control_degeneracy_provenance": {
+            "schema_version": "CRYPTO_PAIR_CONTROL_PROVENANCE_V1",
+            "stages": [
+                "SIGNAL",
+                "ORIENTED_SIGNAL when a frozen train orientation is applied",
+                "RANK when mapping-defined",
+                "NORMALIZED_SCORE when mapping-defined",
+                "SELECTION",
+                "RAW_WEIGHT when mapping-defined",
+                "CAPPED_WEIGHT when mapping-defined",
+                "MAPPED_WEIGHT",
+                "EXECUTABLE_WEIGHT",
+            ],
+            "first_equal_stage": (
+                "earliest stage from which all subsequent mapping-defined "
+                "identities remain exactly equal"
+            ),
+            "outcome_free": True,
+            "identity_excludes": [
+                "target",
+                "target_ic",
+                "gross",
+                "net",
+                "turnover",
+                "cost",
+                "reward",
+            ],
+            "kill_lines_unchanged": True,
+        },
         "incremental_weight_formula": "primary_weight - each_axis_control_weight",
         "pair_reward_role": (
             "matched attribution and execution diagnostic; never proposal-policy, "
@@ -1775,8 +2167,10 @@ def robust_monthly_audit(
 
 
 __all__ = [
+    "ControlBehaviorDegeneracyError",
     "FIXED_COST_BPS",
     "PAIR_THRESHOLDS",
+    "control_degeneracy_provenance",
     "evaluate_pair",
     "feedback_contract_payload",
     "pair_contract_payload",

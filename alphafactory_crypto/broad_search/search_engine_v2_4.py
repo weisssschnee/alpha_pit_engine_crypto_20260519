@@ -67,6 +67,30 @@ V24_CANDIDATE_LOCAL_FAILURES = frozenset(
         "DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE",
     }
 )
+V24_CONTROL_PROVENANCE_STAGES = frozenset(
+    {
+        "SIGNAL",
+        "ORIENTED_SIGNAL",
+        "RANK",
+        "NORMALIZED_SCORE",
+        "SELECTION",
+        "RAW_WEIGHT",
+        "CAPPED_WEIGHT",
+        "MAPPED_WEIGHT",
+        "EXECUTABLE_WEIGHT",
+    }
+)
+V24_CONTROL_FAILURE_LABELS: Mapping[str, tuple[str, str]] = {
+    "CONTROL_BEHAVIOR_EQUALS_PRIMARY": ("primary", "left_control"),
+    "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY": (
+        "primary",
+        "right_control",
+    ),
+    "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB": (
+        "ab_control",
+        "interaction_left_control",
+    ),
+}
 
 
 def prepare_v24_train_rows(
@@ -1594,7 +1618,10 @@ def _v24_worker_evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     ):
         raise RuntimeError("V24_WORKER_NOT_INITIALIZED")
     from alphafactory_crypto.broad_search.compositional18m import CandidateSpec
-    from alphafactory_crypto.broad_search.pair18m import evaluate_pair
+    from alphafactory_crypto.broad_search.pair18m import (
+        ControlBehaviorDegeneracyError,
+        evaluate_pair,
+    )
 
     candidate = CandidateSpec.from_dict(dict(payload["candidate"]))
     orientation = float(payload["frozen_train_orientation"])
@@ -1613,22 +1640,32 @@ def _v24_worker_evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             economic_receipt=_V24_WORKER_CONTEXT,
             frozen_train_orientation=orientation,
             include_economic_paths=True,
+            include_control_provenance=True,
         )
         error = None
+        failure_provenance = None
+        memory_error = False
+    except ControlBehaviorDegeneracyError as failure:
+        evaluation = None
+        error = f"ValueError:{failure}"
+        failure_provenance = dict(failure.provenance)
         memory_error = False
     except MemoryError as failure:
         evaluation = None
         error = f"{type(failure).__name__}:{failure}"
+        failure_provenance = None
         memory_error = True
     except (ValueError, FloatingPointError) as failure:
         evaluation = None
         error = f"{type(failure).__name__}:{failure}"
+        failure_provenance = None
         memory_error = False
     memory = process.memory_info()
     return {
         "candidate_id": candidate.candidate_id,
         "evaluation": evaluation,
         "error": error,
+        "failure_provenance": failure_provenance,
         "memory_error": memory_error,
         "process_cpu_seconds": time.process_time() - cpu_started,
         "wall_seconds": time.perf_counter() - wall_started,
@@ -1661,6 +1698,114 @@ def _v24_failure_reason(worker: Mapping[str, Any]) -> str | None:
     return reason
 
 
+def _v24_verify_canonical_provenance_hash(
+    payload: Mapping[str, Any],
+    *,
+    error_prefix: str,
+) -> None:
+    observed = str(payload.get("provenance_sha256") or "")
+    unhashed = {
+        key: value
+        for key, value in dict(payload).items()
+        if key != "provenance_sha256"
+    }
+    if len(observed) != 64 or observed != _canonical_sha256(unhashed):
+        raise RuntimeError(f"{error_prefix}_HASH_INVALID")
+
+
+def _v24_validate_control_comparison_provenance(
+    payload: Mapping[str, Any],
+    *,
+    failure_reason: str | None,
+) -> dict[str, Any]:
+    provenance = dict(payload)
+    if (
+        provenance.get("schema_version")
+        != "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1"
+    ):
+        raise RuntimeError("V24_CONTROL_PROVENANCE_SCHEMA_INVALID")
+    stage_order = [str(value) for value in provenance.get("stage_order") or ()]
+    stages = dict(provenance.get("stages") or {})
+    if (
+        not stage_order
+        or len(stage_order) != len(set(stage_order))
+        or set(stage_order) != set(stages)
+        or set(stage_order) - set(V24_CONTROL_PROVENANCE_STAGES)
+        or "MAPPED_WEIGHT" not in stage_order
+        or "EXECUTABLE_WEIGHT" not in stage_order
+    ):
+        raise RuntimeError("V24_CONTROL_PROVENANCE_STAGES_INVALID")
+    for stage in stage_order:
+        item = dict(stages[stage])
+        if (
+            len(str(item.get("primary_identity_sha256") or "")) != 64
+            or len(str(item.get("control_identity_sha256") or "")) != 64
+            or not isinstance(item.get("equal"), bool)
+        ):
+            raise RuntimeError("V24_CONTROL_PROVENANCE_STAGE_IDENTITY_INVALID")
+    if failure_reason is not None:
+        expected_labels = V24_CONTROL_FAILURE_LABELS.get(str(failure_reason))
+        if (
+            expected_labels is None
+            or provenance.get("failure_reason") != failure_reason
+            or (
+                str(provenance.get("primary_label") or ""),
+                str(provenance.get("control_label") or ""),
+            )
+            != expected_labels
+            or provenance.get("final_weight_equal") is not True
+            or str(provenance.get("first_equal_stage") or "")
+            not in stage_order
+        ):
+            raise RuntimeError("V24_CONTROL_PROVENANCE_FAILURE_BINDING_INVALID")
+    _v24_verify_canonical_provenance_hash(
+        provenance,
+        error_prefix="V24_CONTROL_PROVENANCE",
+    )
+    return provenance
+
+
+def _v24_bind_control_provenance(
+    *,
+    candidate_id: str,
+    candidate_spec_sha256: str,
+    failure_reason: str | None,
+    provenance: Mapping[str, Any],
+) -> dict[str, Any]:
+    raw = dict(provenance)
+    if raw.get("schema_version") == "CRYPTO_PAIR_CONTROL_PROVENANCE_V1":
+        if failure_reason is not None:
+            raise RuntimeError("V24_CONTROL_PROVENANCE_PAIR_USED_FOR_FAILURE")
+        _v24_verify_canonical_provenance_hash(
+            raw,
+            error_prefix="V24_PAIR_CONTROL_PROVENANCE",
+        )
+        comparisons = dict(raw.get("comparisons") or {})
+        if not comparisons:
+            raise RuntimeError("V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_MISSING")
+        for comparison in comparisons.values():
+            validated = _v24_validate_control_comparison_provenance(
+                comparison,
+                failure_reason=None,
+            )
+            if validated.get("final_weight_equal") is not False:
+                raise RuntimeError("V24_EVALUATED_CONTROL_PROVENANCE_EQUAL")
+    else:
+        raw = _v24_validate_control_comparison_provenance(
+            raw,
+            failure_reason=failure_reason,
+        )
+    envelope: dict[str, Any] = {
+        "schema_version": "CRYPTO_V24_BOUND_CONTROL_PROVENANCE_V1",
+        "candidate_id": str(candidate_id),
+        "candidate_spec_sha256": str(candidate_spec_sha256),
+        "failure_reason": failure_reason,
+        "provenance": raw,
+    }
+    envelope["provenance_sha256"] = _canonical_sha256(envelope)
+    return envelope
+
+
 def _v24_write_candidate_failure_projection(
     *,
     ordinal: int,
@@ -1674,6 +1819,24 @@ def _v24_write_candidate_failure_projection(
     reason = _v24_failure_reason(worker)
     if reason is None:
         raise RuntimeError("V24_WORKER_FAILURE_REASON_MISSING")
+    provenance = worker.get("failure_provenance")
+    behavior_failure = reason in {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+    }
+    if behavior_failure and not isinstance(provenance, Mapping):
+        raise RuntimeError("V24_CONTROL_DEGENERACY_PROVENANCE_MISSING")
+    provenance_payload = (
+        _v24_bind_control_provenance(
+            candidate_id=candidate_id,
+            candidate_spec_sha256=str(selected["candidate_spec_sha256"]),
+            failure_reason=reason,
+            provenance=provenance,
+        )
+        if isinstance(provenance, Mapping)
+        else None
+    )
     return {
         "completion_ordinal": int(ordinal + 1),
         "candidate_id": candidate_id,
@@ -1688,6 +1851,32 @@ def _v24_write_candidate_failure_projection(
         "evaluation_partition": "validation",
         "validation_status": "CANDIDATE_LOCAL_FAILURE",
         "validation_failure_reason": reason,
+        "control_equality_stage": (
+            str(
+                dict(provenance_payload["provenance"]).get(
+                    "first_equal_stage"
+                )
+                or ""
+            )
+            or None
+            if provenance_payload is not None
+            else None
+        ),
+        "control_degeneracy_provenance_sha256": (
+            str(provenance_payload.get("provenance_sha256") or "") or None
+            if provenance_payload is not None
+            else None
+        ),
+        "control_degeneracy_provenance_json": (
+            json.dumps(
+                provenance_payload,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            )
+            if provenance_payload is not None
+            else None
+        ),
         "strict_evaluated": False,
         "comparison_included": False,
         "pair_reward": float("nan"),
@@ -1820,6 +2009,17 @@ def _v24_write_candidate_projection(
         np.asarray([row["net_10bps"] for row in incremental], dtype=float)
     )
     primary_metrics = dict(evaluation.get("primary") or {})
+    provenance = evaluation.get("control_degeneracy_provenance")
+    provenance_payload = (
+        _v24_bind_control_provenance(
+            candidate_id=candidate_id,
+            candidate_spec_sha256=str(selected["candidate_spec_sha256"]),
+            failure_reason=None,
+            provenance=provenance,
+        )
+        if isinstance(provenance, Mapping)
+        else None
+    )
     return {
         "completion_ordinal": int(ordinal + 1),
         "candidate_id": candidate_id,
@@ -1834,6 +2034,22 @@ def _v24_write_candidate_projection(
         "evaluation_partition": "validation",
         "validation_status": "EVALUATED",
         "validation_failure_reason": None,
+        "control_equality_stage": None,
+        "control_degeneracy_provenance_sha256": (
+            str(provenance_payload.get("provenance_sha256") or "") or None
+            if provenance_payload is not None
+            else None
+        ),
+        "control_degeneracy_provenance_json": (
+            json.dumps(
+                provenance_payload,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            )
+            if provenance_payload is not None
+            else None
+        ),
         "strict_evaluated": True,
         "comparison_included": False,
         "pair_reward": float(evaluation["pair_reward"]),

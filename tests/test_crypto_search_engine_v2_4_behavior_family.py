@@ -30,6 +30,49 @@ from alphafactory_crypto.broad_search.search_engine_v2_4 import (
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
+def _control_failure_provenance(first_equal_stage: str) -> dict:
+    stage_order = [
+        "SIGNAL",
+        "RANK",
+        "MAPPED_WEIGHT",
+        "EXECUTABLE_WEIGHT",
+    ]
+    first_index = stage_order.index(first_equal_stage)
+    payload = {
+        "schema_version": "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1",
+        "primary_label": "primary",
+        "control_label": "left_control",
+        "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        "stage_order": stage_order,
+        "stages": {
+            stage: {
+                "primary_identity_sha256": ("A" if index < first_index else "C")
+                * 64,
+                "control_identity_sha256": ("B" if index < first_index else "C")
+                * 64,
+                "equal": index >= first_index,
+            }
+            for index, stage in enumerate(stage_order)
+        },
+        "first_equal_stage": first_equal_stage,
+        "final_weight_equal": True,
+        "primary_mapping_provenance_sha256": "D" * 64,
+        "control_mapping_provenance_sha256": "E" * 64,
+        "rank_comparison": {},
+        "identity_excludes": ["target", "target_ic", "reward"],
+        "failure_reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+    }
+    payload["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    return payload
+
+
 def test_v24_one_time_receipt_binds_exact_budget_and_fresh_interval() -> None:
     receipt = load_v24_run_receipt(REPO_ROOT, require_authorized=False)
     assert receipt["experiment_id"] == "crypto_search_engine_v2_4_fresh_family_gate"
@@ -100,6 +143,7 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
     worker = {
         "candidate_id": "candidate-1",
         "error": "ValueError:CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "failure_provenance": _control_failure_provenance("RANK"),
         "process_cpu_seconds": 1.5,
         "wall_seconds": 2.0,
         "worker_rss_bytes": 10,
@@ -116,9 +160,34 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
     assert row["validation_failure_reason"] in V24_CANDIDATE_LOCAL_FAILURES
     assert row["strict_evaluated"] is False
     assert row["comparison_included"] is False
+    assert row["control_equality_stage"] == "RANK"
+    assert len(row["control_degeneracy_provenance_sha256"]) == 64
+    envelope = json.loads(row["control_degeneracy_provenance_json"])
+    assert envelope["candidate_id"] == "candidate-1"
+    assert envelope["candidate_spec_sha256"] == "A" * 64
+    assert envelope["provenance"]["first_equal_stage"] == "RANK"
+    other = _v24_write_candidate_failure_projection(
+        ordinal=1,
+        selected={**selected, "candidate_id": "candidate-2"},
+        worker={**worker, "candidate_id": "candidate-2"},
+        economic_receipt_sha256="E" * 64,
+    )
+    assert (
+        other["control_degeneracy_provenance_sha256"]
+        != row["control_degeneracy_provenance_sha256"]
+    )
     with pytest.raises(RuntimeError, match="V24_UNEXPECTED_CANDIDATE_FAILURE"):
         _v24_failure_reason(
             {"error": "ValueError:UNREGISTERED_CANDIDATE_FAILURE"}
+        )
+    tampered = _control_failure_provenance("RANK")
+    tampered["first_equal_stage"] = "MAPPED_WEIGHT"
+    with pytest.raises(RuntimeError, match="V24_CONTROL_PROVENANCE_HASH_INVALID"):
+        _v24_write_candidate_failure_projection(
+            ordinal=0,
+            selected=selected,
+            worker={**worker, "failure_provenance": tampered},
+            economic_receipt_sha256="E" * 64,
         )
 
 
@@ -165,6 +234,9 @@ def test_v24_repair_batch_continues_after_candidate_local_failure(
         {
             "candidate_id": "candidate-failed",
             "error": "ValueError:CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "failure_provenance": _control_failure_provenance(
+                "MAPPED_WEIGHT"
+            ),
             "process_cpu_seconds": 1.0,
             "wall_seconds": 1.0,
             "worker_rss_bytes": 10,

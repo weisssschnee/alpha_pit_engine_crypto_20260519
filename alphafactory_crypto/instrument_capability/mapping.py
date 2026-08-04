@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import asdict, dataclass
+import math
+from dataclasses import asdict, dataclass, field
 from typing import Any, Mapping
 
 import numpy as np
@@ -37,6 +38,7 @@ class MappingResult:
     feasible: np.ndarray
     transition_reasons: tuple[tuple[str, ...], ...]
     diagnostics: Mapping[str, Any]
+    behavior_provenance: Mapping[str, Any] = field(default_factory=dict)
 
 
 DEFAULT_MAPPING_CONTRACTS: Mapping[str, MappingContract] = {
@@ -117,6 +119,129 @@ def _matrix(values: np.ndarray, name: str) -> np.ndarray:
     return result
 
 
+def _array_identity(values: np.ndarray) -> str:
+    """Hash a numeric stage with an explicit finite mask and stable zeros."""
+
+    array = np.asarray(values, dtype="<f8")
+    finite = np.isfinite(array)
+    canonical = np.where(finite, array, 0.0).astype("<f8", copy=False)
+    canonical[canonical == 0.0] = 0.0
+    digest = hashlib.sha256()
+    digest.update(str(array.shape).encode("ascii"))
+    digest.update(finite.astype(np.uint8).tobytes(order="C"))
+    digest.update(canonical.tobytes(order="C"))
+    return digest.hexdigest().upper()
+
+
+def _rank_entropy_mean(values: np.ndarray) -> float:
+    """Mean normalized entropy of average-rank states across coordinates."""
+
+    array = _matrix(values, "rank entropy values")
+    entropies: list[float] = []
+    for column in range(array.shape[1]):
+        local = array[:, column]
+        local = local[np.isfinite(local)]
+        if local.size <= 1:
+            entropies.append(0.0)
+            continue
+        _, counts = np.unique(local, return_counts=True)
+        probabilities = counts.astype(float) / float(local.size)
+        entropy = -float(np.sum(probabilities * np.log(probabilities)))
+        entropies.append(entropy / math.log(float(local.size)))
+    return float(np.mean(entropies)) if entropies else 0.0
+
+
+def _stage_record(values: np.ndarray, *, semantic: str) -> dict[str, Any]:
+    array = np.asarray(values, dtype=float)
+    finite = np.isfinite(array)
+    record: dict[str, Any] = {
+        "semantic": str(semantic),
+        "identity_sha256": _array_identity(array),
+        "shape": [int(value) for value in array.shape],
+        "finite_count": int(finite.sum()),
+        "non_null_rate": float(finite.mean()) if finite.size else 0.0,
+    }
+    if semantic in {
+        "mapping_input_signal",
+        "raw_expression_signal_before_train_orientation",
+        "mapping_input_after_frozen_train_orientation",
+    }:
+        clean = array[finite]
+        with np.errstate(all="ignore"):
+            dispersions = np.nanstd(array, axis=0)
+        finite_dispersions = dispersions[np.isfinite(dispersions)]
+        record["distribution_summary"] = {
+            "mean": float(np.mean(clean)) if clean.size else None,
+            "standard_deviation": float(np.std(clean)) if clean.size else None,
+            "minimum": float(np.min(clean)) if clean.size else None,
+            "maximum": float(np.max(clean)) if clean.size else None,
+            "cross_sectional_dispersion_mean": (
+                float(np.mean(finite_dispersions))
+                if finite_dispersions.size
+                else None
+            ),
+            "rank_entropy_mean": _rank_entropy_mean(array),
+        }
+    return record
+
+
+def _mapping_behavior_provenance(
+    *,
+    mapping_id: str,
+    stage_order: list[str],
+    stage_values: Mapping[str, tuple[np.ndarray, str]],
+    unavailable_stages: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    stages = {
+        name: _stage_record(values, semantic=semantic)
+        for name, (values, semantic) in stage_values.items()
+    }
+    payload: dict[str, Any] = {
+        "schema_version": "CRYPTO_MAPPING_BEHAVIOR_PROVENANCE_V1",
+        "mapping_id": str(mapping_id),
+        "stage_order": list(stage_order),
+        "stages": stages,
+        "unavailable_stages": dict(unavailable_stages or {}),
+        "identity_excludes": [
+            "target",
+            "target_ic",
+            "gross",
+            "net",
+            "turnover",
+            "cost",
+            "reward",
+        ],
+    }
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    payload["provenance_sha256"] = hashlib.sha256(encoded).hexdigest().upper()
+    return payload
+
+
+def _signal_provenance_stages(
+    mapping_signal: np.ndarray,
+    source_signal: np.ndarray | None,
+) -> tuple[list[str], dict[str, tuple[np.ndarray, str]]]:
+    if source_signal is None:
+        return ["SIGNAL"], {
+            "SIGNAL": (mapping_signal, "mapping_input_signal"),
+        }
+    source = _matrix(source_signal, "source_signal_for_provenance")
+    if source.shape != mapping_signal.shape:
+        raise ValueError("source signal provenance shape mismatch")
+    return ["SIGNAL", "ORIENTED_SIGNAL"], {
+        "SIGNAL": (source, "raw_expression_signal_before_train_orientation"),
+        "ORIENTED_SIGNAL": (
+            mapping_signal,
+            "mapping_input_after_frozen_train_orientation",
+        ),
+    }
+
+
 def _average_ranks(values: np.ndarray) -> np.ndarray:
     order = np.argsort(values, kind="mergesort")
     ranks = np.empty(len(values), dtype=float)
@@ -194,7 +319,13 @@ def _capped_allocation_columns(
     return allocation
 
 
-def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+def _cross_sectional(
+    signal: np.ndarray,
+    contract: MappingContract,
+    *,
+    include_behavior_provenance: bool = False,
+    source_signal_for_provenance: np.ndarray | None = None,
+) -> MappingResult:
     parameters = contract.parameters
     gross_target = float(parameters["gross_target"])
     cap = float(parameters["position_cap"])
@@ -229,7 +360,12 @@ def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingRe
     negative_allocation = _capped_allocation_columns(
         np.where(negative, -centered, 0.0), side_targets, cap
     )
-    weights = np.where(finite, positive_allocation - negative_allocation, 0.0)
+    capped_weights = np.where(
+        finite,
+        positive_allocation - negative_allocation,
+        0.0,
+    )
+    weights = capped_weights.copy()
     feasible = (
         (finite_count >= minimum)
         & positive.any(axis=0)
@@ -262,10 +398,73 @@ def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingRe
         "max_abs_net_exposure": float(np.max(np.abs(weights.sum(axis=0)))) if weights.size else 0.0,
         "gross_reduced_coordinates": int(sum("GROSS_REDUCED_FOR_CAP_FEASIBILITY" in item for item in reasons)),
     }
-    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, feasible, tuple(reasons), diagnostics)
+    provenance = (
+        _mapping_behavior_provenance(
+            mapping_id=contract.portfolio_mapping_id,
+            stage_order=[
+                *_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[0],
+                "RANK",
+                "NORMALIZED_SCORE",
+                "SELECTION",
+                "CAPPED_WEIGHT",
+                "MAPPED_WEIGHT",
+                "EXECUTABLE_WEIGHT",
+            ],
+            stage_values={
+                **_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[1],
+                "RANK": (ranks, "cross_sectional_average_rank"),
+                "NORMALIZED_SCORE": (
+                    centered,
+                    "demeaned_cross_sectional_rank_score",
+                ),
+                "SELECTION": (
+                    np.where(finite, np.sign(weights), 0.0),
+                    "final_long_short_membership",
+                ),
+                "CAPPED_WEIGHT": (
+                    capped_weights,
+                    "sidewise_capped_weight_before_feasibility_suppression",
+                ),
+                "MAPPED_WEIGHT": (weights, "portfolio_mapping_output"),
+                "EXECUTABLE_WEIGHT": (
+                    weights,
+                    "evaluator_input_weight_no_post_mapping_transform",
+                ),
+            },
+            unavailable_stages={
+                "RAW_WEIGHT": (
+                    "not materialized by CROSS_SECTIONAL_ZERO_NET; the authority "
+                    "allocates sidewise under the cap directly"
+                ),
+            },
+        )
+        if include_behavior_provenance
+        else {}
+    )
+    return MappingResult(
+        contract.portfolio_mapping_id,
+        mapping_contract_sha256(contract),
+        weights,
+        feasible,
+        tuple(reasons),
+        diagnostics,
+        provenance,
+    )
 
 
-def _directional(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+def _directional(
+    signal: np.ndarray,
+    contract: MappingContract,
+    *,
+    include_behavior_provenance: bool = False,
+    source_signal_for_provenance: np.ndarray | None = None,
+) -> MappingResult:
     p = contract.parameters
     entry = float(p["entry_threshold"])
     exit_threshold = float(p["exit_threshold"])
@@ -275,6 +474,7 @@ def _directional(signal: np.ndarray, contract: MappingContract) -> MappingResult
     if not (0 <= exit_threshold < entry and 0 < maximum <= gross_cap and interval >= 1):
         raise ValueError("invalid directional mapping parameters")
     weights = np.zeros(signal.shape, dtype=float)
+    raw_weights = np.zeros(signal.shape, dtype=float)
     current = np.zeros(signal.shape[0], dtype=float)
     reasons: list[tuple[str, ...]] = []
     for column in range(signal.shape[1]):
@@ -306,6 +506,7 @@ def _directional(signal: np.ndarray, contract: MappingContract) -> MappingResult
         else:
             coordinate_reasons.append("CADENCE_HOLD")
         gross = float(np.abs(current).sum())
+        raw_weights[:, column] = current
         if gross > gross_cap:
             current *= gross_cap / gross
             coordinate_reasons.append("GROSS_CAP_SCALED")
@@ -321,10 +522,69 @@ def _directional(signal: np.ndarray, contract: MappingContract) -> MappingResult
         "common_mode_preserved": bool(np.any(np.abs(weights.sum(axis=0)) > 1e-12)),
         "state_out": {"positions": current.tolist()},
     }
-    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, np.ones(signal.shape[1], dtype=bool), tuple(reasons), diagnostics)
+    provenance = (
+        _mapping_behavior_provenance(
+            mapping_id=contract.portfolio_mapping_id,
+            stage_order=[
+                *_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[0],
+                "SELECTION",
+                "RAW_WEIGHT",
+                "CAPPED_WEIGHT",
+                "MAPPED_WEIGHT",
+                "EXECUTABLE_WEIGHT",
+            ],
+            stage_values={
+                **_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[1],
+                "SELECTION": (
+                    np.sign(weights),
+                    "stateful_active_direction_membership",
+                ),
+                "RAW_WEIGHT": (
+                    raw_weights,
+                    "stateful_position_before_gross_cap_scaling",
+                ),
+                "CAPPED_WEIGHT": (
+                    weights,
+                    "stateful_position_after_gross_cap_scaling",
+                ),
+                "MAPPED_WEIGHT": (weights, "stateful_portfolio_mapping_output"),
+                "EXECUTABLE_WEIGHT": (
+                    weights,
+                    "evaluator_input_weight_no_post_mapping_transform",
+                ),
+            },
+            unavailable_stages={
+                "RANK": "TIME_SERIES_DIRECTIONAL_STATEFUL does not rank assets",
+                "NORMALIZED_WEIGHT": "no distinct normalization stage exists",
+            },
+        )
+        if include_behavior_provenance
+        else {}
+    )
+    return MappingResult(
+        contract.portfolio_mapping_id,
+        mapping_contract_sha256(contract),
+        weights,
+        np.ones(signal.shape[1], dtype=bool),
+        tuple(reasons),
+        diagnostics,
+        provenance,
+    )
 
 
-def _sparse(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+def _sparse(
+    signal: np.ndarray,
+    contract: MappingContract,
+    *,
+    include_behavior_provenance: bool = False,
+    source_signal_for_provenance: np.ndarray | None = None,
+) -> MappingResult:
     p = contract.parameters
     threshold = float(p["event_threshold"])
     hold_period = int(p["fixed_holding_period"])
@@ -334,6 +594,7 @@ def _sparse(signal: np.ndarray, contract: MappingContract) -> MappingResult:
     if threshold <= 0 or hold_period <= 0 or settlement <= 0 or maximum <= 0 or gross_cap <= 0:
         raise ValueError("invalid sparse mapping parameters")
     weights = np.zeros(signal.shape, dtype=float)
+    raw_weights = np.zeros(signal.shape, dtype=float)
     current = np.zeros(signal.shape[0], dtype=float)
     remaining = np.zeros(signal.shape[0], dtype=int)
     reasons: list[tuple[str, ...]] = []
@@ -360,6 +621,7 @@ def _sparse(signal: np.ndarray, contract: MappingContract) -> MappingResult:
             elif not np.isfinite(value) and current[asset] != 0:
                 coordinate_reasons.append("MISSING_SIGNAL_HELD")
         gross = float(np.abs(current).sum())
+        raw_weights[:, column] = current
         if gross > gross_cap:
             current *= gross_cap / gross
             coordinate_reasons.append("GROSS_CAP_SCALED")
@@ -384,17 +646,91 @@ def _sparse(signal: np.ndarray, contract: MappingContract) -> MappingResult:
             "remaining_holding_period": remaining.astype(int).tolist(),
         },
     }
-    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, np.ones(signal.shape[1], dtype=bool), tuple(reasons), diagnostics)
+    provenance = (
+        _mapping_behavior_provenance(
+            mapping_id=contract.portfolio_mapping_id,
+            stage_order=[
+                *_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[0],
+                "SELECTION",
+                "RAW_WEIGHT",
+                "CAPPED_WEIGHT",
+                "MAPPED_WEIGHT",
+                "EXECUTABLE_WEIGHT",
+            ],
+            stage_values={
+                **_signal_provenance_stages(
+                    signal,
+                    source_signal_for_provenance,
+                )[1],
+                "SELECTION": (
+                    np.sign(weights),
+                    "event_active_direction_membership",
+                ),
+                "RAW_WEIGHT": (
+                    raw_weights,
+                    "event_hold_position_before_gross_cap_scaling",
+                ),
+                "CAPPED_WEIGHT": (
+                    weights,
+                    "event_hold_position_after_gross_cap_scaling",
+                ),
+                "MAPPED_WEIGHT": (weights, "event_hold_portfolio_mapping_output"),
+                "EXECUTABLE_WEIGHT": (
+                    weights,
+                    "evaluator_input_weight_no_post_mapping_transform",
+                ),
+            },
+            unavailable_stages={
+                "RANK": "SPARSE_EVENT_OR_CARRY does not rank assets",
+                "NORMALIZED_WEIGHT": "no distinct normalization stage exists",
+            },
+        )
+        if include_behavior_provenance
+        else {}
+    )
+    return MappingResult(
+        contract.portfolio_mapping_id,
+        mapping_contract_sha256(contract),
+        weights,
+        np.ones(signal.shape[1], dtype=bool),
+        tuple(reasons),
+        diagnostics,
+        provenance,
+    )
 
 
-def map_portfolio(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+def map_portfolio(
+    signal: np.ndarray,
+    contract: MappingContract,
+    *,
+    include_behavior_provenance: bool = False,
+    source_signal_for_provenance: np.ndarray | None = None,
+) -> MappingResult:
     source = _matrix(signal, "signal")
     if contract.portfolio_mapping_id == CROSS_SECTIONAL_ZERO_NET:
-        return _cross_sectional(source, contract)
+        return _cross_sectional(
+            source,
+            contract,
+            include_behavior_provenance=include_behavior_provenance,
+            source_signal_for_provenance=source_signal_for_provenance,
+        )
     if contract.portfolio_mapping_id == TIME_SERIES_DIRECTIONAL_STATEFUL:
-        return _directional(source, contract)
+        return _directional(
+            source,
+            contract,
+            include_behavior_provenance=include_behavior_provenance,
+            source_signal_for_provenance=source_signal_for_provenance,
+        )
     if contract.portfolio_mapping_id == SPARSE_EVENT_OR_CARRY:
-        return _sparse(source, contract)
+        return _sparse(
+            source,
+            contract,
+            include_behavior_provenance=include_behavior_provenance,
+            source_signal_for_provenance=source_signal_for_provenance,
+        )
     if contract.portfolio_mapping_id == DIRECT_ZERO_NET_COST_AWARE:
         raise ValueError(
             "direct-weight contract requires validate_direct_weights; it is not a signal mapping"

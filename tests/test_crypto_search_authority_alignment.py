@@ -20,6 +20,7 @@ from alphafactory_crypto.broad_search.expression import (
     materialize_expression,
 )
 from alphafactory_crypto.broad_search.pair18m import (
+    ControlBehaviorDegeneracyError,
     FIXED_COST_BPS,
     SEARCH_REWARD_AUTHORITY,
     SEARCH_REWARD_COMPONENT_AUTHORITY,
@@ -27,6 +28,7 @@ from alphafactory_crypto.broad_search.pair18m import (
     _stationary_bootstrap_indices,
     pair_contract_payload,
     _series_metrics,
+    control_degeneracy_provenance,
     evaluate_pair,
 )
 from alphafactory_crypto.instrument_capability.mapping import (
@@ -52,6 +54,91 @@ def test_four_hour_behavior_uses_t_minus_four_not_t_minus_one() -> None:
     assert attribution["entry_l1"] == pytest.approx(0.5)
     assert attribution["transition_exit_l1"] == pytest.approx(0.5)
     assert attribution["total_turnover_l1"] == pytest.approx(float(path.sum()))
+
+
+def test_control_degeneracy_provenance_finds_rank_as_first_equal_stage() -> None:
+    primary_signal = np.tile(
+        np.asarray([[-1.0], [0.0], [1.0], [2.0]], dtype=float),
+        (1, 48),
+    )
+    control_signal = primary_signal + 20.0
+    mapping = DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]
+    primary = map_portfolio(
+        primary_signal,
+        mapping,
+        include_behavior_provenance=True,
+    )
+    control = map_portfolio(
+        control_signal,
+        mapping,
+        include_behavior_provenance=True,
+    )
+    timestamps = np.arange(48, dtype=np.int64) * 3_600_000_000_000
+
+    provenance = control_degeneracy_provenance(
+        primary_signal=primary_signal,
+        control_signal=control_signal,
+        primary_mapping=primary,
+        control_mapping=control,
+        timestamp_ns=timestamps,
+        primary_label="primary",
+        control_label="left_control",
+    )
+
+    assert provenance["final_weight_equal"] is True
+    assert provenance["first_equal_stage"] == "RANK"
+    assert provenance["stages"]["SIGNAL"]["equal"] is False
+    assert provenance["stages"]["RANK"]["equal"] is True
+    assert provenance["rank_comparison"]["mean_spearman"] == pytest.approx(1.0)
+    assert provenance["rank_comparison"]["top_bucket_overlap_mean"] == pytest.approx(1.0)
+    assert provenance["rank_comparison"]["bottom_bucket_overlap_mean"] == pytest.approx(1.0)
+    assert "target_ic" in provenance["identity_excludes"]
+    assert len(provenance["provenance_sha256"]) == 64
+
+
+def test_control_degeneracy_does_not_mislabel_feasibility_suppression_as_cap() -> None:
+    primary_signal = np.asarray([[0.0], [1.0]])
+    control_signal = np.asarray([[1.0], [0.0]])
+    mapping = DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]
+    primary = map_portfolio(
+        primary_signal,
+        mapping,
+        include_behavior_provenance=True,
+    )
+    control = map_portfolio(
+        control_signal,
+        mapping,
+        include_behavior_provenance=True,
+    )
+
+    provenance = control_degeneracy_provenance(
+        primary_signal=primary_signal,
+        control_signal=control_signal,
+        primary_mapping=primary,
+        control_mapping=control,
+        timestamp_ns=np.asarray([0], dtype=np.int64),
+        primary_label="primary",
+        control_label="left_control",
+    )
+
+    assert provenance["stages"]["CAPPED_WEIGHT"]["equal"] is False
+    assert provenance["stages"]["MAPPED_WEIGHT"]["equal"] is True
+    assert provenance["first_equal_stage"] == "MAPPED_WEIGHT"
+
+
+def test_control_behavior_degeneracy_error_preserves_kill_line_and_provenance() -> None:
+    failure = ControlBehaviorDegeneracyError(
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        {
+            "schema_version": "CRYPTO_CONTROL_DEGENERACY_PROVENANCE_V1",
+            "first_equal_stage": "MAPPED_WEIGHT",
+            "provenance_sha256": "A" * 64,
+        },
+    )
+
+    assert isinstance(failure, ValueError)
+    assert str(failure) == "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
+    assert failure.provenance["first_equal_stage"] == "MAPPED_WEIGHT"
 
 
 def test_behavior_turnover_exactly_matches_evaluator_turnover() -> None:
@@ -176,7 +263,7 @@ def test_stationary_bootstrap_is_deterministic_and_order_aware() -> None:
 def test_pair_contract_is_crypto_only_and_has_joint_matched_reward() -> None:
     contract = pair_contract_payload()
 
-    assert contract["schema_version"] == 4
+    assert contract["schema_version"] == 5
     assert contract["market_semantics"]["asset_class"] == "CRYPTO"
     assert contract["market_semantics"]["calendar"] == "CONTINUOUS_UTC"
     assert contract["market_semantics"]["a_share_constraints_applied"] is False
@@ -291,7 +378,21 @@ def test_behavior_family_uses_incremental_delta_weights() -> None:
         block_end="2023-07-01T12:00:00Z",
         block_role="DEVELOPMENT_ADAPTIVE_FEEDBACK",
         behavior_contract=contract,
+        include_control_provenance=True,
     )
+
+    provenance = result["control_degeneracy_provenance"]
+    assert provenance["schema_version"] == "CRYPTO_PAIR_CONTROL_PROVENANCE_V1"
+    assert set(provenance["comparisons"]) == {
+        "primary_vs_left_control",
+        "primary_vs_right_control",
+    }
+    assert all(
+        comparison["final_weight_equal"] is False
+        and comparison["first_equal_stage"] is None
+        for comparison in provenance["comparisons"].values()
+    )
+    assert "target_ic" in provenance["identity_excludes"]
 
     raw = {"a": store.field("a"), "b": store.field("b")}
     primary_signal = materialize_expression(

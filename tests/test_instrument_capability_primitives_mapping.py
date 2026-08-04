@@ -160,9 +160,41 @@ class ExplicitMappingTests(unittest.TestCase):
     def test_cross_sectional_deletes_but_directional_preserves_common_mode(self) -> None:
         base = np.tile(np.array([[-1.0], [0.0], [1.0], [2.0]]), (1, 8))
         shifted = base + 20.0
-        left = map_portfolio(base, DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]).weights
-        right = map_portfolio(shifted, DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]).weights
+        left_result = map_portfolio(
+            base,
+            DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET],
+            include_behavior_provenance=True,
+        )
+        right_result = map_portfolio(
+            shifted,
+            DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET],
+            include_behavior_provenance=True,
+        )
+        left = left_result.weights
+        right = right_result.weights
         np.testing.assert_allclose(left, right)
+        self.assertNotEqual(
+            left_result.behavior_provenance["stages"]["SIGNAL"]["identity_sha256"],
+            right_result.behavior_provenance["stages"]["SIGNAL"]["identity_sha256"],
+        )
+        self.assertEqual(
+            left_result.behavior_provenance["stages"]["RANK"]["identity_sha256"],
+            right_result.behavior_provenance["stages"]["RANK"]["identity_sha256"],
+        )
+        self.assertEqual(
+            left_result.behavior_provenance["stage_order"],
+            [
+                "SIGNAL",
+                "RANK",
+                "NORMALIZED_SCORE",
+                "SELECTION",
+                "CAPPED_WEIGHT",
+                "MAPPED_WEIGHT",
+                "EXECUTABLE_WEIGHT",
+            ],
+        )
+        self.assertNotIn("target", left_result.behavior_provenance)
+        self.assertNotIn("reward", left_result.behavior_provenance)
         directional_signal = np.ones((4, 8), dtype=float) * 0.9
         directional = map_portfolio(
             directional_signal, DEFAULT_MAPPING_CONTRACTS[TIME_SERIES_DIRECTIONAL_STATEFUL]
@@ -180,6 +212,67 @@ class ExplicitMappingTests(unittest.TestCase):
         result = map_portfolio(signal, DEFAULT_MAPPING_CONTRACTS[SPARSE_EVENT_OR_CARRY])
         np.testing.assert_allclose(result.weights[1], [0, 0, 0.25, 0.25, 0.25, 0.25, 0, 0])
         self.assertTrue(result.diagnostics["singleton_preserved"])
+
+    def test_behavior_provenance_is_an_opt_in_projection_with_mapping_parity(self) -> None:
+        cases = {
+            CROSS_SECTIONAL_ZERO_NET: np.asarray(
+                [[-2.0, -1.0], [-1.0, 0.0], [1.0, 2.0], [2.0, 3.0]]
+            ),
+            TIME_SERIES_DIRECTIONAL_STATEFUL: np.asarray(
+                [[0.0, 0.8, 0.4, 0.1], [0.0, -0.9, -0.3, 0.0]]
+            ),
+            SPARSE_EVENT_OR_CARRY: np.asarray(
+                [[0.0, 0.8, 0.0, 0.0], [0.0, 0.0, -0.9, 0.0]]
+            ),
+        }
+        for mapping_id, signal in cases.items():
+            with self.subTest(mapping_id=mapping_id):
+                contract = DEFAULT_MAPPING_CONTRACTS[mapping_id]
+                baseline = map_portfolio(signal, contract)
+                traced = map_portfolio(
+                    signal,
+                    contract,
+                    include_behavior_provenance=True,
+                )
+                np.testing.assert_array_equal(baseline.weights, traced.weights)
+                np.testing.assert_array_equal(baseline.feasible, traced.feasible)
+                self.assertEqual(
+                    baseline.transition_reasons,
+                    traced.transition_reasons,
+                )
+                self.assertEqual(baseline.diagnostics, traced.diagnostics)
+                self.assertEqual(baseline.behavior_provenance, {})
+                self.assertEqual(
+                    traced.behavior_provenance["mapping_id"],
+                    mapping_id,
+                )
+
+    def test_behavior_provenance_separates_raw_and_train_oriented_signal(self) -> None:
+        raw = np.asarray(
+            [[-2.0, -1.0], [-1.0, 0.0], [1.0, 2.0], [2.0, 3.0]]
+        )
+        oriented = -raw
+        traced = map_portfolio(
+            oriented,
+            DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET],
+            include_behavior_provenance=True,
+            source_signal_for_provenance=raw,
+        )
+
+        assert traced.behavior_provenance["stage_order"][:2] == [
+            "SIGNAL",
+            "ORIENTED_SIGNAL",
+        ]
+        assert (
+            traced.behavior_provenance["stages"]["SIGNAL"]["identity_sha256"]
+            != traced.behavior_provenance["stages"]["ORIENTED_SIGNAL"][
+                "identity_sha256"
+            ]
+        )
+        assert (
+            traced.behavior_provenance["stages"]["SIGNAL"]["semantic"]
+            == "raw_expression_signal_before_train_orientation"
+        )
 
     def test_turnover_decomposition_and_full_l1_cost(self) -> None:
         signal = np.array([[1.0, -1.0]], dtype=float)
