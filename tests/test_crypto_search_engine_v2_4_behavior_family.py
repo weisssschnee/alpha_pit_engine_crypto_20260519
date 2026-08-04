@@ -11,6 +11,7 @@ import pytest
 
 from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     V24_CANDIDATE_LOCAL_FAILURES,
+    _v24_bind_control_provenance,
     _v24_failure_reason,
     _v24_mark_equal_count_comparison,
     _v24_write_batch_projections,
@@ -61,6 +62,65 @@ def _control_failure_provenance(first_equal_stage: str) -> dict:
         "rank_comparison": {},
         "identity_excludes": ["target", "target_ic", "reward"],
         "failure_reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+    }
+    payload["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    return payload
+
+
+def _control_success_provenance(
+    primary_label: str,
+    control_label: str,
+) -> dict:
+    payload = _control_failure_provenance("MAPPED_WEIGHT")
+    payload.pop("provenance_sha256")
+    payload.pop("failure_reason")
+    payload["primary_label"] = primary_label
+    payload["control_label"] = control_label
+    payload["first_equal_stage"] = None
+    payload["final_weight_equal"] = False
+    for item in payload["stages"].values():
+        item["control_identity_sha256"] = "B" * 64
+        item["equal"] = False
+    payload["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    return payload
+
+
+def _pair_control_provenance(*, hierarchical: bool) -> dict:
+    comparisons = {
+        "primary_vs_left_control": _control_success_provenance(
+            "primary",
+            "left_control",
+        ),
+        "primary_vs_right_control": _control_success_provenance(
+            "primary",
+            "right_control",
+        ),
+    }
+    if hierarchical:
+        comparisons["ab_vs_interaction_left_control"] = (
+            _control_success_provenance(
+                "ab_control",
+                "interaction_left_control",
+            )
+        )
+    payload = {
+        "schema_version": "CRYPTO_PAIR_CONTROL_PROVENANCE_V1",
+        "comparisons": comparisons,
+        "identity_excludes": ["target", "target_ic", "reward"],
     }
     payload["provenance_sha256"] = hashlib.sha256(
         json.dumps(
@@ -188,6 +248,53 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
             selected=selected,
             worker={**worker, "failure_provenance": tampered},
             economic_receipt_sha256="E" * 64,
+        )
+
+
+def test_v24_evaluated_provenance_requires_exact_control_comparison_set() -> None:
+    base = _pair_control_provenance(hierarchical=False)
+    envelope = _v24_bind_control_provenance(
+        candidate_id="candidate-1",
+        candidate_spec_sha256="A" * 64,
+        failure_reason=None,
+        provenance=base,
+        hierarchical_three_axis=False,
+    )
+    assert envelope["candidate_id"] == "candidate-1"
+    assert len(envelope["provenance_sha256"]) == 64
+
+    truncated = _pair_control_provenance(hierarchical=False)
+    truncated.pop("provenance_sha256")
+    truncated["comparisons"].pop("primary_vs_right_control")
+    truncated["provenance_sha256"] = hashlib.sha256(
+        json.dumps(
+            truncated,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    with pytest.raises(
+        RuntimeError,
+        match="V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_INVALID",
+    ):
+        _v24_bind_control_provenance(
+            candidate_id="candidate-1",
+            candidate_spec_sha256="A" * 64,
+            failure_reason=None,
+            provenance=truncated,
+            hierarchical_three_axis=False,
+        )
+    with pytest.raises(
+        RuntimeError,
+        match="V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_INVALID",
+    ):
+        _v24_bind_control_provenance(
+            candidate_id="candidate-1",
+            candidate_spec_sha256="A" * 64,
+            failure_reason=None,
+            provenance=base,
+            hierarchical_three_axis=True,
         )
 
 

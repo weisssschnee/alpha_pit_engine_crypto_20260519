@@ -1771,6 +1771,7 @@ def _v24_bind_control_provenance(
     candidate_spec_sha256: str,
     failure_reason: str | None,
     provenance: Mapping[str, Any],
+    hierarchical_three_axis: bool | None = None,
 ) -> dict[str, Any]:
     raw = dict(provenance)
     if raw.get("schema_version") == "CRYPTO_PAIR_CONTROL_PROVENANCE_V1":
@@ -1781,8 +1782,14 @@ def _v24_bind_control_provenance(
             error_prefix="V24_PAIR_CONTROL_PROVENANCE",
         )
         comparisons = dict(raw.get("comparisons") or {})
-        if not comparisons:
-            raise RuntimeError("V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_MISSING")
+        expected_comparisons = {
+            "primary_vs_left_control",
+            "primary_vs_right_control",
+        }
+        if hierarchical_three_axis is True:
+            expected_comparisons.add("ab_vs_interaction_left_control")
+        if set(comparisons) != expected_comparisons:
+            raise RuntimeError("V24_PAIR_CONTROL_PROVENANCE_COMPARISONS_INVALID")
         for comparison in comparisons.values():
             validated = _v24_validate_control_comparison_provenance(
                 comparison,
@@ -1833,6 +1840,7 @@ def _v24_write_candidate_failure_projection(
             candidate_spec_sha256=str(selected["candidate_spec_sha256"]),
             failure_reason=reason,
             provenance=provenance,
+            hierarchical_three_axis=None,
         )
         if isinstance(provenance, Mapping)
         else None
@@ -2010,15 +2018,18 @@ def _v24_write_candidate_projection(
     )
     primary_metrics = dict(evaluation.get("primary") or {})
     provenance = evaluation.get("control_degeneracy_provenance")
+    if not isinstance(provenance, Mapping):
+        raise RuntimeError("V24_EVALUATED_CONTROL_PROVENANCE_MISSING")
     provenance_payload = (
         _v24_bind_control_provenance(
             candidate_id=candidate_id,
             candidate_spec_sha256=str(selected["candidate_spec_sha256"]),
             failure_reason=None,
             provenance=provenance,
+            hierarchical_three_axis=bool(
+                evaluation.get("hierarchical_three_axis")
+            ),
         )
-        if isinstance(provenance, Mapping)
-        else None
     )
     return {
         "completion_ordinal": int(ordinal + 1),
