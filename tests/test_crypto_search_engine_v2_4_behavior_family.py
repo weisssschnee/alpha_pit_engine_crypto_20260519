@@ -200,6 +200,11 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
         "horizon_hours": 1,
         "search_reward": 0.5,
         "train_orientation": 1.0,
+        "candidate": {
+            "skeleton_id": "skeleton-1",
+            "mechanism_family": "FLOW_CONFIRMATION",
+            "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        },
     }
     worker = {
         "candidate_id": "candidate-1",
@@ -222,6 +227,11 @@ def test_v24_candidate_local_failure_is_persisted_without_backfill() -> None:
     assert row["strict_evaluated"] is False
     assert row["comparison_included"] is False
     assert row["control_equality_stage"] == "RANK"
+    assert row["typed_constructible"] is True
+    assert row["skeleton_id"] == "skeleton-1"
+    assert row["mechanism_family"] == "FLOW_CONFIRMATION"
+    assert row["mapping_family"] == "CROSS_SECTIONAL_ZERO_NET"
+    assert row["direction_authority"] == "TRAIN_FROZEN_SIGN_ORIENTATION"
     assert len(row["control_degeneracy_provenance_sha256"]) == 64
     envelope = json.loads(row["control_degeneracy_provenance_json"])
     assert envelope["candidate_id"] == "candidate-1"
@@ -368,6 +378,11 @@ def test_v24_repair_batch_continues_after_candidate_local_failure(
         "horizon_hours": 1,
         "search_reward": 0.5,
         "train_orientation": 1.0,
+        "candidate": {
+            "skeleton_id": "skeleton-1",
+            "mechanism_family": "FLOW_CONFIRMATION",
+            "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        },
     }
     selected = [
         {**base, "candidate_id": "candidate-failed"},

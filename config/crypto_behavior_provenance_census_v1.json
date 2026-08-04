@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "consumer_id": "CRYPTO_BEHAVIOR_PROVENANCE_CENSUS_V1",
+  "status": "SOURCE_ONLY_OBSERVABILITY_INFRASTRUCTURE",
+  "historical_inference_allowed": false,
+  "market_read_allowed": false,
+  "candidate_replay_allowed": false,
+  "reward_or_policy_feedback_allowed": false,
+  "exclusive_counting_key": "first_equal_stage",
+  "canonical_input": {
+    "envelope_column": "control_degeneracy_provenance_json",
+    "envelope_hash_column": "control_degeneracy_provenance_sha256",
+    "candidate_binding": [
+      "candidate_id",
+      "candidate_spec_sha256"
+    ],
+    "duplicate_flat_fingerprint_authority": false
+  },
+  "allowed_stages": [
+    "SIGNAL",
+    "ORIENTED_SIGNAL",
+    "RANK",
+    "NORMALIZED_SCORE",
+    "SELECTION",
+    "RAW_WEIGHT",
+    "CAPPED_WEIGHT",
+    "MAPPED_WEIGHT",
+    "EXECUTABLE_WEIGHT"
+  ],
+  "slice_columns": {
+    "arm": "arm",
+    "seed": "seed",
+    "skeleton": "skeleton_id",
+    "mechanism_family": "mechanism_family",
+    "mapping_family": "mapping_family",
+    "horizon": "horizon_hours",
+    "direction_authority": "direction_authority"
+  },
+  "legacy_no_provenance_result": {
+    "status": "NO_PROVENANCE_ROWS",
+    "legacy_final_equal_count": "observed final equality failures only",
+    "first_equal_stage": null
+  },
+  "funnel": [
+    "proposal_count",
+    "typed_constructible_count",
+    "behavior_unique_count",
+    "control_non_degenerate_count",
+    "strict_evaluated_count",
+    "matched_positive_count",
+    "qualified_candidate_count"
+  ],
+  "qualified_candidate_rule": "EXPLICIT_LEDGER_BOOLEAN_OR_NULL_NOT_INFERRED",
+  "reward_rule": "MATCHED_POSITIVE_FROM_EXISTING_EVALUATOR_ONLY",
+  "cpu_rule": "SUM_PROCESS_CPU_SECONDS_NO_PAIR_REWARD_PER_CPU_HOUR",
+  "proposal_denominator_rule": "PROPOSAL_COUNT_MEANS_INPUT_LEDGER_CANDIDATES_NOT_RAW_GENERATION_ATTEMPTS",
+  "phase_b_rule": "PROVENANCE_IS_EVALUATION_DIAGNOSTIC_ONLY_AND_WRITES_NO_REWARD_OPTIMIZER_ARCHIVE_OR_POLICY_FEEDBACK"
+}

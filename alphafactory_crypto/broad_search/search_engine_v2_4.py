@@ -1832,6 +1832,26 @@ def _v24_require_hierarchical_three_axis(
     return value
 
 
+def _v25_observability_dimensions(
+    selected: Mapping[str, Any],
+) -> dict[str, Any]:
+    candidate = selected.get("candidate")
+    if not isinstance(candidate, Mapping):
+        raise RuntimeError("V25_CANDIDATE_METADATA_MISSING")
+    required = {
+        "skeleton_id": str(candidate.get("skeleton_id") or ""),
+        "mechanism_family": str(candidate.get("mechanism_family") or ""),
+        "mapping_family": str(candidate.get("mapping_id") or ""),
+    }
+    if not all(required.values()):
+        raise RuntimeError("V25_CANDIDATE_METADATA_INVALID")
+    return {
+        **required,
+        "direction_authority": "TRAIN_FROZEN_SIGN_ORIENTATION",
+        "typed_constructible": True,
+    }
+
+
 def _v24_write_candidate_failure_projection(
     *,
     ordinal: int,
@@ -1865,6 +1885,7 @@ def _v24_write_candidate_failure_projection(
         else None
     )
     return {
+        **_v25_observability_dimensions(selected),
         "completion_ordinal": int(ordinal + 1),
         "candidate_id": candidate_id,
         "candidate_spec_sha256": str(selected["candidate_spec_sha256"]),
@@ -2051,6 +2072,7 @@ def _v24_write_candidate_projection(
         )
     )
     return {
+        **_v25_observability_dimensions(selected),
         "completion_ordinal": int(ordinal + 1),
         "candidate_id": candidate_id,
         "candidate_spec_sha256": str(selected["candidate_spec_sha256"]),
