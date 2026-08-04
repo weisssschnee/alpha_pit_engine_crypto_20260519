@@ -4,6 +4,39 @@ Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_MILESTONE_RECORDED_NOT_RUN`
+
+The Search Run Evidence Contract V1 milestone is accepted and audited at source
+HEAD `815f054fe92050ce04197874246cbe838a7d7f89`. It does not create a new
+failure-attribution framework. It consolidates the existing target authority,
+CandidateSpec exposure, arm productivity, matched controls, Behavior Archive,
+V2.5 provenance, economic waterfall, validation roles, and reward diagnostics
+into one evidence requirement for a future separately authorized real search.
+
+The audit confirms that most evidence authorities already exist. The principal
+unobserved links are realized semantic-axis participation, condition occupancy,
+candidate-family joins across mechanism/matched/behavior/economic stages, and
+real V2.5 behavior-provenance rows. Stability evidence remains partition- and
+authorization-dependent. Missing or unauthorized evidence must be recorded as
+`NOT_OBSERVED`, `NOT_APPLICABLE`, or `NOT_AUTHORIZED`, never as zero or failure.
+
+The milestone records sixteen non-duplicate questions covering cost fidelity,
+information decay, actual exposure, optimizer concentration and useful yield,
+axis realization, condition occupancy, matched increment, operator basis,
+behavior reconvergence, lineage novelty, field-cluster increment, economic kill
+stage, mapping/execution tradeoff, migration, and reward alignment. The canonical
+audit is
+`reports/CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_AUDIT_20260804.md`.
+
+Milestone completion means the contract and deduplicated question set are
+accepted. Search capability completion remains pending until a separately
+authorized run produces at least one joined real observation and passes an
+independent checker. This milestone authorizes no market read, historical replay,
+search, tuning, reseed, rescue, optimizer change, OOS, promotion, new grammar,
+new evaluator, new platform, or new Graph node.
+
+The preceding source implementation record was:
+
 `CRYPTO_SEARCH_ENGINE_V2_5_BEHAVIOR_PROVENANCE_CENSUS_CONSUMER_IMPLEMENTED_NO_REPLAY`
 
 Source commits `e9f5d629`, `d66421cc`, `8be18c91`, `8f457091`,
@@ -1005,10 +1038,15 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Wait for a separately authorized future Search Engine run. Its ordinary
-candidate-evaluation receipts may populate the V2.5 diagnostic schema, after
-which this consumer can report mutually exclusive degeneracy stages and the
-full policy funnel without influencing search. Historical stage-attribution
-replay remains unauthorized. No market search, prior-state import, tuning,
-reseed, rescue, holdout/OOS/challenge/forward read, latent/relational training,
-promotion, or subsequent Arena is authorized by this closure.
+Do not build a standalone Failure Attribution Framework or run another generic
+validation. Before any separately authorized future Search Engine run, translate
+the accepted evidence contract into the smallest run-local schema additions and
+freeze which of the sixteen questions that run can answer. Reuse the existing
+target preflight, CandidateSpec, matched evaluator, Behavior Archive, V2.5
+provenance, waterfall, checkpoint, and ledger authorities. Require at least one
+real joined observation before claiming the contract is implemented in research.
+
+Historical stage-attribution replay remains unauthorized. No market search,
+prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,
+latent/relational training, promotion, or subsequent Arena is authorized by this
+milestone.
