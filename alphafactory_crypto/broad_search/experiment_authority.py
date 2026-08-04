@@ -594,8 +594,25 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED",
         },
-        "expected_run_outcome": {},
+        "expected_run_outcome": {
+            "status": "ENGINE_VERIFICATION_FAILED",
+            "reason": "LEDGER_EVIDENCE_COLUMNS_MISSING",
+            "runtime": "runtime/crypto_search_run_evidence_v1_20260804",
+            "producer_source_sha": (
+                "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c"
+            ),
+            "generation_attempts": 12_034,
+            "strict_evaluated_count": 8_000,
+            "checkpoint": "checkpoint_003",
+            "artifact_bundle_sha256": (
+                "04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF"
+            ),
+            "checker_result": "FAIL",
+            "sealed_reads": 0,
+            "rescue_rerun_started": False,
+        },
         "run_authorization_scope": (
             "ONE_FRESH_STATE_8000_STRICT_DEVELOPMENT_EVIDENCE_RUN"
         ),
@@ -828,6 +845,7 @@ def _validate_search_economic_receipt(
         "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
         "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
         "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED",
     }
     if status not in receipt_spec["allowed_statuses"]:
         blockers.append("status")

@@ -4,36 +4,41 @@ Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_MILESTONE_RECORDED_NOT_RUN`
+`CRYPTO_SEARCH_RUN_EVIDENCE_V1_COMPLETE_ENGINE_VERIFICATION_FAILED`
 
-The Search Run Evidence Contract V1 milestone is accepted and audited at source
-HEAD `815f054fe92050ce04197874246cbe838a7d7f89`. It does not create a new
-failure-attribution framework. It consolidates the existing target authority,
-CandidateSpec exposure, arm productivity, matched controls, Behavior Archive,
-V2.5 provenance, economic waterfall, validation roles, and reward diagnostics
-into one evidence requirement for a future separately authorized real search.
+The one-time fresh-state development run is consumed and closed. Producer
+`fea74611c491d2d9a77d8013bc6cdaf427b4fd8c` completed exactly 8,000 strict
+candidates from 12,034 generation attempts on the existing 115-field aligned
+OI/mark plus aggTrades carrier. All four 2,000-candidate checkpoints were
+atomically published and restore-verified; the run used 10 workers, stayed under
+the frozen eight-hour and 50,000-attempt limits, read no validation, OOS, or
+holdout partition, and started no rescue run.
 
-The audit confirms that most evidence authorities already exist. The principal
-unobserved links are realized semantic-axis participation, condition occupancy,
-candidate-family joins across mechanism/matched/behavior/economic stages, and
-real V2.5 behavior-provenance rows. Stability evidence remains partition- and
-authorization-dependent. Missing or unauthorized evidence must be recorded as
-`NOT_OBSERVED`, `NOT_APPLICABLE`, or `NOT_AUTHORIZED`, never as zero or failure.
+The passive evidence artifacts are non-empty: 9,769 proposal-attribution rows,
+1,769 control-degenerate rows, 63 exposure strata, and 786 compiled mechanisms.
+Observed degeneracy is concentrated at SIGNAL, RANK, and SELECTION. These rows
+are diagnostic only and were not used by reward, optimizer, or Behavior Archive
+identity.
 
-The milestone records sixteen non-duplicate questions covering cost fidelity,
-information decay, actual exposure, optimizer concentration and useful yield,
-axis realization, condition occupancy, matched increment, operator basis,
-behavior reconvergence, lineage novelty, field-cluster increment, economic kill
-stage, mapping/execution tradeoff, migration, and reward alignment. The canonical
-audit is
-`reports/CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1_AUDIT_20260804.md`.
+The independent PC2 checker and the independent local checker both return
+`FAIL` with artifact bundle SHA256
+`04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF`.
+The final 8,000-row candidate ledger lacks the seven required joined evidence
+columns: control-degeneracy JSON/hash, mechanism-realization JSON/hash,
+declared-axis count, active-axis count, and realization status. Therefore the
+run proves checkpoint/replay execution and non-empty side evidence, but it does
+not close the candidate-level Search Run Evidence Contract V1 chain and cannot
+support optimizer, mechanism, mapping, reward, Alpha, validation, OOS, or
+promotion conclusions.
 
-Milestone completion means the contract and deduplicated question set are
-accepted. Search capability completion remains pending until a separately
-authorized run produces at least one joined real observation and passes an
-independent checker. This milestone authorizes no market read, historical replay,
-search, tuning, reseed, rescue, optimizer change, OOS, promotion, new grammar,
-new evaluator, new platform, or new Graph node.
+The receipt status is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
+`run_authorized=false`. No rerun, reseed, tuning, historical inference,
+search-policy change, reward change, mapping change, OOS, promotion, new Arena,
+or new Graph node is authorized. Canonical evidence is
+`runtime/crypto_search_run_evidence_v1_20260804/independent_terminal_check.json`;
+the original run report remains an immutable producer artifact and must be read
+together with this failed independent check.
 
 The preceding source implementation record was:
 

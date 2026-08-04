@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_RUN_EVIDENCE_V1_RECEIPT",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_SEARCH_RUN_EVIDENCE_V1_20260804",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -18,7 +18,19 @@
     "validation_allowed": false,
     "oos_allowed": false
   },
-  "run_outcome": {},
+  "run_outcome": {
+    "status": "ENGINE_VERIFICATION_FAILED",
+    "reason": "LEDGER_EVIDENCE_COLUMNS_MISSING",
+    "runtime": "runtime/crypto_search_run_evidence_v1_20260804",
+    "producer_source_sha": "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c",
+    "generation_attempts": 12034,
+    "strict_evaluated_count": 8000,
+    "checkpoint": "checkpoint_003",
+    "artifact_bundle_sha256": "04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF",
+    "checker_result": "FAIL",
+    "sealed_reads": 0,
+    "rescue_rerun_started": false
+  },
   "market": {
     "asset_class": "CRYPTO",
     "calendar": "CONTINUOUS_UTC"

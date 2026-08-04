@@ -96,14 +96,33 @@ def test_evidence_campaign_reuses_v23_policy_with_new_fresh_seeds() -> None:
     assert config["boundaries"]["search_policy_change"] is False
 
 
-def test_evidence_campaign_receipt_is_hash_bound_and_authorized_once() -> None:
+def test_evidence_campaign_receipt_is_consumed_after_verification_failure() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_run_evidence_v1_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED"
+    )
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "LEDGER_EVIDENCE_COLUMNS_MISSING",
+        "runtime": "runtime/crypto_search_run_evidence_v1_20260804",
+        "producer_source_sha": (
+            "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c"
+        ),
+        "generation_attempts": 12_034,
+        "strict_evaluated_count": 8_000,
+        "checkpoint": "checkpoint_003",
+        "artifact_bundle_sha256": (
+            "04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF"
+        ),
+        "checker_result": "FAIL",
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["runner_campaign"] == (
         SEARCH_EVIDENCE_V1_CAMPAIGN
     )

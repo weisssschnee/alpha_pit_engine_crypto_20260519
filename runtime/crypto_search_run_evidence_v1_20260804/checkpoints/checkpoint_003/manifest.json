@@ -1,0 +1,95 @@
+{
+  "archive_state_sha256": "461AC75E7713B518B1DFD5CFDE61465373BBCDD0B97C05D0F155C1DA6C97E910",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_003",
+  "checkpoint_index": 3,
+  "compiler_identity": {
+    "bundle_sha256": "BA493B6C9C9D2D9AB8F712B954362007282493F972BF4AB69C41E2D5D3E57643",
+    "paths": [
+      {
+        "bytes": 55404,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "E27B8296AD1A6239A21F406F19DDBF86EA53BA0FFD9A3BB7B7A9418B8C4568A4"
+      },
+      {
+        "bytes": 24801,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "4D6A71912470A78547FC533825F70FB94DEED534E7892B535E5B1FC3102C090F"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 87685,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "9FF4C51217B8609E18EB5D93AEF7DAC804366ABD6031E5A37978C76AB7615477"
+      },
+      {
+        "bytes": 93868,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "EC2FF86E84A876D9C70FF8CFF7B6CD7A8153068773303A1FF2E0E29BFEBA9D1F"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 945774,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "A672E0474B5608874A8C92E67D5EC8A9937E3F2A323A5AC3F2EE1C6699B971CB"
+      },
+      {
+        "bytes": 35617,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "31541B6DE35AC7E96DC847709D1CF58516D3FC9035B2CFBDF8DC9B9291242641"
+      }
+    ]
+  },
+  "completed_identity_sha256": "1541764388284949A94AF74DE8CAC8FA9463E99501D42E7F64AEA3A03DB915D7",
+  "completed_ledger_row_count": 8000,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 43180,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "D22829D3B6CCAC5B827F7303F865DAABBE5164429E09A21E4027318B5FD44CDC"
+    },
+    {
+      "bytes": 7257987,
+      "name": "behavior_archive.parquet",
+      "sha256": "E042D7E2075B70893BC2A3627F3EDB72E027CD13AE6A29FB4DD24C9AE4C1279E"
+    },
+    {
+      "bytes": 40764643,
+      "name": "candidate_ledger.parquet",
+      "sha256": "5F64ACAEF8200E070E444432052F4F0B06569382C74D2154921ECEDB46F2A620"
+    },
+    {
+      "bytes": 42343635,
+      "name": "state.json",
+      "sha256": "6434AD2C5CFF407A5CA27771239C6670FCF7311597CD4A01A98F65D7B66FA5ED"
+    }
+  ],
+  "frozen_contract_sha256": "964800501F454F605CCF22563B88494E52855EA754CC8D6E8C263DA6262D575E",
+  "policy_state_sha256": "2B6B7A6CBA762D72ECC48A0285E5C5DA032E4183DE8C0DD89C3F00F29D384D4D",
+  "receipt_count": 3936,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c",
+  "state_sha256": "3E0E46DFF3FC2E8C07C183F73D90D711FFD87C1EA9C6D23F3B782F09357A2C9F",
+  "validation_arm_metric_row_count": null,
+  "validation_candidate_row_count": null,
+  "validation_cohort_path_row_count": null,
+  "validation_decisions_sha256": null
+}

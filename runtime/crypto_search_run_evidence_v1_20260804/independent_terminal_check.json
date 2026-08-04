@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "result": "FAIL",
+  "engineering_integrity": "FAIL",
+  "checker": "alphafactory_crypto.broad_search.search_engine_v1.check_search_evidence_v1",
+  "pc2_exit_code": 1,
+  "local_exit_code": 1,
+  "pc2_local_results_equal": true,
+  "producer_source_sha": "fea74611c491d2d9a77d8013bc6cdaf427b4fd8c",
+  "artifact_bundle_sha256": "04FB3B25295F44C741333431904A0FDED064CCA1D122A9EEEEE40D1C3C76B2CF",
+  "strict_evaluated_count": 8000,
+  "behavior_attributed_proposal_count": 9769,
+  "control_degenerate_count": 1769,
+  "compiled_mechanism_count": 786,
+  "checkpoint_count": 4,
+  "sealed_reads": 0,
+  "errors": [
+    "ledger_evidence:control_degeneracy_provenance_json",
+    "ledger_evidence:control_degeneracy_provenance_sha256",
+    "ledger_evidence:mechanism_realization_json",
+    "ledger_evidence:mechanism_realization_sha256",
+    "ledger_evidence:declared_axis_count",
+    "ledger_evidence:active_axis_count",
+    "ledger_evidence:mechanism_realization_status"
+  ],
+  "interpretation": "The frozen run completed, but the joined final candidate ledger does not satisfy Search Run Evidence Contract V1. No rerun, historical inference, policy change, OOS, or promotion is authorized."
+}
