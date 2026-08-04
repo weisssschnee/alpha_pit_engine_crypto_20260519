@@ -4,7 +4,41 @@ Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_4_REPAIR_REPLAY_COMPLETE_HOLD`
+`CRYPTO_SEARCH_ENGINE_V2_4_CONTROL_DEGENERACY_PROVENANCE_IMPLEMENTED_NO_REPLAY`
+
+Source commits `1ba4a36ef13fefaa7296bd7217af3c17b16d6c87`,
+`6435cb909d1c55a8e7ec42a120c016168ac52c42`, and
+`f5cee4bfc65634735393956d7b9a881a069b30e6` add an
+opt-in, read-only control-degeneracy provenance projection to the existing
+mapping and pair-evaluation authorities. It records the raw expression signal
+separately from the frozen-train-oriented mapping input, then records only
+mapping-defined rank, normalized-score, selection, raw-weight, capped-weight,
+mapped-weight, and executable-weight identities. `first_equal_stage` is the
+earliest observed stage from which every later mapping-defined identity remains
+equal. Signal distribution, finite support, cross-sectional dispersion, rank
+entropy, rank correlation, top/bottom overlap, and long/short set overlap are
+diagnostic only; target, IC, gross, net, turnover, cost, and reward are excluded
+from the identity.
+
+The existing `CONTROL_BEHAVIOR_EQUALS_PRIMARY`, right-axis, and hierarchical
+AB-left-control exact-weight kill-lines are unchanged. V2.4 workers validate
+the provenance schema, stages, labels, failure reason, exact canonical hash,
+and final equality before persisting a candidate/spec-bound envelope. Enabling
+the projection leaves weights, feasibility, transition reasons, diagnostics,
+reward, and evaluation authority unchanged. Verification is source-only and
+synthetic: 417 tests pass with the existing NumPy warning. No candidate was
+generated or replayed, no July data was reread, and no optimizer, archive,
+policy memory, OOS, promotion, or new Arena was started.
+
+The completed July repair ledger is now interpreted more precisely: all 512
+candidate specs passed static typed reconstruction; 140 reached strict matched
+cost evaluation, while 367 mapped primary/control pairs and five hierarchical
+AB/left-control pairs became exactly weight-identical. The persisted historical
+rows do not contain the new intermediate fingerprints, so they cannot be
+retroactively assigned to SIGNAL, RANK, SELECTION, CAP, or MAPPING without a
+separately authorized exact-cohort replay. Evolution's higher reward among 40
+survivors remains conditional on a 15.6% evaluation-reachability rate versus
+random's 39.1%; it is not an unconditional policy-productivity win.
 
 The separately authorized V2.4 repair replay is consumed and closed. It reused
 the exact frozen July 1-18 cohort: 512 candidate identities in the original
@@ -18,7 +52,8 @@ The unique 10-worker PC2 evaluation source
 `ecf951c179abc5a29e19ab840f878d0cc97ccd1f` completed all 512 source
 ordinals and eight exact 64-candidate checkpoints. Known control/support
 degeneracies were persisted candidate-locally: 140 candidates completed strict
-matched cost evaluation and 372 failed constructibility. The initial terminal
+matched cost evaluation and 372 became behaviorally non-distinct from a required
+control on the fresh window. The initial terminal
 aggregation correctly stopped because one arm had zero strict candidates in
 one seed-horizon cell; finalizer
 `0a25183f79350b19bc8ae961e8df12fa815c12f8` treated that cell as an
@@ -28,7 +63,8 @@ checkpoints, without market re-evaluation.
 Independent PC2 and local checkers pass with artifact bundle SHA256
 `85430B0965A88ADF64FE0F81B1168FF23D038C4454DD638D6C7E9241A008C18B`.
 The repair replay contains 510 behavior families and zero strict matched-positive
-candidates. Evolution beats typed random on equal-count mean pair reward by
+candidates. Among the strict-evaluated survivors, Evolution beats typed random
+on equal-count mean pair reward by
 `2.747134383772` and on mean matched net at 5 bps by `0.000063753316`, but
 neither arm qualifies because matched-positive count is zero. These are fresh
 validation diagnostics only: economic Alpha remains HOLD, and no OOS,
@@ -938,7 +974,9 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Stop after Git and CURRENT Graph closure. No further market search, V2
-validation rerun, V2.1 validation, prior-state import, tuning, reseed, rescue,
-holdout/OOS/challenge/forward read, latent/relational training, promotion, or
-subsequent Arena is authorized.
+Close the source-only provenance change in Git and the existing CURRENT Search
+Engine node. The exact 512-candidate stage-attribution replay is not authorized
+by this source repair; it would require a separate frozen same-cohort receipt
+and must generate no candidates or adaptive feedback. No further market search,
+prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,
+latent/relational training, promotion, or subsequent Arena is authorized.

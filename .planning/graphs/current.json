@@ -13,7 +13,9 @@
       "evidence": {
         "changed_paths": [
           ".planning/STATE.md",
+          "alphafactory_crypto/broad_search/pair18m.py",
           "alphafactory_crypto/broad_search/search_engine_v2_4.py",
+          "alphafactory_crypto/instrument_capability/mapping.py",
           "config/crypto_search_engine_v2_4_repair_replay_receipt.json",
           "reports/CRYPTO_SEARCH_ENGINE_V2_4_20260804.md",
           "runtime/crypto_search_engine_v2_4_repair_replay_20260804/aligned_carrier_manifest.json",
@@ -33,10 +35,12 @@
           "runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json",
           "runtime/crypto_search_engine_v2_4_repair_replay_20260804/producer_status.json",
           "runtime/crypto_search_engine_v2_4_repair_replay_20260804/run_manifest.json",
-          "tests/test_crypto_search_engine_v2_4_behavior_family.py"
+          "tests/test_crypto_search_authority_alignment.py",
+          "tests/test_crypto_search_engine_v2_4_behavior_family.py",
+          "tests/test_instrument_capability_primitives_mapping.py"
         ],
         "raw_sha": "75c7d3abf39223fe12034e42cfa9b880eb45624b",
-        "repo_head": "6d7d607a51853a4950f1d7993be37dc25b5eda46"
+        "repo_head": "f5cee4bfc65634735393956d7b9a881a069b30e6"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1118,7 +1122,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-04T02:36:20.309674+00:00",
+  "generated_at": "2026-08-04T04:12:07.818125+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3266,6 +3270,15 @@
         },
         {
           "bypass_forbidden": true,
+          "enforced_by": "instrument_capability.mapping.map_portfolio, broad_search.pair18m.evaluate_pair, broad_search.search_engine_v2_4 worker projections, and focused parity/tamper tests",
+          "evidence_ref": ".planning/STATE.md",
+          "id": "crypto_search_v2_4_control_degeneracy_provenance",
+          "rule": "Source 1ba4a36ef13fefaa7296bd7217af3c17b16d6c87 plus fail-closed completions 6435cb909d1c55a8e7ec42a120c016168ac52c42 and f5cee4bfc65634735393956d7b9a881a069b30e6 add opt-in control-degeneracy provenance without changing mapping outputs, pair reward, or exact behavior-equality kill-lines. The projection distinguishes raw expression signal from frozen-train-oriented mapping input; records only stages that exist in the current mapping authority; identifies the earliest stable equality stage; excludes target, IC, economic outcomes, cost, and reward; and binds worker provenance to the candidate ID and CandidateSpec hash after canonical schema/hash/failure validation. Successful V2.4 rows require an explicit strict-boolean hierarchy marker and the exact binary or hierarchical comparison set. The historical 512-candidate July artifacts are not rewritten and no replay, candidate generation, adaptive feedback, OOS, promotion, or new Arena is authorized by this source-only capability.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -3389,6 +3402,7 @@
         "alphafactory_crypto/broad_search/compositional18m.py",
         "alphafactory_crypto/broad_search/audit.py",
         "alphafactory_crypto/broad_search/pair18m.py",
+        "alphafactory_crypto/instrument_capability/mapping.py",
         "alphafactory_crypto/broad_search/panel18m.py",
         "config/crypto_search_economic_receipt_v1.json",
         "config/crypto_search_economic_receipt_v2.json",
@@ -4231,6 +4245,43 @@
         "alphafactory_crypto_data_admission_v1_write_json",
         "alphafactory_crypto_data_admission_v1_write_parquet",
         "alphafactory_crypto_data_admission_v1_write_raw_panel_store",
+        "alphafactory_crypto_instrument_capability_evidence_mapping",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_assert_close",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_counterfactual_signal",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_hash_array",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_json_array",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_mapping_cost_counterfactual_payload",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_mapping_synthetic_behavior_payload",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_mapping_turnover_rows",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_math_isclose",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_rationale_1",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_rationale_292",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_rationale_363",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_rationale_68",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_reason_count",
+        "alphafactory_crypto_instrument_capability_evidence_mapping_sum",
+        "alphafactory_crypto_instrument_capability_mapping",
+        "alphafactory_crypto_instrument_capability_mapping_average_ranks",
+        "alphafactory_crypto_instrument_capability_mapping_capped_allocation",
+        "alphafactory_crypto_instrument_capability_mapping_capped_allocation_columns",
+        "alphafactory_crypto_instrument_capability_mapping_cross_sectional",
+        "alphafactory_crypto_instrument_capability_mapping_direct_signal_reference",
+        "alphafactory_crypto_instrument_capability_mapping_directional",
+        "alphafactory_crypto_instrument_capability_mapping_map_portfolio",
+        "alphafactory_crypto_instrument_capability_mapping_mapping_contract_payload",
+        "alphafactory_crypto_instrument_capability_mapping_mapping_contract_sha256",
+        "alphafactory_crypto_instrument_capability_mapping_mappingcontract",
+        "alphafactory_crypto_instrument_capability_mapping_mappingcontract_to_dict",
+        "alphafactory_crypto_instrument_capability_mapping_mappingresult",
+        "alphafactory_crypto_instrument_capability_mapping_matrix",
+        "alphafactory_crypto_instrument_capability_mapping_portfolio_series",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_1",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_134",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_161",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_410",
+        "alphafactory_crypto_instrument_capability_mapping_sparse",
+        "alphafactory_crypto_instrument_capability_mapping_turnover_decomposition",
+        "alphafactory_crypto_instrument_capability_mapping_validate_direct_weights",
         "archive_deprecated_crypto_a7_20260527_scripts_scripts_crypto_a2_5_linkage_and_placebo_audit",
         "archive_deprecated_crypto_a7_20260527_scripts_scripts_crypto_a2_5_linkage_and_placebo_audit_ann_return",
         "archive_deprecated_crypto_a7_20260527_scripts_scripts_crypto_a2_5_linkage_and_placebo_audit_audit_baseline_ablation",
@@ -5397,6 +5448,24 @@
         "tests_test_crypto_search_v2_3_oos_policy_bias_audit",
         "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_effective_rank_detects_duplicates",
         "tests_test_crypto_search_v2_3_oos_policy_bias_audit_test_v23_oos_policy_bias_audit_helpers_are_deterministic",
+        "tests_test_instrument_capability_primitives_mapping",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_contract_has_exact_requested_primitive_authority",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_delta_slope_and_acceleration_invariants",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_event_window_counts_events_not_occupancy",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_missing_segment_resets_stateful_primitives",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_path_shape_is_not_multiscale_alias",
+        "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_state_age_time_since_last_hit_and_duration_do_not_collapse",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_cap_property_with_ties_and_missing_values",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_cross_sectional_cap_is_true_on_final_weights",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_cross_sectional_deletes_but_directional_preserves_common_mode",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_directional_hysteresis_holds_then_exits",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_mapping_identity_changes_with_contract",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_sparse_singleton_event_is_preserved_and_exits",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_synthetic_evidence_checks_final_caps_for_all_mappings",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_turnover_decomposition_and_full_l1_cost",
+        "tests_test_instrument_capability_primitives_mapping_explicitmappingtests_test_unknown_mapping_is_rejected",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_chain_gate_inventory",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_classify_occurrence",
@@ -5430,7 +5499,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-04T02:36:20.309674+00:00",
+        "checked_at": "2026-08-04T04:12:07.818125+00:00",
         "evidence_ref": "runtime/crypto_search_engine_v2_4_repair_replay_20260804/independent_terminal_check.json",
         "evidence_sha256": "9A01C6C3F67871035A783C7045838DF048C260558C9C22E32D06401CA2903FF0",
         "level": "PARTIAL",
@@ -7341,10 +7410,7 @@
         "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
-        "HELD-OUT CALIBRATION VERIFIED",
-        "UNPURGED EVIDENCE SUPERSEDED",
-        "ECONOMIC INCREMENT NOT ESTABLISHED",
-        "NO OOS"
+        "HELD-OUT CALIBRATION VERIFIED"
       ],
       "color": "#2e7d32",
       "contracts": [
@@ -7698,7 +7764,7 @@
       "required": false,
       "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-08-04T02:36:20.309674+00:00",
+        "checked_at": "2026-08-04T03:53:48.109920+00:00",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
         "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
         "level": "PARTIAL",
@@ -8296,7 +8362,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "B8935C1B97F8A947FA301955CE31797231A5743081D7B1E39B96F74B966CC63A"
+    "sha256": "EA73644D632ACD4FB9A1C16BBDEEBC34D16AF19C8F60944953CC87786097D176"
   },
   "profile_id": null,
   "profiles": [
@@ -8333,7 +8399,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "9E3997A7AA0B9DBA2B4757E79E0FE3F8AB72E3C4CD5AF7DEDC29A346978ABB40"
   },
-  "repo_head": "6d7d607a51853a4950f1d7993be37dc25b5eda46",
+  "repo_head": "f5cee4bfc65634735393956d7b9a881a069b30e6",
   "schema_version": 1,
   "semantic_authorities": [
     {

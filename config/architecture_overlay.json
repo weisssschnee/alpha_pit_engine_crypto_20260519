@@ -406,6 +406,7 @@
                                     "alphafactory_crypto/broad_search/compositional18m.py",
                                     "alphafactory_crypto/broad_search/audit.py",
                                     "alphafactory_crypto/broad_search/pair18m.py",
+                                    "alphafactory_crypto/instrument_capability/mapping.py",
                                     "alphafactory_crypto/broad_search/panel18m.py",
                                     "config/crypto_search_economic_receipt_v1.json",
                                     "config/crypto_search_economic_receipt_v2.json",
@@ -701,6 +702,15 @@
                                             "enforced_by":  "broad_search.search_engine_v2_4, broad_search.pair18m.evaluate_pair, config/crypto_search_engine_v2_4_behavior_family.json, and ADR 0022",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_engine_v2_4_repair_replay_20260804/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_v2_4_control_degeneracy_provenance",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "Source 1ba4a36ef13fefaa7296bd7217af3c17b16d6c87 plus fail-closed completions 6435cb909d1c55a8e7ec42a120c016168ac52c42 and f5cee4bfc65634735393956d7b9a881a069b30e6 add opt-in control-degeneracy provenance without changing mapping outputs, pair reward, or exact behavior-equality kill-lines. The projection distinguishes raw expression signal from frozen-train-oriented mapping input; records only stages that exist in the current mapping authority; identifies the earliest stable equality stage; excludes target, IC, economic outcomes, cost, and reward; and binds worker provenance to the candidate ID and CandidateSpec hash after canonical schema/hash/failure validation. Successful V2.4 rows require an explicit strict-boolean hierarchy marker and the exact binary or hierarchical comparison set. The historical 512-candidate July artifacts are not rewritten and no replay, candidate generation, adaptive feedback, OOS, promotion, or new Arena is authorized by this source-only capability.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "instrument_capability.mapping.map_portfolio, broad_search.pair18m.evaluate_pair, broad_search.search_engine_v2_4 worker projections, and focused parity/tamper tests",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  ".planning/STATE.md"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
