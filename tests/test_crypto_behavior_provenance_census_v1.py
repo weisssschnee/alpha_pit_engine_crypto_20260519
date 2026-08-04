@@ -176,6 +176,14 @@ def test_v25_contract_is_observability_only() -> None:
         "legacy_final_equal_count": 372,
         "first_equal_stage": None,
     }
+    assert "control_degeneracy_provenance_json" in contract[
+        "required_provenance_ledger_columns"
+    ]
+    assert set(contract["output_schemas"]) == {
+        "candidate_behavior_provenance.parquet",
+        "degeneracy_stage_counts.parquet",
+        "search_policy_funnel.parquet",
+    }
 
 
 def test_v25_authoritative_legacy_closure_is_hash_bound_and_unknown() -> None:

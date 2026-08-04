@@ -22,7 +22,7 @@ import pandas as pd
 
 CONTRACT_PATH = "config/crypto_behavior_provenance_census_v1.json"
 CONTRACT_CANONICAL_SHA256 = (
-    "BD850591B32BA46B2BC56626C3A70DF647E15B56228D8CE599512B7DA37D9AFB"
+    "D9C5DBCEF8F64340DFC8AD0EB8CE013B0854B5B476977FC67337035D93488864"
 )
 BOUND_SCHEMA = "CRYPTO_V24_BOUND_CONTROL_PROVENANCE_V1"
 PAIR_SCHEMA = "CRYPTO_PAIR_CONTROL_PROVENANCE_V1"
@@ -202,8 +202,12 @@ def _validate_source_manifest(
     for key in ("producer_source_sha", "finalizer_source_sha"):
         if not _git_commit_exists(repo_root, str(manifest.get(key) or "")):
             raise ValueError(f"SOURCE_MANIFEST_COMMIT_INVALID:{key}")
+    try:
+        portable_manifest_path = str(manifest_path.relative_to(repo_root.resolve()))
+    except ValueError:
+        portable_manifest_path = str(manifest_path)
     return {
-        "source_manifest_path": str(manifest_path),
+        "source_manifest_path": portable_manifest_path,
         "source_manifest_sha256": _file_sha256(manifest_path),
         "producer_source_sha": str(manifest["producer_source_sha"]),
         "finalizer_source_sha": str(manifest["finalizer_source_sha"]),
