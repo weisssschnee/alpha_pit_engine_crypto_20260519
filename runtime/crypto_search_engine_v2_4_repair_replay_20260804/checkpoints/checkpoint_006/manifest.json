@@ -1,0 +1,23 @@
+{
+  "candidate_local_failure_count": 309,
+  "checkpoint_candidate_count": 64,
+  "checkpoint_index": 6,
+  "checkpoint_strict_evaluated_count": 0,
+  "completed_candidate_count": 448,
+  "files": [
+    {
+      "bytes": 37662,
+      "path": "candidate_ledger.parquet",
+      "sha256": "64897CF110D7F4B127992ABBF398F32F642FC1A5E58CA9A33341E599E87E3266"
+    }
+  ],
+  "frozen_contract_sha256": "80909E8E267ACFD67472B0E6D9DFE8D93199376EACDC801FE3319BEF5CA4E761",
+  "manifest_sha256": "9150C41AE955E46D073F2C254A4AFF0C1791E04C0EC94076EF56ABF1B6F71B45",
+  "memory_fallback_used": false,
+  "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+  "schema_version": 1,
+  "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+  "status": "V24_CHECKPOINT_COMPLETE",
+  "strict_evaluated_count": 139,
+  "workers": 10
+}

@@ -1,33 +1,42 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-03 Asia/Hong_Kong
+Last updated: 2026-08-04 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V2_4_ENGINE_VALIDATION_BLOCKED_CLOSED`
+`CRYPTO_SEARCH_ENGINE_V2_4_REPAIR_REPLAY_COMPLETE_HOLD`
 
-The single authorized V2.4 fresh-family gate is consumed and closed. July
-aggTrades acquisition and independent TAR-content verification passed, and the
-new July 1-18 aligned carrier independently qualified with 115 fields (71
-OI/mark plus 44 aggTrades), a Binance USD-M target, dynamic eligibility,
-PIT/lag identities, and no missing-value fill. The selection receipt was
-frozen before fresh-data access with exactly 512 unique candidates, 64 in each
-of eight arm-seed-horizon cells.
+The separately authorized V2.4 repair replay is consumed and closed. It reused
+the exact frozen July 1-18 cohort: 512 candidate identities in the original
+order, the same two seeds and 1h/4h horizons, the qualified 115-field carrier
+(71 OI/mark plus 44 aggTrades), Binance USD-M target, and 5/10 bps cost paths.
+It generated, replaced, or backfilled no candidate and imported no adaptive
+state. A pre-market static sweep reconstructed all 512 candidate specs through
+the existing typed compiler.
 
-The unique 10-worker PC2 producer at
-`83a38d56fc2b362aed65ba246ea3fbd7993dfc4a` failed closed on frozen
-candidate ordinal 0 (`949A5E2E...40D37`) with
-`CONTROL_BEHAVIOR_EQUALS_PRIMARY`. It stopped before any strict evaluation or
-checkpoint: strict evaluated `0`, checkpoints `0`, memory fallback unused.
-Independent PC2 and local checkers both pass the blocked terminal state. No
-candidate was substituted or backfilled, and no generation, optimizer
-feedback, policy/archive memory, OOS read, promotion, tuning, reseed, rescue,
-or second search occurred. This is a validation-constructibility block only;
-it is not a negative conclusion about the carrier, fields, behavior families,
-or crypto Alpha space. No arm qualified.
+The unique 10-worker PC2 evaluation source
+`ecf951c179abc5a29e19ab840f878d0cc97ccd1f` completed all 512 source
+ordinals and eight exact 64-candidate checkpoints. Known control/support
+degeneracies were persisted candidate-locally: 140 candidates completed strict
+matched cost evaluation and 372 failed constructibility. The initial terminal
+aggregation correctly stopped because one arm had zero strict candidates in
+one seed-horizon cell; finalizer
+`0a25183f79350b19bc8ae961e8df12fa815c12f8` treated that cell as an
+equal comparison count of zero and assembled artifacts only from the existing
+checkpoints, without market re-evaluation.
 
-The one-time V2.4 receipt now has
-`RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED` and
+Independent PC2 and local checkers pass with artifact bundle SHA256
+`85430B0965A88ADF64FE0F81B1168FF23D038C4454DD638D6C7E9241A008C18B`.
+The repair replay contains 510 behavior families and zero strict matched-positive
+candidates. Evolution beats typed random on equal-count mean pair reward by
+`2.747134383772` and on mean matched net at 5 bps by `0.000063753316`, but
+neither arm qualifies because matched-positive count is zero. These are fresh
+validation diagnostics only: economic Alpha remains HOLD, and no OOS,
+promotion, challenge, new Arena, tuning, reseed, rescue, optimizer feedback,
+policy/archive memory, or second search is authorized.
+
+The one-time repair receipt now has
+`RUN_AUTHORIZATION_CONSUMED_REPAIR_REPLAY_COMPLETE` and
 `run_authorized=false`.
 
 The preceding source implementation record was:

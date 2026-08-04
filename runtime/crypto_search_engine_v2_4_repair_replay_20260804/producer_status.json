@@ -1,0 +1,21 @@
+{
+  "active_wall_seconds": 4.4622619999572635,
+  "archive_written": false,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 372,
+  "checkpoint": "checkpoint_007",
+  "completed_candidate_count": 512,
+  "frozen_contract_sha256": "80909E8E267ACFD67472B0E6D9DFE8D93199376EACDC801FE3319BEF5CA4E761",
+  "heartbeat_utc": "2026-08-04T02:17:15.358950+00:00",
+  "memory_fallback_used": false,
+  "optimizer_feedback_written": false,
+  "pair_evaluated_per_hour": 112947.20032235376,
+  "policy_memory_written": false,
+  "producer_pid": 8044,
+  "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+  "schema_version": 1,
+  "source_candidate_count": 512,
+  "status": "V24_REPAIR_REPLAY_COMPLETE",
+  "strict_evaluated_count": 140,
+  "workers": 10
+}

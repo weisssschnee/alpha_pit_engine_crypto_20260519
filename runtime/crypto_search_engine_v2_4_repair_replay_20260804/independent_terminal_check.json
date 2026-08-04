@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "PASS_V24_REPAIR_REPLAY_INDEPENDENT_CHECK",
+  "pc2_checked_at": "2026-08-04T02:17:17.3586110Z",
+  "local_checked_at": "2026-08-04T02:22:26.4874694Z",
+  "pc2_task_id": "job_20260804_101701_42813b",
+  "evaluation_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+  "finalizer_source_sha": "0a25183f79350b19bc8ae961e8df12fa815c12f8",
+  "artifact_bundle_sha256": "85430B0965A88ADF64FE0F81B1168FF23D038C4454DD638D6C7E9241A008C18B",
+  "source_candidate_count": 512,
+  "strict_evaluated_count": 140,
+  "candidate_local_failure_count": 372,
+  "behavior_family_count": 510,
+  "checkpoint_count": 8,
+  "matched_positive_count": 0,
+  "arm_qualified": [],
+  "promotion_authorized": false,
+  "pc2_and_local_results_equal": true
+}

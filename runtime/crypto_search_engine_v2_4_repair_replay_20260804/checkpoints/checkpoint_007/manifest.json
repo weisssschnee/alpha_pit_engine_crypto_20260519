@@ -1,0 +1,38 @@
+{
+  "candidate_local_failure_count": 372,
+  "checkpoint_candidate_count": 64,
+  "checkpoint_index": 7,
+  "checkpoint_strict_evaluated_count": 1,
+  "completed_candidate_count": 512,
+  "files": [
+    {
+      "bytes": 38501,
+      "path": "candidate_ledger.parquet",
+      "sha256": "2454AA2089099BF530255E786CA63CED1D77A800B1060146EB798668A18CAB6E"
+    },
+    {
+      "bytes": 51262,
+      "path": "paths/0501_7D5314F8E998C465/economic_asset_positions.parquet",
+      "sha256": "53C914318FD9C8EBE1889AB2B6E2B8D1C9FB56788D516586B11C59E4897F04B1"
+    },
+    {
+      "bytes": 15852,
+      "path": "paths/0501_7D5314F8E998C465/economic_daily_sleeves.parquet",
+      "sha256": "A046EF512E3633A0429AA48E01FE0F3AF8CCBBDCE3E7B8348650BE70EF85A213"
+    },
+    {
+      "bytes": 46120,
+      "path": "paths/0501_7D5314F8E998C465/economic_hourly_sleeves.parquet",
+      "sha256": "6960B51DC6D5D3A7FF73FF268CE93E6E0BD7B41ED1EB69BED10FC5EAEA6D0889"
+    }
+  ],
+  "frozen_contract_sha256": "80909E8E267ACFD67472B0E6D9DFE8D93199376EACDC801FE3319BEF5CA4E761",
+  "manifest_sha256": "1DE916E97CA7377C079127D0EB6F68A877DE4E4EAE5DD0AEABEE3217765F4ECC",
+  "memory_fallback_used": false,
+  "producer_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+  "schema_version": 1,
+  "selection_receipt_sha256": "DDD90D0F15CC7F54BA723D3E9C14274BB83F8FD186065374770C8C3205D4CD48",
+  "status": "V24_CHECKPOINT_COMPLETE",
+  "strict_evaluated_count": 140,
+  "workers": 10
+}

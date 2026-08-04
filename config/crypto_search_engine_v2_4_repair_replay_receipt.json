@@ -2,8 +2,8 @@
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_ENGINE_V2_4_REPAIR_REPLAY_RECEIPT",
   "experiment_id": "crypto_search_engine_v2_4_repair_replay",
-  "status": "RUN_AUTHORIZED_ONE_TIME_REPAIR_REPLAY",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_REPAIR_REPLAY_COMPLETE",
+  "run_authorized": false,
   "decision_id": "USER_AUTHORIZED_V24_REPAIR_REPLAY_20260804",
   "source_implementation_sha": "896dc0f0981f86272bd8ea4d346463dded49efa5",
   "component_sources": {
@@ -137,5 +137,32 @@
     "new_ast": false,
     "new_compiler": false,
     "new_graph_node": false
+  },
+  "run_outcome": {
+    "status": "PASS_V24_REPAIR_REPLAY_COMPLETE",
+    "evaluation_source_sha": "ecf951c179abc5a29e19ab840f878d0cc97ccd1f",
+    "finalizer_source_sha": "0a25183f79350b19bc8ae961e8df12fa815c12f8",
+    "pc2_evaluation_task_id": "job_20260804_100621_da6b0a",
+    "pc2_finalization_task_id": "job_20260804_101701_42813b",
+    "runtime_path": "runtime/crypto_search_engine_v2_4_repair_replay_20260804",
+    "report_path": "reports/CRYPTO_SEARCH_ENGINE_V2_4_20260804.md",
+    "artifact_bundle_sha256": "85430B0965A88ADF64FE0F81B1168FF23D038C4454DD638D6C7E9241A008C18B",
+    "source_candidate_count": 512,
+    "strict_evaluated_count": 140,
+    "candidate_local_failure_count": 372,
+    "behavior_family_count": 510,
+    "checkpoint_count": 8,
+    "matched_positive_count": 0,
+    "workers": 10,
+    "memory_fallback_used": false,
+    "candidate_replacement_performed": false,
+    "candidate_backfill_performed": false,
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "policy_memory_written": false,
+    "archive_written": false,
+    "arm_qualified": [],
+    "oos": false,
+    "promotion_authorized": false
   }
 }
