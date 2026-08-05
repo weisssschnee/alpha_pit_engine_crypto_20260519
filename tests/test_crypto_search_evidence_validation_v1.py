@@ -2,12 +2,20 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
+
 from alphafactory_crypto.broad_search.search_evidence_validation_v1 import (
+    CONSENSUS_MAIN_CANDIDATE_IDS_SHA256,
+    CONSENSUS_OTHER_CANDIDATE_IDS_SHA256,
     EXPECTED_SELECTION_SHA256,
+    _aggregate_consensus_group,
     _build_summary,
     _canonical_sha256,
+    _line_sha256,
     _selection_projection,
+    load_consensus_receipt,
     load_validation_receipt,
+    select_consensus_cohort,
     select_final_positive_champions,
 )
 
@@ -115,3 +123,108 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
     assert summary["primary_4h_two_axis"]["source_count"] == 2
     assert summary["primary_4h_two_axis"]["both_axis_net_lcb_positive_count"] == 1
     assert summary["interpretation_boundary"].endswith("OOS_OR_PROMOTION")
+
+
+def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> None:
+    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=False)
+    assert receipt["run_authorized"] is False
+    assert receipt["status"] == "SOURCE_IMPLEMENTATION_PENDING"
+    assert receipt["development_fresh_interval"] == {
+        "start": "2026-07-18T00:00:00Z",
+        "end_exclusive": "2026-08-01T00:00:00Z",
+        "hours": 336,
+        "role": "SECOND_STAGE_DEVELOPMENT_FRESH_NO_FEEDBACK",
+    }
+    main_ids = receipt["cohort"]["main_candidate_ids"]
+    other_ids = receipt["cohort"]["other_candidate_ids"]
+    assert _line_sha256(main_ids) == CONSENSUS_MAIN_CANDIDATE_IDS_SHA256
+    assert _line_sha256(other_ids) == CONSENSUS_OTHER_CANDIDATE_IDS_SHA256
+    assert receipt["aggregation"]["leave_one_out_target_used"] is False
+    assert receipt["boundaries"]["oos"] is False
+    assert receipt["boundaries"]["promotion"] is False
+    assert receipt["boundaries"]["second_run"] is False
+
+
+def test_consensus_cohort_is_exact_23_plus_12_without_validation_reselection() -> None:
+    grouped = select_consensus_cohort(REPO_ROOT)
+    assert len(grouped["main"]) == 23
+    assert len(grouped["other"]) == 12
+    assert _line_sha256(
+        [row["candidate_id"] for row in grouped["main"]]
+    ) == CONSENSUS_MAIN_CANDIDATE_IDS_SHA256
+    assert _line_sha256(
+        [row["candidate_id"] for row in grouped["other"]]
+    ) == CONSENSUS_OTHER_CANDIDATE_IDS_SHA256
+    assert all(int(row["horizon_hours"]) == 4 for rows in grouped.values() for row in rows)
+    assert all(int(row["declared_axis_count"]) == 2 for rows in grouped.values() for row in rows)
+    assert all(
+        row["mechanism_family"] == "MECHANISM_V2_FLOW_INTENSITY_CONVICTION"
+        and row["mapping_family"] == "TIME_SERIES_DIRECTIONAL_STATEFUL"
+        for row in grouped["main"]
+    )
+
+
+def test_consensus_recomputes_from_equal_weight_paths_and_target_free_influence() -> None:
+    hours = 48
+    timestamp_ns = (
+        np.datetime64("2026-07-18T00:00:00", "ns").astype(np.int64)
+        + np.arange(hours, dtype=np.int64) * 3_600_000_000_000
+    )
+    target = np.tile(np.asarray([[0.002], [-0.002], [0.0]]), (1, hours))
+    rows = [
+        {"candidate_id": "A"},
+        {"candidate_id": "B"},
+    ]
+    workers = []
+    primary_weights = []
+    for candidate_id, scale in (("A", 0.5), ("B", 0.3)):
+        primary = np.tile(np.asarray([[scale], [-scale], [0.0]]), (1, hours))
+        left = primary * 0.5
+        right = primary * 0.25
+        mask = np.ones(hours, dtype=bool)
+        if candidate_id == "B":
+            mask[0] = False
+        sleeves = {
+            "primary": {"weights": primary, "mask": np.ones(hours, dtype=bool)},
+            "control_left": {"weights": left, "mask": np.ones(hours, dtype=bool)},
+            "control_right": {"weights": right, "mask": mask},
+        }
+        workers.append(
+            {
+                "candidate_id": candidate_id,
+                "error": None,
+                "evaluation": {
+                    "_economic_paths": {
+                        "asset_ids": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+                        "timestamp_ns": timestamp_ns,
+                        "cost_bps": 5.0,
+                        "horizon_hours": 4,
+                        "sleeves": sleeves,
+                    }
+                },
+            }
+        )
+        primary_weights.append(primary)
+    result = _aggregate_consensus_group(
+        group="main", rows=rows, workers=workers, target=target
+    )
+    assert result["summary"]["member_count"] == 2
+    assert result["summary"]["coefficient"] == 0.5
+    assert result["summary"]["common_support_hours"] == 47
+    assert all(row["target_used"] is False for row in result["influence_rows"])
+    primary_asset_rows = [
+        row
+        for row in result["asset_rows"]
+        if row["sleeve"] == "primary" and row["timestamp_ns"] == timestamp_ns[1]
+    ]
+    observed = {row["asset_id"]: row["weight"] for row in primary_asset_rows}
+    expected = np.mean(np.stack(primary_weights, axis=0), axis=0)
+    assert observed["BTCUSDT"] == expected[0, 1]
+    assert observed["ETHUSDT"] == expected[1, 1]
+    assert {row["sleeve"] for row in result["metric_rows"]} == {
+        "primary",
+        "control_left",
+        "control_right",
+        "primary_minus_left_control",
+        "primary_minus_right_control",
+    }
