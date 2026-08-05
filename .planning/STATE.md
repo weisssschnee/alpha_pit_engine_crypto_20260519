@@ -46,6 +46,16 @@ globally untouched OOS evidence, or promotion authority. No additional search,
 validation replay, OOS, challenge, recent, May-stress, forward, promotion, or
 new Arena is authorized.
 
+Closure verification passes 436 tests with the existing NumPy
+degrees-of-freedom warning. The existing CURRENT Search Engine capability node
+is updated and independently resolves its committed validation receipt and
+checker evidence as `STATIC_VERIFIED / PASS`; no node, authority role, or
+promotion transition was added. The global RAW navigation graph still predates
+the closure commit. Its single refresh attempt remained CPU-active but exceeded
+the bounded ten-minute command budget and was terminated without replacing RAW;
+CURRENT therefore truthfully retains `RAW_GRAPH_SOURCE_CHANGED / STALE` rather
+than claiming global graph freshness.
+
 The underlying V1.1 development evidence remains:
 
 The one-time V1.1 fresh-state development run is consumed and closed. Producer

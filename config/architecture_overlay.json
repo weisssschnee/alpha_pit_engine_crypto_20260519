@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (Evidence V1.1 runtime verified; earliest failure at cost then stability; economic Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (Evidence V1.1 champion validation complete; narrow 4h two-axis net-sign survival; LCB and rank migration fail; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -547,15 +547,18 @@
                                     ,"runtime/crypto_search_run_evidence_v1_1_20260805/final_decision.json"
                                     ,"runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json"
                                     ,"reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_20260805.md"
+                                    ,"alphafactory_crypto/broad_search/search_evidence_validation_v1.py"
+                                    ,"config/crypto_search_evidence_v1_1_validation_replacement_receipt.json"
+                                    ,"runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_run_evidence_v1_1_receipt.json",
+                                        "path":  "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
                                         "repo_ref":  "experiment/crypto-search-evidence-v1-1-20260805",
-                                        "verified_sha":  "ce713786dc80559dcbea8ee2ced581d9edb70c23",
-                                        "sha256":  "42A11C085F73E953D2796FBE3E1EEB99C33D54CF8C76AE8E6DEFE1D26F5A040F"
+                                        "verified_sha":  "5c42e4acac42ec794c67466503a0e8418a7bbdd9",
+                                        "sha256":  "518AC4086550FED464006C508C2B3D7ECA7BBC808E600F0694C15C8C403B506F"
                                     },
                       "contracts":  [
                                         {
@@ -757,6 +760,15 @@
                                             "evidence_ref":  "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json"
                                         },
                                         {
+                                            "id":  "crypto_search_evidence_v1_1_champion_validation_consumed_outcome",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The wrapper-failure replacement receipt is consumed with run_authorized false. Producer 840c3038c9e461d1ba70dd7c520a9db9b1cb33fe evaluated the exact frozen 49 V1.1 positive behavior-family champions on the unchanged 2025-11-01 through 2026-01-01 Binance USD-M development-validation partition with fixed train orientation, mapping, 5 bps cost, reward, and evaluator. Ten PC2 workers completed 49/49 strict evaluations in one restore-verified checkpoint with zero failures and no generation, optimizer feedback, archive write, memory fallback, or sealed read. Independent PC2 and local checkers pass. The predeclared 4h two-axis slice has 21/35 positive validation search reward and 24/35 positive net mean on both matched axes, concentrated in flow-intensity conviction with stateful directional mapping, but 0/35 has positive net LCB on both axes. All declared mechanism axes realized, while train-validation reward Spearman is negative. No candidate, arm, Alpha, OOS, or promotion qualifies. Validation behavior-family identity was not emitted, so cross-window family-identity stability is unobserved and not inferred. No rerun, tuning, further validation, OOS, challenge, forward, promotion, or new Arena is authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.search_evidence_validation_v1, broad_search.pair18m, and the consumed replacement receipt",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md"
+                                        },
+                                        {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
                                             "type":  "ADMISSION",
                                             "rule":  "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
@@ -869,18 +881,18 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
-                                         "evidence_sha256":  "D112F6F8D026B5988A3889651A9892F14D07E04F4DB4724613720CD16BF00E14",
-                                         "verified_at_sha":  "ce713786dc80559dcbea8ee2ced581d9edb70c23"
-                                     },
-                      "claim_badges":  [
-                                           "EVIDENCE V1.1 RECEIPT CONSUMED",
-                                           "2K CHECKPOINT RESTORE PASS",
-                                           "2000 OF 2000 STRICT PROVENANCE JOIN PASS",
-                                           "EARLIEST FAILURE COST THEN STABILITY",
-                                           "NO POLICY QUALIFICATION",
-                                           "NO OOS OR PROMOTION"
-                                       ],
+                       "evidence_ref":  "runtime/crypto_search_evidence_v1_1_validation_20260805r1/independent_checker.json",
+                       "evidence_sha256":  "D0A4E24F85CC9233AF9DC25DED471887AEDEE34836800A75D7B1C5FC67DB07BE",
+                       "verified_at_sha":  "5c42e4acac42ec794c67466503a0e8418a7bbdd9"
+                   },
+    "claim_badges":  [
+                         "V1.1 DEVELOPMENT VALIDATION COMPLETE",
+                         "4H TWO-AXIS NET SIGN SURVIVES",
+                         "DUAL-AXIS NET LCB ZERO",
+                         "TRAIN VALIDATION RANK MIGRATION FAIL",
+                         "NO FAMILY ID MIGRATION CLAIM",
+                         "NO OOS OR PROMOTION"
+                     ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
                                                      "separate new-data Arena authorization",

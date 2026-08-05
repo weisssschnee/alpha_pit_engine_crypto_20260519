@@ -6,6 +6,50 @@
       "evidence": {},
       "message": "Current view is advisory; formal runtime evidence was not supplied",
       "severity": "INFO"
+    },
+    {
+      "category": "STALE",
+      "code": "RAW_GRAPH_SOURCE_CHANGED",
+      "evidence": {
+        "changed_paths": [
+          ".planning/STATE.md",
+          "alphafactory_crypto/broad_search/search_evidence_validation_v1.py",
+          "config/crypto_search_evidence_v1_1_validation_receipt.json",
+          "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
+          "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805.md",
+          "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
+          "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_ACCELERATION_PREFLIGHT_20260805.md",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/behavior_family_selection_receipt.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/frozen_contract.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/independent_checker.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/pc2_checker.log",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/pc2_launch.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/pc2_producer.log",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/pc2_task_result.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/producer_status.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/static_constructibility.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805/terminal_closure.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/behavior_family_selection_receipt.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/checkpoints/checkpoint_000/manifest.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/frozen_contract.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/independent_checker.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/pc2_checker.log",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/pc2_producer.stderr.log",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/pc2_producer.stdout.log",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/pc2_wrapper_result.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/producer_status.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/run_manifest.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/static_constructibility.json",
+          "runtime/crypto_search_evidence_v1_1_validation_20260805r1/validation_summary.json",
+          "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1",
+          "tests/test_crypto_search_evidence_validation_v1.py"
+        ],
+        "raw_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
+        "repo_head": "5c42e4acac42ec794c67466503a0e8418a7bbdd9"
+      },
+      "message": "Raw graph predates non-overlay source changes",
+      "severity": "ERROR"
     }
   ],
   "edges": [
@@ -1084,7 +1128,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-04T19:06:06.002563+00:00",
+  "generated_at": "2026-08-05T04:03:16.108136+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3031,10 +3075,10 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "config/crypto_search_run_evidence_v1_1_receipt.json",
+        "path": "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
         "repo_ref": "experiment/crypto-search-evidence-v1-1-20260805",
-        "sha256": "42A11C085F73E953D2796FBE3E1EEB99C33D54CF8C76AE8E6DEFE1D26F5A040F",
-        "verified_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23"
+        "sha256": "518AC4086550FED464006C508C2B3D7ECA7BBC808E600F0694C15C8C403B506F",
+        "verified_sha": "5c42e4acac42ec794c67466503a0e8418a7bbdd9"
       },
       "authority_bindings": [
         {
@@ -3059,11 +3103,11 @@
         }
       ],
       "claim_badges": [
-        "EVIDENCE V1.1 RECEIPT CONSUMED",
-        "2K CHECKPOINT RESTORE PASS",
-        "2000 OF 2000 STRICT PROVENANCE JOIN PASS",
-        "EARLIEST FAILURE COST THEN STABILITY",
-        "NO POLICY QUALIFICATION",
+        "V1.1 DEVELOPMENT VALIDATION COMPLETE",
+        "4H TWO-AXIS NET SIGN SURVIVES",
+        "DUAL-AXIS NET LCB ZERO",
+        "TRAIN VALIDATION RANK MIGRATION FAIL",
+        "NO FAMILY ID MIGRATION CLAIM",
         "NO OOS OR PROMOTION"
       ],
       "color": "#f9a825",
@@ -3268,6 +3312,15 @@
         },
         {
           "bypass_forbidden": true,
+          "enforced_by": "broad_search.search_evidence_validation_v1, broad_search.pair18m, and the consumed replacement receipt",
+          "evidence_ref": "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
+          "id": "crypto_search_evidence_v1_1_champion_validation_consumed_outcome",
+          "rule": "The wrapper-failure replacement receipt is consumed with run_authorized false. Producer 840c3038c9e461d1ba70dd7c520a9db9b1cb33fe evaluated the exact frozen 49 V1.1 positive behavior-family champions on the unchanged 2025-11-01 through 2026-01-01 Binance USD-M development-validation partition with fixed train orientation, mapping, 5 bps cost, reward, and evaluator. Ten PC2 workers completed 49/49 strict evaluations in one restore-verified checkpoint with zero failures and no generation, optimizer feedback, archive write, memory fallback, or sealed read. Independent PC2 and local checkers pass. The predeclared 4h two-axis slice has 21/35 positive validation search reward and 24/35 positive net mean on both matched axes, concentrated in flow-intensity conviction with stateful directional mapping, but 0/35 has positive net LCB on both axes. All declared mechanism axes realized, while train-validation reward Spearman is negative. No candidate, arm, Alpha, OOS, or promotion qualifies. Validation behavior-family identity was not emitted, so cross-window family-identity stability is unobserved and not inferred. No rerun, tuning, further validation, OOS, challenge, forward, promotion, or new Arena is authorized.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -3380,7 +3433,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (Evidence V1.1 runtime verified; earliest failure at cost then stability; economic Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (Evidence V1.1 champion validation complete; narrow 4h two-axis net-sign survival; LCB and rank migration fail; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3531,7 +3584,10 @@
         "runtime/crypto_search_run_evidence_v1_1_20260805/run_manifest.json",
         "runtime/crypto_search_run_evidence_v1_1_20260805/final_decision.json",
         "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
-        "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_20260805.md"
+        "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_20260805.md",
+        "alphafactory_crypto/broad_search/search_evidence_validation_v1.py",
+        "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
+        "runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -5587,14 +5643,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-04T19:06:06.002563+00:00",
-        "evidence_ref": "runtime/crypto_search_run_evidence_v1_1_20260805/independent_checker.json",
-        "evidence_sha256": "D112F6F8D026B5988A3889651A9892F14D07E04F4DB4724613720CD16BF00E14",
+        "checked_at": "2026-08-05T04:03:16.108136+00:00",
+        "evidence_ref": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/independent_checker.json",
+        "evidence_sha256": "D0A4E24F85CC9233AF9DC25DED471887AEDEE34836800A75D7B1C5FC67DB07BE",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23"
+        "verified_at_sha": "5c42e4acac42ec794c67466503a0e8418a7bbdd9"
       },
       "visible_by_default": true
     },
@@ -7859,7 +7915,7 @@
       "required": false,
       "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-08-04T16:33:52.985513+00:00",
+        "checked_at": "2026-08-05T04:03:16.108136+00:00",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
         "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
         "level": "PARTIAL",
@@ -8457,7 +8513,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "FFE1158F16A7C49C1BE0B10E9C21DFE2862073DF51933E776597376D37EF9FB5"
+    "sha256": "5AACBF878E22C41A144750DE87773BCBA9696FB93AB7B8A06BE210A5C6C398D4"
   },
   "profile_id": null,
   "profiles": [
@@ -8494,7 +8550,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "05E9C4D4FCDC90707E2909EF6FD53ECCDB72D5F41A21A306E56F8FC37C137748"
   },
-  "repo_head": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
+  "repo_head": "5c42e4acac42ec794c67466503a0e8418a7bbdd9",
   "schema_version": 1,
   "semantic_authorities": [
     {
@@ -8603,13 +8659,13 @@
       "semantic_role": "validation_role"
     }
   ],
-  "status": "INSUFFICIENT_EVIDENCE",
+  "status": "STALE",
   "strict_mode": false,
   "strict_ready": false,
   "summary": {
     "current_edges": 31,
     "current_nodes": 26,
-    "errors": 0,
+    "errors": 1,
     "runtime_edges": 0,
     "runtime_nodes": 0,
     "warnings": 0
