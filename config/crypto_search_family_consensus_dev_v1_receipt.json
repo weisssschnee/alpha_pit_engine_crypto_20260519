@@ -130,6 +130,27 @@
     "challenge": false,
     "forward": false
   },
+  "offline_checkpoint_finalization": {
+    "authority": "CURRENT_USER_INSTRUCTION_CONTINUE_EXISTING_CHECKPOINT_CLOSURE",
+    "authorized": true,
+    "authorized_at": "2026-08-05T15:30:00+00:00",
+    "scope": "PERSISTED_CHECKPOINT_PATH_AGGREGATION_ONLY",
+    "source_implementation_sha": "9d003c45a56a107860e52123302181867240286d",
+    "source_component_sha256": "40C55E37B8CE9414E443B8FBDABBE636D84914F73FAF53C3D2F85ADB625AA7BB",
+    "allowed_execution_head_changed_paths": [
+      "config/crypto_search_family_consensus_dev_v1_receipt.json"
+    ],
+    "checkpoint_manifest_file_sha256": "D39B79EBCF3094BD1F2B32A360865754D5EB6290F315388094B932EFF08CD99F",
+    "checkpoint_manifest_sha256": "ABC01F1969AE4E28152F0427491F775807295E741A978B288A24C1BFB1773C4C",
+    "candidate_ledger_sha256": "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522",
+    "market_read_count": 0,
+    "candidate_evaluation_count": 0,
+    "candidate_generation": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "oos": false,
+    "promotion": false
+  },
   "previous_outcome": {
     "status": "ACQUISITION_FAILED_NO_CANDIDATE_GATE",
     "completed_at": "2026-08-05T10:38:25.589678+00:00",
