@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION",
+  "status": "RUN_AUTHORIZED_ONE_TIME_NO_FEEDBACK_DEVELOPMENT_VALIDATION",
+  "run_authorized": true,
+  "decision_id": "USER_AUTHORIZED_EVIDENCE_V1_1_CHAMPION_VALIDATION_20260805",
+  "source_evidence": {
+    "candidate_ledger_path": "runtime/crypto_search_run_evidence_v1_1_20260805/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "6554BECC35E8586F63505DA4646F41482BEFB80FEE4618B2710C22A35A8D6718",
+    "candidate_ledger_row_count": 2000,
+    "behavior_archive_path": "runtime/crypto_search_run_evidence_v1_1_20260805/behavior_archive.parquet",
+    "behavior_archive_sha256": "182D2ABB810B73C02622BBA51E41F231EFA0AED8A4D1E15B93D48499866C391F",
+    "economic_receipt_path": "config/crypto_search_run_evidence_v1_1_receipt.json",
+    "producer_source_sha": "67701ba73ac16c3da6cbdf6d98431d6d1df998e1"
+  },
+  "selection": {
+    "unit": "FINAL_POSITIVE_BEHAVIOR_FAMILY_CHAMPION",
+    "rule": "behavior_archive.is_family_champion == true AND search_reward > 0; exact join to immutable candidate ledger; candidate_id ascending",
+    "candidate_count_exact": 49,
+    "selection_sha256": "C3BD1C0D0940BEE2FAE41B51BD94D11B3684CD93B4E9AD84D125AEC0D5A746DE",
+    "all_champions_included": true,
+    "primary_analysis_slice": "horizon_hours == 4 AND declared_axis_count == 2",
+    "validation_feedback_selection_allowed": false,
+    "backfill_allowed": false
+  },
+  "validation": {
+    "start": "2025-11-01T00:00:00Z",
+    "end_exclusive": "2026-01-01T00:00:00Z",
+    "role": "DEVELOPMENT_VALIDATION_NO_FEEDBACK",
+    "execution_venue": "BINANCE_USD_M",
+    "cost_bps": 5.0
+  },
+  "carrier": {
+    "manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "aligned_cache": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+    "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "target_cache": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
+    "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+    "field_count": 115,
+    "missing_value_fill": null,
+    "dynamic_eligible_intersection": true
+  },
+  "compute": {
+    "execution_host": "PC2",
+    "workers_default": 10,
+    "workers_fallback": 8,
+    "workers_12_forbidden": true,
+    "fallback_only_after_memory_error": true,
+    "wall_time_seconds_maximum": 3600,
+    "minimum_pair_evaluated_per_hour": 128.0,
+    "workspace_drive": "C",
+    "local_heavy_compute_allowed": false
+  },
+  "boundaries": {
+    "single_run": true,
+    "candidate_generation": false,
+    "optimizer_feedback": false,
+    "policy_memory_write": false,
+    "archive_write": false,
+    "backfill": false,
+    "restart": false,
+    "reseed": false,
+    "parameter_tuning": false,
+    "rescue_rerun": false,
+    "holdout_read": false,
+    "oos": false,
+    "promotion": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "new_evaluator": false,
+    "new_compiler": false,
+    "new_ast": false,
+    "new_graph_node": false
+  },
+  "outcome": null
+}
