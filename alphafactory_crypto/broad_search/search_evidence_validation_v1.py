@@ -948,6 +948,346 @@ def _metrics_projection(
     return output
 
 
+def _align_target_to_economic_path_identity(
+    target_store: Any,
+    economic_paths: Mapping[str, Any],
+) -> np.ndarray:
+    """Select the exact asset/time coordinates already used by pair18m."""
+
+    asset_ids = tuple(str(value) for value in economic_paths.get("asset_ids") or ())
+    timestamps = np.asarray(economic_paths.get("timestamp_ns"), dtype=np.int64)
+    horizon = int(economic_paths.get("horizon_hours", -1))
+    store_assets = tuple(str(value) for value in target_store.symbols)
+    store_timestamps = np.asarray(target_store.timestamp_ns, dtype=np.int64)
+    if not asset_ids or asset_ids != store_assets:
+        raise RuntimeError("FAMILY_CONSENSUS_TARGET_ASSET_IDENTITY_CHANGED")
+    if (
+        timestamps.ndim != 1
+        or timestamps.size == 0
+        or np.any(np.diff(timestamps) <= 0)
+        or store_timestamps.ndim != 1
+        or store_timestamps.size == 0
+        or np.any(np.diff(store_timestamps) <= 0)
+        or horizon != 4
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_TARGET_TIME_IDENTITY_INVALID")
+    indexes = np.searchsorted(store_timestamps, timestamps)
+    if (
+        np.any(indexes >= store_timestamps.size)
+        or not np.array_equal(store_timestamps[indexes], timestamps)
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_TARGET_TIMESTAMPS_MISSING")
+    source = np.asarray(target_store.target_return(horizon), dtype=float)
+    if source.shape != (len(store_assets), store_timestamps.size):
+        raise RuntimeError("FAMILY_CONSENSUS_TARGET_STORE_SHAPE_CHANGED")
+    target = np.asarray(source[:, indexes], dtype=float)
+    if target.shape != (len(asset_ids), timestamps.size):
+        raise RuntimeError("FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED")
+    return target
+
+
+def _restore_consensus_checkpoint_paths(
+    checkpoint_root: Path,
+    ledger_rows: Sequence[Mapping[str, Any]],
+    *,
+    asset_capacity_upper_bound: int | None = None,
+) -> tuple[list[dict[str, Any]], np.ndarray, dict[str, Any]]:
+    """Restore the threshold-sparse pair path projection without market reads."""
+
+    checkpoint = Path(checkpoint_root)
+    rows = sorted(
+        (dict(row) for row in ledger_rows),
+        key=lambda row: int(row["completion_ordinal"]),
+    )
+    candidate_ids = [str(row["candidate_id"]) for row in rows]
+    if (
+        not rows
+        or len(candidate_ids) != len(set(candidate_ids))
+        or [int(row["completion_ordinal"]) for row in rows]
+        != list(range(1, len(rows) + 1))
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_LEDGER_IDENTITY_CHANGED")
+
+    required_sleeves = ("primary", "control_left", "control_right")
+    hourly_columns = {
+        "candidate_id",
+        "horizon_hours",
+        "execution_venue",
+        "economic_receipt_sha256",
+        "evaluation_partition",
+        "sleeve",
+        "timestamp_ns",
+        "objective_mask",
+        "gross",
+    }
+    position_columns = {
+        "candidate_id",
+        "horizon_hours",
+        "execution_venue",
+        "economic_receipt_sha256",
+        "evaluation_partition",
+        "sleeve",
+        "timestamp_ns",
+        "asset_id",
+        "weight",
+        "asset_gross_contribution",
+    }
+    restored: list[dict[str, Any]] = []
+    asset_ids: set[str] = set()
+    reference_timestamps: np.ndarray | None = None
+    receipt_identity: str | None = None
+    for row in rows:
+        candidate_id = str(row["candidate_id"])
+        ordinal = int(row["completion_ordinal"]) - 1
+        local = checkpoint / "paths" / f"{ordinal:04d}_{candidate_id[:16]}"
+        hourly_path = local / "economic_hourly_sleeves.parquet"
+        position_path = local / "economic_asset_positions.parquet"
+        if not hourly_path.is_file() or not position_path.is_file():
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_PATH_MISSING")
+        hourly = pd.read_parquet(hourly_path)
+        positions = pd.read_parquet(position_path)
+        if not hourly_columns.issubset(hourly.columns) or not position_columns.issubset(
+            positions.columns
+        ):
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_PATH_SCHEMA_CHANGED")
+        for table in (hourly, positions):
+            if (
+                set(table["candidate_id"].astype(str)) != {candidate_id}
+                or set(table["horizon_hours"].astype(int)) != {4}
+                or set(table["execution_venue"].astype(str)) != {"BINANCE_USD_M"}
+                or set(table["evaluation_partition"].astype(str)) != {"validation"}
+            ):
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_PATH_IDENTITY_CHANGED")
+        local_receipts = set(hourly["economic_receipt_sha256"].astype(str)) | set(
+            positions["economic_receipt_sha256"].astype(str)
+        )
+        if len(local_receipts) != 1:
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_RECEIPT_CHANGED")
+        local_receipt = next(iter(local_receipts))
+        if receipt_identity is None:
+            receipt_identity = local_receipt
+        elif local_receipt != receipt_identity:
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_RECEIPT_CHANGED")
+        if str(row.get("economic_receipt_sha256") or local_receipt) != local_receipt:
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_RECEIPT_CHANGED")
+
+        sleeve_tables: dict[str, pd.DataFrame] = {}
+        for sleeve in required_sleeves:
+            values = hourly.loc[hourly["sleeve"].eq(sleeve)].sort_values(
+                "timestamp_ns", kind="stable"
+            )
+            timestamps = values["timestamp_ns"].to_numpy(dtype=np.int64)
+            if (
+                values.empty
+                or values["timestamp_ns"].duplicated().any()
+                or np.any(np.diff(timestamps) <= 0)
+            ):
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_TIME_IDENTITY_CHANGED")
+            if reference_timestamps is None:
+                reference_timestamps = timestamps
+            elif not np.array_equal(reference_timestamps, timestamps):
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_TIME_IDENTITY_CHANGED")
+            sleeve_tables[sleeve] = values
+        if not set(positions["sleeve"].astype(str)).issubset(
+            set(hourly["sleeve"].astype(str))
+        ):
+            raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_SLEEVE_IDENTITY_CHANGED")
+        asset_ids.update(str(value) for value in positions["asset_id"])
+        restored.append(
+            {
+                "row": row,
+                "hourly": sleeve_tables,
+                "positions": positions.loc[
+                    positions["sleeve"].isin(required_sleeves)
+                ].copy(),
+            }
+        )
+
+    assert reference_timestamps is not None
+    ordered_assets = tuple(sorted(asset_ids))
+    if not ordered_assets:
+        raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_ACTIVE_ASSETS_EMPTY")
+    asset_index = {asset_id: index for index, asset_id in enumerate(ordered_assets)}
+    time_index = {
+        int(timestamp): index for index, timestamp in enumerate(reference_timestamps)
+    }
+    target = np.full(
+        (len(ordered_assets), reference_timestamps.size), np.nan, dtype=float
+    )
+    missing_target_coordinates: set[tuple[int, int]] = set()
+    workers: list[dict[str, Any]] = []
+    restored_weights: list[dict[str, np.ndarray]] = []
+    for item in restored:
+        weights_by_sleeve = {
+            sleeve: np.zeros(target.shape, dtype=float) for sleeve in required_sleeves
+        }
+        seen_coordinates: set[tuple[str, int, int]] = set()
+        for position in item["positions"].to_dict("records"):
+            sleeve = str(position["sleeve"])
+            asset = asset_index.get(str(position["asset_id"]))
+            timestamp = time_index.get(int(position["timestamp_ns"]))
+            if asset is None or timestamp is None:
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_POSITION_IDENTITY_CHANGED")
+            coordinate = (sleeve, asset, timestamp)
+            if coordinate in seen_coordinates:
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_POSITION_DUPLICATED")
+            seen_coordinates.add(coordinate)
+            weight = float(position["weight"])
+            contribution = float(position["asset_gross_contribution"])
+            if not math.isfinite(weight) or math.isinf(contribution):
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_POSITION_NOT_FINITE")
+            weights_by_sleeve[sleeve][asset, timestamp] = weight
+            target_coordinate = (asset, timestamp)
+            if math.isnan(contribution) and weight != 0.0:
+                if math.isfinite(target[asset, timestamp]):
+                    raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_TARGET_CONFLICT")
+                missing_target_coordinates.add(target_coordinate)
+            elif weight != 0.0:
+                observed_target = contribution * 4.0 / weight
+                previous = target[asset, timestamp]
+                if target_coordinate in missing_target_coordinates or (
+                    math.isfinite(previous)
+                    and not np.isclose(
+                        previous, observed_target, rtol=1.0e-10, atol=1.0e-12
+                    )
+                ):
+                    raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_TARGET_CONFLICT")
+                target[asset, timestamp] = observed_target
+            elif math.isfinite(contribution) and abs(contribution) > 1.0e-18:
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_TARGET_UNRECOVERABLE")
+        sleeves = {
+            sleeve: {
+                "weights": weights_by_sleeve[sleeve],
+                "mask": item["hourly"][sleeve]["objective_mask"].to_numpy(
+                    dtype=bool
+                ),
+            }
+            for sleeve in required_sleeves
+        }
+        workers.append(
+            {
+                "candidate_id": str(item["row"]["candidate_id"]),
+                "error": None,
+                "evaluation": {
+                    "_economic_paths": {
+                        "asset_ids": list(ordered_assets),
+                        "timestamp_ns": reference_timestamps.copy(),
+                        "cost_bps": 5.0,
+                        "horizon_hours": 4,
+                        "sleeves": sleeves,
+                    }
+                },
+            }
+        )
+        restored_weights.append(weights_by_sleeve)
+
+    target_observation_count = int(np.isfinite(target).sum())
+    for item, weights_by_sleeve in zip(restored, restored_weights):
+        for sleeve in required_sleeves:
+            table = item["hourly"][sleeve]
+            mask = table["objective_mask"].to_numpy(dtype=bool)
+            rebuilt = np.nansum(weights_by_sleeve[sleeve] * target, axis=0) / 4.0
+            observed = table["gross"].to_numpy(dtype=float)
+            if not np.allclose(
+                rebuilt[mask], observed[mask], rtol=1.0e-10, atol=1.0e-12
+            ):
+                raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_GROSS_REPLAY_CHANGED")
+
+    capacity = int(asset_capacity_upper_bound or len(ordered_assets))
+    if capacity < len(ordered_assets):
+        raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_ASSET_BOUND_TOO_SMALL")
+    weight_threshold = 1.0e-12
+    gross_threshold = 1.0e-18
+    sleeve_weight_l1_bound = capacity * weight_threshold
+    sleeve_turnover_bound = 2.0 * sleeve_weight_l1_bound
+    sleeve_cost_bound = sleeve_turnover_bound * 5.0 / 10_000.0
+    sleeve_gross_bound = capacity * gross_threshold
+    incremental_weight_l1_bound = 2.0 * sleeve_weight_l1_bound
+    incremental_turnover_bound = 2.0 * incremental_weight_l1_bound
+    incremental_cost_bound = incremental_turnover_bound * 5.0 / 10_000.0
+    incremental_gross_bound = 2.0 * sleeve_gross_bound
+    restoration = {
+        "schema_version": 1,
+        "authority": "PERSISTED_THRESHOLD_SPARSE_CHECKPOINT_PROJECTION",
+        "bit_exact_original_executable_weights": False,
+        "candidate_count": len(rows),
+        "timestamp_count": int(reference_timestamps.size),
+        "active_asset_count": len(ordered_assets),
+        "asset_capacity_upper_bound": capacity,
+        "target_observation_count": target_observation_count,
+        "selected_missing_target_coordinate_count": len(
+            missing_target_coordinates
+        ),
+        "sparse_weight_omission_abs_threshold": weight_threshold,
+        "sparse_asset_gross_omission_abs_threshold": gross_threshold,
+        "max_sleeve_weight_l1_error_bound": sleeve_weight_l1_bound,
+        "max_sleeve_turnover_error_bound": sleeve_turnover_bound,
+        "max_sleeve_cost_error_bound_at_5bps": sleeve_cost_bound,
+        "max_sleeve_gross_path_abs_error_bound": sleeve_gross_bound,
+        "max_incremental_weight_l1_error_bound": incremental_weight_l1_bound,
+        "max_incremental_turnover_error_bound": incremental_turnover_bound,
+        "max_incremental_cost_error_bound_at_5bps": incremental_cost_bound,
+        "max_incremental_gross_path_abs_error_bound": incremental_gross_bound,
+        "max_incremental_net_mean_abs_error_bound": (
+            incremental_cost_bound + incremental_gross_bound
+        ),
+        "economic_receipt_sha256": str(receipt_identity or ""),
+        "target_sha256": hashlib.sha256(
+            np.ascontiguousarray(target).view(np.uint8)
+        ).hexdigest().upper(),
+        "market_read_count": 0,
+    }
+    return workers, target, restoration
+
+
+def _checkpoint_asset_capacity_authority(runtime_root: Path) -> dict[str, Any]:
+    """Read the frozen metadata ceiling; this does not open any market payload."""
+
+    symbol_map_path = Path(runtime_root) / "pc2_external_evidence" / "symbol_map.json"
+    source_probe_path = Path(runtime_root) / "source_metadata_probe.json"
+    symbol_map = json.loads(symbol_map_path.read_text(encoding="utf-8"))
+    source_probe = json.loads(source_probe_path.read_text(encoding="utf-8"))
+    first_rank = int(symbol_map.get("first_rank", -1))
+    last_rank = int(symbol_map.get("last_rank", -1))
+    requested = int(symbol_map.get("requested_bases", -1))
+    if first_rank != 51 or last_rank != 200 or requested != last_rank - first_rank + 1:
+        raise RuntimeError("FAMILY_CONSENSUS_CHECKPOINT_ASSET_AUTHORITY_CHANGED")
+    return {
+        "asset_capacity_upper_bound": requested,
+        "rank_interval": [first_rank, last_rank],
+        "common_mapped_base_count": int(source_probe["common_mapped_base_count"]),
+        "symbol_map_file_sha256": _file_sha256(symbol_map_path),
+        "source_metadata_probe_file_sha256": _file_sha256(source_probe_path),
+        "market_payload_read": False,
+    }
+
+
+def _apply_checkpoint_projection_boundary(
+    decision: dict[str, Any],
+    restoration: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Label the historical result honestly and bound its net-mean conclusion."""
+
+    output = dict(decision)
+    main = dict(output["main_consensus"])
+    bound = float(restoration["max_incremental_net_mean_abs_error_bound"])
+    left_upper = float(main["left_incremental_net_mean"]) + bound
+    right_upper = float(main["right_incremental_net_mean"]) + bound
+    robust_negative = bool(left_upper < 0.0 and right_upper < 0.0)
+    output["status"] = "FAMILY_CONSENSUS_CHECKPOINT_PROJECTION_COMPLETE"
+    output["checkpoint_projection_boundary"] = {
+        **dict(restoration),
+        "net_lcb_is_point_estimate_only": True,
+        "left_incremental_net_mean_upper_bound": left_upper,
+        "right_incremental_net_mean_upper_bound": right_upper,
+        "did_not_transfer_robust_to_projection_bound": robust_negative,
+    }
+    if not robust_negative:
+        output["main_interpretation"] = "CHECKPOINT_PROJECTION_INDETERMINATE"
+    output["interpretation_robust_to_projection_bound"] = robust_negative
+    return output
+
+
 def _aggregate_consensus_group(
     *,
     group: str,
@@ -1158,6 +1498,68 @@ def _aggregate_consensus_group(
         "influence_rows": influence_rows,
         "concentration_rows": concentration_rows,
     }
+
+
+def _build_consensus_aggregation_result(
+    *,
+    grouped: Mapping[str, Sequence[Mapping[str, Any]]],
+    workers: Sequence[Mapping[str, Any]],
+    target: np.ndarray,
+    producer_source_sha: str,
+) -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
+    worker_lookup = {str(row["candidate_id"]): row for row in workers}
+    aggregated = {
+        group: _aggregate_consensus_group(
+            group=group,
+            rows=grouped[group],
+            workers=[
+                worker_lookup[str(row["candidate_id"])] for row in grouped[group]
+            ],
+            target=target,
+        )
+        for group in ("main", "other")
+    }
+    tables = {
+        "consensus_metrics.parquet": [
+            row for group in aggregated.values() for row in group["metric_rows"]
+        ],
+        "consensus_hourly_paths.parquet": [
+            row for group in aggregated.values() for row in group["hourly_rows"]
+        ],
+        "consensus_asset_weights.parquet": [
+            row for group in aggregated.values() for row in group["asset_rows"]
+        ],
+        "candidate_influence.parquet": [
+            row for group in aggregated.values() for row in group["influence_rows"]
+        ],
+        "consensus_concentration.parquet": [
+            row
+            for group in aggregated.values()
+            for row in group["concentration_rows"]
+        ],
+    }
+    main_summary = dict(aggregated["main"]["summary"])
+    other_summary = dict(aggregated["other"]["summary"])
+    if main_summary["both_axis_net_lcb_positive"]:
+        interpretation = "FAMILY_ENSEMBLE_TRANSFER_OBSERVED_DEVELOPMENT_ONLY"
+    elif main_summary["both_axis_net_mean_positive"]:
+        interpretation = "THIN_FAMILY_EFFECT_NOT_STATISTICALLY_QUALIFIED"
+    else:
+        interpretation = "FAMILY_CONSENSUS_DID_NOT_TRANSFER"
+    decision = {
+        "schema_version": 1,
+        "status": "FAMILY_CONSENSUS_GATE_COMPLETE",
+        "producer_source_sha": str(producer_source_sha),
+        "main_consensus": main_summary,
+        "other_consensus_descriptive": other_summary,
+        "main_interpretation": interpretation,
+        "comparison_role": "OTHER_12_DESCRIPTIVE_ONLY_NOT_FAIR_PRIMARY_COMPARATOR",
+        "common_mechanism_claim_authorized": False,
+        "oos": False,
+        "promotion_authorized": False,
+        "automatic_expansion": False,
+    }
+    return decision, tables
 
 
 def _augment_projection(
@@ -1590,11 +1992,23 @@ def run_validation(
 def _consensus_report(decision: Mapping[str, Any]) -> str:
     main = dict(decision.get("main_consensus") or {})
     other = dict(decision.get("other_consensus_descriptive") or {})
+    finalization = dict(decision.get("offline_checkpoint_finalization") or {})
+    finalization_line = (
+        "- Finalization: bounded threshold-sparse checkpoint projection only; not a "
+        "bit-exact reconstruction of omitted sub-threshold weights. "
+        f"market reads `{finalization.get('market_read_count')}`, candidate evaluations "
+        f"`{finalization.get('candidate_evaluation_count')}`.\n"
+        "- Projection bound: the main dual-axis negative net-mean interpretation is "
+        f"robust `{decision.get('interpretation_robust_to_projection_bound')}`; "
+        "net-LCB values are diagnostic point estimates only.\n"
+        if finalization
+        else ""
+    )
     return f"""# Crypto 4h Two-Axis Family-Consensus Development Gate
 
 - Status: `{decision['status']}`
 - Producer source: `{decision['producer_source_sha']}`
-- Interval: `2026-07-18T00:00:00Z` to `2026-08-01T00:00:00Z`
+{finalization_line}- Interval: `2026-07-18T00:00:00Z` to `2026-08-01T00:00:00Z`
 - Contract: fixed 23-member main family and fixed 12-member descriptive group; equal coefficients; identical common support for primary/A/B; aggregate executable weights are evaluated with the existing Binance target, 4h horizon, and 5 bps cost.
 - Boundary: second-stage development-fresh evidence only. This is not OOS, promotion, or proof of a common causal mechanism.
 
@@ -1848,64 +2262,22 @@ def run_consensus_gate(
         from alphafactory_crypto.broad_search.runner18m import RawPanelStore
 
         target_store = BinanceTargetStore(RawPanelStore.open(cache_root), target_root)
-        time_slice = target_store.block_slice(
-            str(interval["start"]), str(interval["end_exclusive"])
-        )
-        target = np.asarray(target_store.target_return(4)[:, time_slice], dtype=float)
         worker_lookup = {str(row["candidate_id"]): row for row in workers}
-        aggregated = {
-            group: _aggregate_consensus_group(
-                group=group,
-                rows=grouped[group],
-                workers=[worker_lookup[str(row["candidate_id"])] for row in grouped[group]],
-                target=target,
-            )
-            for group in ("main", "other")
-        }
-        tables = {
-            "consensus_metrics.parquet": [
-                row for group in aggregated.values() for row in group["metric_rows"]
-            ],
-            "consensus_hourly_paths.parquet": [
-                row for group in aggregated.values() for row in group["hourly_rows"]
-            ],
-            "consensus_asset_weights.parquet": [
-                row for group in aggregated.values() for row in group["asset_rows"]
-            ],
-            "candidate_influence.parquet": [
-                row for group in aggregated.values() for row in group["influence_rows"]
-            ],
-            "consensus_concentration.parquet": [
-                row
-                for group in aggregated.values()
-                for row in group["concentration_rows"]
-            ],
-        }
+        first_candidate_id = str(grouped["main"][0]["candidate_id"])
+        first_paths = dict(
+            dict(worker_lookup[first_candidate_id]["evaluation"])["_economic_paths"]
+        )
+        target = _align_target_to_economic_path_identity(target_store, first_paths)
+        decision, tables = _build_consensus_aggregation_result(
+            grouped=grouped,
+            workers=workers,
+            target=target,
+            producer_source_sha=source_sha,
+        )
         for name, table_rows in tables.items():
             path = runtime_root / name
             pd.DataFrame(table_rows).to_parquet(path, index=False)
             result_files.append(path)
-        main_summary = dict(aggregated["main"]["summary"])
-        other_summary = dict(aggregated["other"]["summary"])
-        if main_summary["both_axis_net_lcb_positive"]:
-            interpretation = "FAMILY_ENSEMBLE_TRANSFER_OBSERVED_DEVELOPMENT_ONLY"
-        elif main_summary["both_axis_net_mean_positive"]:
-            interpretation = "THIN_FAMILY_EFFECT_NOT_STATISTICALLY_QUALIFIED"
-        else:
-            interpretation = "FAMILY_CONSENSUS_DID_NOT_TRANSFER"
-        decision = {
-            "schema_version": 1,
-            "status": "FAMILY_CONSENSUS_GATE_COMPLETE",
-            "producer_source_sha": source_sha,
-            "main_consensus": main_summary,
-            "other_consensus_descriptive": other_summary,
-            "main_interpretation": interpretation,
-            "comparison_role": "OTHER_12_DESCRIPTIVE_ONLY_NOT_FAIR_PRIMARY_COMPARATOR",
-            "common_mechanism_claim_authorized": False,
-            "oos": False,
-            "promotion_authorized": False,
-            "automatic_expansion": False,
-        }
     decision_path = runtime_root / "final_decision.json"
     _write_json(decision_path, decision)
     report_path.write_text(_consensus_report(decision), encoding="utf-8")
@@ -1960,6 +2332,249 @@ def run_consensus_gate(
     return decision
 
 
+def finalize_consensus_checkpoint(
+    repo_root: Path,
+    *,
+    runtime_date: str = CONSENSUS_DEFAULT_RUNTIME_DATE,
+    finalizer_source_sha: str,
+    receipt_path: str = CONSENSUS_RECEIPT_PATH,
+) -> dict[str, Any]:
+    """Finish the consumed gate from immutable path projections only."""
+
+    started = time.perf_counter()
+    root = Path(repo_root)
+    receipt_file = root / str(receipt_path)
+    receipt = load_consensus_receipt(
+        root, require_authorized=False, receipt_path=receipt_path
+    )
+    authorization = dict(receipt.get("offline_checkpoint_finalization") or {})
+    if (
+        authorization.get("authorized") is not True
+        or authorization.get("scope")
+        != "PERSISTED_CHECKPOINT_PATH_AGGREGATION_ONLY"
+        or int(authorization.get("market_read_count", -1)) != 0
+        or int(authorization.get("candidate_evaluation_count", -1)) != 0
+        or authorization.get("candidate_generation") is not False
+        or authorization.get("optimizer_feedback") is not False
+        or authorization.get("archive_write") is not False
+        or authorization.get("oos") is not False
+        or authorization.get("promotion") is not False
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZATION_NOT_AUTHORIZED")
+    expected_source_sha = str(authorization.get("source_implementation_sha") or "")
+    if str(finalizer_source_sha).lower() != expected_source_sha.lower():
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_SOURCE_CHANGED")
+    component_sha = _file_sha256(Path(__file__))
+    if component_sha != str(authorization.get("source_component_sha256") or ""):
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_COMPONENT_CHANGED")
+    observed_head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=root, text=True
+    ).strip().lower()
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", expected_source_sha, observed_head],
+        cwd=root,
+        check=False,
+    )
+    if ancestor.returncode != 0:
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_SOURCE_NOT_ANCESTOR")
+    allowed_paths = sorted(
+        str(value).replace("\\", "/")
+        for value in authorization.get("allowed_execution_head_changed_paths") or ()
+    )
+    changed_paths = sorted(
+        line.replace("\\", "/")
+        for line in subprocess.check_output(
+            ["git", "diff", "--name-only", f"{expected_source_sha}..{observed_head}"],
+            cwd=root,
+            text=True,
+        ).splitlines()
+        if line.strip()
+    )
+    if changed_paths != allowed_paths:
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_SOURCE_BUNDLE_CHANGED")
+    if subprocess.run(["git", "diff", "--quiet"], cwd=root, check=False).returncode:
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_WORKTREE_DIRTY")
+    if subprocess.run(
+        ["git", "diff", "--cached", "--quiet"], cwd=root, check=False
+    ).returncode:
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_FINALIZER_INDEX_DIRTY")
+
+    runtime_root = root / "runtime" / f"{CONSENSUS_RUNTIME_PREFIX}_{runtime_date}"
+    checkpoint = runtime_root / "checkpoints" / "checkpoint_000"
+    checkpoint_manifest_file = checkpoint / "manifest.json"
+    checkpoint_manifest = json.loads(
+        checkpoint_manifest_file.read_text(encoding="utf-8")
+    )
+    saved_manifest = str(checkpoint_manifest.pop("manifest_sha256", ""))
+    if (
+        _canonical_sha256(checkpoint_manifest) != saved_manifest
+        or checkpoint_manifest["files"] != _v24_checkpoint_files(checkpoint)
+        or _file_sha256(checkpoint_manifest_file)
+        != str(authorization.get("checkpoint_manifest_file_sha256") or "")
+        or saved_manifest
+        != str(authorization.get("checkpoint_manifest_sha256") or "")
+        or int(checkpoint_manifest.get("completed_candidate_count", -1)) != 35
+        or int(checkpoint_manifest.get("strict_evaluated_count", -1)) != 35
+        or int(checkpoint_manifest.get("candidate_local_failure_count", -1)) != 0
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_CHECKPOINT_CHANGED")
+    ledger_path = runtime_root / "candidate_ledger.parquet"
+    checkpoint_ledger = checkpoint / "candidate_ledger.parquet"
+    if (
+        not ledger_path.is_file()
+        or not checkpoint_ledger.is_file()
+        or _file_sha256(ledger_path) != _file_sha256(checkpoint_ledger)
+        or _file_sha256(checkpoint_ledger)
+        != str(authorization.get("candidate_ledger_sha256") or "")
+    ):
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_LEDGER_CHANGED")
+    finalization_root = runtime_root / "offline_finalization_v1"
+    if finalization_root.exists():
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_TERMINAL_ALREADY_EXISTS")
+
+    ledger = pd.read_parquet(checkpoint_ledger)
+    grouped = select_consensus_cohort(root, receipt=receipt)
+    expected_groups = {
+        group: {str(row["candidate_id"]) for row in rows}
+        for group, rows in grouped.items()
+    }
+    observed_groups = {
+        group: set(
+            ledger.loc[ledger["consensus_group"].eq(group), "candidate_id"].astype(str)
+        )
+        for group in ("main", "other")
+    }
+    if expected_groups != observed_groups:
+        raise RuntimeError("FAMILY_CONSENSUS_OFFLINE_GROUP_IDENTITY_CHANGED")
+    capacity_authority = _checkpoint_asset_capacity_authority(runtime_root)
+    workers, target, restoration = _restore_consensus_checkpoint_paths(
+        checkpoint,
+        ledger.to_dict("records"),
+        asset_capacity_upper_bound=int(
+            capacity_authority["asset_capacity_upper_bound"]
+        ),
+    )
+    decision, tables = _build_consensus_aggregation_result(
+        grouped=grouped,
+        workers=workers,
+        target=target,
+        producer_source_sha=str(checkpoint_manifest["producer_source_sha"]),
+    )
+    restoration = {**restoration, "asset_capacity_authority": capacity_authority}
+    decision = _apply_checkpoint_projection_boundary(decision, restoration)
+    decision["offline_checkpoint_finalization"] = {
+        **restoration,
+        "source_implementation_sha": expected_source_sha,
+        "execution_head_sha": observed_head,
+        "checkpoint_manifest_file_sha256": _file_sha256(checkpoint_manifest_file),
+        "candidate_evaluation_count": 0,
+    }
+
+    temporary = runtime_root / f"offline_finalization_v1.tmp-{os.getpid()}"
+    if temporary.exists():
+        raise FileExistsError(temporary)
+    temporary.mkdir(parents=True)
+    report_path = root / "reports" / f"CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_{runtime_date}.md"
+    try:
+        for name, table_rows in tables.items():
+            source = temporary / name
+            pd.DataFrame(table_rows).to_parquet(source, index=False)
+        decision_source = temporary / "final_decision.json"
+        _write_json(decision_source, decision)
+        report_source = temporary / "report.md"
+        report_source.write_text(_consensus_report(decision), encoding="utf-8")
+
+        result_entries = [
+            {
+                "path": str(ledger_path.relative_to(root).as_posix()),
+                "bytes": ledger_path.stat().st_size,
+                "sha256": _file_sha256(ledger_path),
+            },
+            {
+                "path": str(checkpoint_manifest_file.relative_to(root).as_posix()),
+                "bytes": checkpoint_manifest_file.stat().st_size,
+                "sha256": _file_sha256(checkpoint_manifest_file),
+            },
+        ]
+        result_entries.extend(
+            {
+                "path": str(
+                    (finalization_root / source.name).relative_to(root).as_posix()
+                ),
+                "bytes": source.stat().st_size,
+                "sha256": _file_sha256(source),
+            }
+            for source in sorted(temporary.iterdir(), key=lambda value: value.name)
+        )
+        carrier_manifest = json.loads(
+            (runtime_root / "aligned_carrier_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        manifest = {
+            "schema_version": 1,
+            "status": str(decision["status"]),
+            "producer_source_sha": str(checkpoint_manifest["producer_source_sha"]),
+            "offline_finalizer_source_sha": expected_source_sha,
+            "execution_head_sha": observed_head,
+            "finalization_mode": "PERSISTED_CHECKPOINT_PATH_AGGREGATION_ONLY",
+            "runtime": str(finalization_root.relative_to(root).as_posix()),
+            "report": str(
+                (finalization_root / "report.md").relative_to(root).as_posix()
+            ),
+            "run_receipt_sha256": _file_sha256(receipt_file),
+            "selection_receipt_sha256": str(
+                checkpoint_manifest["selection_receipt_sha256"]
+            ),
+            "frozen_contract_sha256": str(
+                checkpoint_manifest["frozen_contract_sha256"]
+            ),
+            "carrier_manifest_sha256": str(carrier_manifest["manifest_sha256"]),
+            "carrier_manifest_file_sha256": _file_sha256(
+                runtime_root / "aligned_carrier_manifest.json"
+            ),
+            "candidate_count": 35,
+            "strict_evaluated_count": 35,
+            "candidate_local_failure_count": 0,
+            "active_wall_seconds": time.perf_counter() - started,
+            "pair_evaluated_per_hour": None,
+            "workers": int(checkpoint_manifest["workers"]),
+            "memory_fallback_used": bool(
+                checkpoint_manifest["memory_fallback_used"]
+            ),
+            "checkpoint_count": 1,
+            "market_payload_read_after_selection_freeze": True,
+            "offline_market_read_count": 0,
+            "offline_candidate_evaluation_count": 0,
+            "candidate_generation_performed": False,
+            "optimizer_feedback_written": False,
+            "policy_memory_written": False,
+            "archive_written": False,
+            "holdout_read_count": 0,
+            "oos": False,
+            "promotion_authorized": False,
+            "files": result_entries,
+        }
+        manifest["bundle_sha256"] = _canonical_sha256(manifest)
+        manifest_source = temporary / "run_manifest.json"
+        _write_json(manifest_source, manifest)
+        os.replace(temporary, finalization_root)
+        report_copy = report_path.with_name(
+            f"{report_path.name}.tmp-{os.getpid()}"
+        )
+        try:
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(finalization_root / "report.md", report_copy)
+            os.replace(report_copy, report_path)
+        except OSError:
+            if report_copy.exists():
+                report_copy.unlink()
+    finally:
+        if temporary.exists():
+            shutil.rmtree(temporary)
+    return decision
+
+
 def check_consensus_gate(
     repo_root: Path,
     *,
@@ -1969,7 +2584,11 @@ def check_consensus_gate(
     root = Path(repo_root)
     receipt = load_consensus_receipt(root, receipt_path=receipt_path)
     runtime_root = root / "runtime" / f"{CONSENSUS_RUNTIME_PREFIX}_{runtime_date}"
+    finalization_root = runtime_root / "offline_finalization_v1"
     errors: list[str] = []
+    if finalization_root.exists() and not finalization_root.is_dir():
+        errors.append("offline_finalization_reserved_path_not_directory")
+    terminal_root = finalization_root if finalization_root.is_dir() else runtime_root
     try:
         grouped = select_consensus_cohort(root, receipt=receipt)
         expected_ids = {
@@ -2010,13 +2629,16 @@ def check_consensus_gate(
         ):
             errors.append("checkpoint_restore")
         decision = json.loads(
-            (runtime_root / "final_decision.json").read_text(encoding="utf-8")
+            (terminal_root / "final_decision.json").read_text(encoding="utf-8")
         )
-        if decision["status"] == "FAMILY_CONSENSUS_GATE_COMPLETE":
-            metrics = pd.read_parquet(runtime_root / "consensus_metrics.parquet")
-            influence = pd.read_parquet(runtime_root / "candidate_influence.parquet")
+        if decision["status"] in {
+            "FAMILY_CONSENSUS_GATE_COMPLETE",
+            "FAMILY_CONSENSUS_CHECKPOINT_PROJECTION_COMPLETE",
+        }:
+            metrics = pd.read_parquet(terminal_root / "consensus_metrics.parquet")
+            influence = pd.read_parquet(terminal_root / "candidate_influence.parquet")
             concentration = pd.read_parquet(
-                runtime_root / "consensus_concentration.parquet"
+                terminal_root / "consensus_concentration.parquet"
             )
             if (
                 set(metrics["consensus_group"].astype(str)) != {"main", "other"}
@@ -2037,11 +2659,70 @@ def check_consensus_gate(
         elif decision["status"] != "FAMILY_CONSENSUS_FIXED_MEMBER_FAILURE":
             errors.append("terminal_status")
         run_manifest = json.loads(
-            (runtime_root / "run_manifest.json").read_text(encoding="utf-8")
+            (terminal_root / "run_manifest.json").read_text(encoding="utf-8")
         )
         saved_bundle = str(run_manifest.pop("bundle_sha256", ""))
         if _canonical_sha256(run_manifest) != saved_bundle:
             errors.append("run_manifest_hash")
+        if run_manifest.get("finalization_mode") == (
+            "PERSISTED_CHECKPOINT_PATH_AGGREGATION_ONLY"
+        ):
+            finalization = dict(decision.get("offline_checkpoint_finalization") or {})
+            authorization = dict(
+                receipt.get("offline_checkpoint_finalization") or {}
+            )
+            outcome = dict(
+                receipt.get("offline_checkpoint_finalization_outcome") or {}
+            )
+            expected_receipt_sha = str(
+                outcome.get("authorization_receipt_sha256")
+                or _file_sha256(root / str(receipt_path))
+            )
+            if (
+                int(run_manifest.get("offline_market_read_count", -1)) != 0
+                or int(run_manifest.get("offline_candidate_evaluation_count", -1))
+                != 0
+                or int(finalization.get("market_read_count", -1)) != 0
+                or int(finalization.get("candidate_evaluation_count", -1)) != 0
+                or str(run_manifest.get("offline_finalizer_source_sha") or "")
+                != str(authorization.get("source_implementation_sha") or "")
+                or str(run_manifest.get("run_receipt_sha256") or "")
+                != expected_receipt_sha
+                or int(finalization.get("candidate_count", -1)) != 35
+                or int(finalization.get("timestamp_count", -1)) != 330
+            ):
+                errors.append("offline_finalization_boundary")
+            capacity_authority = _checkpoint_asset_capacity_authority(runtime_root)
+            restored_workers, restored_target, restoration = (
+                _restore_consensus_checkpoint_paths(
+                    checkpoint,
+                    ledger.to_dict("records"),
+                    asset_capacity_upper_bound=int(
+                        capacity_authority["asset_capacity_upper_bound"]
+                    ),
+                )
+            )
+            rebuilt_decision, _ = _build_consensus_aggregation_result(
+                grouped=grouped,
+                workers=restored_workers,
+                target=restored_target,
+                producer_source_sha=str(decision["producer_source_sha"]),
+            )
+            restoration = {**restoration, "asset_capacity_authority": capacity_authority}
+            rebuilt_decision = _apply_checkpoint_projection_boundary(
+                rebuilt_decision, restoration
+            )
+            if (
+                rebuilt_decision["main_consensus"] != decision["main_consensus"]
+                or rebuilt_decision["other_consensus_descriptive"]
+                != decision["other_consensus_descriptive"]
+                or restoration["target_sha256"]
+                != finalization.get("target_sha256")
+                or decision.get("status")
+                != "FAMILY_CONSENSUS_CHECKPOINT_PROJECTION_COMPLETE"
+                or decision.get("interpretation_robust_to_projection_bound") is not True
+            ):
+                errors.append("offline_finalization_replay")
         for item in run_manifest["files"]:
             path = root / str(item["path"])
             if (
@@ -2166,12 +2847,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             "freeze-consensus",
             "prepare-consensus-carrier",
             "run-consensus",
+            "finalize-consensus-checkpoint",
             "check-consensus",
         ),
     )
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--runtime-date", default=DEFAULT_RUNTIME_DATE)
     parser.add_argument("--producer-source-sha")
+    parser.add_argument("--finalizer-source-sha")
     parser.add_argument("--receipt-path")
     parser.add_argument("--new-oi-source-root", type=Path)
     parser.add_argument("--old-aligned-cache", type=Path)
@@ -2179,9 +2862,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--top100-tar", type=Path)
     parser.add_argument("--ranks101-200-tar", type=Path)
     args = parser.parse_args(argv)
-    is_consensus = args.command.endswith("consensus") or args.command == (
-        "prepare-consensus-carrier"
-    )
+    is_consensus = args.command.endswith("consensus") or args.command in {
+        "prepare-consensus-carrier",
+        "finalize-consensus-checkpoint",
+    }
     receipt_path = str(
         args.receipt_path
         or (CONSENSUS_RECEIPT_PATH if is_consensus else RECEIPT_PATH)
@@ -2245,6 +2929,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.repo_root,
             runtime_date=args.runtime_date,
             producer_source_sha=args.producer_source_sha,
+            receipt_path=receipt_path,
+        )
+        print(json.dumps(result, sort_keys=True, default=str))
+        return 0
+    if args.command == "finalize-consensus-checkpoint":
+        if not args.finalizer_source_sha:
+            parser.error("--finalizer-source-sha is required")
+        result = finalize_consensus_checkpoint(
+            args.repo_root,
+            runtime_date=args.runtime_date,
+            finalizer_source_sha=str(args.finalizer_source_sha),
             receipt_path=receipt_path,
         )
         print(json.dumps(result, sort_keys=True, default=str))
