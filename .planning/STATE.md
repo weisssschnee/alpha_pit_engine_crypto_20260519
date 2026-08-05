@@ -39,6 +39,14 @@ target, mapping, 5 bps cost, cohort, and interval; it does not qualify Alpha or
 a common causal mechanism. The predecessor target-shape failure remains
 recorded below as history.
 
+The existing CURRENT search capability node now points to the committed
+checker-backed projection evidence with `STATIC_VERIFIED / PASS`; no node,
+authority, or lifecycle transition was added. Global CURRENT remains truthfully
+`STALE` because the 21,761-node RAW graph predates the intervening source and
+artifact commits. The installed maintenance route can refresh CURRENT but the
+RAW builder dependency is absent, and this task did not install a new
+dependency merely to erase that global warning.
+
 The preceding completed phase was:
 
 `CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_ACQUISITION_FAILED_NO_GATE_CLOSED`
