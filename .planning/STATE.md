@@ -4,6 +4,23 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_ACQUISITION_REPAIR_AUTHORIZED_NOT_STARTED`
+
+The current user instruction reauthorizes only a targeted repair of the four
+failed OKX venue-day coordinates. The existing 38 completed coordinates must be
+reused through their done markers and cannot be redownloaded. If and only if the
+same frozen acquisition reaches 42/42 with zero failures and exact symbol-map
+identity, the previously unstarted exact 35-candidate consensus gate may run
+once under the unchanged producer, cohort, target, mapping, 5 bps cost, matched
+controls, evaluator, and compute contract. No generation, reseed, tuning,
+optimizer feedback, archive write, OOS, promotion, or second candidate gate is
+authorized.
+
+The repair receipt is `RUN_AUTHORIZED_ACQUISITION_REPAIR_NOT_STARTED` with
+`run_authorized=true`. Its predecessor failure remains recorded below.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_ACQUISITION_FAILED_NO_GATE_CLOSED`
 
 The separately authorized 4h two-axis family-consensus development gate is

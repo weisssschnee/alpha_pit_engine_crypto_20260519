@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1",
-  "decision_id": "USER_AUTHORIZED_4H_TWO_AXIS_FAMILY_CONSENSUS_DEV_GATE_20260805",
-  "status": "RUN_AUTHORIZATION_CONSUMED_ACQUISITION_FAILED_NO_GATE",
-  "run_authorized": false,
+  "decision_id": "USER_AUTHORIZED_FAMILY_CONSENSUS_ACQUISITION_REPAIR_20260805",
+  "status": "RUN_AUTHORIZED_ACQUISITION_REPAIR_NOT_STARTED",
+  "run_authorized": true,
   "source_implementation_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
   "source_evidence": {
     "candidate_ledger_path": "runtime/crypto_search_run_evidence_v1_1_20260805/candidate_ledger.parquet",
@@ -96,6 +96,15 @@
   "data_acquisition": {
     "authorized": true,
     "single_pc2_acquisition": true,
+    "resume_existing_immutable_root": true,
+    "retry_failed_coordinates_only": true,
+    "previous_successful_day_coordinates": 38,
+    "authorized_failed_coordinates": [
+      "okx_futures/2026-07-18",
+      "okx_futures/2026-07-19",
+      "okx_futures/2026-07-21",
+      "okx_futures/2026-07-22"
+    ],
     "oi_mark_start_date": "2026-07-18",
     "oi_mark_end_date_inclusive": "2026-07-31",
     "aggtrades_source": "EXISTING_VERIFIED_FULL_2026_07_TARS_UNREAD_SLICE_ONLY",
@@ -121,7 +130,7 @@
     "challenge": false,
     "forward": false
   },
-  "outcome": {
+  "previous_outcome": {
     "status": "ACQUISITION_FAILED_NO_CANDIDATE_GATE",
     "completed_at": "2026-08-05T10:38:25.589678+00:00",
     "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
@@ -172,5 +181,21 @@
     "oos_read": false,
     "promotion_authorized": false,
     "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json"
-  }
+  },
+  "repair_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "authorized_at": "2026-08-05T12:20:00+00:00",
+    "scope": "RETRY_EXACT_FOUR_FAILED_OKX_COORDINATES_THEN_RUN_NEVER_STARTED_35_CANDIDATE_GATE_ONCE",
+    "redownload_successful_coordinates": false,
+    "candidate_gate_previously_started": false,
+    "candidate_gate_runs_authorized": 1,
+    "new_candidate_generation": false,
+    "reseed": false,
+    "parameter_tuning": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "oos": false,
+    "promotion": false
+  },
+  "outcome": null
 }
