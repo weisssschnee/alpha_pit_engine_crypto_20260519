@@ -4,7 +4,30 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE_ENGINEERING_PASS_RESEARCH_HOLD`
+`CRYPTO_SEARCH_EVIDENCE_V1_1_CHAMPION_VALIDATION_RUNTIME_FAILED_RESEARCH_UNCHANGED`
+
+The separately authorized one-time no-feedback validation of the 49 final
+positive V1.1 behavior-family champions is consumed and closed without an
+economic result. Producer source
+`5fd83536cc84121636a28a6f09b3de3b8e5c8636` froze the exact 49 identities and
+passed 49/49 static typed reconstruction on PC2. After the validation entry,
+the detached PowerShell wrapper promoted a NumPy `RuntimeWarning` on stderr to
+a terminating `NativeCommandError` because it used
+`ErrorActionPreference=Stop`; the Python parent exited before
+`checkpoint_000`. The single orphan worker was terminated only to release the
+inherited pipe and memory. There are zero auditable completed candidates, no
+candidate ledger, and no migration, validation, or Alpha conclusion.
+
+PC2 and local independent checkers both fail on the expected missing candidate
+ledger. No restart, backfill, reseed, tuning, rescue rerun, optimizer feedback,
+policy/archive write, holdout/OOS read, promotion, or automatic expansion was
+started. The one-time receipt is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_RUNTIME_WRAPPER_FAILED` with
+`run_authorized=false`. Closure verification passes 435 tests with the existing
+NumPy degrees-of-freedom warning. This runtime-only failure changes no CURRENT search
+capability authority and therefore does not require a Graph transition.
+
+The underlying V1.1 development evidence remains:
 
 The one-time V1.1 fresh-state development run is consumed and closed. Producer
 `67701ba73ac16c3da6cbdf6d98431d6d1df998e1` completed exactly 2,000 strict
@@ -1055,13 +1078,13 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not build a standalone Failure Attribution Framework or run another generic
-validation. Before any separately authorized future Search Engine run, translate
-the accepted evidence contract into the smallest run-local schema additions and
-freeze which of the sixteen questions that run can answer. Reuse the existing
-target preflight, CandidateSpec, matched evaluator, Behavior Archive, V2.5
-provenance, waterfall, checkpoint, and ledger authorities. Require at least one
-real joined observation before claiming the contract is implemented in research.
+Do not infer a validation or migration result from the failed 49-candidate run,
+and do not restart it under the consumed receipt. Before any separately
+authorized future attempt, the PC2 launch wrapper must keep native stderr
+warnings diagnostic while using the child process exit code as terminal
+authority. Reuse the exact frozen cohort and existing target, compiler, mapping,
+evaluator, reward, provenance, checkpoint, and ledger authorities; do not add a
+new search or failure-attribution framework.
 
 Historical stage-attribution replay remains unauthorized. No market search,
 prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,

@@ -1,0 +1,18 @@
+﻿{
+    "schema_version":  1,
+    "status":  "LAUNCHED",
+    "job_id":  "job_20260805_105900_5fd835",
+    "pid":  26460,
+    "launched_at":  "2026-08-05T10:57:23.3036379+08:00",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_validation_v1_5fd83536",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_validation_v1_5fd83536\\runtime\\crypto_search_evidence_v1_1_validation_20260805",
+    "producer_source_sha":  "5fd83536cc84121636a28a6f09b3de3b8e5c8636",
+    "python":  "D:\\HermesWorker\\python311\\python.exe",
+    "python_overlay":  "D:\\HermesWorker\\runtime\\crypto_search_py311_overlay_94b016fa\\site-packages",
+    "workers_default":  10,
+    "workers_memory_fallback":  8,
+    "selection_preflight":  {
+                                "candidate_count":  49,
+                                "selection_sha256":  "C3BD1C0D0940BEE2FAE41B51BD94D11B3684CD93B4E9AD84D125AEC0D5A746DE"
+                            }
+}

@@ -16,7 +16,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_receipt_freezes_one_no_feedback_development_validation() -> None:
-    receipt = load_validation_receipt(REPO_ROOT, require_authorized=True)
+    receipt = load_validation_receipt(REPO_ROOT)
+    assert receipt["run_authorized"] is False
+    assert receipt["status"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_RUNTIME_WRAPPER_FAILED"
+    )
     assert receipt["selection"]["candidate_count_exact"] == 49
     assert receipt["selection"]["selection_sha256"] == EXPECTED_SELECTION_SHA256
     assert receipt["selection"]["backfill_allowed"] is False
@@ -32,6 +36,11 @@ def test_receipt_freezes_one_no_feedback_development_validation() -> None:
     assert receipt["boundaries"]["holdout_read"] is False
     assert receipt["boundaries"]["oos"] is False
     assert receipt["boundaries"]["promotion"] is False
+    assert receipt["outcome"]["status"] == (
+        "ENGINE_RUNTIME_WRAPPER_FAILED_NO_CHECKPOINT"
+    )
+    assert receipt["outcome"]["auditable_completed_candidate_count"] == 0
+    assert receipt["outcome"]["restart_started"] is False
 
 
 def test_exact_final_champion_selection_is_immutable_and_complete() -> None:

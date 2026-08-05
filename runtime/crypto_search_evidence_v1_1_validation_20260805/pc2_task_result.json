@@ -1,0 +1,10 @@
+﻿{
+    "schema_version":  1,
+    "job_id":  "job_20260805_105900_5fd835",
+    "completed_at":  "2026-08-05T11:02:44.8690444+08:00",
+    "exit_code":  1,
+    "producer_source_sha":  "5fd83536cc84121636a28a6f09b3de3b8e5c8636",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_validation_v1_5fd83536\\runtime\\crypto_search_evidence_v1_1_validation_20260805",
+    "final_decision_exists":  false,
+    "run_manifest_exists":  false
+}

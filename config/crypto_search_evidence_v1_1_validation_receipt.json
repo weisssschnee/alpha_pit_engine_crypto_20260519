@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION",
-  "status": "RUN_AUTHORIZED_ONE_TIME_NO_FEEDBACK_DEVELOPMENT_VALIDATION",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_RUNTIME_WRAPPER_FAILED",
+  "run_authorized": false,
   "decision_id": "USER_AUTHORIZED_EVIDENCE_V1_1_CHAMPION_VALIDATION_20260805",
   "source_evidence": {
     "candidate_ledger_path": "runtime/crypto_search_run_evidence_v1_1_20260805/candidate_ledger.parquet",
@@ -74,5 +74,33 @@
     "new_ast": false,
     "new_graph_node": false
   },
-  "outcome": null
+  "outcome": {
+    "status": "ENGINE_RUNTIME_WRAPPER_FAILED_NO_CHECKPOINT",
+    "producer_source_sha": "5fd83536cc84121636a28a6f09b3de3b8e5c8636",
+    "runtime": "runtime/crypto_search_evidence_v1_1_validation_20260805",
+    "job_id": "job_20260805_105900_5fd835",
+    "selection_receipt_sha256": "0EE27BBF83DD43974C00BD85303C5E6061F07CFFE35A4ED0276F3B178ACF60B8",
+    "frozen_contract_sha256": "E3595EA40C1C3A94DB0D749F58BF5D537C51EDC770BFE98DBFDA879A1868F20E",
+    "selected_candidate_count": 49,
+    "checkpoint_count": 0,
+    "auditable_completed_candidate_count": 0,
+    "strict_evaluated_count": 0,
+    "failure_layer": "PC2_POWERSHELL_NATIVE_STDERR_WRAPPER",
+    "failure_reason": "NUMPY_RUNTIMEWARNING_PROMOTED_TO_NATIVE_COMMAND_ERROR_BY_ERRORACTION_STOP",
+    "worker_memory_fallback_used": false,
+    "restart_started": false,
+    "backfill_started": false,
+    "rescue_rerun_started": false,
+    "seed_changed": false,
+    "parameter_tuning_performed": false,
+    "optimizer_feedback_written": false,
+    "policy_memory_written": false,
+    "archive_written": false,
+    "holdout_read_count": 0,
+    "oos": false,
+    "promotion_authorized": false,
+    "pc2_checker": "FAIL_EXPECTED_MISSING_CANDIDATE_LEDGER",
+    "local_checker": "FAIL_EXPECTED_MISSING_CANDIDATE_LEDGER",
+    "research_interpretation": "NO_ECONOMIC_VALIDATION_RESULT"
+  }
 }

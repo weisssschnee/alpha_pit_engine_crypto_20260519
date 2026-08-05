@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-08-05T03:09:05.815603+00:00",
+  "errors": [
+    "FileNotFoundError:[Errno 2] No such file or directory: 'G:\\\\Project_V7_Rotation\\\\alpha_pit_engine_crypto_20260519\\\\runtime\\\\crypto_search_evidence_v1_1_validation_20260805\\\\candidate_ledger.parquet'"
+  ],
+  "runtime": "runtime/crypto_search_evidence_v1_1_validation_20260805",
+  "schema_version": 1,
+  "status": "FAIL"
+}

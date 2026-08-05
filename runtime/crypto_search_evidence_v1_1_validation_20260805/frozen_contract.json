@@ -1,0 +1,25 @@
+{
+  "archive_write": false,
+  "candidate_count": 49,
+  "candidate_generation": false,
+  "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "contracts_sha256": "7F94104F1465E6F0DE60111BB1410535B67E832568FF80176229AB5816B2A0BA",
+  "frozen_contract_sha256": "E3595EA40C1C3A94DB0D749F58BF5D537C51EDC770BFE98DBFDA879A1868F20E",
+  "holdout_read": false,
+  "optimizer_feedback": false,
+  "producer_source_sha": "5fd83536cc84121636a28a6f09b3de3b8e5c8636",
+  "run_receipt_sha256": "9B8654B1F7FD19F7D5C3A9ECC82A5D3D3B36C08E14F132E240DACBA57E0695A6",
+  "schema_version": 1,
+  "selection_receipt_sha256": "0EE27BBF83DD43974C00BD85303C5E6061F07CFFE35A4ED0276F3B178ACF60B8",
+  "selection_sha256": "C3BD1C0D0940BEE2FAE41B51BD94D11B3684CD93B4E9AD84D125AEC0D5A746DE",
+  "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "validation": {
+    "cost_bps": 5.0,
+    "end_exclusive": "2026-01-01T00:00:00Z",
+    "execution_venue": "BINANCE_USD_M",
+    "role": "DEVELOPMENT_VALIDATION_NO_FEEDBACK",
+    "start": "2025-11-01T00:00:00Z"
+  },
+  "workers_default": 10,
+  "workers_fallback": 8
+}

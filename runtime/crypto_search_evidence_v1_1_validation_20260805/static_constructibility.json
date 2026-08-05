@@ -1,0 +1,8 @@
+{
+  "candidate_count": 49,
+  "market_read_performed": false,
+  "proofs_sha256": "D50585994DD9B11178C742298A00BB4C8B1A13701D202E4A15393C3F18E924E5",
+  "schema_version": 1,
+  "status": "PASS_V24_STATIC_CONSTRUCTIBILITY_SWEEP",
+  "unique_candidate_count": 49
+}
