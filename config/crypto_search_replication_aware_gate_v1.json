@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260806_crypto_replication_aware_search_gate_v1",
+  "authorization": "ONE_FRESH_STATE_1536_STRICT_DEVELOPMENT_BLOCK_ROBUST_GATE",
+  "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+  "aggregate_knowledge_path": "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+  "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+  "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+  "stages": [
+    {
+      "stage_id": "CHECKPOINT_000_ROTATING_EQUAL_TOTAL_ALLOCATION",
+      "checkpoint_indexes": [0],
+      "strict_count": 512,
+      "allocation_per_checkpoint": {
+        "block_robust_typed_random_v1": 172,
+        "block_robust_evolution_current_v1": 170,
+        "block_robust_evolution_replication_v1": 170
+      }
+    },
+    {
+      "stage_id": "CHECKPOINT_001_ROTATING_EQUAL_TOTAL_ALLOCATION",
+      "checkpoint_indexes": [1],
+      "strict_count": 512,
+      "allocation_per_checkpoint": {
+        "block_robust_typed_random_v1": 170,
+        "block_robust_evolution_current_v1": 172,
+        "block_robust_evolution_replication_v1": 170
+      }
+    },
+    {
+      "stage_id": "CHECKPOINT_002_ROTATING_EQUAL_TOTAL_ALLOCATION",
+      "checkpoint_indexes": [2],
+      "strict_count": 512,
+      "allocation_per_checkpoint": {
+        "block_robust_typed_random_v1": 170,
+        "block_robust_evolution_current_v1": 170,
+        "block_robust_evolution_replication_v1": 172
+      }
+    }
+  ],
+  "search": {
+    "strict_evaluated_target": 1536,
+    "checkpoint_size": 512,
+    "checkpoint_count": 3,
+    "raw_generation_attempts_maximum": 9600,
+    "wall_time_seconds_maximum": 10800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "required_pairs_per_hour": 512.0,
+    "stateless_random_inflight_rule": "CEIL(workers / active_policy_lanes)",
+    "adaptive_inflight_per_policy_lane": 1,
+    "cache_scope": "EXISTING_CANDIDATE_LOCAL_DAG_ONLY",
+    "minimum_free_memory_reserve_bytes": 12884901888
+  },
+  "policy_parameters": {
+    "block_robust_typed_random_v1": {
+      "duplicate_resample_limit": 64,
+      "allowed_horizons": [4],
+      "rng_stream_id": "block_robust_typed_random_v1"
+    },
+    "block_robust_evolution_current_v1": {
+      "duplicate_resample_limit": 64,
+      "warmup": 32,
+      "tournament_size": 4,
+      "population_limit": 256,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2,
+      "allowed_horizons": [4],
+      "rng_stream_id": "block_robust_evolution_current_v1",
+      "selection_authority": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2"
+    },
+    "block_robust_evolution_replication_v1": {
+      "duplicate_resample_limit": 64,
+      "warmup": 32,
+      "tournament_size": 4,
+      "population_limit": 256,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2,
+      "allowed_horizons": [4],
+      "rng_stream_id": "block_robust_evolution_replication_v1",
+      "selection_authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+    }
+  },
+  "block_robust_contract": {
+    "schema_version": 1,
+    "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1",
+    "mechanism_shape": "BINARY_TWO_AXIS_ONLY",
+    "horizons_hours": [4],
+    "partition_tail_purge_hours": 6,
+    "feature_warmup": "PAST_ONLY_EXISTING_EXPRESSION_WARMUP",
+    "position_boundary": "ZERO_START_CHARGE_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION",
+    "replicated_candidate_rule": "AT_LEAST_2_OF_3_BLOCKS_BOTH_MATCHED_NET_MEAN_POSITIVE",
+    "all_three_rule": "3_OF_3_BLOCKS_BOTH_MATCHED_NET_MEAN_POSITIVE",
+    "ordering": [
+      "REPLICATED_POSITIVE_BLOCK_COUNT_DESC",
+      "WORST_BLOCK_MIN_MATCHED_NET_MEAN_DESC",
+      "MEDIAN_BLOCK_JOINT_SEARCH_REWARD_DESC",
+      "MAX_REQUIRED_ONE_WAY_TURNOVER_ASC",
+      "MIN_REQUIRED_SUPPORT_DESC",
+      "CANDIDATE_ID_ASC"
+    ],
+    "blocks": [
+      {
+        "block_id": "development_block_0",
+        "start": "2025-08-29T07:00:00Z",
+        "end_exclusive": "2025-09-19T12:00:00Z"
+      },
+      {
+        "block_id": "development_block_1",
+        "start": "2025-09-19T12:00:00Z",
+        "end_exclusive": "2025-10-10T18:00:00Z"
+      },
+      {
+        "block_id": "development_block_2",
+        "start": "2025-10-10T18:00:00Z",
+        "end_exclusive": "2025-11-01T00:00:00Z"
+      }
+    ]
+  },
+  "qualification": {
+    "equal_strict_count_per_arm": 512,
+    "replicated_count_strictly_above_current_evolution": true,
+    "replicated_per_process_cpu_hour_strictly_above_current_evolution": true,
+    "minimum_behavior_family_ratio_to_current_evolution": 0.9,
+    "minimum_strict_raw_reachability_ratio_to_current_evolution": 0.9,
+    "minimum_supported_template_count_with_positive_delta": 2,
+    "minimum_candidates_per_arm_template": 30,
+    "leave_best_template_out_delta_must_be_positive": true
+  },
+  "evidence_contract": {
+    "contract_id": "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1",
+    "campaign_revision": "DEVELOPMENT_BLOCK_ROBUST_A_B",
+    "passive_diagnostics_only": false,
+    "optimizer_feedback_allowed": "BLOCK_ROBUST_EVOLUTION_ARM_ONLY",
+    "reward_formula_changed": false,
+    "archive_identity_input_allowed": false,
+    "required_layers": [
+      "TARGET_AND_EXECUTION_CONTRACT",
+      "SEARCH_SPACE_EXPOSURE",
+      "OPTIMIZER_PRODUCTIVITY",
+      "THREE_BLOCK_REPLICATION",
+      "MATCHED_INCREMENT",
+      "EXECUTABLE_BEHAVIOR",
+      "ECONOMIC_WATERFALL"
+    ],
+    "minimum_comparable_candidates_per_reported_stratum": 30,
+    "under_supported_stratum_status": "NOT_OBSERVED_SUFFICIENTLY",
+    "complexity_is_objective": false,
+    "historical_inference_allowed": false
+  },
+  "question_scope": {
+    "Q01_BLOCK_REPLICATION": "IN_SCOPE",
+    "Q02_EQUAL_COUNT_POLICY_PRODUCTIVITY": "IN_SCOPE",
+    "Q03_CPU_PRODUCTIVITY": "IN_SCOPE",
+    "Q04_BEHAVIOR_FAMILY_COLLAPSE": "IN_SCOPE",
+    "Q05_REACHABILITY": "IN_SCOPE",
+    "Q06_TEMPLATE_CONCENTRATION": "IN_SCOPE",
+    "Q07_VALIDATION_MIGRATION": "NOT_AUTHORIZED",
+    "Q08_OOS": "NOT_AUTHORIZED"
+  },
+  "validation": {
+    "authorized": false,
+    "status": "NOT_AUTHORIZED",
+    "holdout_read": false,
+    "automatic_continuation": false
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "persistent_mechanism_knowledge": {
+    "declarative_mechanism_specs": true,
+    "aggregate_outcomes": true,
+    "behavior_yield": true,
+    "lifecycle": true,
+    "sampling_probability_prior": false,
+    "individual_candidate_reward": false,
+    "population": false,
+    "cem_distribution": false,
+    "rng_state": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "validation": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "new_fields": false,
+    "new_grammar": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "target_change": false,
+    "cost_change": false,
+    "reward_formula_change": false,
+    "mapping_change": false,
+    "historical_replay": false,
+    "automatic_expansion": false,
+    "rescue_rerun": false,
+    "parameter_tuning": false,
+    "search_selection_authority_change": true,
+    "liquidation": "HOLD"
+  }
+}

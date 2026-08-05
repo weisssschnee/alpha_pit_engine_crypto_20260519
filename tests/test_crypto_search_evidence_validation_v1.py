@@ -138,9 +138,7 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
 def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> None:
     receipt = load_consensus_receipt(REPO_ROOT, require_authorized=False)
     assert receipt["run_authorized"] is False
-    assert receipt["status"] == (
-        "RUN_AUTHORIZATION_CONSUMED_AGGREGATION_FAILED_TARGET_SHAPE"
-    )
+    assert receipt["status"] == "OFFLINE_CHECKPOINT_PROJECTION_COMPLETE"
     assert receipt["source_implementation_sha"] == (
         "d3dd61844cd05ca01aba857d57a5abd29c2a5840"
     )
@@ -167,6 +165,15 @@ def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> N
     assert receipt["repair_authorization"]["candidate_gate_previously_started"] is False
     assert receipt["repair_authorization"]["candidate_gate_runs_authorized"] == 1
     assert receipt["repair_authorization"]["oos"] is False
+    offline = receipt["offline_checkpoint_finalization_outcome"]
+    assert offline["status"] == "FAMILY_CONSENSUS_CHECKPOINT_PROJECTION_COMPLETE"
+    assert offline["market_read_count"] == 0
+    assert offline["candidate_evaluation_count"] == 0
+    assert offline["main_interpretation"] == "FAMILY_CONSENSUS_DID_NOT_TRANSFER"
+    assert offline["interpretation_robust_to_projection_bound"] is True
+    assert offline["independent_checker"] == "PASS"
+    assert offline["oos"] is False
+    assert offline["promotion"] is False
     assert receipt["outcome"]["status"] == (
         "FAMILY_CONSENSUS_AGGREGATION_FAILED_TARGET_SHAPE"
     )

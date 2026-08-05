@@ -1367,6 +1367,15 @@ def sample_mechanism_candidate(
     rng: random.Random,
 ) -> CandidateSpec:
     role_domains = domains or mechanism_role_domains(tuple(registry.fields.values()))
+    allowed_horizons = tuple(
+        int(value) for value in role_domains.get("__HORIZONS__", HORIZONS)
+    )
+    if (
+        not allowed_horizons
+        or any(value not in HORIZONS for value in allowed_horizons)
+        or len(set(allowed_horizons)) != len(allowed_horizons)
+    ):
+        raise ValueError("mechanism sampling horizon domain changed")
     left, left_auxiliary = _sample_role_binding(spec.left_role, role_domains, rng)
     right, right_auxiliary = _sample_role_binding(spec.right_role, role_domains, rng)
     if spec.condition_role:
@@ -1391,7 +1400,7 @@ def sample_mechanism_candidate(
         "right_normalizer": rng.choice(NORMALIZERS),
         "condition_normalizer": rng.choice(NORMALIZERS),
         "beta": rng.choice(BETAS),
-        "horizon_hours": rng.choice(HORIZONS),
+        "horizon_hours": rng.choice(allowed_horizons),
         "matched_control_schema": spec.matched_control_schema,
     }
     return mechanism_candidate_from_genes(

@@ -88,6 +88,18 @@ def _array_sha(values: np.ndarray) -> str:
     return digest.hexdigest().upper()
 
 
+def _json_sha(value: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+            default=str,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+
+
 def _average_rank_vector(values: np.ndarray) -> np.ndarray:
     order = np.argsort(values, kind="mergesort")
     ranks = np.empty(values.size, dtype=float)
@@ -964,6 +976,189 @@ def strict_pair_feedback(metrics: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _development_block_robust_ordering(
+    *,
+    candidate: CandidateSpec,
+    primary_weight: np.ndarray,
+    left_delta_weight: np.ndarray,
+    right_delta_weight: np.ndarray,
+    target: np.ndarray,
+    evaluation_mask: np.ndarray,
+    timestamp_ns: np.ndarray,
+    cost_bps: float,
+    full_block_start: str,
+    full_block_end: str,
+    contract: Mapping[str, Any],
+    economic_receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Project the existing evaluator into three purged in-train blocks.
+
+    This is optimizer feedback over the authorized development partition, not
+    validation evidence and not a second evaluator.  Every block calls the
+    same series metrics and turnover authority after slicing the already
+    mapped weights.  Slicing resets positions to zero and charges both initial
+    establishment and terminal liquidation.
+    """
+
+    if contract.get("schema_version") != 1 or contract.get("authority") != (
+        "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+    ):
+        raise ValueError("BLOCK_ROBUST_ORDERING_CONTRACT_CHANGED")
+    if int(candidate.horizon_hours) != 4:
+        raise ValueError("BLOCK_ROBUST_ORDERING_REQUIRES_4H")
+    if candidate.mechanism_family.startswith("CONDITIONAL_"):
+        raise ValueError("BLOCK_ROBUST_ORDERING_REQUIRES_BINARY_MECHANISM")
+    execution = dict(economic_receipt.get("execution") or {})
+    purge_hours = int(contract.get("partition_tail_purge_hours", -1))
+    if purge_hours != int(execution.get("partition_tail_purge_hours", -2)):
+        raise ValueError("BLOCK_ROBUST_ORDERING_PURGE_CHANGED")
+    blocks = tuple(dict(value) for value in contract.get("blocks") or ())
+    if len(blocks) != 3:
+        raise ValueError("BLOCK_ROBUST_ORDERING_REQUIRES_THREE_BLOCKS")
+    if (
+        str(blocks[0].get("start")) != str(full_block_start)
+        or str(blocks[-1].get("end_exclusive")) != str(full_block_end)
+        or any(
+            str(blocks[index]["end_exclusive"])
+            != str(blocks[index + 1]["start"])
+            for index in range(2)
+        )
+    ):
+        raise ValueError("BLOCK_ROBUST_ORDERING_BLOCK_COVERAGE_CHANGED")
+
+    timestamps = np.asarray(timestamp_ns, dtype=np.int64)
+    rows: list[dict[str, Any]] = []
+    for block_index, block in enumerate(blocks):
+        block_id = str(block.get("block_id") or f"block_{block_index}")
+        parsed_start = datetime.fromisoformat(
+            str(block["start"]).replace("Z", "+00:00")
+        )
+        parsed_end = datetime.fromisoformat(
+            str(block["end_exclusive"]).replace("Z", "+00:00")
+        )
+        effective_end = parsed_end - timedelta(hours=purge_hours)
+        if effective_end <= parsed_start:
+            raise ValueError("BLOCK_ROBUST_ORDERING_EMPTY_PURGED_BLOCK")
+        start_ns = int(parsed_start.timestamp() * 1_000_000_000)
+        stop_ns = int(effective_end.timestamp() * 1_000_000_000)
+        start_index = int(np.searchsorted(timestamps, start_ns, side="left"))
+        stop_index = int(np.searchsorted(timestamps, stop_ns, side="left"))
+        if (
+            start_index >= stop_index
+            or start_index >= timestamps.size
+            or int(timestamps[start_index]) != start_ns
+            or (stop_index < timestamps.size and int(timestamps[stop_index]) != stop_ns)
+        ):
+            raise ValueError("BLOCK_ROBUST_ORDERING_TIMESTAMP_ALIGNMENT_CHANGED")
+        local = slice(start_index, stop_index)
+        local_timestamps = timestamps[local]
+        local_months = np.asarray(
+            [str(np.datetime64(int(value), "ns"))[:7] for value in local_timestamps],
+            dtype=str,
+        )
+        component_weights = {
+            "primary": np.asarray(primary_weight[:, local], dtype=float),
+            "primary_minus_left_control": np.asarray(
+                left_delta_weight[:, local], dtype=float
+            ),
+            "primary_minus_right_control": np.asarray(
+                right_delta_weight[:, local], dtype=float
+            ),
+        }
+        component_metrics: dict[str, dict[str, Any]] = {}
+        objective_components: dict[str, dict[str, np.ndarray]] = {}
+        for component_name, weights in component_weights.items():
+            metrics = _series_metrics(
+                weights=weights,
+                target=np.asarray(target[:, local], dtype=float),
+                months=local_months,
+                evaluation_mask=np.asarray(evaluation_mask[local], dtype=bool),
+                horizon=4,
+                cost_bps=float(cost_bps),
+                include_internal_objective_paths=True,
+            )
+            objective_components[component_name] = {
+                "net": np.asarray(metrics.pop("_objective_net_path"), dtype=float),
+                "turnover": np.asarray(
+                    metrics.pop("_objective_turnover_path"), dtype=float
+                ),
+                "mask": np.asarray(metrics.pop("_objective_mask"), dtype=bool),
+            }
+            component_metrics[component_name] = metrics
+        block_seed = int.from_bytes(
+            hashlib.sha256(
+                (
+                    "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1|"
+                    f"{candidate.candidate_id}|{block_id}"
+                ).encode("utf-8")
+            ).digest()[:8],
+            "little",
+            signed=False,
+        )
+        joint = _joint_portfolio_search_reward(
+            components=objective_components,
+            timestamp_ns=local_timestamps,
+            seed=block_seed,
+        )
+        left = component_metrics["primary_minus_left_control"]
+        right = component_metrics["primary_minus_right_control"]
+        required_objectives = tuple(joint["component_objectives"].values())
+        row = {
+            "block_id": block_id,
+            "start": str(block["start"]),
+            "raw_end_exclusive": str(block["end_exclusive"]),
+            "effective_end_exclusive": effective_end.isoformat().replace(
+                "+00:00", "Z"
+            ),
+            "evaluated_hour_count": int(stop_index - start_index),
+            "left_net_mean": float(left["net_mean"]),
+            "right_net_mean": float(right["net_mean"]),
+            "both_matched_net_positive": bool(
+                float(left["net_mean"]) > 0.0 and float(right["net_mean"]) > 0.0
+            ),
+            "min_matched_net_mean": float(
+                min(float(left["net_mean"]), float(right["net_mean"]))
+            ),
+            "joint_search_reward": float(joint["search_reward"]),
+            "max_required_mean_one_way_turnover": float(
+                max(float(value["mean_one_way_turnover"]) for value in required_objectives)
+            ),
+            "min_required_support": float(
+                min(float(value["support"]) for value in component_metrics.values())
+            ),
+            "initial_establishment_charged": True,
+            "terminal_liquidation_charged": True,
+        }
+        rows.append(row)
+
+    replicated_count = sum(bool(row["both_matched_net_positive"]) for row in rows)
+    payload = {
+        "schema_version": 1,
+        "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1",
+        "candidate_id": candidate.candidate_id,
+        "evaluation_partition": "train",
+        "validation_read": False,
+        "block_count": 3,
+        "replicated_positive_block_count": int(replicated_count),
+        "replicated_candidate": bool(replicated_count >= 2),
+        "all_three_blocks_positive": bool(replicated_count == 3),
+        "worst_block_min_matched_net_mean": float(
+            min(float(row["min_matched_net_mean"]) for row in rows)
+        ),
+        "median_block_joint_search_reward": float(
+            np.median([float(row["joint_search_reward"]) for row in rows])
+        ),
+        "max_required_mean_one_way_turnover": float(
+            max(float(row["max_required_mean_one_way_turnover"]) for row in rows)
+        ),
+        "min_required_support": float(
+            min(float(row["min_required_support"]) for row in rows)
+        ),
+        "blocks": rows,
+    }
+    return {**payload, "ordering_sha256": _json_sha(payload)}
+
+
 def evaluate_pair(
     *,
     store: RawPanelStore,
@@ -978,6 +1173,7 @@ def evaluate_pair(
     include_validation_paths: bool = False,
     include_economic_paths: bool = False,
     include_control_provenance: bool = False,
+    optimizer_block_contract: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -1748,6 +1944,26 @@ def evaluate_pair(
                 min(left_feedback["distance"], right_feedback["distance"])
             ),
         }
+    block_robust_ordering = None
+    if optimizer_block_contract is not None:
+        if economic_receipt is None or evaluation_partition != "train":
+            raise ValueError(
+                "BLOCK_ROBUST_ORDERING_REQUIRES_RECEIPT_BOUND_TRAIN_PARTITION"
+            )
+        block_robust_ordering = _development_block_robust_ordering(
+            candidate=candidate,
+            primary_weight=primary_weight,
+            left_delta_weight=left_delta_weight,
+            right_delta_weight=right_delta_weight,
+            target=target,
+            evaluation_mask=evaluation_mask,
+            timestamp_ns=timestamp_ns,
+            cost_bps=evaluation_cost_bps,
+            full_block_start=block_start,
+            full_block_end=block_end,
+            contract=optimizer_block_contract,
+            economic_receipt=economic_receipt,
+        )
     if (
         include_validation_paths or include_economic_paths
     ) and evaluation_partition not in {"validation", "holdout"}:
@@ -2093,6 +2309,7 @@ def evaluate_pair(
         "search_reward": float(search_objective["search_reward"]),
         "search_reward_authority": SEARCH_REWARD_AUTHORITY,
         "search_reward_feedback": search_objective,
+        "block_robust_ordering": block_robust_ordering,
         "pair_reward": float(feedback["distance"]),
         "matched_positive": bool(feedback["matched_positive"]),
         "feedback": feedback,

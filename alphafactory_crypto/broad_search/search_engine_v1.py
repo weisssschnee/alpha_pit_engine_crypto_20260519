@@ -291,9 +291,27 @@ SEARCH_EVIDENCE_V11_CHECKPOINT_COUNT = 1
 SEARCH_EVIDENCE_V11_STRICT_TARGET = 2_000
 SEARCH_EVIDENCE_V11_RAW_ATTEMPT_LIMIT = 12_500
 SEARCH_EVIDENCE_V11_WALL_TIME_LIMIT_SECONDS = 3 * 60 * 60
+BLOCK_ROBUST_GATE_CAMPAIGN = "crypto_search_replication_aware_gate_v1"
+BLOCK_ROBUST_GATE_EPOCH_ID = "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1_20260806"
+BLOCK_ROBUST_GATE_CONFIG = "config/crypto_search_replication_aware_gate_v1.json"
+BLOCK_ROBUST_GATE_SEEDS = (1544162162, 58589310)
+BLOCK_ROBUST_GATE_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_1)"
+)
+BLOCK_ROBUST_GATE_ARMS = (
+    "block_robust_typed_random_v1",
+    "block_robust_evolution_current_v1",
+    "block_robust_evolution_replication_v1",
+)
+BLOCK_ROBUST_GATE_CHECKPOINT_SIZE = 512
+BLOCK_ROBUST_GATE_CHECKPOINT_COUNT = 3
+BLOCK_ROBUST_GATE_STRICT_TARGET = 1_536
+BLOCK_ROBUST_GATE_RAW_ATTEMPT_LIMIT = 9_600
+BLOCK_ROBUST_GATE_WALL_TIME_LIMIT_SECONDS = 3 * 60 * 60
 SEARCH_EVIDENCE_CAMPAIGNS = (
     SEARCH_EVIDENCE_V1_CAMPAIGN,
     SEARCH_EVIDENCE_V11_CAMPAIGN,
+    BLOCK_ROBUST_GATE_CAMPAIGN,
 )
 SEARCH_EVIDENCE_V1_PROVENANCE_COLUMNS = (
     "control_degeneracy_provenance_json",
@@ -363,6 +381,7 @@ ECONOMIC_SEARCH_CAMPAIGNS = (
     MECHANISM_SEARCH_V23_CAMPAIGN,
     SEARCH_EVIDENCE_V1_CAMPAIGN,
     SEARCH_EVIDENCE_V11_CAMPAIGN,
+    BLOCK_ROBUST_GATE_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -534,6 +553,29 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
         "behavior_provenance_required": True,
         "decision_status": "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE",
         "search_engine_version": "SEARCH_RUN_EVIDENCE_CONTRACT_V1_1",
+    },
+    BLOCK_ROBUST_GATE_CAMPAIGN: {
+        "epoch_id": BLOCK_ROBUST_GATE_EPOCH_ID,
+        "runtime_date": "20260806",
+        "runtime_prefix": "crypto_search_replication_aware_gate_v1",
+        "report_prefix": "CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1",
+        "report_title": "Crypto Replication-Aware Search Gate V1",
+        "receipt_path": "config/crypto_search_replication_aware_gate_v1_receipt.json",
+        "contract_path": BLOCK_ROBUST_GATE_CONFIG,
+        "authorization": "ONE_FRESH_STATE_1536_STRICT_DEVELOPMENT_BLOCK_ROBUST_GATE",
+        "cli_suffix": "replication-aware-v1",
+        "seeds": BLOCK_ROBUST_GATE_SEEDS,
+        "seed_derivation": BLOCK_ROBUST_GATE_SEED_DERIVATION,
+        "strict_target": BLOCK_ROBUST_GATE_STRICT_TARGET,
+        "checkpoint_size": BLOCK_ROBUST_GATE_CHECKPOINT_SIZE,
+        "checkpoint_count": BLOCK_ROBUST_GATE_CHECKPOINT_COUNT,
+        "raw_attempt_limit": BLOCK_ROBUST_GATE_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": BLOCK_ROBUST_GATE_WALL_TIME_LIMIT_SECONDS,
+        "arms": BLOCK_ROBUST_GATE_ARMS,
+        "validation_required": False,
+        "behavior_provenance_required": True,
+        "decision_status": "PASS_REPLICATION_AWARE_SEARCH_GATE_V1_COMPLETE",
+        "search_engine_version": "REPLICATION_AWARE_SEARCH_GATE_V1",
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -839,6 +881,32 @@ def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
         )
         if set(seeds) & prior:
             raise ValueError("Search Evidence V1.1 seed set overlaps a prior campaign")
+    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN:
+        expected = tuple(
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{BLOCK_ROBUST_GATE_EPOCH_ID}|seed|{ordinal}".encode()
+                ).digest()[:4],
+                "big",
+            )
+            for ordinal in range(2)
+        )
+        if seeds != BLOCK_ROBUST_GATE_SEEDS or seeds != expected:
+            raise ValueError("Block-robust gate seed set changed")
+        if config.get("seed_derivation") != BLOCK_ROBUST_GATE_SEED_DERIVATION:
+            raise ValueError("Block-robust gate seed derivation changed")
+        prior = (
+            set(SEEDS)
+            | set(ECONOMIC_SEARCH_V6_SEEDS)
+            | set(MECHANISM_SEARCH_V2_SEEDS)
+            | set(MECHANISM_SEARCH_V21_SEEDS)
+            | set(MECHANISM_SEARCH_V22_SEEDS)
+            | set(MECHANISM_SEARCH_V23_SEEDS)
+            | set(SEARCH_EVIDENCE_V1_SEEDS)
+            | set(SEARCH_EVIDENCE_V11_SEEDS)
+        )
+        if set(seeds) & prior:
+            raise ValueError("Block-robust gate seed set overlaps a prior campaign")
     return seeds
 
 
@@ -2421,7 +2489,10 @@ def _search_evidence_v1_frozen_contract(
             "epoch_id": campaign_meta["epoch_id"],
             "search_engine_version": campaign_meta["search_engine_version"],
             "objective": (
-                "Run an unchanged V2.3 Random/Evolution development search while "
+                "Compare current and three-block robust Evolution selection at equal "
+                "4h binary strict counts on the frozen development partition"
+                if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+                else "Run an unchanged V2.3 Random/Evolution development search while "
                 "joining target, exposure, optimizer, realization, matched, behavior, "
                 "economic, and lineage evidence without feeding diagnostics back"
             ),
@@ -2439,7 +2510,11 @@ def _search_evidence_v1_frozen_contract(
                 "active": list(campaign_meta["arms"]),
                 "same_frozen_seed_set_for_every_arm": True,
                 "arm_local_adaptive_memory": True,
-                "random_role": "UNCHANGED_V2_3_COMPARATOR",
+                "random_role": (
+                    "4H_BINARY_TYPED_RANDOM_COMPARATOR"
+                    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+                    else "UNCHANGED_V2_3_COMPARATOR"
+                ),
                 "cem_budget": 0,
             },
             "policies": dict(config["policy_parameters"]),
@@ -2448,6 +2523,16 @@ def _search_evidence_v1_frozen_contract(
             "fresh_state": dict(config["fresh_state"]),
             "persistent_mechanism_knowledge": dict(
                 config["persistent_mechanism_knowledge"]
+            ),
+            **(
+                {
+                    "block_robust_contract": dict(
+                        config["block_robust_contract"]
+                    ),
+                    "qualification": dict(config["qualification"]),
+                }
+                if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+                else {}
             ),
             "budget": {
                 **dict(config["search"]),
@@ -4787,8 +4872,26 @@ class MechanismRandomV2:
             self.catalog
         ):
             raise ValueError("mechanism policy catalog must be non-empty and unique")
-        self.rng = random.Random(int(self.seed))
+        stream_id = str(self.parameters.get("rng_stream_id") or "")
+        effective_seed = (
+            int.from_bytes(
+                hashlib.sha256(
+                    f"{int(self.seed)}|{stream_id}".encode("utf-8")
+                ).digest()[:8],
+                "big",
+            )
+            if stream_id
+            else int(self.seed)
+        )
+        self.rng = random.Random(effective_seed)
         self.domains = mechanism_role_domains(tuple(self.registry.fields.values()))
+        if "allowed_horizons" in self.parameters:
+            allowed_horizons = tuple(
+                int(value) for value in self.parameters["allowed_horizons"]
+            )
+            if not allowed_horizons or any(value not in HORIZONS for value in allowed_horizons):
+                raise ValueError("mechanism policy allowed_horizons changed")
+            self.domains["__HORIZONS__"] = allowed_horizons
 
     def _select_spec(self) -> MechanismSpec:
         return self.catalog[self.rng.randrange(len(self.catalog))]
@@ -5022,16 +5125,44 @@ class MechanismEvolutionV2(MechanismRandomV2):
     def _candidate(self, record: Mapping[str, Any]) -> CandidateSpec:
         return CandidateSpec.from_dict(record["candidate"])
 
+    def _selection_key(
+        self,
+        candidate_id: str,
+        record: Mapping[str, Any],
+        *,
+        include_family_count: bool,
+    ) -> tuple[Any, ...]:
+        if self.parameters.get("selection_authority") != (
+            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+        ):
+            base: tuple[Any, ...] = (-float(record["search_reward"]),)
+        else:
+            ordering = dict(record.get("block_robust_ordering") or {})
+            if ordering.get("authority") != (
+                "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+            ):
+                raise ValueError("block-robust Evolution observation is unbound")
+            base = (
+                -int(ordering["replicated_positive_block_count"]),
+                -float(ordering["worst_block_min_matched_net_mean"]),
+                -float(ordering["median_block_joint_search_reward"]),
+                float(ordering["max_required_mean_one_way_turnover"]),
+                -float(ordering["min_required_support"]),
+            )
+        if include_family_count:
+            base = (*base, int(record.get("family_count", 1)))
+        return (*base, str(candidate_id))
+
     def _parent(self, eligible: Sequence[str] | None = None) -> CandidateSpec:
         ids = sorted(eligible or self.population)
         size = min(int(self.parameters.get("tournament_size", 4)), len(ids))
         sampled = self.rng.sample(ids, size)
         selected = min(
             sampled,
-            key=lambda candidate_id: (
-                -float(self.population[candidate_id]["search_reward"]),
-                int(self.population[candidate_id].get("family_count", 1)),
+            key=lambda candidate_id: self._selection_key(
                 candidate_id,
+                self.population[candidate_id],
+                include_family_count=True,
             ),
         )
         return self._candidate(self.population[selected])
@@ -5430,6 +5561,11 @@ class MechanismEvolutionV2(MechanismRandomV2):
         record = {
             "candidate": candidate.to_dict(),
             "search_reward": _search_ordering_reward(archive_row),
+            "block_robust_ordering": (
+                dict(archive_row["block_robust_ordering"])
+                if isinstance(archive_row.get("block_robust_ordering"), Mapping)
+                else None
+            ),
             "behavior_family_id": family_id,
             "family_count": int(
                 archive_row.get("policy_local_family_count_at_completion", 1)
@@ -5441,9 +5577,10 @@ class MechanismEvolutionV2(MechanismRandomV2):
             if str(value["behavior_family_id"]) == family_id
         ]:
             old = self.population[candidate_id]
-            if float(old["search_reward"]) > float(record["search_reward"]) or (
-                float(old["search_reward"]) == float(record["search_reward"])
-                and candidate_id < candidate.candidate_id
+            if self._selection_key(
+                candidate_id, old, include_family_count=False
+            ) < self._selection_key(
+                candidate.candidate_id, record, include_family_count=False
             ):
                 return
             del self.population[candidate_id]
@@ -5459,9 +5596,10 @@ class MechanismEvolutionV2(MechanismRandomV2):
         if len(self.population) > limit:
             retained = sorted(
                 self.population,
-                key=lambda candidate_id: (
-                    -float(self.population[candidate_id]["search_reward"]),
+                key=lambda candidate_id: self._selection_key(
                     candidate_id,
+                    self.population[candidate_id],
+                    include_family_count=False,
                 ),
             )[:limit]
             self.population = {
@@ -6183,6 +6321,131 @@ def _load_search_evidence_v1_contract(
     ):
         raise ValueError("Search Evidence V1 stage total changed")
     v23_config, catalog, knowledge = _load_mechanism_v23_contract(repo_root)
+    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN:
+        base_random = dict(
+            v23_config["policy_parameters"]["expanded_mechanism_random_v2_3"]
+        )
+        base_evolution = dict(
+            v23_config["policy_parameters"]["mechanism_evolution_v2_3"]
+        )
+        expected_parameters = {
+            BLOCK_ROBUST_GATE_ARMS[0]: {
+                **base_random,
+                "allowed_horizons": [4],
+                "rng_stream_id": BLOCK_ROBUST_GATE_ARMS[0],
+            },
+            BLOCK_ROBUST_GATE_ARMS[1]: {
+                **base_evolution,
+                "allowed_horizons": [4],
+                "rng_stream_id": BLOCK_ROBUST_GATE_ARMS[1],
+                "selection_authority": SEARCH_REWARD_AUTHORITY,
+            },
+            BLOCK_ROBUST_GATE_ARMS[2]: {
+                **base_evolution,
+                "allowed_horizons": [4],
+                "rng_stream_id": BLOCK_ROBUST_GATE_ARMS[2],
+                "selection_authority": (
+                    "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+                ),
+            },
+        }
+        if config.get("policy_parameters") != expected_parameters:
+            raise PermissionError("block-robust gate policy parameters changed")
+        gate = dict(config.get("block_robust_contract") or {})
+        expected_blocks = [
+            {
+                "block_id": "development_block_0",
+                "start": "2025-08-29T07:00:00Z",
+                "end_exclusive": "2025-09-19T12:00:00Z",
+            },
+            {
+                "block_id": "development_block_1",
+                "start": "2025-09-19T12:00:00Z",
+                "end_exclusive": "2025-10-10T18:00:00Z",
+            },
+            {
+                "block_id": "development_block_2",
+                "start": "2025-10-10T18:00:00Z",
+                "end_exclusive": "2025-11-01T00:00:00Z",
+            },
+        ]
+        if (
+            gate.get("schema_version") != 1
+            or gate.get("authority")
+            != "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+            or gate.get("blocks") != expected_blocks
+            or int(gate.get("partition_tail_purge_hours", -1)) != 6
+            or gate.get("feature_warmup") != "PAST_ONLY_EXISTING_EXPRESSION_WARMUP"
+            or gate.get("position_boundary")
+            != "ZERO_START_CHARGE_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION"
+            or gate.get("replicated_candidate_rule")
+            != "AT_LEAST_2_OF_3_BLOCKS_BOTH_MATCHED_NET_MEAN_POSITIVE"
+            or gate.get("mechanism_shape") != "BINARY_TWO_AXIS_ONLY"
+            or gate.get("horizons_hours") != [4]
+        ):
+            raise PermissionError("block-robust ordering contract changed")
+        qualification = dict(config.get("qualification") or {})
+        if qualification != {
+            "equal_strict_count_per_arm": 512,
+            "replicated_count_strictly_above_current_evolution": True,
+            "replicated_per_process_cpu_hour_strictly_above_current_evolution": True,
+            "minimum_behavior_family_ratio_to_current_evolution": 0.9,
+            "minimum_strict_raw_reachability_ratio_to_current_evolution": 0.9,
+            "minimum_supported_template_count_with_positive_delta": 2,
+            "minimum_candidates_per_arm_template": 30,
+            "leave_best_template_out_delta_must_be_positive": True,
+        }:
+            raise PermissionError("block-robust qualification gate changed")
+        validation = dict(config.get("validation") or {})
+        if validation != {
+            "authorized": False,
+            "status": "NOT_AUTHORIZED",
+            "holdout_read": False,
+            "automatic_continuation": False,
+        }:
+            raise PermissionError("block-robust validation boundary changed")
+        boundaries = dict(config.get("boundaries") or {})
+        required_false = (
+            "validation",
+            "oos",
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "new_fields",
+            "new_grammar",
+            "new_ast",
+            "new_compiler",
+            "new_evaluator",
+            "target_change",
+            "cost_change",
+            "reward_formula_change",
+            "mapping_change",
+            "historical_replay",
+            "automatic_expansion",
+            "rescue_rerun",
+            "parameter_tuning",
+        )
+        if boundaries.get("development_only") is not True or any(
+            bool(boundaries.get(key)) for key in required_false
+        ):
+            raise PermissionError("block-robust gate crossed a research boundary")
+        if boundaries.get("search_selection_authority_change") is not True:
+            raise PermissionError("block-robust selection change was not explicit")
+        if repo_root / str(config["catalog_path"]) != (
+            repo_root / MECHANISM_SEARCH_V23_CATALOG
+        ):
+            raise ValueError("block-robust mechanism catalog changed")
+        if repo_root / str(config["aggregate_knowledge_path"]) != (
+            repo_root / MECHANISM_SEARCH_V23_KNOWLEDGE
+        ):
+            raise ValueError("block-robust mechanism knowledge path changed")
+        binary_catalog = tuple(item for item in catalog if not item.condition_role)
+        if not binary_catalog or any(item.condition_role for item in binary_catalog):
+            raise ValueError("block-robust binary catalog projection changed")
+        return config, binary_catalog, knowledge
     if config.get("policy_parameters") != v23_config.get("policy_parameters"):
         raise PermissionError("Search Evidence V1 changed the V2.3 search policy")
     evidence = dict(config.get("evidence_contract") or {})
@@ -6294,6 +6557,8 @@ def _initial_policies(
     mechanism_v22_catalog: tuple[MechanismSpec, ...] | None = None
     mechanism_v23_config: dict[str, Any] | None = None
     mechanism_v23_catalog: tuple[MechanismSpec, ...] | None = None
+    block_robust_config: dict[str, Any] | None = None
+    block_robust_catalog: tuple[MechanismSpec, ...] | None = None
     if set(arms) & set(MECHANISM_SEARCH_V2_ARMS[1:]):
         mechanism_config, mechanism_catalog = _load_mechanism_v2_contract(
             Path(__file__).resolve().parents[2]
@@ -6312,6 +6577,13 @@ def _initial_policies(
     if set(arms) & set(MECHANISM_SEARCH_V23_ARMS):
         mechanism_v23_config, mechanism_v23_catalog, _ = (
             _load_mechanism_v23_contract(Path(__file__).resolve().parents[2])
+        )
+    if set(arms) & set(BLOCK_ROBUST_GATE_ARMS):
+        block_robust_config, block_robust_catalog, _ = (
+            _load_search_evidence_v1_contract(
+                Path(__file__).resolve().parents[2],
+                campaign=BLOCK_ROBUST_GATE_CAMPAIGN,
+            )
         )
     compatible_skeleton_ids = field_role_surface(
         tuple(registry.fields.values())
@@ -6448,6 +6720,22 @@ def _initial_policies(
                     registry,
                     mechanism_v23_catalog,
                     dict(mechanism_v23_config["policy_parameters"][arm]),
+                )
+            elif arm == BLOCK_ROBUST_GATE_ARMS[0]:
+                assert block_robust_config is not None and block_robust_catalog is not None
+                output[key] = MechanismRandomV2(
+                    seed,
+                    registry,
+                    block_robust_catalog,
+                    dict(block_robust_config["policy_parameters"][arm]),
+                )
+            elif arm in BLOCK_ROBUST_GATE_ARMS[1:]:
+                assert block_robust_config is not None and block_robust_catalog is not None
+                output[key] = MechanismEvolutionV2(
+                    seed,
+                    registry,
+                    block_robust_catalog,
+                    dict(block_robust_config["policy_parameters"][arm]),
                 )
             else:
                 raise ValueError(f"unsupported search policy arm: {arm}")
@@ -6595,6 +6883,7 @@ _WORKER_BLOCK_START = ADAPTIVE_START
 _WORKER_BLOCK_END = ADAPTIVE_END
 _WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
 _WORKER_INCLUDE_CONTROL_PROVENANCE = False
+_WORKER_OPTIMIZER_BLOCK_CONTRACT: Mapping[str, Any] | None = None
 
 
 def _validate_receipt_target_store_binding(
@@ -6639,11 +6928,12 @@ def _worker_initialize(
     block_role: str = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1",
     economic_receipt: Mapping[str, Any] | None = None,
     include_control_provenance: bool = False,
+    optimizer_block_contract: Mapping[str, Any] | None = None,
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
     global _WORKER_ECONOMIC_RECEIPT
     global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
-    global _WORKER_INCLUDE_CONTROL_PROVENANCE
+    global _WORKER_INCLUDE_CONTROL_PROVENANCE, _WORKER_OPTIMIZER_BLOCK_CONTRACT
     source_store = RawPanelStore.open(Path(cache_root))
     if economic_receipt is not None:
         from alphafactory_crypto.broad_search.replay_v14_binance_target import (
@@ -6672,6 +6962,11 @@ def _worker_initialize(
     _WORKER_BLOCK_END = str(block_end)
     _WORKER_BLOCK_ROLE = str(block_role)
     _WORKER_INCLUDE_CONTROL_PROVENANCE = bool(include_control_provenance)
+    _WORKER_OPTIMIZER_BLOCK_CONTRACT = (
+        dict(optimizer_block_contract)
+        if optimizer_block_contract is not None
+        else None
+    )
 
 
 def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -6699,6 +6994,7 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
             behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
             economic_receipt=_WORKER_ECONOMIC_RECEIPT,
             include_control_provenance=_WORKER_INCLUDE_CONTROL_PROVENANCE,
+            optimizer_block_contract=_WORKER_OPTIMIZER_BLOCK_CONTRACT,
         )
     except ControlBehaviorDegeneracyError as failure:
         error = type(failure).__name__ + ":" + str(failure)
@@ -8423,6 +8719,54 @@ def _ledger_row(
             separators=(",", ":"),
             default=str,
         ),
+        "block_robust_ordering_json": (
+            json.dumps(
+                evaluation["block_robust_ordering"],
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            )
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "block_robust_ordering_sha256": (
+            evaluation["block_robust_ordering"].get("ordering_sha256")
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "replicated_positive_block_count": (
+            int(evaluation["block_robust_ordering"]["replicated_positive_block_count"])
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "replicated_candidate": (
+            bool(evaluation["block_robust_ordering"]["replicated_candidate"])
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "all_three_blocks_positive": (
+            bool(evaluation["block_robust_ordering"]["all_three_blocks_positive"])
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "worst_block_min_matched_net_mean": (
+            float(
+                evaluation["block_robust_ordering"][
+                    "worst_block_min_matched_net_mean"
+                ]
+            )
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
+        "median_block_joint_search_reward": (
+            float(
+                evaluation["block_robust_ordering"][
+                    "median_block_joint_search_reward"
+                ]
+            )
+            if isinstance(evaluation.get("block_robust_ordering"), Mapping)
+            else None
+        ),
         "train_day_sortino": evaluation.get("search_reward_feedback", {}).get(
             "train_day_sortino"
         ),
@@ -8618,6 +8962,160 @@ def _validation_blocked_decision(
     }
 
 
+def _block_robust_gate_summary(
+    *,
+    ledger: pd.DataFrame,
+    state: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    if len(ledger) != BLOCK_ROBUST_GATE_STRICT_TARGET:
+        raise RuntimeError("block-robust gate strict count is incomplete")
+    frame = ledger.copy()
+    if frame["block_robust_ordering_json"].isna().any():
+        raise RuntimeError("block-robust ordering provenance is incomplete")
+    frame["mechanism_template"] = frame["candidate_spec_json"].map(
+        lambda payload: str(
+            CandidateSpec.from_dict(json.loads(str(payload))).generation_genes[
+                "mechanism_spec"
+            ]["template_id"]
+        )
+    )
+    arm_rows: dict[str, dict[str, Any]] = {}
+    for arm in BLOCK_ROBUST_GATE_ARMS:
+        local = frame.loc[frame["arm"].astype(str) == arm]
+        counter = dict(state["arm_counters"][arm])
+        process_cpu_seconds = float(counter["cpu_seconds"])
+        attempts = int(counter["generation_attempts"])
+        replicated = int(local["replicated_candidate"].fillna(False).astype(bool).sum())
+        arm_rows[arm] = {
+            "strict_evaluated_count": int(len(local)),
+            "generation_attempts": attempts,
+            "strict_raw_reachability": float(len(local) / max(1, attempts)),
+            "behavior_family_count": int(
+                local["behavior_family_id"].astype(str).nunique()
+            ),
+            "replicated_candidate_count": replicated,
+            "all_three_blocks_positive_count": int(
+                local["all_three_blocks_positive"].fillna(False).astype(bool).sum()
+            ),
+            "replicated_candidate_rate": float(replicated / max(1, len(local))),
+            "total_process_cpu_seconds": process_cpu_seconds,
+            "replicated_candidates_per_process_cpu_hour": float(
+                replicated * 3600.0 / max(process_cpu_seconds, 1.0e-12)
+            ),
+        }
+
+    template_rows: list[dict[str, Any]] = []
+    for template in sorted(frame["mechanism_template"].unique()):
+        for arm in BLOCK_ROBUST_GATE_ARMS:
+            local = frame.loc[
+                frame["arm"].astype(str).eq(arm)
+                & frame["mechanism_template"].eq(template)
+            ]
+            replicated = int(
+                local["replicated_candidate"].fillna(False).astype(bool).sum()
+            )
+            template_rows.append(
+                {
+                    "mechanism_template": str(template),
+                    "arm": arm,
+                    "strict_evaluated_count": int(len(local)),
+                    "replicated_candidate_count": replicated,
+                    "replicated_candidate_rate": float(
+                        replicated / max(1, len(local))
+                    ),
+                }
+            )
+    template_frame = pd.DataFrame(template_rows)
+    current_arm = BLOCK_ROBUST_GATE_ARMS[1]
+    robust_arm = BLOCK_ROBUST_GATE_ARMS[2]
+    minimum = int(config["qualification"]["minimum_candidates_per_arm_template"])
+    supported_positive: list[str] = []
+    for template in sorted(frame["mechanism_template"].unique()):
+        current = template_frame.loc[
+            template_frame["mechanism_template"].eq(template)
+            & template_frame["arm"].eq(current_arm)
+        ].iloc[0]
+        robust = template_frame.loc[
+            template_frame["mechanism_template"].eq(template)
+            & template_frame["arm"].eq(robust_arm)
+        ].iloc[0]
+        if (
+            int(current["strict_evaluated_count"]) >= minimum
+            and int(robust["strict_evaluated_count"]) >= minimum
+            and float(robust["replicated_candidate_rate"])
+            > float(current["replicated_candidate_rate"])
+        ):
+            supported_positive.append(str(template))
+    robust_template = template_frame.loc[template_frame["arm"].eq(robust_arm)]
+    best_template = str(
+        robust_template.sort_values(
+            ["replicated_candidate_count", "mechanism_template"],
+            ascending=[False, True],
+            kind="mergesort",
+        ).iloc[0]["mechanism_template"]
+    )
+
+    def leave_out_rate(arm: str) -> float:
+        local = frame.loc[
+            frame["arm"].astype(str).eq(arm)
+            & ~frame["mechanism_template"].eq(best_template)
+        ]
+        return float(
+            local["replicated_candidate"].fillna(False).astype(bool).sum()
+            / max(1, len(local))
+        )
+
+    current = arm_rows[current_arm]
+    robust = arm_rows[robust_arm]
+    gate_checks = {
+        "equal_strict_count": (
+            int(current["strict_evaluated_count"])
+            == int(robust["strict_evaluated_count"])
+            == 512
+        ),
+        "replicated_count_strictly_above_current": int(
+            robust["replicated_candidate_count"]
+        )
+        > int(current["replicated_candidate_count"]),
+        "replicated_cpu_productivity_strictly_above_current": float(
+            robust["replicated_candidates_per_process_cpu_hour"]
+        )
+        > float(current["replicated_candidates_per_process_cpu_hour"]),
+        "behavior_family_floor": int(robust["behavior_family_count"])
+        >= 0.9 * int(current["behavior_family_count"]),
+        "strict_raw_reachability_floor": float(robust["strict_raw_reachability"])
+        >= 0.9 * float(current["strict_raw_reachability"]),
+        "template_breadth": len(supported_positive) >= 2,
+        "leave_best_template_out_delta_positive": leave_out_rate(robust_arm)
+        > leave_out_rate(current_arm),
+    }
+    qualified = all(gate_checks.values())
+    summary = {
+        "schema_version": 1,
+        "status": (
+            "QUALIFIED_FOR_SEPARATELY_AUTHORIZED_SMALL_DEVELOPMENT_VALIDATION"
+            if qualified
+            else "NOT_QUALIFIED_FOR_VALIDATION"
+        ),
+        "authority": "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1",
+        "development_only": True,
+        "validation_read": False,
+        "oos_read": False,
+        "arms": arm_rows,
+        "gate_checks": gate_checks,
+        "supported_templates_with_positive_delta": supported_positive,
+        "best_robust_template_removed": best_template,
+        "leave_best_template_out_rates": {
+            current_arm: leave_out_rate(current_arm),
+            robust_arm: leave_out_rate(robust_arm),
+        },
+        "automatic_continuation": False,
+        "alpha_claim": False,
+    }
+    return {**summary, "summary_sha256": _payload_sha(summary)}, template_rows
+
+
 def _write_search_evidence_v1_artifacts(
     *,
     runtime_root: Path,
@@ -8767,7 +9265,9 @@ def _write_search_evidence_v1_artifacts(
     summary = {
         "schema_version": 1,
         "status": "PASS_SEARCH_RUN_EVIDENCE_V1_NONEMPTY",
-        "contract_id": "CRYPTO_SEARCH_RUN_EVIDENCE_CONTRACT_V1",
+        "contract_id": dict(config.get("evidence_contract") or {}).get(
+            "contract_id"
+        ),
         "target_and_execution_contract": {
             "status": "PASS_RECEIPT_BOUND",
             "venue": economic_receipt["execution"]["venue"],
@@ -8814,13 +9314,26 @@ def _write_search_evidence_v1_artifacts(
         },
         "exposure_stratum_count": len(exposure_rows),
         "minimum_comparable_candidates_per_reported_stratum": minimum,
-        "diagnostics_used_by_optimizer": False,
+        "diagnostics_used_by_optimizer": (
+            "BLOCK_ROBUST_EVOLUTION_ARM_ONLY"
+            if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+            else False
+        ),
         "diagnostics_used_by_reward": False,
         "diagnostics_used_by_archive_identity": False,
         "historical_inference_performed": False,
         "question_scope": dict(config.get("question_scope") or {}),
         "sealed_reads": 0,
     }
+    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN:
+        block_summary, template_rows = _block_robust_gate_summary(
+            ledger=pd.DataFrame(ledger),
+            state=state,
+            config=config,
+        )
+        _write_json(runtime_root / "block_robust_gate_summary.json", block_summary)
+        _write_parquet(runtime_root / "block_robust_template_metrics.parquet", template_rows)
+        summary["block_robust_gate"] = block_summary
     _write_json(runtime_root / "search_run_evidence_summary.json", summary)
     return summary
 
@@ -9942,17 +10455,25 @@ def _search_evidence_v1_final_decision(
         evidence_summary.get("joined_strict_provenance_count", -1)
     )
     if (
-        campaign == SEARCH_EVIDENCE_V11_CAMPAIGN
+        campaign in {SEARCH_EVIDENCE_V11_CAMPAIGN, BLOCK_ROBUST_GATE_CAMPAIGN}
         and joined_strict_count != len(ledger)
     ):
         raise RuntimeError(
             "Search Evidence V1.1 strict provenance join is incomplete"
         )
+    block_gate = dict(evidence_summary.get("block_robust_gate") or {})
+    block_qualified = block_gate.get("status") == (
+        "QUALIFIED_FOR_SEPARATELY_AUTHORIZED_SMALL_DEVELOPMENT_VALIDATION"
+    )
     return {
         "schema_version": 1,
         "epoch_id": campaign_meta["epoch_id"],
         "status": campaign_meta["decision_status"],
-        "reason": "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE",
+        "reason": (
+            "FRESH_DEVELOPMENT_BLOCK_ROBUST_POLICY_COMPARISON_COMPLETE"
+            if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+            else "FRESH_DEVELOPMENT_SEARCH_AND_PASSIVE_EVIDENCE_JOIN_COMPLETE"
+        ),
         "producer_source_sha": source_sha,
         "strict_evaluated_count": len(ledger),
         "joined_strict_provenance_count": joined_strict_count,
@@ -9974,9 +10495,15 @@ def _search_evidence_v1_final_decision(
         "arm_summaries": dict(evidence_summary["arm_funnel"]),
         "evidence_summary": dict(evidence_summary),
         "validation_status": "NOT_AUTHORIZED",
-        "future_development_data_arena_qualified_arms": [],
+        "future_development_data_arena_qualified_arms": (
+            [BLOCK_ROBUST_GATE_ARMS[2]] if block_qualified else []
+        ),
         "future_new_data_arena_qualified_arms": [],
-        "research_decision": "EVIDENCE_COLLECTED_NO_AUTOMATIC_POLICY_CHANGE",
+        "research_decision": (
+            block_gate.get("status")
+            if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+            else "EVIDENCE_COLLECTED_NO_AUTOMATIC_POLICY_CHANGE"
+        ),
         "alpha_claim": False,
         "oos": False,
         "promotion": "FORBIDDEN",
@@ -9989,6 +10516,46 @@ def _search_evidence_v1_final_decision(
 
 
 def _search_evidence_v1_report_text(decision: Mapping[str, Any]) -> str:
+    if decision.get("epoch_id") == BLOCK_ROBUST_GATE_EPOCH_ID:
+        gate = dict(decision["evidence_summary"]["block_robust_gate"])
+        arm_lines = []
+        for arm, values in gate["arms"].items():
+            arm_lines.append(
+                "| {arm} | {strict:,} | {attempts:,} | {families:,} | "
+                "{replicated:,} | {all_three:,} | {per_cpu:.3f} |".format(
+                    arm=arm,
+                    strict=int(values["strict_evaluated_count"]),
+                    attempts=int(values["generation_attempts"]),
+                    families=int(values["behavior_family_count"]),
+                    replicated=int(values["replicated_candidate_count"]),
+                    all_three=int(values["all_three_blocks_positive_count"]),
+                    per_cpu=float(
+                        values["replicated_candidates_per_process_cpu_hour"]
+                    ),
+                )
+            )
+        failed = [name for name, passed in gate["gate_checks"].items() if not passed]
+        return f"""# Crypto Replication-Aware Search Gate V1
+
+- Engineering status: `{decision['status']}`; research gate: `{gate['status']}`.
+- Producer source: `{decision['producer_source_sha']}`.
+- Development-only strict evaluations: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` attempts; sealed reads `0`.
+- Scope: existing 115-field aligned carrier, 4h binary mechanisms, Binance USD-M target, existing mapping, matched controls and frozen 5 bps cost.
+- Checkpoints: `{decision['checkpoint_count']}/3`; exact restore: `{decision['checkpoint_restore_verified']}`.
+- Validation/OOS/promotion: `NOT_AUTHORIZED` / `NOT_AUTHORIZED` / `FORBIDDEN`.
+
+| Arm | Strict | Attempts | Families | Replicated 2/3+ | Replicated 3/3 | Replicated / CPU-hour |
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(arm_lines)}
+
+Gate checks that failed: `{', '.join(failed) if failed else 'none'}`.
+Supported templates with positive robust-minus-current delta: `{', '.join(gate['supported_templates_with_positive_delta']) or 'none'}`.
+
+The robust arm changes only development parent ordering. It does not change the
+reward formula, target, mapping, cost, mechanism catalog, compiler, AST, or
+evaluator. Passing this gate authorizes nothing automatically; any development
+validation requires a separate instruction and frozen cohort.
+"""
     summary = dict(decision["evidence_summary"])
     waterfall = dict(summary["economic_waterfall"])
     arm_rows = []
@@ -11446,6 +12013,8 @@ def _final_manifest(
         "search_run_evidence.parquet",
         "search_exposure_strata.parquet",
         "search_run_evidence_summary.json",
+        "block_robust_gate_summary.json",
+        "block_robust_template_metrics.parquet",
     ):
         path = runtime_root / name
         if path.is_file():
@@ -15409,6 +15978,15 @@ def run_engine(
         block_start = ADAPTIVE_START
         block_end = ADAPTIVE_END
     registry = TypedExpressionRegistry(contracts)
+    optimizer_block_contract = (
+        dict(
+            _load_search_evidence_v1_contract(
+                repo_root, campaign=campaign
+            )[0]["block_robust_contract"]
+        )
+        if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+        else None
+    )
     proposal_liveness = _proposal_liveness_preflight(
         registry,
         arms=campaign_arms,
@@ -15704,6 +16282,7 @@ def run_engine(
                 block_role,
                 economic_receipt,
                 is_search_evidence_v1,
+                optimizer_block_contract,
             ),
         )
 
@@ -16373,6 +16952,9 @@ def run_engine(
                             proposal[
                                 "policy_local_family_count_at_completion"
                             ]
+                        ),
+                        "block_robust_ordering": evaluation.get(
+                            "block_robust_ordering"
                         ),
                     }
                     if (
@@ -20736,6 +21318,12 @@ def check_v14(
         "final_decision.json",
         "run_manifest.json",
     )
+    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN:
+        required = (
+            *required,
+            "block_robust_gate_summary.json",
+            "block_robust_template_metrics.parquet",
+        )
     for name in required:
         if not (runtime_root / name).is_file():
             errors.append(f"missing:{name}")
@@ -22702,16 +23290,65 @@ def check_search_evidence_v1(
         int(summary.get("strict_evaluated_count", -1)) != len(ledger)
         or int(summary.get("behavior_attributed_proposal_count", -1)) != len(evidence)
         or int(summary.get("control_degenerate_count", -1)) != len(failures)
-        or summary.get("diagnostics_used_by_optimizer") is not False
+        or summary.get("diagnostics_used_by_optimizer")
+        != (
+            "BLOCK_ROBUST_EVOLUTION_ARM_ONLY"
+            if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+            else False
+        )
         or summary.get("diagnostics_used_by_reward") is not False
         or summary.get("diagnostics_used_by_archive_identity") is not False
         or summary.get("historical_inference_performed") is not False
     ):
         errors.append("evidence_summary")
-    if campaign == SEARCH_EVIDENCE_V11_CAMPAIGN and int(
+    if campaign in {
+        SEARCH_EVIDENCE_V11_CAMPAIGN,
+        BLOCK_ROBUST_GATE_CAMPAIGN,
+    } and int(
         summary.get("joined_strict_provenance_count", -1)
     ) != len(ledger):
         errors.append("joined_strict_provenance_count")
+    if campaign == BLOCK_ROBUST_GATE_CAMPAIGN:
+        block_summary = _read_json(runtime_root / "block_robust_gate_summary.json")
+        template_metrics = pd.read_parquet(
+            runtime_root / "block_robust_template_metrics.parquet"
+        )
+        expected_block, expected_templates = _block_robust_gate_summary(
+            ledger=ledger,
+            state={
+                "arm_counters": {
+                    arm: {
+                        **dict(summary["arm_funnel"][arm]),
+                        "cpu_seconds": float(
+                            dict(block_summary["arms"][arm])[
+                                "total_process_cpu_seconds"
+                            ]
+                        ),
+                    }
+                    for arm in BLOCK_ROBUST_GATE_ARMS
+                }
+            },
+            config=campaign_contract,
+        )
+        if block_summary != expected_block:
+            errors.append("block_robust_gate_summary")
+        expected_template_frame = pd.DataFrame(expected_templates).sort_values(
+            ["mechanism_template", "arm"], kind="mergesort"
+        ).reset_index(drop=True)
+        observed_template_frame = template_metrics.sort_values(
+            ["mechanism_template", "arm"], kind="mergesort"
+        ).reset_index(drop=True)
+        if not observed_template_frame.equals(expected_template_frame):
+            errors.append("block_robust_template_metrics")
+        for column in (
+            "block_robust_ordering_json",
+            "block_robust_ordering_sha256",
+            "replicated_positive_block_count",
+            "replicated_candidate",
+            "all_three_blocks_positive",
+        ):
+            if column not in ledger or bool(ledger[column].isna().any()):
+                errors.append(f"block_robust_ledger:{column}")
     try:
         expected_allocations = _search_evidence_v1_expected_checkpoint_allocations(
             stages=frozen.get("stages") or (),
@@ -22764,6 +23401,14 @@ def check_search_evidence_v1(
         "search_run_evidence.parquet",
         "search_exposure_strata.parquet",
         "search_run_evidence_summary.json",
+        *(
+            (
+                "block_robust_gate_summary.json",
+                "block_robust_template_metrics.parquet",
+            )
+            if campaign == BLOCK_ROBUST_GATE_CAMPAIGN
+            else ()
+        ),
     ):
         if (runtime_root / name).relative_to(repo_root).as_posix() not in manifest_paths:
             errors.append(f"manifest:{name}")
@@ -22797,6 +23442,7 @@ def _cli_result_is_success(result: Mapping[str, Any]) -> bool:
     return result.get("result") == "PASS" or result.get("status") in {
         "PASS_SEARCH_RUN_EVIDENCE_V1_COMPLETE",
         "PASS_SEARCH_RUN_EVIDENCE_V1_1_COMPLETE",
+        "PASS_REPLICATION_AWARE_SEARCH_GATE_V1_COMPLETE",
     }
 
 
@@ -22839,6 +23485,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-evidence-v1",
             "run-evidence-v1-1",
             "check-evidence-v1-1",
+            "run-replication-aware-v1",
+            "check-replication-aware-v1",
             "assess-evidence-v1-repair",
             "run-oos-v2-3",
             "check-oos-v2-3",
@@ -22879,6 +23527,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-mechanism-v2-3": MECHANISM_SEARCH_V23_CAMPAIGN,
         "run-evidence-v1": SEARCH_EVIDENCE_V1_CAMPAIGN,
         "run-evidence-v1-1": SEARCH_EVIDENCE_V11_CAMPAIGN,
+        "run-replication-aware-v1": BLOCK_ROBUST_GATE_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -23040,6 +23689,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=SEARCH_EVIDENCE_V11_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-replication-aware-v1":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260806"),
+            source_sha=args.source_sha,
+            campaign=BLOCK_ROBUST_GATE_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "run-oos-v2-3":
         result = run_v23_frozen_oos_replay(
             repo_root,
@@ -23186,6 +23843,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             runtime_date=str(args.runtime_date or "20260805"),
             campaign=SEARCH_EVIDENCE_V11_CAMPAIGN,
+        )
+    elif args.command == "check-replication-aware-v1":
+        result = check_search_evidence_v1(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260806"),
+            campaign=BLOCK_ROBUST_GATE_CAMPAIGN,
         )
     elif args.command == "assess-evidence-v1-repair":
         result = assess_search_evidence_v1_repair(
