@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "contract_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1",
+  "status": "FROZEN_BEFORE_AGGREGATE_MEMBER_READOUT",
+  "role": "EXISTING_CHECKPOINT_POST_HOC_ATTRIBUTION_NO_SELECTION_AUTHORITY",
+  "source_head_sha": "9701555dec2453080eb366d5e7a93733ad10d31f",
+  "sources": {
+    "receipt_path": "config/crypto_search_family_consensus_dev_v1_receipt.json",
+    "receipt_sha256": "2715B9532C3D998ADA3BF184947E9D8CAB5C64FF081D00601880527B6CE57599",
+    "candidate_ledger_path": "runtime/crypto_search_family_consensus_dev_v1_20260805/candidate_ledger.parquet",
+    "candidate_ledger_sha256": "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522",
+    "checkpoint_manifest_path": "runtime/crypto_search_family_consensus_dev_v1_20260805/checkpoints/checkpoint_000/manifest.json",
+    "checkpoint_manifest_file_sha256": "D39B79EBCF3094BD1F2B32A360865754D5EB6290F315388094B932EFF08CD99F",
+    "final_decision_path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/final_decision.json",
+    "final_decision_sha256": "6257A1D00929C199E3609CD3D7DC67B5C2A29535F6714E51712C5EFE8314AF7E",
+    "run_manifest_path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/run_manifest.json",
+    "run_manifest_sha256": "C19F4E2A55F8C27EF20CAF3A2D0589FD53BDBAAC479D8C4631CFCC36D64177AA",
+    "independent_checker_path": "runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json",
+    "independent_checker_sha256": "BB5BF353DFB6D246A4F89866CFEB6DDDE810D477EC2FAAFBC8B957E1DD50D6E5"
+  },
+  "cohort": {
+    "main_count": 23,
+    "main_candidate_ids_sha256": "EAB230F56C938295BA8D74570A66FEF18E64A2FD88E9341C22B7B2E79268D1E7",
+    "other_count": 12,
+    "other_candidate_ids_sha256": "06707EF9D18B347295B78CE1975F51C0E73F515A1752D880128D6EE0326A0D04",
+    "primary_analysis_group": "main"
+  },
+  "frozen_diagnostics": {
+    "member_majority_count": 12,
+    "material_weight_retention_ratio_below": 0.5,
+    "low_common_support_retention_below": 0.25,
+    "economic_axes": [
+      "primary_minus_left_control",
+      "primary_minus_right_control"
+    ],
+    "individual_positive_rule": "BOTH_AXES_STRICTLY_ABOVE_ZERO",
+    "support_denominator": "MEDIAN_INDIVIDUAL_DUAL_AXIS_OBJECTIVE_SUPPORT_HOURS",
+    "cancellation_measure": "CONSENSUS_MEAN_L1_DIVIDED_BY_INDIVIDUAL_MEAN_L1_ON_EXACT_COMMON_SUPPORT",
+    "pairwise_measure": "FLATTENED_INCREMENTAL_WEIGHT_COSINE_ON_EXACT_COMMON_SUPPORT"
+  },
+  "classification_order": [
+    "GROSS_MECHANISM_DECAY_IF_GROSS_BOTH_COUNT_BELOW_12",
+    "EXECUTION_DRAG_IF_GROSS_BOTH_COUNT_AT_LEAST_12_AND_NET_BOTH_COUNT_BELOW_12",
+    "FAMILY_INCOHERENCE_IF_NET_BOTH_COUNT_AT_LEAST_12_AND_EITHER_AXIS_WEIGHT_RETENTION_BELOW_0_5",
+    "SUPPORT_BOTTLENECK_IS_MATERIAL_IF_COMMON_SUPPORT_RETENTION_BELOW_0_25",
+    "OTHERWISE_MIXED_NOT_IDENTIFIED"
+  ],
+  "boundaries": {
+    "market_read_count": 0,
+    "candidate_evaluation_count": 0,
+    "candidate_generation": false,
+    "candidate_reselection": false,
+    "reward_change": false,
+    "mapping_change": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "oos": false,
+    "promotion": false
+  }
+}

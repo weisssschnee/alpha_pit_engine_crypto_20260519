@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (family-consensus checkpoint projection complete; common family did not transfer; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (family-consensus attribution complete; support-slice gross reversal; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -555,6 +555,9 @@
                                     ,"runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/run_manifest.json"
                                     ,"runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json"
                                     ,"reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md"
+                                    ,"runtime/crypto_search_family_consensus_member_attribution_v1_20260806/summary.json"
+                                    ,"runtime/crypto_search_family_consensus_member_attribution_v1_20260806/run_manifest.json"
+                                    ,"reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -776,7 +779,7 @@
                                         {
                                             "id":  "crypto_search_family_consensus_dev_v1_consumed_outcome",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The repaired one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 retained the exact 23 primary flow-intensity/stateful champions and 12 descriptive champions for the 2026-07-18 through 2026-08-01 development-fresh interval, completed acquisition 42/42, qualified the 115-field carrier, and evaluated all 35 fixed candidates once with zero candidate-local failures. Source 9d003c45a56a107860e52123302181867240286d repairs the 336-hour receipt target versus 330-hour economic-path identity. The existing checkpoint was then aggregated without market read or candidate re-evaluation as an explicitly non-bit-exact threshold-sparse projection with a 3.003e-13 worst incremental net-mean error bound. The primary consensus left/right matched net means are -0.00015651447691891477 and -0.000303735033547274, so FAMILY_CONSENSUS_DID_NOT_TRANSFER is robust to that bound; net-LCB remains a diagnostic point estimate only. The independent checker passes. No second gate, rescue, generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized.",
+                                            "rule":  "The repaired one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 retained the exact 23 primary flow-intensity/stateful champions and 12 descriptive champions for the 2026-07-18 through 2026-08-01 development-fresh interval, completed acquisition 42/42, qualified the 115-field carrier, and evaluated all 35 fixed candidates once with zero candidate-local failures. Source 9d003c45a56a107860e52123302181867240286d repairs the 336-hour receipt target versus 330-hour economic-path identity. The existing checkpoint was then aggregated without market read or candidate re-evaluation as an explicitly non-bit-exact threshold-sparse projection with a 3.003e-13 worst incremental net-mean error bound. The primary consensus left/right matched net means are -0.00015651447691891477 and -0.000303735033547274, so FAMILY_CONSENSUS_DID_NOT_TRANSFER is robust to that bound; net-LCB remains a diagnostic point estimate only. Existing-checkpoint attribution subsequently found 20/23 members gross-positive on both axes but only 7/23 net-positive on both, 66/330 exact common-support retention, negative gross on the common slice, and 93.3%/96.8% incremental-weight retention. The current consensus is therefore closed for execution drag plus a material support-slice gross reversal, not family-weight cancellation. The independent checker passes. No second gate, rescue, member reselection, generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_evidence_validation_v1 and the consumed family-consensus receipt",
                                             "bypass_forbidden":  true,
@@ -900,6 +903,9 @@
                        "verified_at_sha":  "824d4512812910e6ee84c7142c33aacc0fb7fd27"
                    },
     "claim_badges":  [
+                         "MEMBER ATTRIBUTION COMPLETE NO MARKET READ",
+                         "COMMON SUPPORT 66 OF 330",
+                         "FAMILY WEIGHT CANCELLATION NOT SUPPORTED",
                          "FAMILY CONSENSUS PROJECTION COMPLETE",
                          "COMMON FAMILY DID NOT TRANSFER",
                          "PROJECTION-BOUND ROBUST NET NEGATIVE",

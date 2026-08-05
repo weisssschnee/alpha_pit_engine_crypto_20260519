@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "contract_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1",
+  "status": "EXISTING_CHECKPOINT_ATTRIBUTION_COMPLETE",
+  "source_head_sha": "9701555dec2453080eb366d5e7a93733ad10d31f",
+  "analysis_role": "POST_HOC_DESCRIPTIVE_ATTRIBUTION_NO_SELECTION_AUTHORITY",
+  "primary_group": {
+    "name": "main",
+    "member_count": 23,
+    "mechanism_family": "MECHANISM_V2_FLOW_INTENSITY_CONVICTION",
+    "mapping_family": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+    "horizon_hours": 4
+  },
+  "source_recalculation": {
+    "hourly_path_gross_max_abs_error_vs_ledger": 8.470329472543003e-20,
+    "hourly_path_net_max_abs_error_vs_ledger": 0.0,
+    "consensus_left_weight_retention_abs_error_vs_committed_concentration": 4.440892098500626e-16,
+    "consensus_right_weight_retention_abs_error_vs_committed_concentration": 0.0
+  },
+  "member_full_path_readout": {
+    "gross_both_axes_positive_count": 20,
+    "net_both_axes_positive_count": 7,
+    "net_lcb_both_axes_positive_count": 0,
+    "gross_both_positive_but_net_both_not_positive_count": 13,
+    "validation_reward_positive_count": 6,
+    "validation_matched_positive_count": 0,
+    "left_gross_positive_count": 22,
+    "right_gross_positive_count": 21,
+    "left_net_positive_count": 9,
+    "right_net_positive_count": 13,
+    "left_gross_mean": 0.0001855563289393617,
+    "right_gross_mean": 0.00022554080920952362,
+    "left_net_mean": 0.0000633567901572984,
+    "right_net_mean": 0.00009659129580543669,
+    "left_net_median": -0.000030733893075346984,
+    "right_net_median": 0.00003136981143998674,
+    "left_cost_mean": 0.00012219953878206324,
+    "right_cost_mean": 0.00012894951340408685,
+    "left_turnover_mean": 0.24439907756412654,
+    "right_turnover_mean": 0.25789902680817367,
+    "train_to_current_validation_reward_spearman": -0.6047430830039526
+  },
+  "support_readout": {
+    "median_individual_dual_axis_objective_support_hours": 330,
+    "exact_consensus_common_support_hours": 66,
+    "common_support_retention_ratio": 0.2,
+    "frozen_low_support_threshold": 0.25,
+    "material_support_bottleneck": true,
+    "common_support_definition": "INTERSECTION_OF_PRIMARY_LEFT_CONTROL_RIGHT_CONTROL_EVALUATION_MASKS_ACROSS_ALL_23_MEMBERS"
+  },
+  "consensus_common_support_economics": {
+    "left_incremental_gross_mean": -0.00005482014302704938,
+    "right_incremental_gross_mean": -0.00014145025218389627,
+    "left_incremental_cost_mean": 0.00010169433389186537,
+    "right_incremental_cost_mean": 0.0001622847813633777,
+    "left_incremental_net_mean": -0.00015651447691891477,
+    "right_incremental_net_mean": -0.000303735033547274,
+    "both_axis_gross_positive": false,
+    "both_axis_net_positive": false,
+    "gross_sign_reversed_relative_to_full_member_majority": true
+  },
+  "behavior_alignment_on_exact_common_support": {
+    "left_incremental": {
+      "weight_retention_ratio": 0.9332634542759101,
+      "pairwise_cosine_pair_count": 253,
+      "pairwise_cosine_mean": 0.47853433016337094,
+      "pairwise_cosine_median": 0.46052684994245113,
+      "pairwise_cosine_q10": 0.21646790917895015,
+      "pairwise_cosine_q90": 0.78311250375294,
+      "negative_pair_fraction": 0.015810276679841896
+    },
+    "right_incremental": {
+      "weight_retention_ratio": 0.9682107426825787,
+      "pairwise_cosine_pair_count": 253,
+      "pairwise_cosine_mean": 0.4539192150377021,
+      "pairwise_cosine_median": 0.46045228003507055,
+      "pairwise_cosine_q10": 0.1971835438872043,
+      "pairwise_cosine_q90": 0.7698332459424687,
+      "negative_pair_fraction": 0.043478260869565216
+    },
+    "frozen_material_retention_threshold": 0.5,
+    "family_incoherence_supported": false
+  },
+  "frozen_branch_result": {
+    "member_level_primary_classification": "EXECUTION_DRAG",
+    "reason": "20_OF_23_GROSS_BOTH_POSITIVE_BUT_ONLY_7_OF_23_NET_BOTH_POSITIVE",
+    "consensus_terminal_observation": "LOW_COMMON_SUPPORT_WITH_GROSS_SIGN_REVERSAL",
+    "support_bottleneck_material": true,
+    "gross_mechanism_extinction_on_member_full_paths": false,
+    "family_weight_cancellation": false,
+    "reward_rank_stability_supported": false
+  },
+  "research_decision": "HOLD_RESEARCH",
+  "next_action": "CLOSE_CURRENT_FAMILY_CONSENSUS_CONSTRUCTION;DO_NOT_RESCUE_BY_COST_OR_MEMBER_RESELECTION;REQUIRE_FUTURE_MECHANISM_TESTS_TO_HAVE_UNIFORM_PRE_FROZEN_SUPPORT",
+  "boundaries": {
+    "market_read_count": 0,
+    "candidate_evaluation_count": 0,
+    "candidate_generation": false,
+    "candidate_reselection": false,
+    "reward_change": false,
+    "mapping_change": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "oos": false,
+    "promotion": false
+  }
+}

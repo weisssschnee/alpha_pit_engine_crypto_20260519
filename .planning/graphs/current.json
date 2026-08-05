@@ -21,6 +21,7 @@
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_ACCELERATION_PREFLIGHT_20260805.md",
           "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md",
+          "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/behavior_family_selection_receipt.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/frozen_contract.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/independent_checker.json",
@@ -72,11 +73,14 @@
           "runtime/crypto_search_family_consensus_dev_v1_20260805/producer_status.json",
           "runtime/crypto_search_family_consensus_dev_v1_20260805/source_metadata_probe.json",
           "runtime/crypto_search_family_consensus_dev_v1_20260805/static_constructibility.json",
+          "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/frozen_contract.json",
+          "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/run_manifest.json",
+          "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/summary.json",
           "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1",
           "tests/test_crypto_search_evidence_validation_v1.py"
         ],
         "raw_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
-        "repo_head": "824d4512812910e6ee84c7142c33aacc0fb7fd27"
+        "repo_head": "9701555dec2453080eb366d5e7a93733ad10d31f"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1158,7 +1162,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-05T16:30:24.395382+00:00",
+  "generated_at": "2026-08-05T17:19:13.632621+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3133,12 +3137,12 @@
         }
       ],
       "claim_badges": [
+        "MEMBER ATTRIBUTION COMPLETE NO MARKET READ",
+        "COMMON SUPPORT 66 OF 330",
+        "FAMILY WEIGHT CANCELLATION NOT SUPPORTED",
         "FAMILY CONSENSUS PROJECTION COMPLETE",
         "COMMON FAMILY DID NOT TRANSFER",
-        "PROJECTION-BOUND ROBUST NET NEGATIVE",
-        "CHECKPOINT 35/35 REUSED NO REEVAL",
-        "LCB POINT ESTIMATE ONLY",
-        "NO OOS OR PROMOTION"
+        "PROJECTION-BOUND ROBUST NET NEGATIVE"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -3354,7 +3358,7 @@
           "enforced_by": "broad_search.search_evidence_validation_v1 and the consumed family-consensus receipt",
           "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/final_decision.json",
           "id": "crypto_search_family_consensus_dev_v1_consumed_outcome",
-          "rule": "The repaired one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 retained the exact 23 primary flow-intensity/stateful champions and 12 descriptive champions for the 2026-07-18 through 2026-08-01 development-fresh interval, completed acquisition 42/42, qualified the 115-field carrier, and evaluated all 35 fixed candidates once with zero candidate-local failures. Source 9d003c45a56a107860e52123302181867240286d repairs the 336-hour receipt target versus 330-hour economic-path identity. The existing checkpoint was then aggregated without market read or candidate re-evaluation as an explicitly non-bit-exact threshold-sparse projection with a 3.003e-13 worst incremental net-mean error bound. The primary consensus left/right matched net means are -0.00015651447691891477 and -0.000303735033547274, so FAMILY_CONSENSUS_DID_NOT_TRANSFER is robust to that bound; net-LCB remains a diagnostic point estimate only. The independent checker passes. No second gate, rescue, generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized.",
+          "rule": "The repaired one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 retained the exact 23 primary flow-intensity/stateful champions and 12 descriptive champions for the 2026-07-18 through 2026-08-01 development-fresh interval, completed acquisition 42/42, qualified the 115-field carrier, and evaluated all 35 fixed candidates once with zero candidate-local failures. Source 9d003c45a56a107860e52123302181867240286d repairs the 336-hour receipt target versus 330-hour economic-path identity. The existing checkpoint was then aggregated without market read or candidate re-evaluation as an explicitly non-bit-exact threshold-sparse projection with a 3.003e-13 worst incremental net-mean error bound. The primary consensus left/right matched net means are -0.00015651447691891477 and -0.000303735033547274, so FAMILY_CONSENSUS_DID_NOT_TRANSFER is robust to that bound; net-LCB remains a diagnostic point estimate only. Existing-checkpoint attribution subsequently found 20/23 members gross-positive on both axes but only 7/23 net-positive on both, 66/330 exact common-support retention, negative gross on the common slice, and 93.3%/96.8% incremental-weight retention. The current consensus is therefore closed for execution drag plus a material support-slice gross reversal, not family-weight cancellation. The independent checker passes. No second gate, rescue, member reselection, generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized.",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -3472,7 +3476,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (family-consensus checkpoint projection complete; common family did not transfer; Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (family-consensus attribution complete; support-slice gross reversal; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3631,7 +3635,10 @@
         "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/final_decision.json",
         "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/run_manifest.json",
         "runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json",
-        "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md"
+        "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md",
+        "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/summary.json",
+        "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/run_manifest.json",
+        "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -5687,7 +5694,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-05T16:30:24.395382+00:00",
+        "checked_at": "2026-08-05T17:19:13.632621+00:00",
         "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json",
         "evidence_sha256": "BDFFA9E7D205B4CC0EAABA9D2EC93FE42F28F169A874C51F06109CCB4BD63490",
         "level": "STATIC_VERIFIED",
@@ -7605,10 +7612,7 @@
         "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
-        "HELD-OUT CALIBRATION VERIFIED",
-        "UNPURGED EVIDENCE SUPERSEDED",
-        "ECONOMIC INCREMENT NOT ESTABLISHED",
-        "NO OOS"
+        "HELD-OUT CALIBRATION VERIFIED"
       ],
       "color": "#2e7d32",
       "contracts": [
@@ -7962,7 +7966,7 @@
       "required": false,
       "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-08-05T16:28:04.790736+00:00",
+        "checked_at": "2026-08-05T17:19:13.632621+00:00",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
         "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
         "level": "PARTIAL",
@@ -8560,7 +8564,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "2B9D87C3A5B6AFBA5C915E995C0850A71B56968E30D96758B433FA28BF7348DD"
+    "sha256": "70B7DD13D322583B81831E306F9138ECDE126F0A8FAD0BD14BB592DB3D445EC1"
   },
   "profile_id": null,
   "profiles": [
@@ -8597,7 +8601,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "05E9C4D4FCDC90707E2909EF6FD53ECCDB72D5F41A21A306E56F8FC37C137748"
   },
-  "repo_head": "824d4512812910e6ee84c7142c33aacc0fb7fd27",
+  "repo_head": "9701555dec2453080eb366d5e7a93733ad10d31f",
   "schema_version": 1,
   "semantic_authorities": [
     {

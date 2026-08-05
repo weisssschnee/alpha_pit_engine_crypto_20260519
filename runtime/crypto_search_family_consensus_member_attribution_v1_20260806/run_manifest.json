@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "contract_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1",
+  "status": "EXISTING_CHECKPOINT_ATTRIBUTION_COMPLETE",
+  "source_head_sha": "9701555dec2453080eb366d5e7a93733ad10d31f",
+  "input_identity": {
+    "candidate_ledger_sha256": "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522",
+    "consensus_metrics_sha256": "CDD26DBE57EB9A62D6D00CC41236CE3323F6E04B9E497E3C7C5965FD4548D92E",
+    "consensus_concentration_sha256": "D328A2948107CFF8FC306A2DB69076232159ACC96C0B00DBBE9A5BB155A53494",
+    "checkpoint_manifest_file_sha256": "D39B79EBCF3094BD1F2B32A360865754D5EB6290F315388094B932EFF08CD99F",
+    "receipt_sha256": "2715B9532C3D998ADA3BF184947E9D8CAB5C64FF081D00601880527B6CE57599"
+  },
+  "output_identity": {
+    "frozen_contract_path": "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/frozen_contract.json",
+    "frozen_contract_sha256": "2E3489BF38215784D77933E2F0FD31F71F5E02FF7C1345EEA4D36018D6BB0013",
+    "summary_path": "runtime/crypto_search_family_consensus_member_attribution_v1_20260806/summary.json",
+    "summary_sha256": "B5BA477241AD8A11219CF62D3F44963F1660106FD4EB0FE8BD6B1FD5C160D21A",
+    "report_path": "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md",
+    "report_sha256": "DAD345BA28C640AD6FAABA601F121BBEC473AC2DF24627E9FFEDC15C31D50E52"
+  },
+  "recalculation": {
+    "main_member_count": 23,
+    "gross_net_recomputed_from_persisted_hourly_sleeves": true,
+    "behavior_alignment_recomputed_from_persisted_sparse_positions": true,
+    "consensus_common_mask_recomputed_from_persisted_base_sleeve_masks": true,
+    "market_payload_read": false,
+    "target_read": false,
+    "candidate_evaluation": false
+  },
+  "boundaries": {
+    "market_read_count": 0,
+    "candidate_evaluation_count": 0,
+    "candidate_generation": false,
+    "candidate_reselection": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "validation_read": false,
+    "oos_read": false,
+    "promotion": false
+  },
+  "research_decision": "HOLD_RESEARCH"
+}

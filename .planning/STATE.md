@@ -1186,13 +1186,23 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart or extend the consumed family-consensus gate. Its bounded
-checkpoint projection is complete and robustly negative on both matched
-incremental net means; it gives no reason to advance the current consensus
-construction to OOS or promotion. The exact online target/weight timestamp
-contract is repaired for any separately authorized future work, but this
-closure authorizes no new search, validation, data Arena, evaluator, compiler,
-AST, mapping, reward, or optimizer change.
+Do not restart or extend the consumed family-consensus gate. Existing-checkpoint
+member attribution is complete without a market read or candidate
+re-evaluation. On full member paths, 20/23 members retain positive gross on both
+matched axes, but only 7/23 retain positive net on both axes and none retains
+positive dual-axis net-LCB. The exact consensus mask retains only 66 of the
+median 330 individual objective hours; both consensus gross means are already
+negative on that slice. Incremental-weight retention is 93.3%/96.8%, so member
+cancellation is not the failure. Close the current equal-weight family
+consensus and do not rescue it by lowering cost, reselecting the six current
+positive members, or rerunning the interval.
+
+Preserve the 4h flow-intensity/stateful pocket only as descriptive mechanism
+evidence. Any separately authorized future mechanism experiment must establish
+uniform pre-frozen support before aggregation and should test genuinely
+different mechanism forms rather than another parameterized consensus of this
+family. This closure authorizes no new search, validation, data Arena,
+evaluator, compiler, AST, mapping, reward, optimizer change, OOS, or promotion.
 
 Historical stage-attribution replay remains unauthorized. No market search,
 prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,
