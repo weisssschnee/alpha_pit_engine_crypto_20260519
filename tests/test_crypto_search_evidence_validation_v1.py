@@ -126,10 +126,10 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
 
 
 def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> None:
-    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=True)
-    assert receipt["run_authorized"] is True
+    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=False)
+    assert receipt["run_authorized"] is False
     assert receipt["status"] == (
-        "RUN_AUTHORIZED_ACQUISITION_REPAIR_NOT_STARTED"
+        "RUN_AUTHORIZATION_CONSUMED_AGGREGATION_FAILED_TARGET_SHAPE"
     )
     assert receipt["source_implementation_sha"] == (
         "d3dd61844cd05ca01aba857d57a5abd29c2a5840"
@@ -157,7 +157,17 @@ def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> N
     assert receipt["repair_authorization"]["candidate_gate_previously_started"] is False
     assert receipt["repair_authorization"]["candidate_gate_runs_authorized"] == 1
     assert receipt["repair_authorization"]["oos"] is False
-    assert receipt["outcome"] is None
+    assert receipt["outcome"]["status"] == (
+        "FAMILY_CONSENSUS_AGGREGATION_FAILED_TARGET_SHAPE"
+    )
+    assert receipt["outcome"]["successful_day_coordinates"] == 42
+    assert receipt["outcome"]["pre_repair_files_changed"] == 0
+    assert receipt["outcome"]["strict_evaluated_count"] == 35
+    assert receipt["outcome"]["aggregation_failure"] == (
+        "FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED"
+    )
+    assert receipt["outcome"]["consensus_result"] == "NOT_OBSERVED"
+    assert receipt["outcome"]["second_candidate_gate_started"] is False
 
 
 def test_consensus_cohort_is_exact_23_plus_12_without_validation_reselection() -> None:

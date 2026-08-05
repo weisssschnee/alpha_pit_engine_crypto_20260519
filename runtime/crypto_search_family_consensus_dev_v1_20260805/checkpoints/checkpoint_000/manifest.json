@@ -1,0 +1,545 @@
+{
+  "candidate_local_failure_count": 0,
+  "checkpoint": "checkpoint_000",
+  "completed_candidate_count": 35,
+  "files": [
+    {
+      "bytes": 273644,
+      "path": "candidate_ledger.parquet",
+      "sha256": "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522"
+    },
+    {
+      "bytes": 166551,
+      "path": "paths/0000_075651B6A5C036E4/economic_asset_positions.parquet",
+      "sha256": "23E25F70B1A547DE8FD5B924851FD4820111799DD0881B9A37C3A188726D947F"
+    },
+    {
+      "bytes": 18537,
+      "path": "paths/0000_075651B6A5C036E4/economic_daily_sleeves.parquet",
+      "sha256": "7CF3C83A3D399541166EED8D52152E5DFF6AB515ACB90DC2E278BB4B2E694EF3"
+    },
+    {
+      "bytes": 133883,
+      "path": "paths/0000_075651B6A5C036E4/economic_hourly_sleeves.parquet",
+      "sha256": "546755B1AB4D40B533F1B6722DC789E90200AF3917BAD8C33647954D378A5926"
+    },
+    {
+      "bytes": 129222,
+      "path": "paths/0001_0E33B98E15EC43B4/economic_asset_positions.parquet",
+      "sha256": "95132267C622AC113F1D4CF0D49561A90D3A8A0700C444B42BAAF943C38E19F5"
+    },
+    {
+      "bytes": 18060,
+      "path": "paths/0001_0E33B98E15EC43B4/economic_daily_sleeves.parquet",
+      "sha256": "9159756070072B0194ADD02D0F562A9D3D090894EC68C9E6CBEED02DB32C0CFB"
+    },
+    {
+      "bytes": 105892,
+      "path": "paths/0001_0E33B98E15EC43B4/economic_hourly_sleeves.parquet",
+      "sha256": "449E360BD64A88C3CC90EEC13F7DF70482BBF3C6FFCBDE2DD29361D839299338"
+    },
+    {
+      "bytes": 311827,
+      "path": "paths/0002_18F166FAA3015AB4/economic_asset_positions.parquet",
+      "sha256": "98A347919AF95150BD72B77194775A57328EC1A7B02543E68CC1C7DC9E57CF1D"
+    },
+    {
+      "bytes": 18544,
+      "path": "paths/0002_18F166FAA3015AB4/economic_daily_sleeves.parquet",
+      "sha256": "334BE8AF938F39A2267903A2D3AD33915E75DF14E4ADCBB86B84CC2D58046D5E"
+    },
+    {
+      "bytes": 126776,
+      "path": "paths/0002_18F166FAA3015AB4/economic_hourly_sleeves.parquet",
+      "sha256": "9DEA0096C4D41B7A5BAF3256E036CF9B1D0D9F7788398DB2E3A7CE0DE5ED8709"
+    },
+    {
+      "bytes": 63677,
+      "path": "paths/0003_219BAEDD67ACDAE8/economic_asset_positions.parquet",
+      "sha256": "C6977C1AEA7D2F6865A3C59A069893279CE1CB8D07BA4FA01A1872E1265DF5EE"
+    },
+    {
+      "bytes": 17687,
+      "path": "paths/0003_219BAEDD67ACDAE8/economic_daily_sleeves.parquet",
+      "sha256": "B44B1FA9DC70F4A5E178AF062437A54E7E0CE689BCCDE14953B0FD5629BA7FDA"
+    },
+    {
+      "bytes": 100740,
+      "path": "paths/0003_219BAEDD67ACDAE8/economic_hourly_sleeves.parquet",
+      "sha256": "9A45757A44A71855BCE4EEA0CBB902600DF0462DBD6B2F16F1EB28BCEE64B850"
+    },
+    {
+      "bytes": 533278,
+      "path": "paths/0004_34A73A9092CD8549/economic_asset_positions.parquet",
+      "sha256": "14F8D551AF91D50AD333BB3DD85F830A234B792F46B683DD0D7ABD6DC6D24B59"
+    },
+    {
+      "bytes": 18445,
+      "path": "paths/0004_34A73A9092CD8549/economic_daily_sleeves.parquet",
+      "sha256": "1C77B83ABEB3488BC052AB6A330E09F47B6A0D16A25820FDFBF97A3BFC868885"
+    },
+    {
+      "bytes": 122839,
+      "path": "paths/0004_34A73A9092CD8549/economic_hourly_sleeves.parquet",
+      "sha256": "179B0AE8C3791AC5E51F84662B4C65121A7012C84DF93CE8C5502253C1A3A551"
+    },
+    {
+      "bytes": 730530,
+      "path": "paths/0005_3BD1C8F6ECF4E3ED/economic_asset_positions.parquet",
+      "sha256": "EFFEFD8C1B7D3B6867DFE1D286794D5AD8063341DDF1A05EC218BD6509472C1D"
+    },
+    {
+      "bytes": 18583,
+      "path": "paths/0005_3BD1C8F6ECF4E3ED/economic_daily_sleeves.parquet",
+      "sha256": "9769B0B609D01615CD0087F6DF14C74909635FD2A0BB675DB76123DFB48B02F5"
+    },
+    {
+      "bytes": 125533,
+      "path": "paths/0005_3BD1C8F6ECF4E3ED/economic_hourly_sleeves.parquet",
+      "sha256": "AAC1A361E8DF4ECE1DE7E67CBFF7B1C4241D4158ED660D9543DDE5C5467E568E"
+    },
+    {
+      "bytes": 455784,
+      "path": "paths/0006_4BC92CCC95A066FF/economic_asset_positions.parquet",
+      "sha256": "500A5788FCC97414CF0247FF052BCB2E2F506E2A4FA5DF732286735392E863DF"
+    },
+    {
+      "bytes": 18603,
+      "path": "paths/0006_4BC92CCC95A066FF/economic_daily_sleeves.parquet",
+      "sha256": "70E910305A11C07E1F74870CEC5DAE34D183508380674A4E9B15221107E59B82"
+    },
+    {
+      "bytes": 144274,
+      "path": "paths/0006_4BC92CCC95A066FF/economic_hourly_sleeves.parquet",
+      "sha256": "FF0175FA1095FC96485EDB57A252A908555294C1569CC80B41C4830D98261D0D"
+    },
+    {
+      "bytes": 539045,
+      "path": "paths/0007_4F9FFCE5CA305895/economic_asset_positions.parquet",
+      "sha256": "B903F474752AF33E2088AC99C73FA0634B1BC9994D6B3062611B53ACD716EF85"
+    },
+    {
+      "bytes": 18485,
+      "path": "paths/0007_4F9FFCE5CA305895/economic_daily_sleeves.parquet",
+      "sha256": "18B5226AAD168361E319F12F33166872DC1073091CA343656B20B274ADAC88A5"
+    },
+    {
+      "bytes": 123247,
+      "path": "paths/0007_4F9FFCE5CA305895/economic_hourly_sleeves.parquet",
+      "sha256": "25576D21E54EE93FABACBDD46318E4D75B0DD7B50FBFAD88665645604A3CB1B2"
+    },
+    {
+      "bytes": 345640,
+      "path": "paths/0008_59758FB01DFB8EA7/economic_asset_positions.parquet",
+      "sha256": "4629ACAC460129E3AF959ACED3DCF2327B2DF4A1D0EEBD6F262BE072413A04DA"
+    },
+    {
+      "bytes": 18276,
+      "path": "paths/0008_59758FB01DFB8EA7/economic_daily_sleeves.parquet",
+      "sha256": "619F69FC2553F7B37330500FA666262A8D1A74F0371F238725F37534EFED5256"
+    },
+    {
+      "bytes": 124479,
+      "path": "paths/0008_59758FB01DFB8EA7/economic_hourly_sleeves.parquet",
+      "sha256": "96DFDC1122FA99230DABDEB7B53693D2F45903AAFDBD54A5CB8F227CC160A6D4"
+    },
+    {
+      "bytes": 104514,
+      "path": "paths/0009_72F1F444FD093741/economic_asset_positions.parquet",
+      "sha256": "9A96326D1EFED802B4F4E2E6DF2BE7BDEF33EA16CBAEC266CA1A92CFB94B8C47"
+    },
+    {
+      "bytes": 17743,
+      "path": "paths/0009_72F1F444FD093741/economic_daily_sleeves.parquet",
+      "sha256": "36CC600FD47D2B058DF112B36090E81499DB9A73FEF0139CE01785A39838334F"
+    },
+    {
+      "bytes": 109634,
+      "path": "paths/0009_72F1F444FD093741/economic_hourly_sleeves.parquet",
+      "sha256": "0D202579F7466DC188C3E123E9318611D7D5B165A75E01A494173E696D9C27C8"
+    },
+    {
+      "bytes": 227714,
+      "path": "paths/0010_8E3DD2C05486E726/economic_asset_positions.parquet",
+      "sha256": "D178F175B6E10807A8E75B12B3AB57E231D56411C69F3CA595CA7DFEEA58AD88"
+    },
+    {
+      "bytes": 18162,
+      "path": "paths/0010_8E3DD2C05486E726/economic_daily_sleeves.parquet",
+      "sha256": "C13208C7A0EEDCB2F978863E1B79DEC3C80AD17E43B99CE7D74CA484CFF7A971"
+    },
+    {
+      "bytes": 124027,
+      "path": "paths/0010_8E3DD2C05486E726/economic_hourly_sleeves.parquet",
+      "sha256": "7E4C598B1A9E9BD4145971FF113642222086E3D9CE7566326F667B97F68AFB4B"
+    },
+    {
+      "bytes": 198723,
+      "path": "paths/0011_8F441CF7940FA4E2/economic_asset_positions.parquet",
+      "sha256": "DD91DFA443834492D1E552CBAE43F04F28E81620BBA4375A86FD4D290D0BFF83"
+    },
+    {
+      "bytes": 18468,
+      "path": "paths/0011_8F441CF7940FA4E2/economic_daily_sleeves.parquet",
+      "sha256": "494D881816D58B76FE92E379C7B6972364E1566EB126AC78D6977B6290996E8E"
+    },
+    {
+      "bytes": 126222,
+      "path": "paths/0011_8F441CF7940FA4E2/economic_hourly_sleeves.parquet",
+      "sha256": "F0E31A67B466BF2872BA640F7B524F89E814570496BA7D15944C5F48836C9153"
+    },
+    {
+      "bytes": 160702,
+      "path": "paths/0012_A6A911E9F9661653/economic_asset_positions.parquet",
+      "sha256": "1B200D1405AEE9E3F965B4ECD8F49BC4238417813FA7099145A9327476050CD2"
+    },
+    {
+      "bytes": 16992,
+      "path": "paths/0012_A6A911E9F9661653/economic_daily_sleeves.parquet",
+      "sha256": "6645462D2E3D14ADBC4A685905777D7A52FB15E82EA7981356995020CB088998"
+    },
+    {
+      "bytes": 72561,
+      "path": "paths/0012_A6A911E9F9661653/economic_hourly_sleeves.parquet",
+      "sha256": "810868970A62A7BBB55E95DF6EAAD86AADBDBF57744BB7D818A23972BD0DED41"
+    },
+    {
+      "bytes": 93605,
+      "path": "paths/0013_A9C5EEA05E40187F/economic_asset_positions.parquet",
+      "sha256": "91A90624980045B9DA9A4FC310F591EE3A69A0B1811DF0B8D2E20185DB021B69"
+    },
+    {
+      "bytes": 18544,
+      "path": "paths/0013_A9C5EEA05E40187F/economic_daily_sleeves.parquet",
+      "sha256": "52D4A8B1403EA6550564C4DEE647760CDB3B2F6CB8C08806059C085EC519CDE1"
+    },
+    {
+      "bytes": 119337,
+      "path": "paths/0013_A9C5EEA05E40187F/economic_hourly_sleeves.parquet",
+      "sha256": "05F67DE14AD6AA5BD14676888B9584C7391F693A1FAA7D4A04D92CCABB334E30"
+    },
+    {
+      "bytes": 73533,
+      "path": "paths/0014_B347546049F91E5C/economic_asset_positions.parquet",
+      "sha256": "27A269ECD9B9F3D9F84D44743EF011A9F55AA234B35401089FE29A9E9733FBB6"
+    },
+    {
+      "bytes": 17676,
+      "path": "paths/0014_B347546049F91E5C/economic_daily_sleeves.parquet",
+      "sha256": "5139F1C57E88B1C6F68FCF84199854F8ADEC85C220B51EB71FE906E6B9DD5D27"
+    },
+    {
+      "bytes": 105348,
+      "path": "paths/0014_B347546049F91E5C/economic_hourly_sleeves.parquet",
+      "sha256": "48501696E6C4DC5BDFA4EF94939E263B1EFD312933F4CFCA2DDD477C4FE03BD3"
+    },
+    {
+      "bytes": 264914,
+      "path": "paths/0015_B87E60EDDFFBCDF5/economic_asset_positions.parquet",
+      "sha256": "39FA7F9F2010CDB6ADACEF95C4B76B4DBA1D177EBA0807EE9BDD2FAD0BF6E4CE"
+    },
+    {
+      "bytes": 18134,
+      "path": "paths/0015_B87E60EDDFFBCDF5/economic_daily_sleeves.parquet",
+      "sha256": "320B0D4D90D713B16F5826763F1C77C7B4B05AC2B1F7B01E2F5986BB1AC34278"
+    },
+    {
+      "bytes": 126868,
+      "path": "paths/0015_B87E60EDDFFBCDF5/economic_hourly_sleeves.parquet",
+      "sha256": "59EC931832C621800695D7E9412FB42FF707BFEE96F43848B0BCE698A6D9AB7D"
+    },
+    {
+      "bytes": 343861,
+      "path": "paths/0016_B9ECF8DE4C99F115/economic_asset_positions.parquet",
+      "sha256": "4CF05D146ACDE0BEEE881888E46463A41A4EAC73C14A67A205D0DA46BB0448B7"
+    },
+    {
+      "bytes": 18465,
+      "path": "paths/0016_B9ECF8DE4C99F115/economic_daily_sleeves.parquet",
+      "sha256": "581E8C94D9604AB9956F1FEDD6D5B190559A7006D44740E20AD90F5A6D0DFD41"
+    },
+    {
+      "bytes": 122427,
+      "path": "paths/0016_B9ECF8DE4C99F115/economic_hourly_sleeves.parquet",
+      "sha256": "30AD7F03F311AA55B8862B1179E7258C660EF0915A9C5590E019653B5CC4F340"
+    },
+    {
+      "bytes": 300209,
+      "path": "paths/0017_CE136873FBC3A09B/economic_asset_positions.parquet",
+      "sha256": "53D8A7841A82BACE611BCF9855AF4BFA068478FCF221400904C5F8F6FCED1751"
+    },
+    {
+      "bytes": 18520,
+      "path": "paths/0017_CE136873FBC3A09B/economic_daily_sleeves.parquet",
+      "sha256": "DE8516FB8B70AFA751C6CE1F54DB3241CAC89B15ADD10F6F6AFBA5F0EDDA53B3"
+    },
+    {
+      "bytes": 126449,
+      "path": "paths/0017_CE136873FBC3A09B/economic_hourly_sleeves.parquet",
+      "sha256": "CE3A01902612161934D4007702CA7FC373784ED93733E243A0C75BD0066C7007"
+    },
+    {
+      "bytes": 215405,
+      "path": "paths/0018_CFCE361D57CE383B/economic_asset_positions.parquet",
+      "sha256": "678579D7A2168A5A159E8D5462FBA4BD23C21D0EA75CC882617948BE87968831"
+    },
+    {
+      "bytes": 18561,
+      "path": "paths/0018_CFCE361D57CE383B/economic_daily_sleeves.parquet",
+      "sha256": "05283A4A0F2795741747B40D86348A129091650BEF5895EBC9902304E3A53106"
+    },
+    {
+      "bytes": 116942,
+      "path": "paths/0018_CFCE361D57CE383B/economic_hourly_sleeves.parquet",
+      "sha256": "1DB2E7BAB963A86B4D60E245AA4CEB4D3A26451EE056BE959AF4703AAE6A5861"
+    },
+    {
+      "bytes": 135453,
+      "path": "paths/0019_D0886CB7BF3F000B/economic_asset_positions.parquet",
+      "sha256": "2A7ACD81A9E019AA702CA593949882DD7280C5C370549EADB5F53B4BDA6D27F7"
+    },
+    {
+      "bytes": 18130,
+      "path": "paths/0019_D0886CB7BF3F000B/economic_daily_sleeves.parquet",
+      "sha256": "39C26BD68A35804B2052382BC93D0869C1BBEF0FF148ACBBEC1D0CB9A5BEB9F2"
+    },
+    {
+      "bytes": 105746,
+      "path": "paths/0019_D0886CB7BF3F000B/economic_hourly_sleeves.parquet",
+      "sha256": "5389B15AEBE2231E9C26BA0BC025C6CBFE7771312F4AEFA765CD84B7DD221283"
+    },
+    {
+      "bytes": 166008,
+      "path": "paths/0020_E7FDB0A8F5DF8313/economic_asset_positions.parquet",
+      "sha256": "043E0F76DDDF9DFEA9575809774661B8D626923F27E40AADAFD4E4ED0C992D2D"
+    },
+    {
+      "bytes": 18533,
+      "path": "paths/0020_E7FDB0A8F5DF8313/economic_daily_sleeves.parquet",
+      "sha256": "45D89659AD789146BDF4FDAF5BE6B3D5E2D2E532F220D36C0DFE3912F7698AF0"
+    },
+    {
+      "bytes": 132849,
+      "path": "paths/0020_E7FDB0A8F5DF8313/economic_hourly_sleeves.parquet",
+      "sha256": "1EC7CE669B31059B972BC792879102BDCBE9EA8C539AEAA3E872AA02A2DA0694"
+    },
+    {
+      "bytes": 291020,
+      "path": "paths/0021_E863A499C6FABD9A/economic_asset_positions.parquet",
+      "sha256": "6A8F512DD41CE9DC428AFD7A2F79482182AC4B9C524DCC86BE65A3DB1F8388CB"
+    },
+    {
+      "bytes": 18462,
+      "path": "paths/0021_E863A499C6FABD9A/economic_daily_sleeves.parquet",
+      "sha256": "B2C436005892361472295688B1CE5DF1B2ED9A7AC3FD569B8B2A635141BC683B"
+    },
+    {
+      "bytes": 126018,
+      "path": "paths/0021_E863A499C6FABD9A/economic_hourly_sleeves.parquet",
+      "sha256": "A8039EA62CA66E57C151F6C274E8020B847EF71197097EBBB7E7BECB1EA21E07"
+    },
+    {
+      "bytes": 207929,
+      "path": "paths/0022_E92388A9E6C09956/economic_asset_positions.parquet",
+      "sha256": "19A317C97F981CF992C08AE2E9518E7427CA30CB60E50DCB2B45A138075910FB"
+    },
+    {
+      "bytes": 18476,
+      "path": "paths/0022_E92388A9E6C09956/economic_daily_sleeves.parquet",
+      "sha256": "8D4E0C671EA6C5C67624092B6C6D6644AE46D0CE712F061EEB93AB809DE8BD3C"
+    },
+    {
+      "bytes": 118649,
+      "path": "paths/0022_E92388A9E6C09956/economic_hourly_sleeves.parquet",
+      "sha256": "3668FE8823EE449F827D32F69122F73BAF7107DC2EADA30F5DA6DD06C1AB789A"
+    },
+    {
+      "bytes": 127747,
+      "path": "paths/0023_02127DF9B78F446C/economic_asset_positions.parquet",
+      "sha256": "8FE774E2EB09B0A083147509F50DE7FD5C90F5241130B017EE1BC3E8B0D1C3B2"
+    },
+    {
+      "bytes": 18437,
+      "path": "paths/0023_02127DF9B78F446C/economic_daily_sleeves.parquet",
+      "sha256": "4D2D5F13483F2004FD784B48DF63B14F79B375CEA18A38F28C27099264547180"
+    },
+    {
+      "bytes": 91508,
+      "path": "paths/0023_02127DF9B78F446C/economic_hourly_sleeves.parquet",
+      "sha256": "E5C493463B3BD756C928FB2CEE26C61B7F424E19656E9298B2BDF2154154C325"
+    },
+    {
+      "bytes": 128072,
+      "path": "paths/0024_2829AC30D8900A6E/economic_asset_positions.parquet",
+      "sha256": "19E9B0E6965BBA2BB76C3DF00E8FB40B53B296F8C5085EB9E3F171D3810BFB8D"
+    },
+    {
+      "bytes": 18412,
+      "path": "paths/0024_2829AC30D8900A6E/economic_daily_sleeves.parquet",
+      "sha256": "F97DCBEA89150BB0D0F98CAD9983D203768E336971EC194BF59BA08D4115EC97"
+    },
+    {
+      "bytes": 91274,
+      "path": "paths/0024_2829AC30D8900A6E/economic_hourly_sleeves.parquet",
+      "sha256": "A65EB0056FE9527047C938037F4188FA14ACF2D22A1C567F7E5AD3A22CA06C75"
+    },
+    {
+      "bytes": 155062,
+      "path": "paths/0025_42069A0E071257B3/economic_asset_positions.parquet",
+      "sha256": "0610EB8BC3AC97900B91A80D0D14B0EEBA718AB39F13D31256CA4B16B0CFB074"
+    },
+    {
+      "bytes": 18540,
+      "path": "paths/0025_42069A0E071257B3/economic_daily_sleeves.parquet",
+      "sha256": "5D6E1B183429880242F654EEEA9A5CDB7154E938309B5F158F4967750814915F"
+    },
+    {
+      "bytes": 94899,
+      "path": "paths/0025_42069A0E071257B3/economic_hourly_sleeves.parquet",
+      "sha256": "1E1986109B4FACDE78A8F40158921001EDDEB8B5D3FA4DE46B438BE3B1BE898A"
+    },
+    {
+      "bytes": 128024,
+      "path": "paths/0026_50AA99D4B30C71B4/economic_asset_positions.parquet",
+      "sha256": "68B9800FD9A9FF5FE6C3B2E4F0C25D22B59D114D17F0A45711DE5FDDAFF68C7D"
+    },
+    {
+      "bytes": 18355,
+      "path": "paths/0026_50AA99D4B30C71B4/economic_daily_sleeves.parquet",
+      "sha256": "AF472F1C380ECCAB9600367A4DE8AEDC51D20009A5B6BDDAD349EA51CA10D747"
+    },
+    {
+      "bytes": 91428,
+      "path": "paths/0026_50AA99D4B30C71B4/economic_hourly_sleeves.parquet",
+      "sha256": "40E69E6A748C2D08AA83916851DD1967F24F520E920EC577BC8F3500C2959FB0"
+    },
+    {
+      "bytes": 85896,
+      "path": "paths/0027_5965390382D66284/economic_asset_positions.parquet",
+      "sha256": "74B1AA0ADFA1C76403F1EE0E72578B99D95EDADE3C42F37C529EA84FC9E55680"
+    },
+    {
+      "bytes": 17887,
+      "path": "paths/0027_5965390382D66284/economic_daily_sleeves.parquet",
+      "sha256": "1AEDA4FB4F7F78BEC61D0775671E62024B619CD202600F9C0D3546EB74736433"
+    },
+    {
+      "bytes": 76794,
+      "path": "paths/0027_5965390382D66284/economic_hourly_sleeves.parquet",
+      "sha256": "B69455091E888A52F7F5EC1DAE35B889FA39326C50E2394592E87BEF084AB8AD"
+    },
+    {
+      "bytes": 125557,
+      "path": "paths/0028_5A38D29538B788BC/economic_asset_positions.parquet",
+      "sha256": "5BBEF8D8F9DEE54001E7CC0BFF590DEB76019906FD33DFE630FEF34F3650EE2D"
+    },
+    {
+      "bytes": 18490,
+      "path": "paths/0028_5A38D29538B788BC/economic_daily_sleeves.parquet",
+      "sha256": "5831F3F75DD92662A388B22FC63541BCE7541695102B8552E684CF4D90CA40DD"
+    },
+    {
+      "bytes": 91477,
+      "path": "paths/0028_5A38D29538B788BC/economic_hourly_sleeves.parquet",
+      "sha256": "152A55FB1995093CF94BFCA7F393A4F88382490FAD783FE92D2C287A8FD303B2"
+    },
+    {
+      "bytes": 252674,
+      "path": "paths/0029_779E621B900019A4/economic_asset_positions.parquet",
+      "sha256": "4BB5E175791AA10E8FC2B7A0E0E1AB27A5578F0E00F8AFB1B3DE5C31983E9720"
+    },
+    {
+      "bytes": 18507,
+      "path": "paths/0029_779E621B900019A4/economic_daily_sleeves.parquet",
+      "sha256": "4AD60A67F0CCAA76785EC3D2933E218CF493F9E9128968B73BE960FE3178EBA5"
+    },
+    {
+      "bytes": 103309,
+      "path": "paths/0029_779E621B900019A4/economic_hourly_sleeves.parquet",
+      "sha256": "C9967FA48AF2F721854601AD9DCA9D78DFA79C3208C0966F660212CDFE6A4FC5"
+    },
+    {
+      "bytes": 134154,
+      "path": "paths/0030_92BC1FE2325F78FC/economic_asset_positions.parquet",
+      "sha256": "6CA7B1CCF26A2E42BE5CFD75131534D0A3CE5BDA2CE4CBB88AB1F8C133C603F1"
+    },
+    {
+      "bytes": 18600,
+      "path": "paths/0030_92BC1FE2325F78FC/economic_daily_sleeves.parquet",
+      "sha256": "74982352617DCEA2168F7A5839125BA8673B0486E2FC0F245F6D2D7E188441D9"
+    },
+    {
+      "bytes": 100927,
+      "path": "paths/0030_92BC1FE2325F78FC/economic_hourly_sleeves.parquet",
+      "sha256": "B3AF4B6CBB2478FC1C7D55310989F06C947F3C87599A0B125D598A004B5AD901"
+    },
+    {
+      "bytes": 206653,
+      "path": "paths/0031_BF21D3AADE76EA4C/economic_asset_positions.parquet",
+      "sha256": "0BD1EF1784423B0D6AABFAAC60899716DE3C012B4B4E8BC516D1A639F5350E23"
+    },
+    {
+      "bytes": 18579,
+      "path": "paths/0031_BF21D3AADE76EA4C/economic_daily_sleeves.parquet",
+      "sha256": "770277DE010EB9E6F6D8974AF68867070BBBBE2D3846C784D60547311830B707"
+    },
+    {
+      "bytes": 141882,
+      "path": "paths/0031_BF21D3AADE76EA4C/economic_hourly_sleeves.parquet",
+      "sha256": "3B371E944190ACD857A6E6157A21C9002FCE066C5E86EF29FAF925C090BF1DF5"
+    },
+    {
+      "bytes": 610576,
+      "path": "paths/0032_C2538DE085C94972/economic_asset_positions.parquet",
+      "sha256": "3FA0919ECB0E26D3C0A1139F70F901112EFDF45176851C8E5A7BFC41AB76C4A8"
+    },
+    {
+      "bytes": 18689,
+      "path": "paths/0032_C2538DE085C94972/economic_daily_sleeves.parquet",
+      "sha256": "A1F245145FD2A8D6B9D069088EEB2C204182DC2B7B002927A0164E66F9D1C224"
+    },
+    {
+      "bytes": 144232,
+      "path": "paths/0032_C2538DE085C94972/economic_hourly_sleeves.parquet",
+      "sha256": "6207433048F902E4725D5E2120079BD48CF98D9F9BA49E36FEC2672850630942"
+    },
+    {
+      "bytes": 253055,
+      "path": "paths/0033_DF03166F891F6EF2/economic_asset_positions.parquet",
+      "sha256": "2A76E5C3A236316E49ACBB176649CFD90D6C51A3AB467D01AB1603BFDE88B1BD"
+    },
+    {
+      "bytes": 18551,
+      "path": "paths/0033_DF03166F891F6EF2/economic_daily_sleeves.parquet",
+      "sha256": "FC9EFECB5DEE6C9EE230370C2641CEDCD9F1AD7DA6EA4C9389458D0642BEF820"
+    },
+    {
+      "bytes": 102123,
+      "path": "paths/0033_DF03166F891F6EF2/economic_hourly_sleeves.parquet",
+      "sha256": "0A6BDAF9AE8C12C9F88E91583AB7C079291ABB53DA129B47CC6611A28EE215B2"
+    },
+    {
+      "bytes": 154705,
+      "path": "paths/0034_F96AF63ABB6ECB4C/economic_asset_positions.parquet",
+      "sha256": "82347AD7EABA9F114201E60C57593B0283375FC649C8404D9429327A8E7C9B0F"
+    },
+    {
+      "bytes": 18468,
+      "path": "paths/0034_F96AF63ABB6ECB4C/economic_daily_sleeves.parquet",
+      "sha256": "EC345ED7E7C266C16C540856CD16C02757B148EE1FACD757F4F7C56587C53997"
+    },
+    {
+      "bytes": 94427,
+      "path": "paths/0034_F96AF63ABB6ECB4C/economic_hourly_sleeves.parquet",
+      "sha256": "796E1A5B557DD27BF0F0B64A3FCE38AE948B4173D3104B2765B75F4D4DAD5124"
+    }
+  ],
+  "frozen_contract_sha256": "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+  "manifest_sha256": "ABC01F1969AE4E28152F0427491F775807295E741A978B288A24C1BFB1773C4C",
+  "memory_fallback_used": false,
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "schema_version": 1,
+  "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+  "strict_evaluated_count": 35,
+  "workers": 10
+}

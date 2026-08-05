@@ -1,0 +1,28 @@
+{
+    "status":  "PASS",
+    "acquisition_status":  "complete",
+    "completed_days":  42,
+    "total_days":  42,
+    "failure_count":  0,
+    "frozen_mapping_exact":  true,
+    "frozen_symbol_map_sha256":  "B9E5C594710D73E0C508DE1CBBC6CD56B843C67D850371A92A0CF77B78880888",
+    "done_markers":  42,
+    "compact_files":  42,
+    "object_manifest_files":  42,
+    "pre_repair_files_checked":  114,
+    "pre_repair_files_changed":  0,
+    "changed_files":  [
+
+                      ],
+    "unexpected_dates":  [
+
+                         ],
+    "missing_dates":  [
+
+                      ],
+    "carrier_started":  false,
+    "checkpoints_started":  false,
+    "run_started":  false,
+    "elapsed_seconds":  0.36380609999999997,
+    "verified_utc":  "2026-08-05T13:40:08.0133293+00:00"
+}

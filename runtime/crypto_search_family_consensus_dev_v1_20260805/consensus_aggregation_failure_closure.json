@@ -1,0 +1,71 @@
+{
+    "schema_version":  1,
+    "status":  "FAMILY_CONSENSUS_AGGREGATION_FAILED_TARGET_SHAPE",
+    "producer_source_sha":  "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+    "development_fresh_interval":  {
+                                       "start":  "2026-07-18T00:00:00Z",
+                                       "end_exclusive":  "2026-08-01T00:00:00Z"
+                                   },
+    "frozen_selection":  {
+                             "main_count":  23,
+                             "other_count":  12,
+                             "selection_receipt_sha256":  "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+                             "frozen_contract_sha256":  "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+                             "selection_frozen_before_market_read":  true
+                         },
+    "acquisition_repair":  {
+                               "status":  "COMPLETE",
+                               "scheduled_day_coordinates":  42,
+                               "successful_day_coordinates":  42,
+                               "failed_day_coordinates":  0,
+                               "reused_successful_coordinates":  38,
+                               "repaired_coordinates":  4,
+                               "pre_repair_files_checked":  114,
+                               "pre_repair_files_changed":  0,
+                               "frozen_mapping_exact":  true,
+                               "verification_sha256":  "0381A667D8B198E8B05369F8E1ACF344E64B8EF5E98C9156ABC48CC2C9118F95"
+                           },
+    "carrier":  {
+                    "status":  "FAMILY_CONSENSUS_CARRIER_READY",
+                    "field_count":  115,
+                    "manifest_sha256":  "11C518E7CA669F7F6DCA2246620AE2F914764E24301DA9D918279E4E311F1923",
+                    "aligned_identity_sha256":  "48981474E2C77D0A91A0932211C101CB043D79D801CE3577E5CA6979A89EFA00",
+                    "target_identity_sha256":  "96BC63663DBF7EF4F6DACCE5D2DC1B5C4FFCEE09514ED80B15B1E28B9E18B2D9"
+                },
+    "candidate_gate":  {
+                           "started_once":  true,
+                           "completed_candidate_count":  35,
+                           "strict_evaluated_count":  35,
+                           "candidate_local_failure_count":  0,
+                           "workers":  10,
+                           "memory_fallback_used":  false,
+                           "checkpoint_manifest_sha256":  "D39B79EBCF3094BD1F2B32A360865754D5EB6290F315388094B932EFF08CD99F",
+                           "candidate_ledger_sha256":  "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522",
+                           "aggregation_status":  "FAILED",
+                           "failure_code":  "FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED",
+                           "final_decision_present":  false,
+                           "run_manifest_present":  false,
+                           "consensus_result":  "NOT_OBSERVED",
+                           "stdout_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                           "stderr_sha256":  "DAD963467EC52D3A602A42AF844109918E44CBA2D8BA72EA2D77934B87C20814"
+                       },
+    "independent_checker":  {
+                                "status":  "FAIL",
+                                "errors":  [
+                                               "FileNotFoundError:[Errno 2] No such file or directory: \u0027C:\\\\HermesWorker\\\\workspace\\\\crypto_family_consensus_d3dd6184\\\\runtime\\\\crypto_search_family_consensus_dev_v1_20260805\\\\final_decision.json\u0027"
+                                           ],
+                                "artifact_sha256":  "0658056516F5F7AA8FCFED80961DB10D7685A530B6213907A619BA465C157B21",
+                                "interpretation":  "EXPECTED_FAIL_CLOSED_MISSING_TERMINAL_AGGREGATION_ARTIFACTS"
+                            },
+    "boundaries":  {
+                       "candidate_generation_performed":  false,
+                       "optimizer_feedback_written":  false,
+                       "archive_written":  false,
+                       "second_candidate_gate_started":  false,
+                       "rescue_rerun_started":  false,
+                       "oos_read":  false,
+                       "promotion_authorized":  false
+                   },
+    "decision":  "FAIL_CLOSED_NO_RERUN_NO_CONSENSUS_CONCLUSION",
+    "completed_utc":  "2026-08-05T14:35:56.6311579+00:00"
+}

@@ -1,11 +1,17 @@
 {
+  "active_wall_seconds": 0.0005944999866187572,
   "archive_written": false,
   "candidate_generation_performed": false,
   "completed_candidate_count": 0,
-  "heartbeat_utc": "2026-08-05T05:30:18.973650+00:00",
-  "market_payload_read": false,
+  "heartbeat_utc": "2026-08-05T13:52:39.808472+00:00",
+  "holdout_read_count": 0,
+  "market_payload_read_after_selection_freeze": true,
+  "memory_fallback_used": false,
   "optimizer_feedback_written": false,
+  "producer_pid": 12332,
   "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
   "schema_version": 1,
-  "status": "FROZEN_AWAITING_SINGLE_PC2_ACQUISITION_AND_GATE"
+  "source_candidate_count": 35,
+  "status": "FAMILY_CONSENSUS_GATE_RUNNING",
+  "workers": 10
 }

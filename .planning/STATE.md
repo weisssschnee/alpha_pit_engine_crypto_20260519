@@ -4,20 +4,32 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_ACQUISITION_REPAIR_AUTHORIZED_NOT_STARTED`
+`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_AGGREGATION_FAILED_TARGET_SHAPE_CLOSED`
 
-The current user instruction reauthorizes only a targeted repair of the four
-failed OKX venue-day coordinates. The existing 38 completed coordinates must be
-reused through their done markers and cannot be redownloaded. If and only if the
-same frozen acquisition reaches 42/42 with zero failures and exact symbol-map
-identity, the previously unstarted exact 35-candidate consensus gate may run
-once under the unchanged producer, cohort, target, mapping, 5 bps cost, matched
-controls, evaluator, and compute contract. No generation, reseed, tuning,
-optimizer feedback, archive write, OOS, promotion, or second candidate gate is
-authorized.
+The explicitly authorized acquisition repair is consumed and closed. The four
+failed OKX venue-days were repaired against the same immutable acquisition
+root. The other 38 coordinates were reused: all 114 pre-repair payload hashes
+remain unchanged. Acquisition completed 42/42 with zero failures and the exact
+frozen symbol-map identity, and the existing carrier preparation produced the
+qualified 115-field aligned carrier.
 
-The repair receipt is `RUN_AUTHORIZED_ACQUISITION_REPAIR_NOT_STARTED` with
-`run_authorized=true`. Its predecessor failure remains recorded below.
+The one authorized fixed-cohort gate then ran once at producer
+`d3dd61844cd05ca01aba857d57a5abd29c2a5840`. Ten PC2 workers completed all
+35 fixed candidates with zero candidate-local failures and no memory fallback;
+`checkpoint_000` contains the 35-row ledger and all economic paths. Aggregation
+failed closed at `FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED` before consensus
+metrics, `final_decision.json`, or `run_manifest.json` could be produced. The
+PC2 and local independent checkers therefore return FAIL for the missing
+terminal aggregation artifacts. This is an aggregation-contract failure, not a
+family-consensus transfer result, Alpha negative, or candidate-evaluation
+failure.
+
+The receipt is
+`RUN_AUTHORIZATION_CONSUMED_AGGREGATION_FAILED_TARGET_SHAPE` with
+`run_authorized=false`. No second gate, rescue rerun, generation, optimizer
+feedback, archive write, OOS read, or promotion occurred. The prior V1.1
+champion validation remains the latest completed checker-backed research
+result. Its predecessor acquisition failure remains recorded below.
 
 The preceding completed phase was:
 
@@ -1158,13 +1170,13 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not infer a validation or migration result from the failed 49-candidate run,
-and do not restart it under the consumed receipt. Before any separately
-authorized future attempt, the PC2 launch wrapper must keep native stderr
-warnings diagnostic while using the child process exit code as terminal
-authority. Reuse the exact frozen cohort and existing target, compiler, mapping,
-evaluator, reward, provenance, checkpoint, and ledger authorities; do not add a
-new search or failure-attribution framework.
+Do not infer a family-consensus transfer result from the completed 35 candidate
+evaluations because aggregation never produced a consensus portfolio. Do not
+restart the consumed gate. Before any separately authorized future market run,
+perform a source-only audit and repair of the existing consensus aggregation
+target/weight shape contract while preserving the checkpoint, cohort, target,
+compiler, mapping, evaluator, reward, provenance, and ledger authorities. Do
+not add a new search, evaluator, compiler, AST, or failure-attribution system.
 
 Historical stage-attribution replay remains unauthorized. No market search,
 prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,

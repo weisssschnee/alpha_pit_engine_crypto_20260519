@@ -1,0 +1,239 @@
+{
+    "timestamp_utc":  "2026-08-05T13:48:01.2645471+00:00",
+    "total_physical_gb":  31.773,
+    "free_physical_gb":  1.532,
+    "total_virtual_gb":  40.603,
+    "free_virtual_gb":  4.352,
+    "python_and_shell_processes":  [
+                                       {
+                                           "process_id":  15088,
+                                           "parent_process_id":  10344,
+                                           "name":  "powershell.exe",
+                                           "command_line":  "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" ",
+                                           "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                       },
+                                       {
+                                           "process_id":  19808,
+                                           "parent_process_id":  13344,
+                                           "name":  "powershell.exe",
+                                           "command_line":  "powershell  -NoProfile -ExecutionPolicy Bypass -File C:\\HermesWorker\\runtime\\crypto_family_consensus_memory_audit_20260805.ps1",
+                                           "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                       },
+                                       {
+                                           "process_id":  24420,
+                                           "parent_process_id":  24288,
+                                           "name":  "powershell.exe",
+                                           "command_line":  "powershell  -NoProfile -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwB0AG8AcAAnAAoAJAByAG8AbwB0AD0AJwBDADoAXABIAGUAcgBtAGUAcwBXAG8AcgBrAGUAcgBcAGQAYQB0AGEAXABjAHIAeQBwAHQAbwBfAGYAYQBtAGkAbAB5AF8AYwBvAG4AcwBlAG4AcwB1AHMAXwAyADAAMgA2ADAAOAAwADUAXABvAGkAXwBtAGEAcgBrAF8AYwBvAG0AcABhAGMAdABfADIAMAAyADYAMAA3ADEAOABfADIAMAAyADYAMAA3ADMAMQAnAAoAJABvAHAAcwA9ACcAQwA6AFwASABlAHIAbQBlAHMAVwBvAHIAawBlAHIAXAByAHUAbgB0AGkAbQBlAFwAYwByAHkAcAB0AG8AXwBmAGEAbQBpAGwAeQBfAGMAbwBuAHMAZQBuAHMAdQBzAF8AcgBlAHAAYQBpAHIAXwAyADAAMgA2ADAAOAAwADUAJwAKACQAcgB1AG4AdABpAG0AZQA9ACcAQwA6AFwASABlAHIAbQBlAHMAVwBvAHIAawBlAHIAXAB3AG8AcgBrAHMAcABhAGMAZQBcAGMAcgB5AHAAdABvAF8AZgBhAG0AaQBsAHkAXwBjAG8AbgBzAGUAbgBzAHUAcwBfAGQAMwBkAGQANgAxADgANABcAHIAdQBuAHQAaQBtAGUAXABjAHIAeQBwAHQAbwBfAHMAZQBhAHIAYwBoAF8AZgBhAG0AaQBsAHkAXwBjAG8AbgBzAGUAbgBzAHUAcwBfAGQAZQB2AF8AdgAxAF8AMgAwADIANgAwADgAMAA1ACcACgAkAGEAYwBxAD0ARwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBSAGEAdwAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAHMAdABhAHQAdQBzAC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuAAoAJABwAHIAbwBvAGYAPQBHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAtAFIAYQB3ACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAcgBvAG8AdAAgACcAZgByAG8AegBlAG4AXwBzAHkAbQBiAG8AbABfAG0AYQBwAF8AcAByAG8AbwBmAC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuAAoAJABiAGUAZgBvAHIAZQA9AEAAKABHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAtAFIAYQB3ACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAbwBwAHMAIAAnAHAAcgBlAF8AcgBlAHAAYQBpAHIAXwBwAGEAeQBsAG8AYQBkAF8AbQBhAG4AaQBmAGUAcwB0AC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuACkACgAkAGMAaABhAG4AZwBlAGQAPQBAACgAKQAKAGYAbwByAGUAYQBjAGgAKAAkAHIAbwB3ACAAaQBuACAAJABiAGUAZgBvAHIAZQApAHsACgAgACAAJABwAGEAdABoAD0ASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAoAFsAcwB0AHIAaQBuAGcAXQAkAHIAbwB3AC4AcABhAHQAaAApAC4AUgBlAHAAbABhAGMAZQAoACcALwAnACwAJwBcACcAKQAKACAAIABpAGYAKAAtAG4AbwB0ACAAKABUAGUAcwB0AC0AUABhAHQAaAAgAC0ATABpAHQAZQByAGEAbABQAGEAdABoACAAJABwAGEAdABoACkAKQB7ACQAYwBoAGEAbgBnAGUAZAArAD0AKABbAHMAdAByAGkAbgBnAF0AJAByAG8AdwAuAHAAYQB0AGgAKQA7AGMAbwBuAHQAaQBuAHUAZQB9AAoAIAAgACQAaQB0AGUAbQA9AEcAZQB0AC0ASQB0AGUAbQAgAC0ATABpAHQAZQByAGEAbABQAGEAdABoACAAJABwAGEAdABoAAoAIAAgACQAcwBoAGEAPQAoAEcAZQB0AC0ARgBpAGwAZQBIAGEAcwBoACAALQBBAGwAZwBvAHIAaQB0AGgAbQAgAFMASABBADIANQA2ACAALQBMAGkAdABlAHIAYQBsAFAAYQB0AGgAIAAkAHAAYQB0AGgAKQAuAEgAYQBzAGgACgAgACAAaQBmACgAJABpAHQAZQBtAC4ATABlAG4AZwB0AGgAIAAtAG4AZQAgAFsAaQBuAHQANgA0AF0AJAByAG8AdwAuAGwAZQBuAGcAdABoACAALQBvAHIAIAAkAHMAaABhACAALQBuAGUAIABbAHMAdAByAGkAbgBnAF0AJAByAG8AdwAuAHMAaABhADIANQA2ACkAewAkAGMAaABhAG4AZwBlAGQAKwA9ACgAWwBzAHQAcgBpAG4AZwBdACQAcgBvAHcALgBwAGEAdABoACkAfQAKAH0ACgAkAG8AdQB0AHMAaQBkAGUAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAGMAbwBtAHAAYQBjAHQAXwAxAGgAXAAqAFwAZABhAHQAZQA9ACoAJwApACAALQBEAGkAcgBlAGMAdABvAHIAeQAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQB8AFcAaABlAHIAZQAtAE8AYgBqAGUAYwB0ACAAewAkAF8ALgBGAHUAbABsAE4AYQBtAGUAIAAtAG4AbwB0AG0AYQB0AGMAaAAgACcAZABhAHQAZQA9ADIAMAAyADYALQAwADcALQAoADEAWwA4ADkAXQB8ADIAWwAwAC0AOQBdAHwAMwBbADAAMQBdACkAJAAnAH0AKQAKAFsAcABzAGMAdQBzAHQAbwBtAG8AYgBqAGUAYwB0AF0AQAB7AAoAIABBAGMAcQB1AGkAcwBpAHQAaQBvAG4APQAkAGEAYwBxAAoAIABNAGEAcABwAGkAbgBnAEUAeABhAGMAdAA9ACQAcAByAG8AbwBmAC4AbQBhAHAAcABpAG4AZwBfAGUAeABhAGMAdABfAG0AYQB0AGMAaAAKACAARgByAG8AegBlAG4ATQBhAHAAUwBoAGEAPQAkAHAAcgBvAG8AZgAuAGYAcgBvAHoAZQBuAF8AcwB5AG0AYgBvAGwAXwBtAGEAcABfAHMAaABhADIANQA2AAoAIABEAG8AbgBlAE0AYQByAGsAZQByAHMAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAGQAbwBuAGUAXAAqAFwAKgAuAGoAcwBvAG4AJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAEMAbwBtAHAAYQBjAHQARgBpAGwAZQBzAD0AQAAoAEcAZQB0AC0AQwBoAGkAbABkAEkAdABlAG0AIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAG8AbwB0ACAAJwBjAG8AbQBwAGEAYwB0AF8AMQBoAFwAKgBcAGQAYQB0AGUAPQAqAFwAcABhAHIAdAAuAHAAYQByAHEAdQBlAHQAJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAE0AYQBuAGkAZgBlAHMAdABGAGkAbABlAHMAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAG8AYgBqAGUAYwB0AF8AbQBhAG4AaQBmAGUAcwB0AFwAKgBcAGQAYQB0AGUAPQAqAFwAbwBiAGoAZQBjAHQAcwAuAHAAYQByAHEAdQBlAHQAJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAFAAcgBlAEUAeABpAHMAdABpAG4AZwBNAGEAbgBpAGYAZQBzAHQAUgBvAHcAcwA9ACQAYgBlAGYAbwByAGUALgBDAG8AdQBuAHQACgAgAEMAaABhAG4AZwBlAGQAUAByAGUARQB4AGkAcwB0AGkAbgBnAEYAaQBsAGUAcwA9ACQAYwBoAGEAbgBnAGUAZAAKACAATwB1AHQAcwBpAGQAZQBJAG4AdABlAHIAdgBhAGwARABpAHIAcwA9ACQAbwB1AHQAcwBpAGQAZQAuAEMAbwB1AG4AdAAKACAAQwBhAHIAcgBpAGUAcgA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwBhAGwAaQBnAG4AZQBkAF8AYwBhAHIAcgBpAGUAcgBfAG0AYQBuAGkAZgBlAHMAdAAuAGoAcwBvAG4AJwApACkACgAgAEMAaABlAGMAawBwAG8AaQBuAHQAcwA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwBjAGgAZQBjAGsAcABvAGkAbgB0AHMAJwApACkACgAgAFIAdQBuAE0AYQBuAGkAZgBlAHMAdAA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwByAHUAbgBfAG0AYQBuAGkAZgBlAHMAdAAuAGoAcwBvAG4AJwApACkACgAgAEEAYwBxAHUAaQBzAGkAdABpAG8AbgBTAHQAZABvAHUAdAA9AEcAZQB0AC0AQwBvAG4AdABlAG4AdAAgAC0AVABhAGkAbAAgADgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJABvAHAAcwAgACcAYQBjAHEAdQBpAHMAaQB0AGkAbwBuAF8AcgBlAHAAYQBpAHIALgBzAHQAZABvAHUAdAAuAGwAbwBnACcAKQAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAKACAAQQBjAHEAdQBpAHMAaQB0AGkAbwBuAFMAdABkAGUAcgByAD0ARwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBUAGEAaQBsACAAOAAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAG8AcABzACAAJwBhAGMAcQB1AGkAcwBpAHQAaQBvAG4AXwByAGUAcABhAGkAcgAuAHMAdABkAGUAcgByAC4AbABvAGcAJwApACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlAAoAfQB8AEMAbwBuAHYAZQByAHQAVABvAC0ASgBzAG8AbgAgAC0ARABlAHAAdABoACAAOAAgAC0AQwBvAG0AcAByAGUAcwBzAA==",
+                                           "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                       },
+                                       {
+                                           "process_id":  23776,
+                                           "parent_process_id":  1576,
+                                           "name":  "powershell.exe",
+                                           "command_line":  "\"powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File \"C:\\ProgramData\\HermesPortableSSHCompanyPC2\\run-company-pc2-tunnel-2224-v3.ps1\"",
+                                           "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                       }
+                                   ],
+    "top_memory_processes":  [
+                                 {
+                                     "process_id":  24420,
+                                     "name":  "powershell",
+                                     "working_set_gb":  24.635,
+                                     "private_memory_gb":  24.674,
+                                     "command_line":  "powershell  -NoProfile -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwB0AG8AcAAnAAoAJAByAG8AbwB0AD0AJwBDADoAXABIAGUAcgBtAGUAcwBXAG8AcgBrAGUAcgBcAGQAYQB0AGEAXABjAHIAeQBwAHQAbwBfAGYAYQBtAGkAbAB5AF8AYwBvAG4AcwBlAG4AcwB1AHMAXwAyADAAMgA2ADAAOAAwADUAXABvAGkAXwBtAGEAcgBrAF8AYwBvAG0AcABhAGMAdABfADIAMAAyADYAMAA3ADEAOABfADIAMAAyADYAMAA3ADMAMQAnAAoAJABvAHAAcwA9ACcAQwA6AFwASABlAHIAbQBlAHMAVwBvAHIAawBlAHIAXAByAHUAbgB0AGkAbQBlAFwAYwByAHkAcAB0AG8AXwBmAGEAbQBpAGwAeQBfAGMAbwBuAHMAZQBuAHMAdQBzAF8AcgBlAHAAYQBpAHIAXwAyADAAMgA2ADAAOAAwADUAJwAKACQAcgB1AG4AdABpAG0AZQA9ACcAQwA6AFwASABlAHIAbQBlAHMAVwBvAHIAawBlAHIAXAB3AG8AcgBrAHMAcABhAGMAZQBcAGMAcgB5AHAAdABvAF8AZgBhAG0AaQBsAHkAXwBjAG8AbgBzAGUAbgBzAHUAcwBfAGQAMwBkAGQANgAxADgANABcAHIAdQBuAHQAaQBtAGUAXABjAHIAeQBwAHQAbwBfAHMAZQBhAHIAYwBoAF8AZgBhAG0AaQBsAHkAXwBjAG8AbgBzAGUAbgBzAHUAcwBfAGQAZQB2AF8AdgAxAF8AMgAwADIANgAwADgAMAA1ACcACgAkAGEAYwBxAD0ARwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBSAGEAdwAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAHMAdABhAHQAdQBzAC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuAAoAJABwAHIAbwBvAGYAPQBHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAtAFIAYQB3ACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAcgBvAG8AdAAgACcAZgByAG8AegBlAG4AXwBzAHkAbQBiAG8AbABfAG0AYQBwAF8AcAByAG8AbwBmAC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuAAoAJABiAGUAZgBvAHIAZQA9AEAAKABHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAtAFIAYQB3ACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAbwBwAHMAIAAnAHAAcgBlAF8AcgBlAHAAYQBpAHIAXwBwAGEAeQBsAG8AYQBkAF8AbQBhAG4AaQBmAGUAcwB0AC4AagBzAG8AbgAnACkAfABDAG8AbgB2AGUAcgB0AEYAcgBvAG0ALQBKAHMAbwBuACkACgAkAGMAaABhAG4AZwBlAGQAPQBAACgAKQAKAGYAbwByAGUAYQBjAGgAKAAkAHIAbwB3ACAAaQBuACAAJABiAGUAZgBvAHIAZQApAHsACgAgACAAJABwAGEAdABoAD0ASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAoAFsAcwB0AHIAaQBuAGcAXQAkAHIAbwB3AC4AcABhAHQAaAApAC4AUgBlAHAAbABhAGMAZQAoACcALwAnACwAJwBcACcAKQAKACAAIABpAGYAKAAtAG4AbwB0ACAAKABUAGUAcwB0AC0AUABhAHQAaAAgAC0ATABpAHQAZQByAGEAbABQAGEAdABoACAAJABwAGEAdABoACkAKQB7ACQAYwBoAGEAbgBnAGUAZAArAD0AKABbAHMAdAByAGkAbgBnAF0AJAByAG8AdwAuAHAAYQB0AGgAKQA7AGMAbwBuAHQAaQBuAHUAZQB9AAoAIAAgACQAaQB0AGUAbQA9AEcAZQB0AC0ASQB0AGUAbQAgAC0ATABpAHQAZQByAGEAbABQAGEAdABoACAAJABwAGEAdABoAAoAIAAgACQAcwBoAGEAPQAoAEcAZQB0AC0ARgBpAGwAZQBIAGEAcwBoACAALQBBAGwAZwBvAHIAaQB0AGgAbQAgAFMASABBADIANQA2ACAALQBMAGkAdABlAHIAYQBsAFAAYQB0AGgAIAAkAHAAYQB0AGgAKQAuAEgAYQBzAGgACgAgACAAaQBmACgAJABpAHQAZQBtAC4ATABlAG4AZwB0AGgAIAAtAG4AZQAgAFsAaQBuAHQANgA0AF0AJAByAG8AdwAuAGwAZQBuAGcAdABoACAALQBvAHIAIAAkAHMAaABhACAALQBuAGUAIABbAHMAdAByAGkAbgBnAF0AJAByAG8AdwAuAHMAaABhADIANQA2ACkAewAkAGMAaABhAG4AZwBlAGQAKwA9ACgAWwBzAHQAcgBpAG4AZwBdACQAcgBvAHcALgBwAGEAdABoACkAfQAKAH0ACgAkAG8AdQB0AHMAaQBkAGUAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAGMAbwBtAHAAYQBjAHQAXwAxAGgAXAAqAFwAZABhAHQAZQA9ACoAJwApACAALQBEAGkAcgBlAGMAdABvAHIAeQAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQB8AFcAaABlAHIAZQAtAE8AYgBqAGUAYwB0ACAAewAkAF8ALgBGAHUAbABsAE4AYQBtAGUAIAAtAG4AbwB0AG0AYQB0AGMAaAAgACcAZABhAHQAZQA9ADIAMAAyADYALQAwADcALQAoADEAWwA4ADkAXQB8ADIAWwAwAC0AOQBdAHwAMwBbADAAMQBdACkAJAAnAH0AKQAKAFsAcABzAGMAdQBzAHQAbwBtAG8AYgBqAGUAYwB0AF0AQAB7AAoAIABBAGMAcQB1AGkAcwBpAHQAaQBvAG4APQAkAGEAYwBxAAoAIABNAGEAcABwAGkAbgBnAEUAeABhAGMAdAA9ACQAcAByAG8AbwBmAC4AbQBhAHAAcABpAG4AZwBfAGUAeABhAGMAdABfAG0AYQB0AGMAaAAKACAARgByAG8AegBlAG4ATQBhAHAAUwBoAGEAPQAkAHAAcgBvAG8AZgAuAGYAcgBvAHoAZQBuAF8AcwB5AG0AYgBvAGwAXwBtAGEAcABfAHMAaABhADIANQA2AAoAIABEAG8AbgBlAE0AYQByAGsAZQByAHMAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAGQAbwBuAGUAXAAqAFwAKgAuAGoAcwBvAG4AJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAEMAbwBtAHAAYQBjAHQARgBpAGwAZQBzAD0AQAAoAEcAZQB0AC0AQwBoAGkAbABkAEkAdABlAG0AIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAG8AbwB0ACAAJwBjAG8AbQBwAGEAYwB0AF8AMQBoAFwAKgBcAGQAYQB0AGUAPQAqAFwAcABhAHIAdAAuAHAAYQByAHEAdQBlAHQAJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAE0AYQBuAGkAZgBlAHMAdABGAGkAbABlAHMAPQBAACgARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAHIAbwBvAHQAIAAnAG8AYgBqAGUAYwB0AF8AbQBhAG4AaQBmAGUAcwB0AFwAKgBcAGQAYQB0AGUAPQAqAFwAbwBiAGoAZQBjAHQAcwAuAHAAYQByAHEAdQBlAHQAJwApACAALQBGAGkAbABlACkALgBDAG8AdQBuAHQACgAgAFAAcgBlAEUAeABpAHMAdABpAG4AZwBNAGEAbgBpAGYAZQBzAHQAUgBvAHcAcwA9ACQAYgBlAGYAbwByAGUALgBDAG8AdQBuAHQACgAgAEMAaABhAG4AZwBlAGQAUAByAGUARQB4AGkAcwB0AGkAbgBnAEYAaQBsAGUAcwA9ACQAYwBoAGEAbgBnAGUAZAAKACAATwB1AHQAcwBpAGQAZQBJAG4AdABlAHIAdgBhAGwARABpAHIAcwA9ACQAbwB1AHQAcwBpAGQAZQAuAEMAbwB1AG4AdAAKACAAQwBhAHIAcgBpAGUAcgA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwBhAGwAaQBnAG4AZQBkAF8AYwBhAHIAcgBpAGUAcgBfAG0AYQBuAGkAZgBlAHMAdAAuAGoAcwBvAG4AJwApACkACgAgAEMAaABlAGMAawBwAG8AaQBuAHQAcwA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwBjAGgAZQBjAGsAcABvAGkAbgB0AHMAJwApACkACgAgAFIAdQBuAE0AYQBuAGkAZgBlAHMAdAA9ACgAVABlAHMAdAAtAFAAYQB0AGgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJAByAHUAbgB0AGkAbQBlACAAJwByAHUAbgBfAG0AYQBuAGkAZgBlAHMAdAAuAGoAcwBvAG4AJwApACkACgAgAEEAYwBxAHUAaQBzAGkAdABpAG8AbgBTAHQAZABvAHUAdAA9AEcAZQB0AC0AQwBvAG4AdABlAG4AdAAgAC0AVABhAGkAbAAgADgAIAAoAEoAbwBpAG4ALQBQAGEAdABoACAAJABvAHAAcwAgACcAYQBjAHEAdQBpAHMAaQB0AGkAbwBuAF8AcgBlAHAAYQBpAHIALgBzAHQAZABvAHUAdAAuAGwAbwBnACcAKQAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAKACAAQQBjAHEAdQBpAHMAaQB0AGkAbwBuAFMAdABkAGUAcgByAD0ARwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBUAGEAaQBsACAAOAAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAkAG8AcABzACAAJwBhAGMAcQB1AGkAcwBpAHQAaQBvAG4AXwByAGUAcABhAGkAcgAuAHMAdABkAGUAcgByAC4AbABvAGcAJwApACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlAAoAfQB8AEMAbwBuAHYAZQByAHQAVABvAC0ASgBzAG8AbgAgAC0ARABlAHAAdABoACAAOAAgAC0AQwBvAG0AcAByAGUAcwBzAA==",
+                                     "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                 },
+                                 {
+                                     "process_id":  3864,
+                                     "name":  "Memory Compression",
+                                     "working_set_gb":  0.243,
+                                     "private_memory_gb":  0.003,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  26904,
+                                     "name":  "AweSun",
+                                     "working_set_gb":  0.239,
+                                     "private_memory_gb":  0.228,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  10344,
+                                     "name":  "explorer",
+                                     "working_set_gb":  0.116,
+                                     "private_memory_gb":  0.496,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  14460,
+                                     "name":  "TextInputHost",
+                                     "working_set_gb":  0.08,
+                                     "private_memory_gb":  0.097,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  8240,
+                                     "name":  "msedgewebview2",
+                                     "working_set_gb":  0.076,
+                                     "private_memory_gb":  0.12,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  19808,
+                                     "name":  "powershell",
+                                     "working_set_gb":  0.074,
+                                     "private_memory_gb":  0.066,
+                                     "command_line":  "powershell  -NoProfile -ExecutionPolicy Bypass -File C:\\HermesWorker\\runtime\\crypto_family_consensus_memory_audit_20260805.ps1",
+                                     "executable_path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                                 },
+                                 {
+                                     "process_id":  5660,
+                                     "name":  "msedge",
+                                     "working_set_gb":  0.071,
+                                     "private_memory_gb":  0.197,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  17084,
+                                     "name":  "OpenCode",
+                                     "working_set_gb":  0.067,
+                                     "private_memory_gb":  0.317,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  23684,
+                                     "name":  "svchost",
+                                     "working_set_gb":  0.066,
+                                     "private_memory_gb":  0.043,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  22172,
+                                     "name":  "msedge",
+                                     "working_set_gb":  0.065,
+                                     "private_memory_gb":  0.075,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  16688,
+                                     "name":  "quark",
+                                     "working_set_gb":  0.06,
+                                     "private_memory_gb":  0.105,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  7652,
+                                     "name":  "QQPCTray",
+                                     "working_set_gb":  0.06,
+                                     "private_memory_gb":  0.157,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  1780,
+                                     "name":  "QQPCRTP",
+                                     "working_set_gb":  0.06,
+                                     "private_memory_gb":  0.156,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  16388,
+                                     "name":  "OpenCode",
+                                     "working_set_gb":  0.056,
+                                     "private_memory_gb":  0.157,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  8064,
+                                     "name":  "MSPCManagerService",
+                                     "working_set_gb":  0.049,
+                                     "private_memory_gb":  0.068,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  992,
+                                     "name":  "svchost",
+                                     "working_set_gb":  0.046,
+                                     "private_memory_gb":  0.039,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  4476,
+                                     "name":  "svchost",
+                                     "working_set_gb":  0.042,
+                                     "private_memory_gb":  0.051,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  24552,
+                                     "name":  "msedge",
+                                     "working_set_gb":  0.041,
+                                     "private_memory_gb":  0.066,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  14312,
+                                     "name":  "Taskmgr",
+                                     "working_set_gb":  0.038,
+                                     "private_memory_gb":  0.036,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  7548,
+                                     "name":  "WmiPrvSE",
+                                     "working_set_gb":  0.037,
+                                     "private_memory_gb":  0.034,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  8072,
+                                     "name":  "SearchIndexer",
+                                     "working_set_gb":  0.037,
+                                     "private_memory_gb":  0.049,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  5172,
+                                     "name":  "hermes-agent-cn-runtime-win32-x64",
+                                     "working_set_gb":  0.036,
+                                     "private_memory_gb":  0.276,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  16580,
+                                     "name":  "quark",
+                                     "working_set_gb":  0.035,
+                                     "private_memory_gb":  0.037,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 },
+                                 {
+                                     "process_id":  16908,
+                                     "name":  "OpenCode",
+                                     "working_set_gb":  0.035,
+                                     "private_memory_gb":  0.117,
+                                     "command_line":  null,
+                                     "executable_path":  null
+                                 }
+                             ]
+}

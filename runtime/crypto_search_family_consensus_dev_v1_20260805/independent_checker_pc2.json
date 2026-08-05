@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-08-05T14:34:09.293811+00:00",
+  "errors": [
+    "FileNotFoundError:[Errno 2] No such file or directory: 'C:\\\\HermesWorker\\\\workspace\\\\crypto_family_consensus_d3dd6184\\\\runtime\\\\crypto_search_family_consensus_dev_v1_20260805\\\\final_decision.json'"
+  ],
+  "runtime": "runtime/crypto_search_family_consensus_dev_v1_20260805",
+  "schema_version": 1,
+  "status": "FAIL"
+}

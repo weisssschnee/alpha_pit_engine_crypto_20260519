@@ -1,0 +1,572 @@
+[
+    {
+        "path":  "compact_1h/bybit/date=2026-07-18/part.parquet",
+        "length":  646843,
+        "sha256":  "903F983852ABFF90FC13C84773F6F1411CF72F1D6440D43EB6136CE77BA0CC26"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-19/part.parquet",
+        "length":  642733,
+        "sha256":  "B48757BAE26BB13EA17D1C60640297EB8D02F3E1046174B08278830770FB15D1"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-20/part.parquet",
+        "length":  643369,
+        "sha256":  "CE79B1063032C86B335302F354A164B7BBB4A14834EFB58AF3DBF10D382DFCB2"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-21/part.parquet",
+        "length":  631067,
+        "sha256":  "9E7CA8E67715FAFDBF061AFA3DE4205E152F534F103B723F275C2A84F7AA57F5"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-22/part.parquet",
+        "length":  630168,
+        "sha256":  "4A5BB4221D30D81CB3C54346DBC449EF29AA5BEA521A2EDB93F768A19D1E50EB"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-23/part.parquet",
+        "length":  639649,
+        "sha256":  "40093A4FCFE3DE87DC92267934042206E526FFB30854E8A4525E84836B6F54F5"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-24/part.parquet",
+        "length":  653364,
+        "sha256":  "CE69BFF951CA68D673E31632B04F8838F0944AE53EFCF33DE0774FB053E20979"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-25/part.parquet",
+        "length":  642198,
+        "sha256":  "ABFA1AC580F6AFC9E7899AAB678FF763FDEA541175F37C5CEEB61C7514E7C3A9"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-26/part.parquet",
+        "length":  640086,
+        "sha256":  "58145EA59015D26B118D2BEB7C5EE54FBE7B5BA362FCC981128791BC9325F823"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-27/part.parquet",
+        "length":  645342,
+        "sha256":  "67DC33AE811ECA76DA7D2F09800D3E3DF5AC7AF251E053DF6F7064E1A5D2FDAE"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-28/part.parquet",
+        "length":  655038,
+        "sha256":  "68C2F9B7CCD39C6E63BAC7B0C241F23A0234851FF2F240272852F27DD47A8F06"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-29/part.parquet",
+        "length":  659049,
+        "sha256":  "C6561DEA8578810C9E57B6C852ACBFB1CB76E3B847FD1AAAFC5A24B17ADE4E89"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-30/part.parquet",
+        "length":  646594,
+        "sha256":  "E89C1DE5C22C5A4146F75B51C2BE085341AA2F45409671E8955CC0A2594E72A5"
+    },
+    {
+        "path":  "compact_1h/bybit/date=2026-07-31/part.parquet",
+        "length":  648077,
+        "sha256":  "D47BE37846883DEA7754D453F9EB19DD9734DACA7C6FBF8AEC71AB801C7130B4"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-18/part.parquet",
+        "length":  298891,
+        "sha256":  "130202EB1B5A96EDD5A19123853CAFD9C89596BCAA50F953BAB563C807A7924E"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-19/part.parquet",
+        "length":  297980,
+        "sha256":  "0704FE8985C1E8DA82A2A6A5B6598734BC5AB4A8905FC8D7C21928E242D353DE"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-20/part.parquet",
+        "length":  297480,
+        "sha256":  "A7E44A6512C7398AE3C962A32D08EEE1E4B4C3FD79B47047CA44A458F5C7C1BC"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-21/part.parquet",
+        "length":  289485,
+        "sha256":  "29986C308DDAF5983E8B5BB8F7F2DFE8E67C5A65AC3F40E0DE6F7EA308F83850"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-22/part.parquet",
+        "length":  293440,
+        "sha256":  "879408019849E52C6F58A20178E523B686F4D9F84E1F4FBE036898A4065F3128"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-23/part.parquet",
+        "length":  296143,
+        "sha256":  "09AD6C2CE522F97EBB1DCF711C13B270BEE27B318CC64D8EC96FD3EAEC281BEC"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-24/part.parquet",
+        "length":  303179,
+        "sha256":  "277BF1E868749C237379FE5135CFD9F03C5535216916ED1D0A2DB7277143993A"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-25/part.parquet",
+        "length":  303736,
+        "sha256":  "A517C0EFC997C2CCD5DF6A0D1E8A18D67179CA7A36DE7912D34728DC424CEDCD"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-26/part.parquet",
+        "length":  299275,
+        "sha256":  "7134BA695686FE8A2B97AAF6BFA1B9D3FC80D6E9F3FD9EA161A110AEBF1C8B3C"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-27/part.parquet",
+        "length":  299866,
+        "sha256":  "14C6D708BB29B45CB40B5C47D2B36610D77B6A5909EEFFDA028DD04EA18AFC32"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-28/part.parquet",
+        "length":  306718,
+        "sha256":  "B59F5AF0C600C0AFB61DB0A9AF5A01C8168FA11A41EC0D9CCA5683D33B9D3D58"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-29/part.parquet",
+        "length":  309393,
+        "sha256":  "43A0CDC741CDFE60BBD3825DF10EEF2C6C186F2021297241B619CCEE5F56403A"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-30/part.parquet",
+        "length":  305896,
+        "sha256":  "9B4AA879903770881C184A0676DAE3562F9ADCEC2DE2E5C1DF927A8476B179FB"
+    },
+    {
+        "path":  "compact_1h/hyperliquid_futures/date=2026-07-31/part.parquet",
+        "length":  302451,
+        "sha256":  "D6B33C3336ABD680D2D1B3457DBA4D19228A185943A3E3C386D7A124EEC67F57"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-20/part.parquet",
+        "length":  383425,
+        "sha256":  "73274F3BD1C0C27B9F482AEC5FDD743676CAE312BBCFC691FB7012BE1A08F2EB"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-23/part.parquet",
+        "length":  381061,
+        "sha256":  "4E492FF4FE914639AD2C642C6A656BA3DED64C3F87B14A3C3D57B1FC8B01D5DF"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-24/part.parquet",
+        "length":  385623,
+        "sha256":  "FE221E3173BCC31FFBF595E055CA8BEF6C534C7C34D53414A4E765512A1E85D6"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-25/part.parquet",
+        "length":  387229,
+        "sha256":  "1B7CEC34D7FAD5673DEC5910B44BC702A24F4607E0A6B3B5263B67B9A43F8AA2"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-26/part.parquet",
+        "length":  387617,
+        "sha256":  "203823B4B48D3DE04E65974488A8005A616D00E5DC01926B6F3B45953AE20397"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-27/part.parquet",
+        "length":  389631,
+        "sha256":  "B39A3DDC63F37F1BBE04806C468DC4D3F0A20EAFFA6D5A349FCEF58742116162"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-28/part.parquet",
+        "length":  394342,
+        "sha256":  "06E6F253B20E3218CFB536AE46CC81BCA4C8B322ED70F4113B0873C102B79E68"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-29/part.parquet",
+        "length":  401738,
+        "sha256":  "8B24E3B284FE16FF9CDDE10DC8BBC74CE44C5A06FF787C7DB1D8047A4487EBE3"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-30/part.parquet",
+        "length":  398487,
+        "sha256":  "5BB3EFE2C704B8BC0D9A45DDD9D7A8A9117F60AC341DFBA5574B4F841A1844FC"
+    },
+    {
+        "path":  "compact_1h/okx_futures/date=2026-07-31/part.parquet",
+        "length":  399785,
+        "sha256":  "B31F2C445D866E7832FAC9C5BB3CD720B24C7A1B97945028D7F8142990C36A46"
+    },
+    {
+        "path":  "done/bybit/2026-07-18.json",
+        "length":  854,
+        "sha256":  "BD897763FD85BEECA842956A5770E9CD053354D8F2AC9C19833C387C2ED5632E"
+    },
+    {
+        "path":  "done/bybit/2026-07-19.json",
+        "length":  854,
+        "sha256":  "CEF82D43321389FBBC7FBB3BE2516BF245FC06DE6865AAA0EEC10E4BB4D87512"
+    },
+    {
+        "path":  "done/bybit/2026-07-20.json",
+        "length":  854,
+        "sha256":  "788A7B1BE0C8E414E764899485CE192655DE6A144494AA94DE507C47F427B2C6"
+    },
+    {
+        "path":  "done/bybit/2026-07-21.json",
+        "length":  854,
+        "sha256":  "A94A55E36B8B6DF7247651A6D611BC8FA81D43C314281FEDE2D5C48EB6E4DEB3"
+    },
+    {
+        "path":  "done/bybit/2026-07-22.json",
+        "length":  854,
+        "sha256":  "CED1E566584DD21E31C47E8A2A18CF03BA6E280539D37955422F3AD78FDF7A08"
+    },
+    {
+        "path":  "done/bybit/2026-07-23.json",
+        "length":  854,
+        "sha256":  "96C81F29EB1B568E1B05F672A3531C39C377400BD0DACFE548F9A384615056CD"
+    },
+    {
+        "path":  "done/bybit/2026-07-24.json",
+        "length":  854,
+        "sha256":  "605A2616E41D16BD6C6704ADD77324B5181EBE8C249EACF249C14D93ED0A7C49"
+    },
+    {
+        "path":  "done/bybit/2026-07-25.json",
+        "length":  854,
+        "sha256":  "5D1E3361839E876CB0CC8B9497083A87F491B69E5CD81639308260E528129F2E"
+    },
+    {
+        "path":  "done/bybit/2026-07-26.json",
+        "length":  854,
+        "sha256":  "FE430B899A15BF192DCA5B7741B4C67EAAEF8DDFE08336806295A50ACF537C9B"
+    },
+    {
+        "path":  "done/bybit/2026-07-27.json",
+        "length":  854,
+        "sha256":  "EF3AAD61D6E2479C2B14C67861DFD1472D01C51911815B073610F5C2C045F814"
+    },
+    {
+        "path":  "done/bybit/2026-07-28.json",
+        "length":  854,
+        "sha256":  "BAF995E0366E86C1635C7C4DB8C76316C4E34800D81EBC3C007C17AFA9141B04"
+    },
+    {
+        "path":  "done/bybit/2026-07-29.json",
+        "length":  854,
+        "sha256":  "89B6B28B9F745BFA71D24576D68DFA29359A9FBDDC30D6447FAF66F8F2F608BB"
+    },
+    {
+        "path":  "done/bybit/2026-07-30.json",
+        "length":  854,
+        "sha256":  "2B235AA070E95A2772560CC72CAD9457720C796610D07617F611FB9CA6F25086"
+    },
+    {
+        "path":  "done/bybit/2026-07-31.json",
+        "length":  854,
+        "sha256":  "8F314183629E6388F6CE06FBDBB95E0892AE2D73E698CC9B3BA05C0708B3F3D0"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-18.json",
+        "length":  895,
+        "sha256":  "AFBE88431708265898BE2EEA9B186C559D114E51DB7CF13D3F3F48F1B9436682"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-19.json",
+        "length":  895,
+        "sha256":  "B2143E2A783F4C4B24D8A551D07F92DF23770ABFB01AF75D7F83BA1F8A9C7FE9"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-20.json",
+        "length":  895,
+        "sha256":  "24CED2F8BD5A19D1FA4EB1F524FD4FA4002F164D4E85B895A6246E99C3D534BF"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-21.json",
+        "length":  895,
+        "sha256":  "E3C21CA88291AED9386F0D6152902F50BAAE83C8F2A52BAA802426DB5BE9CDE4"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-22.json",
+        "length":  895,
+        "sha256":  "CE8DB9A38544693C6AA5377E3EBE2D3FBD20B5385C15BFC97BC8DAA5B94C8C19"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-23.json",
+        "length":  895,
+        "sha256":  "3EE8F61B3B242FBC7846A4F8A649692145187D29B51F7D178861CB4FAB612B3C"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-24.json",
+        "length":  895,
+        "sha256":  "796910A6D78170E7625E6E6C41CF412ACD75603717486CC82C68810E015A727D"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-25.json",
+        "length":  895,
+        "sha256":  "6FE71F6CE978BB90D63B49D6B8C7353FE0FC46F289E90F1E436C01CFA54237DE"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-26.json",
+        "length":  895,
+        "sha256":  "7F211BD5DBD82A9E809E4868079238ACBF9824C7A01D159F024D0806FC80A3CC"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-27.json",
+        "length":  895,
+        "sha256":  "57D55BD4EFF3F06E6F0E1106CA85985B00F4D532B1A3C776FF605BA6676F0FBF"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-28.json",
+        "length":  895,
+        "sha256":  "39C0C44A9EFBE5A6FF73D19D1493D08E38E96BFB7496610DBDFF3E5C28F2EAF8"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-29.json",
+        "length":  895,
+        "sha256":  "9C92BCFEA76EC34BE4118FA9E3D19EC3A6ED59725655CC33AB60D2DA6E8F7C1B"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-30.json",
+        "length":  895,
+        "sha256":  "493308731023BF1080D6DDC7F46E6FB2C7FEDBA5AA810D7A2364FF2A66F4102C"
+    },
+    {
+        "path":  "done/hyperliquid_futures/2026-07-31.json",
+        "length":  895,
+        "sha256":  "AA260A57FC56EB1D5D7BCFC62C8821F71B3AE869FF110A8A72AE0C293839A18B"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-20.json",
+        "length":  873,
+        "sha256":  "D31CFA3D4CD566E71A21CE43F2D6543F085A912E52C8C859C8C3737953BF850F"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-23.json",
+        "length":  873,
+        "sha256":  "2D7973DA88680956FB04D6ECB04814D4D54C2EC796F1EC52707F3853C3683697"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-24.json",
+        "length":  873,
+        "sha256":  "8F97B8795ADEBC0A7E56F33A25CBA60F174224558D09D0F041F3FB3DE2FF05EE"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-25.json",
+        "length":  873,
+        "sha256":  "4511B49881B129C099E48C78AD3B8161F5B86B26F84B53C3D3661BF43747C321"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-26.json",
+        "length":  873,
+        "sha256":  "30BF1A956F6E73066C1DE0A6F8574641AD202B7324769BB43C29F01A86CC2C1A"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-27.json",
+        "length":  873,
+        "sha256":  "7F9769C13ED59EAB1DF24F3DF63DB7C2685DC06D24DD08491617C0CF03C3221C"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-28.json",
+        "length":  873,
+        "sha256":  "4079C6F288197FDFFE2DC3FCF04C6E66B3A64945B4FA08A7E1DE41CFB262FD31"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-29.json",
+        "length":  873,
+        "sha256":  "103FD58686A8FFDF26253AFCE6A228937C4635E25CE9FBF34205054E623BC966"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-30.json",
+        "length":  873,
+        "sha256":  "2341030A1450B8B8E99B7FB6503B7BBE427722F2B3C9F0A1ACC230D116AAC988"
+    },
+    {
+        "path":  "done/okx_futures/2026-07-31.json",
+        "length":  873,
+        "sha256":  "C5B1DA07186D87C266A3543DE26F1866F3B6960FEA945A5A042D89D10A311C35"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-18/objects.parquet",
+        "length":  316242,
+        "sha256":  "23012D8CC9F0C12584BEB1949E7E2F48073F18A00039FDB419DF89F922814EB7"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-19/objects.parquet",
+        "length":  317127,
+        "sha256":  "1FE2FDDC2A82FF85FEA143EB9E450EF4F95A9525A853E3041ACA2B1A0C37B470"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-20/objects.parquet",
+        "length":  324229,
+        "sha256":  "E97ABBB10F5580103FFD615E360E5139C69B2B224DFF2F9460B7102C326A6751"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-21/objects.parquet",
+        "length":  320254,
+        "sha256":  "88F22CF2CC1612DA9A893B28FEDEB5C71CA46AF1BEEF42C72FA54BA05D67EA24"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-22/objects.parquet",
+        "length":  319772,
+        "sha256":  "D8EBEF9D284A0B490937A9A86EFF3EEF0A0AF2034C6FB0BA995C4A76874FD7DA"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-23/objects.parquet",
+        "length":  316700,
+        "sha256":  "32BAB07055FF7AA894378093A69176846B8A752F06D506EB97F92FE2718B559F"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-24/objects.parquet",
+        "length":  320729,
+        "sha256":  "8A50841B7D6DFE7EA1E4784CEAF84D9F7AD027FA51AB6F7ADFB89475C56A0085"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-25/objects.parquet",
+        "length":  318553,
+        "sha256":  "BAC76BA244B09C2E921D6DA2D61733B2B154E4523E15D2F65F2217DB755CCAC3"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-26/objects.parquet",
+        "length":  319155,
+        "sha256":  "DF988688AE2A11BE46766242B4406FC49E5C41AC9DD587C567287D1DE1554D76"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-27/objects.parquet",
+        "length":  317810,
+        "sha256":  "131AFA1B5BE7D0B7E59DDF5BB35C508A6C05E9E9F40F58DA26015A8C38BB961E"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-28/objects.parquet",
+        "length":  316933,
+        "sha256":  "B945B7D33900AE685BBFBD01680240710B19D5D48C9F93A6147EB87B715355BC"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-29/objects.parquet",
+        "length":  320046,
+        "sha256":  "8ADAEDABF5C135539B65DE4FF93343D4D7B50BF706B209B5271B52CA3A221430"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-30/objects.parquet",
+        "length":  316275,
+        "sha256":  "6E14716706B2994F329EEC4CEDC54CC513A5B5F86EAB8654A91B7A940C769EF4"
+    },
+    {
+        "path":  "object_manifest/bybit/date=2026-07-31/objects.parquet",
+        "length":  316711,
+        "sha256":  "D231D0DB6D8F9380274305D33E5372B2212C3BC48121AD5CF2DC653827C11482"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-18/objects.parquet",
+        "length":  187585,
+        "sha256":  "B1E9A403065C9918D925F62536A2A52266577BD6D2E5359B49D34C0F5D05C8FE"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-19/objects.parquet",
+        "length":  183921,
+        "sha256":  "02E11339A6FFFCAF22B7EFC935606ED7E0D5E0BD384E5415FE9372D7F200F685"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-20/objects.parquet",
+        "length":  183762,
+        "sha256":  "B4EC4718B3C2F6D4ED41850F96F0ED46232629C416F0F93A74FDD310F53533B3"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-21/objects.parquet",
+        "length":  182236,
+        "sha256":  "4A65DD2F828D6569F9F68156AFC133BE8A8258BFFC03734A98836A59D777EC99"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-22/objects.parquet",
+        "length":  187073,
+        "sha256":  "9EBF02838F335DF69CB6292F24BD27D54B063337D242878C798430B42B3DB872"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-23/objects.parquet",
+        "length":  183978,
+        "sha256":  "3CFCB3A566AC349720B34FC31F8144C315D622126B1DAAB852B3D5E90CC5F663"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-24/objects.parquet",
+        "length":  183551,
+        "sha256":  "D425C67748381E4BF0F6A94B11573D564210B2AE264305DEF8739ACDB56216C2"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-25/objects.parquet",
+        "length":  187524,
+        "sha256":  "C00017384BC601FB0187EEC48C9581361A5D9FD7E9209BAA10AC424F0C2DE350"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-26/objects.parquet",
+        "length":  180166,
+        "sha256":  "7B586514C6FF60AEAECC92E3CADD99AE152AF215ECD3A125ACC1EC31400EDFDC"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-27/objects.parquet",
+        "length":  180936,
+        "sha256":  "70FD229587DD07B78CCBE08FF5B987BC82A98CD3FCF2C3DB7F0DB8A4DBAEC040"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-28/objects.parquet",
+        "length":  182351,
+        "sha256":  "9BD3C46642C4D4C9D4D07C847882C201E48311416FE365164E0574DB5D63C6CF"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-29/objects.parquet",
+        "length":  185821,
+        "sha256":  "3313C3372F9F8CD4232020A080BE9B615438DE950DCF5335811F936E6F18954B"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-30/objects.parquet",
+        "length":  187163,
+        "sha256":  "CAFFA4E81B15F68963E93A8A0F244281F8FB0363C0DCD162E011EFF67C5B9652"
+    },
+    {
+        "path":  "object_manifest/hyperliquid_futures/date=2026-07-31/objects.parquet",
+        "length":  183491,
+        "sha256":  "6C8C0FB45D19C6E02B0082A5707B382D285A1C80E7A46EE74B175ED38571FF28"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-20/objects.parquet",
+        "length":  253545,
+        "sha256":  "238DAB414546DF8A70D2387980455B40BA23E933D44445B5012B6C65588AD51A"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-23/objects.parquet",
+        "length":  252766,
+        "sha256":  "A1CBB50F943EAED351784361F37E8162734E5EE540321C243F1EE363DD8BD298"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-24/objects.parquet",
+        "length":  252445,
+        "sha256":  "C55982819AABECFBC6F9CF8C72B1409C915F5B50459487E7B35BBD30CA25B92B"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-25/objects.parquet",
+        "length":  249411,
+        "sha256":  "AB8EACD71C6855816D6CA05681F9D5056462FC3208E51958998C00EC76296E87"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-26/objects.parquet",
+        "length":  248450,
+        "sha256":  "9CC5BB2FE8D811A666C3183D45696CC8C2AF9F7334E16E08865F1E17DE417ADC"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-27/objects.parquet",
+        "length":  250177,
+        "sha256":  "D07D848B89F27C77EDD1037111B99B729B2BDD7A9C0469C2BACC560BA5AEB8DD"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-28/objects.parquet",
+        "length":  249550,
+        "sha256":  "8C8CC0F22197B7AB3490F9F59E6F33AF1917C45B656F6DC1CCDA48F64BC8C379"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-29/objects.parquet",
+        "length":  253589,
+        "sha256":  "160D5BE95B4D40409925C0DC2FE2D52AFF016CE67A51C493BF1303172081E03D"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-30/objects.parquet",
+        "length":  252654,
+        "sha256":  "29822441EA07083A69C3980CA8E5F76DB43013A4C9208A266910FB6F66E69B69"
+    },
+    {
+        "path":  "object_manifest/okx_futures/date=2026-07-31/objects.parquet",
+        "length":  250263,
+        "sha256":  "BA37405F145025EB5BFDF490D6E9F198B8E6AAFF153B13ADC4586751EF084815"
+    }
+]

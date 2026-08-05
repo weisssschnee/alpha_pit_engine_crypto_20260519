@@ -1,0 +1,883 @@
+{
+  "candidate_generation_performed": false,
+  "contracts": [
+    {
+      "field_id": "bybit__open_interest_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "bybit__open_interest_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "bybit__open_interest_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "bybit__open_interest_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "bybit__open_interest_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "bybit__open_interest_value_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "bybit__open_interest_value_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "bybit__open_interest_value_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "bybit__open_interest_value_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "bybit__open_interest_value_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "bybit__oi_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "bybit__mark_price_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__mark_price_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__mark_price_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__mark_price_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__mark_price_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__index_price_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__index_price_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__index_price_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__index_price_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__index_price_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "bybit__funding_rate_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "bybit__funding_rate_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "bybit__funding_rate_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "bybit__funding_rate_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "bybit__funding_rate_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "bybit__mark_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "hyperliquid_futures__open_interest_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "hyperliquid_futures__open_interest_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "hyperliquid_futures__open_interest_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "hyperliquid_futures__open_interest_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "hyperliquid_futures__open_interest_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "hyperliquid_futures__oi_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_price_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_price_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_price_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_price_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_price_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__index_price_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__index_price_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__index_price_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__index_price_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__index_price_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "hyperliquid_futures__funding_rate_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "hyperliquid_futures__funding_rate_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "hyperliquid_futures__funding_rate_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "hyperliquid_futures__funding_rate_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "hyperliquid_futures__funding_rate_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "hyperliquid_futures__mark_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "okx_futures__open_interest_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "okx_futures__open_interest_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "okx_futures__open_interest_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "okx_futures__open_interest_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "okx_futures__open_interest_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "okx_futures__open_interest_value_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "okx_futures__open_interest_value_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "okx_futures__open_interest_value_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "okx_futures__open_interest_value_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "okx_futures__open_interest_value_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "okx_futures__oi_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "okx_futures__mark_price_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "okx_futures__mark_price_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "okx_futures__mark_price_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "okx_futures__mark_price_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "okx_futures__mark_price_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "okx_futures__funding_rate_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "okx_futures__funding_rate_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "okx_futures__funding_rate_min",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "okx_futures__funding_rate_max",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "okx_futures__funding_rate_std",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "okx_futures__mark_n",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "agg_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "buy_agg_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "sell_agg_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "buy_underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "sell_underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "buy_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "sell_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "buy_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "sell_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "signed_aggressor_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "base_asset",
+      "value_type": "SIGNED_FLOW"
+    },
+    {
+      "field_id": "signed_aggressor_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "SIGNED_FLOW"
+    },
+    {
+      "field_id": "trade_count_le_100",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_100_1k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_1k_10k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_10k_100k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_100k_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_gt_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "notional_le_100",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_100_1k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_1k_10k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_10k_100k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_100k_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_gt_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "open_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "high_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "low_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "close_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "max_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "buy_vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "sell_vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "avg_agg_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "avg_underlying_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "volume_imbalance",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "buy_sell_notional_ratio",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "price_range_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "close_to_open_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "large_trade_count_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "large_notional_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "large_trade_count_ratio_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "large_notional_ratio_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    }
+  ],
+  "contracts_sha256": "7F94104F1465E6F0DE60111BB1410535B67E832568FF80176229AB5816B2A0BA",
+  "development_fresh_interval": {
+    "end_exclusive": "2026-08-01T00:00:00Z",
+    "hours": 336,
+    "role": "SECOND_STAGE_DEVELOPMENT_FRESH_NO_FEEDBACK",
+    "start": "2026-07-18T00:00:00Z"
+  },
+  "extended_aligned_cache": {
+    "directory_bundle": {
+      "bundle_sha256": "A472D5AAF77A837C7559EA45FE35467314F001C99073E8D618E5DFB7851F362D",
+      "bytes": 635719157,
+      "file_count": 122
+    },
+    "identity_sha256": "48981474E2C77D0A91A0932211C101CB043D79D801CE3577E5CA6979A89EFA00",
+    "path": "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184\\.cache\\crypto_search_family_consensus_dev_v1\\aligned_extended_to_20260801"
+  },
+  "field_count": 115,
+  "manifest_sha256": "77AE29F97D96395C06FEC710B6D4B231D7CDA5E6AE187C4AB429F0D3AFC3B872",
+  "market_payload_read_after_selection_freeze": true,
+  "missing_value_fill": null,
+  "new_aligned_cache": {
+    "identity_sha256": "534C1A650174F2C16222BA049178A121C54EDA2EF0E9AA7118968A590882D178",
+    "path": "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184\\.cache\\crypto_search_family_consensus_dev_v1\\aligned_new_20260718_20260801"
+  },
+  "new_oi_cache": {
+    "evidence": {
+      "active_fields": 71,
+      "bundle_sha256": "62F3AF43E31F6481AA5A2E0EC24B38533B721E9093CCE6423D87B31067867DFF",
+      "bytes": 29288685,
+      "declared_fields": 96,
+      "file_count": 129,
+      "root": "C:\\HermesWorker\\data\\crypto_family_consensus_20260805\\oi_mark_compact_20260718_20260731",
+      "zero_support_fields": [
+        "bybit__estimated_settle_price_last",
+        "bybit__estimated_settle_price_max",
+        "bybit__estimated_settle_price_mean",
+        "bybit__estimated_settle_price_min",
+        "bybit__estimated_settle_price_std",
+        "hyperliquid_futures__estimated_settle_price_last",
+        "hyperliquid_futures__estimated_settle_price_max",
+        "hyperliquid_futures__estimated_settle_price_mean",
+        "hyperliquid_futures__estimated_settle_price_min",
+        "hyperliquid_futures__estimated_settle_price_std",
+        "hyperliquid_futures__open_interest_value_last",
+        "hyperliquid_futures__open_interest_value_max",
+        "hyperliquid_futures__open_interest_value_mean",
+        "hyperliquid_futures__open_interest_value_min",
+        "hyperliquid_futures__open_interest_value_std",
+        "okx_futures__estimated_settle_price_last",
+        "okx_futures__estimated_settle_price_max",
+        "okx_futures__estimated_settle_price_mean",
+        "okx_futures__estimated_settle_price_min",
+        "okx_futures__estimated_settle_price_std",
+        "okx_futures__index_price_last",
+        "okx_futures__index_price_max",
+        "okx_futures__index_price_mean",
+        "okx_futures__index_price_min",
+        "okx_futures__index_price_std"
+      ]
+    },
+    "identity_sha256": "76869D9F06D9E82D293DCDDF7E4D1A3BC89B348758EFBD73581AA961D6F20954",
+    "path": "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184\\.cache\\crypto_search_family_consensus_dev_v1\\oi_mark_new_20260718_20260801"
+  },
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "ranks101_200_tar_sha256": "1C914681794062992E78A27867C7F496A5F3769F12C71409EE2E97C4EF3D394B",
+  "schema_version": 1,
+  "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+  "status": "FAMILY_CONSENSUS_CARRIER_READY",
+  "target_cache": {
+    "identity_sha256": "96BC63663DBF7EF4F6DACCE5D2DC1B5C4FFCEE09514ED80B15B1E28B9E18B2D9",
+    "path": "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184\\.cache\\crypto_search_family_consensus_dev_v1\\binance_open_target_to_20260801"
+  },
+  "top100_tar_sha256": "D5057424228883C79A0E6934BCF07A9E55FCF52A352724740B74C95EAA3C739E"
+}

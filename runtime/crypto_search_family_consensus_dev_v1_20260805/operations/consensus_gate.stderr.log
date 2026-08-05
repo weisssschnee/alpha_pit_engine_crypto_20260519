@@ -1,0 +1,20 @@
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\HermesWorker\workspace\crypto_family_consensus_d3dd6184\alphafactory_crypto\broad_search\search_evidence_validation_v1.py", line 2285, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\workspace\crypto_family_consensus_d3dd6184\alphafactory_crypto\broad_search\search_evidence_validation_v1.py", line 2244, in main
+    result = run_consensus_gate(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_family_consensus_d3dd6184\alphafactory_crypto\broad_search\search_evidence_validation_v1.py", line 1856, in run_consensus_gate
+    aggregated = {
+                 ^
+  File "C:\HermesWorker\workspace\crypto_family_consensus_d3dd6184\alphafactory_crypto\broad_search\search_evidence_validation_v1.py", line 1857, in <dictcomp>
+    group: _aggregate_consensus_group(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_family_consensus_d3dd6184\alphafactory_crypto\broad_search\search_evidence_validation_v1.py", line 1013, in _aggregate_consensus_group
+    raise RuntimeError("FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED")
+RuntimeError: FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED

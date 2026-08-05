@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (family-consensus acquisition failed before gate; Evidence V1.1 champion validation remains latest evaluated result; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (family-consensus 35/35 evaluated but aggregation target shape failed; no consensus result; Evidence V1.1 champion validation remains latest completed result; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -551,7 +551,7 @@
                                     ,"config/crypto_search_evidence_v1_1_validation_replacement_receipt.json"
                                     ,"runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json"
                                     ,"config/crypto_search_family_consensus_dev_v1_receipt.json"
-                                    ,"runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json"
+                                    ,"runtime/crypto_search_family_consensus_dev_v1_20260805/consensus_aggregation_failure_closure.json"
                                     ,"runtime/crypto_search_family_consensus_dev_v1_20260805/closure_verification.json"
                                     ,"reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md"
                                 ],
@@ -775,11 +775,11 @@
                                         {
                                             "id":  "crypto_search_family_consensus_dev_v1_consumed_outcome",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 froze exactly 23 primary flow-intensity/stateful champions and 12 descriptive 4h two-axis champions before the 2026-07-18 through 2026-08-01 development-fresh market read. The single PC2 acquisition scheduled 42 frozen venue-day coordinates, completed 38, and failed closed on four OKX object read timeouts. Carrier preparation, the 35-candidate gate, independent gate checking, and all market evaluation remained unstarted; strict evaluated count is zero and consensus transfer is NOT_OBSERVED. No retry, rescue, candidate generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized. The prior V1.1 champion validation remains the latest evaluated evidence.",
+                                            "rule":  "The repaired one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 retained the exact 23 primary flow-intensity/stateful champions and 12 descriptive champions for the 2026-07-18 through 2026-08-01 development-fresh interval. Acquisition reached 42/42 with zero failures and exact mapping while all 114 pre-repair payload hashes remained unchanged. The 115-field carrier qualified and the single 10-worker gate completed all 35 fixed candidate evaluations with zero candidate-local failures. Aggregation then failed closed at FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED before consensus metrics, final decision, or run manifest; the independent checker therefore fails on missing terminal artifacts and consensus transfer remains NOT_OBSERVED. No second gate, rescue, generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized. The prior V1.1 champion validation remains the latest completed checker-backed research result.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.search_evidence_validation_v1 and the consumed family-consensus receipt",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json"
+                                            "evidence_ref":  "runtime/crypto_search_family_consensus_dev_v1_20260805/consensus_aggregation_failure_closure.json"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",
