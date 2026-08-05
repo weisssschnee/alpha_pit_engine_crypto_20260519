@@ -14,6 +14,9 @@ from alphafactory_crypto.broad_search.pair18m import (
     SEARCH_REWARD_AUTHORITY,
     _development_block_robust_ordering,
 )
+from alphafactory_crypto.broad_search.experiment_authority import (
+    resolve_search_economic_receipt,
+)
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     BLOCK_ROBUST_GATE_ARMS,
     BLOCK_ROBUST_GATE_CAMPAIGN,
@@ -98,6 +101,25 @@ def test_gate_contract_is_equal_count_fresh_development_only() -> None:
         "holdout_read": False,
         "automatic_continuation": False,
     }
+
+
+def test_gate_receipt_is_hash_bound_and_authorizes_no_validation() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_replication_aware_gate_v1_receipt.json",
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
+    assert receipt["search_campaign"]["seed_set"] == list(
+        BLOCK_ROBUST_GATE_SEEDS
+    )
+    assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
+    assert receipt["holdout"]["read_allowed"] is False
+    assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
+    assert receipt["validation_kill_line"]["evaluated_per_active_arm"] == 0
+    assert receipt["formal_claims_authorized"] is False
 
 
 def test_gate_policies_emit_only_4h_binary_candidates() -> None:
