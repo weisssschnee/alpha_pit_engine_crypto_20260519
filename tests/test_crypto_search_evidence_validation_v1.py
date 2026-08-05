@@ -13,6 +13,9 @@ from alphafactory_crypto.broad_search.search_evidence_validation_v1 import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+REPLACEMENT_RECEIPT = (
+    "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json"
+)
 
 
 def test_receipt_freezes_one_no_feedback_development_validation() -> None:
@@ -53,6 +56,30 @@ def test_exact_final_champion_selection_is_immutable_and_complete() -> None:
     assert sum(int(row["horizon_hours"]) == 4 for row in rows) == 43
     assert sum(int(row["declared_axis_count"]) == 2 for row in rows) == 36
     assert _canonical_sha256(_selection_projection(rows)) == EXPECTED_SELECTION_SHA256
+
+
+def test_replacement_receipt_keeps_same_cohort_and_repairs_only_launcher() -> None:
+    receipt = load_validation_receipt(
+        REPO_ROOT,
+        require_authorized=True,
+        receipt_path=REPLACEMENT_RECEIPT,
+    )
+    rows = select_final_positive_champions(REPO_ROOT, receipt=receipt)
+    assert receipt["receipt_id"] == (
+        "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_REPLACEMENT"
+    )
+    assert receipt["replacement_for"]["auditable_completed_candidate_count"] == 0
+    assert receipt["selection"]["selection_sha256"] == EXPECTED_SELECTION_SHA256
+    assert _canonical_sha256(_selection_projection(rows)) == EXPECTED_SELECTION_SHA256
+    assert receipt["launcher"]["native_stderr_warning_terminal"] is False
+    assert receipt["launcher"]["python_exit_code_terminal"] is True
+    launcher = (
+        REPO_ROOT / "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1"
+    ).read_text(encoding="utf-8")
+    assert "Start-Process" in launcher
+    assert "RedirectStandardError" in launcher
+    assert "$process.ExitCode" in launcher
+    assert "*>>" not in launcher
 
 
 def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -> None:

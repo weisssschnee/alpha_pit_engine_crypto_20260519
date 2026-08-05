@@ -75,13 +75,17 @@ def load_validation_receipt(
     repo_root: Path,
     *,
     require_authorized: bool | None = None,
+    receipt_path: str = RECEIPT_PATH,
 ) -> dict[str, Any]:
-    path = Path(repo_root) / RECEIPT_PATH
+    path = Path(repo_root) / str(receipt_path)
     receipt = json.loads(path.read_text(encoding="utf-8"))
     blockers: list[str] = []
     if int(receipt.get("schema_version", -1)) != 1:
         blockers.append("schema_version")
-    if receipt.get("receipt_id") != "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION":
+    if receipt.get("receipt_id") not in {
+        "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION",
+        "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_REPLACEMENT",
+    }:
         blockers.append("receipt_id")
     if require_authorized is not None and bool(receipt.get("run_authorized")) is not bool(
         require_authorized
@@ -211,6 +215,7 @@ def freeze_selection_before_validation_read(
     producer_source_sha: str,
     receipt: Mapping[str, Any],
     rows: Sequence[Mapping[str, Any]],
+    receipt_path: str = RECEIPT_PATH,
 ) -> dict[str, Any]:
     output = Path(runtime_root) / "behavior_family_selection_receipt.json"
     if output.exists():
@@ -219,7 +224,7 @@ def freeze_selection_before_validation_read(
         "schema_version": 1,
         "status": "SELECTION_FROZEN_BEFORE_VALIDATION_READ",
         "producer_source_sha": str(producer_source_sha).lower(),
-        "run_receipt_sha256": _file_sha256(Path(repo_root) / RECEIPT_PATH),
+        "run_receipt_sha256": _file_sha256(Path(repo_root) / str(receipt_path)),
         "source_candidate_ledger_sha256": receipt["source_evidence"][
             "candidate_ledger_sha256"
         ],
@@ -243,6 +248,7 @@ def _build_economic_context(
     *,
     receipt: Mapping[str, Any],
     target_identity_sha256: str,
+    receipt_path: str = RECEIPT_PATH,
 ) -> dict[str, Any]:
     from alphafactory_crypto.broad_search.experiment_authority import (
         resolve_search_economic_receipt,
@@ -283,7 +289,7 @@ def _build_economic_context(
         "evidence_partition": partitions,
         "validation": validation,
         "execution": execution,
-        "receipt_sha256": _file_sha256(Path(repo_root) / RECEIPT_PATH),
+        "receipt_sha256": _file_sha256(Path(repo_root) / str(receipt_path)),
     }
 
 
@@ -455,9 +461,12 @@ def run_validation(
     *,
     runtime_date: str = DEFAULT_RUNTIME_DATE,
     producer_source_sha: str | None = None,
+    receipt_path: str = RECEIPT_PATH,
 ) -> dict[str, Any]:
     root = Path(repo_root)
-    receipt = load_validation_receipt(root, require_authorized=True)
+    receipt = load_validation_receipt(
+        root, require_authorized=True, receipt_path=receipt_path
+    )
     observed_sha = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=root, text=True
     ).strip().lower()
@@ -475,6 +484,7 @@ def run_validation(
         producer_source_sha=source_sha,
         receipt=receipt,
         rows=selected,
+        receipt_path=receipt_path,
     )
     carrier_manifest = json.loads(
         (root / str(receipt["carrier"]["manifest_path"])).read_text(encoding="utf-8")
@@ -501,11 +511,12 @@ def run_validation(
         root,
         receipt=receipt,
         target_identity_sha256=str(target_metadata["identity_sha256"]),
+        receipt_path=receipt_path,
     )
     frozen = {
         "schema_version": 1,
         "producer_source_sha": source_sha,
-        "run_receipt_sha256": _file_sha256(root / RECEIPT_PATH),
+        "run_receipt_sha256": _file_sha256(root / str(receipt_path)),
         "selection_receipt_sha256": selection_receipt["receipt_sha256"],
         "selection_sha256": receipt["selection"]["selection_sha256"],
         "candidate_count": 49,
@@ -655,7 +666,7 @@ def run_validation(
         "producer_source_sha": source_sha,
         "runtime": str(runtime_root.relative_to(root).as_posix()),
         "report": str(report_path.relative_to(root).as_posix()),
-        "run_receipt_sha256": _file_sha256(root / RECEIPT_PATH),
+        "run_receipt_sha256": _file_sha256(root / str(receipt_path)),
         "selection_receipt_sha256": selection_receipt["receipt_sha256"],
         "frozen_contract_sha256": frozen["frozen_contract_sha256"],
         "candidate_count": 49,
@@ -710,9 +721,10 @@ def check_validation(
     repo_root: Path,
     *,
     runtime_date: str = DEFAULT_RUNTIME_DATE,
+    receipt_path: str = RECEIPT_PATH,
 ) -> dict[str, Any]:
     root = Path(repo_root)
-    receipt = load_validation_receipt(root)
+    receipt = load_validation_receipt(root, receipt_path=receipt_path)
     runtime_root = root / "runtime" / f"{RUNTIME_PREFIX}_{runtime_date}"
     errors: list[str] = []
     try:
@@ -793,9 +805,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--runtime-date", default=DEFAULT_RUNTIME_DATE)
     parser.add_argument("--producer-source-sha")
+    parser.add_argument("--receipt-path", default=RECEIPT_PATH)
     args = parser.parse_args(argv)
     if args.command == "select":
-        rows = select_final_positive_champions(args.repo_root)
+        receipt = load_validation_receipt(
+            args.repo_root, receipt_path=args.receipt_path
+        )
+        rows = select_final_positive_champions(args.repo_root, receipt=receipt)
         print(json.dumps({"candidate_count": len(rows), "selection_sha256": _canonical_sha256(_selection_projection(rows))}, sort_keys=True))
         return 0
     if args.command == "run":
@@ -803,9 +819,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.repo_root,
             runtime_date=args.runtime_date,
             producer_source_sha=args.producer_source_sha,
+            receipt_path=args.receipt_path,
         )
     else:
-        result = check_validation(args.repo_root, runtime_date=args.runtime_date)
+        result = check_validation(
+            args.repo_root,
+            runtime_date=args.runtime_date,
+            receipt_path=args.receipt_path,
+        )
     print(json.dumps(result, sort_keys=True, default=str))
     return 0 if result.get("status") != "FAIL" else 1
 
