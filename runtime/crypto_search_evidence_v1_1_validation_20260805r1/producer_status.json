@@ -1,0 +1,19 @@
+{
+  "active_wall_seconds": 112.31766659999266,
+  "archive_written": false,
+  "candidate_generation_performed": false,
+  "checkpoint": "checkpoint_000",
+  "completed_candidate_count": 49,
+  "heartbeat_utc": "2026-08-05T03:27:00.736710+00:00",
+  "holdout_read_count": 0,
+  "memory_fallback_used": false,
+  "optimizer_feedback_written": false,
+  "pair_evaluated_per_hour": 1570.7790180491133,
+  "producer_pid": 25544,
+  "producer_source_sha": "840c3038c9e461d1ba70dd7c520a9db9b1cb33fe",
+  "schema_version": 1,
+  "source_candidate_count": 49,
+  "status": "VALIDATION_COMPLETE",
+  "strict_evaluated_count": 49,
+  "workers": 10
+}

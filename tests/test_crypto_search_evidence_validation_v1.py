@@ -61,7 +61,7 @@ def test_exact_final_champion_selection_is_immutable_and_complete() -> None:
 def test_replacement_receipt_keeps_same_cohort_and_repairs_only_launcher() -> None:
     receipt = load_validation_receipt(
         REPO_ROOT,
-        require_authorized=True,
+        require_authorized=False,
         receipt_path=REPLACEMENT_RECEIPT,
     )
     rows = select_final_positive_champions(REPO_ROOT, receipt=receipt)
@@ -73,6 +73,10 @@ def test_replacement_receipt_keeps_same_cohort_and_repairs_only_launcher() -> No
     assert _canonical_sha256(_selection_projection(rows)) == EXPECTED_SELECTION_SHA256
     assert receipt["launcher"]["native_stderr_warning_terminal"] is False
     assert receipt["launcher"]["python_exit_code_terminal"] is True
+    assert receipt["status"] == "RUN_AUTHORIZATION_CONSUMED_VALIDATION_COMPLETE"
+    assert receipt["outcome"]["strict_evaluated_count"] == 49
+    assert receipt["outcome"]["both_axis_net_lcb_positive_count"] == 0
+    assert receipt["outcome"]["validation_behavior_family_identity_observed"] is False
     launcher = (
         REPO_ROOT / "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1"
     ).read_text(encoding="utf-8")
@@ -92,8 +96,10 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
                 "arm": "evolution" if ordinal < 3 else "random",
                 "horizon_hours": 4 if ordinal < 2 else 1,
                 "validation_search_reward": 1.0 if ordinal == 0 else -1.0,
-                "matched_positive": ordinal == 0,
-                "primary_net_mean": 0.1 if ordinal < 2 else -0.1,
+                "matched_positive": False,
+                "validation_matched_positive": ordinal == 0,
+                "primary_net_mean": -0.1,
+                "validation_primary_net_mean": 0.1 if ordinal < 2 else -0.1,
                 "validation_left_incremental_net_mean": 0.1,
                 "validation_right_incremental_net_mean": 0.1 if ordinal == 0 else -0.1,
                 "validation_left_incremental_net_lcb": 0.01,

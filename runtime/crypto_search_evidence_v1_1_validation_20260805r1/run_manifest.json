@@ -1,0 +1,53 @@
+{
+  "active_wall_seconds": 112.30096530006267,
+  "archive_written": false,
+  "bundle_sha256": "E812FE2E92404B0F337531D21876D9A8EBD4B71438F9382518048A89F0CCF44A",
+  "candidate_count": 49,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 0,
+  "checkpoint_count": 1,
+  "files": [
+    {
+      "bytes": 393861,
+      "path": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/candidate_ledger.parquet",
+      "sha256": "CE980BF725B1EB96FC0A62224756E0663A33402B8953155ABCB130D198AB44A0"
+    },
+    {
+      "bytes": 2714,
+      "path": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/validation_summary.json",
+      "sha256": "4C211E581D07D371B1A72767BD579F86979A9F3D7B342CA6C8064C4E21702264"
+    },
+    {
+      "bytes": 3088,
+      "path": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json",
+      "sha256": "A1602D320B0C6CF00BFAD8A23C2050087EACD5C407BE7A06C7F178C0A03D3F7C"
+    },
+    {
+      "bytes": 30281,
+      "path": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "2CFE6B6B6E35821340E3BD02683D986F55810C09154F663ADB3264D1064623E8"
+    },
+    {
+      "bytes": 1122,
+      "path": "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
+      "sha256": "3079541FE3E5BA4D4E721A7069213E8F4A4FA07940494098F7B837665FC7C72E"
+    }
+  ],
+  "frozen_contract_sha256": "1CB45AE9788BDF9904B555DCF2A6B8F3B3F97555B8651AD7150B6B7152452419",
+  "holdout_read_count": 0,
+  "memory_fallback_used": false,
+  "oos": false,
+  "optimizer_feedback_written": false,
+  "pair_evaluated_per_hour": 1570.7790180491133,
+  "policy_memory_written": false,
+  "producer_source_sha": "840c3038c9e461d1ba70dd7c520a9db9b1cb33fe",
+  "promotion_authorized": false,
+  "report": "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
+  "run_receipt_sha256": "C1B4AFB425C42E6ECD7CC577DF2F1A1CBE5FD06154FD7630B00C10EF0FBE1EFA",
+  "runtime": "runtime/crypto_search_evidence_v1_1_validation_20260805r1",
+  "schema_version": 1,
+  "selection_receipt_sha256": "F48CDA49778183FAA1D500D8D8F815956A8735E071C27060C106364033E1E991",
+  "status": "VALIDATION_COMPLETE",
+  "strict_evaluated_count": 49,
+  "workers": 10
+}

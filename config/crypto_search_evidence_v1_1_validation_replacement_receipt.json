@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_REPLACEMENT",
-  "status": "RUN_AUTHORIZED_ONE_TIME_WRAPPER_FAILURE_REPLACEMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_VALIDATION_COMPLETE",
+  "run_authorized": false,
   "decision_id": "USER_AUTHORIZED_EVIDENCE_V1_1_VALIDATION_REPLACEMENT_20260805",
   "replacement_for": {
     "receipt_path": "config/crypto_search_evidence_v1_1_validation_receipt.json",
@@ -87,5 +87,41 @@
     "native_stderr_warning_terminal": false,
     "company_remote_start_detached_required": true
   },
-  "outcome": null
+  "outcome": {
+    "status": "VALIDATION_COMPLETE",
+    "producer_source_sha": "840c3038c9e461d1ba70dd7c520a9db9b1cb33fe",
+    "runtime": "runtime/crypto_search_evidence_v1_1_validation_20260805r1",
+    "report": "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
+    "strict_evaluated_count": 49,
+    "candidate_local_failure_count": 0,
+    "checkpoint_count": 1,
+    "workers": 10,
+    "memory_fallback_used": false,
+    "pair_evaluated_per_hour": 1570.7790180491133,
+    "validation_search_reward_positive_count": 22,
+    "both_axis_net_positive_count": 26,
+    "both_axis_net_lcb_positive_count": 0,
+    "strict_matched_positive_count": 0,
+    "train_validation_search_reward_spearman": -0.22214285714285714,
+    "primary_4h_two_axis": {
+      "candidate_count": 35,
+      "validation_search_reward_positive_count": 21,
+      "both_axis_net_positive_count": 24,
+      "both_axis_net_lcb_positive_count": 0,
+      "train_validation_search_reward_spearman": -0.2067226890756303
+    },
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "holdout_read_count": 0,
+    "oos": false,
+    "promotion_authorized": false,
+    "automatic_expansion": false,
+    "pc2_independent_checker": "PASS",
+    "local_independent_checker": "PASS",
+    "interpretation": "DEVELOPMENT_VALIDATION_DIRECTIONAL_SURVIVAL_NARROW_4H_TWO_AXIS_BUT_NO_DUAL_AXIS_LCB_OR_RANK_MIGRATION_QUALIFICATION",
+    "validation_behavior_family_identity_observed": false,
+    "validation_behavior_family_identity_boundary": "The fixed train behavior-family champion identities selected the cohort, but the validation evaluation projection did not emit a validation behavior-family identity; no cross-window family-identity stability claim is made.",
+    "summary_projection_correction": "The producer summary referenced the source matched_positive and primary_net_mean columns. The observed counts remain numerically correct for this run: validation_primary_net_mean is positive for the same 30 rows, and strict validation matched-positive must be zero because no row has both required validation incremental net-LCB axes positive at the frozen zero threshold. Closure source now persists and reads explicit validation columns; no market replay was performed."
+  }
 }

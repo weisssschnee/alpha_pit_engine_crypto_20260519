@@ -4,28 +4,47 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_EVIDENCE_V1_1_CHAMPION_VALIDATION_RUNTIME_FAILED_RESEARCH_UNCHANGED`
+`CRYPTO_SEARCH_EVIDENCE_V1_1_CHAMPION_DEVELOPMENT_VALIDATION_COMPLETE_RESEARCH_HOLD`
 
-The separately authorized one-time no-feedback validation of the 49 final
-positive V1.1 behavior-family champions is consumed and closed without an
-economic result. Producer source
-`5fd83536cc84121636a28a6f09b3de3b8e5c8636` froze the exact 49 identities and
-passed 49/49 static typed reconstruction on PC2. After the validation entry,
-the detached PowerShell wrapper promoted a NumPy `RuntimeWarning` on stderr to
-a terminating `NativeCommandError` because it used
-`ErrorActionPreference=Stop`; the Python parent exited before
-`checkpoint_000`. The single orphan worker was terminated only to release the
-inherited pipe and memory. There are zero auditable completed candidates, no
-candidate ledger, and no migration, validation, or Alpha conclusion.
+The explicitly authorized wrapper-failure replacement is consumed and closed.
+Producer `840c3038c9e461d1ba70dd7c520a9db9b1cb33fe` evaluated the exact same 49
+frozen V1.1 positive behavior-family champions on the unchanged 2025-11-01 to
+2026-01-01 Binance USD-M development-validation partition. The fixed candidate
+identities, train orientation, target, portfolio mapping, 5 bps cost, reward,
+and evaluator were unchanged. Ten PC2 workers completed 49/49 strict evaluations
+in one restore-verified checkpoint at 1,570.779 pairs/hour with zero candidate
+failures and no memory fallback. Candidate generation, optimizer feedback,
+policy/archive writes, backfill, reseed, tuning, holdout/OOS reads, promotion,
+and automatic expansion remained zero. Independent PC2 and local checkers pass.
 
-PC2 and local independent checkers both fail on the expected missing candidate
-ledger. No restart, backfill, reseed, tuning, rescue rerun, optimizer feedback,
-policy/archive write, holdout/OOS read, promotion, or automatic expansion was
-started. The one-time receipt is
-`RUN_AUTHORIZATION_CONSUMED_ENGINE_RUNTIME_WRAPPER_FAILED` with
-`run_authorized=false`. Closure verification passes 435 tests with the existing
-NumPy degrees-of-freedom warning. This runtime-only failure changes no CURRENT search
-capability authority and therefore does not require a Graph transition.
+The result is narrow directional survival, not qualification. Across all 49,
+22 have positive validation search reward and 26 have positive net mean on both
+matched axes, but zero have positive net LCB on both axes. The predeclared 4h
+two-axis slice has 21/35 positive validation reward and 24/35 dual-axis positive
+net mean, but 0/35 dual-axis positive net LCB. The signal is concentrated in
+`MECHANISM_V2_FLOW_INTENSITY_CONVICTION` with
+`TIME_SERIES_DIRECTIONAL_STATEFUL`: 18/23 validation-reward positive and 21/23
+dual-axis net-mean positive. Three-axis candidates produce only 1/13 positive
+validation rewards; 1h produces 0/6. All 49 candidates realize every declared
+mechanism axis, so the weak result is not explained by an inactive declared
+axis. Train-to-validation search-reward Spearman is -0.222 overall and -0.207
+in the primary slice, so development reward ordering does not migrate.
+
+Strict matched-positive count is zero because the frozen strict evaluator
+requires non-negative net LCB on every matched axis and no candidate crosses
+both validation axes. The producer summary accidentally read the source
+`matched_positive` and `primary_net_mean` columns for two displayed counts;
+their numeric results happen to agree with validation in this run. Closure code
+now persists and reads explicit validation fields without market replay. The
+validation projection did not emit a validation behavior-family identity, so
+cross-window family-identity stability remains unobserved and is not inferred.
+
+The replacement receipt is
+`RUN_AUTHORIZATION_CONSUMED_VALIDATION_COMPLETE` with `run_authorized=false`.
+This development validation provides no arm qualification, Alpha claim,
+globally untouched OOS evidence, or promotion authority. No additional search,
+validation replay, OOS, challenge, recent, May-stress, forward, promotion, or
+new Arena is authorized.
 
 The underlying V1.1 development evidence remains:
 

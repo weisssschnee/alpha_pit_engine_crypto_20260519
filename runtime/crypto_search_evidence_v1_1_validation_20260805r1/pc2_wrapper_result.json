@@ -1,0 +1,17 @@
+﻿{
+    "schema_version":  1,
+    "status":  "PROCESS_COMPLETE",
+    "exit_code":  0,
+    "started_at":  "2026-08-05T11:25:05.3911218+08:00",
+    "completed_at":  "2026-08-05T11:27:01.2531433+08:00",
+    "wall_seconds":  115.8620215,
+    "producer_source_sha":  "840c3038c9e461d1ba70dd7c520a9db9b1cb33fe",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_search_evidence_validation_r1_840c3038\\runtime\\crypto_search_evidence_v1_1_validation_20260805r1",
+    "receipt_path":  "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
+    "stdout_path":  "D:\\HermesWorker\\runtime\\crypto_search_evidence_validation_r1_20260805\\producer.stdout.log",
+    "stderr_path":  "D:\\HermesWorker\\runtime\\crypto_search_evidence_validation_r1_20260805\\producer.stderr.log",
+    "stderr_is_diagnostic_only":  true,
+    "native_exit_code_is_terminal_authority":  true,
+    "final_decision_exists":  true,
+    "run_manifest_exists":  true
+}

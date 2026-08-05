@@ -334,6 +334,7 @@ def _augment_projection(
             "validation_search_reward_limiting_component": feedback.get(
                 "limiting_component"
             ),
+            "validation_matched_positive": bool(evaluation["matched_positive"]),
             "validation_behavior_family_id": behavior.get("behavior_family_id"),
             "validation_declared_axis_count": realization.get("declared_axis_count"),
             "validation_active_axis_count": realization.get("active_axis_count"),
@@ -383,9 +384,11 @@ def _slice_metrics(frame: pd.DataFrame) -> dict[str, Any]:
         "validation_search_reward_positive_count": int(
             evaluated["validation_search_reward"].gt(0.0).sum()
         ),
-        "matched_positive_count": int(evaluated["matched_positive"].sum()),
+        "matched_positive_count": int(
+            evaluated["validation_matched_positive"].sum()
+        ),
         "primary_net_positive_count": int(
-            evaluated["primary_net_mean"].gt(0.0).sum()
+            evaluated["validation_primary_net_mean"].gt(0.0).sum()
         ),
         "both_axis_net_positive_count": int(
             (left_net.gt(0.0) & right_net.gt(0.0)).sum()
