@@ -1,0 +1,76 @@
+{
+  "aggregation": {
+    "coefficient_rule": "EQUAL_FIXED_1_OVER_N",
+    "common_mechanism_claim_authorized": false,
+    "comparison_role": "MAIN_23_PRIMARY_OTHER_12_DESCRIPTIVE_ONLY",
+    "economics_rule": "RECOMPUTE_FROM_AGGREGATE_EXECUTABLE_WEIGHTS",
+    "leave_one_out_target_used": false,
+    "missing_weight_rule": "FLAT_ZERO_OUTSIDE_COMMON_SUPPORT",
+    "support_rule": "COMMON_INTERSECTION_SHARED_BY_PRIMARY_LEFT_RIGHT"
+  },
+  "archive_written": false,
+  "boundaries": {
+    "archive_write": false,
+    "candidate_generation": false,
+    "challenge": false,
+    "forward": false,
+    "oos": false,
+    "optimizer_feedback": false,
+    "parameter_tuning": false,
+    "policy_memory_write": false,
+    "promotion": false,
+    "rescue_rerun": false,
+    "second_run": false
+  },
+  "candidate_generation_performed": false,
+  "carrier": {
+    "cost_bps": 5.0,
+    "extended_aligned_cache": ".cache/crypto_search_family_consensus_dev_v1/aligned_extended_to_20260801",
+    "missing_value_fill": null,
+    "new_aligned_cache": ".cache/crypto_search_family_consensus_dev_v1/aligned_new_20260718_20260801",
+    "new_oi_cache": ".cache/crypto_search_family_consensus_dev_v1/oi_mark_new_20260718_20260801",
+    "old_aligned_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "required_field_count": 115,
+    "target_cache": ".cache/crypto_search_family_consensus_dev_v1/binance_open_target_to_20260801",
+    "target_horizon_hours": 4,
+    "target_venue": "BINANCE_USD_M",
+    "v24_aligned_cache_identity_sha256": "56C3F44FCF374ECB3A14927C32CA582F139FBA7C2A0F38CB083C151A47183CC8"
+  },
+  "compute": {
+    "minimum_pair_evaluated_per_hour": 128,
+    "wall_time_seconds": 3600,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_fallback": 8
+  },
+  "contract_count": 115,
+  "contracts_sha256": "7F94104F1465E6F0DE60111BB1410535B67E832568FF80176229AB5816B2A0BA",
+  "development_fresh_interval": {
+    "end_exclusive": "2026-08-01T00:00:00Z",
+    "hours": 336,
+    "role": "SECOND_STAGE_DEVELOPMENT_FRESH_NO_FEEDBACK",
+    "start": "2026-07-18T00:00:00Z"
+  },
+  "frozen_contract_sha256": "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+  "main_candidate_ids_sha256": "EAB230F56C938295BA8D74570A66FEF18E64A2FD88E9341C22B7B2E79268D1E7",
+  "main_member_count": 23,
+  "market_payload_read": false,
+  "optimizer_feedback_written": false,
+  "other_candidate_ids_sha256": "06707EF9D18B347295B78CE1975F51C0E73F515A1752D880128D6EE0326A0D04",
+  "other_member_count": 12,
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "run_receipt_sha256": "AB33C00CA5C50153F7519907A3DECEB9F9BF3228E8674FF7ECF35C0C6A536F63",
+  "schema_version": 1,
+  "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+  "source_metadata_probe": {
+    "common_mapped_base_count": 74,
+    "hours_below_three": 0,
+    "market_payload_read": false,
+    "metadata_only": true,
+    "minimum_hourly_support": 68,
+    "path": "G:/Chengbo/runtime/crypto_family_consensus_source_probe_20260805.json",
+    "sha256": "651947110FEE16EA96E99BB8BEC15D82F99C52D9BF02FE1254BDC6EA5538F580",
+    "symbol_map_sha256": "B9E5C594710D73E0C508DE1CBBC6CD56B843C67D850371A92A0CF77B78880888"
+  },
+  "status": "FROZEN_BEFORE_DEVELOPMENT_FRESH_MARKET_PAYLOAD_READ"
+}

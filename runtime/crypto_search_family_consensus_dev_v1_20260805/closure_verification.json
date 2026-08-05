@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "ACQUISITION_FAILURE_CLOSURE_ONLY",
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "checks": {
+    "receipt_consumed": true,
+    "selection_frozen_before_market_read": true,
+    "exact_main_member_count": 23,
+    "exact_other_member_count": 12,
+    "source_metadata_probe_hash_verified": true,
+    "acquisition_status_hash_verified": true,
+    "acquisition_log_hashes_verified": true,
+    "scheduled_day_coordinates": 42,
+    "successful_day_coordinates": 38,
+    "failed_day_coordinates": 4,
+    "carrier_manifest_absent": true,
+    "candidate_checkpoints_absent": true,
+    "candidate_run_manifest_absent": true,
+    "candidate_gate_started": false,
+    "strict_evaluated_count": 0,
+    "consensus_result": "NOT_OBSERVED",
+    "restart_started": false,
+    "rescue_rerun_started": false
+  },
+  "gate_checker": {
+    "pc2": "NOT_RUN_NO_GATE_ARTIFACTS",
+    "local": "NOT_RUN_NO_GATE_ARTIFACTS"
+  },
+  "focused_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "full_tests": {
+    "passed": 439,
+    "failed": 0,
+    "warnings": 1,
+    "warning_scope": "PRE_EXISTING_NUMPY_DEGREES_OF_FREEDOM"
+  },
+  "claim_boundary": "VERIFIES_CLOSURE_AND_NON_EXECUTION_ONLY_NOT_CONSENSUS_OR_ALPHA"
+}

@@ -4,6 +4,40 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_ACQUISITION_FAILED_NO_GATE_CLOSED`
+
+The separately authorized 4h two-axis family-consensus development gate is
+consumed and closed without a consensus result. Producer
+`d3dd61844cd05ca01aba857d57a5abd29c2a5840` froze exactly 23 primary
+`FLOW_INTENSITY_CONVICTION × TIME_SERIES_DIRECTIONAL_STATEFUL × 4h × two-axis`
+champions plus 12 descriptive 4h two-axis champions before reading the
+2026-07-18 through 2026-08-01 development-fresh interval. The selection receipt
+is `424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7`.
+
+The single PC2 acquisition scheduled all 42 frozen venue-day coordinates. It
+completed 38 and terminated with four OKX read timeouts on 2026-07-18,
+2026-07-19, 2026-07-21, and 2026-07-22. The aligned carrier was not built, the
+35-candidate gate and its independent checker never started, strict evaluated
+count is zero, and no consensus transfer or economic conclusion is observed.
+No retry, rescue, redownload, candidate generation, optimizer feedback, archive
+write, OOS read, or promotion occurred. Partial payloads remain evidence only
+and are not admitted as a research carrier.
+
+The receipt is
+`RUN_AUTHORIZATION_CONSUMED_ACQUISITION_FAILED_NO_GATE` with
+`run_authorized=false`. A future retry would require new explicit authorization;
+this closure does not authorize one. The previously completed V1.1 champion
+development-validation result below remains the latest market-evaluated
+research evidence.
+
+The existing CURRENT Search capability node records this consumed failure while
+retaining the prior completed validation as its latest checker-backed result.
+No node or authority transition was added. CURRENT regenerated truthfully as
+`STALE` because the RAW graph predates the closure worktree; no global freshness
+claim is made.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_EVIDENCE_V1_1_CHAMPION_DEVELOPMENT_VALIDATION_COMPLETE_RESEARCH_HOLD`
 
 The explicitly authorized wrapper-failure replacement is consumed and closed.

@@ -1,0 +1,1402 @@
+{
+  "created_at": "2026-08-05T05:37:21.893319+00:00",
+  "first_rank": 51,
+  "last_rank": 200,
+  "requested_bases": 150,
+  "venues": {
+    "bybit": {
+      "0G": {
+        "symbol": "0GUSDT",
+        "liquidity_rank": 100
+      },
+      "1000FLOKI": {
+        "symbol": "1000FLOKIUSDT",
+        "liquidity_rank": 55
+      },
+      "1000LUNC": {
+        "symbol": "1000LUNCUSDT",
+        "liquidity_rank": 132
+      },
+      "1000RATS": {
+        "symbol": "1000RATSUSDT",
+        "liquidity_rank": 110
+      },
+      "1INCH": {
+        "symbol": "1INCHUSDT",
+        "liquidity_rank": 189
+      },
+      "4": {
+        "symbol": "4USDT",
+        "liquidity_rank": 172
+      },
+      "ACT": {
+        "symbol": "ACTUSDT",
+        "liquidity_rank": 156
+      },
+      "AERO": {
+        "symbol": "AEROUSDT",
+        "liquidity_rank": 182
+      },
+      "AEVO": {
+        "symbol": "AEVOUSDT",
+        "liquidity_rank": 176
+      },
+      "AIXBT": {
+        "symbol": "AIXBTUSDT",
+        "liquidity_rank": 88
+      },
+      "ALGO": {
+        "symbol": "ALGOUSDT",
+        "liquidity_rank": 85
+      },
+      "ALT": {
+        "symbol": "ALTUSDT",
+        "liquidity_rank": 130
+      },
+      "APE": {
+        "symbol": "APEUSDT",
+        "liquidity_rank": 77
+      },
+      "API3": {
+        "symbol": "API3USDT",
+        "liquidity_rank": 180
+      },
+      "ARC": {
+        "symbol": "ARCUSDT",
+        "liquidity_rank": 115
+      },
+      "ARKM": {
+        "symbol": "ARKMUSDT",
+        "liquidity_rank": 87
+      },
+      "AR": {
+        "symbol": "ARUSDT",
+        "liquidity_rank": 96
+      },
+      "ATOM": {
+        "symbol": "ATOMUSDT",
+        "liquidity_rank": 60
+      },
+      "AUCTION": {
+        "symbol": "AUCTIONUSDT",
+        "liquidity_rank": 160
+      },
+      "AVNT": {
+        "symbol": "AVNTUSDT",
+        "liquidity_rank": 109
+      },
+      "AXS": {
+        "symbol": "AXSUSDT",
+        "liquidity_rank": 106
+      },
+      "BARD": {
+        "symbol": "BARDUSDT",
+        "liquidity_rank": 158
+      },
+      "BB": {
+        "symbol": "BBUSDT",
+        "liquidity_rank": 151
+      },
+      "BEAT": {
+        "symbol": "BEATUSDT",
+        "liquidity_rank": 64
+      },
+      "BERA": {
+        "symbol": "BERAUSDT",
+        "liquidity_rank": 82
+      },
+      "BIGTIME": {
+        "symbol": "BIGTIMEUSDT",
+        "liquidity_rank": 128
+      },
+      "BIO": {
+        "symbol": "BIOUSDT",
+        "liquidity_rank": 111
+      },
+      "BLUR": {
+        "symbol": "BLURUSDT",
+        "liquidity_rank": 147
+      },
+      "BOME": {
+        "symbol": "BOMEUSDT",
+        "liquidity_rank": 61
+      },
+      "BRETT": {
+        "symbol": "BRETTUSDT",
+        "liquidity_rank": 175
+      },
+      "CAKE": {
+        "symbol": "CAKEUSDT",
+        "liquidity_rank": 119
+      },
+      "CELO": {
+        "symbol": "CELOUSDT",
+        "liquidity_rank": 145
+      },
+      "CFX": {
+        "symbol": "CFXUSDT",
+        "liquidity_rank": 97
+      },
+      "CHILLGUY": {
+        "symbol": "CHILLGUYUSDT",
+        "liquidity_rank": 186
+      },
+      "CHZ": {
+        "symbol": "CHZUSDT",
+        "liquidity_rank": 113
+      },
+      "CLO": {
+        "symbol": "CLOUSDT",
+        "liquidity_rank": 188
+      },
+      "COMP": {
+        "symbol": "COMPUSDT",
+        "liquidity_rank": 149
+      },
+      "CYS": {
+        "symbol": "CYSUSDT",
+        "liquidity_rank": 169
+      },
+      "DOGS": {
+        "symbol": "DOGSUSDT",
+        "liquidity_rank": 136
+      },
+      "DYDX": {
+        "symbol": "DYDXUSDT",
+        "liquidity_rank": 67
+      },
+      "EGLD": {
+        "symbol": "EGLDUSDT",
+        "liquidity_rank": 200
+      },
+      "EIGEN": {
+        "symbol": "EIGENUSDT",
+        "liquidity_rank": 58
+      },
+      "ENSO": {
+        "symbol": "ENSOUSDT",
+        "liquidity_rank": 137
+      },
+      "ENS": {
+        "symbol": "ENSUSDT",
+        "liquidity_rank": 71
+      },
+      "FLOW": {
+        "symbol": "FLOWUSDT",
+        "liquidity_rank": 141
+      },
+      "GALA": {
+        "symbol": "GALAUSDT",
+        "liquidity_rank": 51
+      },
+      "GIGGLE": {
+        "symbol": "GIGGLEUSDT",
+        "liquidity_rank": 69
+      },
+      "GMT": {
+        "symbol": "GMTUSDT",
+        "liquidity_rank": 105
+      },
+      "GOAT": {
+        "symbol": "GOATUSDT",
+        "liquidity_rank": 114
+      },
+      "GRASS": {
+        "symbol": "GRASSUSDT",
+        "liquidity_rank": 153
+      },
+      "GRIFFAIN": {
+        "symbol": "GRIFFAINUSDT",
+        "liquidity_rank": 168
+      },
+      "GRT": {
+        "symbol": "GRTUSDT",
+        "liquidity_rank": 118
+      },
+      "HBAR": {
+        "symbol": "HBARUSDT",
+        "liquidity_rank": 56
+      },
+      "H": {
+        "symbol": "HUSDT",
+        "liquidity_rank": 93
+      },
+      "HUMA": {
+        "symbol": "HUMAUSDT",
+        "liquidity_rank": 166
+      },
+      "ICP": {
+        "symbol": "ICPUSDT",
+        "liquidity_rank": 66
+      },
+      "IMX": {
+        "symbol": "IMXUSDT",
+        "liquidity_rank": 123
+      },
+      "IOTA": {
+        "symbol": "IOTAUSDT",
+        "liquidity_rank": 194
+      },
+      "IO": {
+        "symbol": "IOUSDT",
+        "liquidity_rank": 112
+      },
+      "IP": {
+        "symbol": "IPUSDT",
+        "liquidity_rank": 83
+      },
+      "JASMY": {
+        "symbol": "JASMYUSDT",
+        "liquidity_rank": 108
+      },
+      "JELLYJELLY": {
+        "symbol": "JELLYJELLYUSDT",
+        "liquidity_rank": 190
+      },
+      "JTO": {
+        "symbol": "JTOUSDT",
+        "liquidity_rank": 73
+      },
+      "JUP": {
+        "symbol": "JUPUSDT",
+        "liquidity_rank": 62
+      },
+      "KAITO": {
+        "symbol": "KAITOUSDT",
+        "liquidity_rank": 90
+      },
+      "KAS": {
+        "symbol": "KASUSDT",
+        "liquidity_rank": 139
+      },
+      "KITE": {
+        "symbol": "KITEUSDT",
+        "liquidity_rank": 81
+      },
+      "LA": {
+        "symbol": "LAUSDT",
+        "liquidity_rank": 184
+      },
+      "LDO": {
+        "symbol": "LDOUSDT",
+        "liquidity_rank": 53
+      },
+      "LIGHT": {
+        "symbol": "LIGHTUSDT",
+        "liquidity_rank": 155
+      },
+      "LINEA": {
+        "symbol": "LINEAUSDT",
+        "liquidity_rank": 143
+      },
+      "LIT": {
+        "symbol": "LITUSDT",
+        "liquidity_rank": 101
+      },
+      "LPT": {
+        "symbol": "LPTUSDT",
+        "liquidity_rank": 135
+      },
+      "LYN": {
+        "symbol": "LYNUSDT",
+        "liquidity_rank": 181
+      },
+      "MAGIC": {
+        "symbol": "MAGICUSDT",
+        "liquidity_rank": 191
+      },
+      "MANA": {
+        "symbol": "MANAUSDT",
+        "liquidity_rank": 125
+      },
+      "MANTA": {
+        "symbol": "MANTAUSDT",
+        "liquidity_rank": 154
+      },
+      "MASK": {
+        "symbol": "MASKUSDT",
+        "liquidity_rank": 126
+      },
+      "MEME": {
+        "symbol": "MEMEUSDT",
+        "liquidity_rank": 95
+      },
+      "MERL": {
+        "symbol": "MERLUSDT",
+        "liquidity_rank": 185
+      },
+      "MEW": {
+        "symbol": "MEWUSDT",
+        "liquidity_rank": 171
+      },
+      "MINA": {
+        "symbol": "MINAUSDT",
+        "liquidity_rank": 174
+      },
+      "MON": {
+        "symbol": "MONUSDT",
+        "liquidity_rank": 103
+      },
+      "MOODENG": {
+        "symbol": "MOODENGUSDT",
+        "liquidity_rank": 72
+      },
+      "MOVE": {
+        "symbol": "MOVEUSDT",
+        "liquidity_rank": 117
+      },
+      "MUBARAK": {
+        "symbol": "MUBARAKUSDT",
+        "liquidity_rank": 179
+      },
+      "M": {
+        "symbol": "MUSDT",
+        "liquidity_rank": 146
+      },
+      "MYX": {
+        "symbol": "MYXUSDT",
+        "liquidity_rank": 84
+      },
+      "NEO": {
+        "symbol": "NEOUSDT",
+        "liquidity_rank": 133
+      },
+      "NIGHT": {
+        "symbol": "NIGHTUSDT",
+        "liquidity_rank": 148
+      },
+      "NOT": {
+        "symbol": "NOTUSDT",
+        "liquidity_rank": 92
+      },
+      "PENDLE": {
+        "symbol": "PENDLEUSDT",
+        "liquidity_rank": 63
+      },
+      "PEOPLE": {
+        "symbol": "PEOPLEUSDT",
+        "liquidity_rank": 65
+      },
+      "PIEVERSE": {
+        "symbol": "PIEVERSEUSDT",
+        "liquidity_rank": 150
+      },
+      "PIPPIN": {
+        "symbol": "PIPPINUSDT",
+        "liquidity_rank": 98
+      },
+      "PIXEL": {
+        "symbol": "PIXELUSDT",
+        "liquidity_rank": 161
+      },
+      "POL": {
+        "symbol": "POLUSDT",
+        "liquidity_rank": 91
+      },
+      "POPCAT": {
+        "symbol": "POPCATUSDT",
+        "liquidity_rank": 54
+      },
+      "POWER": {
+        "symbol": "POWERUSDT",
+        "liquidity_rank": 107
+      },
+      "PYTH": {
+        "symbol": "PYTHUSDT",
+        "liquidity_rank": 94
+      },
+      "RAVE": {
+        "symbol": "RAVEUSDT",
+        "liquidity_rank": 162
+      },
+      "RENDER": {
+        "symbol": "RENDERUSDT",
+        "liquidity_rank": 70
+      },
+      "RESOLV": {
+        "symbol": "RESOLVUSDT",
+        "liquidity_rank": 134
+      },
+      "REZ": {
+        "symbol": "REZUSDT",
+        "liquidity_rank": 159
+      },
+      "ROSE": {
+        "symbol": "ROSEUSDT",
+        "liquidity_rank": 164
+      },
+      "RSR": {
+        "symbol": "RSRUSDT",
+        "liquidity_rank": 177
+      },
+      "RUNE": {
+        "symbol": "RUNEUSDT",
+        "liquidity_rank": 80
+      },
+      "SAGA": {
+        "symbol": "SAGAUSDT",
+        "liquidity_rank": 116
+      },
+      "SAHARA": {
+        "symbol": "SAHARAUSDT",
+        "liquidity_rank": 167
+      },
+      "SAND": {
+        "symbol": "SANDUSDT",
+        "liquidity_rank": 79
+      },
+      "SNX": {
+        "symbol": "SNXUSDT",
+        "liquidity_rank": 152
+      },
+      "SOMI": {
+        "symbol": "SOMIUSDT",
+        "liquidity_rank": 193
+      },
+      "SOON": {
+        "symbol": "SOONUSDT",
+        "liquidity_rank": 173
+      },
+      "SPACE": {
+        "symbol": "SPACEUSDT",
+        "liquidity_rank": 196
+      },
+      "SPX": {
+        "symbol": "SPXUSDT",
+        "liquidity_rank": 78
+      },
+      "SSV": {
+        "symbol": "SSVUSDT",
+        "liquidity_rank": 165
+      },
+      "STABLE": {
+        "symbol": "STABLEUSDT",
+        "liquidity_rank": 144
+      },
+      "STRK": {
+        "symbol": "STRKUSDT",
+        "liquidity_rank": 86
+      },
+      "STX": {
+        "symbol": "STXUSDT",
+        "liquidity_rank": 76
+      },
+      "SUPER": {
+        "symbol": "SUPERUSDT",
+        "liquidity_rank": 199
+      },
+      "S": {
+        "symbol": "SUSDT",
+        "liquidity_rank": 89
+      },
+      "SUSHI": {
+        "symbol": "SUSHIUSDT",
+        "liquidity_rank": 131
+      },
+      "SYRUP": {
+        "symbol": "SYRUPUSDT",
+        "liquidity_rank": 127
+      },
+      "THETA": {
+        "symbol": "THETAUSDT",
+        "liquidity_rank": 120
+      },
+      "TON": {
+        "symbol": "TONUSDT",
+        "liquidity_rank": 52
+      },
+      "TRB": {
+        "symbol": "TRBUSDT",
+        "liquidity_rank": 68
+      },
+      "USELESS": {
+        "symbol": "USELESSUSDT",
+        "liquidity_rank": 124
+      },
+      "USUAL": {
+        "symbol": "USUALUSDT",
+        "liquidity_rank": 140
+      },
+      "VET": {
+        "symbol": "VETUSDT",
+        "liquidity_rank": 122
+      },
+      "W": {
+        "symbol": "WUSDT",
+        "liquidity_rank": 99
+      },
+      "XAI": {
+        "symbol": "XAIUSDT",
+        "liquidity_rank": 138
+      },
+      "XLM": {
+        "symbol": "XLMUSDT",
+        "liquidity_rank": 59
+      },
+      "XMR": {
+        "symbol": "XMRUSDT",
+        "liquidity_rank": 102
+      },
+      "XTZ": {
+        "symbol": "XTZUSDT",
+        "liquidity_rank": 163
+      },
+      "YGG": {
+        "symbol": "YGGUSDT",
+        "liquidity_rank": 178
+      },
+      "ZAMA": {
+        "symbol": "ZAMAUSDT",
+        "liquidity_rank": 157
+      },
+      "ZEC": {
+        "symbol": "ZECUSDT",
+        "liquidity_rank": 104
+      },
+      "ZEN": {
+        "symbol": "ZENUSDT",
+        "liquidity_rank": 129
+      },
+      "ZEREBRO": {
+        "symbol": "ZEREBROUSDT",
+        "liquidity_rank": 192
+      },
+      "ZK": {
+        "symbol": "ZKUSDT",
+        "liquidity_rank": 121
+      },
+      "ZORA": {
+        "symbol": "ZORAUSDT",
+        "liquidity_rank": 170
+      },
+      "ZRO": {
+        "symbol": "ZROUSDT",
+        "liquidity_rank": 75
+      }
+    },
+    "okx_futures": {
+      "0G": {
+        "symbol": "0G-USDT-SWAP",
+        "liquidity_rank": 100
+      },
+      "1INCH": {
+        "symbol": "1INCH-USDT-SWAP",
+        "liquidity_rank": 189
+      },
+      "ACT": {
+        "symbol": "ACT-USDT-SWAP",
+        "liquidity_rank": 156
+      },
+      "AERO": {
+        "symbol": "AERO-USDT-SWAP",
+        "liquidity_rank": 182
+      },
+      "AEVO": {
+        "symbol": "AEVO-USDT-SWAP",
+        "liquidity_rank": 176
+      },
+      "AIXBT": {
+        "symbol": "AIXBT-USDT-SWAP",
+        "liquidity_rank": 88
+      },
+      "ALGO": {
+        "symbol": "ALGO-USDT-SWAP",
+        "liquidity_rank": 85
+      },
+      "APE": {
+        "symbol": "APE-USDT-SWAP",
+        "liquidity_rank": 77
+      },
+      "API3": {
+        "symbol": "API3-USDT-SWAP",
+        "liquidity_rank": 180
+      },
+      "AR": {
+        "symbol": "AR-USDT-SWAP",
+        "liquidity_rank": 96
+      },
+      "ARC": {
+        "symbol": "ARC-USDT-SWAP",
+        "liquidity_rank": 115
+      },
+      "ARKM": {
+        "symbol": "ARKM-USDT-SWAP",
+        "liquidity_rank": 87
+      },
+      "ATOM": {
+        "symbol": "ATOM-USDT-SWAP",
+        "liquidity_rank": 60
+      },
+      "AUCTION": {
+        "symbol": "AUCTION-USDT-SWAP",
+        "liquidity_rank": 160
+      },
+      "AVNT": {
+        "symbol": "AVNT-USDT-SWAP",
+        "liquidity_rank": 109
+      },
+      "AXS": {
+        "symbol": "AXS-USDT-SWAP",
+        "liquidity_rank": 106
+      },
+      "BARD": {
+        "symbol": "BARD-USDT-SWAP",
+        "liquidity_rank": 158
+      },
+      "BB": {
+        "symbol": "BB-USDT-SWAP",
+        "liquidity_rank": 151
+      },
+      "BEAT": {
+        "symbol": "BEAT-USDT-SWAP",
+        "liquidity_rank": 64
+      },
+      "BERA": {
+        "symbol": "BERA-USDT-SWAP",
+        "liquidity_rank": 82
+      },
+      "BIGTIME": {
+        "symbol": "BIGTIME-USDT-SWAP",
+        "liquidity_rank": 128
+      },
+      "BIO": {
+        "symbol": "BIO-USDT-SWAP",
+        "liquidity_rank": 111
+      },
+      "BLUR": {
+        "symbol": "BLUR-USDT-SWAP",
+        "liquidity_rank": 147
+      },
+      "BOME": {
+        "symbol": "BOME-USDT-SWAP",
+        "liquidity_rank": 61
+      },
+      "BRETT": {
+        "symbol": "BRETT-USDT-SWAP",
+        "liquidity_rank": 175
+      },
+      "CELO": {
+        "symbol": "CELO-USDT-SWAP",
+        "liquidity_rank": 145
+      },
+      "CFX": {
+        "symbol": "CFX-USDT-SWAP",
+        "liquidity_rank": 97
+      },
+      "CHZ": {
+        "symbol": "CHZ-USDT-SWAP",
+        "liquidity_rank": 113
+      },
+      "COMP": {
+        "symbol": "COMP-USDT-SWAP",
+        "liquidity_rank": 149
+      },
+      "DOGS": {
+        "symbol": "DOGS-USDT-SWAP",
+        "liquidity_rank": 136
+      },
+      "DYDX": {
+        "symbol": "DYDX-USDT-SWAP",
+        "liquidity_rank": 67
+      },
+      "EGLD": {
+        "symbol": "EGLD-USDT-SWAP",
+        "liquidity_rank": 200
+      },
+      "EIGEN": {
+        "symbol": "EIGEN-USDT-SWAP",
+        "liquidity_rank": 58
+      },
+      "ENS": {
+        "symbol": "ENS-USDT-SWAP",
+        "liquidity_rank": 71
+      },
+      "ENSO": {
+        "symbol": "ENSO-USDT-SWAP",
+        "liquidity_rank": 137
+      },
+      "FLOW": {
+        "symbol": "FLOW-USDT-SWAP",
+        "liquidity_rank": 141
+      },
+      "GALA": {
+        "symbol": "GALA-USDT-SWAP",
+        "liquidity_rank": 51
+      },
+      "GIGGLE": {
+        "symbol": "GIGGLE-USDT-SWAP",
+        "liquidity_rank": 69
+      },
+      "GMT": {
+        "symbol": "GMT-USDT-SWAP",
+        "liquidity_rank": 105
+      },
+      "GOAT": {
+        "symbol": "GOAT-USDT-SWAP",
+        "liquidity_rank": 114
+      },
+      "GRASS": {
+        "symbol": "GRASS-USDT-SWAP",
+        "liquidity_rank": 153
+      },
+      "GRIFFAIN": {
+        "symbol": "GRIFFAIN-USDT-SWAP",
+        "liquidity_rank": 168
+      },
+      "GRT": {
+        "symbol": "GRT-USDT-SWAP",
+        "liquidity_rank": 118
+      },
+      "H": {
+        "symbol": "H-USDT-SWAP",
+        "liquidity_rank": 93
+      },
+      "HBAR": {
+        "symbol": "HBAR-USDT-SWAP",
+        "liquidity_rank": 56
+      },
+      "HUMA": {
+        "symbol": "HUMA-USDT-SWAP",
+        "liquidity_rank": 166
+      },
+      "ICP": {
+        "symbol": "ICP-USDT-SWAP",
+        "liquidity_rank": 66
+      },
+      "IMX": {
+        "symbol": "IMX-USDT-SWAP",
+        "liquidity_rank": 123
+      },
+      "IOTA": {
+        "symbol": "IOTA-USDT-SWAP",
+        "liquidity_rank": 194
+      },
+      "IP": {
+        "symbol": "IP-USDT-SWAP",
+        "liquidity_rank": 83
+      },
+      "JELLYJELLY": {
+        "symbol": "JELLYJELLY-USDT-SWAP",
+        "liquidity_rank": 190
+      },
+      "JTO": {
+        "symbol": "JTO-USDT-SWAP",
+        "liquidity_rank": 73
+      },
+      "JUP": {
+        "symbol": "JUP-USDT-SWAP",
+        "liquidity_rank": 62
+      },
+      "KAITO": {
+        "symbol": "KAITO-USDT-SWAP",
+        "liquidity_rank": 90
+      },
+      "KITE": {
+        "symbol": "KITE-USDT-SWAP",
+        "liquidity_rank": 81
+      },
+      "LA": {
+        "symbol": "LA-USDT-SWAP",
+        "liquidity_rank": 184
+      },
+      "LAYER": {
+        "symbol": "LAYER-USDT-SWAP",
+        "liquidity_rank": 187
+      },
+      "LDO": {
+        "symbol": "LDO-USDT-SWAP",
+        "liquidity_rank": 53
+      },
+      "LIGHT": {
+        "symbol": "LIGHT-USDT-SWAP",
+        "liquidity_rank": 155
+      },
+      "LINEA": {
+        "symbol": "LINEA-USDT-SWAP",
+        "liquidity_rank": 143
+      },
+      "LIT": {
+        "symbol": "LIT-USDT-SWAP",
+        "liquidity_rank": 101
+      },
+      "LPT": {
+        "symbol": "LPT-USDT-SWAP",
+        "liquidity_rank": 135
+      },
+      "MAGIC": {
+        "symbol": "MAGIC-USDT-SWAP",
+        "liquidity_rank": 191
+      },
+      "MANA": {
+        "symbol": "MANA-USDT-SWAP",
+        "liquidity_rank": 125
+      },
+      "MASK": {
+        "symbol": "MASK-USDT-SWAP",
+        "liquidity_rank": 126
+      },
+      "MEME": {
+        "symbol": "MEME-USDT-SWAP",
+        "liquidity_rank": 95
+      },
+      "MERL": {
+        "symbol": "MERL-USDT-SWAP",
+        "liquidity_rank": 185
+      },
+      "MEW": {
+        "symbol": "MEW-USDT-SWAP",
+        "liquidity_rank": 171
+      },
+      "MINA": {
+        "symbol": "MINA-USDT-SWAP",
+        "liquidity_rank": 174
+      },
+      "MON": {
+        "symbol": "MON-USDT-SWAP",
+        "liquidity_rank": 103
+      },
+      "MOODENG": {
+        "symbol": "MOODENG-USDT-SWAP",
+        "liquidity_rank": 72
+      },
+      "MOVE": {
+        "symbol": "MOVE-USDT-SWAP",
+        "liquidity_rank": 117
+      },
+      "MUBARAK": {
+        "symbol": "MUBARAK-USDT-SWAP",
+        "liquidity_rank": 179
+      },
+      "NEO": {
+        "symbol": "NEO-USDT-SWAP",
+        "liquidity_rank": 133
+      },
+      "NIGHT": {
+        "symbol": "NIGHT-USDT-SWAP",
+        "liquidity_rank": 148
+      },
+      "NOT": {
+        "symbol": "NOT-USDT-SWAP",
+        "liquidity_rank": 92
+      },
+      "PENDLE": {
+        "symbol": "PENDLE-USDT-SWAP",
+        "liquidity_rank": 63
+      },
+      "PEOPLE": {
+        "symbol": "PEOPLE-USDT-SWAP",
+        "liquidity_rank": 65
+      },
+      "PIEVERSE": {
+        "symbol": "PIEVERSE-USDT-SWAP",
+        "liquidity_rank": 150
+      },
+      "PIPPIN": {
+        "symbol": "PIPPIN-USDT-SWAP",
+        "liquidity_rank": 98
+      },
+      "POL": {
+        "symbol": "POL-USDT-SWAP",
+        "liquidity_rank": 91
+      },
+      "POPCAT": {
+        "symbol": "POPCAT-USDT-SWAP",
+        "liquidity_rank": 54
+      },
+      "PYTH": {
+        "symbol": "PYTH-USDT-SWAP",
+        "liquidity_rank": 94
+      },
+      "RAVE": {
+        "symbol": "RAVE-USDT-SWAP",
+        "liquidity_rank": 162
+      },
+      "RENDER": {
+        "symbol": "RENDER-USDT-SWAP",
+        "liquidity_rank": 70
+      },
+      "RESOLV": {
+        "symbol": "RESOLV-USDT-SWAP",
+        "liquidity_rank": 134
+      },
+      "RSR": {
+        "symbol": "RSR-USDT-SWAP",
+        "liquidity_rank": 177
+      },
+      "S": {
+        "symbol": "S-USDT-SWAP",
+        "liquidity_rank": 89
+      },
+      "SAHARA": {
+        "symbol": "SAHARA-USDT-SWAP",
+        "liquidity_rank": 167
+      },
+      "SAND": {
+        "symbol": "SAND-USDT-SWAP",
+        "liquidity_rank": 79
+      },
+      "SNX": {
+        "symbol": "SNX-USDT-SWAP",
+        "liquidity_rank": 152
+      },
+      "SOON": {
+        "symbol": "SOON-USDT-SWAP",
+        "liquidity_rank": 173
+      },
+      "SPACE": {
+        "symbol": "SPACE-USDT-SWAP",
+        "liquidity_rank": 196
+      },
+      "SPX": {
+        "symbol": "SPX-USDT-SWAP",
+        "liquidity_rank": 78
+      },
+      "SSV": {
+        "symbol": "SSV-USDT-SWAP",
+        "liquidity_rank": 165
+      },
+      "STABLE": {
+        "symbol": "STABLE-USDT-SWAP",
+        "liquidity_rank": 144
+      },
+      "STRK": {
+        "symbol": "STRK-USDT-SWAP",
+        "liquidity_rank": 86
+      },
+      "STX": {
+        "symbol": "STX-USDT-SWAP",
+        "liquidity_rank": 76
+      },
+      "SUSHI": {
+        "symbol": "SUSHI-USDT-SWAP",
+        "liquidity_rank": 131
+      },
+      "SYRUP": {
+        "symbol": "SYRUP-USDT-SWAP",
+        "liquidity_rank": 127
+      },
+      "THETA": {
+        "symbol": "THETA-USDT-SWAP",
+        "liquidity_rank": 120
+      },
+      "TON": {
+        "symbol": "TON-USDT-SWAP",
+        "liquidity_rank": 52
+      },
+      "TRB": {
+        "symbol": "TRB-USDT-SWAP",
+        "liquidity_rank": 68
+      },
+      "TURBO": {
+        "symbol": "TURBO-USDT-SWAP",
+        "liquidity_rank": 74
+      },
+      "USELESS": {
+        "symbol": "USELESS-USDT-SWAP",
+        "liquidity_rank": 124
+      },
+      "W": {
+        "symbol": "W-USDT-SWAP",
+        "liquidity_rank": 99
+      },
+      "XLM": {
+        "symbol": "XLM-USDT-SWAP",
+        "liquidity_rank": 59
+      },
+      "XTZ": {
+        "symbol": "XTZ-USDT-SWAP",
+        "liquidity_rank": 163
+      },
+      "YGG": {
+        "symbol": "YGG-USDT-SWAP",
+        "liquidity_rank": 178
+      },
+      "ZAMA": {
+        "symbol": "ZAMA-USDT-SWAP",
+        "liquidity_rank": 157
+      },
+      "ZEC": {
+        "symbol": "ZEC-USDT-SWAP",
+        "liquidity_rank": 104
+      },
+      "ZEN": {
+        "symbol": "ZEN-USDT-SWAP",
+        "liquidity_rank": 129
+      },
+      "ZEREBRO": {
+        "symbol": "ZEREBRO-USDT-SWAP",
+        "liquidity_rank": 192
+      },
+      "ZK": {
+        "symbol": "ZK-USDT-SWAP",
+        "liquidity_rank": 121
+      },
+      "ZORA": {
+        "symbol": "ZORA-USDT-SWAP",
+        "liquidity_rank": 170
+      },
+      "ZRO": {
+        "symbol": "ZRO-USDT-SWAP",
+        "liquidity_rank": 75
+      }
+    },
+    "hyperliquid_futures": {
+      "0G": {
+        "symbol": "0G",
+        "liquidity_rank": 100
+      },
+      "AERO": {
+        "symbol": "AERO",
+        "liquidity_rank": 182
+      },
+      "AIXBT": {
+        "symbol": "AIXBT",
+        "liquidity_rank": 88
+      },
+      "ALGO": {
+        "symbol": "ALGO",
+        "liquidity_rank": 85
+      },
+      "ALT": {
+        "symbol": "ALT",
+        "liquidity_rank": 130
+      },
+      "APE": {
+        "symbol": "APE",
+        "liquidity_rank": 77
+      },
+      "AR": {
+        "symbol": "AR",
+        "liquidity_rank": 96
+      },
+      "ATOM": {
+        "symbol": "ATOM",
+        "liquidity_rank": 60
+      },
+      "AVNT": {
+        "symbol": "AVNT",
+        "liquidity_rank": 109
+      },
+      "AXS": {
+        "symbol": "AXS",
+        "liquidity_rank": 106
+      },
+      "BERA": {
+        "symbol": "BERA",
+        "liquidity_rank": 82
+      },
+      "BIGTIME": {
+        "symbol": "BIGTIME",
+        "liquidity_rank": 128
+      },
+      "BIO": {
+        "symbol": "BIO",
+        "liquidity_rank": 111
+      },
+      "BLUR": {
+        "symbol": "BLUR",
+        "liquidity_rank": 147
+      },
+      "BOME": {
+        "symbol": "BOME",
+        "liquidity_rank": 61
+      },
+      "BRETT": {
+        "symbol": "BRETT",
+        "liquidity_rank": 175
+      },
+      "CAKE": {
+        "symbol": "CAKE",
+        "liquidity_rank": 119
+      },
+      "CELO": {
+        "symbol": "CELO",
+        "liquidity_rank": 145
+      },
+      "CFX": {
+        "symbol": "CFX",
+        "liquidity_rank": 97
+      },
+      "CHILLGUY": {
+        "symbol": "CHILLGUY",
+        "liquidity_rank": 186
+      },
+      "COMP": {
+        "symbol": "COMP",
+        "liquidity_rank": 149
+      },
+      "DYDX": {
+        "symbol": "DYDX",
+        "liquidity_rank": 67
+      },
+      "EIGEN": {
+        "symbol": "EIGEN",
+        "liquidity_rank": 58
+      },
+      "ENS": {
+        "symbol": "ENS",
+        "liquidity_rank": 71
+      },
+      "GALA": {
+        "symbol": "GALA",
+        "liquidity_rank": 51
+      },
+      "GMT": {
+        "symbol": "GMT",
+        "liquidity_rank": 105
+      },
+      "GOAT": {
+        "symbol": "GOAT",
+        "liquidity_rank": 114
+      },
+      "GRASS": {
+        "symbol": "GRASS",
+        "liquidity_rank": 153
+      },
+      "GRIFFAIN": {
+        "symbol": "GRIFFAIN",
+        "liquidity_rank": 168
+      },
+      "HBAR": {
+        "symbol": "HBAR",
+        "liquidity_rank": 56
+      },
+      "ICP": {
+        "symbol": "ICP",
+        "liquidity_rank": 66
+      },
+      "IMX": {
+        "symbol": "IMX",
+        "liquidity_rank": 123
+      },
+      "IO": {
+        "symbol": "IO",
+        "liquidity_rank": 112
+      },
+      "IOTA": {
+        "symbol": "IOTA",
+        "liquidity_rank": 194
+      },
+      "IP": {
+        "symbol": "IP",
+        "liquidity_rank": 83
+      },
+      "JTO": {
+        "symbol": "JTO",
+        "liquidity_rank": 73
+      },
+      "JUP": {
+        "symbol": "JUP",
+        "liquidity_rank": 62
+      },
+      "KAITO": {
+        "symbol": "KAITO",
+        "liquidity_rank": 90
+      },
+      "KAS": {
+        "symbol": "KAS",
+        "liquidity_rank": 139
+      },
+      "LAYER": {
+        "symbol": "LAYER",
+        "liquidity_rank": 187
+      },
+      "LDO": {
+        "symbol": "LDO",
+        "liquidity_rank": 53
+      },
+      "LINEA": {
+        "symbol": "LINEA",
+        "liquidity_rank": 143
+      },
+      "LIT": {
+        "symbol": "LIT",
+        "liquidity_rank": 101
+      },
+      "MANTA": {
+        "symbol": "MANTA",
+        "liquidity_rank": 154
+      },
+      "MEME": {
+        "symbol": "MEME",
+        "liquidity_rank": 95
+      },
+      "MERL": {
+        "symbol": "MERL",
+        "liquidity_rank": 185
+      },
+      "MEW": {
+        "symbol": "MEW",
+        "liquidity_rank": 171
+      },
+      "MINA": {
+        "symbol": "MINA",
+        "liquidity_rank": 174
+      },
+      "MON": {
+        "symbol": "MON",
+        "liquidity_rank": 103
+      },
+      "MOODENG": {
+        "symbol": "MOODENG",
+        "liquidity_rank": 72
+      },
+      "MOVE": {
+        "symbol": "MOVE",
+        "liquidity_rank": 117
+      },
+      "NEO": {
+        "symbol": "NEO",
+        "liquidity_rank": 133
+      },
+      "NOT": {
+        "symbol": "NOT",
+        "liquidity_rank": 92
+      },
+      "PENDLE": {
+        "symbol": "PENDLE",
+        "liquidity_rank": 63
+      },
+      "PEOPLE": {
+        "symbol": "PEOPLE",
+        "liquidity_rank": 65
+      },
+      "POL": {
+        "symbol": "POL",
+        "liquidity_rank": 91
+      },
+      "POPCAT": {
+        "symbol": "POPCAT",
+        "liquidity_rank": 54
+      },
+      "PYTH": {
+        "symbol": "PYTH",
+        "liquidity_rank": 94
+      },
+      "RENDER": {
+        "symbol": "RENDER",
+        "liquidity_rank": 70
+      },
+      "RESOLV": {
+        "symbol": "RESOLV",
+        "liquidity_rank": 134
+      },
+      "REZ": {
+        "symbol": "REZ",
+        "liquidity_rank": 159
+      },
+      "RSR": {
+        "symbol": "RSR",
+        "liquidity_rank": 177
+      },
+      "RUNE": {
+        "symbol": "RUNE",
+        "liquidity_rank": 80
+      },
+      "S": {
+        "symbol": "S",
+        "liquidity_rank": 89
+      },
+      "SAGA": {
+        "symbol": "SAGA",
+        "liquidity_rank": 116
+      },
+      "SAND": {
+        "symbol": "SAND",
+        "liquidity_rank": 79
+      },
+      "SNX": {
+        "symbol": "SNX",
+        "liquidity_rank": 152
+      },
+      "SPX": {
+        "symbol": "SPX",
+        "liquidity_rank": 78
+      },
+      "STABLE": {
+        "symbol": "STABLE",
+        "liquidity_rank": 144
+      },
+      "STRK": {
+        "symbol": "STRK",
+        "liquidity_rank": 86
+      },
+      "STX": {
+        "symbol": "STX",
+        "liquidity_rank": 76
+      },
+      "SUPER": {
+        "symbol": "SUPER",
+        "liquidity_rank": 199
+      },
+      "SUSHI": {
+        "symbol": "SUSHI",
+        "liquidity_rank": 131
+      },
+      "SYRUP": {
+        "symbol": "SYRUP",
+        "liquidity_rank": 127
+      },
+      "TON": {
+        "symbol": "TON",
+        "liquidity_rank": 52
+      },
+      "TRB": {
+        "symbol": "TRB",
+        "liquidity_rank": 68
+      },
+      "TURBO": {
+        "symbol": "TURBO",
+        "liquidity_rank": 74
+      },
+      "USUAL": {
+        "symbol": "USUAL",
+        "liquidity_rank": 140
+      },
+      "W": {
+        "symbol": "W",
+        "liquidity_rank": 99
+      },
+      "XAI": {
+        "symbol": "XAI",
+        "liquidity_rank": 138
+      },
+      "XLM": {
+        "symbol": "XLM",
+        "liquidity_rank": 59
+      },
+      "XMR": {
+        "symbol": "XMR",
+        "liquidity_rank": 102
+      },
+      "YGG": {
+        "symbol": "YGG",
+        "liquidity_rank": 178
+      },
+      "ZEC": {
+        "symbol": "ZEC",
+        "liquidity_rank": 104
+      },
+      "ZEN": {
+        "symbol": "ZEN",
+        "liquidity_rank": 129
+      },
+      "ZEREBRO": {
+        "symbol": "ZEREBRO",
+        "liquidity_rank": 192
+      },
+      "ZK": {
+        "symbol": "ZK",
+        "liquidity_rank": 121
+      },
+      "ZORA": {
+        "symbol": "ZORA",
+        "liquidity_rank": 170
+      },
+      "ZRO": {
+        "symbol": "ZRO",
+        "liquidity_rank": 75
+      }
+    }
+  }
+}

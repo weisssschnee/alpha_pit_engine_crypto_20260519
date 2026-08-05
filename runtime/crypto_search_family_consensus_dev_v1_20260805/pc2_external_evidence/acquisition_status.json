@@ -1,0 +1,29 @@
+{
+  "status": "retry_required",
+  "completed_at": "2026-08-05T10:38:25.589678+00:00",
+  "completed_days": 42,
+  "total_days": 42,
+  "failure_count": 4,
+  "failures": [
+    {
+      "venue": "okx_futures",
+      "date": "2026-07-18",
+      "error": "RuntimeError: download failed key=okx_futures/2026-07-18/06/PYTH-USDT-SWAP_mark_price.parquet.zst: Read timeout on endpoint URL: \"None\""
+    },
+    {
+      "venue": "okx_futures",
+      "date": "2026-07-22",
+      "error": "RuntimeError: download failed key=okx_futures/2026-07-22/02/LIGHT-USDT-SWAP_mark_price.parquet.zst: Read timeout on endpoint URL: \"None\""
+    },
+    {
+      "venue": "okx_futures",
+      "date": "2026-07-19",
+      "error": "RuntimeError: download failed key=okx_futures/2026-07-19/23/SPX-USDT-SWAP_mark_price.parquet.zst: Read timeout on endpoint URL: \"None\""
+    },
+    {
+      "venue": "okx_futures",
+      "date": "2026-07-21",
+      "error": "RuntimeError: download failed key=okx_futures/2026-07-21/16/MAGIC-USDT-SWAP_mark_price.parquet.zst: Read timeout on endpoint URL: \"None\""
+    }
+  ]
+}

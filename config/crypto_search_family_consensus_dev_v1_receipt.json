@@ -2,8 +2,8 @@
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1",
   "decision_id": "USER_AUTHORIZED_4H_TWO_AXIS_FAMILY_CONSENSUS_DEV_GATE_20260805",
-  "status": "RUN_AUTHORIZED_NOT_STARTED",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ACQUISITION_FAILED_NO_GATE",
+  "run_authorized": false,
   "source_implementation_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
   "source_evidence": {
     "candidate_ledger_path": "runtime/crypto_search_run_evidence_v1_1_20260805/candidate_ledger.parquet",
@@ -121,5 +121,56 @@
     "challenge": false,
     "forward": false
   },
-  "outcome": null
+  "outcome": {
+    "status": "ACQUISITION_FAILED_NO_CANDIDATE_GATE",
+    "completed_at": "2026-08-05T10:38:25.589678+00:00",
+    "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+    "selection_frozen_before_market_read": true,
+    "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+    "frozen_contract_sha256": "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+    "market_payload_read": true,
+    "acquisition_status": "retry_required",
+    "scheduled_day_coordinates": 42,
+    "successful_day_coordinates": 38,
+    "failed_day_coordinates": 4,
+    "failed_coordinates": [
+      {
+        "venue": "okx_futures",
+        "date": "2026-07-18",
+        "failed_object": "PYTH-USDT-SWAP_mark_price.parquet.zst",
+        "failure": "READ_TIMEOUT"
+      },
+      {
+        "venue": "okx_futures",
+        "date": "2026-07-19",
+        "failed_object": "SPX-USDT-SWAP_mark_price.parquet.zst",
+        "failure": "READ_TIMEOUT"
+      },
+      {
+        "venue": "okx_futures",
+        "date": "2026-07-21",
+        "failed_object": "MAGIC-USDT-SWAP_mark_price.parquet.zst",
+        "failure": "READ_TIMEOUT"
+      },
+      {
+        "venue": "okx_futures",
+        "date": "2026-07-22",
+        "failed_object": "LIGHT-USDT-SWAP_mark_price.parquet.zst",
+        "failure": "READ_TIMEOUT"
+      }
+    ],
+    "carrier_preparation_started": false,
+    "candidate_gate_started": false,
+    "strict_evaluated_count": 0,
+    "consensus_result": "NOT_OBSERVED",
+    "independent_gate_checker": "NOT_RUN_NO_GATE_ARTIFACTS",
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "restart_started": false,
+    "rescue_rerun_started": false,
+    "oos_read": false,
+    "promotion_authorized": false,
+    "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json"
+  }
 }

@@ -126,9 +126,11 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
 
 
 def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> None:
-    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=True)
-    assert receipt["run_authorized"] is True
-    assert receipt["status"] == "RUN_AUTHORIZED_NOT_STARTED"
+    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=False)
+    assert receipt["run_authorized"] is False
+    assert receipt["status"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ACQUISITION_FAILED_NO_GATE"
+    )
     assert receipt["source_implementation_sha"] == (
         "d3dd61844cd05ca01aba857d57a5abd29c2a5840"
     )
@@ -146,6 +148,14 @@ def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> N
     assert receipt["boundaries"]["oos"] is False
     assert receipt["boundaries"]["promotion"] is False
     assert receipt["boundaries"]["second_run"] is False
+    assert receipt["outcome"]["status"] == "ACQUISITION_FAILED_NO_CANDIDATE_GATE"
+    assert receipt["outcome"]["scheduled_day_coordinates"] == 42
+    assert receipt["outcome"]["successful_day_coordinates"] == 38
+    assert receipt["outcome"]["failed_day_coordinates"] == 4
+    assert receipt["outcome"]["candidate_gate_started"] is False
+    assert receipt["outcome"]["strict_evaluated_count"] == 0
+    assert receipt["outcome"]["consensus_result"] == "NOT_OBSERVED"
+    assert receipt["outcome"]["restart_started"] is False
 
 
 def test_consensus_cohort_is_exact_23_plus_12_without_validation_reselection() -> None:

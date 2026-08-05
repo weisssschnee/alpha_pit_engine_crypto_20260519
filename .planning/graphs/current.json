@@ -16,9 +16,11 @@
           "alphafactory_crypto/broad_search/search_evidence_validation_v1.py",
           "config/crypto_search_evidence_v1_1_validation_receipt.json",
           "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
+          "config/crypto_search_family_consensus_dev_v1_receipt.json",
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805.md",
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805r1.md",
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_ACCELERATION_PREFLIGHT_20260805.md",
+          "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/behavior_family_selection_receipt.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/frozen_contract.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/independent_checker.json",
@@ -42,11 +44,23 @@
           "runtime/crypto_search_evidence_v1_1_validation_20260805r1/run_manifest.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805r1/static_constructibility.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805r1/validation_summary.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/behavior_family_selection_receipt.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/closure_verification.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/frozen_contract.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/pc2_external_evidence/acquisition.stderr.log",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/pc2_external_evidence/acquisition.stdout.log",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/pc2_external_evidence/acquisition_status.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/pc2_external_evidence/pipeline_status.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/pc2_external_evidence/symbol_map.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/producer_status.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/source_metadata_probe.json",
+          "runtime/crypto_search_family_consensus_dev_v1_20260805/static_constructibility.json",
           "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1",
           "tests/test_crypto_search_evidence_validation_v1.py"
         ],
         "raw_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
-        "repo_head": "5c42e4acac42ec794c67466503a0e8418a7bbdd9"
+        "repo_head": "0d5e2ecfdedc493be5eb55d4f82cb28c84aa49c2"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1128,7 +1142,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-05T04:03:16.108136+00:00",
+  "generated_at": "2026-08-05T11:04:14.440283+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3321,6 +3335,15 @@
         },
         {
           "bypass_forbidden": true,
+          "enforced_by": "broad_search.search_evidence_validation_v1 and the consumed family-consensus receipt",
+          "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json",
+          "id": "crypto_search_family_consensus_dev_v1_consumed_outcome",
+          "rule": "The one-time 4h two-axis family-consensus development receipt is consumed with run_authorized false. Producer d3dd61844cd05ca01aba857d57a5abd29c2a5840 froze exactly 23 primary flow-intensity/stateful champions and 12 descriptive 4h two-axis champions before the 2026-07-18 through 2026-08-01 development-fresh market read. The single PC2 acquisition scheduled 42 frozen venue-day coordinates, completed 38, and failed closed on four OKX object read timeouts. Carrier preparation, the 35-candidate gate, independent gate checking, and all market evaluation remained unstarted; strict evaluated count is zero and consensus transfer is NOT_OBSERVED. No retry, rescue, candidate generation, optimizer feedback, archive write, OOS read, promotion, or new Graph node is authorized. The prior V1.1 champion validation remains the latest evaluated evidence.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -3433,7 +3456,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (Evidence V1.1 champion validation complete; narrow 4h two-axis net-sign survival; LCB and rank migration fail; Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (family-consensus acquisition failed before gate; Evidence V1.1 champion validation remains latest evaluated result; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3587,7 +3610,11 @@
         "reports/CRYPTO_SEARCH_RUN_EVIDENCE_V1_1_20260805.md",
         "alphafactory_crypto/broad_search/search_evidence_validation_v1.py",
         "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
-        "runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json"
+        "runtime/crypto_search_evidence_v1_1_validation_20260805r1/final_decision.json",
+        "config/crypto_search_family_consensus_dev_v1_receipt.json",
+        "runtime/crypto_search_family_consensus_dev_v1_20260805/acquisition_failure_closure.json",
+        "runtime/crypto_search_family_consensus_dev_v1_20260805/closure_verification.json",
+        "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_20260805.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -5643,7 +5670,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-05T04:03:16.108136+00:00",
+        "checked_at": "2026-08-05T11:04:14.440283+00:00",
         "evidence_ref": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/independent_checker.json",
         "evidence_sha256": "D0A4E24F85CC9233AF9DC25DED471887AEDEE34836800A75D7B1C5FC67DB07BE",
         "level": "STATIC_VERIFIED",
@@ -8513,7 +8540,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "5AACBF878E22C41A144750DE87773BCBA9696FB93AB7B8A06BE210A5C6C398D4"
+    "sha256": "05FC0112DEEACBE5EBEF9F5EF6E8CA4491E9AA41FA117FE3FD765134615CEF86"
   },
   "profile_id": null,
   "profiles": [
@@ -8550,7 +8577,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "05E9C4D4FCDC90707E2909EF6FD53ECCDB72D5F41A21A306E56F8FC37C137748"
   },
-  "repo_head": "5c42e4acac42ec794c67466503a0e8418a7bbdd9",
+  "repo_head": "0d5e2ecfdedc493be5eb55d4f82cb28c84aa49c2",
   "schema_version": 1,
   "semantic_authorities": [
     {

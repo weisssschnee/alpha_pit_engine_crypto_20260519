@@ -1,0 +1,19 @@
+{
+    "schema_version":  1,
+    "status":  "FAILED",
+    "phase":  "TERMINAL",
+    "producer_source_sha":  "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_family_consensus_d3dd6184\\runtime\\crypto_search_family_consensus_dev_v1_20260805",
+    "acquisition_root":  "C:\\HermesWorker\\data\\crypto_family_consensus_20260805\\oi_mark_compact_20260718_20260731",
+    "updated_utc":  "2026-08-05T10:38:25.8846813+00:00",
+    "elapsed_seconds":  18065.2560676,
+    "candidate_generation_performed":  false,
+    "optimizer_feedback_written":  false,
+    "archive_written":  false,
+    "oos":  false,
+    "promotion_authorized":  false,
+    "error":  "acquisition failed with exit code : Traceback (most recent call last): |   File \"C:\\HermesWorker\\runtime\\crypto_family_consensus_frozen_oi_acquire_20260805.py\", line 116, in \u003cmodule\u003e |     raise SystemExit(main()) |                      ^^^^^^ |   File \"C:\\HermesWorker\\runtime\\crypto_family_consensus_frozen_oi_acquire_20260805.py\", line 88, in main |     module.main() |   File \"D:\\HermesWorker\\runtime\\cryptohft_crossvenue_oi_mark_compact_ranks51_200_pc2_20260720.py\", line 394, in main |     raise RuntimeError(f\"completed with {len(failures)} failed day coordinates\") | RuntimeError: completed with 4 failed day coordinates",
+    "no_second_run":  true,
+    "script_stack":  "在 Invoke-Native、C:\\HermesWorker\\runtime\\crypto_family_consensus_pc2_pipeline_20260805.ps1 中: 第 81 行\r\n在 \u003cScriptBlock\u003e、C:\\HermesWorker\\runtime\\crypto_family_consensus_pc2_pipeline_20260805.ps1 中: 第 122 行"
+}

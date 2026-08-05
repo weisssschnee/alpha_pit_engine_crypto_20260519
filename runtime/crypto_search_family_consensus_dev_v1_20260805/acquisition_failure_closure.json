@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "ACQUISITION_FAILED_NO_CANDIDATE_GATE",
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "development_fresh_interval": {
+    "start": "2026-07-18T00:00:00Z",
+    "end_exclusive": "2026-08-01T00:00:00Z"
+  },
+  "frozen_selection": {
+    "main_count": 23,
+    "other_count": 12,
+    "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+    "frozen_contract_sha256": "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+    "source_metadata_probe_sha256": "651947110FEE16EA96E99BB8BEC15D82F99C52D9BF02FE1254BDC6EA5538F580",
+    "selection_frozen_before_market_read": true
+  },
+  "acquisition": {
+    "status": "retry_required",
+    "scheduled_day_coordinates": 42,
+    "successful_day_coordinates": 38,
+    "failed_day_coordinates": 4,
+    "failed_venue": "okx_futures",
+    "failed_dates": [
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-21",
+      "2026-07-22"
+    ],
+    "failure_class": "OBJECT_READ_TIMEOUT",
+    "status_artifact_sha256": "E618CA76603F7534206B28C551121F4EE3362A866AB96E14B0B67C214CAE99F8",
+    "stdout_sha256": "06ED18EB83D14583EDDF2C80283E800153E23EBA0AB19F4D77E7C14739EA21BE",
+    "stderr_sha256": "ADFCA505F9B32BFCA292797C1E5F20F33276C588EE3FF8ADC47400992A24C066"
+  },
+  "gate": {
+    "carrier_preparation_started": false,
+    "candidate_gate_started": false,
+    "strict_evaluated_count": 0,
+    "independent_gate_checker": "NOT_RUN_NO_GATE_ARTIFACTS",
+    "consensus_result": "NOT_OBSERVED"
+  },
+  "boundaries": {
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "restart_started": false,
+    "rescue_rerun_started": false,
+    "oos_read": false,
+    "promotion_authorized": false,
+    "partial_payload_admitted_as_research_carrier": false
+  },
+  "decision": "FAIL_CLOSED_NO_RETRY_NO_CONSENSUS_CONCLUSION"
+}

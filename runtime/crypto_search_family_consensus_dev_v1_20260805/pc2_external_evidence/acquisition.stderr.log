@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\HermesWorker\runtime\crypto_family_consensus_frozen_oi_acquire_20260805.py", line 116, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\runtime\crypto_family_consensus_frozen_oi_acquire_20260805.py", line 88, in main
+    module.main()
+  File "D:\HermesWorker\runtime\cryptohft_crossvenue_oi_mark_compact_ranks51_200_pc2_20260720.py", line 394, in main
+    raise RuntimeError(f"completed with {len(failures)} failed day coordinates")
+RuntimeError: completed with 4 failed day coordinates
