@@ -4,32 +4,40 @@ Last updated: 2026-08-05 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_AGGREGATION_FAILED_TARGET_SHAPE_CLOSED`
+`CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_CHECKPOINT_PROJECTION_COMPLETE_RESEARCH_HOLD`
 
-The explicitly authorized acquisition repair is consumed and closed. The four
-failed OKX venue-days were repaired against the same immutable acquisition
-root. The other 38 coordinates were reused: all 114 pre-repair payload hashes
-remain unchanged. Acquisition completed 42/42 with zero failures and the exact
-frozen symbol-map identity, and the existing carrier preparation produced the
-qualified 115-field aligned carrier.
+The source-only closure repaired the exact aggregation defect: the original
+runner supplied the full 336-hour receipt target to economic weight paths whose
+identity was correctly shortened to 330 hours by the two-hour execution delay
+and four-hour horizon purge. Future online aggregation now selects target
+columns by the persisted economic-path timestamps instead of positional receipt
+length. Focused verification passed 27 tests and the final full suite passed
+443 tests with the existing NumPy warning.
 
-The one authorized fixed-cohort gate then ran once at producer
-`d3dd61844cd05ca01aba857d57a5abd29c2a5840`. Ten PC2 workers completed all
-35 fixed candidates with zero candidate-local failures and no memory fallback;
-`checkpoint_000` contains the 35-row ledger and all economic paths. Aggregation
-failed closed at `FAMILY_CONSENSUS_TARGET_SHAPE_CHANGED` before consensus
-metrics, `final_decision.json`, or `run_manifest.json` could be produced. The
-PC2 and local independent checkers therefore return FAIL for the missing
-terminal aggregation artifacts. This is an aggregation-contract failure, not a
-family-consensus transfer result, Alpha negative, or candidate-evaluation
-failure.
+The already completed 35-candidate checkpoint was then consumed once without a
+market read, candidate evaluation, generation, optimizer feedback, or archive
+write. Because its persisted asset paths omit weights at or below `1e-12` and
+asset gross contributions at or below `1e-18`, the result is explicitly a
+bounded threshold-sparse projection, not a bit-exact reconstruction. The frozen
+rank interval gives a 150-asset ceiling and a worst incremental net-mean error
+bound of `3.003e-13`.
 
-The receipt is
-`RUN_AUTHORIZATION_CONSUMED_AGGREGATION_FAILED_TARGET_SHAPE` with
-`run_authorized=false`. No second gate, rescue rerun, generation, optimizer
-feedback, archive write, OOS read, or promotion occurred. The prior V1.1
-champion validation remains the latest completed checker-backed research
-result. Its predecessor acquisition failure remains recorded below.
+The 23-member primary family consensus has 66 common-support hours. Its
+left/right matched incremental net means are `-0.00015651447691891477` and
+`-0.000303735033547274`; both remain negative after the worst projection bound.
+The result is therefore robustly
+`FAMILY_CONSENSUS_DID_NOT_TRANSFER` for this development-fresh window. Net-LCB
+values remain diagnostic point estimates only. The 12-member other group stays
+descriptive and is not a fair primary comparator. The independent checker
+passes with zero errors.
+
+The receipt is `OFFLINE_CHECKPOINT_PROJECTION_COMPLETE` with
+`run_authorized=false`. No second gate, rescue rerun, market replay, candidate
+re-evaluation, generation, optimizer feedback, archive write, OOS read, or
+promotion occurred. This closes the family-consensus question under the frozen
+target, mapping, 5 bps cost, cohort, and interval; it does not qualify Alpha or
+a common causal mechanism. The predecessor target-shape failure remains
+recorded below as history.
 
 The preceding completed phase was:
 
@@ -1170,13 +1178,13 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not infer a family-consensus transfer result from the completed 35 candidate
-evaluations because aggregation never produced a consensus portfolio. Do not
-restart the consumed gate. Before any separately authorized future market run,
-perform a source-only audit and repair of the existing consensus aggregation
-target/weight shape contract while preserving the checkpoint, cohort, target,
-compiler, mapping, evaluator, reward, provenance, and ledger authorities. Do
-not add a new search, evaluator, compiler, AST, or failure-attribution system.
+Do not restart or extend the consumed family-consensus gate. Its bounded
+checkpoint projection is complete and robustly negative on both matched
+incremental net means; it gives no reason to advance the current consensus
+construction to OOS or promotion. The exact online target/weight timestamp
+contract is repaired for any separately authorized future work, but this
+closure authorizes no new search, validation, data Arena, evaluator, compiler,
+AST, mapping, reward, or optimizer change.
 
 Historical stage-attribution replay remains unauthorized. No market search,
 prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,

@@ -1,0 +1,81 @@
+{
+  "active_wall_seconds": 14.804754599987064,
+  "archive_written": false,
+  "bundle_sha256": "DCF1500D348D5CEAE63D075D248AC755AA64E4F9AD57BE52A209C07BEBD086AA",
+  "candidate_count": 35,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 0,
+  "carrier_manifest_file_sha256": "11C518E7CA669F7F6DCA2246620AE2F914764E24301DA9D918279E4E311F1923",
+  "carrier_manifest_sha256": "77AE29F97D96395C06FEC710B6D4B231D7CDA5E6AE187C4AB429F0D3AFC3B872",
+  "checkpoint_count": 1,
+  "execution_head_sha": "6100b958ec7c2f06165078d5be60c893f65c7f93",
+  "files": [
+    {
+      "bytes": 273644,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/candidate_ledger.parquet",
+      "sha256": "5B386A1E0669A4BF63D6CF303F33B7EA8CB24D003BF9A780F9ADC1875A97E522"
+    },
+    {
+      "bytes": 21823,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "D39B79EBCF3094BD1F2B32A360865754D5EB6290F315388094B932EFF08CD99F"
+    },
+    {
+      "bytes": 9683,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/candidate_influence.parquet",
+      "sha256": "A670CE8ECB4BE786FF57B71F185528EA01154DA16F93479F8D643A9C60E824F6"
+    },
+    {
+      "bytes": 445228,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/consensus_asset_weights.parquet",
+      "sha256": "7F3522372D3234AE5AB1E3CE4784EE35EAF14DADF0D306154D83FF38FFBF0FA7"
+    },
+    {
+      "bytes": 5328,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/consensus_concentration.parquet",
+      "sha256": "D328A2948107CFF8FC306A2DB69076232159ACC96C0B00DBBE9A5BB155A53494"
+    },
+    {
+      "bytes": 77819,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/consensus_hourly_paths.parquet",
+      "sha256": "3A9DD29AE0D335380D1A6CE504D497611E185B6E3C6E916F90F5A0D1C801E5CD"
+    },
+    {
+      "bytes": 29306,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/consensus_metrics.parquet",
+      "sha256": "CDD26DBE57EB9A62D6D00CC41236CE3323F6E04B9E497E3C7C5965FD4548D92E"
+    },
+    {
+      "bytes": 7896,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/final_decision.json",
+      "sha256": "6257A1D00929C199E3609CD3D7DC67B5C2A29535F6714E51712C5EFE8314AF7E"
+    },
+    {
+      "bytes": 1736,
+      "path": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/report.md",
+      "sha256": "3C04A855151035931817607F7FDE017A1679B5956C801B6A7DA7AC9F14D09455"
+    }
+  ],
+  "finalization_mode": "PERSISTED_CHECKPOINT_PATH_AGGREGATION_ONLY",
+  "frozen_contract_sha256": "40C576385F8006E6DF70E019A396868F3D7059F48822ED52E89319A2649C3FDE",
+  "holdout_read_count": 0,
+  "market_payload_read_after_selection_freeze": true,
+  "memory_fallback_used": false,
+  "offline_candidate_evaluation_count": 0,
+  "offline_finalizer_source_sha": "9d003c45a56a107860e52123302181867240286d",
+  "offline_market_read_count": 0,
+  "oos": false,
+  "optimizer_feedback_written": false,
+  "pair_evaluated_per_hour": null,
+  "policy_memory_written": false,
+  "producer_source_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
+  "promotion_authorized": false,
+  "report": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/report.md",
+  "run_receipt_sha256": "0FD92BCE6ADAF20F22A6CF8C3180CF9CB6D436052AC4B743CA98A4E082FDA5AD",
+  "runtime": "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1",
+  "schema_version": 1,
+  "selection_receipt_sha256": "424037971D1473C78B68BFAA889B5900A86EE2DC349F946B4ECB7622C3AD1BF7",
+  "status": "FAMILY_CONSENSUS_CHECKPOINT_PROJECTION_COMPLETE",
+  "strict_evaluated_count": 35,
+  "workers": 10
+}
