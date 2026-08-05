@@ -2,9 +2,9 @@
   "schema_version": 1,
   "receipt_id": "CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1",
   "decision_id": "USER_AUTHORIZED_4H_TWO_AXIS_FAMILY_CONSENSUS_DEV_GATE_20260805",
-  "status": "SOURCE_IMPLEMENTATION_PENDING",
-  "run_authorized": false,
-  "source_implementation_sha": null,
+  "status": "RUN_AUTHORIZED_NOT_STARTED",
+  "run_authorized": true,
+  "source_implementation_sha": "d3dd61844cd05ca01aba857d57a5abd29c2a5840",
   "source_evidence": {
     "candidate_ledger_path": "runtime/crypto_search_run_evidence_v1_1_20260805/candidate_ledger.parquet",
     "candidate_ledger_sha256": "6554BECC35E8586F63505DA4646F41482BEFB80FEE4618B2710C22A35A8D6718",

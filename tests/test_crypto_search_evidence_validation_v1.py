@@ -126,9 +126,12 @@ def test_summary_keeps_all_candidates_and_predeclared_primary_slice_separate() -
 
 
 def test_consensus_receipt_freezes_exact_cohorts_and_development_boundary() -> None:
-    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=False)
-    assert receipt["run_authorized"] is False
-    assert receipt["status"] == "SOURCE_IMPLEMENTATION_PENDING"
+    receipt = load_consensus_receipt(REPO_ROOT, require_authorized=True)
+    assert receipt["run_authorized"] is True
+    assert receipt["status"] == "RUN_AUTHORIZED_NOT_STARTED"
+    assert receipt["source_implementation_sha"] == (
+        "d3dd61844cd05ca01aba857d57a5abd29c2a5840"
+    )
     assert receipt["development_fresh_interval"] == {
         "start": "2026-07-18T00:00:00Z",
         "end_exclusive": "2026-08-01T00:00:00Z",
