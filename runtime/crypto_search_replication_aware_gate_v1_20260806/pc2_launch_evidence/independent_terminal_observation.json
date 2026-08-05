@@ -1,0 +1,20 @@
+﻿{
+    "status":  "RUN_INVALID_PRODUCER_PARENT_EXITED_BEFORE_ATTEMPTS",
+    "observed_utc":  "2026-08-05T20:56:27.8702845Z",
+    "task_id":  "job_20260806_044440_a5b83e",
+    "producer_sha":  "ee36ea46a617b8786661b402992ef3fb0fbaaf5a",
+    "producer_pid_recorded":  21472,
+    "producer_parent_pid_recorded":  25812,
+    "orphan_python_pid":  23784,
+    "orphan_python_started_utc":  "2026-08-05T20:44:54.5336322Z",
+    "heartbeat_utc":  "2026-08-05T20:44:54.473959+00:00",
+    "generation_attempts":  0,
+    "strict_evaluated":  0,
+    "checkpoint_count":  0,
+    "final_decision_present":  false,
+    "run_manifest_present":  false,
+    "task_unregistered":  true,
+    "orphan_terminated":  true,
+    "rerun_performed":  false,
+    "reason":  "Top-level producer exited without stderr before the first generation attempt and left one multiprocessing spawn child holding inherited pipes."
+}

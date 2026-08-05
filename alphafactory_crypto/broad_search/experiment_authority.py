@@ -804,7 +804,29 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED",
         },
-        "expected_run_outcome": {},
+        "expected_run_outcome": {
+            "status": "ENGINE_VERIFICATION_FAILED",
+            "reason": "PRODUCER_PARENT_EXITED_BEFORE_FIRST_ATTEMPT",
+            "runtime": (
+                "runtime/crypto_search_replication_aware_gate_v1_20260806"
+            ),
+            "producer_source_sha": (
+                "ee36ea46a617b8786661b402992ef3fb0fbaaf5a"
+            ),
+            "generation_attempts": 0,
+            "strict_evaluated_count": 0,
+            "checkpoint": None,
+            "artifact_bundle_sha256": (
+                "D0E544EB1396CA5C43E77ED82B4277FA"
+                "EF05164650846CB7735CB3D4F65EBCFD"
+            ),
+            "checker_result": "FAIL",
+            "checker_exit_code": 1,
+            "checker_missing_artifact_count": 13,
+            "effective_task_id": "job_20260806_044440_a5b83e",
+            "sealed_reads": 0,
+            "rescue_rerun_started": False,
+        },
         "run_authorization_scope": (
             "ONE_FRESH_STATE_1536_STRICT_DEVELOPMENT_BLOCK_ROBUST_GATE"
         ),

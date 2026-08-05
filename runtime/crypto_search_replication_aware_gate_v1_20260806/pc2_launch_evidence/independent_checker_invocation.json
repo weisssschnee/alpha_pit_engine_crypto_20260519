@@ -1,0 +1,11 @@
+﻿{
+    "status":  "CHECKER_REJECTED_INVALID_RUNTIME",
+    "observed_utc":  "2026-08-05T20:58:11.4398668Z",
+    "exit_code":  1,
+    "producer_sha":  "ee36ea46a617b8786661b402992ef3fb0fbaaf5a",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_replication_gate_ee36ea46\\runtime\\crypto_search_replication_aware_gate_v1_20260806",
+    "stdout":  "C:\\HermesWorker\\runtime\\crypto_replication_gate_pc2_ee36ea46\\independent_checker_stdout.log",
+    "stderr":  "C:\\HermesWorker\\runtime\\crypto_replication_gate_pc2_ee36ea46\\independent_checker_stderr.log",
+    "final_decision_present":  false,
+    "run_manifest_present":  false
+}

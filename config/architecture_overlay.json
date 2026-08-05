@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (family-consensus attribution complete; support-slice gross reversal; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (replication-aware source implemented; zero-attempt run invalid; prior evidence retained; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -558,6 +558,12 @@
                                     ,"runtime/crypto_search_family_consensus_member_attribution_v1_20260806/summary.json"
                                     ,"runtime/crypto_search_family_consensus_member_attribution_v1_20260806/run_manifest.json"
                                     ,"reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md"
+                                    ,"config/crypto_search_replication_aware_gate_v1.json"
+                                    ,"config/crypto_search_replication_aware_gate_v1_receipt.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806/invalid_run_artifact_manifest.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806/pc2_launch_evidence/independent_terminal_observation.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806/pc2_launch_evidence/independent_checker_invocation.json"
+                                    ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -784,6 +790,15 @@
                                             "enforced_by":  "broad_search.search_evidence_validation_v1 and the consumed family-consensus receipt",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_family_consensus_dev_v1_20260805/offline_finalization_v1/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_replication_aware_gate_v1_invalid_run",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "Replication-Aware Search Gate V1 source is retained at producer ee36ea46a617b8786661b402992ef3fb0fbaaf5a, reusing the existing 115-field aligned carrier, Binance USD-M target, mapping, frozen 5 bps cost, matched controls, mechanism catalog, compiler, AST, and evaluator. The one effective PC2 task wrote only the frozen contract, authority preflight, and initial producer status before its top-level Python process exited and left one multiprocessing spawn child. Independent closure observes zero generation attempts, zero strict evaluations, zero checkpoints, zero sealed reads, no run manifest, and no final decision; the checker rejects 13 missing terminal artifacts. The orphan and scheduled task were terminated, the receipt is consumed with run_authorized false, and no rescue rerun occurred. This is an invalid runtime, not random/Evolution, replication-ordering, Alpha, validation, OOS, or promotion evidence. The preceding checker-backed market evidence remains current. Any replacement requires new explicit authorization.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1.check_search_evidence_v1, and the consumed replication-aware receipt",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_search_replication_aware_gate_v1_20260806/invalid_run_artifact_manifest.json"
                                         },
                                         {
                                             "id":  "search_engine_v1_counting_and_restore_gate",

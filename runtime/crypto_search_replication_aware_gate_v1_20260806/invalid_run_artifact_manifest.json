@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "RUN_INVALID_PRODUCER_PARENT_EXITED_BEFORE_ATTEMPTS",
+  "bundle_rule": "SHA256_UTF8_SORTED_PATH_PIPE_BYTES_PIPE_SHA256_LF",
+  "artifact_count": 10,
+  "artifact_bundle_sha256": "D0E544EB1396CA5C43E77ED82B4277FAEF05164650846CB7735CB3D4F65EBCFD",
+  "artifacts": [
+    {
+      "path": "embedded_preflight.json",
+      "bytes": 4612,
+      "sha256": "99CE3556D815BA32468DC37CD3DAA23EB461D75BFAA89F0375EDC1E3D844B80D"
+    },
+    {
+      "path": "frozen_contract.json",
+      "bytes": 34938,
+      "sha256": "8EE49ABFCF4259B0597F186541E4059E1751A8B6EA2C149174843CCDE963D8AD"
+    },
+    {
+      "path": "pc2_launch_evidence/independent_checker_invocation.json",
+      "bytes": 649,
+      "sha256": "D8C9FB9AC126B90AB47D04B4B8AA256295D216AF98C2C4272211080E5FC087A2"
+    },
+    {
+      "path": "pc2_launch_evidence/independent_checker_stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "pc2_launch_evidence/independent_checker_stdout.log",
+      "bytes": 1190,
+      "sha256": "3963244D1E8BA0424A87B9A9A1DC90FA577F320955AC9E37C6A6AC2820C70FA9"
+    },
+    {
+      "path": "pc2_launch_evidence/independent_terminal_observation.json",
+      "bytes": 914,
+      "sha256": "8B2A2E4113FA1B2C0D033C8602E656C90F2A27338239CFEC713400C945AF09FD"
+    },
+    {
+      "path": "pc2_launch_evidence/launch_manifest.json",
+      "bytes": 1997,
+      "sha256": "933630FE970CEB655C6F1F4635EE07A33A1A397E18329E1FDDFC37306C816BA0"
+    },
+    {
+      "path": "pc2_launch_evidence/producer_stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "pc2_launch_evidence/producer_stdout.log",
+      "bytes": 23342,
+      "sha256": "E2287AEE047E8B4F2DB8CCCBAC39F5825552F9BD5205E0C8BFA0B029A2F73A7D"
+    },
+    {
+      "path": "producer_status.json",
+      "bytes": 718,
+      "sha256": "D5A509F92C7D63A93B72EFE042EF3C7604E07F72D38993C2C91C31E242177CA0"
+    }
+  ]
+}

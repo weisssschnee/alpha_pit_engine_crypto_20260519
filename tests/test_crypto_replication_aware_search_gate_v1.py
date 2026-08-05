@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -103,14 +104,35 @@ def test_gate_contract_is_equal_count_fresh_development_only() -> None:
     }
 
 
-def test_gate_receipt_is_hash_bound_and_authorizes_no_validation() -> None:
+def test_gate_receipt_is_consumed_by_exact_zero_attempt_failure() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_replication_aware_gate_v1_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED"
+    )
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "PRODUCER_PARENT_EXITED_BEFORE_FIRST_ATTEMPT",
+        "runtime": "runtime/crypto_search_replication_aware_gate_v1_20260806",
+        "producer_source_sha": "ee36ea46a617b8786661b402992ef3fb0fbaaf5a",
+        "generation_attempts": 0,
+        "strict_evaluated_count": 0,
+        "checkpoint": None,
+        "artifact_bundle_sha256": (
+            "D0E544EB1396CA5C43E77ED82B4277FA"
+            "EF05164650846CB7735CB3D4F65EBCFD"
+        ),
+        "checker_result": "FAIL",
+        "checker_exit_code": 1,
+        "checker_missing_artifact_count": 13,
+        "effective_task_id": "job_20260806_044440_a5b83e",
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
     assert receipt["search_campaign"]["seed_set"] == list(
         BLOCK_ROBUST_GATE_SEEDS
@@ -120,6 +142,33 @@ def test_gate_receipt_is_hash_bound_and_authorizes_no_validation() -> None:
     assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
     assert receipt["validation_kill_line"]["evaluated_per_active_arm"] == 0
     assert receipt["formal_claims_authorized"] is False
+
+
+def test_invalid_run_artifact_manifest_binds_zero_attempt_evidence() -> None:
+    runtime = REPO_ROOT / "runtime/crypto_search_replication_aware_gate_v1_20260806"
+    manifest = json.loads(
+        (runtime / "invalid_run_artifact_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    rows = sorted(manifest["artifacts"], key=lambda row: str(row["path"]))
+    assert manifest["status"] == (
+        "RUN_INVALID_PRODUCER_PARENT_EXITED_BEFORE_ATTEMPTS"
+    )
+    assert manifest["artifact_count"] == len(rows) == 10
+    for row in rows:
+        payload = (runtime / str(row["path"])).read_bytes()
+        assert len(payload) == int(row["bytes"])
+        assert hashlib.sha256(payload).hexdigest().upper() == row["sha256"]
+    bundle_payload = "\n".join(
+        f"{row['path']}|{row['bytes']}|{row['sha256']}" for row in rows
+    ).encode("utf-8")
+    assert hashlib.sha256(bundle_payload).hexdigest().upper() == (
+        manifest["artifact_bundle_sha256"]
+    )
+    producer = json.loads((runtime / "producer_status.json").read_text())
+    assert producer["generation_attempts"] == 0
+    assert producer["strict_evaluated"] == 0
 
 
 def test_gate_policies_emit_only_4h_binary_candidates() -> None:

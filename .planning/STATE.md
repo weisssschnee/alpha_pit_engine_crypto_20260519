@@ -1,8 +1,43 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-05 Asia/Hong_Kong
+Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_SOURCE_IMPLEMENTED_RUN_INVALID_ZERO_ATTEMPTS_RESEARCH_HOLD`
+
+Replication-Aware Search Gate V1 source is implemented and source-qualified at
+producer `ee36ea46a617b8786661b402992ef3fb0fbaaf5a`. It reuses the existing
+115-field aligned carrier, Binance USD-M target, mapping, 5 bps cost, dual-axis
+matched controls, mechanism catalog, compiler, AST, and evaluator. The frozen
+development-only design compares typed random, current Evolution, and identical
+Evolution with three-block robust lexicographic selection at 512 strict per arm.
+
+The one effective PC2 task `job_20260806_044440_a5b83e` did not reach search.
+After writing the frozen contract, authority preflight, and initial producer
+status, its top-level Python producer exited before the first generation
+attempt and left one spawn child holding inherited pipes. Independent closure
+records exactly zero generation attempts, zero strict evaluations, zero
+checkpoints, zero sealed reads, and no run manifest or final decision. The
+orphan and task entry were terminated without a rerun. The independent checker
+correctly fails on 13 missing terminal artifacts.
+
+The receipt is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
+`run_authorized=false`. The ten-file invalid-run evidence bundle is
+`D0E544EB1396CA5C43E77ED82B4277FAEF05164650846CB7735CB3D4F65EBCFD`.
+No random/Evolution comparison, replication-ordering conclusion, Alpha claim,
+validation, OOS, promotion, or next-Arena authority exists. A replacement run
+requires new explicit authorization; this closure does not authorize one.
+
+The existing Search capability overlay records the source implementation and
+invalid run without a new node, authority, lifecycle, or promotion transition.
+Bounded CURRENT maintenance did not terminate; its partial generated files
+were discarded and the prior valid generated CURRENT was restored. CURRENT is
+therefore stale against the updated overlay, and no global freshness PASS is
+claimed.
+
+The preceding completed phase was:
 
 `CRYPTO_SEARCH_FAMILY_CONSENSUS_DEV_V1_CHECKPOINT_PROJECTION_COMPLETE_RESEARCH_HOLD`
 
@@ -1186,25 +1221,14 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart or extend the consumed family-consensus gate. Existing-checkpoint
-member attribution is complete without a market read or candidate
-re-evaluation. On full member paths, 20/23 members retain positive gross on both
-matched axes, but only 7/23 retain positive net on both axes and none retains
-positive dual-axis net-LCB. The exact consensus mask retains only 66 of the
-median 330 individual objective hours; both consensus gross means are already
-negative on that slice. Incremental-weight retention is 93.3%/96.8%, so member
-cancellation is not the failure. Close the current equal-weight family
-consensus and do not rescue it by lowering cost, reselecting the six current
-positive members, or rerunning the interval.
+Do not restart the consumed Replication-Aware Search Gate V1 receipt. The source
+implementation remains available but runtime-unverified. Before requesting any
+replacement, diagnose the zero-attempt parent exit with a market-free Windows
+multiprocessing/spawn preflight that cannot generate candidates or read market
+partitions. A replacement must use a new explicit authorization and receipt;
+this closure grants neither.
 
-Preserve the 4h flow-intensity/stateful pocket only as descriptive mechanism
-evidence. Any separately authorized future mechanism experiment must establish
-uniform pre-frozen support before aggregation and should test genuinely
-different mechanism forms rather than another parameterized consensus of this
-family. This closure authorizes no new search, validation, data Arena,
-evaluator, compiler, AST, mapping, reward, optimizer change, OOS, or promotion.
-
-Historical stage-attribution replay remains unauthorized. No market search,
-prior-state import, tuning, reseed, rescue, holdout/OOS/challenge/forward read,
-latent/relational training, promotion, or subsequent Arena is authorized by this
-milestone.
+The prior family-consensus and V1.1 development/validation conclusions remain
+unchanged. No market search, validation, data Arena, reward/mapping/optimizer
+change, tuning, reseed, rescue, holdout/OOS/challenge/forward read, promotion,
+new compiler, AST, evaluator, or Graph node is authorized by this closure.
