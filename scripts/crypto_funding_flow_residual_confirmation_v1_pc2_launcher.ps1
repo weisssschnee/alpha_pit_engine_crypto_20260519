@@ -52,12 +52,74 @@ if ($LASTEXITCODE -ne 0 -or $head -ne $ProducerSourceSha) {
 if (@(& git -C $RepoRoot status --porcelain).Count -ne 0) {
     throw 'WORKTREE_NOT_CLEAN'
 }
+$autoCrlf = (& git -C $RepoRoot config --get core.autocrlf | Out-String).Trim().ToLowerInvariant()
+if ($LASTEXITCODE -ne 0 -or $autoCrlf -ne 'false') {
+    throw 'CORE_AUTOCRLF_MUST_BE_FALSE'
+}
 $observedBlob = (
     & git -C $RepoRoot rev-parse "HEAD:$ReceiptRelativePath" | Out-String
 ).Trim()
 if ($LASTEXITCODE -ne 0 -or $observedBlob -ne $ReceiptBlobSha1) {
     throw 'RECEIPT_BLOB_MISMATCH'
 }
+
+$receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json
+$byteContract = $receipt.deployment_exact_byte_contract
+if (
+    $null -eq $byteContract -or
+    $byteContract.checkout_mode -ne 'GIT_COMMIT_OBJECT_EXACT_BYTES' -or
+    $byteContract.core_autocrlf_required -ne $false -or
+    $byteContract.working_tree_blob_must_equal_commit_blob -ne $true -or
+    $byteContract.preflight_must_resolve_full_economic_authority -ne $true
+) {
+    throw 'EXACT_BYTE_DEPLOYMENT_CONTRACT_MISSING_OR_CHANGED'
+}
+$exactBytePaths = [System.Collections.Generic.HashSet[string]]::new(
+    [System.StringComparer]::Ordinal
+)
+foreach ($relative in @($byteContract.critical_paths)) {
+    [void]$exactBytePaths.Add(([string]$relative).Replace('\', '/'))
+}
+$economicReceiptRelativePath = (
+    [string]$receipt.source_evidence.economic_receipt_path
+).Replace('\', '/')
+$economicReceiptPath = Join-Path $RepoRoot $economicReceiptRelativePath
+if (-not (Test-Path -LiteralPath $economicReceiptPath -PathType Leaf)) {
+    throw "ECONOMIC_RECEIPT_MISSING:$economicReceiptRelativePath"
+}
+$economicReceipt = Get-Content -LiteralPath $economicReceiptPath -Raw | ConvertFrom-Json
+foreach ($component in @($economicReceipt.component_sources.psobject.Properties.Value)) {
+    [void]$exactBytePaths.Add(([string]$component.path).Replace('\', '/'))
+}
+$exactByteProofRows = @()
+foreach ($relative in @($exactBytePaths | Sort-Object)) {
+    $path = Join-Path $RepoRoot $relative
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "EXACT_BYTE_PATH_MISSING:$relative"
+    }
+    $commitBlob = (& git -C $RepoRoot rev-parse "HEAD:$relative" | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0) { throw "COMMIT_BLOB_MISSING:$relative" }
+    $worktreeBlob = (
+        & git -C $RepoRoot hash-object --no-filters -- $relative | Out-String
+    ).Trim()
+    if ($LASTEXITCODE -ne 0) { throw "WORKTREE_BLOB_UNREADABLE:$relative" }
+    if ($worktreeBlob -ne $commitBlob) {
+        throw "WORKTREE_BYTES_DIVERGE_FROM_COMMIT:$relative"
+    }
+    $exactByteProofRows += [ordered]@{
+        path = $relative
+        commit_blob_sha1 = $commitBlob
+        worktree_blob_sha1 = $worktreeBlob
+    }
+}
+$exactByteProofJson = $exactByteProofRows | ConvertTo-Json -Depth 4 -Compress
+$exactByteProofSha256 = (
+    [BitConverter]::ToString(
+        [Security.Cryptography.SHA256]::Create().ComputeHash(
+            [Text.Encoding]::UTF8.GetBytes($exactByteProofJson)
+        )
+    )
+).Replace('-', '')
 
 $cache = Get-Item -LiteralPath (Join-Path $RepoRoot '.cache') -Force
 if ($cache.LinkType -ne 'Junction') { throw 'CACHE_NOT_JUNCTION' }
@@ -134,6 +196,9 @@ if ($PreflightOnly) {
         status = 'LAUNCH_PREFLIGHT_ONLY_PASS'
         producer_sha = $head
         receipt_blob_sha1 = $observedBlob
+        core_autocrlf = $autoCrlf
+        exact_byte_path_count = $exactByteProofRows.Count
+        exact_byte_proof_sha256 = $exactByteProofSha256
         runtime_absent = -not (Test-Path -LiteralPath $runtimeRoot)
         active_python_count = $activePython.Count
         free_memory_gib = [math]::Round($freeMemoryGiB, 3)
@@ -169,6 +234,10 @@ $runArguments = @(
     producer_sha = $ProducerSourceSha
     receipt_path = $ReceiptRelativePath
     receipt_blob_sha1 = $observedBlob
+    core_autocrlf = $autoCrlf
+    exact_byte_path_count = $exactByteProofRows.Count
+    exact_byte_proof_sha256 = $exactByteProofSha256
+    exact_byte_proof = $exactByteProofRows
     candidate_count = 162
     pair_count = 81
     workers_default = 10

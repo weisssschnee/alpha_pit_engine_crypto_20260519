@@ -107,6 +107,58 @@ def test_preflight_resolves_economic_authority_before_launch(monkeypatch) -> Non
     assert result["economic_authority_verified"] is True
 
 
+def test_replacement_receipt_preserves_grid_and_requires_exact_byte_deployment() -> None:
+    replacement_path = (
+        "config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json"
+    )
+    replacement = load_confirmation_receipt(
+        REPO_ROOT,
+        receipt_path=replacement_path,
+        require_authorized=True,
+    )
+    predecessor = load_confirmation_receipt(REPO_ROOT, require_authorized=False)
+    replacement_rows, replacement_pairs, replacement_proof = build_frozen_grid(
+        REPO_ROOT,
+        receipt=replacement,
+    )
+    predecessor_rows, predecessor_pairs, predecessor_proof = build_frozen_grid(
+        REPO_ROOT,
+        receipt=predecessor,
+    )
+    assert replacement["status"] == (
+        "RUN_AUTHORIZED_REPLACEMENT_AFTER_PRE_MARKET_EXACT_BYTE_REPAIR"
+    )
+    assert replacement["run_authorized"] is True
+    assert replacement["runtime"]["runtime_date"] == "20260806r1"
+    assert replacement_proof["grid_sha256"] == predecessor_proof["grid_sha256"]
+    assert replacement_proof["pairs_sha256"] == predecessor_proof["pairs_sha256"]
+    assert [row["candidate_id"] for row in replacement_rows] == [
+        row["candidate_id"] for row in predecessor_rows
+    ]
+    assert replacement_pairs == predecessor_pairs
+    deployment = replacement["deployment_exact_byte_contract"]
+    assert deployment == {
+        **deployment,
+        "checkout_mode": "GIT_COMMIT_OBJECT_EXACT_BYTES",
+        "core_autocrlf_required": False,
+        "working_tree_blob_must_equal_commit_blob": True,
+        "preflight_must_resolve_full_economic_authority": True,
+    }
+    assert replacement_path in deployment["critical_paths"]
+
+
+def test_pc2_launcher_fails_closed_on_checkout_byte_transformation() -> None:
+    launcher = (
+        REPO_ROOT
+        / "scripts/crypto_funding_flow_residual_confirmation_v1_pc2_launcher.ps1"
+    ).read_text(encoding="utf-8")
+    assert "CORE_AUTOCRLF_MUST_BE_FALSE" in launcher
+    assert "hash-object --no-filters" in launcher
+    assert "WORKTREE_BYTES_DIVERGE_FROM_COMMIT" in launcher
+    assert "component_sources.psobject.Properties.Value" in launcher
+    assert "exact_byte_proof_sha256" in launcher
+
+
 def test_validation_splits_and_tail_purge_are_frozen() -> None:
     contract = json.loads(
         (REPO_ROOT / "config/crypto_funding_flow_residual_nested_confirmation_v1.json")

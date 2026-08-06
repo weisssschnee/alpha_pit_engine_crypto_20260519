@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_RECEIPT",
+  "status": "RUN_AUTHORIZED_REPLACEMENT_AFTER_PRE_MARKET_EXACT_BYTE_REPAIR",
+  "run_authorized": true,
+  "run_authorization": {
+    "decision_id": "USER_AUTHORIZED_ONE_REPLACEMENT_FUNDING_FLOW_RESIDUAL_NESTED_DIAGNOSTIC_20260806R1",
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "scope": "ONE_DETERMINISTIC_81_MAIN_81_PLACEBO_STAGE0_THEN_CONDITIONAL_A_B_REUSED_DEVELOPMENT_VALIDATION_DIAGNOSTIC",
+    "replacement_reason": "THE_PREDECESSOR_RECEIPT_WAS_CONSUMED_BEFORE_ANY_MARKET_EVALUATION_BECAUSE_PC2_CHECKOUT_BYTES_DID_NOT_MATCH_COMMITTED_BLOBS",
+    "contaminated_interval_reuse_authorized": true,
+    "unread_migration_claim_allowed": false,
+    "oos_allowed": false,
+    "promotion_allowed": false,
+    "second_run_allowed": false,
+    "rescue_rerun_allowed": false,
+    "parameter_tuning_allowed": false
+  },
+  "runtime": {
+    "runtime_date": "20260806r1",
+    "runtime_path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1",
+    "report_path": "reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806r1.md"
+  },
+  "contract": {
+    "path": "config/crypto_funding_flow_residual_nested_confirmation_v1.json"
+  },
+  "deployment_exact_byte_contract": {
+    "checkout_mode": "GIT_COMMIT_OBJECT_EXACT_BYTES",
+    "core_autocrlf_required": false,
+    "working_tree_blob_must_equal_commit_blob": true,
+    "preflight_must_resolve_full_economic_authority": true,
+    "critical_paths": [
+      "config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json",
+      "config/crypto_funding_flow_residual_nested_confirmation_v1.json",
+      "config/crypto_search_run_evidence_v1_1_receipt.json",
+      "config/crypto_typed_mechanism_catalog_v2_1.json",
+      "config/crypto_search_engine_v1_4_binance_target_replay.json",
+      "alphafactory_crypto/broad_search/funding_flow_residual_confirmation_v1.py",
+      "alphafactory_crypto/broad_search/experiment_authority.py",
+      "scripts/crypto_funding_flow_residual_confirmation_v1_pc2_launcher.ps1"
+    ]
+  },
+  "source_evidence": {
+    "r3_candidate_ledger_path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/candidate_ledger.parquet",
+    "r3_candidate_ledger_sha256": "73C28D5005F5055CBEF9E9B37E89B21CCA641D3802F38835DC99ED6F9ECBA49C",
+    "anchor_candidate_id": "D2D46A0AB9675C7349A1C658D4B200987FBC216A89AD5627FF613EC26E7B71CE",
+    "anchor_candidate_spec_sha256": "C18EC79BF0A72ABE3CBC22BC5355538C99D3A4D8E3CD12F98B4EE4705ACC9736",
+    "anchor_behavior_family_id": "B6207EB8838214A7EFE5E35305BE3498376B28F6EFB62BC86C5E22FE33337A50",
+    "anchor_train_orientation": -1.0,
+    "carrier_manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "carrier_manifest_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6",
+    "carrier_manifest_canonical_sha256": "C38CAC31D2E8C19743AF5529D64BF7D87B74ACDD8166BE7F2E33F7C5D77B0743",
+    "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "economic_receipt_path": "config/crypto_search_run_evidence_v1_1_receipt.json",
+    "economic_receipt_file_sha256": "42A11C085F73E953D2796FBE3E1EEB99C33D54CF8C76AE8E6DEFE1D26F5A040F",
+    "economic_receipt_canonical_sha256": "2209433AF0C94FD5090D3D901D2A5C7EC99B7A580CCFB70D78383E2D4BD57BAE",
+    "mechanism_catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+    "mechanism_catalog_sha256": "DF7DF713592AA1A1F722B998D0A262C9F12F021E3F10B741C3451182EFC5A748",
+    "mechanism_catalog_canonical_sha256": "24A0007C91A0C8654AF3D5AC4E30CE9DF420CE620C4BFB60DA722DF262D29951",
+    "target_contract_path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+    "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+    "target_contract_canonical_sha256": "97EC6E68A9AB3AA308C7904D8E4796757A854A06ED94801F941AE8C4E9871291",
+    "prior_validation_contract_path": "runtime/crypto_search_evidence_v1_1_validation_20260805r1/frozen_contract.json",
+    "prior_validation_contract_sha256": "38724D9F7C0418383FF60A70F310CBC9E58102A668B475D94361341964CB4F53",
+    "prior_validation_contract_canonical_sha256": "2B241BED2BA83AE5C0DC8BC77826B3F45C903FDECB360BBB244A29D1FA9A43CC",
+    "prior_validation_reuse_status": "KNOWN_REUSED_AND_EXPLICITLY_AUTHORIZED_FOR_ONE_ADAPTIVE_DIAGNOSTIC"
+  },
+  "carrier": {
+    "aligned_cache": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+    "target_cache": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
+    "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+    "field_count": 115
+  },
+  "boundaries": {
+    "evidence_status": "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+    "sealed_read_count": 0,
+    "holdout_read": false,
+    "oos_read": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "automatic_expansion": false
+  },
+  "outcome": {
+    "status": "NOT_RUN",
+    "research_decision": "PENDING_ONE_AUTHORIZED_REPLACEMENT_DIAGNOSTIC",
+    "completed_candidate_count": 0,
+    "validation_a_read": false,
+    "validation_b_read": false,
+    "holdout_read_count": 0,
+    "oos_read_count": 0,
+    "second_run_performed": false
+  }
+}
