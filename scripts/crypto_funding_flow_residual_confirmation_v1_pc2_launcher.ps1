@@ -63,6 +63,7 @@ $cache = Get-Item -LiteralPath (Join-Path $RepoRoot '.cache') -Force
 if ($cache.LinkType -ne 'Junction') { throw 'CACHE_NOT_JUNCTION' }
 $runtimeParent = Join-Path $RepoRoot 'runtime'
 New-Item -ItemType Directory -Path $runtimeParent -Force | Out-Null
+$createdReadOnlyJunctions = @()
 foreach ($name in @(
     'crypto_search_engine_v1_4_oi_flow_20260728',
     'crypto_search_replication_aware_gate_v1_20260806r3',
@@ -75,6 +76,7 @@ foreach ($name in @(
     }
     if (-not (Test-Path -LiteralPath $destination)) {
         New-Item -ItemType Junction -Path $destination -Target $source | Out-Null
+        $createdReadOnlyJunctions += $destination
     }
     $item = Get-Item -LiteralPath $destination -Force
     if ($item.LinkType -ne 'Junction' -or @($item.Target) -notcontains $source) {
@@ -116,6 +118,15 @@ try {
     ) { throw 'PREFLIGHT_CONTRACT_CHANGED' }
 } finally {
     Remove-Item -LiteralPath $probeRoot -Recurse -Force
+    if ($PreflightOnly) {
+        foreach ($junction in $createdReadOnlyJunctions) {
+            $item = Get-Item -LiteralPath $junction -Force
+            if ($item.LinkType -ne 'Junction') {
+                throw "PREFLIGHT_CLEANUP_TARGET_NOT_JUNCTION:$junction"
+            }
+            Remove-Item -LiteralPath $junction -Force
+        }
+    }
 }
 
 if ($PreflightOnly) {
