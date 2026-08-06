@@ -22,6 +22,7 @@
           "config/crypto_search_evidence_v1_1_validation_replacement_receipt.json",
           "config/crypto_search_family_consensus_dev_v1_receipt.json",
           "config/crypto_search_replication_aware_gate_v1.json",
+          "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
           "config/crypto_search_replication_aware_gate_v1_receipt.json",
           "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json",
           "reports/CRYPTO_SEARCH_EVIDENCE_V1_1_VALIDATION_20260805.md",
@@ -31,6 +32,7 @@
           "reports/CRYPTO_SEARCH_FAMILY_CONSENSUS_MEMBER_ATTRIBUTION_V1_20260806.md",
           "reports/CRYPTO_SEARCH_PROCESS_EVIDENCE_REPAIR_20260806.md",
           "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806.md",
+          "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R2_20260806.md",
           "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_20260806.md",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/behavior_family_selection_receipt.json",
           "runtime/crypto_search_evidence_v1_1_validation_20260805/frozen_contract.json",
@@ -130,12 +132,34 @@
           "runtime/crypto_search_replication_aware_gate_v1_20260806r1/terminal_failure_evidence/launcher/producer_stderr.log",
           "runtime/crypto_search_replication_aware_gate_v1_20260806r1/terminal_failure_evidence/launcher/producer_stdout.log",
           "runtime/crypto_search_replication_aware_gate_v1_20260806r1/terminal_failure_evidence/launcher/task_result.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/embedded_preflight.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/frozen_contract.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/independent_checker_local.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/independent_checker_pc2.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/invalid_run_artifact_manifest.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/producer_status.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/authoritative_failure_evidence.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/checker.pc2.result.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/checker.pc2.stderr.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/checker.pc2.stdout.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/job_20260806_140152_2eabe8.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/job_20260806_140152_2eabe8.start.lock",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/job_20260806_140152_2eabe8.status.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/job_20260806_140152_2eabe8.stderr.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/job_20260806_140152_2eabe8.stdout.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/detached_job/launch_job_20260806_140152_2eabe8.ps1",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/launch_manifest.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/producer.stderr.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/producer.stdout.log",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/transport_manifest.json",
+          "runtime/crypto_search_replication_aware_gate_v1_20260806r2/terminal_failure_evidence/wrapper_result.json",
+          "scripts/crypto_replication_aware_gate_v1_pc2_launcher.ps1",
           "scripts/crypto_search_evidence_validation_v1_pc2_launcher.ps1",
           "tests/test_crypto_replication_aware_search_gate_v1.py",
           "tests/test_crypto_search_evidence_validation_v1.py"
         ],
         "raw_sha": "ce713786dc80559dcbea8ee2ced581d9edb70c23",
-        "repo_head": "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596"
+        "repo_head": "d4e5d0fb3e0574fb8a4fd09b77cd2afa8b0a6195"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1217,7 +1241,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-06T05:18:05.626804+00:00",
+  "generated_at": "2026-08-06T06:27:38.151464+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3197,7 +3221,10 @@
         "FAMILY WEIGHT CANCELLATION NOT SUPPORTED",
         "FAMILY CONSENSUS PROJECTION COMPLETE",
         "COMMON FAMILY DID NOT TRANSFER",
-        "PROJECTION-BOUND ROBUST NET NEGATIVE"
+        "PROJECTION-BOUND ROBUST NET NEGATIVE",
+        "CHECKPOINT 35/35 REUSED NO REEVAL",
+        "LCB POINT ESTIMATE ONLY",
+        "NO OOS OR PROMOTION"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -3446,6 +3473,15 @@
         },
         {
           "bypass_forbidden": true,
+          "enforced_by": "broad_search.experiment_authority, broad_search.search_engine_v1.check_search_evidence_v1, the consumed R2 receipt, and the committed PC2 launcher",
+          "evidence_ref": "runtime/crypto_search_replication_aware_gate_v1_20260806r2/invalid_run_artifact_manifest.json",
+          "id": "crypto_search_replication_aware_gate_v1_r2_invalid_run",
+          "rule": "The one authorized R2 receipt is consumed with run_authorized false. Exact producer c8ddfed84ed06101cd69b3ae5d6b63451e5be698 and PC2 task job_20260806_140152_2eabe8 passed exact source, receipt, resource, cache, and no-market warning smoke checks. The detached task then failed before run_engine entry because Windows PowerShell Start-Process flattened two multiword descriptive CLI values and argparse exited 2. Persisted counts are 0 generation attempts, 0 submitted, 0 returned, 0 strict evaluated, 0 market evaluations, 0 checkpoints, and 0 sealed reads. PC2 and local checkers reject the incomplete runtime with 15 and 13 missing engine artifacts. No restart, second task, reseed, tuning, rescue rerun, validation, OOS, holdout, automatic expansion, or promotion occurred. This is operational invalid-run evidence only and cannot compare random, current Evolution, replication-aware Evolution, reward, Alpha, or migration. The launcher source now quotes multiword native arguments, but another market run requires new explicit authorization and receipt.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -3558,7 +3594,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (replacement launch invalid before worker submit; prior evidence retained; Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (R2 launch invalid before engine entry; prior evidence retained; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3731,7 +3767,10 @@
         "reports/CRYPTO_SEARCH_PROCESS_EVIDENCE_REPAIR_20260806.md",
         "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json",
         "runtime/crypto_search_replication_aware_gate_v1_20260806r1/invalid_run_artifact_manifest.json",
-        "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_20260806.md"
+        "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_20260806.md",
+        "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
+        "runtime/crypto_search_replication_aware_gate_v1_20260806r2/invalid_run_artifact_manifest.json",
+        "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R2_20260806.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -5787,7 +5826,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-08-06T05:18:05.626804+00:00",
+        "checked_at": "2026-08-06T06:14:18.354083+00:00",
         "evidence_ref": "runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json",
         "evidence_sha256": "BDFFA9E7D205B4CC0EAABA9D2EC93FE42F28F169A874C51F06109CCB4BD63490",
         "level": "STATIC_VERIFIED",
@@ -7705,7 +7744,10 @@
         "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
-        "HELD-OUT CALIBRATION VERIFIED"
+        "HELD-OUT CALIBRATION VERIFIED",
+        "UNPURGED EVIDENCE SUPERSEDED",
+        "ECONOMIC INCREMENT NOT ESTABLISHED",
+        "NO OOS"
       ],
       "color": "#2e7d32",
       "contracts": [
@@ -8059,7 +8101,7 @@
       "required": false,
       "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-08-05T17:19:13.632621+00:00",
+        "checked_at": "2026-08-06T06:14:18.354083+00:00",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
         "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
         "level": "PARTIAL",
@@ -8657,7 +8699,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "625B72C113B6804F17BF5645DAC281BF96CD8A5EA8D150BE6FDDCEB886018926"
+    "sha256": "179C6C2A28FAF6B06529AF2A927962C00F5B7AEE773B4D1F942611033E171009"
   },
   "profile_id": null,
   "profiles": [
@@ -8694,7 +8736,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "05E9C4D4FCDC90707E2909EF6FD53ECCDB72D5F41A21A306E56F8FC37C137748"
   },
-  "repo_head": "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596",
+  "repo_head": "d4e5d0fb3e0574fb8a4fd09b77cd2afa8b0a6195",
   "schema_version": 1,
   "semantic_authorities": [
     {
