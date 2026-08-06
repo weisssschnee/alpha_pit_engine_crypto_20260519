@@ -28,6 +28,7 @@ from alphafactory_crypto.broad_search.temporal_activation_v1 import (
     _allocation_coordinate,
     _checkpoint,
     _operator_nodes,
+    _pair_diagnostic_row,
     _paired_common_support,
     _validate_config,
     classify_results,
@@ -416,6 +417,57 @@ def test_native_and_common_support_views_remain_separate() -> None:
     assert diagnostic["axis"]["left"]["static"]["support_coordinates"] == 1
     assert diagnostic["axis"]["left"]["temporal"]["support_coordinates"] == 1
     assert diagnostic["paired_worst_axis_net_delta"] > 0.0
+
+
+def test_pair_diagnostic_excludes_runtime_candidate_objects_and_writes_parquet(
+    tmp_path: Path,
+) -> None:
+    def evaluation(value: float) -> dict[str, object]:
+        return {
+            "left_incremental": {
+                "gross_mean": value,
+                "net_mean": value,
+                "net_lcb": value,
+            },
+            "right_incremental": {
+                "gross_mean": value,
+                "net_mean": value,
+                "net_lcb": value,
+            },
+            "block_robust_ordering": {
+                "replicated_positive_block_count": 3,
+                "all_three_blocks_positive": True,
+                "worst_block_min_matched_net_mean": value,
+            },
+            "matched_positive": True,
+        }
+
+    row = _pair_diagnostic_row(
+        pair={
+            "paired_proposal_id": "pair-1",
+            "outer_template": "BASIS_OI_CROWDING",
+            "primitive_id": "Delta",
+            "temporal_field_family": "open_interest_level_change",
+            "static": object(),
+            "temporal": object(),
+            "static_candidate_spec_json": "{}",
+            "temporal_candidate_spec_json": "{}",
+        },
+        static=evaluation(0.1),
+        temporal=evaluation(0.2),
+        common={
+            "static_worst_axis_net_mean": 0.1,
+            "temporal_worst_axis_net_mean": 0.2,
+            "paired_worst_axis_net_delta": 0.1,
+        },
+    )
+    assert "static" not in row
+    assert "temporal" not in row
+    assert not any(key.endswith("_candidate_spec_json") for key in row)
+    output = tmp_path / "paired_economic_diagnostics.parquet"
+    engine._write_parquet(output, [row])
+    restored = pd.read_parquet(output)
+    assert restored.loc[0, "paired_proposal_id"] == "pair-1"
 
 
 def test_source_smoke_compiles_families_and_closes_worker_evidence(tmp_path: Path) -> None:

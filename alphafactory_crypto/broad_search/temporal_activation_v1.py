@@ -1062,7 +1062,8 @@ def _pair_diagnostic_row(
     return {
         key: value
         for key, value in pair.items()
-        if not key.endswith("_candidate_spec_json")
+        if key not in {"static", "temporal"}
+        and not key.endswith("_candidate_spec_json")
     } | {
         "static_native_worst_axis_net_mean": static_worst,
         "temporal_native_worst_axis_net_mean": temporal_worst,
