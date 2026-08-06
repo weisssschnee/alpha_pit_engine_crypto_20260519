@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (R2 launch invalid before engine entry; prior evidence retained; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (R3 replication gate complete; validation not qualified; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -572,6 +572,12 @@
                                     ,"config/crypto_search_replication_aware_gate_v1_r2_receipt.json"
                                     ,"runtime/crypto_search_replication_aware_gate_v1_20260806r2/invalid_run_artifact_manifest.json"
                                     ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R2_20260806.md"
+                                    ,"config/crypto_search_replication_aware_gate_v1_r3_receipt.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/run_manifest.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/final_decision.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/independent_checker_local.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/closure_artifact_manifest.json"
+                                    ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806r3.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -836,6 +842,15 @@
                                              "evidence_ref":  "runtime/crypto_search_replication_aware_gate_v1_20260806r2/invalid_run_artifact_manifest.json"
                                          },
                                          {
+                                             "id":  "crypto_search_replication_aware_gate_v1_r3_consumed_outcome",
+                                             "type":  "EVIDENCE",
+                                             "rule":  "The one authorized R3 receipt is consumed with run_authorized false. Exact producer fd6220d56e0632b5084c2ed7574992c8bc2803fb and PC2 task job_20260806_145544_e65955 completed 1,536 strict evaluations from 2,077 attempts with 512 per arm, three atomic restore-verified checkpoints, 10 workers, zero sealed reads, and independent PC2 plus local checker PASS. Replication-aware Evolution produced 29 candidates positive in at least two of three purged development blocks versus 27 for current Evolution and improved process-CPU productivity, but its advantage disappeared after the best contributing template was removed and it produced zero all-three-block-positive candidates versus two for current Evolution. The frozen research decision is NOT_QUALIFIED_FOR_VALIDATION; the sole strict matched-positive row remains development-only. The detached process exit 1 occurred after artifact completion during non-authorized validation return assembly and does not alter the immutable market evidence. No validation, OOS, promotion, automatic continuation, or new Arena is authorized.",
+                                             "severity":  "HARD",
+                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1.check_search_evidence_v1, and the consumed R3 receipt",
+                                             "bypass_forbidden":  true,
+                                             "evidence_ref":  "runtime/crypto_search_replication_aware_gate_v1_20260806r3/final_decision.json"
+                                         },
+                                         {
                                              "id":  "search_engine_v1_counting_and_restore_gate",
                                             "type":  "ADMISSION",
                                             "rule":  "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
@@ -948,11 +963,14 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_search_family_consensus_dev_v1_20260805/independent_checker.json",
-                       "evidence_sha256":  "BDFFA9E7D205B4CC0EAABA9D2EC93FE42F28F169A874C51F06109CCB4BD63490",
-                       "verified_at_sha":  "824d4512812910e6ee84c7142c33aacc0fb7fd27"
+                       "evidence_ref":  "runtime/crypto_search_replication_aware_gate_v1_20260806r3/independent_checker_local.json",
+                       "evidence_sha256":  "1029A0A6EC53CF0F3087D85D699658739C70980CBA52C7D904739EA2155E0416",
+                       "verified_at_sha":  "1b6593dd13bbab8802b5b3ca700ad347d19d6abe"
                    },
     "claim_badges":  [
+                         "R3 REPLICATION GATE COMPLETE",
+                         "1536 STRICT THREE RESTORE VERIFIED CHECKPOINTS",
+                         "REPLICATION POLICY NOT QUALIFIED FOR VALIDATION",
                          "MEMBER ATTRIBUTION COMPLETE NO MARKET READ",
                          "COMMON SUPPORT 66 OF 330",
                          "FAMILY WEIGHT CANCELLATION NOT SUPPORTED",
