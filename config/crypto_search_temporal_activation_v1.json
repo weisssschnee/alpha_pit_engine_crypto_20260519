@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "experiment_id": "CRYPTO_SEARCH_CORE_V3_CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION",
+  "research_role": "DEVELOPMENT_ONLY_PAIRED_REPRESENTATION_ATTRIBUTION",
+  "question": "Does one canonical temporal transform, holding the raw field tuple and outer economic mechanism fixed, shift the matched after-cost candidate distribution to the right?",
+  "deduplication_decisions": {
+    "sequential_release_preserved": true,
+    "maximum_strict_evaluations": 8192,
+    "strict_evaluations_per_tranche": 2048,
+    "static_candidates_per_tranche": 1024,
+    "temporal_candidates_per_tranche": 1024,
+    "optimizer_arms": [],
+    "reuse_existing_receipt_loader": true,
+    "reuse_existing_atomic_checkpoint_pattern": true,
+    "reuse_existing_economic_path_turnover_and_cost_primitives": true,
+    "reuse_existing_economic_waterfall": true,
+    "reuse_existing_independent_checker_pattern": true,
+    "derived_lcb_distribution_view": true,
+    "derived_block_robustness_view": true,
+    "derived_exposure_view": true,
+    "derived_views_are_not_independent_fact_sources": true,
+    "new_graph_node": false
+  },
+  "source_authorities": {
+    "catalog_path": "config/crypto_typed_mechanism_catalog_v2_1.json",
+    "canonical_primitive_path": "alphafactory_crypto/instrument_capability/primitives.py",
+    "primitive_parameter_path": "alphafactory_crypto/instrument_canary/grammar.py",
+    "expression_path": "alphafactory_crypto/broad_search/expression.py",
+    "candidate_path": "alphafactory_crypto/broad_search/compositional18m.py",
+    "evaluator_path": "alphafactory_crypto/broad_search/pair18m.py",
+    "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+    "economic_receipt_path": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json"
+  },
+  "market_contract": {
+    "carrier": "EXISTING_115_FIELD_OI_MARK_X_AGGTRADES_ALIGNED_CARRIER",
+    "target": "EXISTING_BINANCE_USDM_DELAYED_OPEN_TARGET",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6,
+    "mapping": "EXISTING_MAPPING_AUTHORITY",
+    "cost": "EXISTING_5_BPS_FULL_L1",
+    "matched_controls": "EXISTING_DUAL_AXIS_MATCHED_CONTROL_AUTHORITY",
+    "orientation": "EXISTING_DEVELOPMENT_TRAIN_FROZEN_ORIENTATION",
+    "development_blocks_config": "config/crypto_search_replication_aware_gate_v1.json"
+  },
+  "temporal_adapter": {
+    "expression_operator": "CanonicalPrimitive",
+    "maximum_nodes_per_candidate": 1,
+    "implementation_authority": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+    "parameter_authority": "alphafactory_crypto.instrument_canary.grammar.PRIMITIVE_PARAMETER_OPTIONS",
+    "allowed_primitive_ids": [
+      "Delta",
+      "Acceleration",
+      "Persistence",
+      "Transition",
+      "EventWindow",
+      "MultiScaleRelation"
+    ],
+    "threshold": 0.0,
+    "unused_parameter_identity": "CANONICAL_NULL",
+    "arbitrary_nesting": false,
+    "primitive_implementation_copy_allowed": false
+  },
+  "temporal_families": [
+    {
+      "family_id": "T1_POSITION_STATE_CHANGE",
+      "pair_quota_per_tranche": 256,
+      "primitive_ids": ["Delta", "Acceleration", "MultiScaleRelation"],
+      "eligible_temporal_roles": ["OI_LEVEL", "OI_NOTIONAL", "FUNDING", "BASIS_BUNDLE"],
+      "eligible_outer_templates": [
+        "OI_PRICE_DIVERGENCE_V2",
+        "OI_FLOW_CONFIRMATION_V2",
+        "OI_NOTIONAL_PRICE_ABSORPTION",
+        "BASIS_FLOW_DISLOCATION",
+        "FUNDING_FLOW_CROWDING",
+        "OI_ACTIVITY_EXPANSION",
+        "BASIS_OI_CROWDING"
+      ]
+    },
+    {
+      "family_id": "T2_FLOW_SHOCK_LIFECYCLE",
+      "pair_quota_per_tranche": 256,
+      "primitive_ids": ["Delta", "Acceleration", "Persistence"],
+      "eligible_temporal_roles": ["FLOW_IMBALANCE", "TRADE_INTENSITY", "LARGE_TRADE"],
+      "eligible_outer_templates": [
+        "OI_FLOW_CONFIRMATION_V2",
+        "FLOW_PRICE_ABSORPTION",
+        "LARGE_TRADE_PRICE_RESPONSE",
+        "FLOW_INTENSITY_CONVICTION",
+        "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+        "FUNDING_FLOW_CROWDING"
+      ]
+    },
+    {
+      "family_id": "T3_CROWDING_TRANSITION",
+      "pair_quota_per_tranche": 256,
+      "primitive_ids": ["Transition", "EventWindow", "Persistence"],
+      "eligible_temporal_roles": ["FUNDING", "BASIS_BUNDLE", "OI_LEVEL"],
+      "eligible_outer_templates": [
+        "OI_PRICE_DIVERGENCE_V2",
+        "OI_FLOW_CONFIRMATION_V2",
+        "BASIS_FLOW_DISLOCATION",
+        "FUNDING_FLOW_CROWDING",
+        "OI_ACTIVITY_EXPANSION",
+        "BASIS_OI_CROWDING"
+      ]
+    },
+    {
+      "family_id": "T4_MULTI_SCALE_DISLOCATION",
+      "pair_quota_per_tranche": 256,
+      "primitive_ids": ["MultiScaleRelation"],
+      "eligible_temporal_roles": [
+        "OI_LEVEL",
+        "OI_NOTIONAL",
+        "FUNDING",
+        "BASIS_BUNDLE",
+        "FLOW_IMBALANCE",
+        "TRADE_INTENSITY"
+      ],
+      "eligible_outer_templates": [
+        "OI_PRICE_DIVERGENCE_V2",
+        "OI_FLOW_CONFIRMATION_V2",
+        "OI_NOTIONAL_PRICE_ABSORPTION",
+        "FLOW_PRICE_ABSORPTION",
+        "FLOW_INTENSITY_CONVICTION",
+        "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+        "BASIS_FLOW_DISLOCATION",
+        "FUNDING_FLOW_CROWDING",
+        "OI_ACTIVITY_EXPANSION",
+        "BASIS_OI_CROWDING"
+      ]
+    }
+  ],
+  "paired_proposal_contract": {
+    "rng_seed": 3594390834,
+    "rng_seed_derivation": "UINT32_PREFIX_OF_SHA256_EXPERIMENT_ID",
+    "shared": [
+      "raw_field_tuple",
+      "outer_mechanism_spec",
+      "outer_relation_operator",
+      "outer_normalizers",
+      "beta",
+      "mapping",
+      "horizon",
+      "orientation_rule",
+      "cost",
+      "matched_control_schema",
+      "proposal_ordinal",
+      "allocation_stratum"
+    ],
+    "only_research_difference": "ONE_CANONICAL_TEMPORAL_TRANSFORM_ON_ONE_TYPED_AXIS",
+    "pair_lineage_location": "PAIRED_PROPOSAL_LEDGER_ONLY",
+    "pair_lineage_in_candidate_identity": false,
+    "matched_controls_preserve_temporal_transform": true,
+    "native_strict_view": true,
+    "paired_common_support_diagnostic": true,
+    "support_selection_effect_label": "SUPPORT_SELECTION_EFFECT"
+  },
+  "search_budget": {
+    "strict_evaluated_maximum": 8192,
+    "pair_maximum": 4096,
+    "strict_evaluated_per_tranche": 2048,
+    "pair_per_tranche": 1024,
+    "tranche_count_maximum": 4,
+    "checkpoint_size": 2048,
+    "checkpoint_count_maximum": 4,
+    "raw_pair_attempts_maximum": 100000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "minimum_completed_candidates_per_hour_diagnostic": 512.0,
+    "automatic_expansion": false,
+    "sequential_gate_release_only": true,
+    "later_tranche_proposal_pregeneration": false
+  },
+  "decision_contract": {
+    "primary_metric": "NATIVE_PAIRED_WORST_AXIS_NET_DELTA",
+    "broad_support": {
+      "paired_delta_median_strictly_positive": true,
+      "temporal_pair_win_fraction_minimum": 0.55,
+      "common_support_paired_delta_median_minimum": 0.0,
+      "native_dual_axis_net_positive_rate_improvement_absolute_minimum": 0.01,
+      "native_dual_axis_net_positive_rate_improvement_relative_minimum": 0.2,
+      "replicated_2_of_3_rate_strictly_above_static": true,
+      "all_3_blocks_count_not_below_static": true,
+      "minimum_positive_template_count": 2,
+      "minimum_positive_primitive_count": 2,
+      "leave_best_template_out_paired_delta_median_strictly_positive": true,
+      "maximum_top_template_positive_delta_share": 0.4,
+      "cost_sign_kill_rate_not_above_static": true,
+      "dual_axis_net_positive_per_gross_positive_above_static": true,
+      "worst_block_matched_net_median_above_static": true,
+      "joint_net_lcb_margin_p90_above_static": true
+    },
+    "later_tranche": {
+      "cumulative_broad_shift_required": true,
+      "new_tranche_paired_delta_median_minimum": 0.0,
+      "marginal_progress_required": true,
+      "maximum_top_template_positive_delta_share": 0.35,
+      "maximum_top_primitive_positive_delta_share": 0.4,
+      "consecutive_no_boundary_progress_futility": 2
+    },
+    "final_breadth": {
+      "minimum_positive_field_family_count": 2,
+      "leave_best_field_family_out_paired_delta_median_strictly_positive": true
+    },
+    "cost_sign_kill_rate": "COMPONENT_OF_BROAD_SHIFT_COST_CONVERSION_GATE",
+    "lcb_distribution": "COMPONENT_OF_BROAD_SHIFT_LCB_DISTRIBUTION_GATE",
+    "matched_positive": "STRONG_DIAGNOSTIC_NOT_REQUIRED",
+    "terminal_statuses": [
+      "CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_SUPPORTED",
+      "LOCAL_TEMPORAL_MECHANISM_LINE_IDENTIFIED",
+      "CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_NOT_SUPPORTED",
+      "EARLY_STOP_TEMPORAL_FUTILITY",
+      "INVALID_RUN_FAIL_CLOSED"
+    ]
+  },
+  "artifacts": [
+    "frozen_contract.json",
+    "paired_proposal_ledger.parquet",
+    "candidate_ledger.parquet",
+    "paired_economic_diagnostics.parquet",
+    "checkpoints/checkpoint_*/manifest.json",
+    "continuation_decision_*.json",
+    "final_decision.json",
+    "run_manifest.json",
+    "independent_checker.json",
+    "reports/CRYPTO_SEARCH_CORE_V3_CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_<date>.md"
+  ],
+  "boundaries": {
+    "development_only": true,
+    "new_fields": false,
+    "new_data_source": false,
+    "target_change": false,
+    "horizon_change": false,
+    "mapping_change": false,
+    "cost_change": false,
+    "reward_change": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "evaluator_formula_change": false,
+    "new_behavior_archive_identity": false,
+    "optimizer_feedback": false,
+    "archive_feedback": false,
+    "validation": false,
+    "oos": false,
+    "holdout": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "rescue_rerun": false,
+    "parameter_tuning": false,
+    "new_graph_node": false
+  }
+}

@@ -1183,6 +1183,7 @@ def evaluate_pair(
     frozen_train_orientation: float | None = None,
     include_validation_paths: bool = False,
     include_economic_paths: bool = False,
+    include_paired_diagnostic_paths: bool = False,
     include_control_provenance: bool = False,
     optimizer_block_contract: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -1825,7 +1826,9 @@ def evaluate_pair(
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
         include_internal_objective_paths=(
-            include_validation_paths or include_economic_paths
+            include_validation_paths
+            or include_economic_paths
+            or include_paired_diagnostic_paths
         ),
     )
     right_control = _series_metrics(
@@ -1836,7 +1839,9 @@ def evaluate_pair(
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
         include_internal_objective_paths=(
-            include_validation_paths or include_economic_paths
+            include_validation_paths
+            or include_economic_paths
+            or include_paired_diagnostic_paths
         ),
     )
     interaction_left_control = (
@@ -1848,7 +1853,9 @@ def evaluate_pair(
             horizon=candidate.horizon_hours,
             cost_bps=evaluation_cost_bps,
             include_internal_objective_paths=(
-                include_validation_paths or include_economic_paths
+                include_validation_paths
+                or include_economic_paths
+                or include_paired_diagnostic_paths
             ),
         )
         if interaction_left_control_weight is not None
@@ -1981,8 +1988,16 @@ def evaluate_pair(
         raise ValueError(
             "EVALUATION_PATHS_REQUIRE_VALIDATION_OR_HOLDOUT_PARTITION"
         )
+    if include_paired_diagnostic_paths and (
+        evaluation_partition != "train"
+        or block_role
+        != "FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY"
+    ):
+        raise ValueError(
+            "PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE"
+        )
     economic_paths: dict[str, Any] | None = None
-    if include_economic_paths:
+    if include_economic_paths or include_paired_diagnostic_paths:
         target_metadata = getattr(store, "target_metadata", {})
         execution_venue = str(
             dict(target_metadata).get("venue")
@@ -2120,7 +2135,7 @@ def evaluate_pair(
                 np.nan,
             )
             section.pop("_objective_turnover_path")
-    elif include_economic_paths:
+    elif include_economic_paths or include_paired_diagnostic_paths:
         control_sections = {
             "left": control,
             "right": right_control,
@@ -2344,7 +2359,12 @@ def evaluate_pair(
         ),
         **(
             {"_economic_paths": economic_paths}
-            if economic_paths is not None
+            if economic_paths is not None and include_economic_paths
+            else {}
+        ),
+        **(
+            {"_paired_diagnostic_paths": economic_paths}
+            if economic_paths is not None and include_paired_diagnostic_paths
             else {}
         ),
     }

@@ -27,6 +27,7 @@ from scipy.stats import rankdata
 
 from .expression import (
     BINARY_OPERATORS,
+    CanonicalTemporalPrimitiveAdapterV1,
     CONDITION_GATE_MODES,
     Expression,
     FieldContract,
@@ -1164,15 +1165,8 @@ def _validate_mechanism_binding(
         raise ValueError(f"field binding violates typed mechanism role: {role}")
 
 
-def mechanism_candidate_from_genes(
-    registry: TypedExpressionRegistry,
-    *,
-    genes: Mapping[str, Any],
-    domains: Mapping[str, Sequence[Any]] | None = None,
-) -> CandidateSpec:
-    """Compile a V2 mechanism genome with the existing Expression registry."""
-
-    required = {
+MECHANISM_GENE_KEYS = frozenset(
+    {
         "mechanism_id",
         "mechanism_spec",
         "left_field",
@@ -1191,10 +1185,21 @@ def mechanism_candidate_from_genes(
         "horizon_hours",
         "matched_control_schema",
     }
-    if set(genes) != required:
+)
+
+
+def mechanism_candidate_from_genes(
+    registry: TypedExpressionRegistry,
+    *,
+    genes: Mapping[str, Any],
+    domains: Mapping[str, Sequence[Any]] | None = None,
+) -> CandidateSpec:
+    """Compile a V2 mechanism genome with the existing Expression registry."""
+
+    if set(genes) != MECHANISM_GENE_KEYS:
         raise ValueError(
             "mechanism generation genes must be exact: "
-            + ",".join(sorted(required))
+            + ",".join(sorted(MECHANISM_GENE_KEYS))
         )
     spec = MechanismSpec.from_dict(dict(genes["mechanism_spec"]))
     if str(genes["mechanism_id"]) != spec.mechanism_id:
@@ -1338,6 +1343,199 @@ def mechanism_candidate_from_genes(
         control,
         genome["horizon_hours"],
         mapping_id,
+        assurance.raw_fields,
+        tuple(infer_family(field_id) for field_id in assurance.raw_fields),
+        assurance.rolling_windows,
+        assurance.depth,
+        operator_path(expression),
+        genome,
+    )
+
+
+def temporal_mechanism_candidate_from_genes(
+    registry: TypedExpressionRegistry,
+    *,
+    genes: Mapping[str, Any],
+    domains: Mapping[str, Sequence[Any]] | None = None,
+) -> CandidateSpec:
+    """Compile one binary mechanism whose only change is one canonical transform."""
+
+    allowed_gene_sets = (
+        {*MECHANISM_GENE_KEYS, "temporal_transform"},
+        {*MECHANISM_GENE_KEYS, "temporal_transform", "paired_lineage"},
+    )
+    if set(genes) not in allowed_gene_sets:
+        raise ValueError(
+            "temporal mechanism generation genes must be exact: "
+            + ",".join(sorted({*MECHANISM_GENE_KEYS, "temporal_transform"}))
+        )
+    base_genes = {key: genes[key] for key in MECHANISM_GENE_KEYS}
+    base_candidate = mechanism_candidate_from_genes(
+        registry,
+        genes=base_genes,
+        domains=domains,
+    )
+    spec = MechanismSpec.from_dict(dict(base_genes["mechanism_spec"]))
+    if (
+        spec.generation != 1
+        or spec.condition_role is not None
+        or spec.matched_control_schema != "DUAL_AXIS_A_B_AB"
+    ):
+        raise ValueError("temporal V1 requires one binary two-axis mechanism")
+    transform = dict(genes["temporal_transform"])
+    paired_lineage = (
+        dict(genes["paired_lineage"]) if "paired_lineage" in genes else None
+    )
+    if paired_lineage is not None and set(paired_lineage) != {
+        "paired_static_candidate_id",
+        "paired_proposal_id",
+        "proposal_ordinal",
+    }:
+        raise ValueError("temporal paired lineage genes must be exact")
+    required_transform = {
+        "temporal_family_id",
+        "primitive_id",
+        "axis",
+        "window",
+        "long_window",
+        "threshold",
+        "placement",
+    }
+    if set(transform) != required_transform:
+        raise ValueError("temporal transform genes must be exact")
+    axis = str(transform["axis"])
+    if axis not in {"left", "right"}:
+        raise ValueError("temporal axis must be left or right")
+    primitive_id = str(transform["primitive_id"])
+    numeric_primitive = primitive_id in {
+        "Delta",
+        "Acceleration",
+        "MultiScaleRelation",
+    }
+    temporal_role = spec.left_role if axis == "left" else spec.right_role
+    bundle_role = temporal_role in {"BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"}
+    expected_placement = (
+        "POST_TYPED_BUNDLE_PRE_OUTER"
+        if bundle_role
+        else "PRE_NORMALIZER"
+        if numeric_primitive
+        else "POST_NORMALIZER"
+    )
+    if str(transform["placement"]) != expected_placement:
+        raise ValueError("temporal primitive placement changed")
+    CanonicalTemporalPrimitiveAdapterV1.normalized_parameters(
+        {
+            "primitive_id": primitive_id,
+            "window": transform["window"],
+            "long_window": transform["long_window"],
+            "threshold": transform["threshold"],
+        }
+    )
+
+    def binding(side: str) -> Expression:
+        role = spec.left_role if side == "left" else spec.right_role
+        field_id = str(base_genes[f"{side}_field"])
+        auxiliary = str(base_genes[f"{side}_auxiliary_field"])
+        normalizer = str(base_genes[f"{side}_normalizer"])
+        normalizer_window = int(base_genes[f"{side}_window"])
+        static = _mechanism_binding_expression(
+            role=role,
+            field_id=field_id,
+            auxiliary_field_id=auxiliary,
+            window=normalizer_window,
+            normalizer=normalizer,
+        )
+        if side != axis:
+            return static
+        if numeric_primitive and role not in {
+            "BASIS_BUNDLE",
+            "CROSS_VENUE_OI_BUNDLE",
+        }:
+            primitive_input = Expression.raw(field_id)
+            transformed = CanonicalTemporalPrimitiveAdapterV1.expression(
+                primitive_input,
+                primitive_id=primitive_id,
+                window=transform["window"],
+                long_window=transform["long_window"],
+                threshold=transform["threshold"],
+            )
+            return Expression(
+                normalizer,
+                (transformed,),
+                parameters={"window": normalizer_window},
+            )
+        return CanonicalTemporalPrimitiveAdapterV1.expression(
+            static,
+            primitive_id=primitive_id,
+            window=transform["window"],
+            long_window=transform["long_window"],
+            threshold=transform["threshold"],
+        )
+
+    left = binding("left")
+    right = binding("right")
+    payload_parameters: dict[str, float | str] = {}
+    if spec.payload_operator == "Residual":
+        payload_parameters["beta"] = float(base_genes["beta"])
+    if spec.payload_mode:
+        payload_parameters["mode"] = spec.payload_mode
+    expression = Expression(
+        spec.payload_operator,
+        (left, right),
+        parameters=payload_parameters,
+    )
+    assurance = registry.validate(expression)
+    control = ablate_expression(expression)
+    control_assurance = registry.validate(control)
+    if set(assurance.raw_fields) != set(control_assurance.raw_fields):
+        raise AssertionError("temporal matched control changed raw inputs")
+    if base_candidate.mapping_id != mapping_id_for_mechanism_spec(spec):
+        raise AssertionError("temporal mapping authority changed")
+    genome = {
+        **base_genes,
+        "temporal_transform": {
+            "temporal_family_id": str(transform["temporal_family_id"]),
+            "primitive_id": primitive_id,
+            "axis": axis,
+            "window": (
+                None if transform["window"] is None else int(transform["window"])
+            ),
+            "long_window": (
+                None
+                if transform["long_window"] is None
+                else int(transform["long_window"])
+            ),
+            "threshold": (
+                None
+                if transform["threshold"] is None
+                else float(transform["threshold"])
+            ),
+            "placement": expected_placement,
+        },
+    }
+    if paired_lineage is not None:
+        genome["paired_lineage"] = {
+            "paired_static_candidate_id": str(
+                paired_lineage["paired_static_candidate_id"]
+            ),
+            "paired_proposal_id": str(paired_lineage["paired_proposal_id"]),
+            "proposal_ordinal": int(paired_lineage["proposal_ordinal"]),
+        }
+    candidate_payload = {
+        "mechanism_id": spec.mechanism_id,
+        "expression": expression.canonical_dict(),
+        "control": control.canonical_dict(),
+        "horizon_hours": int(base_genes["horizon_hours"]),
+        "mapping_id": base_candidate.mapping_id,
+    }
+    return CandidateSpec(
+        _payload_sha(candidate_payload),
+        spec.mechanism_id,
+        f"TEMPORAL_V1_{spec.template_id}",
+        expression,
+        control,
+        int(base_genes["horizon_hours"]),
+        base_candidate.mapping_id,
         assurance.raw_fields,
         tuple(infer_family(field_id) for field_id in assurance.raw_fields),
         assurance.rolling_windows,
@@ -2226,4 +2424,5 @@ __all__ = [
     "sample_mechanism_candidate",
     "skeleton_payload",
     "skeleton_registry",
+    "temporal_mechanism_candidate_from_genes",
 ]

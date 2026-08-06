@@ -16,6 +16,14 @@ from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
 
+from alphafactory_crypto.instrument_canary.grammar import (
+    PRIMITIVE_PARAMETER_OPTIONS,
+)
+from alphafactory_crypto.instrument_capability.primitives import (
+    CANONICAL_PRIMITIVES,
+    evaluate_primitive,
+)
+
 
 VALUE_TYPES = frozenset(
     {
@@ -49,6 +57,18 @@ NORMALIZERS = frozenset(
         "CrossSectionalRobustZScore",
     }
 )
+
+CANONICAL_TEMPORAL_PRIMITIVE_IDS_V1 = frozenset(
+    {
+        "Delta",
+        "Acceleration",
+        "Persistence",
+        "Transition",
+        "EventWindow",
+        "MultiScaleRelation",
+    }
+)
+CANONICAL_PRIMITIVE_OPERATOR = "CanonicalPrimitive"
 
 BINARY_OPERATORS = frozenset(
     {
@@ -113,7 +133,7 @@ class Expression:
     operator: str
     inputs: tuple["Expression", ...] = ()
     field_id: str | None = None
-    parameters: Mapping[str, float | int | str] = field(default_factory=dict)
+    parameters: Mapping[str, float | int | str | None] = field(default_factory=dict)
 
     @classmethod
     def raw(cls, field_id: str) -> "Expression":
@@ -147,6 +167,114 @@ class ExpressionAssurance:
     observable_lag_hours: int
 
 
+class CanonicalTemporalPrimitiveAdapterV1:
+    """Thin typed adapter over the existing canonical primitive authority."""
+
+    PARAMETER_KEYS = frozenset(
+        {"primitive_id", "window", "long_window", "threshold"}
+    )
+
+    @classmethod
+    def normalized_parameters(
+        cls, parameters: Mapping[str, Any]
+    ) -> tuple[str, int | None, int | None, float | None]:
+        if set(parameters) != cls.PARAMETER_KEYS:
+            raise ValueError("CanonicalPrimitive parameters must be exact")
+        primitive_id = str(parameters["primitive_id"])
+        if primitive_id not in CANONICAL_TEMPORAL_PRIMITIVE_IDS_V1:
+            raise ValueError("primitive is outside the temporal V1 search binding")
+        if primitive_id not in CANONICAL_PRIMITIVES:
+            raise ValueError("primitive is absent from canonical authority")
+
+        def optional_int(value: Any) -> int | None:
+            return None if value is None else int(value)
+
+        def optional_float(value: Any) -> float | None:
+            return None if value is None else float(value)
+
+        window = optional_int(parameters["window"])
+        long_window = optional_int(parameters["long_window"])
+        threshold = optional_float(parameters["threshold"])
+        coordinate = (window, long_window, threshold)
+        if coordinate not in PRIMITIVE_PARAMETER_OPTIONS[primitive_id]:
+            raise ValueError("primitive parameters are outside canonical authority")
+        return primitive_id, window, long_window, threshold
+
+    @classmethod
+    def expression(
+        cls,
+        source: Expression,
+        *,
+        primitive_id: str,
+        window: int | None,
+        long_window: int | None,
+        threshold: float | None,
+    ) -> Expression:
+        parameters = {
+            "primitive_id": str(primitive_id),
+            "window": None if window is None else int(window),
+            "long_window": None if long_window is None else int(long_window),
+            "threshold": None if threshold is None else float(threshold),
+        }
+        cls.normalized_parameters(parameters)
+        return Expression(
+            CANONICAL_PRIMITIVE_OPERATOR,
+            (source,),
+            parameters=parameters,
+        )
+
+    @staticmethod
+    def effective_window_widths(
+        primitive_id: str,
+        window: int | None,
+        long_window: int | None,
+    ) -> tuple[int, ...]:
+        if primitive_id == "Delta":
+            assert window is not None
+            return (window + 1,)
+        if primitive_id == "Acceleration":
+            assert window is not None
+            return (2 * window + 1,)
+        if primitive_id in {"Persistence", "EventWindow"}:
+            assert window is not None
+            return (window,)
+        if primitive_id == "MultiScaleRelation":
+            assert window is not None and long_window is not None
+            return (window, long_window)
+        return ()
+
+    @staticmethod
+    def output_contract(
+        primitive_id: str, child: ExpressionAssurance
+    ) -> tuple[str, str]:
+        if primitive_id in {"Delta", "Acceleration", "MultiScaleRelation"}:
+            return child.value_type, child.unit
+        if primitive_id == "Persistence":
+            return "UNIT_INTERVAL", "dimensionless"
+        if primitive_id == "Transition":
+            return "EVENT", "dimensionless"
+        if primitive_id == "EventWindow":
+            return "COUNT", "dimensionless"
+        raise AssertionError(primitive_id)
+
+    @staticmethod
+    def materialize(
+        values: np.ndarray,
+        *,
+        primitive_id: str,
+        window: int | None,
+        long_window: int | None,
+        threshold: float | None,
+    ) -> np.ndarray:
+        return evaluate_primitive(
+            primitive_id,
+            values,
+            window=1 if window is None else int(window),
+            long_window=1 if long_window is None else int(long_window),
+            threshold=0.0 if threshold is None else float(threshold),
+        )
+
+
 def _same_unit(left: ExpressionAssurance, right: ExpressionAssurance) -> None:
     if left.unit != right.unit:
         raise ValueError(f"incompatible units: {left.unit} and {right.unit}")
@@ -170,17 +298,30 @@ class TypedExpressionRegistry:
 
     def validate(self, expression: Expression) -> ExpressionAssurance:
         assurance = self._validate(expression)
+        temporal_nodes = self._operator_count(
+            expression, CANONICAL_PRIMITIVE_OPERATOR
+        )
+        if temporal_nodes > 1:
+            raise ValueError("expression uses more than one canonical primitive")
         if assurance.depth > self.MAX_DEPTH:
             raise ValueError("expression depth exceeds four")
         if not 1 <= len(assurance.raw_fields) <= self.MAX_RAW_INPUTS:
             raise ValueError("expression must use one to four raw inputs")
-        if len(assurance.rolling_windows) > self.MAX_ROLLING_WINDOWS:
-            raise ValueError("expression uses more than three rolling windows")
+        rolling_limit = self.MAX_ROLLING_WINDOWS + (1 if temporal_nodes else 0)
+        if len(assurance.rolling_windows) > rolling_limit:
+            raise ValueError("expression exceeds its rolling-window limit")
         if assurance.cross_asset_normalizations > self.MAX_CROSS_ASSET_NORMALIZATIONS:
             raise ValueError("expression uses more than one cross-asset normalization")
         if assurance.regime_gates > self.MAX_REGIME_GATES:
             raise ValueError("expression uses more than one regime gate")
         return assurance
+
+    @staticmethod
+    def _operator_count(expression: Expression, operator: str) -> int:
+        return int(expression.operator == operator) + sum(
+            TypedExpressionRegistry._operator_count(child, operator)
+            for child in expression.inputs
+        )
 
     def _validate(self, expression: Expression) -> ExpressionAssurance:
         if expression.operator == "Raw":
@@ -204,6 +345,33 @@ class TypedExpressionRegistry:
         if expression.field_id is not None:
             raise ValueError("non-Raw nodes cannot carry field_id")
         children = tuple(self._validate(value) for value in expression.inputs)
+        if expression.operator == CANONICAL_PRIMITIVE_OPERATOR:
+            if len(children) != 1:
+                raise ValueError("CanonicalPrimitive requires one input")
+            child = children[0]
+            primitive_id, window, long_window, threshold = (
+                CanonicalTemporalPrimitiveAdapterV1.normalized_parameters(
+                    expression.parameters
+                )
+            )
+            output_type, output_unit = (
+                CanonicalTemporalPrimitiveAdapterV1.output_contract(
+                    primitive_id, child
+                )
+            )
+            widths = CanonicalTemporalPrimitiveAdapterV1.effective_window_widths(
+                primitive_id, window, long_window
+            )
+            return ExpressionAssurance(
+                output_type,
+                output_unit,
+                child.depth + 1,
+                child.raw_fields,
+                (*child.rolling_windows, *widths),
+                child.cross_asset_normalizations,
+                child.regime_gates,
+                child.observable_lag_hours,
+            )
         if expression.operator in NORMALIZERS:
             if len(children) != 1:
                 raise ValueError(f"{expression.operator} requires one input")
@@ -286,7 +454,13 @@ class TypedExpressionRegistry:
                 raise ValueError("Residual inputs must be unit-compatible or normalized")
             output_type, output_unit = left.value_type, left.unit
         elif expression.operator == "ConditionGate":
-            if right.value_type not in {"STATE", "EVENT", "RATIO", "UNIT_INTERVAL"}:
+            if right.value_type not in {
+                "STATE",
+                "EVENT",
+                "COUNT",
+                "RATIO",
+                "UNIT_INTERVAL",
+            }:
                 raise ValueError("ConditionGate requires state-like second input")
             mode = str(expression.parameters.get("mode", "POSITIVE"))
             if mode not in CONDITION_GATE_MODES:
@@ -335,6 +509,9 @@ class TypedExpressionRegistry:
                 "raw_inputs": [1, self.MAX_RAW_INPUTS],
                 "depth": [1, self.MAX_DEPTH],
                 "rolling_windows": self.MAX_ROLLING_WINDOWS,
+                "rolling_windows_with_one_canonical_primitive": (
+                    self.MAX_ROLLING_WINDOWS + 1
+                ),
                 "cross_asset_normalizations": self.MAX_CROSS_ASSET_NORMALIZATIONS,
                 "regime_gates": self.MAX_REGIME_GATES,
             },
@@ -457,7 +634,8 @@ def materialize_expression(
             children = [evaluate(value) for value in node.inputs]
             left = children[0]
             right = children[1] if len(children) == 2 else None
-            window = int(node.parameters.get("window", 0))
+            raw_window = node.parameters.get("window", 0)
+            window = 0 if raw_window is None else int(raw_window)
             if node.operator == "Log":
                 result = np.log(np.maximum(left, epsilon))
             elif node.operator == "SignedLog":
@@ -483,6 +661,19 @@ def materialize_expression(
                     .rank(method="average", pct=True)
                     .to_numpy(dtype=float)
                     .T
+                )
+            elif node.operator == CANONICAL_PRIMITIVE_OPERATOR:
+                primitive_id, primitive_window, long_window, threshold = (
+                    CanonicalTemporalPrimitiveAdapterV1.normalized_parameters(
+                        node.parameters
+                    )
+                )
+                result = CanonicalTemporalPrimitiveAdapterV1.materialize(
+                    left,
+                    primitive_id=primitive_id,
+                    window=primitive_window,
+                    long_window=long_window,
+                    threshold=threshold,
                 )
             elif node.operator == "CrossSectionalRank":
                 result = _cross_sectional_rank(left)
@@ -581,6 +772,9 @@ def ablate_expression(expression: Expression) -> Expression:
 
 __all__ = [
     "BINARY_OPERATORS",
+    "CANONICAL_PRIMITIVE_OPERATOR",
+    "CANONICAL_TEMPORAL_PRIMITIVE_IDS_V1",
+    "CanonicalTemporalPrimitiveAdapterV1",
     "CONDITION_GATE_MODES",
     "CONTROL_OPERATORS",
     "NORMALIZERS",
