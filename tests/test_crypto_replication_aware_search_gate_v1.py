@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from alphafactory_crypto.broad_search.expression import (
     FieldContract,
@@ -28,7 +29,10 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _economic_campaign_seeds,
     _initial_policies,
     _load_search_evidence_v1_contract,
+    _process_evidence_root_for_campaign,
     _search_evidence_v1_expected_checkpoint_allocations,
+    _write_proposal_batch_process_evidence,
+    _write_worker_process_evidence,
 )
 
 
@@ -102,6 +106,116 @@ def test_gate_contract_is_equal_count_fresh_development_only() -> None:
         "holdout_read": False,
         "automatic_continuation": False,
     }
+
+
+def test_proposal_batch_process_evidence_persists_pre_submit_identity(
+    tmp_path: Path,
+) -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    config, catalog, _ = _load_search_evidence_v1_contract(
+        REPO_ROOT, campaign=BLOCK_ROBUST_GATE_CAMPAIGN
+    )
+    policy = MechanismRandomV2(
+        BLOCK_ROBUST_GATE_SEEDS[0],
+        registry,
+        catalog,
+        dict(config["policy_parameters"][BLOCK_ROBUST_GATE_ARMS[0]]),
+    )
+    candidate, metadata = policy.propose()
+    proposal = {
+        **metadata,
+        "candidate": candidate,
+        "arm": BLOCK_ROBUST_GATE_ARMS[0],
+        "seed": BLOCK_ROBUST_GATE_SEEDS[0],
+        "policy_key": (
+            f"{BLOCK_ROBUST_GATE_ARMS[0]}|{BLOCK_ROBUST_GATE_SEEDS[0]}"
+        ),
+        "generation_attempt_ordinal": 7,
+    }
+
+    payload = _write_proposal_batch_process_evidence(
+        evidence_root=tmp_path,
+        stage="PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT",
+        source_sha="a" * 40,
+        frozen_contract_sha256="B" * 64,
+        checkpoint_index=0,
+        batch_index=0,
+        generation_attempts=7,
+        attempted_exact_id_count=1,
+        proposals=[proposal],
+        submitted_count=0,
+        returned_count=0,
+    )
+
+    observed = json.loads(
+        (tmp_path / "producer_batch_000000.json").read_text(encoding="utf-8")
+    )
+    assert observed == payload
+    assert observed["stage"] == "PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT"
+    assert observed["generation_attempts"] == 7
+    assert observed["proposal_count"] == 1
+    assert observed["submitted_count"] == 0
+    assert observed["proposals"][0]["candidate_id"] == candidate.candidate_id
+    assert observed["proposals"][0]["candidate_spec_sha256"] == hashlib.sha256(
+        json.dumps(
+            candidate.to_dict(),
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+            default=str,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+    assert len(observed["evidence_sha256"]) == 64
+
+
+def test_worker_process_evidence_is_stage_specific_and_atomic(tmp_path: Path) -> None:
+    initializer = _write_worker_process_evidence(
+        evidence_root=tmp_path,
+        channel="initializer",
+        stage="INITIALIZER_READY",
+    )
+    task = _write_worker_process_evidence(
+        evidence_root=tmp_path,
+        channel="task",
+        stage="TASK_COMPLETED",
+        candidate_id="candidate-1",
+        outcome="PAIR_EVALUATED",
+    )
+
+    assert initializer is not None
+    assert task is not None
+    assert initializer.name.endswith("_initializer.json")
+    assert task.name.endswith("_task.json")
+    assert not list(tmp_path.glob("*.tmp-*"))
+    observed = json.loads(task.read_text(encoding="utf-8"))
+    assert observed["stage"] == "TASK_COMPLETED"
+    assert observed["candidate_id"] == "candidate-1"
+    assert observed["outcome"] == "PAIR_EVALUATED"
+    assert len(observed["evidence_sha256"]) == 64
+
+
+def test_process_evidence_is_replication_gate_local_and_fail_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assert _process_evidence_root_for_campaign(
+        tmp_path, BLOCK_ROBUST_GATE_CAMPAIGN
+    ) == (tmp_path / "process_evidence")
+    assert _process_evidence_root_for_campaign(tmp_path, "legacy") is None
+
+    def fail_write(_path: Path, _value: object) -> None:
+        raise OSError("diagnostic disk unavailable")
+
+    monkeypatch.setattr(
+        "alphafactory_crypto.broad_search.search_engine_v1._write_json",
+        fail_write,
+    )
+    with pytest.raises(OSError, match="diagnostic disk unavailable"):
+        _write_worker_process_evidence(
+            evidence_root=tmp_path,
+            channel="initializer",
+            stage="INITIALIZER_STARTED",
+        )
 
 
 def test_gate_receipt_is_consumed_by_exact_zero_attempt_failure() -> None:

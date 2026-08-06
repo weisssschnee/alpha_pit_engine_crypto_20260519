@@ -938,6 +938,114 @@ def _write_json(path: Path, value: Any) -> None:
     os.replace(temporary, path)
 
 
+def _write_worker_process_evidence(
+    *,
+    evidence_root: Path | None,
+    channel: str,
+    stage: str,
+    candidate_id: str | None = None,
+    outcome: str | None = None,
+    error: BaseException | None = None,
+) -> Path | None:
+    # Process evidence is a fail-closed execution receipt, not optimizer or
+    # evaluator feedback.  An authorized gate must not continue when its
+    # process lineage cannot be persisted.
+    if evidence_root is None:
+        return None
+    if channel not in {"initializer", "task"}:
+        raise ValueError("worker process evidence channel must be initializer or task")
+    core = {
+        "schema_version": 1,
+        "worker_pid": os.getpid(),
+        "worker_parent_pid": os.getppid(),
+        "channel": str(channel),
+        "stage": str(stage),
+        "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+        "candidate_id": str(candidate_id) if candidate_id is not None else None,
+        "outcome": str(outcome) if outcome is not None else None,
+        "error_type": type(error).__name__ if error is not None else None,
+        "error_message": str(error)[:1000] if error is not None else None,
+    }
+    payload = {**core, "evidence_sha256": _payload_sha(core)}
+    path = evidence_root / f"worker_{os.getpid()}_{channel}.json"
+    _write_json(path, payload)
+    return path
+
+
+def _write_proposal_batch_process_evidence(
+    *,
+    evidence_root: Path,
+    stage: str,
+    source_sha: str,
+    frozen_contract_sha256: str,
+    checkpoint_index: int,
+    batch_index: int,
+    generation_attempts: int,
+    attempted_exact_id_count: int,
+    proposals: Sequence[Mapping[str, Any]],
+    submitted_count: int,
+    returned_count: int,
+) -> dict[str, Any]:
+    proposal_rows: list[dict[str, Any]] = []
+    for proposal in proposals:
+        candidate = proposal["candidate"]
+        if not isinstance(candidate, CandidateSpec):
+            raise TypeError("proposal process evidence requires CandidateSpec")
+        receipt = proposal.get("receipt")
+        proposal_rows.append(
+            {
+                "candidate_id": candidate.candidate_id,
+                "candidate_spec_sha256": _payload_sha(candidate.to_dict()),
+                "arm": str(proposal["arm"]),
+                "seed": int(proposal["seed"]),
+                "policy_key": str(proposal["policy_key"]),
+                "operation": str(proposal.get("operation") or ""),
+                "generation_attempt_ordinal": int(
+                    proposal["generation_attempt_ordinal"]
+                ),
+                "receipt_sha256": (
+                    str(receipt.get("receipt_sha256"))
+                    if isinstance(receipt, Mapping)
+                    and receipt.get("receipt_sha256") is not None
+                    else None
+                ),
+            }
+        )
+    core = {
+        "schema_version": 1,
+        "stage": str(stage),
+        "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+        "producer_pid": os.getpid(),
+        "producer_parent_pid": os.getppid(),
+        "producer_source_sha": str(source_sha).lower(),
+        "frozen_contract_sha256": str(frozen_contract_sha256).upper(),
+        "checkpoint_index": int(checkpoint_index),
+        "evaluation_batch_index": int(batch_index),
+        "generation_attempts": int(generation_attempts),
+        "attempted_exact_id_count": int(attempted_exact_id_count),
+        "proposal_count": len(proposal_rows),
+        "submitted_count": int(submitted_count),
+        "returned_count": int(returned_count),
+        "proposal_identity_sha256": _payload_sha(proposal_rows),
+        "proposals": proposal_rows,
+    }
+    payload = {**core, "evidence_sha256": _payload_sha(core)}
+    _write_json(
+        evidence_root / f"producer_batch_{int(batch_index):06d}.json",
+        payload,
+    )
+    return payload
+
+
+def _process_evidence_root_for_campaign(
+    runtime_root: Path,
+    campaign: str,
+) -> Path | None:
+    if campaign != BLOCK_ROBUST_GATE_CAMPAIGN:
+        return None
+    return runtime_root / "process_evidence"
+
+
 def _write_parquet(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".tmp-{os.getpid()}")
@@ -6884,6 +6992,7 @@ _WORKER_BLOCK_END = ADAPTIVE_END
 _WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
 _WORKER_INCLUDE_CONTROL_PROVENANCE = False
 _WORKER_OPTIMIZER_BLOCK_CONTRACT: Mapping[str, Any] | None = None
+_WORKER_PROCESS_EVIDENCE_ROOT: Path | None = None
 
 
 def _validate_receipt_target_store_binding(
@@ -6929,95 +7038,146 @@ def _worker_initialize(
     economic_receipt: Mapping[str, Any] | None = None,
     include_control_provenance: bool = False,
     optimizer_block_contract: Mapping[str, Any] | None = None,
+    process_evidence_root: str | None = None,
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
     global _WORKER_ECONOMIC_RECEIPT
     global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
     global _WORKER_INCLUDE_CONTROL_PROVENANCE, _WORKER_OPTIMIZER_BLOCK_CONTRACT
-    source_store = RawPanelStore.open(Path(cache_root))
-    if economic_receipt is not None:
-        from alphafactory_crypto.broad_search.replay_v14_binance_target import (
-            BinanceTargetStore,
-        )
-
-        execution = dict(economic_receipt.get("execution") or {})
-        target_root = (
-            Path(__file__).resolve().parents[2]
-            / str(execution.get("target_cache_path") or "")
-        )
-        _validate_receipt_target_store_binding(
-            source_store,
-            target_root,
-            execution,
-        )
-        _WORKER_STORE = BinanceTargetStore(source_store, target_root)
-    else:
-        _WORKER_STORE = source_store
-    _WORKER_REGISTRY = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
-    _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
-    _WORKER_ECONOMIC_RECEIPT = (
-        dict(economic_receipt) if economic_receipt is not None else None
+    global _WORKER_PROCESS_EVIDENCE_ROOT
+    _WORKER_PROCESS_EVIDENCE_ROOT = (
+        Path(process_evidence_root) if process_evidence_root else None
     )
-    _WORKER_BLOCK_START = str(block_start)
-    _WORKER_BLOCK_END = str(block_end)
-    _WORKER_BLOCK_ROLE = str(block_role)
-    _WORKER_INCLUDE_CONTROL_PROVENANCE = bool(include_control_provenance)
-    _WORKER_OPTIMIZER_BLOCK_CONTRACT = (
-        dict(optimizer_block_contract)
-        if optimizer_block_contract is not None
-        else None
+    _write_worker_process_evidence(
+        evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="initializer",
+        stage="INITIALIZER_STARTED",
+    )
+    try:
+        source_store = RawPanelStore.open(Path(cache_root))
+        if economic_receipt is not None:
+            from alphafactory_crypto.broad_search.replay_v14_binance_target import (
+                BinanceTargetStore,
+            )
+
+            execution = dict(economic_receipt.get("execution") or {})
+            target_root = (
+                Path(__file__).resolve().parents[2]
+                / str(execution.get("target_cache_path") or "")
+            )
+            _validate_receipt_target_store_binding(
+                source_store,
+                target_root,
+                execution,
+            )
+            _WORKER_STORE = BinanceTargetStore(source_store, target_root)
+        else:
+            _WORKER_STORE = source_store
+        _WORKER_REGISTRY = TypedExpressionRegistry(
+            _contracts_from_payload(contract_rows)
+        )
+        _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
+        _WORKER_ECONOMIC_RECEIPT = (
+            dict(economic_receipt) if economic_receipt is not None else None
+        )
+        _WORKER_BLOCK_START = str(block_start)
+        _WORKER_BLOCK_END = str(block_end)
+        _WORKER_BLOCK_ROLE = str(block_role)
+        _WORKER_INCLUDE_CONTROL_PROVENANCE = bool(include_control_provenance)
+        _WORKER_OPTIMIZER_BLOCK_CONTRACT = (
+            dict(optimizer_block_contract)
+            if optimizer_block_contract is not None
+            else None
+        )
+    except BaseException as failure:
+        _write_worker_process_evidence(
+            evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+            channel="initializer",
+            stage="INITIALIZER_FAILED",
+            error=failure,
+        )
+        raise
+    _write_worker_process_evidence(
+        evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="initializer",
+        stage="INITIALIZER_READY",
     )
 
 
 def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
-    if (
-        _WORKER_STORE is None
-        or _WORKER_REGISTRY is None
-        or _WORKER_BEHAVIOR_CONTRACT is None
-    ):
-        raise RuntimeError("Search Engine V1 worker was not initialized")
-    candidate = CandidateSpec.from_dict(candidate_payload)
-    process = psutil.Process(os.getpid())
-    cpu_started = time.process_time()
-    wall_started = time.perf_counter()
-    evaluation = None
-    error = None
-    memory_error = False
+    candidate_id = str(candidate_payload.get("candidate_id") or "")
+    _write_worker_process_evidence(
+        evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="task",
+        stage="TASK_STARTED",
+        candidate_id=candidate_id or None,
+    )
     try:
-        evaluation = evaluate_pair(
-            store=_WORKER_STORE,
-            registry=_WORKER_REGISTRY,
-            candidate=candidate,
-            block_start=_WORKER_BLOCK_START,
-            block_end=_WORKER_BLOCK_END,
-            block_role=_WORKER_BLOCK_ROLE,
-            behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
-            economic_receipt=_WORKER_ECONOMIC_RECEIPT,
-            include_control_provenance=_WORKER_INCLUDE_CONTROL_PROVENANCE,
-            optimizer_block_contract=_WORKER_OPTIMIZER_BLOCK_CONTRACT,
+        if (
+            _WORKER_STORE is None
+            or _WORKER_REGISTRY is None
+            or _WORKER_BEHAVIOR_CONTRACT is None
+        ):
+            raise RuntimeError("Search Engine V1 worker was not initialized")
+        candidate = CandidateSpec.from_dict(candidate_payload)
+        process = psutil.Process(os.getpid())
+        cpu_started = time.process_time()
+        wall_started = time.perf_counter()
+        evaluation = None
+        error = None
+        memory_error = False
+        try:
+            evaluation = evaluate_pair(
+                store=_WORKER_STORE,
+                registry=_WORKER_REGISTRY,
+                candidate=candidate,
+                block_start=_WORKER_BLOCK_START,
+                block_end=_WORKER_BLOCK_END,
+                block_role=_WORKER_BLOCK_ROLE,
+                behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
+                economic_receipt=_WORKER_ECONOMIC_RECEIPT,
+                include_control_provenance=_WORKER_INCLUDE_CONTROL_PROVENANCE,
+                optimizer_block_contract=_WORKER_OPTIMIZER_BLOCK_CONTRACT,
+            )
+        except ControlBehaviorDegeneracyError as failure:
+            error = type(failure).__name__ + ":" + str(failure)
+            degeneracy_evidence = dict(failure.evidence)
+        except MemoryError as failure:
+            error = type(failure).__name__ + ":" + str(failure)
+            memory_error = True
+        except (ValueError, FloatingPointError) as failure:
+            error = type(failure).__name__ + ":" + str(failure)
+        memory = process.memory_info()
+        result = {
+            "candidate_id": candidate.candidate_id,
+            "evaluation": evaluation,
+            "error": error,
+            "memory_error": memory_error,
+            "degeneracy_evidence": (
+                degeneracy_evidence if "degeneracy_evidence" in locals() else None
+            ),
+            "process_cpu_seconds": time.process_time() - cpu_started,
+            "wall_seconds": time.perf_counter() - wall_started,
+            "worker_rss_bytes": int(memory.rss),
+            "worker_private_bytes": int(getattr(memory, "private", memory.rss)),
+        }
+    except BaseException as failure:
+        _write_worker_process_evidence(
+            evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+            channel="task",
+            stage="TASK_FAILED",
+            candidate_id=candidate_id or None,
+            error=failure,
         )
-    except ControlBehaviorDegeneracyError as failure:
-        error = type(failure).__name__ + ":" + str(failure)
-        degeneracy_evidence = dict(failure.evidence)
-    except MemoryError as failure:
-        error = type(failure).__name__ + ":" + str(failure)
-        memory_error = True
-    except (ValueError, FloatingPointError) as failure:
-        error = type(failure).__name__ + ":" + str(failure)
-    memory = process.memory_info()
-    return {
-        "candidate_id": candidate.candidate_id,
-        "evaluation": evaluation,
-        "error": error,
-        "memory_error": memory_error,
-        "degeneracy_evidence": (
-            degeneracy_evidence if "degeneracy_evidence" in locals() else None
-        ),
-        "process_cpu_seconds": time.process_time() - cpu_started,
-        "wall_seconds": time.perf_counter() - wall_started,
-        "worker_rss_bytes": int(memory.rss),
-        "worker_private_bytes": int(getattr(memory, "private", memory.rss)),
-    }
+        raise
+    _write_worker_process_evidence(
+        evidence_root=_WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="task",
+        stage="TASK_COMPLETED",
+        candidate_id=candidate.candidate_id,
+        outcome="PAIR_EVALUATED" if evaluation is not None else "PAIR_REJECTED",
+    )
+    return result
 
 
 def _worker_evaluate_frozen_oos(payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -16268,6 +16428,10 @@ def run_engine(
             raise _EngineBudgetExhausted("ACTIVE_WALL_TIME_LIMIT")
 
     executor: concurrent.futures.ProcessPoolExecutor | None = None
+    process_evidence_root = _process_evidence_root_for_campaign(
+        runtime_root,
+        campaign,
+    )
 
     def start_executor(workers: int) -> concurrent.futures.ProcessPoolExecutor:
         return concurrent.futures.ProcessPoolExecutor(
@@ -16283,6 +16447,11 @@ def run_engine(
                 economic_receipt,
                 is_search_evidence_v1,
                 optimizer_block_contract,
+                (
+                    str(process_evidence_root)
+                    if process_evidence_root is not None
+                    else None
+                ),
             ),
         )
 
@@ -16737,19 +16906,91 @@ def run_engine(
                         int(state["scheduler_cursor"]) + 1
                     )
                 assert executor is not None
-                batch_wall_started = time.perf_counter()
-                future_rows = [
-                    (
-                        proposal,
-                        executor.submit(
-                            _worker_evaluate, proposal["candidate"].to_dict()
-                        ),
+                batch_index = int(state.get("evaluation_batch_index", 0))
+                if process_evidence_root is not None:
+                    state["attempted_exact_ids"] = sorted(attempted_ids)
+
+                def persist_batch_stage(
+                    stage: str,
+                    *,
+                    submitted_count: int,
+                    returned_count: int,
+                ) -> None:
+                    if process_evidence_root is None:
+                        return
+                    batch_evidence_path = (
+                        process_evidence_root
+                        / f"producer_batch_{batch_index:06d}.json"
                     )
-                    for proposal in proposals
-                ]
+                    evidence = _write_proposal_batch_process_evidence(
+                        evidence_root=process_evidence_root,
+                        stage=stage,
+                        source_sha=source_sha,
+                        frozen_contract_sha256=frozen_hash,
+                        checkpoint_index=checkpoint_index,
+                        batch_index=batch_index,
+                        generation_attempts=int(state["generation_attempts"]),
+                        attempted_exact_id_count=len(attempted_ids),
+                        proposals=proposals,
+                        submitted_count=submitted_count,
+                        returned_count=returned_count,
+                    )
+                    status_row = {
+                        "evaluation_batch_index": batch_index,
+                        "proposal_count": len(proposals),
+                        "submitted_count": submitted_count,
+                        "returned_count": returned_count,
+                        "process_evidence_path": batch_evidence_path.relative_to(
+                            runtime_root
+                        ).as_posix(),
+                        "process_evidence_sha256": evidence["evidence_sha256"],
+                    }
+                    write_producer_status(
+                        stage,
+                        checkpoint_index=checkpoint_index,
+                        last_batch=status_row,
+                    )
+
+                persist_batch_stage(
+                    "PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT",
+                    submitted_count=0,
+                    returned_count=0,
+                )
+                batch_wall_started = time.perf_counter()
+                future_rows: list[
+                    tuple[dict[str, Any], concurrent.futures.Future[dict[str, Any]]]
+                ] = []
+                try:
+                    for proposal in proposals:
+                        future_rows.append(
+                            (
+                                proposal,
+                                executor.submit(
+                                    _worker_evaluate,
+                                    proposal["candidate"].to_dict(),
+                                ),
+                            )
+                        )
+                except BaseException:
+                    persist_batch_stage(
+                        "WORKER_SUBMISSION_FAILED",
+                        submitted_count=len(future_rows),
+                        returned_count=0,
+                    )
+                    raise
+                persist_batch_stage(
+                    "WORKERS_SUBMITTED",
+                    submitted_count=len(future_rows),
+                    returned_count=0,
+                )
                 worker_results = [
                     (proposal, future.result()) for proposal, future in future_rows
                 ]
+                persist_batch_stage(
+                    "WORKER_RESULTS_RETURNED",
+                    submitted_count=len(future_rows),
+                    returned_count=len(worker_results),
+                )
                 batch_evaluator_wall = time.perf_counter() - batch_wall_started
                 batch_pair_cpu = sum(
                     float(worker["process_cpu_seconds"])
