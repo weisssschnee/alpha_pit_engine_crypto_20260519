@@ -157,6 +157,8 @@ def test_pc2_launcher_fails_closed_on_checkout_byte_transformation() -> None:
     assert "WORKTREE_BYTES_DIVERGE_FROM_COMMIT" in launcher
     assert "component_sources.psobject.Properties.Value" in launcher
     assert "exact_byte_proof_sha256" in launcher
+    assert "crypto_search_run_evidence_v1_1_20260805" in launcher
+    assert "$preflightDetail" in launcher
 
 
 def test_validation_splits_and_tail_purge_are_frozen() -> None:

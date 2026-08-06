@@ -129,7 +129,8 @@ $createdReadOnlyJunctions = @()
 foreach ($name in @(
     'crypto_search_engine_v1_4_oi_flow_20260728',
     'crypto_search_replication_aware_gate_v1_20260806r3',
-    'crypto_search_evidence_v1_1_validation_20260805r1'
+    'crypto_search_evidence_v1_1_validation_20260805r1',
+    'crypto_search_run_evidence_v1_1_20260805'
 )) {
     $source = Join-Path (Join-Path $BaseWorkspace 'runtime') $name
     $destination = Join-Path $runtimeParent $name
@@ -168,7 +169,12 @@ try {
         -Arguments $preflightArguments `
         -StdoutPath $preflightStdout `
         -StderrPath $preflightStderr
-    if ($preflightExit -ne 0) { throw "PREFLIGHT_EXITED_NONZERO:$preflightExit" }
+    if ($preflightExit -ne 0) {
+        $preflightDetail = (
+            Get-Content -LiteralPath $preflightStderr -Raw -ErrorAction SilentlyContinue
+        )
+        throw "PREFLIGHT_EXITED_NONZERO:$preflightExit`n$preflightDetail"
+    }
     $preflight = Get-Content -LiteralPath $preflightStdout -Raw | ConvertFrom-Json
     if (
         $preflight.status -ne 'PREFLIGHT_PASS_NO_MARKET_EVALUATION' -or
