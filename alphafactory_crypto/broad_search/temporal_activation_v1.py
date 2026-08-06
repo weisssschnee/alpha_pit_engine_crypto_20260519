@@ -114,6 +114,13 @@ def _json_sha(value: Any) -> str:
     ).hexdigest().upper()
 
 
+def _receipt_content_sha(receipt: Mapping[str, Any]) -> str:
+    """Hash receipt content without recursively hashing its self-hash field."""
+    return _json_sha(
+        {key: value for key, value in receipt.items() if key != "receipt_sha256"}
+    )
+
+
 def _seed(*parts: Any) -> int:
     return int.from_bytes(
         hashlib.sha256("|".join(map(str, parts)).encode("utf-8")).digest()[:8],
@@ -2486,9 +2493,17 @@ def check(
         != frozen.get("config", {}).get("boundaries")
     ):
         errors.append("runtime_receipt_scope")
-    if _json_sha(runtime_receipt) != frozen.get("binding_receipt_sha256"):
+    receipt_content_sha = _receipt_content_sha(runtime_receipt)
+    if (
+        receipt_content_sha != frozen.get("binding_receipt_sha256")
+        or runtime_receipt.get("receipt_sha256") != receipt_content_sha
+    ):
         errors.append("runtime_receipt")
     source_sha = str(final.get("producer_source_sha") or "")
+    checker_source_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
+    ).strip()
+    committed_components: dict[str, bytes] = {}
     for component, expected_hash in runtime_receipt["component_sha256"].items():
         try:
             committed = subprocess.check_output(
@@ -2497,13 +2512,21 @@ def check(
         except subprocess.CalledProcessError:
             errors.append(f"source_blob_missing:{component}")
             continue
+        committed_components[component] = committed
         if hashlib.sha256(committed).hexdigest().upper() != expected_hash:
             errors.append(f"source_blob:{component}")
-        if (repo_root / component).read_bytes() != committed:
+        try:
+            checker_committed = subprocess.check_output(
+                ["git", "show", f"{checker_source_sha}:{component}"], cwd=repo_root
+            )
+        except subprocess.CalledProcessError:
+            errors.append(f"checker_blob_missing:{component}")
+            continue
+        if (repo_root / component).read_bytes() != checker_committed:
             errors.append(f"working_blob:{component}")
-    expression_source = (repo_root / "alphafactory_crypto/broad_search/expression.py").read_text(
-        encoding="utf-8"
-    )
+    expression_source = committed_components.get(
+        "alphafactory_crypto/broad_search/expression.py", b""
+    ).decode("utf-8")
     if expression_source.count("evaluate_primitive(") != 1:
         errors.append("adapter_authority_call")
     for row in pairs.to_dict("records"):
@@ -2597,6 +2620,7 @@ def check(
         "status": "PASS" if not errors else "FAIL",
         "errors": errors,
         "producer_source_sha": final.get("producer_source_sha"),
+        "checker_source_sha": checker_source_sha,
         "research_decision": final.get("status"),
         "strict_evaluated_count": strict_count,
         "pair_count": pair_count,

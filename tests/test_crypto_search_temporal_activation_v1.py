@@ -30,6 +30,7 @@ from alphafactory_crypto.broad_search.temporal_activation_v1 import (
     _operator_nodes,
     _pair_diagnostic_row,
     _paired_common_support,
+    _receipt_content_sha,
     _validate_config,
     classify_results,
     continuation_decision,
@@ -508,6 +509,14 @@ def test_receipt_consumption_is_one_time(monkeypatch: pytest.MonkeyPatch, tmp_pa
     assert result["status"] == "CONSUMED"
     with pytest.raises(RuntimeError, match="not consumable"):
         consume_binding_receipt(tmp_path, runtime_date="20260806")
+
+
+def test_receipt_content_hash_excludes_only_self_hash() -> None:
+    payload = {"budget": {"strict": 2_048}, "boundaries": {"oos": False}}
+    content_sha = temporal_module._json_sha(payload)
+    receipt = {**payload, "receipt_sha256": content_sha}
+    assert _receipt_content_sha(receipt) == content_sha
+    assert temporal_module._json_sha(receipt) != content_sha
 
 
 def test_pc2_launcher_keeps_frozen_worker_policy() -> None:
