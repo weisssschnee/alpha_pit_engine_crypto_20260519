@@ -1,0 +1,125 @@
+﻿{
+    "status":  "LAUNCH_FROZEN",
+    "started_utc":  "2026-08-06T12:49:06.2550009Z",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_r1_97354ea9",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_r1_97354ea9\\runtime\\crypto_funding_flow_residual_nested_confirmation_v1_20260806r1",
+    "producer_sha":  "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+    "receipt_path":  "config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json",
+    "receipt_blob_sha1":  "cb0d5ff28bf17b9a159c391330aee32392a58f6a",
+    "core_autocrlf":  "false",
+    "exact_byte_path_count":  18,
+    "exact_byte_proof_sha256":  "EA4E47AEF680B48F3C664190D08C04309BE14BFCD70C5B42B266E29B2419DD6A",
+    "exact_byte_proof":  [
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/behavior_provenance_census.py",
+                                 "commit_blob_sha1":  "3f17dfaec75c3d9956f03b118379b876243c5321",
+                                 "worktree_blob_sha1":  "3f17dfaec75c3d9956f03b118379b876243c5321"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/compositional18m.py",
+                                 "commit_blob_sha1":  "ad7cfa1d7d6f109dbfb549e0bb8126de5dd68baa",
+                                 "worktree_blob_sha1":  "ad7cfa1d7d6f109dbfb549e0bb8126de5dd68baa"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/experiment_authority.py",
+                                 "commit_blob_sha1":  "1894225e0a84d9b3a2193a1c4f1e0d2af8385f84",
+                                 "worktree_blob_sha1":  "1894225e0a84d9b3a2193a1c4f1e0d2af8385f84"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/funding_flow_residual_confirmation_v1.py",
+                                 "commit_blob_sha1":  "b0f7ebeb3130fc0349c57de42dbfcd7427cfb79a",
+                                 "worktree_blob_sha1":  "b0f7ebeb3130fc0349c57de42dbfcd7427cfb79a"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/pair18m.py",
+                                 "commit_blob_sha1":  "7b74c628eef42f8a4ec27dca859ae008019ba6a0",
+                                 "worktree_blob_sha1":  "7b74c628eef42f8a4ec27dca859ae008019ba6a0"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+                                 "commit_blob_sha1":  "1e02d26ca04387ad6218aeef5d7b44bdb65726a4",
+                                 "worktree_blob_sha1":  "1e02d26ca04387ad6218aeef5d7b44bdb65726a4"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/broad_search/search_engine_v1.py",
+                                 "commit_blob_sha1":  "5e64cdf5c3f85217f4e4dcea8e937658aca17bb2",
+                                 "worktree_blob_sha1":  "5e64cdf5c3f85217f4e4dcea8e937658aca17bb2"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/instrument_canary/grammar.py",
+                                 "commit_blob_sha1":  "c6948f8cac5a3195c8bb57538e041a33a6c11e2a",
+                                 "worktree_blob_sha1":  "c6948f8cac5a3195c8bb57538e041a33a6c11e2a"
+                             },
+                             {
+                                 "path":  "alphafactory_crypto/instrument_capability/mapping.py",
+                                 "commit_blob_sha1":  "b17ac64715c5227f87fc75f71d1bc2c9a718186d",
+                                 "worktree_blob_sha1":  "b17ac64715c5227f87fc75f71d1bc2c9a718186d"
+                             },
+                             {
+                                 "path":  "config/crypto_funding_flow_residual_nested_confirmation_v1.json",
+                                 "commit_blob_sha1":  "43fc7b9a9772e2b0cdaa54f478d5a5c8a67f7d08",
+                                 "worktree_blob_sha1":  "43fc7b9a9772e2b0cdaa54f478d5a5c8a67f7d08"
+                             },
+                             {
+                                 "path":  "config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json",
+                                 "commit_blob_sha1":  "cb0d5ff28bf17b9a159c391330aee32392a58f6a",
+                                 "worktree_blob_sha1":  "cb0d5ff28bf17b9a159c391330aee32392a58f6a"
+                             },
+                             {
+                                 "path":  "config/crypto_search_engine_v1_4_binance_target_replay.json",
+                                 "commit_blob_sha1":  "74133adb8f3ad8d715917ccd0e7866118aaf5a18",
+                                 "worktree_blob_sha1":  "74133adb8f3ad8d715917ccd0e7866118aaf5a18"
+                             },
+                             {
+                                 "path":  "config/crypto_search_mechanism_v2_aggregate_knowledge.json",
+                                 "commit_blob_sha1":  "3a3e846b1efd18efc33e29b5bef1a169fc23c6a4",
+                                 "worktree_blob_sha1":  "3a3e846b1efd18efc33e29b5bef1a169fc23c6a4"
+                             },
+                             {
+                                 "path":  "config/crypto_search_run_evidence_contract_v1_1.json",
+                                 "commit_blob_sha1":  "dac877d4cd4b4df80bf7232f44cb0a836a99467d",
+                                 "worktree_blob_sha1":  "dac877d4cd4b4df80bf7232f44cb0a836a99467d"
+                             },
+                             {
+                                 "path":  "config/crypto_search_run_evidence_v1_1_receipt.json",
+                                 "commit_blob_sha1":  "38cc44255d6cc0cbd653124f89d404b6ea55a9f6",
+                                 "worktree_blob_sha1":  "38cc44255d6cc0cbd653124f89d404b6ea55a9f6"
+                             },
+                             {
+                                 "path":  "config/crypto_typed_mechanism_catalog_v2_1.json",
+                                 "commit_blob_sha1":  "bb0d9a10ac3db2978ad97b766ac923bb73241095",
+                                 "worktree_blob_sha1":  "bb0d9a10ac3db2978ad97b766ac923bb73241095"
+                             },
+                             {
+                                 "path":  "scripts/crypto_a7reward1_portfolio_reward_model.py",
+                                 "commit_blob_sha1":  "6016aded8bd6b785d0281a97c3e9f3c74cb4c194",
+                                 "worktree_blob_sha1":  "6016aded8bd6b785d0281a97c3e9f3c74cb4c194"
+                             },
+                             {
+                                 "path":  "scripts/crypto_funding_flow_residual_confirmation_v1_pc2_launcher.ps1",
+                                 "commit_blob_sha1":  "d01b235159215f15bbdca240ba1f50dc2b132c2e",
+                                 "worktree_blob_sha1":  "d01b235159215f15bbdca240ba1f50dc2b132c2e"
+                             }
+                         ],
+    "candidate_count":  162,
+    "pair_count":  81,
+    "workers_default":  10,
+    "workers_memory_fallback":  8,
+    "wall_time_seconds_limit":  14400,
+    "evidence_status":  "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+    "validation_b_conditional":  true,
+    "oos_holdout_forbidden":  true,
+    "arguments":  [
+                      "-m",
+                      "alphafactory_crypto.broad_search.funding_flow_residual_confirmation_v1",
+                      "run",
+                      "--repo-root",
+                      "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_r1_97354ea9",
+                      "--runtime-date",
+                      "20260806r1",
+                      "--source-sha",
+                      "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+                      "--receipt-path",
+                      "config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json"
+                  ]
+}

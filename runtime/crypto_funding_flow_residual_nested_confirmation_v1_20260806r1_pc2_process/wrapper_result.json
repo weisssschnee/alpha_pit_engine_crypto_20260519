@@ -1,0 +1,13 @@
+﻿{
+    "schema_version":  1,
+    "status":  "PROCESS_AND_CHECKER_COMPLETE",
+    "producer_exit_code":  0,
+    "checker_exit_code":  0,
+    "started_at":  "2026-08-06T20:49:06.2640009+08:00",
+    "completed_at":  "2026-08-06T20:52:43.2948658+08:00",
+    "wall_seconds":  217.03086489999998,
+    "producer_source_sha":  "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_r1_97354ea9\\runtime\\crypto_funding_flow_residual_nested_confirmation_v1_20260806r1",
+    "final_decision_exists":  true,
+    "run_manifest_exists":  true
+}

@@ -1,0 +1,28 @@
+{
+  "candidate_count": 162,
+  "candidate_ids_sha256": "D7F6D4451603FF4121735574BB0044DA01B2BB46736781FE688DD6AA3A51D75F",
+  "checkpoint": "checkpoint_validation_a",
+  "files": [
+    {
+      "bytes": 561700,
+      "name": "candidate_ledger.parquet",
+      "sha256": "B26218E6FDAA4DBA6063C34BE3A64137C667EB25A3A8B4036D52392F817FB845"
+    },
+    {
+      "bytes": 29024,
+      "name": "paired_ledger.parquet",
+      "sha256": "8D6C47FF87D346DD1BA236EBE0B0F2F89DE5580C18D3FC1E41B5D188F8F86144"
+    },
+    {
+      "bytes": 701,
+      "name": "summary.json",
+      "sha256": "5803929096518B546AF557E22FDD0B813C3EDD1EE74E745C03DA7AEBA9672CE8"
+    }
+  ],
+  "frozen_contract_sha256": "AF3572CD39D9AEB409E38CFD982C2F659B25D301B7A5721585E4238A2E797702",
+  "manifest_sha256": "E65232CE28C442BEBFC83120AAC3361DA51DC2E9BE04C7178E393B389291A5D1",
+  "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+  "schema_version": 1,
+  "stage": "validation_a",
+  "strict_evaluated_count": 162
+}

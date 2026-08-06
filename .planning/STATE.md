@@ -4,46 +4,44 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_INVALID_PRE_MARKET_AUTHORITY_FAILURE_RESEARCH_HOLD`
+`CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_VALIDATION_A_FAILED_ROUTE_CLOSED_RESEARCH_HOLD`
 
-The one authorized reused-development-validation diagnostic is consumed and
-closed without evaluating a market candidate. Exact PC2 producer
-`da9e1943fa57e2062f7a7b71bf22c91469382619` froze 162 deterministic candidates
-as 81 exact main/swapped-timescale-placebo pairs, then failed closed while
-resolving the current economic receipt. The PC2 sparse Windows checkout changed
-line endings for component files whose frozen authority still uses byte hashes,
-so `SEARCH_ECONOMIC_RECEIPT_BLOCKED` fired before the economic context was
-constructed.
+The one explicitly authorized replacement diagnostic is consumed and closed.
+Exact PC2 producer `3e8d1bbf07303ff983596ea295a3af82fd340b1b` and detached task
+`job_20260806_204858_323d59` evaluated the unchanged 162-candidate grid as 81
+exact main/swapped-timescale-placebo pairs. Stage 0 and reused development
+Validation A each completed all 162 strict evaluations with zero candidate-local
+failures. The producer and independent checker both exited zero.
 
-The retained producer status has `completed_candidate_count=0`,
-`validation_b_read=false`, `holdout_read_count=0`, and `oos_read_count=0`.
-There are no candidate checkpoints, final decision, run manifest, economic
-metrics, or independent market checker result. Therefore this run says nothing
-about the anchor, local basin, funding-flow residual mechanism, placebo,
-direction, Alpha, or migration. In particular, the user-authorized reused
-validation interval was not read, so no additional validation contamination
-occurred.
+The main construction beat the placebo on the two relative tests: median
+main-minus-placebo worst-axis net was `0.00005048286306459388`, and main beat
+placebo in `0.6296296296296297` of cells. Absolute family economics did not
+transfer. Global main-cell median worst-axis net was
+`-0.00034318043322402545`; only `0.07407407407407407` of main cells had both
+matched axes net positive; only two of six anchor neighbors were positive; and
+Bybit, Hyperliquid and OKX all had negative source-level median worst-axis net,
+so positive funding-source count was zero. Validation A had eight candidates
+with both axes net positive and zero strict matched-positive candidates.
 
-The one-time receipt is now
-`RUN_AUTHORIZATION_CONSUMED_PRE_MARKET_AUTHORITY_FAILURE` with
-`run_authorized=false`. The seven preserved PC2 artifacts were independently
-hash-matched after transfer; their closure bundle SHA256 is
-`F7B723E6C8A662E26BE563D2C7E832AD093315076FF436CB06F0C784E6990285`.
-Source preflight now resolves the economic authority before launch, so the same
-checkout portability defect fails during no-market preflight rather than after
-a scheduled task starts. No restart, rescue rerun, reseed, tuning, second task,
-validation, OOS, holdout, promotion, reward, mapping, evaluator, compiler, AST,
-catalog, or Graph authority transition occurred. Research state remains HOLD.
+The preregistered family gate therefore failed and the terminal decision is
+`REUSED_VALIDATION_DIAGNOSTIC_ONLY::FUNDING_FLOW_RESIDUAL_ROUTE_CLOSED`.
+Validation B was not read. Holdout and OOS read counts remain zero. This closes
+the current long-funding/short-flow residual basin under the frozen target,
+mapping, 5 bps cost, candidate grid and reused-validation diagnostic contract;
+it is not an OOS or promotion result and does not reject all funding/flow
+mechanisms.
 
-The existing `real_policy_upgrade_canary` overlay records the consumed invalid
-diagnostic while retaining R3 as the latest market-evaluated checker-backed
-evidence. No node or authority binding was added. Bounded Graph maintenance
-returned `BLOCKED / AUDIT_UNAVAILABLE` after its Python audit timed out, so the
-generated CURRENT files were not rewritten and no global freshness claim is
-made.
-
-Closure verification passes 468 tests with the existing NumPy
-degrees-of-freedom warning.
+The replacement receipt is
+`RUN_AUTHORIZATION_CONSUMED_VALIDATION_A_TERMINAL_FAIL_CLOSED` with
+`run_authorized=false`. Local independent checking passes against artifact
+bundle `70855B9E57AA57342CF1A96684A234F26C05DB0338D5A87005869C49AD8CA1C8`.
+The PC2 launch also records `core.autocrlf=false` and proves 18 critical source
+and authority files by raw working-tree blob against commit blob, with proof
+SHA256 `EA4E47AEF680B48F3C664190D08C04309BE14BFCD70C5B42B266E29B2419DD6A`.
+Future launches fail before market read if checkout bytes, the economic receipt,
+or its frozen runtime dependency are absent or transformed. No second task,
+rescue rerun, reseed, tuning, optimizer feedback, Archive write, promotion, or
+new Arena is authorized. Research state remains HOLD.
 
 The preceding completed phase was:
 

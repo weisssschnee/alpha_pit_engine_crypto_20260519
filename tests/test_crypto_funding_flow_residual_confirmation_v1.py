@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
 
 import pandas as pd
 
@@ -114,7 +115,7 @@ def test_replacement_receipt_preserves_grid_and_requires_exact_byte_deployment()
     replacement = load_confirmation_receipt(
         REPO_ROOT,
         receipt_path=replacement_path,
-        require_authorized=True,
+        require_authorized=False,
     )
     predecessor = load_confirmation_receipt(REPO_ROOT, require_authorized=False)
     replacement_rows, replacement_pairs, replacement_proof = build_frozen_grid(
@@ -125,10 +126,23 @@ def test_replacement_receipt_preserves_grid_and_requires_exact_byte_deployment()
         REPO_ROOT,
         receipt=predecessor,
     )
-    assert replacement["status"] == (
+    producer_sha = replacement["outcome"]["producer_source_sha"]
+    producer_receipt = json.loads(
+        subprocess.check_output(
+            ["git", "show", f"{producer_sha}:{replacement_path}"],
+            cwd=REPO_ROOT,
+            text=True,
+        )
+    )
+    assert producer_receipt["status"] == (
         "RUN_AUTHORIZED_REPLACEMENT_AFTER_PRE_MARKET_EXACT_BYTE_REPAIR"
     )
-    assert replacement["run_authorized"] is True
+    assert producer_receipt["run_authorized"] is True
+    assert replacement["status"] == (
+        "RUN_AUTHORIZATION_CONSUMED_VALIDATION_A_TERMINAL_FAIL_CLOSED"
+    )
+    assert replacement["run_authorized"] is False
+    assert replacement["outcome"]["second_run_performed"] is False
     assert replacement["runtime"]["runtime_date"] == "20260806r1"
     assert replacement_proof["grid_sha256"] == predecessor_proof["grid_sha256"]
     assert replacement_proof["pairs_sha256"] == predecessor_proof["pairs_sha256"]

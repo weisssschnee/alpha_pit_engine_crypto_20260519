@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (funding-flow confirmation invalid pre-market; R3 remains latest evaluated; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (funding-flow residual route closed at reused Validation A; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -582,6 +582,11 @@
                                     ,"config/crypto_funding_flow_residual_nested_confirmation_v1_receipt.json"
                                     ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806/partial_artifact_manifest.json"
                                     ,"reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806.md"
+                                    ,"config/crypto_funding_flow_residual_nested_confirmation_v1_r1_receipt.json"
+                                    ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/run_manifest.json"
+                                    ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/final_decision.json"
+                                    ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/validation_a_gate.json"
+                                    ,"reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806r1.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -956,11 +961,11 @@
                                         {
                                             "id":  "crypto_funding_flow_residual_confirmation_v1_consumed_outcome",
                                             "type":  "EVIDENCE",
-                                            "rule":  "The one authorized reused-development-validation diagnostic is consumed with run_authorized false after a pre-market PC2 authority-portability failure. Producer da9e1943fa57e2062f7a7b71bf22c91469382619 froze 81 main and 81 exact swapped-timescale placebo candidates, then byte-hash validation blocked the line-ending-altered sparse Windows checkout before any economic context or candidate evaluation. Completed candidate count is zero and Validation-A, Validation-B, holdout and OOS were unread. This is no evidence for or against the funding-flow residual mechanism, anchor, basin, direction, placebo, Alpha or migration. Source preflight now resolves the complete economic authority before launch. No restart, rescue, second task, tuning, promotion or new Arena is authorized.",
+                                            "rule":  "The one explicitly authorized replacement funding-flow residual diagnostic is consumed with run_authorized false. Producer 3e8d1bbf07303ff983596ea295a3af82fd340b1b evaluated the unchanged 81 main plus 81 exact swapped-timescale-placebo pairs on development train and reused Validation A. Main beat placebo relatively, but the absolute family gate failed: global median worst-axis net was negative, only 7.4074% of main cells had both axes net positive, all three funding-source medians were negative, and Validation A produced zero strict matched-positive candidates. The route stopped before Validation B with FUNDING_FLOW_RESIDUAL_ROUTE_CLOSED. Exact-byte PC2 deployment and local checker pass. Holdout/OOS remain unread; no Alpha, promotion, rescue, second task, tuning or new Arena is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.funding_flow_residual_confirmation_v1 preflight/run and the consumed one-time receipt",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806.md"
+                                            "evidence_ref":  "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/final_decision.json"
                                         },
                                         {
                                             "id":  "real_experiment_authority_preflight",

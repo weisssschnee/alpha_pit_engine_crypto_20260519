@@ -1,0 +1,575 @@
+{
+  "archive_written": false,
+  "automatic_expansion": false,
+  "counterfactual_preregistered_branch": "FUNDING_FLOW_RESIDUAL_ROUTE_CLOSED",
+  "evidence_status": "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+  "experiment_id": "CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1",
+  "frozen_contract_sha256": "AF3572CD39D9AEB409E38CFD982C2F659B25D301B7A5721585E4238A2E797702",
+  "holdout_read_count": 0,
+  "oos_authorization": false,
+  "oos_read_count": 0,
+  "optimizer_feedback_written": false,
+  "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+  "promotion_authorized": false,
+  "research_decision": "REUSED_VALIDATION_DIAGNOSTIC_ONLY::FUNDING_FLOW_RESIDUAL_ROUTE_CLOSED",
+  "schema_version": 1,
+  "source_deviation": {
+    "action": "USE_ONLY_EXISTING_BYBIT_HYPERLIQUID_OKX_FIELDS_NO_NEW_FIELD",
+    "authorized_115_field_sources": [
+      "BYBIT",
+      "HYPERLIQUID",
+      "OKX"
+    ],
+    "binance_funding_present": false,
+    "binance_order_flow_unchanged": true,
+    "cross_venue_funding_aggregate_present": false,
+    "requested_funding_sources": [
+      "BYBIT",
+      "BINANCE",
+      "OKX",
+      "EXISTING_CROSS_VENUE_AGGREGATE_IF_PRESENT"
+    ]
+  },
+  "stage_a_gate": {
+    "anchor_direct_neighbor_ids": [
+      "0BD86CB41387A5ADF1CC594FB3C30BFA4C5E0E14BECFBCB7A6574786375C3E74",
+      "1929F99C66F9582C82EB9E4821213015D3AA556F70FB0860005516ED2462E794",
+      "3C0D931D1220CB66E8B24EF347016479C403CFD388C5EB796DF76722852B5136",
+      "5C6B1E9C98E311398173B6E4246C07578582ABDB374EFA6AD8FC9E0DEA4D91C6",
+      "8463EFCC818F70A23E962E793C54562686236D4C69DF6B0E510826C23034AA23",
+      "FCCD479F4824A1F322B37D161CD87F5805F80663023CAF9AE07AB381BF9E9364"
+    ],
+    "cell_metrics": [
+      {
+        "candidate_count": 3,
+        "cell_left_net": 0.00011725013801934989,
+        "cell_right_net": 0.0002521137215393233,
+        "cell_worst_axis_net": 0.00011725013801934989,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": 1.7343770873876766e-05,
+        "cell_right_net": 0.0002700255610668222,
+        "cell_worst_axis_net": 1.7343770873876766e-05,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -2.2273247886608754e-06,
+        "cell_right_net": 0.00020564711695087348,
+        "cell_worst_axis_net": -2.2273247886608754e-06,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": 0.0001536746575174264,
+        "cell_right_net": -2.093177002357985e-05,
+        "cell_worst_axis_net": -2.093177002357985e-05,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": 7.967042844998486e-05,
+        "cell_right_net": -7.301035452206036e-05,
+        "cell_worst_axis_net": -7.301035452206036e-05,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": 7.526928319014325e-05,
+        "cell_right_net": -9.730039734254775e-05,
+        "cell_worst_axis_net": -9.730039734254775e-05,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -3.6075115465543054e-05,
+        "cell_right_net": -0.00017641925489368,
+        "cell_worst_axis_net": -0.00017641925489368,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -8.455349810874425e-05,
+        "cell_right_net": -0.00026955494249033326,
+        "cell_worst_axis_net": -0.00026955494249033326,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -7.764728568415256e-05,
+        "cell_right_net": -0.0002657953187224653,
+        "cell_worst_axis_net": -0.0002657953187224653,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0004301548318370076,
+        "cell_right_net": -0.00021707775472764305,
+        "cell_worst_axis_net": -0.0004301548318370076,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00039334359202874714,
+        "cell_right_net": -5.9651756258859154e-05,
+        "cell_worst_axis_net": -0.00039334359202874714,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0004372064872900752,
+        "cell_right_net": -0.0001606441181466756,
+        "cell_worst_axis_net": -0.0004372064872900752,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0003771461006859677,
+        "cell_right_net": -0.0001242796160885494,
+        "cell_worst_axis_net": -0.0003771461006859677,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0003473590774009575,
+        "cell_right_net": 1.823983319279376e-05,
+        "cell_worst_axis_net": -0.0003473590774009575,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00034318043322402545,
+        "cell_right_net": -1.3635871450971419e-05,
+        "cell_worst_axis_net": -0.00034318043322402545,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -3.001255998091412e-05,
+        "cell_right_net": 0.00023487447889649992,
+        "cell_worst_axis_net": -3.001255998091412e-05,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -5.32659667749983e-05,
+        "cell_right_net": 0.00020356630794693685,
+        "cell_worst_axis_net": -5.32659667749983e-05,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -1.5100726085786645e-05,
+        "cell_right_net": 0.00018036772841586006,
+        "cell_worst_axis_net": -1.5100726085786645e-05,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00040551410923251403,
+        "cell_right_net": -0.0006576676225457897,
+        "cell_worst_axis_net": -0.0006576676225457897,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00039733217868212316,
+        "cell_right_net": -0.0006314116717338373,
+        "cell_worst_axis_net": -0.0006314116717338373,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.000129322733528828,
+        "cell_right_net": -0.00010955152518030756,
+        "cell_worst_axis_net": -0.000129322733528828,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0002907956592929379,
+        "cell_right_net": -0.0006101503036820182,
+        "cell_worst_axis_net": -0.0006101503036820182,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00035819905605930213,
+        "cell_right_net": -0.0006586937887506402,
+        "cell_worst_axis_net": -0.0006586937887506402,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00036698080490323595,
+        "cell_right_net": -0.0007079333761945982,
+        "cell_worst_axis_net": -0.0007079333761945982,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00039659353953795136,
+        "cell_right_net": -0.0005420222365281386,
+        "cell_worst_axis_net": -0.0005420222365281386,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.00035638523266537457,
+        "cell_right_net": -0.000600971135288921,
+        "cell_worst_axis_net": -0.000600971135288921,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_count": 3,
+        "cell_left_net": -0.0003460905563380931,
+        "cell_right_net": -0.000649882470644286,
+        "cell_worst_axis_net": -0.000649882470644286,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      }
+    ],
+    "conditions": {
+      "anchor_direct_neighbor_positive_fraction": false,
+      "complete_evaluation": true,
+      "global_main_cell_median_worst_axis_net_positive": false,
+      "global_main_minus_placebo_cell_delta_positive": true,
+      "main_cells_both_axes_fraction": false,
+      "paired_cells_main_above_placebo_fraction": true,
+      "positive_funding_source_count": false
+    },
+    "family_gate_pass": false,
+    "main_vs_placebo_gate_pass": true,
+    "metrics": {
+      "anchor_direct_neighbor_count": 6,
+      "anchor_direct_neighbor_positive_count": 2,
+      "anchor_direct_neighbor_positive_fraction": 0.3333333333333333,
+      "global_main_cell_median_worst_axis_net": -0.00034318043322402545,
+      "global_median_main_minus_placebo_cell_delta": 5.048286306459388e-05,
+      "main_cells_both_axes_positive_fraction": 0.07407407407407407,
+      "paired_cells_main_above_placebo_fraction": 0.6296296296296297,
+      "positive_funding_source_count": 0
+    },
+    "paired_cell_metrics": [
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00045747152201105654,
+        "cell_main_worst_axis_net": 0.00011725013801934989,
+        "cell_placebo_worst_axis_net": -0.0003612159018646008,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00045393083960203635,
+        "cell_main_worst_axis_net": 1.7343770873876766e-05,
+        "cell_placebo_worst_axis_net": -0.00043658706872815956,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.0005589988787351803,
+        "cell_main_worst_axis_net": -2.2273247886608754e-06,
+        "cell_placebo_worst_axis_net": -0.0005612262035238412,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00021514350700599429,
+        "cell_main_worst_axis_net": -2.093177002357985e-05,
+        "cell_placebo_worst_axis_net": -0.0002134726517371413,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.0004195022842605325,
+        "cell_main_worst_axis_net": -7.301035452206036e-05,
+        "cell_placebo_worst_axis_net": -0.00048413288349178507,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00037747857379620645,
+        "cell_main_worst_axis_net": -9.730039734254775e-05,
+        "cell_placebo_worst_axis_net": -0.0004747789711387542,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00026905000256176044,
+        "cell_main_worst_axis_net": -0.00017641925489368,
+        "cell_placebo_worst_axis_net": -0.0004454692574554404,
+        "flow_window": 3,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.000130615893118442,
+        "cell_main_worst_axis_net": -0.00026955494249033326,
+        "cell_placebo_worst_axis_net": -0.00043791744194066566,
+        "flow_window": 6,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.0002505886719335912,
+        "cell_main_worst_axis_net": -0.0002657953187224653,
+        "cell_placebo_worst_axis_net": -0.0005158505562192636,
+        "flow_window": 12,
+        "funding_source": "bybit",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -0.00015843424599808035,
+        "cell_main_worst_axis_net": -0.0004301548318370076,
+        "cell_placebo_worst_axis_net": -0.00027172058583892726,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -2.1758072102475822e-05,
+        "cell_main_worst_axis_net": -0.00039334359202874714,
+        "cell_placebo_worst_axis_net": -0.0003715855199262713,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -9.797679168059114e-05,
+        "cell_main_worst_axis_net": -0.0004372064872900752,
+        "cell_placebo_worst_axis_net": -0.00033922969560948405,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -0.00020643971399122275,
+        "cell_main_worst_axis_net": -0.0003771461006859677,
+        "cell_placebo_worst_axis_net": -0.00018523116176472648,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -2.608287608959792e-05,
+        "cell_main_worst_axis_net": -0.0003473590774009575,
+        "cell_placebo_worst_axis_net": -0.00026917844308899623,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -2.1192959774575743e-06,
+        "cell_main_worst_axis_net": -0.00034318043322402545,
+        "cell_placebo_worst_axis_net": -0.0002921372017949866,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00014989028622305135,
+        "cell_main_worst_axis_net": -3.001255998091412e-05,
+        "cell_placebo_worst_axis_net": -9.100461937385572e-05,
+        "flow_window": 3,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.0001086025998015751,
+        "cell_main_worst_axis_net": -5.32659667749983e-05,
+        "cell_placebo_worst_axis_net": -0.00016908864976818676,
+        "flow_window": 6,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.00022014356710924765,
+        "cell_main_worst_axis_net": -1.5100726085786645e-05,
+        "cell_placebo_worst_axis_net": -0.00026097731779405156,
+        "flow_window": 12,
+        "funding_source": "hyperliquid_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 1.7268661279231214e-05,
+        "cell_main_worst_axis_net": -0.0006576676225457897,
+        "cell_placebo_worst_axis_net": -0.0006749362838250209,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -2.0750517242628763e-05,
+        "cell_main_worst_axis_net": -0.0006314116717338373,
+        "cell_placebo_worst_axis_net": -0.0006106611544912085,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 0.000342026118423777,
+        "cell_main_worst_axis_net": -0.000129322733528828,
+        "cell_placebo_worst_axis_net": -0.00047134885195260505,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 96
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 1.3916954211153011e-05,
+        "cell_main_worst_axis_net": -0.0006101503036820182,
+        "cell_placebo_worst_axis_net": -0.0006428093887012763,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -8.267512892884681e-05,
+        "cell_main_worst_axis_net": -0.0006586937887506402,
+        "cell_placebo_worst_axis_net": -0.0006246613105725323,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -0.00029377959130594115,
+        "cell_main_worst_axis_net": -0.0007079333761945982,
+        "cell_placebo_worst_axis_net": -0.00046224534197916744,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 168
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 5.048286306459388e-05,
+        "cell_main_worst_axis_net": -0.0005420222365281386,
+        "cell_placebo_worst_axis_net": -0.0005925050995927325,
+        "flow_window": 3,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": 2.2472957637332007e-05,
+        "cell_main_worst_axis_net": -0.000600971135288921,
+        "cell_placebo_worst_axis_net": -0.000623444092926253,
+        "flow_window": 6,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      },
+      {
+        "candidate_pair_count": 3,
+        "cell_main_minus_placebo": -0.0003587400659978854,
+        "cell_main_worst_axis_net": -0.000649882470644286,
+        "cell_placebo_worst_axis_net": -0.0002971816335407445,
+        "flow_window": 12,
+        "funding_source": "okx_futures",
+        "funding_window": 240
+      }
+    ],
+    "schema_version": 1,
+    "source_metrics": [
+      {
+        "funding_source": "bybit",
+        "source_cell_median_worst_axis_net": -7.301035452206036e-05
+      },
+      {
+        "funding_source": "hyperliquid_futures",
+        "source_cell_median_worst_axis_net": -0.0003473590774009575
+      },
+      {
+        "funding_source": "okx_futures",
+        "source_cell_median_worst_axis_net": -0.0006314116717338373
+      }
+    ],
+    "stage": "validation_a",
+    "status": "FAIL"
+  },
+  "stage_b_gate": null,
+  "status": "VALIDATION_A_TERMINAL_FAIL_CLOSED",
+  "unread_migration_claim_authorized": false,
+  "validation_b_read": false
+}

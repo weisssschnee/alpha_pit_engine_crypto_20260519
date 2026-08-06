@@ -1,0 +1,140 @@
+{
+  "archive_written": false,
+  "bundle_sha256": "70855B9E57AA57342CF1A96684A234F26C05DB0338D5A87005869C49AD8CA1C8",
+  "candidate_generation_performed": false,
+  "checkpoint_count": 2,
+  "evidence_status": "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+  "files": [
+    {
+      "bytes": 3644,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/frozen_contract.json",
+      "sha256": "05A689B6025E14BD0835F6B1AE90EC2D79B80373DAD8C2C4F362EA4B0E3A1DF5"
+    },
+    {
+      "bytes": 109641,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/candidate_grid.parquet",
+      "sha256": "120A3B1DF07535D80C5FACF63C1E2273600784F12C8AB5EDD749AEAE72804811"
+    },
+    {
+      "bytes": 23633,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/paired_grid.parquet",
+      "sha256": "F293E5BBD4AAAC1132BD4E9E52D2CB8A2CC2A2D0C51FC3B6EB223CB270416E8D"
+    },
+    {
+      "bytes": 762994,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/stage_0_candidate_ledger.parquet",
+      "sha256": "04C95BE434E4FD30EAD2D5759B235425E02B50073FC63237D641F5A95436FBDB"
+    },
+    {
+      "bytes": 29024,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/stage_0_paired_ledger.parquet",
+      "sha256": "C6359FDD2175E956F8971D57271E944BF3D9EAC07765EFF4354FA86ED50E047B"
+    },
+    {
+      "bytes": 561700,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/validation_a_candidate_ledger.parquet",
+      "sha256": "B26218E6FDAA4DBA6063C34BE3A64137C667EB25A3A8B4036D52392F817FB845"
+    },
+    {
+      "bytes": 29024,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/validation_a_paired_ledger.parquet",
+      "sha256": "8D6C47FF87D346DD1BA236EBE0B0F2F89DE5580C18D3FC1E41B5D188F8F86144"
+    },
+    {
+      "bytes": 18507,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/validation_a_gate.json",
+      "sha256": "347D52980F1995F95CA64E22F1C9592E7010FE97186AE3D895BB95DA943746F8"
+    },
+    {
+      "bytes": 20984,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/final_decision.json",
+      "sha256": "09D88EA5BA9AC269F8E98363589490F9117A48EB2683D91571DB6177C7ECC046"
+    },
+    {
+      "bytes": 1538,
+      "path": "reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806r1.md",
+      "sha256": "E74B0B19B60E82FE0FF1CC4B713095EC45102C685A41CC84FD0DA22E006540FD"
+    },
+    {
+      "bytes": 762994,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_stage_0/candidate_ledger.parquet",
+      "sha256": "04C95BE434E4FD30EAD2D5759B235425E02B50073FC63237D641F5A95436FBDB"
+    },
+    {
+      "bytes": 1002,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_stage_0/manifest.json",
+      "sha256": "70AE6CD4F338F3A4FC1516706EEA23FB8F7F8AE44071A5E788FDDBB59A0A5ACE"
+    },
+    {
+      "bytes": 29024,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_stage_0/paired_ledger.parquet",
+      "sha256": "C6359FDD2175E956F8971D57271E944BF3D9EAC07765EFF4354FA86ED50E047B"
+    },
+    {
+      "bytes": 693,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_stage_0/summary.json",
+      "sha256": "A869EDD66DC108AAB6514EBE7503567A740DC5E71952D053A22DA3DF4F8C0687"
+    },
+    {
+      "bytes": 561700,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_validation_a/candidate_ledger.parquet",
+      "sha256": "B26218E6FDAA4DBA6063C34BE3A64137C667EB25A3A8B4036D52392F817FB845"
+    },
+    {
+      "bytes": 1012,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_validation_a/manifest.json",
+      "sha256": "DD034C80A62582454BF045F62D1C4BA95A7531067251A20BBD545D2A062829B9"
+    },
+    {
+      "bytes": 29024,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_validation_a/paired_ledger.parquet",
+      "sha256": "8D6C47FF87D346DD1BA236EBE0B0F2F89DE5580C18D3FC1E41B5D188F8F86144"
+    },
+    {
+      "bytes": 701,
+      "path": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/checkpoints/checkpoint_validation_a/summary.json",
+      "sha256": "5803929096518B546AF557E22FDD0B813C3EDD1EE74E745C03DA7AEBA9672CE8"
+    }
+  ],
+  "frozen_contract_sha256": "AF3572CD39D9AEB409E38CFD982C2F659B25D301B7A5721585E4238A2E797702",
+  "holdout_read_count": 0,
+  "oos_read_count": 0,
+  "optimizer_feedback_written": false,
+  "policy_memory_written": false,
+  "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+  "report": "reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806r1.md",
+  "resources": [
+    {
+      "candidate_count": 162,
+      "candidate_local_failure_count": 0,
+      "max_worker_private_bytes": 160841728,
+      "max_worker_rss_bytes": 159322112,
+      "memory_fallback_used": false,
+      "pair_evaluated_per_hour": 3946.468239832135,
+      "process_cpu_seconds": 562.828125,
+      "stage": "stage_0",
+      "strict_evaluated_count": 162,
+      "wall_seconds": 147.77770009997766,
+      "workers": 10
+    },
+    {
+      "candidate_count": 162,
+      "candidate_local_failure_count": 0,
+      "max_worker_private_bytes": 158941184,
+      "max_worker_rss_bytes": 158277632,
+      "memory_fallback_used": false,
+      "pair_evaluated_per_hour": 9221.584981672942,
+      "process_cpu_seconds": 218.828125,
+      "stage": "validation_a",
+      "strict_evaluated_count": 162,
+      "wall_seconds": 63.24292420002166,
+      "workers": 10
+    }
+  ],
+  "run_receipt_sha256": "C528F140A6A9C161DFB03A078C1D84045209F497AEAF543B72797636C7DFC660",
+  "runtime": "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1",
+  "schema_version": 1,
+  "second_run_performed": false,
+  "status": "VALIDATION_A_TERMINAL_FAIL_CLOSED",
+  "validation_b_read": false
+}

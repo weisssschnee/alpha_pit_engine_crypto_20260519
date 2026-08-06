@@ -1,0 +1,86 @@
+{
+  "archive_write": false,
+  "candidate_generation": false,
+  "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "contract_sha256": "833C0AC5DB557FB52FAE17A984CAC45E88F5AFC19743AE529E4AF582DD3C68AB",
+  "development_train": {
+    "end_exclusive": "2025-11-01T00:00:00Z",
+    "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+    "start": "2025-08-29T07:00:00Z"
+  },
+  "evidence_status": "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+  "experiment_id": "CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1",
+  "frozen_contract_sha256": "AF3572CD39D9AEB409E38CFD982C2F659B25D301B7A5721585E4238A2E797702",
+  "grid_proof": {
+    "anchor_candidate_id": "D2D46A0AB9675C7349A1C658D4B200987FBC216A89AD5627FF613EC26E7B71CE",
+    "candidate_count": 162,
+    "carrier_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "contracts_sha256": "7F94104F1465E6F0DE60111BB1410535B67E832568FF80176229AB5816B2A0BA",
+    "grid_sha256": "0B76E2F100FF660CA9759F28AEE2C0A74C42EBEBEB1B8BA3711AD9C9AF6C6A2C",
+    "main_count": 81,
+    "market_read_performed": false,
+    "pair_count": 81,
+    "pairs_sha256": "34026E06553A3BC7305ECEB99BAA52E5A628B3E07CFD2C5EF4F99F6413EF7547",
+    "placebo_count": 81,
+    "schema_version": 1
+  },
+  "holdout_read": false,
+  "oos_read": false,
+  "optimizer_feedback": false,
+  "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+  "run_receipt_sha256": "C528F140A6A9C161DFB03A078C1D84045209F497AEAF543B72797636C7DFC660",
+  "schema_version": 1,
+  "source_deviation": {
+    "action": "USE_ONLY_EXISTING_BYBIT_HYPERLIQUID_OKX_FIELDS_NO_NEW_FIELD",
+    "authorized_115_field_sources": [
+      "BYBIT",
+      "HYPERLIQUID",
+      "OKX"
+    ],
+    "binance_funding_present": false,
+    "binance_order_flow_unchanged": true,
+    "cross_venue_funding_aggregate_present": false,
+    "requested_funding_sources": [
+      "BYBIT",
+      "BINANCE",
+      "OKX",
+      "EXISTING_CROSS_VENUE_AGGREGATE_IF_PRESENT"
+    ]
+  },
+  "stage_a_gate": {
+    "global_main_cell_median_worst_axis_net_strictly_positive": true,
+    "global_median_main_minus_placebo_cell_delta_strictly_positive": true,
+    "minimum_anchor_direct_neighbor_positive_fraction": 0.5,
+    "minimum_main_cells_both_axes_net_positive_fraction": 0.5,
+    "minimum_paired_cells_main_above_placebo_fraction": 0.6,
+    "minimum_positive_funding_sources": 2
+  },
+  "stage_b_gate": {
+    "anchor_primary_and_both_incremental_net_lcb_strictly_positive": true,
+    "anchor_strict_matched_positive": true,
+    "median_source_representative_worst_axis_net_strictly_positive": true,
+    "medoid_strict_matched_positive": true,
+    "minimum_source_representatives_both_axes_net_positive": 2,
+    "minimum_support": 0.8,
+    "positive_representatives_must_span_sources": true,
+    "representative_median_main_minus_placebo_delta_strictly_positive": true
+  },
+  "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "validation_a": {
+    "end_exclusive": "2025-12-01T00:00:00Z",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6,
+    "role": "REUSED_DEVELOPMENT_VALIDATION_A_DIAGNOSTIC",
+    "start": "2025-11-01T00:00:00Z"
+  },
+  "validation_b": {
+    "end_exclusive": "2026-01-01T00:00:00Z",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6,
+    "role": "REUSED_DEVELOPMENT_VALIDATION_B_DIAGNOSTIC",
+    "start": "2025-12-01T00:00:00Z"
+  },
+  "validation_b_read": false
+}

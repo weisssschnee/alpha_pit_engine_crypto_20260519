@@ -1,0 +1,11 @@
+{
+  "checkpoint_count": 2,
+  "heartbeat_utc": "2026-08-06T12:52:40.576192+00:00",
+  "holdout_read_count": 0,
+  "oos_read_count": 0,
+  "producer_pid": 4936,
+  "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b",
+  "schema_version": 1,
+  "status": "VALIDATION_A_TERMINAL_FAIL_CLOSED",
+  "validation_b_read": false
+}

@@ -1,0 +1,1 @@
+{"bundle_sha256": "70855B9E57AA57342CF1A96684A234F26C05DB0338D5A87005869C49AD8CA1C8", "holdout_read_count": 0, "oos_read_count": 0, "producer_source_sha": "3e8d1bbf07303ff983596ea295a3af82fd340b1b", "research_decision": "REUSED_VALIDATION_DIAGNOSTIC_ONLY::FUNDING_FLOW_RESIDUAL_ROUTE_CLOSED", "schema_version": 1, "status": "CHECK_PASS", "validation_b_read": false}
