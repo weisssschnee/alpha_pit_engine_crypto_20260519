@@ -1,0 +1,50 @@
+{
+  "attempted_exact_id_count": 1059,
+  "checkpoint_index": 1,
+  "evaluation_batch_index": 177,
+  "evidence_sha256": "9E6A719ABFD706DCBFFD8F087296A9BE31BB0E3E38CCDC7F9318962924092B2E",
+  "frozen_contract_sha256": "B600EF75CEE79EFC3DCFE2C5E1BC7D70C72B78D15225186087AA2E9CBE54F666",
+  "generation_attempts": 1354,
+  "heartbeat_utc": "2026-08-06T07:11:54.944900+00:00",
+  "producer_parent_pid": 26448,
+  "producer_pid": 7028,
+  "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+  "proposal_count": 3,
+  "proposal_identity_sha256": "E81F582B510561160290CC8CB4295E8284635B6DC96C31977E4F30F24E8D1716",
+  "proposals": [
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "5A5D7AE643F9D15AEA2A7253687FD238AD7118C68A75F8164522B250B946B0D1",
+      "candidate_spec_sha256": "DF22791A006F813ED3E39AFEDA89B709C6E7E9A68238692BFC3CB2070EB8409B",
+      "generation_attempt_ordinal": 1351,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_current_v1|1544162162",
+      "receipt_sha256": "8BFFA58F03CF4EE687732BF3BA8E5A1DDAEABE1068AC9BBF7866663693EE7F2F",
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "6303F5F5E70C57F2F4E0DBBADC3D85B9571F01FF5E341A922E4523BEA386D933",
+      "candidate_spec_sha256": "CCE84894BDFF77FD3D16842209AB5C627851D099C9DF5AA22F26900FE260E269",
+      "generation_attempt_ordinal": 1353,
+      "operation": "COMPATIBLE_MECHANISM_SPEC_MUTATION",
+      "policy_key": "block_robust_evolution_current_v1|58589310",
+      "receipt_sha256": "BCAC160BAEA9798795DCCCEA7BE0EDFEBF771EA924D236715BC1DB2B5F78DA71",
+      "seed": 58589310
+    },
+    {
+      "arm": "block_robust_evolution_replication_v1",
+      "candidate_id": "0779675A35040D70054F22B5C2B43D76C4E2454DC96EA4464CD062EBDC71BE2D",
+      "candidate_spec_sha256": "A2E4DEDD1D36C9FB928EFF1000E1726F81C9DC302CD24572C911719A0CBE5583",
+      "generation_attempt_ordinal": 1354,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_replication_v1|1544162162",
+      "receipt_sha256": "6ACBB6C49778AFFCA0014D2FFB0F5D909F6D0D45F8A151B0CC05008DD9995227",
+      "seed": 1544162162
+    }
+  ],
+  "returned_count": 3,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 3
+}

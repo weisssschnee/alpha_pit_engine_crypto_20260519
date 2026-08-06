@@ -1,0 +1,33 @@
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+C:\HermesWorker\workspace\crypto_replication_gate_r3_fd6220d5\alphafactory_crypto\broad_search\search_engine_v1.py:9466: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  .fillna(False)
+C:\HermesWorker\workspace\crypto_replication_gate_r3_fd6220d5\alphafactory_crypto\broad_search\search_engine_v1.py:9471: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  successful["turnover_killed"].fillna(False).astype(bool).sum()
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\HermesWorker\workspace\crypto_replication_gate_r3_fd6220d5\alphafactory_crypto\broad_search\search_engine_v1.py", line 24235, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\workspace\crypto_replication_gate_r3_fd6220d5\alphafactory_crypto\broad_search\search_engine_v1.py", line 23936, in main
+    result = run_engine(
+             ^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_replication_gate_r3_fd6220d5\alphafactory_crypto\broad_search\search_engine_v1.py", line 18109, in run_engine
+    bool(validation_result["resumed"])
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'resumed'

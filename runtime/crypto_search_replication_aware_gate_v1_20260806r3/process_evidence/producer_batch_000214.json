@@ -1,0 +1,100 @@
+{
+  "attempted_exact_id_count": 1338,
+  "checkpoint_index": 2,
+  "evaluation_batch_index": 214,
+  "evidence_sha256": "4F4E0E93C0D2161A891D90A3F35860B04A4C09A9F0FF85B768CD5B4AFB4E9668",
+  "frozen_contract_sha256": "B600EF75CEE79EFC3DCFE2C5E1BC7D70C72B78D15225186087AA2E9CBE54F666",
+  "generation_attempts": 1697,
+  "heartbeat_utc": "2026-08-06T07:16:09.660309+00:00",
+  "producer_parent_pid": 26448,
+  "producer_pid": 7028,
+  "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+  "proposal_count": 8,
+  "proposal_identity_sha256": "DDB6467763B898E44FFD893AE507576F55C69906486241D653591B3B1BCEDBBE",
+  "proposals": [
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "2952942D85A378F3B8AFEB5731B54F51C17233DE047E9B1ABE17FD42C2EAC790",
+      "candidate_spec_sha256": "BBEF90BC8F0B7100303D66B1320D397B198B4AFDD57DD05767BF3BA6DD995BEA",
+      "generation_attempt_ordinal": 1689,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_current_v1|58589310",
+      "receipt_sha256": "19355D4D21AFD4251EE2C3234E29A5F40F90AA6B7C4A81368DBD4CCD55B54CD1",
+      "seed": 58589310
+    },
+    {
+      "arm": "block_robust_evolution_replication_v1",
+      "candidate_id": "B9157069EE9022D7BEF4DE03D9B586867C5507C1ADFAE1312FFA16E80780B65A",
+      "candidate_spec_sha256": "2633DA361AA6080EE77A132B6C798A7C4FCD85B38714A6FE9BAD885D1605F882",
+      "generation_attempt_ordinal": 1690,
+      "operation": "COMPATIBLE_MECHANISM_SPEC_MUTATION",
+      "policy_key": "block_robust_evolution_replication_v1|1544162162",
+      "receipt_sha256": "DE3234C3B54B58814613331F5D1B25DDA6C32BD17D5DBDF2C8F6FBD7443E0E00",
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_evolution_replication_v1",
+      "candidate_id": "9343DA35367012FE2100294E7A7B0E82E3FE5ABC9680F64963EA5236058101A1",
+      "candidate_spec_sha256": "C63C278A8B2C9906D1E2211990E17F6D9C0A30FEF5BB23FE4678D2A6E0C99CA7",
+      "generation_attempt_ordinal": 1691,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_replication_v1|58589310",
+      "receipt_sha256": "144F0368340FDB462755D70A4863BE7762AB8B4F2CEA8FC6294E2CA23386BF74",
+      "seed": 58589310
+    },
+    {
+      "arm": "block_robust_typed_random_v1",
+      "candidate_id": "92135C556E5A68AD53F75D69EAE78C6C33EBDB8A5FE5016108B9E65D548CD2CE",
+      "candidate_spec_sha256": "C701DA26881A65CA7499D41604F21783B88F1C05ECE7C68D3FF46CFB8FEA4052",
+      "generation_attempt_ordinal": 1692,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "block_robust_typed_random_v1|1544162162",
+      "receipt_sha256": null,
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_typed_random_v1",
+      "candidate_id": "D33970BD247CEEB9543FE5544A88825D637D238001F85B835978FCAB9FFAC042",
+      "candidate_spec_sha256": "AB912A69B872F8D76187A60414640C3E439E94E6194126B71FFBB7E3CE7D5930",
+      "generation_attempt_ordinal": 1693,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "block_robust_typed_random_v1|58589310",
+      "receipt_sha256": null,
+      "seed": 58589310
+    },
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "96009CBE6F4EC6533891ECC603EFF4B2D8AC2BFF17B0A68267E78B8A4172B4E4",
+      "candidate_spec_sha256": "F32C808A3F778B67DE59CDA5CCA428035D453A8874AB507B20798BE0D3FC51BB",
+      "generation_attempt_ordinal": 1695,
+      "operation": "ONE_POINT_TYPED_MECHANISM_CROSSOVER",
+      "policy_key": "block_robust_evolution_current_v1|1544162162",
+      "receipt_sha256": "E54309441D0A426586A83CFAC6FD15B91C138D6CC6B1CB1D27B4F21D78A344C8",
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_typed_random_v1",
+      "candidate_id": "7ECFFAE5C98F02D466F5C6B1BA986BA0559856FC410EA91D483680D007B39C08",
+      "candidate_spec_sha256": "187FA741CC8CD4D4182D0B1EEBB8E2EFBF1D5B1654F17456E25A8EB090993753",
+      "generation_attempt_ordinal": 1696,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "block_robust_typed_random_v1|1544162162",
+      "receipt_sha256": null,
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_typed_random_v1",
+      "candidate_id": "1B7A659340EE821772585087AA4C968512B501E808075D04922DF938054B41AB",
+      "candidate_spec_sha256": "23CBFB4EF87020A149E1BE362A790FAC6848D8EF8AC7FF7734563B8AFEFB3571",
+      "generation_attempt_ordinal": 1697,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "block_robust_typed_random_v1|58589310",
+      "receipt_sha256": null,
+      "seed": 58589310
+    }
+  ],
+  "returned_count": 8,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 8
+}

@@ -32,6 +32,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _load_search_evidence_v1_contract,
     _process_evidence_root_for_campaign,
     _search_evidence_v1_expected_checkpoint_allocations,
+    _validation_resumed_flag,
     _write_proposal_batch_process_evidence,
     _write_worker_process_evidence,
 )
@@ -355,14 +356,14 @@ def test_r2_receipt_retains_consumed_pre_engine_launcher_failure() -> None:
     }
 
 
-def test_r3_receipt_authorizes_only_the_exact_fresh_gate() -> None:
+def test_r3_receipt_closes_the_exact_completed_fresh_gate() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE"
+    assert receipt["run_authorized"] is False
     assert receipt["search_campaign"]["runner_campaign"] == (
         BLOCK_ROBUST_GATE_CAMPAIGN
     )
@@ -371,7 +372,40 @@ def test_r3_receipt_authorizes_only_the_exact_fresh_gate() -> None:
     assert receipt["search_campaign"]["seed_set"] == list(
         BLOCK_ROBUST_GATE_SEEDS
     )
-    assert receipt["run_outcome"] == {}
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_COMPLETE",
+        "reason": "FRESH_DEVELOPMENT_BLOCK_ROBUST_POLICY_COMPARISON_COMPLETE",
+        "runtime": (
+            "runtime/crypto_search_replication_aware_gate_v1_20260806r3"
+        ),
+        "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+        "generation_attempts": 2077,
+        "strict_evaluated_count": 1536,
+        "joined_strict_provenance_count": 1536,
+        "behavior_attributed_proposal_count": 1605,
+        "control_degenerate_count": 69,
+        "checkpoint": "checkpoint_002",
+        "checkpoint_restore_verified": True,
+        "artifact_bundle_sha256": (
+            "708C48BB96624AD4902704C4FA17277D3"
+            "336FAD57B9AC2919E1ECCB5FFAA47A1"
+        ),
+        "checker_result": "PASS",
+        "engineering_integrity": "PASS",
+        "research_decision": "NOT_QUALIFIED_FOR_VALIDATION",
+        "replication_candidate_count": 29,
+        "current_candidate_count": 27,
+        "replication_candidates_per_process_cpu_hour": 74.65057817998995,
+        "current_candidates_per_process_cpu_hour": 66.90255207941236,
+        "failed_gate": "leave_best_template_out_delta_positive",
+        "matched_positive_count": 1,
+        "process_exit_code": 1,
+        "process_exit_attribution": (
+            "POST_ARTIFACT_NOT_AUTHORIZED_VALIDATION_RESUMED_KEY_MISSING"
+        ),
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    }
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
     assert receipt["formal_claims_authorized"] is False
@@ -380,6 +414,12 @@ def test_r3_receipt_authorizes_only_the_exact_fresh_gate() -> None:
     assert campaign["receipt_path"] == (
         "config/crypto_search_replication_aware_gate_v1_r3_receipt.json"
     )
+
+
+def test_not_authorized_validation_result_does_not_require_resumed_key() -> None:
+    assert _validation_resumed_flag(None) is False
+    assert _validation_resumed_flag({"status": "NOT_AUTHORIZED"}) is False
+    assert _validation_resumed_flag({"resumed": True}) is True
 
 
 def test_pc2_launcher_treats_native_stderr_as_diagnostic() -> None:

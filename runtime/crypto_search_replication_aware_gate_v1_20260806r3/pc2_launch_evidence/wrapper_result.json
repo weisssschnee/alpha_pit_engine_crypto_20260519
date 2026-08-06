@@ -1,0 +1,17 @@
+﻿{
+    "schema_version":  1,
+    "status":  "PROCESS_FAILED",
+    "exit_code":  1,
+    "started_at":  "2026-08-06T14:55:58.3816238+08:00",
+    "completed_at":  "2026-08-06T15:20:41.1607762+08:00",
+    "wall_seconds":  1482.7791524,
+    "producer_source_sha":  "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_replication_gate_r3_fd6220d5\\runtime\\crypto_search_replication_aware_gate_v1_20260806r3",
+    "receipt_path":  "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+    "stdout_path":  "D:\\HermesWorker\\runtime\\crypto_replication_gate_r3_fd6220d5\\producer.stdout.log",
+    "stderr_path":  "D:\\HermesWorker\\runtime\\crypto_replication_gate_r3_fd6220d5\\producer.stderr.log",
+    "stderr_is_diagnostic_only":  true,
+    "native_exit_code_is_terminal_authority":  true,
+    "final_decision_exists":  true,
+    "run_manifest_exists":  true
+}

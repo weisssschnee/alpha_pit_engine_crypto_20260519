@@ -1,0 +1,10 @@
+{
+  "catalog_sha256": "7BA57F41EDE465625A362FFD3FF600C8B69E83C95463EC4006073CBD26B949AB",
+  "declared_mechanism_count": 72,
+  "individual_candidate_reward_persisted": false,
+  "knowledge_sha256": "FC85BB5348FF60063118DC6D9F59B00C947C3A21A7EE0D02FD84974A5CE9C99B",
+  "population_or_distribution_persisted": false,
+  "schema_version": 1,
+  "train_observed_mechanism_count": 72,
+  "validation_observed_mechanism_count": 0
+}

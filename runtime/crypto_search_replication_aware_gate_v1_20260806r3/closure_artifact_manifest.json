@@ -1,0 +1,79 @@
+{
+  "schema_version": "crypto-search-replication-aware-gate-v1-r3-closure-v1",
+  "status": "COMPLETED_WITH_POST_ARTIFACT_PROCESS_EXIT_1",
+  "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+  "pc2_task_id": "job_20260806_145544_e65955",
+  "strict_evaluated_count": 1536,
+  "core_artifact_bundle_sha256": "708C48BB96624AD4902704C4FA17277D3336FAD57B9AC2919E1ECCB5FFAA47A1",
+  "independent_checker_result": "PASS",
+  "research_decision": "NOT_QUALIFIED_FOR_VALIDATION",
+  "process_exit_code": 1,
+  "process_exit_attribution": "POST_ARTIFACT_NOT_AUTHORIZED_VALIDATION_RESUMED_KEY_MISSING",
+  "entries": [
+    {
+      "path": "reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806r3.md",
+      "bytes": 1420,
+      "sha256": "53AE5547ADCF96BD72AF43854150D307F6194B57DE2034A4CA339F3D81FA905F"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/run_manifest.json",
+      "bytes": 10114,
+      "sha256": "A6F284CEB96062F31C2CD2F6804E85A9C8FA2DF3F96818ECBBE6B01962BFC3CD"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/final_decision.json",
+      "bytes": 10105,
+      "sha256": "F60F6777CFAD727E738A924B72F4BB3B3C12F9A24B65C37D6BE179FCA108DEF0"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/independent_checker_pc2.json",
+      "bytes": 433,
+      "sha256": "1029A0A6EC53CF0F3087D85D699658739C70980CBA52C7D904739EA2155E0416"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/independent_checker_local.json",
+      "bytes": 433,
+      "sha256": "1029A0A6EC53CF0F3087D85D699658739C70980CBA52C7D904739EA2155E0416"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/launch_manifest.json",
+      "bytes": 1638,
+      "sha256": "1663579D35097A3937BD664948590280CE0E41A0BED54B2C357CA7259B0D0C15"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/producer.stdout.log",
+      "bytes": 13505,
+      "sha256": "0FC1E6C9FE23FFA0A4E0F77F5FAD34FED20CA0FBDA76B9A08FF6CC39E86D4B7E"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/producer.stderr.log",
+      "bytes": 3482,
+      "sha256": "85A86E824E04E7C91C57713D5872447EF9B1A861DFFF167AA6933F8A9A432DF7"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/wrapper_result.json",
+      "bytes": 933,
+      "sha256": "DFC22DCFE728DF230D056B92891725647A9927C733552EFDD92645CF339594B8"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/checker.pc2.result.json",
+      "bytes": 297,
+      "sha256": "0BC8DE7A915B389CD3E66F0B48FE037B62602600D87C4B8677E259BB254E7018"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/detached_job/job_20260806_145544_e65955.status.json",
+      "bytes": 692,
+      "sha256": "144DF15DAE5FB6571826D382A63B1EB3CB9A641529FBB5F09A41FFBC0DDFCC85"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/detached_job/job_20260806_145544_e65955.stderr.log",
+      "bytes": 1517,
+      "sha256": "5DD81B10E4C03AC0BA6466961531B88F1F7BC939B36A6136A43DFDDB51B04C8E"
+    },
+    {
+      "path": "runtime/crypto_search_replication_aware_gate_v1_20260806r3/pc2_launch_evidence/detached_job/launch_job_20260806_145544_e65955.ps1",
+      "bytes": 9919,
+      "sha256": "47235B72CC94548D0CC3D0A89426721E570B15AA5EA5B890082F93A2A76C6FCA"
+    }
+  ]
+}

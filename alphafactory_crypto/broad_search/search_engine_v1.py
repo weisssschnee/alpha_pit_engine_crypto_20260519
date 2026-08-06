@@ -15875,6 +15875,12 @@ def _frozen_validation_due(
     )
 
 
+def _validation_resumed_flag(
+    validation_result: Mapping[str, Any] | None,
+) -> bool:
+    return bool((validation_result or {}).get("resumed", False))
+
+
 def run_engine(
     repo_root: Path,
     *,
@@ -18105,11 +18111,7 @@ def run_engine(
             if validation_result is not None
             else "NOT_APPLICABLE"
         ),
-        "validation_resumed": (
-            bool(validation_result["resumed"])
-            if validation_result is not None
-            else False
-        ),
+        "validation_resumed": _validation_resumed_flag(validation_result),
         "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
         "sealed_reads": 0,
     }

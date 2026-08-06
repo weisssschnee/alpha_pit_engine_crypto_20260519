@@ -4,6 +4,40 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R3_COMPLETE_NOT_QUALIFIED_RESEARCH_HOLD`
+
+The one authorized R3 development campaign is consumed and closed. Exact
+producer `fd6220d56e0632b5084c2ed7574992c8bc2803fb`, receipt runtime
+`20260806r3`, and PC2 task `job_20260806_145544_e65955` completed exactly 1,536
+strict evaluations from 2,077 generation attempts with 512 per arm. All three
+512-candidate checkpoints are atomically published and restore-verified. The
+run kept 10 workers, used no memory fallback, completed in 1,478.333 active
+seconds at 3,742.668 actual pairs/hour versus the 512/hour floor, and performed
+zero sealed, validation, OOS, or holdout reads.
+
+Independent PC2 and local checkers pass with engineering integrity `PASS`, no
+errors, and artifact bundle SHA256
+`708C48BB96624AD4902704C4FA17277D3336FAD57B9AC2919E1ECCB5FFAA47A1`.
+The replication-aware Evolution arm produced 29 candidates positive in at
+least two of three purged development blocks versus 27 for current Evolution,
+and 74.651 versus 66.903 such candidates per process CPU-hour. It did not
+qualify: after removing the best contributing template its replication rate
+fell below current Evolution, and it produced zero all-three-block-positive
+candidates versus two for current Evolution. The sole strict matched-positive
+row remains development-only and grants no Alpha, validation, OOS, or promotion
+claim. The frozen result is `NOT_QUALIFIED_FOR_VALIDATION`; no arm is qualified
+and no continuation or next Arena started.
+
+The detached wrapper returned exit 1 only after all market artifacts were
+written because the non-authorized validation result omitted `resumed` while
+the final return assembly indexed that key directly. Closure source now treats
+an absent flag as false. This repair did not read market data or alter the
+completed evidence. No restart, second task, reseed, tuning, rescue rerun,
+validation, OOS, promotion, reward, mapping, compiler, AST, evaluator, or
+mechanism-catalog change occurred. Research state remains HOLD.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R2_INVALID_ARGUMENT_FLATTENING_BEFORE_ENGINE_ENTRY_RESEARCH_HOLD`
 
 The one authorized R2 task is consumed and closed without entering the search

@@ -1010,6 +1010,44 @@ SEARCH_ECONOMIC_RECEIPT_SPECS[
         "USER_AUTHORIZED_REPLICATION_AWARE_SEARCH_GATE_V1_R3_20260806"
     ),
     "runtime_date": "20260806r3",
+    "expected_run_outcome": {
+        "status": "ENGINE_COMPLETE",
+        "reason": (
+            "FRESH_DEVELOPMENT_BLOCK_ROBUST_POLICY_COMPARISON_COMPLETE"
+        ),
+        "runtime": (
+            "runtime/crypto_search_replication_aware_gate_v1_20260806r3"
+        ),
+        "producer_source_sha": (
+            "fd6220d56e0632b5084c2ed7574992c8bc2803fb"
+        ),
+        "generation_attempts": 2_077,
+        "strict_evaluated_count": 1_536,
+        "joined_strict_provenance_count": 1_536,
+        "behavior_attributed_proposal_count": 1_605,
+        "control_degenerate_count": 69,
+        "checkpoint": "checkpoint_002",
+        "checkpoint_restore_verified": True,
+        "artifact_bundle_sha256": (
+            "708C48BB96624AD4902704C4FA17277D3"
+            "336FAD57B9AC2919E1ECCB5FFAA47A1"
+        ),
+        "checker_result": "PASS",
+        "engineering_integrity": "PASS",
+        "research_decision": "NOT_QUALIFIED_FOR_VALIDATION",
+        "replication_candidate_count": 29,
+        "current_candidate_count": 27,
+        "replication_candidates_per_process_cpu_hour": 74.65057817998995,
+        "current_candidates_per_process_cpu_hour": 66.90255207941236,
+        "failed_gate": "leave_best_template_out_delta_positive",
+        "matched_positive_count": 1,
+        "process_exit_code": 1,
+        "process_exit_attribution": (
+            "POST_ARTIFACT_NOT_AUTHORIZED_VALIDATION_RESUMED_KEY_MISSING"
+        ),
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    },
 }
 
 _INVALID_INTENT = {

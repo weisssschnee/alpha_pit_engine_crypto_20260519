@@ -1,0 +1,30 @@
+{
+  "attempted_exact_id_count": 1605,
+  "checkpoint_index": 2,
+  "evaluation_batch_index": 271,
+  "evidence_sha256": "E1154B06E14C2D3206EEC0040BF5E20E7593AF2E7A754FA180778A78E86CF113",
+  "frozen_contract_sha256": "B600EF75CEE79EFC3DCFE2C5E1BC7D70C72B78D15225186087AA2E9CBE54F666",
+  "generation_attempts": 2077,
+  "heartbeat_utc": "2026-08-06T07:20:36.677361+00:00",
+  "producer_parent_pid": 26448,
+  "producer_pid": 7028,
+  "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+  "proposal_count": 1,
+  "proposal_identity_sha256": "11FED91DCD02630F7364E181FC0D5C7528E1BABB3E0863032042DF669EC242AD",
+  "proposals": [
+    {
+      "arm": "block_robust_evolution_replication_v1",
+      "candidate_id": "E7394B44DCA48F97E11C291CCB8CAA041F66AEE796DB37C1001E3C24716B0EBA",
+      "candidate_spec_sha256": "72322D4E6678E30781A1AAA296B6280F7938D4057D597294AA039397A17685EE",
+      "generation_attempt_ordinal": 2077,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_replication_v1|58589310",
+      "receipt_sha256": "272D4E83850D34C8E12F1D24A8B381BF45670A94FFE3BD80349026552E05206B",
+      "seed": 58589310
+    }
+  ],
+  "returned_count": 1,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 1
+}

@@ -1,0 +1,50 @@
+{
+  "attempted_exact_id_count": 1062,
+  "checkpoint_index": 1,
+  "evaluation_batch_index": 178,
+  "evidence_sha256": "46DCF8F5274C41C736550F6726E6B2F0AD15DBEB50AC4724C5C045D4136477B7",
+  "frozen_contract_sha256": "B600EF75CEE79EFC3DCFE2C5E1BC7D70C72B78D15225186087AA2E9CBE54F666",
+  "generation_attempts": 1357,
+  "heartbeat_utc": "2026-08-06T07:11:57.795699+00:00",
+  "producer_parent_pid": 26448,
+  "producer_pid": 7028,
+  "producer_source_sha": "fd6220d56e0632b5084c2ed7574992c8bc2803fb",
+  "proposal_count": 3,
+  "proposal_identity_sha256": "4B05D96CF11468F6215E979068897BFB0927B5D51CC7511FDCB7F625D595AD1A",
+  "proposals": [
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "3F841115CA703D4D946C10052CD0E993E03EE5F4F0F53800056FE7105CF861DF",
+      "candidate_spec_sha256": "002D00CE5596BFF64980D1CB166670E8D18DE510F7FD67EF3499810C62A6C886",
+      "generation_attempt_ordinal": 1355,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_current_v1|1544162162",
+      "receipt_sha256": "4D8E408FFC2C8EB4614F83ACED18D8965B3B6405D51B8B937B542EDC3AE7270B",
+      "seed": 1544162162
+    },
+    {
+      "arm": "block_robust_evolution_current_v1",
+      "candidate_id": "9DF9DEE22B4F54628E0DC0FA38B7A279A0E2DF6E272B71848DB771074FECCD53",
+      "candidate_spec_sha256": "A08E311FE72981ED202ACF06CBF2D703BACE82C3E932C8E1CDC27C1CF885EF7F",
+      "generation_attempt_ordinal": 1356,
+      "operation": "MECHANISM_PARAMETER_GROUP_MUTATION_1_TO_3",
+      "policy_key": "block_robust_evolution_current_v1|58589310",
+      "receipt_sha256": "967D3F30A51BE6CB0DDB4296B7CAA78C5F6C2C29E1DFE7A8FE4351CD22FADDEB",
+      "seed": 58589310
+    },
+    {
+      "arm": "block_robust_evolution_replication_v1",
+      "candidate_id": "19BB8076228B91B0A076D289F281D084B8CE8DFDB47D4506AF299B4E7207D87A",
+      "candidate_spec_sha256": "564320307F5F7F468B85706474C22536BAF9A2F1FC5499AEA28BB77DB6404825",
+      "generation_attempt_ordinal": 1357,
+      "operation": "COMPATIBLE_MECHANISM_SPEC_MUTATION",
+      "policy_key": "block_robust_evolution_replication_v1|1544162162",
+      "receipt_sha256": "93893261619156511A623B103EA15CAA23C39F3D7ED57BB44C2FF52100E156F3",
+      "seed": 1544162162
+    }
+  ],
+  "returned_count": 3,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 3
+}

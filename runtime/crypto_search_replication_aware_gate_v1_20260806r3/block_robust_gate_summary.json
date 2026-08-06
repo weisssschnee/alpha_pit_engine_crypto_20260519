@@ -1,0 +1,64 @@
+{
+  "alpha_claim": false,
+  "arms": {
+    "block_robust_evolution_current_v1": {
+      "all_three_blocks_positive_count": 2,
+      "behavior_family_count": 487,
+      "generation_attempts": 792,
+      "replicated_candidate_count": 27,
+      "replicated_candidate_rate": 0.052734375,
+      "replicated_candidates_per_process_cpu_hour": 66.90255207941236,
+      "strict_evaluated_count": 512,
+      "strict_raw_reachability": 0.6464646464646465,
+      "total_process_cpu_seconds": 1452.859375
+    },
+    "block_robust_evolution_replication_v1": {
+      "all_three_blocks_positive_count": 0,
+      "behavior_family_count": 474,
+      "generation_attempts": 751,
+      "replicated_candidate_count": 29,
+      "replicated_candidate_rate": 0.056640625,
+      "replicated_candidates_per_process_cpu_hour": 74.65057817998995,
+      "strict_evaluated_count": 512,
+      "strict_raw_reachability": 0.681757656458056,
+      "total_process_cpu_seconds": 1398.515625
+    },
+    "block_robust_typed_random_v1": {
+      "all_three_blocks_positive_count": 1,
+      "behavior_family_count": 511,
+      "generation_attempts": 534,
+      "replicated_candidate_count": 13,
+      "replicated_candidate_rate": 0.025390625,
+      "replicated_candidates_per_process_cpu_hour": 32.375990401349,
+      "strict_evaluated_count": 512,
+      "strict_raw_reachability": 0.9588014981273408,
+      "total_process_cpu_seconds": 1445.515625
+    }
+  },
+  "authority": "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1",
+  "automatic_continuation": false,
+  "best_robust_template_removed": "FUNDING_FLOW_CROWDING",
+  "development_only": true,
+  "gate_checks": {
+    "behavior_family_floor": true,
+    "equal_strict_count": true,
+    "leave_best_template_out_delta_positive": false,
+    "replicated_count_strictly_above_current": true,
+    "replicated_cpu_productivity_strictly_above_current": true,
+    "strict_raw_reachability_floor": true,
+    "template_breadth": true
+  },
+  "leave_best_template_out_rates": {
+    "block_robust_evolution_current_v1": 0.05032822757111598,
+    "block_robust_evolution_replication_v1": 0.03349282296650718
+  },
+  "oos_read": false,
+  "schema_version": 1,
+  "status": "NOT_QUALIFIED_FOR_VALIDATION",
+  "summary_sha256": "07D75214B9ABC4CEAE315315BDFD81D5B6F03F6C63AE7D20BA5ABA7110BD8C1E",
+  "supported_templates_with_positive_delta": [
+    "FLOW_INTENSITY_CONVICTION",
+    "FUNDING_FLOW_CROWDING"
+  ],
+  "validation_read": false
+}
