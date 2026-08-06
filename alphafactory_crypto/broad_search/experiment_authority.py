@@ -75,6 +75,9 @@ SEARCH_EVIDENCE_V11_RECEIPT_PATH = (
 BLOCK_ROBUST_GATE_RECEIPT_PATH = (
     "config/crypto_search_replication_aware_gate_v1_receipt.json"
 )
+BLOCK_ROBUST_GATE_REPLACEMENT_RECEIPT_PATH = (
+    "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -892,6 +895,23 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "campaign_contract",
         },
     },
+}
+
+# The original receipt and invalid-run outcome remain independently resolvable.
+# The replacement receipt changes only one-run authority and runtime identity;
+# every economic/search contract field is inherited unchanged.
+SEARCH_ECONOMIC_RECEIPT_SPECS[
+    "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1_REPLACEMENT_RECEIPT"
+] = {
+    **SEARCH_ECONOMIC_RECEIPT_SPECS[
+        "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1_RECEIPT"
+    ],
+    "path": BLOCK_ROBUST_GATE_REPLACEMENT_RECEIPT_PATH,
+    "decision_id": (
+        "USER_AUTHORIZED_REPLICATION_AWARE_SEARCH_GATE_V1_REPLACEMENT_20260806"
+    ),
+    "runtime_date": "20260806r1",
+    "expected_run_outcome": {},
 }
 
 _INVALID_INTENT = {

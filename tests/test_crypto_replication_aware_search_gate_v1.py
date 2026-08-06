@@ -218,7 +218,7 @@ def test_process_evidence_is_replication_gate_local_and_fail_closed(
         )
 
 
-def test_gate_receipt_is_consumed_by_exact_zero_attempt_failure() -> None:
+def test_original_gate_receipt_retains_consumed_invalid_run() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_replication_aware_gate_v1_receipt.json",
@@ -254,6 +254,25 @@ def test_gate_receipt_is_consumed_by_exact_zero_attempt_failure() -> None:
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
     assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
+
+
+def test_replacement_receipt_is_new_authority_for_unchanged_gate() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json",
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        BLOCK_ROBUST_GATE_CAMPAIGN
+    )
+    assert receipt["search_campaign"]["runtime_date"] == "20260806r1"
+    assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
+    assert receipt["search_campaign"]["seed_set"] == list(BLOCK_ROBUST_GATE_SEEDS)
+    assert receipt["run_outcome"] == {}
+    assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
+    assert receipt["holdout"]["read_allowed"] is False
     assert receipt["validation_kill_line"]["evaluated_per_active_arm"] == 0
     assert receipt["formal_claims_authorized"] is False
 
