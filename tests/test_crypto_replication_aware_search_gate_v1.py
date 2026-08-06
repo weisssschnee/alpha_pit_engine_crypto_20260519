@@ -304,6 +304,41 @@ def test_replacement_receipt_retains_consumed_launcher_failure() -> None:
     assert receipt["formal_claims_authorized"] is False
 
 
+def test_r2_receipt_is_single_use_authorized_and_contract_identical() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        BLOCK_ROBUST_GATE_CAMPAIGN
+    )
+    assert receipt["search_campaign"]["runtime_date"] == "20260806r2"
+    assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
+    assert receipt["search_campaign"]["seed_set"] == list(
+        BLOCK_ROBUST_GATE_SEEDS
+    )
+    assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
+    assert receipt["holdout"]["read_allowed"] is False
+    assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
+
+
+def test_pc2_launcher_treats_native_stderr_as_diagnostic() -> None:
+    launcher = (
+        REPO_ROOT
+        / "scripts/crypto_replication_aware_gate_v1_pc2_launcher.ps1"
+    ).read_text(encoding="utf-8")
+
+    assert "Start-Process" in launcher
+    assert "RedirectStandardOutput" in launcher
+    assert "RedirectStandardError" in launcher
+    assert "native-stderr-smoke" in launcher
+    assert "NATIVE_STDERR_SMOKE_PASS" in launcher
+    assert "& $Python @Arguments" not in launcher
+
+
 def test_replacement_invalid_run_manifest_binds_pre_submit_evidence() -> None:
     runtime = (
         REPO_ROOT

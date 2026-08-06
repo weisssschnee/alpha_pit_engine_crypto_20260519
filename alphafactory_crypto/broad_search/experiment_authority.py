@@ -78,6 +78,9 @@ BLOCK_ROBUST_GATE_RECEIPT_PATH = (
 BLOCK_ROBUST_GATE_REPLACEMENT_RECEIPT_PATH = (
     "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json"
 )
+BLOCK_ROBUST_GATE_R2_RECEIPT_PATH = (
+    "config/crypto_search_replication_aware_gate_v1_r2_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -941,6 +944,23 @@ SEARCH_ECONOMIC_RECEIPT_SPECS[
         "sealed_reads": 0,
         "rescue_rerun_started": False,
     },
+}
+
+# The two failed launches remain immutable historical evidence.  R2 is a new,
+# single-use authority with the same economic/search contract and a new runtime
+# identity; it does not convert either failed launch into a resumable run.
+SEARCH_ECONOMIC_RECEIPT_SPECS[
+    "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1_R2_RECEIPT"
+] = {
+    **SEARCH_ECONOMIC_RECEIPT_SPECS[
+        "CRYPTO_REPLICATION_AWARE_SEARCH_GATE_V1_RECEIPT"
+    ],
+    "path": BLOCK_ROBUST_GATE_R2_RECEIPT_PATH,
+    "decision_id": (
+        "USER_AUTHORIZED_REPLICATION_AWARE_SEARCH_GATE_V1_R2_20260806"
+    ),
+    "runtime_date": "20260806r2",
+    "expected_run_outcome": {},
 }
 
 _INVALID_INTENT = {

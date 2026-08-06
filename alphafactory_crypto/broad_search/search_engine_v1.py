@@ -556,12 +556,12 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     },
     BLOCK_ROBUST_GATE_CAMPAIGN: {
         "epoch_id": BLOCK_ROBUST_GATE_EPOCH_ID,
-        "runtime_date": "20260806r1",
+        "runtime_date": "20260806r2",
         "runtime_prefix": "crypto_search_replication_aware_gate_v1",
         "report_prefix": "CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1",
         "report_title": "Crypto Replication-Aware Search Gate V1",
         "receipt_path": (
-            "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json"
+            "config/crypto_search_replication_aware_gate_v1_r2_receipt.json"
         ),
         "contract_path": BLOCK_ROBUST_GATE_CONFIG,
         "authorization": "ONE_FRESH_STATE_1536_STRICT_DEVELOPMENT_BLOCK_ROBUST_GATE",
@@ -23935,7 +23935,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif args.command == "run-replication-aware-v1":
         result = run_engine(
             repo_root,
-            runtime_date=str(args.runtime_date or "20260806r1"),
+            runtime_date=str(args.runtime_date or "20260806r2"),
             source_sha=args.source_sha,
             campaign=BLOCK_ROBUST_GATE_CAMPAIGN,
             authority_preflight=authority_preflight,
@@ -24090,7 +24090,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif args.command == "check-replication-aware-v1":
         result = check_search_evidence_v1(
             repo_root,
-            runtime_date=str(args.runtime_date or "20260806r1"),
+            runtime_date=str(args.runtime_date or "20260806r2"),
             campaign=BLOCK_ROBUST_GATE_CAMPAIGN,
         )
     elif args.command == "assess-evidence-v1-repair":
