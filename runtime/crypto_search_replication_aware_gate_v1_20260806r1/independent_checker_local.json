@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "result": "FAIL",
+  "exit_code": 1,
+  "execution_host": "LOCAL",
+  "runtime": "runtime/crypto_search_replication_aware_gate_v1_20260806r1",
+  "producer_source_sha": "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596",
+  "errors": [
+    "missing:candidate_ledger.parquet",
+    "missing:behavior_archive.parquet",
+    "missing:behavior_family_summary.json",
+    "missing:arm_checkpoint_metrics.parquet",
+    "missing:search_failure_evidence.parquet",
+    "missing:search_run_evidence.parquet",
+    "missing:search_exposure_strata.parquet",
+    "missing:search_run_evidence_summary.json",
+    "missing:mechanism_knowledge.parquet",
+    "missing:mechanism_knowledge_summary.json",
+    "missing:final_decision.json",
+    "missing:run_manifest.json",
+    "missing:report"
+  ]
+}

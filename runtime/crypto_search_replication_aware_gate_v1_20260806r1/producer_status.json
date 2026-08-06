@@ -1,0 +1,29 @@
+{
+  "active_wall_seconds": 0.06465469999238849,
+  "checkpoint_index": 0,
+  "evaluation_batches": 0,
+  "evaluator_effective_cores": 0.0,
+  "frozen_contract_sha256": "A6CDD7A64449F78344419D63C1AFA11C499477A3C659171F5FAD67938536A667",
+  "generation_attempts": 8,
+  "heartbeat_utc": "2026-08-06T04:59:40.170946+00:00",
+  "last_batch": {
+    "evaluation_batch_index": 0,
+    "process_evidence_path": "process_evidence/producer_batch_000000.json",
+    "process_evidence_sha256": "34874A9782043E974ED448B930CAFC286E1B0F891C3BBAD9A2D39A5DDB024D24",
+    "proposal_count": 8,
+    "returned_count": 0,
+    "submitted_count": 0
+  },
+  "observed_pairs_per_hour": 0.0,
+  "producer_parent_pid": 25640,
+  "producer_pid": 9672,
+  "producer_source_sha": "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596",
+  "projected_remaining_hours": null,
+  "required_pairs_per_hour": 512.0,
+  "schema_version": 1,
+  "status": "PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT",
+  "strict_evaluated": 0,
+  "strict_target": 1536,
+  "worker_slot_fill_ratio": 0.0,
+  "workers": 10
+}

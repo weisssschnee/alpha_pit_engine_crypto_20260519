@@ -4,6 +4,40 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_INVALID_NATIVE_STDERR_BEFORE_WORKER_SUBMIT_RESEARCH_HOLD`
+
+The one authorized 1,536-strict replacement run is consumed and closed without
+market-evaluation evidence. Exact producer
+`a0c60ec55c4e71da08f575dfcbf2ec76cecd7596`, replacement receipt SHA256
+`8783957DE8CFBA99B5CE80F1AAF492E2348045A562E1BBBB2352ACF1B7D81167`, and
+PC2 task `job_20260806_125929_7681d5` reached the first pre-submit batch only.
+The persisted counters are eight generation attempts, zero worker submissions,
+zero returns, zero strict evaluations, zero checkpoints, and zero sealed reads.
+
+Windows PowerShell converted the NumPy `RuntimeWarning` written to native
+stderr into a terminating `NativeCommandError`. The producer disappeared during
+the first multiprocessing spawn, leaving one child with inherited log handles.
+After five minutes of unchanged heartbeat, stdout, CPU, and counters, only that
+exact orphan was terminated so the single detached task could persist its
+terminal failure. No restart, second task, reseed, tuning, rescue rerun,
+validation, OOS, holdout, automatic expansion, or promotion occurred.
+
+PC2 and local independent checkers both return `FAIL` with the same 13 missing
+terminal artifacts. The 16-file failure-evidence bundle is
+`C8B3ADD62EEBC1C01A9A7E0D200571485BED83FF582B57AD798CE2E5568720EC`.
+The replacement receipt is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
+`run_authorized=false`. This is an operational invalid run, not evidence about
+random, current Evolution, replication-aware Evolution, reward, Alpha, or
+migration. Any further market run requires new explicit authorization and a new
+receipt.
+
+The existing Search capability node records this consumed replacement failure
+without a new node, authority, lifecycle, or promotion transition. Research
+state remains HOLD.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_PROCESS_EVIDENCE_REPAIRED_SOURCE_AND_PC2_SMOKE_VERIFIED_RESEARCH_HOLD`
 
 Replication-Aware Search Gate V1 remains a consumed invalid market run. Its
@@ -1231,10 +1265,14 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart the consumed Replication-Aware Search Gate V1 receipt. The
-Windows detached-launch and process-evidence defects are source- and PC2
-no-market-smoke verified. A market replacement still requires a new explicit
-authorization and receipt; this closure grants neither.
+Do not restart either consumed Replication-Aware Search Gate V1 receipt. The
+replacement proved that process evidence now captures the pre-submit boundary,
+but its task-specific Windows PowerShell wrapper treated native stderr warnings
+as terminating errors. Before any separately authorized future market run, use
+a launcher that preserves native stderr without converting warnings into
+PowerShell exceptions and verify it with a no-market smoke. A further market
+run still requires a new explicit authorization and receipt; this closure
+grants neither.
 
 The prior family-consensus and V1.1 development/validation conclusions remain
 unchanged. No market search, validation, data Arena, reward/mapping/optimizer

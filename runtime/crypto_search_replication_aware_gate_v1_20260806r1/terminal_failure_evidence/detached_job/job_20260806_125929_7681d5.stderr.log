@@ -1,0 +1,8 @@
+python.exe : D:\HermesWorker\runtime\crypto_search_py311_overlay_94b016fa\site-packages\numpy\lib\_nanfunctions_impl.py
+:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+ËùÔÚÎ»ÖÃ C:\HermesWorker\runtime\launch_crypto_replication_gate_r1_20260806.ps1:151 ×Ö·û: 5
++     & $Python @Arguments 1> $Stdout 2> $Stderr
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\HermesWorker...<= 0 for slice.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

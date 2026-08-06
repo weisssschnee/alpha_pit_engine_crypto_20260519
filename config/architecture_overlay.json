@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (replication-aware process evidence repaired; invalid run unchanged; prior evidence retained; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (replacement launch invalid before worker submit; prior evidence retained; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -566,6 +566,9 @@
                                     ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806.md"
                                     ,"runtime/crypto_search_process_evidence_repair_20260806/run_manifest.json"
                                     ,"reports/CRYPTO_SEARCH_PROCESS_EVIDENCE_REPAIR_20260806.md"
+                                    ,"config/crypto_search_replication_aware_gate_v1_replacement_receipt.json"
+                                    ,"runtime/crypto_search_replication_aware_gate_v1_20260806r1/invalid_run_artifact_manifest.json"
+                                    ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_20260806.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -810,6 +813,15 @@
                                              "enforced_by":  "broad_search.search_engine_v1 process evidence and the Chengbo company-remote detached launcher",
                                              "bypass_forbidden":  true,
                                              "evidence_ref":  "runtime/crypto_search_process_evidence_repair_20260806/run_manifest.json"
+                                         },
+                                         {
+                                             "id":  "crypto_search_replication_aware_gate_v1_replacement_invalid_run",
+                                             "type":  "EVIDENCE",
+                                             "rule":  "The one authorized replacement receipt is consumed with run_authorized false. Exact producer a0c60ec55c4e71da08f575dfcbf2ec76cecd7596 and PC2 task job_20260806_125929_7681d5 wrote the frozen contract, embedded preflight, one eight-proposal pre-submit batch receipt, and worker stage receipts, then failed before worker submission because Windows PowerShell converted a NumPy RuntimeWarning on native stderr into a terminating NativeCommandError. Persisted counts are 8 generation attempts, 0 submitted, 0 returned, 0 strict evaluated, 0 checkpoints, and 0 sealed reads. After five minutes of unchanged liveness, only the exact orphan spawn worker was terminated to close the task. PC2 and local checkers both reject the runtime with 13 missing terminal artifacts. No restart, second task, reseed, tuning, rescue rerun, validation, OOS, holdout, automatic expansion, or promotion occurred. This is operational invalid-run evidence only and cannot compare random, current Evolution, replication-aware Evolution, reward, Alpha, or migration. Any further market run requires new explicit authorization and a new receipt.",
+                                             "severity":  "HARD",
+                                             "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1.check_search_evidence_v1, and the consumed replacement receipt",
+                                             "bypass_forbidden":  true,
+                                             "evidence_ref":  "runtime/crypto_search_replication_aware_gate_v1_20260806r1/invalid_run_artifact_manifest.json"
                                          },
                                          {
                                              "id":  "search_engine_v1_counting_and_restore_gate",

@@ -911,7 +911,36 @@ SEARCH_ECONOMIC_RECEIPT_SPECS[
         "USER_AUTHORIZED_REPLICATION_AWARE_SEARCH_GATE_V1_REPLACEMENT_20260806"
     ),
     "runtime_date": "20260806r1",
-    "expected_run_outcome": {},
+    "expected_run_outcome": {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "NATIVE_STDERR_TERMINATED_BEFORE_WORKER_SUBMIT",
+        "runtime": (
+            "runtime/crypto_search_replication_aware_gate_v1_20260806r1"
+        ),
+        "producer_source_sha": (
+            "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596"
+        ),
+        "generation_attempts": 8,
+        "submitted_count": 0,
+        "returned_count": 0,
+        "strict_evaluated_count": 0,
+        "market_evaluations": 0,
+        "checkpoint": None,
+        "artifact_bundle_sha256": (
+            "C8B3ADD62EEBC1C01A9A7E0D20057148"
+            "5BED83FF582B57AD798CE2E5568720EC"
+        ),
+        "checker_result": "FAIL",
+        "checker_exit_code": 1,
+        "checker_missing_artifact_count": 13,
+        "effective_task_id": "job_20260806_125929_7681d5",
+        "launcher_failure": (
+            "WINDOWS_POWERSHELL_NATIVE_COMMAND_ERROR_FROM_NUMPY_RUNTIME_WARNING"
+        ),
+        "orphan_worker_terminated": True,
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    },
 }
 
 _INVALID_INTENT = {

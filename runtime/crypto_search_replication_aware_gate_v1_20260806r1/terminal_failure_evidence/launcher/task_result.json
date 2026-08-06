@@ -1,0 +1,8 @@
+﻿{
+    "status":  "LAUNCH_OR_PRODUCER_EXCEPTION",
+    "started_utc":  "2026-08-06T04:59:34.2072124Z",
+    "finished_utc":  "2026-08-06T05:04:57.2712478Z",
+    "producer_sha":  "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596",
+    "error":  "D:\\HermesWorker\\runtime\\crypto_search_py311_overlay_94b016fa\\site-packages\\numpy\\lib\\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom \u003c= 0 for slice.",
+    "runtime_exists":  true
+}

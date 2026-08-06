@@ -256,25 +256,84 @@ def test_original_gate_receipt_retains_consumed_invalid_run() -> None:
     assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
 
 
-def test_replacement_receipt_is_new_authority_for_unchanged_gate() -> None:
+def test_replacement_receipt_retains_consumed_launcher_failure() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_replication_aware_gate_v1_replacement_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED"
+    )
+    assert receipt["run_authorized"] is False
     assert receipt["search_campaign"]["runner_campaign"] == (
         BLOCK_ROBUST_GATE_CAMPAIGN
     )
     assert receipt["search_campaign"]["runtime_date"] == "20260806r1"
     assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
     assert receipt["search_campaign"]["seed_set"] == list(BLOCK_ROBUST_GATE_SEEDS)
-    assert receipt["run_outcome"] == {}
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "NATIVE_STDERR_TERMINATED_BEFORE_WORKER_SUBMIT",
+        "runtime": "runtime/crypto_search_replication_aware_gate_v1_20260806r1",
+        "producer_source_sha": "a0c60ec55c4e71da08f575dfcbf2ec76cecd7596",
+        "generation_attempts": 8,
+        "submitted_count": 0,
+        "returned_count": 0,
+        "strict_evaluated_count": 0,
+        "market_evaluations": 0,
+        "checkpoint": None,
+        "artifact_bundle_sha256": (
+            "C8B3ADD62EEBC1C01A9A7E0D20057148"
+            "5BED83FF582B57AD798CE2E5568720EC"
+        ),
+        "checker_result": "FAIL",
+        "checker_exit_code": 1,
+        "checker_missing_artifact_count": 13,
+        "effective_task_id": "job_20260806_125929_7681d5",
+        "launcher_failure": (
+            "WINDOWS_POWERSHELL_NATIVE_COMMAND_ERROR_FROM_NUMPY_RUNTIME_WARNING"
+        ),
+        "orphan_worker_terminated": True,
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    }
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
     assert receipt["validation_kill_line"]["evaluated_per_active_arm"] == 0
     assert receipt["formal_claims_authorized"] is False
+
+
+def test_replacement_invalid_run_manifest_binds_pre_submit_evidence() -> None:
+    runtime = (
+        REPO_ROOT
+        / "runtime/crypto_search_replication_aware_gate_v1_20260806r1"
+    )
+    manifest = json.loads(
+        (runtime / "invalid_run_artifact_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    rows = sorted(manifest["artifacts"], key=lambda row: str(row["path"]))
+    assert manifest["status"] == (
+        "RUN_INVALID_NATIVE_STDERR_TERMINATED_BEFORE_WORKER_SUBMIT"
+    )
+    assert manifest["artifact_count"] == len(rows) == 16
+    for row in rows:
+        payload = (runtime / str(row["path"])).read_bytes()
+        assert len(payload) == int(row["bytes"])
+        assert hashlib.sha256(payload).hexdigest().upper() == row["sha256"]
+    bundle_payload = "\n".join(
+        f"{row['path']}|{row['bytes']}|{row['sha256']}" for row in rows
+    ).encode("utf-8")
+    assert hashlib.sha256(bundle_payload).hexdigest().upper() == (
+        manifest["artifact_bundle_sha256"]
+    )
+    producer = json.loads((runtime / "producer_status.json").read_text())
+    assert producer["generation_attempts"] == 8
+    assert producer["last_batch"]["submitted_count"] == 0
+    assert producer["last_batch"]["returned_count"] == 0
+    assert producer["strict_evaluated"] == 0
 
 
 def test_invalid_run_artifact_manifest_binds_zero_attempt_evidence() -> None:
