@@ -1,0 +1,10 @@
+﻿{
+    "initializer_receipt_count":  5,
+    "smoke_workspace":  "C:\\HermesWorker\\workspace\\crypto_process_evidence_smoke_20260806",
+    "market_evaluation_performed":  false,
+    "status":  "PASS",
+    "source_file_sha256":  "1936BCE6C657ECDD98CC1BA31A94E0D72AF6E7ABF2259B57A460F74B041B3ED4",
+    "receipt_consumed":  false,
+    "production_source_sha":  "175ce33f31ba56ab336d187e2b7ca0c9e2e29e98",
+    "initializer_ready_count":  5
+}

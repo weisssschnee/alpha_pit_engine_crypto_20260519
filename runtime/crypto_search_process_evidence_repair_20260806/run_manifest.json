@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "campaign": "crypto_search_process_evidence_repair_20260806",
+  "status": "SOURCE_IMPLEMENTED_PC2_NO_MARKET_SMOKE_VERIFIED",
+  "research_outcome": "NO_MARKET_RESULT",
+  "production_source_sha": "175ce33f31ba56ab336d187e2b7ca0c9e2e29e98",
+  "production_source_file": "alphafactory_crypto/broad_search/search_engine_v1.py",
+  "production_source_file_sha256": "1936BCE6C657ECDD98CC1BA31A94E0D72AF6E7ABF2259B57A460F74B041B3ED4",
+  "remote_launcher": {
+    "path": "G:/Chengbo/tools/company-remote/company-remote.ps1",
+    "sha256": "75036FFAC3A80A3E0A12637DD93F37B6A0582C9F6313E4F6BCBFC85F4BE726AA",
+    "repository_managed": false,
+    "double_start_repair": "triggerless registration plus one explicit start and a persistent CreateNew start lock",
+    "pid_and_exit_repair": "launcher and child PID persisted; child exit code obtained from System.Diagnostics.Process",
+    "intentional_failure_smoke_task": "job_20260806_111245_5b7afd",
+    "intentional_failure_smoke_exit_code": 7,
+    "intentional_failure_smoke_invocations": 1
+  },
+  "engine_process_evidence": {
+    "campaign_scope": "crypto_search_replication_aware_gate_v1 only",
+    "proposal_batch_receipt": "atomic before worker submission; binds generation attempts and exact candidate identities",
+    "worker_receipts": [
+      "INITIALIZER_STARTED",
+      "INITIALIZER_READY",
+      "INITIALIZER_FAILED",
+      "TASK_STARTED",
+      "TASK_COMPLETED",
+      "TASK_FAILED"
+    ],
+    "authority": "fail closed process evidence only; no evaluator, reward, mapping, archive, or optimizer feedback"
+  },
+  "pc2_no_market_smoke": {
+    "task_id": "job_20260806_114350_12ba4d",
+    "status": "PASS",
+    "exit_code": 0,
+    "launcher_pid": 8364,
+    "child_pid": 13076,
+    "configured_workers": 10,
+    "materialized_workers": 5,
+    "initializer_receipts": 5,
+    "initializer_ready_receipts": 5,
+    "field_count": 115,
+    "market_evaluation_performed": false,
+    "receipt_consumed": false,
+    "sealed_read_count": 0
+  },
+  "verification": {
+    "focused_tests": "29 passed",
+    "full_tests": "454 passed, 1 existing NumPy warning",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "independent_spec_review": "PASS_NO_ACTIONABLE_FINDINGS",
+    "independent_standards_review": "PASS_NO_ACTIONABLE_FINDINGS",
+    "architecture_overlay": "UPDATED_EXISTING_SEARCH_NODE_ONLY",
+    "generated_current": "STALE_MAINTENANCE_TIMED_OUT_PARTIAL_OUTPUT_DISCARDED"
+  },
+  "historical_run_correction": {
+    "persisted_generation_attempts": 0,
+    "exact_generation_attempts": null,
+    "reason": "producer status was stale and no pre-submit attempt receipt existed; an orphan multiprocessing spawn child proves the submission path began",
+    "strict_evaluated_count": 0,
+    "checkpoint_count": 0,
+    "replacement_run_authorized": false
+  },
+  "boundaries": {
+    "market_search_performed": false,
+    "validation_read": false,
+    "oos_read": false,
+    "holdout_read": false,
+    "reward_changed": false,
+    "mapping_changed": false,
+    "search_policy_changed": false,
+    "new_graph_node": false,
+    "replacement_receipt_created": false,
+    "replacement_run_launched": false
+  },
+  "artifacts": [
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/summary.json",
+      "sha256": "6ACE5CBBF60A3C7875FDC013F1C257971F68C104FC0F8DDAC797B90BEBF45293"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/worker_1272_initializer.json",
+      "sha256": "28B615CA69E53DF510CED47ED27CE1884BE84DDF5B3A14F02D9D5C7889D8B9B6"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/worker_14244_initializer.json",
+      "sha256": "F7EA8160FB733E8327B929CE082AF5645E4705CD0940877DB2F9DE8D399B2DF4"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/worker_25216_initializer.json",
+      "sha256": "DA7B4AAF3E0AD03458742636BB465CB1485CA9350195478353673A58BA25B789"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/worker_3328_initializer.json",
+      "sha256": "062D3BB5B9078C420147E843D2A5A90E8F116D86301CCFE1A3A07FCC49C1BCF3"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_initializer_smoke/worker_7276_initializer.json",
+      "sha256": "EF1F7EE9B833A4D29629247DA59194D61A627F04F51355B7A8F196C1437ADBBC"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_launcher_smoke/invocation_count.txt",
+      "sha256": "26240BFF46017A276AD34DC0220CD5F3CCA396068DA691D409C687D2D75645DD"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_launcher_smoke/job_20260806_111245_5b7afd.status.json",
+      "sha256": "D325D33962F58533D34FD5BD8D3603C3DDA768CFD7DA4D14E2F4A5DFB0A83158"
+    },
+    {
+      "path": "runtime/crypto_search_process_evidence_repair_20260806/pc2_engine_smoke_launcher/job_20260806_114350_12ba4d.status.json",
+      "sha256": "C4C5B8A3FA9A24E41A8B21D3B20FD8B40AD7B1E365ABC18387736596E2C0E71F"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{"cache_root": "C:\\HermesWorker\\workspace\\crypto_replication_gate_ee36ea46\\.cache\\crypto_search_engine_v1_4\\oi_mark_x_aggtrades_115", "contract_rows": 115, "phase": "EXACT_INITIALIZER_PARENT_READY", "pid": 22936, "workers": 10}
+{"all_initializer_receipts_ready": true, "all_registries_initialized": true, "all_stores_initialized": true, "initializer_receipt_count": 5, "maximum_worker_rss_bytes": 143998976, "status": "PASS", "unique_worker_count": 5, "wall_seconds": 9.266849517822266, "workers": 10}
+{
+    "initializer_receipt_count":  5,
+    "smoke_workspace":  "C:\\HermesWorker\\workspace\\crypto_process_evidence_smoke_20260806",
+    "market_evaluation_performed":  false,
+    "status":  "PASS",
+    "source_file_sha256":  "1936BCE6C657ECDD98CC1BA31A94E0D72AF6E7ABF2259B57A460F74B041B3ED4",
+    "receipt_consumed":  false,
+    "production_source_sha":  "175ce33f31ba56ab336d187e2b7ca0c9e2e29e98",
+    "initializer_ready_count":  5
+}

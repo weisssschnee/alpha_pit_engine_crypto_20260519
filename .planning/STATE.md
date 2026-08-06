@@ -4,23 +4,33 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_SOURCE_IMPLEMENTED_RUN_INVALID_ZERO_ATTEMPTS_RESEARCH_HOLD`
+`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_PROCESS_EVIDENCE_REPAIRED_SOURCE_AND_PC2_SMOKE_VERIFIED_RESEARCH_HOLD`
 
-Replication-Aware Search Gate V1 source is implemented and source-qualified at
-producer `ee36ea46a617b8786661b402992ef3fb0fbaaf5a`. It reuses the existing
-115-field aligned carrier, Binance USD-M target, mapping, 5 bps cost, dual-axis
-matched controls, mechanism catalog, compiler, AST, and evaluator. The frozen
-development-only design compares typed random, current Evolution, and identical
-Evolution with three-block robust lexicographic selection at 512 strict per arm.
+Replication-Aware Search Gate V1 remains a consumed invalid market run. Its
+retained design and market contract are unchanged. Source commit
+`175ce33f31ba56ab336d187e2b7ca0c9e2e29e98` repairs the missing process-evidence
+chain without evaluating a candidate: proposal attempts and exact candidate
+identities are now atomically persisted after batch construction and before
+worker submission, while worker initializer/task receipts record started,
+ready/completed, and failed stages. These receipts are campaign-local and
+fail-closed; they do not feed reward, mapping, Archive, CEM, or Evolution.
 
-The one effective PC2 task `job_20260806_044440_a5b83e` did not reach search.
-After writing the frozen contract, authority preflight, and initial producer
-status, its top-level Python producer exited before the first generation
-attempt and left one spawn child holding inherited pipes. Independent closure
-records exactly zero generation attempts, zero strict evaluations, zero
-checkpoints, zero sealed reads, and no run manifest or final decision. The
-orphan and task entry were terminated without a rerun. The independent checker
-correctly fails on 13 missing terminal artifacts.
+The historical statement that the failed PC2 task made exactly zero generation
+attempts is withdrawn. Its persisted producer status remained at zero, but no
+pre-submit attempt receipt existed and one orphan multiprocessing spawn child
+proved that the submission path began. The exact proposal count is therefore
+unknown. Exactly zero strict evaluations and zero checkpoints remain supported.
+
+The global remote launcher at
+`G:/Chengbo/tools/company-remote/company-remote.ps1` (SHA256
+`75036FFAC3A80A3E0A12637DD93F37B6A0582C9F6313E4F6BCBFC85F4BE726AA`)
+now registers and starts each detached task once, holds an atomic start lock,
+and persists launcher PID, child PID, separate streams, and the real child exit
+code. PC2 smoke `job_20260806_111245_5b7afd` produced one invocation and the
+intentional exit code 7. No-market engine smoke `job_20260806_114350_12ba4d`
+initialized the exact 115-field store/registry and emitted five of five ready
+worker receipts at the 10-worker configuration, with no market evaluation or
+receipt consumption. Full tests pass: 454 passed with one existing warning.
 
 The receipt is
 `RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
@@ -30,12 +40,12 @@ No random/Evolution comparison, replication-ordering conclusion, Alpha claim,
 validation, OOS, promotion, or next-Arena authority exists. A replacement run
 requires new explicit authorization; this closure does not authorize one.
 
-The existing Search capability overlay records the source implementation and
-invalid run without a new node, authority, lifecycle, or promotion transition.
-Bounded CURRENT maintenance did not terminate; its partial generated files
-were discarded and the prior valid generated CURRENT was restored. CURRENT is
-therefore stale against the updated overlay, and no global freshness PASS is
-claimed.
+The existing Search capability overlay records the invalid run correction and
+process-evidence repair without a new node, authority, lifecycle, or promotion
+transition. Bounded CURRENT maintenance again failed to terminate; its partial
+generated files were discarded and the prior committed CURRENT was restored.
+The overlay is current, generated CURRENT remains stale, and no global freshness
+PASS is claimed. Research state remains HOLD.
 
 The preceding completed phase was:
 
@@ -1221,12 +1231,10 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart the consumed Replication-Aware Search Gate V1 receipt. The source
-implementation remains available but runtime-unverified. Before requesting any
-replacement, diagnose the zero-attempt parent exit with a market-free Windows
-multiprocessing/spawn preflight that cannot generate candidates or read market
-partitions. A replacement must use a new explicit authorization and receipt;
-this closure grants neither.
+Do not restart the consumed Replication-Aware Search Gate V1 receipt. The
+Windows detached-launch and process-evidence defects are source- and PC2
+no-market-smoke verified. A market replacement still requires a new explicit
+authorization and receipt; this closure grants neither.
 
 The prior family-consensus and V1.1 development/validation conclusions remain
 unchanged. No market search, validation, data Arena, reward/mapping/optimizer
