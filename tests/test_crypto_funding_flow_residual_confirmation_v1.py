@@ -5,6 +5,10 @@ from pathlib import Path
 
 import pandas as pd
 
+from alphafactory_crypto.broad_search import (
+    funding_flow_residual_confirmation_v1 as confirmation,
+)
+
 from alphafactory_crypto.broad_search.funding_flow_residual_confirmation_v1 import (
     _counterfactual_decision,
     _verify_checkpoint,
@@ -75,6 +79,32 @@ def test_preflight_freezes_exact_main_placebo_grid_without_market_read() -> None
         result = preflight_confirmation(REPO_ROOT)
         assert result["status"] == "PREFLIGHT_PASS_NO_MARKET_EVALUATION"
         assert result["market_read_performed"] is False
+        assert result["economic_authority_verified"] is True
+
+
+def test_preflight_resolves_economic_authority_before_launch(monkeypatch) -> None:
+    receipt = load_confirmation_receipt(REPO_ROOT, require_authorized=False)
+    calls: list[Path] = []
+
+    monkeypatch.setattr(
+        confirmation,
+        "load_confirmation_receipt",
+        lambda *args, **kwargs: receipt,
+    )
+
+    def record_economic_authority(root: Path, loaded_receipt: dict) -> object:
+        assert loaded_receipt is receipt
+        calls.append(root)
+        return object()
+
+    monkeypatch.setattr(
+        confirmation,
+        "_build_economic_context",
+        record_economic_authority,
+    )
+    result = confirmation.preflight_confirmation(REPO_ROOT)
+    assert calls == [REPO_ROOT]
+    assert result["economic_authority_verified"] is True
 
 
 def test_validation_splits_and_tail_purge_are_frozen() -> None:

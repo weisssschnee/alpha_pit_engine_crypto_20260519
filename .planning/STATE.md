@@ -4,6 +4,39 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_INVALID_PRE_MARKET_AUTHORITY_FAILURE_RESEARCH_HOLD`
+
+The one authorized reused-development-validation diagnostic is consumed and
+closed without evaluating a market candidate. Exact PC2 producer
+`da9e1943fa57e2062f7a7b71bf22c91469382619` froze 162 deterministic candidates
+as 81 exact main/swapped-timescale-placebo pairs, then failed closed while
+resolving the current economic receipt. The PC2 sparse Windows checkout changed
+line endings for component files whose frozen authority still uses byte hashes,
+so `SEARCH_ECONOMIC_RECEIPT_BLOCKED` fired before the economic context was
+constructed.
+
+The retained producer status has `completed_candidate_count=0`,
+`validation_b_read=false`, `holdout_read_count=0`, and `oos_read_count=0`.
+There are no candidate checkpoints, final decision, run manifest, economic
+metrics, or independent market checker result. Therefore this run says nothing
+about the anchor, local basin, funding-flow residual mechanism, placebo,
+direction, Alpha, or migration. In particular, the user-authorized reused
+validation interval was not read, so no additional validation contamination
+occurred.
+
+The one-time receipt is now
+`RUN_AUTHORIZATION_CONSUMED_PRE_MARKET_AUTHORITY_FAILURE` with
+`run_authorized=false`. The seven preserved PC2 artifacts were independently
+hash-matched after transfer; their closure bundle SHA256 is
+`F7B723E6C8A662E26BE563D2C7E832AD093315076FF436CB06F0C784E6990285`.
+Source preflight now resolves the economic authority before launch, so the same
+checkout portability defect fails during no-market preflight rather than after
+a scheduled task starts. No restart, rescue rerun, reseed, tuning, second task,
+validation, OOS, holdout, promotion, reward, mapping, evaluator, compiler, AST,
+catalog, or Graph authority transition occurred. Research state remains HOLD.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R3_COMPLETE_NOT_QUALIFIED_RESEARCH_HOLD`
 
 The one authorized R3 development campaign is consumed and closed. Exact

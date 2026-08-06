@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\funding_flow_residual_confirmation_v1.py", line 2349, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\funding_flow_residual_confirmation_v1.py", line 2332, in main
+    result = run_confirmation(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\funding_flow_residual_confirmation_v1.py", line 1881, in run_confirmation
+    economic=_build_economic_context(root, receipt),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\funding_flow_residual_confirmation_v1.py", line 409, in _build_economic_context
+    base = resolve_search_economic_receipt(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\experiment_authority.py", line 1942, in resolve_search_economic_receipt
+    return _validate_search_economic_receipt(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_funding_flow_confirmation_8a83cc76\alphafactory_crypto\broad_search\experiment_authority.py", line 1788, in _validate_search_economic_receipt
+    raise RuntimeError(
+RuntimeError: SEARCH_ECONOMIC_RECEIPT_BLOCKED: component_hash.aggregate_mechanism_knowledge; component_hash.behavior_provenance_consumer; component_hash.campaign_contract; component_hash.direction; component_hash.expanded_mechanism_catalog; component_hash.mechanism; component_hash.mechanism_mapping; component_hash.optimizer_reward_and_matched_attribution; component_hash.portfolio_mapping_and_cost; component_hash.runtime_binding; component_hash.target_contract; component_hash.target_execution; component_hash.validation_kill_line; component_sources.aggregate_mechanism_knowledge.frozen_hash; component_sources.behavior_provenance_consumer.frozen_hash; component_sources.campaign_contract.frozen_hash; component_sources.direction.frozen_hash; component_sources.expanded_mechanism_catalog.frozen_hash; component_sources.mechanism.frozen_hash; component_sources.mechanism_mapping.frozen_hash; component_sources.optimizer_reward_and_matched_attribution.frozen_hash; component_sources.portfolio_mapping_and_cost.frozen_hash; component_sources.runtime_binding.frozen_hash; component_sources.target_contract.frozen_hash; component_sources.target_execution.frozen_hash; component_sources.validation_kill_line.frozen_hash; run_outcome.frozen_contract

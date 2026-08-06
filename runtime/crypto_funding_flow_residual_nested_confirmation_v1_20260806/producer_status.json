@@ -1,0 +1,11 @@
+{
+  "completed_candidate_count": 0,
+  "heartbeat_utc": "2026-08-06T11:36:06.989944+00:00",
+  "holdout_read_count": 0,
+  "oos_read_count": 0,
+  "producer_pid": 15792,
+  "producer_source_sha": "da9e1943fa57e2062f7a7b71bf22c91469382619",
+  "schema_version": 1,
+  "status": "STAGE_0_RUNNING",
+  "validation_b_read": false
+}

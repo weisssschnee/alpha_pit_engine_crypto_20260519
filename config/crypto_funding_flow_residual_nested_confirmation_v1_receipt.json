@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "receipt_id": "CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_RECEIPT",
-  "status": "RUN_AUTHORIZED_REUSED_DEVELOPMENT_VALIDATION_DIAGNOSTIC",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_PRE_MARKET_AUTHORITY_FAILURE",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_ONE_REUSED_FUNDING_FLOW_RESIDUAL_NESTED_DIAGNOSTIC_20260806",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -64,10 +64,18 @@
     "automatic_expansion": false
   },
   "outcome": {
-    "status": "NOT_RUN",
-    "research_decision": "NOT_OBSERVED",
-    "producer_source_sha": null,
-    "artifact_bundle_sha256": null,
-    "checker_status": null
+    "status": "RUN_INVALID_PRE_MARKET_ECONOMIC_RECEIPT_HASH_PORTABILITY_FAILURE",
+    "research_decision": "NOT_OBSERVED_NO_MARKET_EVALUATION",
+    "producer_source_sha": "da9e1943fa57e2062f7a7b71bf22c91469382619",
+    "artifact_bundle_sha256": "F7B723E6C8A662E26BE563D2C7E832AD093315076FF436CB06F0C784E6990285",
+    "checker_status": "NOT_APPLICABLE_TERMINAL_MARKET_ARTIFACTS_ABSENT",
+    "completed_candidate_count": 0,
+    "validation_a_read": false,
+    "validation_b_read": false,
+    "holdout_read_count": 0,
+    "oos_read_count": 0,
+    "failure_layer": "ECONOMIC_RECEIPT_AUTHORITY_RESOLUTION",
+    "failure_reason": "LINE_ENDING_SENSITIVE_COMPONENT_HASHES_DID_NOT_MATCH_PC2_SPARSE_CHECKOUT",
+    "second_run_performed": false
   }
 }

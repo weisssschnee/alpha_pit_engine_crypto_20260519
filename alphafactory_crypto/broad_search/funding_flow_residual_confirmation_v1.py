@@ -1755,6 +1755,7 @@ def preflight_confirmation(
         receipt["carrier"]["target_identity_sha256"]
     ):
         raise RuntimeError("FUNDING_FLOW_TARGET_IDENTITY_CHANGED")
+    _build_economic_context(root, receipt)
     return {
         "schema_version": 1,
         "status": "PREFLIGHT_PASS_NO_MARKET_EVALUATION",
@@ -1763,6 +1764,7 @@ def preflight_confirmation(
         "pair_count": len(pairs),
         "proof": proof,
         "target_identity_sha256": target_metadata["identity_sha256"],
+        "economic_authority_verified": True,
         "evidence_status": receipt["_contract"]["evidence_status"],
         "holdout_read": False,
         "oos_read": False,

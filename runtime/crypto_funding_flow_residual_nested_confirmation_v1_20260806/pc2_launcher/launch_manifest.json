@@ -1,0 +1,30 @@
+﻿{
+    "status":  "LAUNCH_FROZEN",
+    "started_utc":  "2026-08-06T11:36:05.3652904Z",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_8a83cc76",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_8a83cc76\\runtime\\crypto_funding_flow_residual_nested_confirmation_v1_20260806",
+    "producer_sha":  "da9e1943fa57e2062f7a7b71bf22c91469382619",
+    "receipt_path":  "config/crypto_funding_flow_residual_nested_confirmation_v1_receipt.json",
+    "receipt_blob_sha1":  "f2ab2cf56b4840b580447af15be7134f679a8c87",
+    "candidate_count":  162,
+    "pair_count":  81,
+    "workers_default":  10,
+    "workers_memory_fallback":  8,
+    "wall_time_seconds_limit":  14400,
+    "evidence_status":  "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+    "validation_b_conditional":  true,
+    "oos_holdout_forbidden":  true,
+    "arguments":  [
+                      "-m",
+                      "alphafactory_crypto.broad_search.funding_flow_residual_confirmation_v1",
+                      "run",
+                      "--repo-root",
+                      "C:\\HermesWorker\\workspace\\crypto_funding_flow_confirmation_8a83cc76",
+                      "--runtime-date",
+                      "20260806",
+                      "--source-sha",
+                      "da9e1943fa57e2062f7a7b71bf22c91469382619",
+                      "--receipt-path",
+                      "config/crypto_funding_flow_residual_nested_confirmation_v1_receipt.json"
+                  ]
+}
