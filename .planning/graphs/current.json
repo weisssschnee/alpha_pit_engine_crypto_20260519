@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-06T22:20:43.517526+00:00",
+  "generated_at": "2026-08-06T22:28:21.644187+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -8834,7 +8834,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "95627C0ADE3FBCE420375B43B8566578726BBE154BD9EE0044D6063565FFA309"
+    "sha256": "6437F5D9F6CF78F118BF150D9059DB7CCF18673176EB6E1505172358BA17C111"
   },
   "profile_id": null,
   "profiles": [
@@ -8869,7 +8869,7 @@
     "edge_count": 41380,
     "node_count": 22231,
     "path": ".planning/graphs/graph.json",
-    "sha256": "F3CAD623961406FA389E0208F1C4736B767173BF83706BC28799702A2304B4BE"
+    "sha256": "85AFE046445048EE583F390B278ACF286A515C1E00E6472EC9C7E07229C925F8"
   },
   "repo_head": "3d4872e31af1c57f83231132ad07ff0149742b2b",
   "schema_version": 1,
