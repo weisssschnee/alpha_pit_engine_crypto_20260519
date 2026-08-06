@@ -304,14 +304,16 @@ def test_replacement_receipt_retains_consumed_launcher_failure() -> None:
     assert receipt["formal_claims_authorized"] is False
 
 
-def test_r2_receipt_is_single_use_authorized_and_contract_identical() -> None:
+def test_r2_receipt_retains_consumed_pre_engine_launcher_failure() -> None:
     receipt = resolve_search_economic_receipt(
         REPO_ROOT,
         "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED"
+    )
+    assert receipt["run_authorized"] is False
     assert receipt["search_campaign"]["runner_campaign"] == (
         BLOCK_ROBUST_GATE_CAMPAIGN
     )
@@ -323,6 +325,33 @@ def test_r2_receipt_is_single_use_authorized_and_contract_identical() -> None:
     assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
     assert receipt["holdout"]["read_allowed"] is False
     assert receipt["validation_kill_line"]["required_horizons_hours"] == [4]
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "ARGPARSE_ARGUMENT_LIST_FLATTENED_BEFORE_ENGINE_ENTRY",
+        "runtime": "runtime/crypto_search_replication_aware_gate_v1_20260806r2",
+        "producer_source_sha": "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+        "generation_attempts": 0,
+        "submitted_count": 0,
+        "returned_count": 0,
+        "strict_evaluated_count": 0,
+        "market_evaluations": 0,
+        "checkpoint": None,
+        "artifact_bundle_sha256": (
+            "78862541488DEC0A3D7F12FAE1FC5376"
+            "108CD8CD9A883F346851277B714728D3"
+        ),
+        "checker_result": "FAIL",
+        "checker_exit_code": 1,
+        "checker_missing_artifact_count": 15,
+        "effective_task_id": "job_20260806_140152_2eabe8",
+        "launcher_failure": (
+            "START_PROCESS_ARGUMENT_LIST_FLATTENED_MULTIWORD_VALUES"
+        ),
+        "native_exit_code": 2,
+        "runtime_created": False,
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    }
 
 
 def test_pc2_launcher_treats_native_stderr_as_diagnostic() -> None:
@@ -335,8 +364,41 @@ def test_pc2_launcher_treats_native_stderr_as_diagnostic() -> None:
     assert "RedirectStandardOutput" in launcher
     assert "RedirectStandardError" in launcher
     assert "native-stderr-smoke" in launcher
+    assert "native multiword value" in launcher
+    assert "$nativeArguments" in launcher
     assert "NATIVE_STDERR_SMOKE_PASS" in launcher
     assert "& $Python @Arguments" not in launcher
+
+
+def test_r2_invalid_run_manifest_binds_pre_engine_failure() -> None:
+    runtime = (
+        REPO_ROOT
+        / "runtime/crypto_search_replication_aware_gate_v1_20260806r2"
+    )
+    manifest = json.loads(
+        (runtime / "invalid_run_artifact_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    rows = sorted(manifest["artifacts"], key=lambda row: str(row["path"]))
+    assert manifest["status"] == (
+        "RUN_INVALID_START_PROCESS_ARGUMENT_FLATTENING_BEFORE_ENGINE_ENTRY"
+    )
+    assert manifest["artifact_count"] == len(rows) == 20
+    for row in rows:
+        payload = (runtime / str(row["path"])).read_bytes()
+        assert len(payload) == int(row["bytes"])
+        assert hashlib.sha256(payload).hexdigest().upper() == row["sha256"]
+    bundle_payload = "\n".join(
+        f"{row['path']}|{row['bytes']}|{row['sha256']}" for row in rows
+    ).encode("utf-8")
+    assert hashlib.sha256(bundle_payload).hexdigest().upper() == (
+        manifest["artifact_bundle_sha256"]
+    )
+    producer = json.loads((runtime / "producer_status.json").read_text())
+    assert producer["generation_attempts"] == 0
+    assert producer["strict_evaluated"] == 0
+    assert producer["runtime_created"] is False
 
 
 def test_replacement_invalid_run_manifest_binds_pre_submit_evidence() -> None:

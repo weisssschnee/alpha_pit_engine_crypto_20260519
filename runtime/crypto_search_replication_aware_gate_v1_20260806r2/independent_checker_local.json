@@ -1,0 +1,22 @@
+{
+  "result": "FAIL",
+  "errors": [
+    "missing:candidate_ledger.parquet",
+    "missing:behavior_archive.parquet",
+    "missing:behavior_family_summary.json",
+    "missing:arm_checkpoint_metrics.parquet",
+    "missing:search_failure_evidence.parquet",
+    "missing:search_run_evidence.parquet",
+    "missing:search_exposure_strata.parquet",
+    "missing:search_run_evidence_summary.json",
+    "missing:mechanism_knowledge.parquet",
+    "missing:mechanism_knowledge_summary.json",
+    "missing:final_decision.json",
+    "missing:run_manifest.json",
+    "missing:report"
+  ],
+  "checker_exit_code": 1,
+  "checker_location": "LOCAL",
+  "checked_runtime": "runtime/crypto_search_replication_aware_gate_v1_20260806r2",
+  "closure_metadata_present": true
+}

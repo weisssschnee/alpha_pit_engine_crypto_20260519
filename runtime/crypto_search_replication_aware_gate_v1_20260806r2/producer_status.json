@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "TERMINAL_FAILURE_BEFORE_ENGINE_ENTRY",
+  "reason": "ARGPARSE_UNRECOGNIZED_MULTIWORD_OPTION_VALUES",
+  "failure_layer": "LAUNCHER_ARGUMENT_SERIALIZATION",
+  "producer_source_sha": "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+  "effective_task_id": "job_20260806_140152_2eabe8",
+  "native_exit_code": 2,
+  "detached_exit_code": 1,
+  "generation_attempts": 0,
+  "submitted_count": 0,
+  "returned_count": 0,
+  "strict_evaluated": 0,
+  "market_evaluations": 0,
+  "checkpoint": null,
+  "sealed_reads": 0,
+  "validation_reads": 0,
+  "oos_reads": 0,
+  "holdout_reads": 0,
+  "rescue_rerun_started": false,
+  "runtime_created": false
+}

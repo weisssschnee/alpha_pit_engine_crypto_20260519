@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "LAUNCH_PREFLIGHT_ONLY_PASS",
+  "producer_sha": "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+  "receipt_blob_sha1": "39f6bb5863bb740c27fdfedeb1bfd910261243cd",
+  "resolved_receipt_sha256": "28FCCA347A380A63686F56F0984F3C99E2CEB0CED37606A33C6D0F992EDA9E77",
+  "runtime_absent": true,
+  "log_root_absent": true,
+  "active_python_count": 0,
+  "free_memory_gib": 25.18,
+  "workers_default": 10,
+  "workers_memory_fallback": 8,
+  "workers_12_forbidden": true,
+  "pc2_workspace": "C:\\HermesWorker\\workspace\\crypto_replication_gate_r2_c8ddfed8",
+  "pc2_worktree_clean": true
+}

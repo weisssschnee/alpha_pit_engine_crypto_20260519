@@ -960,7 +960,37 @@ SEARCH_ECONOMIC_RECEIPT_SPECS[
         "USER_AUTHORIZED_REPLICATION_AWARE_SEARCH_GATE_V1_R2_20260806"
     ),
     "runtime_date": "20260806r2",
-    "expected_run_outcome": {},
+    "expected_run_outcome": {
+        "status": "ENGINE_VERIFICATION_FAILED",
+        "reason": "ARGPARSE_ARGUMENT_LIST_FLATTENED_BEFORE_ENGINE_ENTRY",
+        "runtime": (
+            "runtime/crypto_search_replication_aware_gate_v1_20260806r2"
+        ),
+        "producer_source_sha": (
+            "c8ddfed84ed06101cd69b3ae5d6b63451e5be698"
+        ),
+        "generation_attempts": 0,
+        "submitted_count": 0,
+        "returned_count": 0,
+        "strict_evaluated_count": 0,
+        "market_evaluations": 0,
+        "checkpoint": None,
+        "artifact_bundle_sha256": (
+            "78862541488DEC0A3D7F12FAE1FC5376"
+            "108CD8CD9A883F346851277B714728D3"
+        ),
+        "checker_result": "FAIL",
+        "checker_exit_code": 1,
+        "checker_missing_artifact_count": 15,
+        "effective_task_id": "job_20260806_140152_2eabe8",
+        "launcher_failure": (
+            "START_PROCESS_ARGUMENT_LIST_FLATTENED_MULTIWORD_VALUES"
+        ),
+        "native_exit_code": 2,
+        "runtime_created": False,
+        "sealed_reads": 0,
+        "rescue_rerun_started": False,
+    },
 }
 
 _INVALID_INTENT = {

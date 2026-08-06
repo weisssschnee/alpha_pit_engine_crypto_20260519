@@ -1,0 +1,8 @@
+PRODUCER_EXITED_NONZERO:2
+ËùÔÚÎ»ÖÃ C:\HermesWorker\workspace\crypto_replication_gate_r2_c8ddfed8\scripts\crypto_replication_aware_gate_v1_pc2_lau
+ncher.ps1:259 ×Ö·û: 24
++ if ($exitCode -ne 0) { throw "PRODUCER_EXITED_NONZERO:$exitCode" }
++                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (PRODUCER_EXITED_NONZERO:2:String) [], RuntimeException
+    + FullyQualifiedErrorId : PRODUCER_EXITED_NONZERO:2
+ 

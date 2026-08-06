@@ -4,6 +4,41 @@ Last updated: 2026-08-06 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R2_INVALID_ARGUMENT_FLATTENING_BEFORE_ENGINE_ENTRY_RESEARCH_HOLD`
+
+The one authorized R2 task is consumed and closed without entering the search
+engine. Exact producer `c8ddfed84ed06101cd69b3ae5d6b63451e5be698`, receipt
+SHA256 `28FCCA347A380A63686F56F0984F3C99E2CEB0CED37606A33C6D0F992EDA9E77`,
+and PC2 task `job_20260806_140152_2eabe8` passed the committed source/receipt,
+resource, cache, and no-market warning smoke gates. The detached task then
+ended in 2.036 seconds because Windows PowerShell `Start-Process -ArgumentList`
+flattened two multiword descriptive CLI values; argparse exited 2 before
+`run_engine` created its runtime.
+
+Persisted counts are zero generation attempts, zero worker submissions, zero
+returns, zero strict evaluations, zero market evaluations, zero checkpoints,
+and zero sealed reads. PC2 and local independent checkers correctly return
+`FAIL` with 15 and 13 missing engine artifacts respectively. The 20-file closure
+bundle is `78862541488DEC0A3D7F12FAE1FC5376108CD8CD9A883F346851277B714728D3`.
+No restart, second task, reseed, tuning, rescue rerun, validation, OOS, holdout,
+automatic expansion, or promotion occurred.
+
+The launcher now quotes native multiword arguments and its no-market smoke
+checks both warning-only stderr and exact argument round-trip. This is a source
+repair only. The R2 receipt is
+`RUN_AUTHORIZATION_CONSUMED_ENGINE_VERIFICATION_FAILED` with
+`run_authorized=false`; it grants no further market authority. The existing
+Search capability node records this invalid run without a new node, authority,
+lifecycle, or promotion transition. Research state remains HOLD.
+
+Graphify maintenance refreshed the existing CURRENT projection and its HTML.
+The audit remains `STALE` with one `RAW_GRAPH_SOURCE_CHANGED` error because RAW
+was built at `ce713786dc80559dcbea8ee2ced581d9edb70c23`. The available build command
+reports that Graphify is not installed, and this task forbids installing new
+dependencies. Therefore global RAW/CURRENT freshness PASS is not claimed.
+
+The preceding completed phase was:
+
 `CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_REPLACEMENT_INVALID_NATIVE_STDERR_BEFORE_WORKER_SUBMIT_RESEARCH_HOLD`
 
 The one authorized 1,536-strict replacement run is consumed and closed without

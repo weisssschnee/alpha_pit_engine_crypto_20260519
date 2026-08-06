@@ -1,0 +1,31 @@
+﻿{
+    "status":  "LAUNCH_FROZEN",
+    "started_utc":  "2026-08-06T06:02:02.9643736Z",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_replication_gate_r2_c8ddfed8",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_replication_gate_r2_c8ddfed8\\runtime\\crypto_search_replication_aware_gate_v1_20260806r2",
+    "producer_sha":  "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+    "receipt_path":  "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
+    "receipt_blob_sha1":  "39f6bb5863bb740c27fdfedeb1bfd910261243cd",
+    "resolved_receipt_sha256":  "28FCCA347A380A63686F56F0984F3C99E2CEB0CED37606A33C6D0F992EDA9E77",
+    "workers_default":  10,
+    "workers_memory_fallback":  8,
+    "workers_12_forbidden":  true,
+    "strict_target":  1536,
+    "raw_attempt_limit":  9600,
+    "wall_time_seconds_limit":  10800,
+    "required_pairs_per_hour":  512,
+    "validation_oos_holdout_forbidden":  true,
+    "arguments":  [
+                      "-m",
+                      "alphafactory_crypto.broad_search.search_engine_v1",
+                      "run-replication-aware-v1",
+                      "--runtime-date",
+                      "20260806r2",
+                      "--source-sha",
+                      "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+                      "--evidence-to-add",
+                      "equal-count development-block replication productivity and migration-ranking evidence",
+                      "--decision-to-change",
+                      "whether replication-aware Evolution replaces current development selection authority"
+                  ]
+}

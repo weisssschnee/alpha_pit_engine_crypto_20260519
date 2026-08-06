@@ -26,7 +26,14 @@ function Invoke-PythonProcess {
         [Parameter(Mandatory = $true)][string]$StderrPath
     )
 
-    $process = Start-Process -FilePath $Python -ArgumentList $Arguments `
+    $nativeArguments = @($Arguments | ForEach-Object {
+        $value = [string]$_
+        if ($value -match '[\s"]') {
+            return '"' + $value.Replace('"', '\"') + '"'
+        }
+        return $value
+    })
+    $process = Start-Process -FilePath $Python -ArgumentList $nativeArguments `
         -WorkingDirectory $WorkingDirectory -WindowStyle Hidden -Wait -PassThru `
         -RedirectStandardOutput $StdoutPath -RedirectStandardError $StderrPath
     return $process.ExitCode
@@ -41,8 +48,10 @@ if ($NativeInvocationSmokeOnly) {
     $smokeStdout = Join-Path $LogRoot 'native_stderr_smoke.stdout.log'
     $smokeStderr = Join-Path $LogRoot 'native_stderr_smoke.stderr.log'
     $smokeSource = @'
+import sys
 import warnings
 warnings.warn("native-stderr-smoke", RuntimeWarning)
+assert sys.argv[1] == "native multiword value"
 print("NATIVE_STDOUT_OK")
 '@
     [IO.File]::WriteAllText(
@@ -51,7 +60,7 @@ print("NATIVE_STDOUT_OK")
         [Text.UTF8Encoding]::new($false)
     )
     $smokeExitCode = Invoke-PythonProcess `
-        -Arguments @($smokeScript) `
+        -Arguments @($smokeScript, 'native multiword value') `
         -WorkingDirectory $RepoRoot `
         -StdoutPath $smokeStdout `
         -StderrPath $smokeStderr

@@ -1,0 +1,7 @@
+usage: search_engine_v1.py [-h] [--runtime-date RUNTIME_DATE]
+                           [--source-sha SOURCE_SHA]
+                           [--carrier-id {AGGTRADES_TOP200_DELIVERED,CORE3_MICROSTRUCTURE_PILOT,OI_MARK_RANKS51_200_DELIVERED}]
+                           [--evidence-to-add EVIDENCE_TO_ADD]
+                           [--decision-to-change DECISION_TO_CHANGE]
+                           {run,check,run-economic-v1,close-economic-v1,check-economic-v1,run-economic-v2,close-economic-v2,close-validation-blocked-v2,check-economic-v2,run-economic-v3,close-economic-v3,check-economic-v3,run-economic-v4,close-economic-v4,check-economic-v4,run-economic-v5,close-economic-v5,check-economic-v5,run-economic-v6,close-economic-v6,check-economic-v6,run-mechanism-v2,close-validation-blocked-mechanism-v2,check-mechanism-v2,run-mechanism-v2-1,check-mechanism-v2-1,run-mechanism-v2-2,check-mechanism-v2-2,run-mechanism-v2-3,check-mechanism-v2-3,run-evidence-v1,check-evidence-v1,run-evidence-v1-1,check-evidence-v1-1,run-replication-aware-v1,check-replication-aware-v1,assess-evidence-v1-repair,run-oos-v2-3,check-oos-v2-3,build-canary-cache,run-canary,check-canary,run-v11,check-v11,run-v12,check-v12,run-carrier-gate,run-v13,check-v13,build-v14-carrier,qualify-v14-carrier,run-v14,check-v14}
+search_engine_v1.py: error: unrecognized arguments: development-block replication productivity and migration-ranking evidence replication-aware Evolution replaces current development selection authority

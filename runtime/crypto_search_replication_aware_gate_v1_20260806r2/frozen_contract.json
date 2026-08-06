@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "CLOSURE_RECONSTRUCTED_FROM_COMMITTED_RECEIPT_AFTER_PRE_ENGINE_EXIT",
+  "source_sha": "c8ddfed84ed06101cd69b3ae5d6b63451e5be698",
+  "runtime_date": "20260806r2",
+  "producer_runtime_created": false,
+  "market_read_started": false,
+  "closure_generated_after_terminal": true,
+  "economic_receipt": {
+    "result": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+    "receipt_path": "config/crypto_search_replication_aware_gate_v1_r2_receipt.json",
+    "receipt_sha256": "28FCCA347A380A63686F56F0984F3C99E2CEB0CED37606A33C6D0F992EDA9E77",
+    "component_sha256": {
+      "aggregate_mechanism_knowledge": "2C83DAC8C8414D428D06C4DF8CC2D6ADDF0F48AE6C28D100D2081DA9E9E5F88D",
+      "behavior_provenance_consumer": "C481E6A58467BE816A875FF55D3A3F09123BDBEACCAA2B7339DD568A5F42882E",
+      "campaign_contract": "6868E47273A598FCD16C250A8D324BB5AE817DC884CBDFFDFBF168143DAEF942",
+      "direction": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9",
+      "expanded_mechanism_catalog": "DF7DF713592AA1A1F722B998D0A262C9F12F021E3F10B741C3451182EFC5A748",
+      "mechanism": "748E58B2780275B61CDB9B07C967A705CFAAFB506C25AEAE5677D4103359A1E0",
+      "mechanism_mapping": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
+      "optimizer_reward_and_matched_attribution": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
+      "portfolio_mapping_and_cost": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF",
+      "runtime_binding": "B807E8F82AC8CD6D7D07F50DE2FDB54326594A5B6E009DD7E9CB8E43F071B4F5",
+      "target_contract": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+      "target_execution": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630",
+      "validation_kill_line": "C37C0BA2DC41634C1EE638CA4FDA77E8D8DC4BAD7AD14B481509F151DE54EC70"
+    }
+  },
+  "closure_note": "The committed receipt and component identities were verified by PC2 preflight before the one task. Argparse exited before run_engine created a runtime."
+}
