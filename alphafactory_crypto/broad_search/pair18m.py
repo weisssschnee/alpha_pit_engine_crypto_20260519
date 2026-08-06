@@ -1102,6 +1102,7 @@ def _development_block_robust_ordering(
         )
         left = component_metrics["primary_minus_left_control"]
         right = component_metrics["primary_minus_right_control"]
+        primary = component_metrics["primary"]
         required_objectives = tuple(joint["component_objectives"].values())
         row = {
             "block_id": block_id,
@@ -1111,7 +1112,14 @@ def _development_block_robust_ordering(
                 "+00:00", "Z"
             ),
             "evaluated_hour_count": int(stop_index - start_index),
+            # Passive observability only.  These values are already computed by
+            # the existing evaluator above; exposing them does not change the
+            # reward, gates, mapping, controls, or optimizer ordering.
+            "primary_gross_mean": float(primary["gross_mean"]),
+            "primary_net_mean": float(primary["net_mean"]),
+            "left_gross_mean": float(left["gross_mean"]),
             "left_net_mean": float(left["net_mean"]),
+            "right_gross_mean": float(right["gross_mean"]),
             "right_net_mean": float(right["net_mean"]),
             "both_matched_net_positive": bool(
                 float(left["net_mean"]) > 0.0 and float(right["net_mean"]) > 0.0
@@ -1147,6 +1155,9 @@ def _development_block_robust_ordering(
         ),
         "median_block_joint_search_reward": float(
             np.median([float(row["joint_search_reward"]) for row in rows])
+        ),
+        "median_block_min_matched_net_mean": float(
+            np.median([float(row["min_matched_net_mean"]) for row in rows])
         ),
         "max_required_mean_one_way_turnover": float(
             max(float(row["max_required_mean_one_way_turnover"]) for row in rows)

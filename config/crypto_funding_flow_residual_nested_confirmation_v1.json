@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "experiment_id": "CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1",
+  "evidence_status": "REUSED_DEVELOPMENT_VALIDATION_ADAPTIVE_DIAGNOSTIC_ONLY",
+  "contamination_override": {
+    "authorized": true,
+    "authority": "CURRENT_USER_INSTRUCTION_20260806",
+    "reason": "User explicitly authorized one reuse after the unread-interval preflight failed.",
+    "unread_migration_claim_allowed": false,
+    "oos_authorization_allowed": false,
+    "promotion_allowed": false
+  },
+  "source_deviation": {
+    "requested_funding_sources": ["BYBIT", "BINANCE", "OKX", "EXISTING_CROSS_VENUE_AGGREGATE_IF_PRESENT"],
+    "authorized_115_field_sources": ["BYBIT", "HYPERLIQUID", "OKX"],
+    "binance_funding_present": false,
+    "cross_venue_funding_aggregate_present": false,
+    "action": "USE_ONLY_EXISTING_BYBIT_HYPERLIQUID_OKX_FIELDS_NO_NEW_FIELD",
+    "binance_order_flow_unchanged": true
+  },
+  "deterministic_grid_authority": {
+    "mode": "FIXED_DIAGNOSTIC_CURVE_NOT_GENERATIVE_SEARCH",
+    "requested_values_outside_global_proposal_grammar": {
+      "windows_hours": [3, 96, 240],
+      "betas": [0.25]
+    },
+    "construction": "EXISTING_TYPED_AST_PLUS_EXISTING_REGISTRY_VALIDATION_AND_COMPILER",
+    "global_search_grammar_changed": false,
+    "proposal_policy_changed": false
+  },
+  "stages": {
+    "stage_0": "DETERMINISTIC_DEVELOPMENT_CURVE_CONSTRUCTION",
+    "stage_1": "REUSED_VALIDATION_A_FAMILY_SCREEN",
+    "stage_2": "REUSED_VALIDATION_B_FROZEN_COHORT_CONFIRMATION"
+  },
+  "development_train": {
+    "start": "2025-08-29T07:00:00Z",
+    "end_exclusive": "2025-11-01T00:00:00Z",
+    "role": "FRESH_DEVELOPMENT_TRAIN_ONLY"
+  },
+  "validation_a": {
+    "start": "2025-11-01T00:00:00Z",
+    "end_exclusive": "2025-12-01T00:00:00Z",
+    "role": "REUSED_DEVELOPMENT_VALIDATION_A_DIAGNOSTIC",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6
+  },
+  "validation_b": {
+    "start": "2025-12-01T00:00:00Z",
+    "end_exclusive": "2026-01-01T00:00:00Z",
+    "role": "REUSED_DEVELOPMENT_VALIDATION_B_DIAGNOSTIC",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6
+  },
+  "mechanism": {
+    "template_id": "FUNDING_FLOW_CROWDING",
+    "payload_operator": "Residual",
+    "normalizer": "VolatilityScale",
+    "mapping_id": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+    "matched_control_schema": "DUAL_AXIS_A_B_AB",
+    "horizon_hours": 4,
+    "funding_fields": [
+      "bybit__funding_rate_mean",
+      "hyperliquid_futures__funding_rate_mean",
+      "okx_futures__funding_rate_mean"
+    ],
+    "flow_field": "signed_aggressor_notional",
+    "funding_windows": [96, 168, 240],
+    "flow_windows": [3, 6, 12],
+    "betas": [0.25, 0.5, 1.0],
+    "main_candidate_count": 81,
+    "placebo_candidate_count": 81
+  },
+  "stage_a_gate": {
+    "global_main_cell_median_worst_axis_net_strictly_positive": true,
+    "minimum_main_cells_both_axes_net_positive_fraction": 0.5,
+    "minimum_positive_funding_sources": 2,
+    "global_median_main_minus_placebo_cell_delta_strictly_positive": true,
+    "minimum_paired_cells_main_above_placebo_fraction": 0.6,
+    "minimum_anchor_direct_neighbor_positive_fraction": 0.5
+  },
+  "stage_b_gate": {
+    "anchor_strict_matched_positive": true,
+    "anchor_primary_and_both_incremental_net_lcb_strictly_positive": true,
+    "minimum_support": 0.8,
+    "medoid_strict_matched_positive": true,
+    "median_source_representative_worst_axis_net_strictly_positive": true,
+    "minimum_source_representatives_both_axes_net_positive": 2,
+    "representative_median_main_minus_placebo_delta_strictly_positive": true,
+    "positive_representatives_must_span_sources": true
+  },
+  "compute": {
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "wall_time_seconds_maximum": 14400,
+    "minimum_free_memory_reserve_bytes": 12884901888,
+    "minimum_pair_evaluations_per_hour": 128.0
+  },
+  "boundaries": {
+    "general_search": false,
+    "optimizer_feedback": false,
+    "archive_write": false,
+    "parameter_tuning": false,
+    "rescue_rerun": false,
+    "new_field": false,
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "mechanism_catalog_change": false,
+    "target_change": false,
+    "mapping_change": false,
+    "cost_change": false,
+    "reward_change": false,
+    "holdout_read": false,
+    "oos_read": false,
+    "promotion": false,
+    "automatic_expansion": false
+  }
+}
