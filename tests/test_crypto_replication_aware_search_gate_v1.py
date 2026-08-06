@@ -23,6 +23,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     BLOCK_ROBUST_GATE_ARMS,
     BLOCK_ROBUST_GATE_CAMPAIGN,
     BLOCK_ROBUST_GATE_SEEDS,
+    ECONOMIC_SEARCH_CONFIGS,
     MechanismEvolutionV2,
     MechanismRandomV2,
     _block_robust_gate_summary,
@@ -352,6 +353,33 @@ def test_r2_receipt_retains_consumed_pre_engine_launcher_failure() -> None:
         "sealed_reads": 0,
         "rescue_rerun_started": False,
     }
+
+
+def test_r3_receipt_authorizes_only_the_exact_fresh_gate() -> None:
+    receipt = resolve_search_economic_receipt(
+        REPO_ROOT,
+        "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        BLOCK_ROBUST_GATE_CAMPAIGN
+    )
+    assert receipt["search_campaign"]["runtime_date"] == "20260806r3"
+    assert receipt["search_campaign"]["strict_evaluated_target"] == 1536
+    assert receipt["search_campaign"]["seed_set"] == list(
+        BLOCK_ROBUST_GATE_SEEDS
+    )
+    assert receipt["run_outcome"] == {}
+    assert receipt["validation"]["role"] == "NOT_AUTHORIZED"
+    assert receipt["holdout"]["read_allowed"] is False
+    assert receipt["formal_claims_authorized"] is False
+    campaign = ECONOMIC_SEARCH_CONFIGS[BLOCK_ROBUST_GATE_CAMPAIGN]
+    assert campaign["runtime_date"] == "20260806r3"
+    assert campaign["receipt_path"] == (
+        "config/crypto_search_replication_aware_gate_v1_r3_receipt.json"
+    )
 
 
 def test_pc2_launcher_treats_native_stderr_as_diagnostic() -> None:
