@@ -65,7 +65,8 @@ $runtimeParent = Join-Path $RepoRoot 'runtime'
 New-Item -ItemType Directory -Path $runtimeParent -Force | Out-Null
 foreach ($name in @(
     'crypto_search_engine_v1_4_oi_flow_20260728',
-    'crypto_search_replication_aware_gate_v1_20260806r3'
+    'crypto_search_replication_aware_gate_v1_20260806r3',
+    'crypto_search_evidence_v1_1_validation_20260805r1'
 )) {
     $source = Join-Path (Join-Path $BaseWorkspace 'runtime') $name
     $destination = Join-Path $runtimeParent $name

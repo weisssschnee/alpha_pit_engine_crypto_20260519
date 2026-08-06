@@ -130,17 +130,24 @@ def load_confirmation_receipt(
         "USE_ONLY_EXISTING_BYBIT_HYPERLIQUID_OKX_FIELDS_NO_NEW_FIELD"
     ):
         errors.append("source_deviation")
+    ledger = root / str(receipt["source_evidence"]["r3_candidate_ledger_path"])
+    if not ledger.is_file() or _file_sha256(ledger) != str(
+        receipt["source_evidence"]["r3_candidate_ledger_sha256"]
+    ):
+        errors.append("r3_candidate_ledger_path")
     for key, hash_key in (
-        ("r3_candidate_ledger_path", "r3_candidate_ledger_sha256"),
-        ("carrier_manifest_path", "carrier_manifest_sha256"),
-        ("economic_receipt_path", "economic_receipt_file_sha256"),
-        ("mechanism_catalog_path", "mechanism_catalog_sha256"),
-        ("target_contract_path", "target_contract_sha256"),
-        ("prior_validation_contract_path", "prior_validation_contract_sha256"),
+        ("carrier_manifest_path", "carrier_manifest_canonical_sha256"),
+        ("economic_receipt_path", "economic_receipt_canonical_sha256"),
+        ("mechanism_catalog_path", "mechanism_catalog_canonical_sha256"),
+        ("target_contract_path", "target_contract_canonical_sha256"),
+        (
+            "prior_validation_contract_path",
+            "prior_validation_contract_canonical_sha256",
+        ),
     ):
         relative = str(receipt["source_evidence"][key])
         path = root / relative
-        if not path.is_file() or _file_sha256(path) != str(
+        if not path.is_file() or _canonical_sha256(_load_json(path)) != str(
             receipt["source_evidence"][hash_key]
         ):
             errors.append(key)
