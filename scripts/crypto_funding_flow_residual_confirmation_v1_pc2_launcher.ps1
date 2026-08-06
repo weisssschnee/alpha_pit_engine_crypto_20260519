@@ -124,7 +124,7 @@ try {
             if ($item.LinkType -ne 'Junction') {
                 throw "PREFLIGHT_CLEANUP_TARGET_NOT_JUNCTION:$junction"
             }
-            Remove-Item -LiteralPath $junction -Force
+            [System.IO.Directory]::Delete($junction)
         }
     }
 }
