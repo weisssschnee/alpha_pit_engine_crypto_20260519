@@ -20,7 +20,7 @@
     "scope": "SEQUENTIAL_MAX8192_STRICT_PAIRED_DEVELOPMENT_GATE",
     "sequential_gate_release_only": true
   },
-  "authorized_implementation_sha": "5b561c82fd99b1864e698483526d9bea15b9ab38",
+  "authorized_implementation_sha": "98930bc7e363ac9ea85d41688e4e0e2c832f3e97",
   "boundaries": {
     "archive_feedback": false,
     "challenge": false,
@@ -72,7 +72,7 @@
     "alphafactory_crypto/broad_search/compositional18m.py": "AD110BF3E60371B48222F2832896D5F166A93263B54003F6E9277782376B5D88",
     "alphafactory_crypto/broad_search/expression.py": "142F4D90B1F5854C3473EACF5D127B399C0F2CED8C199A7801D6CB9B49D718CB",
     "alphafactory_crypto/broad_search/pair18m.py": "5918475A9032453146C721A545E69AC8B9A579A5A88C395157119AFB6510C998",
-    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "477A7B3EC088FCF569C05D03B0191AD401049F7FC4865A7E210F123977E3E6BE",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "DF11225F2CEC4342838FD8AB3DC4B10988B31F24332414B0853D68CCE3DDDA15",
     "alphafactory_crypto/instrument_canary/grammar.py": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
     "alphafactory_crypto/instrument_capability/primitives.py": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
     "config/crypto_search_replication_aware_gate_v1.json": "6868E47273A598FCD16C250A8D324BB5AE817DC884CBDFFDFBF168143DAEF942",
