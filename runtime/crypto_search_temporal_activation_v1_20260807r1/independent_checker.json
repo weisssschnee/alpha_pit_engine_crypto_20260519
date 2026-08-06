@@ -1,0 +1,13 @@
+{
+  "checker_source_sha": "12cfc9bd07a6aae06df2bcec89f6eed5a39509ac",
+  "completed_tranches": 1,
+  "errors": [],
+  "pair_count": 1024,
+  "producer_source_sha": "07247878576daf56b66b3fb251a8d9faf02b3b6a",
+  "receipt_consumption_required": true,
+  "research_decision": "CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_NOT_SUPPORTED",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "strict_evaluated_count": 2048
+}

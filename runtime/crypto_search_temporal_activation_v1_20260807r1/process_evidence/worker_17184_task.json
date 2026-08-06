@@ -1,0 +1,13 @@
+{
+  "candidate_id": "A09EA58C3B955C8ED3BED54ACC432A4914CCB73E8B74391B6633E8329C5C32A6",
+  "channel": "task",
+  "error_message": null,
+  "error_type": null,
+  "evidence_sha256": "DFB3D3C2538F8BC1E7B58B292214748E0D98DADF575CAC2DB06C07984BD9791E",
+  "heartbeat_utc": "2026-08-06T21:13:39.102907+00:00",
+  "outcome": "PAIR_EVALUATED",
+  "schema_version": 1,
+  "stage": "TASK_COMPLETED",
+  "worker_parent_pid": 25860,
+  "worker_pid": 17184
+}

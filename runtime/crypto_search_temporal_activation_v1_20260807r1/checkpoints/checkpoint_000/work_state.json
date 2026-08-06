@@ -1,0 +1,23 @@
+{
+  "accepted_by_family": {
+    "T1_POSITION_STATE_CHANGE": 256,
+    "T2_FLOW_SHOCK_LIFECYCLE": 256,
+    "T3_CROWDING_TRANSITION": 256,
+    "T4_MULTI_SCALE_DISLOCATION": 256
+  },
+  "active_wall_seconds": 954.8158092999365,
+  "attempts_by_family": {
+    "T1_POSITION_STATE_CHANGE": 267,
+    "T2_FLOW_SHOCK_LIFECYCLE": 306,
+    "T3_CROWDING_TRANSITION": 324,
+    "T4_MULTI_SCALE_DISLOCATION": 276
+  },
+  "candidate_row_count": 2048,
+  "diagnostic_row_count": 1024,
+  "frozen_contract_sha256": "F95962194CD5AEE18DB06DE9414F3F08488048A5946F4991FBE0C0993DA8EDD3",
+  "pair_row_count": 1024,
+  "rejected_row_count": 149,
+  "schema_version": 1,
+  "source_sha": "07247878576daf56b66b3fb251a8d9faf02b3b6a",
+  "workers": 10
+}

@@ -1,0 +1,73 @@
+{
+  "bundle_sha256": "1B04DE3471D143DAD3BFA76941119EDD387766B9E76623F19F53D6212C180A2B",
+  "files": [
+    {
+      "bytes": 27775,
+      "path": "frozen_contract.json",
+      "sha256": "2DAE6522B66D21C3B98E54AA3857608988A61D5C8BAD9AA7A1FA219D92302897"
+    },
+    {
+      "bytes": 4264,
+      "path": "search_authority_binding_receipt.json",
+      "sha256": "CCE88CA79E4CDE1541FDBC504E8805FCAA5543B3FE02357AE6FC19B4EDF2363D"
+    },
+    {
+      "bytes": 1433166,
+      "path": "paired_proposal_ledger.parquet",
+      "sha256": "BE63C592CE255F31FA4048BAB1BF034459070994893BED650511AD0AC08A129A"
+    },
+    {
+      "bytes": 7018514,
+      "path": "candidate_ledger.parquet",
+      "sha256": "5325DE4FF1F7108F650550974DA7A1861AA360B78013F56F6F9F1B2590CBCB3C"
+    },
+    {
+      "bytes": 836484,
+      "path": "paired_economic_diagnostics.parquet",
+      "sha256": "29F006F4A6F682A2CD41E0295BC34B2132AE4491E3983CF818623BF41AC71E12"
+    },
+    {
+      "bytes": 64914,
+      "path": "rejected_pair_ledger.parquet",
+      "sha256": "7FD895CF10CBA110AFD7D23292DB35770F09CA4B0A5B7B957AA5FF3E348C8AA9"
+    },
+    {
+      "bytes": 4937,
+      "path": "template_primitive_exposure.parquet",
+      "sha256": "5D56336927A7B37F69453BCF8FDF6D64C8E7E020684F37CBC1929662AF70C3FD"
+    },
+    {
+      "bytes": 5159,
+      "path": "economic_waterfall.parquet",
+      "sha256": "04D417474D67C435DCFB81E47DD2456E0C7E530C74237F7C2CA0B96E7EC7E445"
+    },
+    {
+      "bytes": 3947,
+      "path": "block_robustness.parquet",
+      "sha256": "984B78E8D4B987AEF8E5279EB82C8FA6EFF0B1E609BE689AB2A011B86B5F010E"
+    },
+    {
+      "bytes": 3058,
+      "path": "lcb_distribution.parquet",
+      "sha256": "D4F0512CFE0B0D97454191D9F7AEDDF624729D3C7D3E2D76640F7A56B494AEB4"
+    },
+    {
+      "bytes": 5757,
+      "path": "final_decision.json",
+      "sha256": "EE55B7F5AA37705386FB918F273343D5F918EAEDB8CC031090ACD1D1F1993FEA"
+    },
+    {
+      "bytes": 5634,
+      "path": "continuation_decision_002048.json",
+      "sha256": "A12C455453C5199C8DE1B6264A66755B81170C83B2D2799C1CB088D538B7A22D"
+    },
+    {
+      "bytes": 1866,
+      "path": "checkpoints/checkpoint_000/manifest.json",
+      "sha256": "70F0031D7C8A0840F870402673ADE11D19348B57148C454D79CF46A369E05B88"
+    }
+  ],
+  "frozen_contract_sha256": "F95962194CD5AEE18DB06DE9414F3F08488048A5946F4991FBE0C0993DA8EDD3",
+  "producer_source_sha": "07247878576daf56b66b3fb251a8d9faf02b3b6a",
+  "schema_version": 1
+}

@@ -1,0 +1,10 @@
+{
+  "active_wall_seconds": 956.0536467999918,
+  "completed_tranches": 1,
+  "heartbeat_utc": "2026-08-06T21:13:47.970519+00:00",
+  "producer_source_sha": "07247878576daf56b66b3fb251a8d9faf02b3b6a",
+  "status": "COMPLETE",
+  "strict_evaluated": 2048,
+  "strict_maximum": 8192,
+  "workers": 10
+}

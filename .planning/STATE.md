@@ -1,8 +1,45 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-06 Asia/Hong_Kong
+Last updated: 2026-08-07 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_SEARCH_TEMPORAL_ACTIVATION_V1_STOPPED_NOT_SUPPORTED_RESEARCH_HOLD`
+
+The one authorized canonical temporal-primitive activation gate is consumed and
+closed. Exact PC2 producer `07247878576daf56b66b3fb251a8d9faf02b3b6a`
+completed tranche 0 with exactly 2,048 strict evaluations representing 1,024
+matched static/temporal pairs, one atomic restore-verified checkpoint, 10
+workers, zero sealed reads, and no validation, OOS, holdout, or optimizer
+feedback. The frozen continuation gate returned
+`STOP_TEMPORAL_NOT_SUPPORTED`; no later-tranche proposals were generated and
+the 8,192 maximum was not released.
+
+Canonical temporal transforms did not improve the frozen static comparator.
+The native paired worst-axis-net delta median was
+`-0.0000033632484912667765`, temporal win fraction was `0.46875`, dual-axis
+net-positive rate fell from `0.076171875` to `0.0732421875`, 2-of-3 block
+replication fell from `0.021484375` to `0.017578125`, and both representations
+had one all-three-block-positive pair and zero matched-positive candidates.
+The temporal cost-sign-kill rate was also slightly higher (`0.8407643312`
+versus `0.8378378378`). Persistence was the strongest primitive median, but the
+leave-best-template and leave-best-field-family breadth checks remained
+negative. The durable decision is
+`CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_NOT_SUPPORTED`; temporal Evolution is
+not authorized.
+
+The original post-run checker exposed a deterministic self-hash defect: it
+rehashed the receipt including its own `receipt_sha256`, so it could never
+equal the pre-self-hash binding. Checker-only repair
+`12cfc9bd07a6aae06df2bcec89f6eed5a39509ac` now verifies the receipt content
+without the self-hash field and separately records producer and checker source
+SHAs. The immutable market runtime was not rerun or modified. Independent PC2
+and local checkers pass with zero errors, and the consumed receipt records the
+actual negative outcome. No Alpha, validation, OOS, promotion, new grammar,
+temporal optimizer, or further search authority is created. Research remains
+HOLD.
+
+The preceding completed phase was:
 
 `CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_VALIDATION_A_FAILED_ROUTE_CLOSED_RESEARCH_HOLD`
 
@@ -1375,16 +1412,16 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart either consumed Replication-Aware Search Gate V1 receipt. The
-replacement proved that process evidence now captures the pre-submit boundary,
-but its task-specific Windows PowerShell wrapper treated native stderr warnings
-as terminating errors. Before any separately authorized future market run, use
-a launcher that preserves native stderr without converting warnings into
-PowerShell exceptions and verify it with a no-market smoke. A further market
-run still requires a new explicit authorization and receipt; this closure
-grants neither.
+Do not restart or extend the consumed Temporal Activation V1 campaign. Its
+frozen tranche-0 gate answered the registered question negatively and did not
+release later tranches. Do not add the tested canonical temporal transforms to
+Evolution, tune their parameters, or reinterpret primitive-level positive
+medians as mechanism qualification. Any different mechanism space or search
+policy requires a separately justified question, explicit authorization, and a
+new receipt; this closure grants none.
 
-The prior family-consensus and V1.1 development/validation conclusions remain
-unchanged. No market search, validation, data Arena, reward/mapping/optimizer
-change, tuning, reseed, rescue, holdout/OOS/challenge/forward read, promotion,
-new compiler, AST, evaluator, or Graph node is authorized by this closure.
+The prior replication-aware, funding-flow residual, family-consensus, and V1.1
+development/validation conclusions remain unchanged. No market search,
+validation, data Arena, reward/mapping/optimizer change, tuning, reseed, rescue,
+holdout/OOS/challenge/forward read, promotion, new compiler, AST, evaluator,
+grammar, temporal Evolution, or Graph node is authorized by this closure.

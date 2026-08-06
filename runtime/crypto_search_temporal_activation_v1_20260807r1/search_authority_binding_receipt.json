@@ -90,15 +90,8 @@
     "target_authority_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60"
   },
   "receipt_id": "CRYPTO_TEMPORAL_ACTIVATION_V1_RECEIPT",
-  "run_authorized": false,
-  "run_outcome": {
-    "completed_tranches": 1,
-    "producer_source_sha": "07247878576daf56b66b3fb251a8d9faf02b3b6a",
-    "research_decision": "CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_NOT_SUPPORTED",
-    "run_manifest_bundle_sha256": "1B04DE3471D143DAD3BFA76941119EDD387766B9E76623F19F53D6212C180A2B",
-    "runtime_date": "20260807r1",
-    "strict_evaluated_count": 2048
-  },
+  "receipt_sha256": "5D5379DC15978A62495EC4641629C0B8D8EB18D0FF260636F48221E7789B4C6F",
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }
