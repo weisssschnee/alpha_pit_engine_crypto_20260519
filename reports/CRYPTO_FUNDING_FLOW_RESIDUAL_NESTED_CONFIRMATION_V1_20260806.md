@@ -57,3 +57,11 @@ launch. A checkout with altered component bytes will therefore fail during
 preflight, before a runtime or scheduled market task is created. Any future
 attempt requires new explicit authorization and an exact-byte PC2 checkout; it
 cannot reuse this consumed receipt.
+
+The existing CURRENT Search capability overlay records this consumed invalid
+diagnostic without a new node or authority transition. Its bounded maintenance
+attempt returned `BLOCKED / AUDIT_UNAVAILABLE` because the Python audit timed
+out; generated CURRENT was therefore left unchanged and is not claimed fresh.
+
+Closure verification: 468 tests passed with the existing NumPy
+degrees-of-freedom warning.

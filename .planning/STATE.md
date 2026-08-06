@@ -35,6 +35,16 @@ a scheduled task starts. No restart, rescue rerun, reseed, tuning, second task,
 validation, OOS, holdout, promotion, reward, mapping, evaluator, compiler, AST,
 catalog, or Graph authority transition occurred. Research state remains HOLD.
 
+The existing `real_policy_upgrade_canary` overlay records the consumed invalid
+diagnostic while retaining R3 as the latest market-evaluated checker-backed
+evidence. No node or authority binding was added. Bounded Graph maintenance
+returned `BLOCKED / AUDIT_UNAVAILABLE` after its Python audit timed out, so the
+generated CURRENT files were not rewritten and no global freshness claim is
+made.
+
+Closure verification passes 468 tests with the existing NumPy
+degrees-of-freedom warning.
+
 The preceding completed phase was:
 
 `CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_R3_COMPLETE_NOT_QUALIFIED_RESEARCH_HOLD`

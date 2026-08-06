@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (R3 replication gate complete; validation not qualified; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (funding-flow confirmation invalid pre-market; R3 remains latest evaluated; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -578,6 +578,10 @@
                                     ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/independent_checker_local.json"
                                     ,"runtime/crypto_search_replication_aware_gate_v1_20260806r3/closure_artifact_manifest.json"
                                     ,"reports/CRYPTO_SEARCH_REPLICATION_AWARE_GATE_V1_20260806r3.md"
+                                    ,"alphafactory_crypto/broad_search/funding_flow_residual_confirmation_v1.py"
+                                    ,"config/crypto_funding_flow_residual_nested_confirmation_v1_receipt.json"
+                                    ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806/partial_artifact_manifest.json"
+                                    ,"reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -948,6 +952,15 @@
                                             "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "reports/CRYPTO_SEARCH_AUTHORITY_SYSTEM_AUDIT_20260729.md"
+                                        },
+                                        {
+                                            "id":  "crypto_funding_flow_residual_confirmation_v1_consumed_outcome",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The one authorized reused-development-validation diagnostic is consumed with run_authorized false after a pre-market PC2 authority-portability failure. Producer da9e1943fa57e2062f7a7b71bf22c91469382619 froze 81 main and 81 exact swapped-timescale placebo candidates, then byte-hash validation blocked the line-ending-altered sparse Windows checkout before any economic context or candidate evaluation. Completed candidate count is zero and Validation-A, Validation-B, holdout and OOS were unread. This is no evidence for or against the funding-flow residual mechanism, anchor, basin, direction, placebo, Alpha or migration. Source preflight now resolves the complete economic authority before launch. No restart, rescue, second task, tuning, promotion or new Arena is authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.funding_flow_residual_confirmation_v1 preflight/run and the consumed one-time receipt",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806.md"
                                         },
                                         {
                                             "id":  "real_experiment_authority_preflight",
