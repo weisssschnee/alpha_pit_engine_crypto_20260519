@@ -4,7 +4,7 @@
   "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY",
   "run_authorized": true,
   "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
-  "authorized_implementation_sha": "942ed74367ce15cc4ec36946e23261e369f662da",
+  "authorized_implementation_sha": "f30bc63676d7df3bc07365fb8e58b36d2eeb8ff4",
   "expected_branch": "experiment/crypto-temporal-program-search-v1-20260807",
   "config_sha256": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
@@ -15,7 +15,7 @@
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "BD9512133FAA096775A61FF701E7A3B5548F8B5B43419CE27706CC7A61520376",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
     "config/crypto_temporal_mechanism_program_v1.json": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
-    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "7A47B72DC1ED6DEAAACC86BF87DB8163BEFD6998CCCC0FF3D7C058F013ACB263"
+    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "E4A29D09AA55840019E6E332DCA3ACDD822CF5B17875C47312032B0E4D97965D"
   },
   "budget": {
     "strict_evaluated_maximum": 50000,
@@ -41,5 +41,15 @@
     "rescue_rerun": false,
     "automatic_next_run": false
   },
-  "receipt_sha256": "D45CEA37C6817F84EEC05C484CA726FBE7E3A15FF34F1AA24C85993F287628C1"
+  "replacement_authorization": {
+    "replaces_receipt_sha256": "D45CEA37C6817F84EEC05C484CA726FBE7E3A15FF34F1AA24C85993F287628C1",
+    "reason": "PRE_CANDIDATE_WINDOWS_POWERSHELL_NATIVE_STDERR_WARNING_ABORT",
+    "prior_generation_attempts": 0,
+    "prior_strict_evaluated": 0,
+    "market_contract_unchanged": true,
+    "seed_contract_unchanged": true,
+    "budget_contract_unchanged": true,
+    "rescue_rerun": false
+  },
+  "receipt_sha256": "63283810731F4BA37A40B809CC49ECA0220E412D6D06D68424DF9532F91D5056"
 }
