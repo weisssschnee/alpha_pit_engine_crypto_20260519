@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY",
+  "run_authorized": true,
+  "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
+  "authorized_implementation_sha": "942ed74367ce15cc4ec36946e23261e369f662da",
+  "expected_branch": "experiment/crypto-temporal-program-search-v1-20260807",
+  "config_sha256": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
+  "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "component_sha256": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
+    "alphafactory_crypto/broad_search/expression.py": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "6F0A1EA7C08E87AAC2FDCEEF90559078F326B952DCDB19A997EC3A8EAC28C72E",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "BD9512133FAA096775A61FF701E7A3B5548F8B5B43419CE27706CC7A61520376",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
+    "config/crypto_temporal_mechanism_program_v1.json": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
+    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "7A47B72DC1ED6DEAAACC86BF87DB8163BEFD6998CCCC0FF3D7C058F013ACB263"
+  },
+  "budget": {
+    "strict_evaluated_maximum": 50000,
+    "raw_generation_attempts_maximum": 250000,
+    "wall_time_seconds_maximum": 64800,
+    "checkpoint_size": 2000,
+    "release_boundaries_strict": [10000, 20000, 30000, 40000, 50000],
+    "workers": [10, 8]
+  },
+  "market_authority": {
+    "carrier": "EXISTING_115_FIELD_OI_MARK_X_AGGTRADES_ALIGNED_CARRIER",
+    "target": "EXISTING_BINANCE_USDM_DELAYED_OPEN_TARGET",
+    "horizon_hours": 4,
+    "cost_bps": 5,
+    "matched_controls": "DUAL_AXIS_A_B_AB"
+  },
+  "boundaries": {
+    "development_only": true,
+    "validation": false,
+    "oos": false,
+    "holdout": false,
+    "promotion": false,
+    "rescue_rerun": false,
+    "automatic_next_run": false
+  },
+  "receipt_sha256": "D45CEA37C6817F84EEC05C484CA726FBE7E3A15FF34F1AA24C85993F287628C1"
+}
