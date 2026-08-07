@@ -1101,7 +1101,17 @@ def _candidate_rebuild_verified(
     roles: Mapping[str, Sequence[str]],
 ) -> bool:
     try:
-        if "mechanism_spec" in candidate.generation_genes:
+        if "program_spec" in candidate.generation_genes:
+            from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                temporal_program_candidate_from_genes,
+            )
+
+            rebuilt = temporal_program_candidate_from_genes(
+                registry,
+                genes=candidate.generation_genes,
+                domains=mechanism_role_domains(tuple(registry.fields.values())),
+            )
+        elif "mechanism_spec" in candidate.generation_genes:
             rebuilt = mechanism_candidate_from_genes(
                 registry,
                 genes=candidate.generation_genes,
@@ -4974,6 +4984,7 @@ class MechanismRandomV2:
     )
     rng: random.Random = field(init=False)
     domains: dict[str, tuple[Any, ...]] = field(init=False)
+    program_specs_by_id: dict[str, Any] = field(init=False, default_factory=dict)
     seen: set[str] = field(default_factory=set)
     step: int = 0
 
@@ -4995,6 +5006,22 @@ class MechanismRandomV2:
         )
         self.rng = random.Random(effective_seed)
         self.domains = mechanism_role_domains(tuple(self.registry.fields.values()))
+        if self.parameters.get("candidate_builder") == "TEMPORAL_MECHANISM_PROGRAM_V1":
+            from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                TemporalProgramSpec,
+            )
+
+            parsed = [
+                TemporalProgramSpec.from_dict(row)
+                for row in tuple(self.parameters.get("temporal_program_specs") or ())
+            ]
+            self.program_specs_by_id = {value.program_id: value for value in parsed}
+            expected_program_ids = {str(item.program_id) for item in self.catalog}
+            if (
+                None in {item.program_id for item in self.catalog}
+                or set(self.program_specs_by_id) != expected_program_ids
+            ):
+                raise ValueError("temporal program policy catalog is incomplete")
         if "allowed_horizons" in self.parameters:
             allowed_horizons = tuple(
                 int(value) for value in self.parameters["allowed_horizons"]
@@ -5004,19 +5031,65 @@ class MechanismRandomV2:
             self.domains["__HORIZONS__"] = allowed_horizons
 
     def _select_spec(self) -> MechanismSpec:
+        if bool(self.parameters.get("balanced_template_sampling", False)):
+            templates = tuple(sorted({item.template_id for item in self.catalog}))
+            template = self.rng.choice(templates)
+            choices = tuple(
+                item for item in self.catalog if item.template_id == template
+            )
+            return self.rng.choice(choices)
         return self.catalog[self.rng.randrange(len(self.catalog))]
+
+    def _program_spec(self, spec: MechanismSpec) -> Any:
+        if self.parameters.get("candidate_builder") != "TEMPORAL_MECHANISM_PROGRAM_V1":
+            return None
+        try:
+            return self.program_specs_by_id[str(spec.program_id)]
+        except KeyError as error:
+            raise ValueError(
+                "temporal program policy catalog binding changed"
+            ) from error
+
+    def _sample_candidate(self, spec: MechanismSpec) -> CandidateSpec:
+        if self.parameters.get("candidate_builder") == "TEMPORAL_MECHANISM_PROGRAM_V1":
+            from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                sample_temporal_program_candidate,
+            )
+
+            return sample_temporal_program_candidate(
+                registry=self.registry,
+                mechanism=spec,
+                program=self._program_spec(spec),
+                domains=self.domains,
+                scale_contract=dict(self.parameters["time_scale_authority"]),
+                rng=self.rng,
+            )
+        return sample_mechanism_candidate(
+            registry=self.registry,
+            spec=spec,
+            domains=self.domains,
+            rng=self.rng,
+        )
+
+    def _build_candidate(self, genes: Mapping[str, Any]) -> CandidateSpec:
+        if self.parameters.get("candidate_builder") == "TEMPORAL_MECHANISM_PROGRAM_V1":
+            from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                temporal_program_candidate_from_genes,
+            )
+
+            return temporal_program_candidate_from_genes(
+                self.registry, genes=genes, domains=self.domains
+            )
+        return mechanism_candidate_from_genes(
+            self.registry, genes=genes, domains=self.domains
+        )
 
     def propose(self) -> tuple[CandidateSpec, dict[str, Any]]:
         before = self.state_hash()
         limit = int(self.parameters.get("duplicate_resample_limit", 64))
         for attempt in range(1, limit + 2):
             spec = self._select_spec()
-            candidate = sample_mechanism_candidate(
-                registry=self.registry,
-                spec=spec,
-                domains=self.domains,
-                rng=self.rng,
-            )
+            candidate = self._sample_candidate(spec)
             if candidate.candidate_id in self.seen:
                 continue
             self.seen.add(candidate.candidate_id)
@@ -5320,6 +5393,12 @@ class MechanismEvolutionV2(MechanismRandomV2):
 
     @staticmethod
     def _gene_groups(candidate: CandidateSpec) -> tuple[tuple[str, ...], ...]:
+        if "program_spec" in candidate.generation_genes:
+            from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                program_gene_groups,
+            )
+
+            return program_gene_groups(candidate)
         spec = MechanismEvolutionV2._spec(candidate)
         groups: list[tuple[str, ...]] = [
             ("left_field", "left_auxiliary_field"),
@@ -5345,12 +5424,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
         spec = self._spec(parent)
         limit = int(self.parameters.get("duplicate_resample_limit", 64))
         for attempt in range(1, limit + 2):
-            donor = sample_mechanism_candidate(
-                registry=self.registry,
-                spec=spec,
-                domains=self.domains,
-                rng=self.rng,
-            )
+            donor = self._sample_candidate(spec)
             genome = dict(parent.generation_genes)
             groups = list(self._gene_groups(parent))
             count = self.rng.randint(1, min(3, len(groups)))
@@ -5358,9 +5432,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
             for group in selected:
                 for name in group:
                     genome[name] = donor.generation_genes[name]
-            child = mechanism_candidate_from_genes(
-                self.registry, genes=genome, domains=self.domains
-            )
+            child = self._build_candidate(genome)
             if child.candidate_id == parent.candidate_id:
                 continue
             return child, self._receipt(
@@ -5401,17 +5473,50 @@ class MechanismEvolutionV2(MechanismRandomV2):
             )
             if target.payload_operator != "Residual":
                 genome["beta"] = 0.5
+            if "program_spec" in genome:
+                donor = self._sample_candidate(target)
+                for name in (
+                    "program_id",
+                    "program_spec",
+                    "left_window",
+                    "left_long_window",
+                    "left_threshold",
+                    "left_outer_window",
+                    "left_outer_threshold",
+                    "right_window",
+                    "right_long_window",
+                    "right_threshold",
+                    "outer_threshold",
+                    "beta",
+                ):
+                    genome[name] = donor.generation_genes[name]
             try:
-                child = mechanism_candidate_from_genes(
-                    self.registry, genes=genome, domains=self.domains
-                )
+                child = self._build_candidate(genome)
             except ValueError:
                 continue
             if child.candidate_id == parent.candidate_id:
                 continue
+            remap_domain = (
+                (
+                    "program_id",
+                    "program_spec",
+                    "left_window",
+                    "left_long_window",
+                    "left_threshold",
+                    "left_outer_window",
+                    "left_outer_threshold",
+                    "right_window",
+                    "right_long_window",
+                    "right_threshold",
+                    "outer_threshold",
+                    "beta",
+                )
+                if "program_spec" in child.generation_genes
+                else ("beta",)
+            )
             remapped_gene_names = sorted(
                 name
-                for name in ("beta",)
+                for name in remap_domain
                 if child.generation_genes.get(name)
                 != parent.generation_genes.get(name)
             )
@@ -5448,9 +5553,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 for name in group:
                     genome[name] = second.generation_genes[name]
             try:
-                child = mechanism_candidate_from_genes(
-                    self.registry, genes=genome, domains=self.domains
-                )
+                child = self._build_candidate(genome)
             except ValueError:
                 continue
             if child.candidate_id in {first.candidate_id, second.candidate_id}:
@@ -5520,9 +5623,27 @@ class MechanismEvolutionV2(MechanismRandomV2):
             elif operation == MECHANISM_EVOLUTION_OPERATIONS[1] and len(parents) == 1:
                 source = self._spec(parents[0])
                 target = self._spec(child)
+                remap_domain = (
+                    (
+                        "program_id",
+                        "program_spec",
+                        "left_window",
+                        "left_long_window",
+                        "left_threshold",
+                        "left_outer_window",
+                        "left_outer_threshold",
+                        "right_window",
+                        "right_long_window",
+                        "right_threshold",
+                        "outer_threshold",
+                        "beta",
+                    )
+                    if "program_spec" in child.generation_genes
+                    else ("beta",)
+                )
                 expected_remapped = sorted(
                     name
-                    for name in ("beta",)
+                    for name in remap_domain
                     if child.generation_genes.get(name)
                     != parents[0].generation_genes.get(name)
                 )
@@ -7041,6 +7162,7 @@ def _worker_initialize(
     include_control_provenance: bool = False,
     optimizer_block_contract: Mapping[str, Any] | None = None,
     process_evidence_root: str | None = None,
+    expression_registry_limits: Mapping[str, Any] | None = None,
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
     global _WORKER_ECONOMIC_RECEIPT
@@ -7076,7 +7198,8 @@ def _worker_initialize(
         else:
             _WORKER_STORE = source_store
         _WORKER_REGISTRY = TypedExpressionRegistry(
-            _contracts_from_payload(contract_rows)
+            _contracts_from_payload(contract_rows),
+            **dict(expression_registry_limits or {}),
         )
         _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
         _WORKER_ECONOMIC_RECEIPT = (

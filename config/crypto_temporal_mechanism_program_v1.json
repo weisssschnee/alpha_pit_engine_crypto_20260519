@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "experiment_id": "CRYPTO_SEARCH_CORE_V4_TEMPORAL_MECHANISM_PROGRAM_V1_20260807",
+  "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
+  "research_role": "DEVELOPMENT_ONLY_TEMPORAL_MECHANISM_SPACE_AND_POLICY_ATTRIBUTION",
+  "question": "Do economically explicit state-event-response-persistence programs create reproducible matched after-cost behavior beyond the existing contemporaneous static mechanism box, and can fresh-state CEM or Evolution search that program space more productively than typed random?",
+  "bounded_interpretation": {
+    "prior_temporal_activation_result_retained": "SHORT_HORIZON_ONE_AXIS_TEMPORAL_TRANSFORM_ABLATION_NOT_SUPPORTED",
+    "prior_result_does_not_close_temporal_programs": true,
+    "this_campaign_changes_search_object": "TEMPORAL_MECHANISM_PROGRAM",
+    "complexity_is_not_a_goal": true,
+    "simple_static_candidate_may_outperform_complex_program": true
+  },
+  "reuse": {
+    "expression_ast": "alphafactory_crypto.broad_search.expression.Expression",
+    "typed_registry": "alphafactory_crypto.broad_search.expression.TypedExpressionRegistry",
+    "candidate_spec": "alphafactory_crypto.broad_search.compositional18m.CandidateSpec",
+    "field_roles": "alphafactory_crypto.broad_search.compositional18m.mechanism_role_domains",
+    "canonical_primitives": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+    "compiler_validation": true,
+    "dual_axis_matched_controls": "alphafactory_crypto.broad_search.pair18m.evaluate_pair",
+    "mapping": "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING",
+    "economic_waterfall": "alphafactory_crypto.broad_search.pair18m.evaluate_pair",
+    "behavior_provenance": true,
+    "campaign_local_archive": true,
+    "random_policy": "MechanismRandomV2",
+    "cem_policy": "MechanismCEMV2",
+    "evolution_policy": "MechanismEvolutionV2",
+    "atomic_checkpoint_pattern": "Temporal Activation V1",
+    "new_ast": false,
+    "second_compiler": false,
+    "new_evaluator": false,
+    "new_mapping": false,
+    "new_graph_node": false
+  },
+  "source_authorities": {
+    "static_catalog": "config/crypto_typed_mechanism_catalog_v2_1.json",
+    "source_carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "target_authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+    "economic_receipt_template": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+    "development_blocks_config": "config/crypto_search_replication_aware_gate_v1.json"
+  },
+  "market_contract": {
+    "carrier": "EXISTING_115_FIELD_OI_MARK_X_AGGTRADES_ALIGNED_CARRIER",
+    "target": "EXISTING_BINANCE_USDM_DELAYED_OPEN_TARGET",
+    "execution_delay_hours": 2,
+    "horizon_hours": 4,
+    "partition_tail_purge_hours": 6,
+    "mapping": "EXISTING_MAPPING_AUTHORITY",
+    "cost": "EXISTING_5_BPS_FULL_L1",
+    "orientation": "EXISTING_DEVELOPMENT_TRAIN_FROZEN_ORIENTATION",
+    "matched_controls": "DUAL_AXIS_A_B_AB",
+    "development_blocks": 3,
+    "zero_fill_forbidden": true,
+    "dynamic_eligibility_required": true
+  },
+  "expression_limits": {
+    "maximum_depth": 7,
+    "maximum_raw_fields": 4,
+    "maximum_rolling_windows": 8,
+    "maximum_canonical_primitive_nodes": 4,
+    "maximum_cross_asset_normalizations": 1,
+    "maximum_regime_gates": 2
+  },
+  "time_scale_authority": {
+    "POSITIONING_SLOW": {
+      "short_hours": [6, 12, 24, 48, 72, 168],
+      "long_hours": [72, 168, 336, 720],
+      "event_memory_hours": [12, 24, 48, 72, 168],
+      "normalizer_hours": [24, 72, 168, 336, 720]
+    },
+    "FLOW_FAST": {
+      "short_hours": [1, 2, 4, 8, 12, 24],
+      "long_hours": [24, 48, 72, 168],
+      "event_memory_hours": [2, 4, 8, 12, 24, 48],
+      "normalizer_hours": [12, 24, 48, 72, 168]
+    },
+    "thresholds_after_normalization": [-1.0, -0.5, 0.0, 0.5, 1.0],
+    "percentile_thresholds": [0.25, 0.5, 0.75],
+    "normalizers": ["RollingZScore", "VolatilityScale", "HistoricalPercentile"],
+    "normalizer_and_threshold_parameters_are_frozen_before_first_candidate": true
+  },
+  "program_families": [
+    {
+      "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+      "economic_semantics": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+      "left_roles": ["OI_LEVEL", "OI_NOTIONAL", "FUNDING", "BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"],
+      "right_roles": ["FLOW_IMBALANCE", "PRICE_RESPONSE", "TRADE_INTENSITY"],
+      "left_component": ["Delta", "MultiScaleRelation"],
+      "right_component": ["Delta", "Slope"],
+      "outer_operators": ["Residual", "NormalizedDifference", "RatioInteraction"]
+    },
+    {
+      "family_id": "P2_RECENT_CROWDING_EVENT_TO_RESPONSE",
+      "economic_semantics": "A rising or falling crowding event opens a bounded post-event response window; the response is evaluated against the next 4h return.",
+      "left_roles": ["OI_LEVEL", "FUNDING", "BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"],
+      "right_roles": ["FLOW_IMBALANCE", "PRICE_RESPONSE", "LARGE_TRADE"],
+      "left_component": ["Transition", "TimeSince", "EventWindow"],
+      "right_component": ["Delta", "Slope"],
+      "outer_operators": ["ConditionGate"],
+      "gate_modes": ["POSITIVE", "NEGATIVE"]
+    },
+    {
+      "family_id": "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION",
+      "economic_semantics": "A flow or large-trade shock persists while price response remains small or diverges, distinguishing absorption from displacement before the next 4h return.",
+      "left_roles": ["FLOW_IMBALANCE", "LARGE_TRADE"],
+      "right_roles": ["PRICE_RESPONSE"],
+      "left_component": ["Delta", "Persistence"],
+      "right_component": ["Delta"],
+      "inner_absorption_operators": ["Residual", "NormalizedDifference"],
+      "outer_operators": ["SafeMul", "StateModulation"]
+    },
+    {
+      "family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+      "economic_semantics": "A slow-versus-long state is routed by a current flow or price transition, testing confirmation and unwind rather than static multiplication.",
+      "left_roles": ["OI_LEVEL", "OI_NOTIONAL", "FUNDING", "BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"],
+      "right_roles": ["FLOW_IMBALANCE", "PRICE_RESPONSE", "TRADE_INTENSITY"],
+      "left_component": ["MultiScaleRelation", "Persistence"],
+      "right_component": ["Transition", "EventWindow"],
+      "outer_operators": ["ConditionGate", "StateModulation"],
+      "gate_modes": ["SIGN_CONFIRMATION", "SIGN_DISAGREEMENT", "SIGN_ROUTING"]
+    }
+  ],
+  "search_budget": {
+    "strict_evaluated_maximum": 50000,
+    "raw_generation_attempts_maximum": 250000,
+    "wall_time_seconds_maximum": 64800,
+    "checkpoint_size": 2000,
+    "checkpoint_count_maximum": 25,
+    "release_boundaries_strict": [10000, 20000, 30000, 40000, 50000],
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "minimum_strict_per_hour_after_first_checkpoint": 2777.777777777778,
+    "minimum_free_memory_bytes": 8589934592,
+    "automatic_release_only_through_frozen_gate": true,
+    "later_tranche_proposal_pregeneration": false
+  },
+  "stage_allocations": [
+    {
+      "stage_id": "PROGRAM_SPACE_ACTIVATION",
+      "strict_start": 0,
+      "strict_end": 10000,
+      "allocation": {
+        "paired_static": 5000,
+        "temporal_program_random": 5000,
+        "temporal_program_cem": 0,
+        "temporal_program_evolution": 0
+      },
+      "program_family_pairs_each": 1250
+    },
+    {
+      "stage_id": "FRESH_POLICY_SEARCH",
+      "strict_start": 10000,
+      "strict_end": 50000,
+      "allocation_per_10000": {
+        "temporal_program_random": 2000,
+        "temporal_program_cem": 4000,
+        "temporal_program_evolution": 4000
+      }
+    }
+  ],
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_temporal_activation_trajectory_import": false,
+    "aggregate_knowledge_sampling_prior": false,
+    "campaign_local_per_run_memory_only": true
+  },
+  "seed_authority": {
+    "derivation": "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_PROGRAM_V1_PIPE_LANE_INDEX",
+    "seeds": [2594819233, 4246332867, 3389304867, 168281835],
+    "shared_across_random_cem_evolution": true,
+    "old_campaign_seed_reuse": false
+  },
+  "policy_parameters": {
+    "temporal_program_random": {
+      "duplicate_resample_limit": 128
+    },
+    "temporal_program_cem": {
+      "duplicate_resample_limit": 128,
+      "minimum_observation_count": 16,
+      "elite_fraction": 0.2,
+      "smoothing": 0.35,
+      "minimum_probability": 0.002,
+      "entropy_floor_ratio": 0.6,
+      "count_pseudocount": 0.5
+    },
+    "temporal_program_evolution": {
+      "duplicate_resample_limit": 128,
+      "warmup": 64,
+      "tournament_size": 4,
+      "population_limit": 512,
+      "parameter_mutation_probability": 0.5,
+      "mechanism_mutation_probability": 0.3,
+      "crossover_probability": 0.2,
+      "selection_authority": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2"
+    }
+  },
+  "continuation_gates": {
+    "stage_10000": {
+      "minimum_pairs_per_family": 1250,
+      "family_continues_when_any_primary_route_passes": true,
+      "primary_routes": {
+        "paired_worst_axis_net_median_strictly_positive": true,
+        "program_win_fraction_minimum": 0.525,
+        "dual_axis_net_positive_rate_absolute_improvement_minimum": 0.01,
+        "replicated_2_of_3_rate_absolute_improvement_minimum": 0.005,
+        "matched_positive_count_above_static": true
+      },
+      "breadth_required_for_a_family": {
+        "minimum_positive_semantic_tuple_count": 2,
+        "maximum_top_semantic_tuple_positive_delta_share": 0.6
+      },
+      "minimum_continuing_family_count": 1,
+      "noncontinuing_family_combined_random_diagnostic_share": 0.1
+    },
+    "stages_20000_30000_40000": {
+      "compare_at_same_strict_count": true,
+      "quality_metrics": ["mean_search_reward", "top_decile_search_reward"],
+      "productivity_metrics": ["dual_axis_net_positive_per_1k", "replicated_2_of_3_per_1k", "new_behavior_families_per_1k", "strict_per_process_cpu_hour"],
+      "adaptive_arm_requires_one_quality_and_one_productivity_improvement": true,
+      "behavior_family_rate_minimum_fraction_of_random": 0.8,
+      "maximum_top_program_family_positive_share": 0.6,
+      "first_all-metric_nonincremental_checkpoint_action": "DIAGNOSTIC_FLOOR_10_PERCENT",
+      "second_consecutive_all-metric_nonincremental_checkpoint_action": "EXIT_ARM",
+      "typed_random_minimum_share": 0.2
+    },
+    "stage_50000": {
+      "terminal_only": true,
+      "no_automatic_validation": true
+    }
+  },
+  "final_decisions": {
+    "TEMPORAL_PROGRAM_SPACE_SUPPORTED_FOR_FUTURE_VALIDATION": {
+      "minimum_strict_matched_positive_behavior_families": 2,
+      "minimum_contributing_program_families": 2,
+      "train_only": true
+    },
+    "LOCAL_TEMPORAL_PROGRAM_LINE_IDENTIFIED": {
+      "family_local_increment": true,
+      "global_qualification": false
+    },
+    "TEMPORAL_PROGRAM_SPACE_NOT_SUPPORTED": {
+      "no_family_survives_frozen_continuation": true
+    },
+    "ENGINE_BUDGET_EXHAUSTED": {
+      "preserve_completed_results": true
+    },
+    "INVALID_RUN_FAIL_CLOSED": {
+      "research_conclusion_forbidden": true
+    }
+  },
+  "required_outputs": [
+    "frozen_contract.json",
+    "embedded_preflight.json",
+    "program_catalog.json",
+    "candidate_ledger.parquet",
+    "behavior_archive.parquet",
+    "program_family_metrics.parquet",
+    "arm_checkpoint_metrics.parquet",
+    "checkpoints/checkpoint_*/manifest.json",
+    "continuation_decision_*.json",
+    "final_decision.json",
+    "run_manifest.json",
+    "independent_checker.json",
+    "reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_<date>.md"
+  ],
+  "boundaries": {
+    "development_only": true,
+    "validation": false,
+    "oos": false,
+    "holdout": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "new_data_source": false,
+    "new_fields": false,
+    "target_change": false,
+    "mapping_change": false,
+    "cost_change": false,
+    "reward_change": false,
+    "new_evaluator": false,
+    "second_ast": false,
+    "second_compiler": false,
+    "cross_sprint_adaptive_memory": false,
+    "parameter_tuning": false,
+    "rescue_rerun": false,
+    "new_graph_node": false
+  }
+}

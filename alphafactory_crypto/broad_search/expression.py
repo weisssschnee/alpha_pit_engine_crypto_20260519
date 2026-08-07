@@ -69,6 +69,7 @@ CANONICAL_TEMPORAL_PRIMITIVE_IDS_V1 = frozenset(
     }
 )
 CANONICAL_PRIMITIVE_OPERATOR = "CanonicalPrimitive"
+TEMPORAL_PROGRAM_COMPONENT_AUTHORITY_V1 = "TEMPORAL_MECHANISM_PROGRAM_V1"
 
 BINARY_OPERATORS = frozenset(
     {
@@ -275,6 +276,161 @@ class CanonicalTemporalPrimitiveAdapterV1:
         )
 
 
+class TemporalProgramComponentAdapterV1:
+    """Typed binding for canonical primitives used as program components.
+
+    Unlike the V1 one-axis adapter, this binding is not coupled to the old
+    aggTrades canary parameter table.  The program compiler owns the frozen,
+    role-aware coordinate domain; this layer independently enforces canonical
+    primitive identity, parameter shape, and numeric safety.
+    """
+
+    PARAMETER_KEYS = frozenset(
+        {"authority", "primitive_id", "window", "long_window", "threshold"}
+    )
+    WINDOW_PRIMITIVES = frozenset(
+        {"Delta", "Slope", "Acceleration", "Persistence", "PathShape", "EventWindow"}
+    )
+    WINDOWLESS_PRIMITIVES = frozenset(
+        {"Duration", "StateAge", "TimeSince", "Transition", "FirstHit", "LastHit"}
+    )
+
+    @classmethod
+    def normalized_parameters(
+        cls, parameters: Mapping[str, Any]
+    ) -> tuple[str, int | None, int | None, float | None]:
+        if set(parameters) != cls.PARAMETER_KEYS:
+            raise ValueError("Temporal program component parameters must be exact")
+        if str(parameters["authority"]) != TEMPORAL_PROGRAM_COMPONENT_AUTHORITY_V1:
+            raise ValueError("temporal program component authority changed")
+        primitive_id = str(parameters["primitive_id"])
+        if primitive_id not in CANONICAL_PRIMITIVES:
+            raise ValueError("temporal program component is not canonical")
+
+        def optional_int(value: Any) -> int | None:
+            if value is None:
+                return None
+            result = int(value)
+            if result <= 0:
+                raise ValueError("temporal program windows must be positive")
+            return result
+
+        def optional_float(value: Any) -> float | None:
+            if value is None:
+                return None
+            result = float(value)
+            if not np.isfinite(result):
+                raise ValueError("temporal program threshold must be finite")
+            return result
+
+        window = optional_int(parameters["window"])
+        long_window = optional_int(parameters["long_window"])
+        threshold = optional_float(parameters["threshold"])
+        if primitive_id == "MultiScaleRelation":
+            if window is None or long_window is None or window >= long_window:
+                raise ValueError("MultiScaleRelation requires short window < long window")
+        elif primitive_id in cls.WINDOW_PRIMITIVES:
+            if window is None or long_window is not None:
+                raise ValueError(f"{primitive_id} requires one window")
+            if primitive_id == "PathShape" and window < 3:
+                raise ValueError("PathShape requires window >= 3")
+        elif primitive_id in cls.WINDOWLESS_PRIMITIVES:
+            if window is not None or long_window is not None:
+                raise ValueError(f"{primitive_id} does not accept a window")
+        else:  # pragma: no cover - canonical authority and sets move together
+            raise ValueError("unsupported temporal program primitive")
+        return primitive_id, window, long_window, threshold
+
+    @classmethod
+    def expression(
+        cls,
+        source: Expression,
+        *,
+        primitive_id: str,
+        window: int | None = None,
+        long_window: int | None = None,
+        threshold: float | None = None,
+    ) -> Expression:
+        parameters = {
+            "authority": TEMPORAL_PROGRAM_COMPONENT_AUTHORITY_V1,
+            "primitive_id": str(primitive_id),
+            "window": None if window is None else int(window),
+            "long_window": None if long_window is None else int(long_window),
+            "threshold": None if threshold is None else float(threshold),
+        }
+        cls.normalized_parameters(parameters)
+        return Expression(CANONICAL_PRIMITIVE_OPERATOR, (source,), parameters=parameters)
+
+    @staticmethod
+    def effective_window_widths(
+        primitive_id: str,
+        window: int | None,
+        long_window: int | None,
+    ) -> tuple[int, ...]:
+        if primitive_id == "Delta":
+            assert window is not None
+            return (window + 1,)
+        if primitive_id == "Acceleration":
+            assert window is not None
+            return (2 * window + 1,)
+        if primitive_id in {"Slope", "Persistence", "PathShape", "EventWindow"}:
+            assert window is not None
+            return (window,)
+        if primitive_id == "MultiScaleRelation":
+            assert window is not None and long_window is not None
+            return (window, long_window)
+        return ()
+
+    @staticmethod
+    def output_contract(
+        primitive_id: str, child: ExpressionAssurance
+    ) -> tuple[str, str]:
+        if primitive_id in {
+            "Delta",
+            "Slope",
+            "Acceleration",
+            "PathShape",
+            "MultiScaleRelation",
+        }:
+            return child.value_type, child.unit
+        if primitive_id == "Persistence":
+            return "UNIT_INTERVAL", "dimensionless"
+        if primitive_id in {"Duration", "StateAge", "TimeSince", "LastHit"}:
+            return "AGE", "dimensionless"
+        if primitive_id in {"Transition", "FirstHit"}:
+            return "EVENT", "dimensionless"
+        if primitive_id == "EventWindow":
+            return "COUNT", "dimensionless"
+        raise AssertionError(primitive_id)
+
+    @staticmethod
+    def materialize(
+        values: np.ndarray,
+        *,
+        primitive_id: str,
+        window: int | None,
+        long_window: int | None,
+        threshold: float | None,
+    ) -> np.ndarray:
+        return evaluate_primitive(
+            primitive_id,
+            values,
+            window=1 if window is None else int(window),
+            long_window=1 if long_window is None else int(long_window),
+            threshold=0.0 if threshold is None else float(threshold),
+        )
+
+
+def _canonical_primitive_adapter(
+    parameters: Mapping[str, Any],
+) -> type[CanonicalTemporalPrimitiveAdapterV1] | type[TemporalProgramComponentAdapterV1]:
+    if set(parameters) == CanonicalTemporalPrimitiveAdapterV1.PARAMETER_KEYS:
+        return CanonicalTemporalPrimitiveAdapterV1
+    if set(parameters) == TemporalProgramComponentAdapterV1.PARAMETER_KEYS:
+        return TemporalProgramComponentAdapterV1
+    raise ValueError("CanonicalPrimitive parameters do not match an authority")
+
+
 def _same_unit(left: ExpressionAssurance, right: ExpressionAssurance) -> None:
     if left.unit != right.unit:
         raise ValueError(f"incompatible units: {left.unit} and {right.unit}")
@@ -291,28 +447,72 @@ class TypedExpressionRegistry:
     # third-axis regime operator without changing the existing AST shape.
     MAX_REGIME_GATES = 2
 
-    def __init__(self, fields: Sequence[FieldContract]) -> None:
+    def __init__(
+        self,
+        fields: Sequence[FieldContract],
+        *,
+        max_depth: int | None = None,
+        max_raw_inputs: int | None = None,
+        max_rolling_windows: int | None = None,
+        max_canonical_primitive_nodes: int = 1,
+        max_cross_asset_normalizations: int | None = None,
+        max_regime_gates: int | None = None,
+    ) -> None:
         self.fields = {item.field_id: item for item in fields}
         if not self.fields or len(self.fields) != len(tuple(fields)):
             raise ValueError("field contracts must be non-empty and unique")
+        self.max_depth = self.MAX_DEPTH if max_depth is None else int(max_depth)
+        self.max_raw_inputs = (
+            self.MAX_RAW_INPUTS if max_raw_inputs is None else int(max_raw_inputs)
+        )
+        self.max_rolling_windows = (
+            None if max_rolling_windows is None else int(max_rolling_windows)
+        )
+        self.max_canonical_primitive_nodes = int(max_canonical_primitive_nodes)
+        self.max_cross_asset_normalizations = (
+            self.MAX_CROSS_ASSET_NORMALIZATIONS
+            if max_cross_asset_normalizations is None
+            else int(max_cross_asset_normalizations)
+        )
+        self.max_regime_gates = (
+            self.MAX_REGIME_GATES if max_regime_gates is None else int(max_regime_gates)
+        )
+        if min(
+            self.max_depth,
+            self.max_raw_inputs,
+            self.max_canonical_primitive_nodes,
+            self.max_cross_asset_normalizations,
+            self.max_regime_gates,
+        ) < 0 or self.max_depth < 1 or self.max_raw_inputs < 1:
+            raise ValueError("expression registry limits are invalid")
+        if self.max_rolling_windows is not None and self.max_rolling_windows < 0:
+            raise ValueError("expression rolling-window limit is invalid")
 
     def validate(self, expression: Expression) -> ExpressionAssurance:
         assurance = self._validate(expression)
         temporal_nodes = self._operator_count(
             expression, CANONICAL_PRIMITIVE_OPERATOR
         )
-        if temporal_nodes > 1:
-            raise ValueError("expression uses more than one canonical primitive")
-        if assurance.depth > self.MAX_DEPTH:
-            raise ValueError("expression depth exceeds four")
-        if not 1 <= len(assurance.raw_fields) <= self.MAX_RAW_INPUTS:
+        if temporal_nodes > self.max_canonical_primitive_nodes:
+            raise ValueError(
+                "expression uses more than one canonical primitive"
+                if self.max_canonical_primitive_nodes == 1
+                else "expression uses too many canonical primitives"
+            )
+        if assurance.depth > self.max_depth:
+            raise ValueError("expression depth exceeds its frozen limit")
+        if not 1 <= len(assurance.raw_fields) <= self.max_raw_inputs:
             raise ValueError("expression must use one to four raw inputs")
-        rolling_limit = self.MAX_ROLLING_WINDOWS + (1 if temporal_nodes else 0)
+        rolling_limit = (
+            self.MAX_ROLLING_WINDOWS + (1 if temporal_nodes else 0)
+            if self.max_rolling_windows is None
+            else self.max_rolling_windows
+        )
         if len(assurance.rolling_windows) > rolling_limit:
             raise ValueError("expression exceeds its rolling-window limit")
-        if assurance.cross_asset_normalizations > self.MAX_CROSS_ASSET_NORMALIZATIONS:
+        if assurance.cross_asset_normalizations > self.max_cross_asset_normalizations:
             raise ValueError("expression uses more than one cross-asset normalization")
-        if assurance.regime_gates > self.MAX_REGIME_GATES:
+        if assurance.regime_gates > self.max_regime_gates:
             raise ValueError("expression uses more than one regime gate")
         return assurance
 
@@ -349,17 +549,14 @@ class TypedExpressionRegistry:
             if len(children) != 1:
                 raise ValueError("CanonicalPrimitive requires one input")
             child = children[0]
-            primitive_id, window, long_window, threshold = (
-                CanonicalTemporalPrimitiveAdapterV1.normalized_parameters(
-                    expression.parameters
-                )
+            adapter = _canonical_primitive_adapter(expression.parameters)
+            primitive_id, window, long_window, threshold = adapter.normalized_parameters(
+                expression.parameters
             )
             output_type, output_unit = (
-                CanonicalTemporalPrimitiveAdapterV1.output_contract(
-                    primitive_id, child
-                )
+                adapter.output_contract(primitive_id, child)
             )
-            widths = CanonicalTemporalPrimitiveAdapterV1.effective_window_widths(
+            widths = adapter.effective_window_widths(
                 primitive_id, window, long_window
             )
             return ExpressionAssurance(
@@ -506,14 +703,16 @@ class TypedExpressionRegistry:
             "lifecycle": "EXPERIMENTAL",
             "authority": "NON_FORMAL_REPRESENTATION_ONLY",
             "limits": {
-                "raw_inputs": [1, self.MAX_RAW_INPUTS],
-                "depth": [1, self.MAX_DEPTH],
-                "rolling_windows": self.MAX_ROLLING_WINDOWS,
-                "rolling_windows_with_one_canonical_primitive": (
-                    self.MAX_ROLLING_WINDOWS + 1
+                "raw_inputs": [1, self.max_raw_inputs],
+                "depth": [1, self.max_depth],
+                "rolling_windows": (
+                    self.MAX_ROLLING_WINDOWS
+                    if self.max_rolling_windows is None
+                    else self.max_rolling_windows
                 ),
-                "cross_asset_normalizations": self.MAX_CROSS_ASSET_NORMALIZATIONS,
-                "regime_gates": self.MAX_REGIME_GATES,
+                "canonical_primitive_nodes": self.max_canonical_primitive_nodes,
+                "cross_asset_normalizations": self.max_cross_asset_normalizations,
+                "regime_gates": self.max_regime_gates,
             },
             "value_types": sorted(VALUE_TYPES),
             "normalizers": sorted(NORMALIZERS),
@@ -663,12 +862,11 @@ def materialize_expression(
                     .T
                 )
             elif node.operator == CANONICAL_PRIMITIVE_OPERATOR:
+                adapter = _canonical_primitive_adapter(node.parameters)
                 primitive_id, primitive_window, long_window, threshold = (
-                    CanonicalTemporalPrimitiveAdapterV1.normalized_parameters(
-                        node.parameters
-                    )
+                    adapter.normalized_parameters(node.parameters)
                 )
-                result = CanonicalTemporalPrimitiveAdapterV1.materialize(
+                result = adapter.materialize(
                     left,
                     primitive_id=primitive_id,
                     window=primitive_window,
@@ -775,6 +973,8 @@ __all__ = [
     "CANONICAL_PRIMITIVE_OPERATOR",
     "CANONICAL_TEMPORAL_PRIMITIVE_IDS_V1",
     "CanonicalTemporalPrimitiveAdapterV1",
+    "TemporalProgramComponentAdapterV1",
+    "TEMPORAL_PROGRAM_COMPONENT_AUTHORITY_V1",
     "CONDITION_GATE_MODES",
     "CONTROL_OPERATORS",
     "NORMALIZERS",

@@ -163,6 +163,7 @@ class MechanismSpec:
     condition_mode: str | None
     mapping_class: str
     matched_control_schema: str
+    program_id: str | None = None
     parent_mechanism_ids: tuple[str, ...] = ()
     lifecycle: str = "ACTIVE"
 
@@ -183,6 +184,7 @@ class MechanismSpec:
             ),
             "mapping_class": self.mapping_class,
             "matched_control_schema": self.matched_control_schema,
+            **({"program_id": self.program_id} if self.program_id else {}),
         }
 
     def to_dict(self) -> dict[str, Any]:
@@ -211,6 +213,7 @@ class MechanismSpec:
         condition_mode: str | None = None,
         mapping_class: str,
         matched_control_schema: str,
+        program_id: str | None = None,
         parent_mechanism_ids: Sequence[str] = (),
         lifecycle: str = "ACTIVE",
     ) -> "MechanismSpec":
@@ -232,6 +235,7 @@ class MechanismSpec:
             ),
             "mapping_class": str(mapping_class),
             "matched_control_schema": str(matched_control_schema),
+            **({"program_id": str(program_id)} if program_id else {}),
         }
         mechanism_id = f"MECHANISM_V2_{_payload_sha(semantic)[:32]}"
         return cls(
@@ -248,6 +252,7 @@ class MechanismSpec:
             semantic.get("condition_mode"),
             str(mapping_class),
             str(matched_control_schema),
+            semantic.get("program_id"),
             tuple(str(value) for value in parent_mechanism_ids),
             str(lifecycle),
         )
@@ -267,6 +272,7 @@ class MechanismSpec:
             condition_mode=payload.get("condition_mode"),
             mapping_class=str(payload["mapping_class"]),
             matched_control_schema=str(payload["matched_control_schema"]),
+            program_id=payload.get("program_id"),
             parent_mechanism_ids=payload.get("parent_mechanism_ids", ()),
             lifecycle=str(payload.get("lifecycle", "ACTIVE")),
         )
