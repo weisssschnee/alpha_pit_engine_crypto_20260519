@@ -270,6 +270,18 @@ def test_contract_is_sequential_development_only_and_not_an_all_family_veto() ->
         assert CONFIG["boundaries"][key] is False
 
 
+def test_pc2_runner_treats_native_exit_code_as_authority_not_stderr() -> None:
+    runner = (
+        REPO_ROOT / "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1"
+    ).read_text(encoding="utf-8")
+    assert "function Invoke-PythonChecked" in runner
+    assert '$ErrorActionPreference = "Continue"' in runner
+    assert "2>&1 | ForEach-Object { Write-Output $_ }" in runner
+    assert 'if ($nativeExitCode -ne 0)' in runner
+    assert runner.count("Invoke-PythonChecked -Arguments") == 3
+    assert "& $PythonExe -m alphafactory_crypto" not in runner
+
+
 def test_stage0_checkpoint_allocation_is_exact_without_rounding_underfill() -> None:
     cumulative: Counter[str] = Counter()
     for checkpoint_index in range(5):

@@ -11,6 +11,31 @@ param(
 $ErrorActionPreference = "Stop"
 Set-Location -LiteralPath $RepoRoot
 
+function Invoke-PythonChecked {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$Arguments,
+        [Parameter(Mandatory = $true)]
+        [string]$FailureMessage
+    )
+
+    # Windows PowerShell turns native stderr into ErrorRecord objects.  A
+    # harmless RuntimeWarning must remain visible without becoming a terminating
+    # PowerShell error; the native process exit code is the sole authority.
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        & $PythonExe @Arguments 2>&1 | ForEach-Object { Write-Output $_ }
+        $nativeExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+    if ($nativeExitCode -ne 0) {
+        throw "$FailureMessage (exit code $nativeExitCode)"
+    }
+}
+
 $branch = (git branch --show-current).Trim()
 $head = (git rev-parse HEAD).Trim().ToLowerInvariant()
 $autocrlf = (git config --get core.autocrlf).Trim().ToLowerInvariant()
@@ -27,23 +52,18 @@ if (git status --porcelain --untracked-files=all) {
     throw "Producer worktree must be clean"
 }
 
-& $PythonExe -m alphafactory_crypto.broad_search.temporal_program_search_v1 source-smoke `
-    --repo-root $RepoRoot
-if ($LASTEXITCODE -ne 0) {
-    throw "Temporal program no-market source smoke failed"
-}
+Invoke-PythonChecked -Arguments @(
+    "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
+    "source-smoke", "--repo-root", $RepoRoot
+) -FailureMessage "Temporal program no-market source smoke failed"
 
-& $PythonExe -m alphafactory_crypto.broad_search.temporal_program_search_v1 run `
-    --repo-root $RepoRoot `
-    --runtime-date $RuntimeDate `
-    --source-sha $SourceSha
-if ($LASTEXITCODE -ne 0) {
-    throw "Temporal program producer failed"
-}
+Invoke-PythonChecked -Arguments @(
+    "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
+    "run", "--repo-root", $RepoRoot, "--runtime-date", $RuntimeDate,
+    "--source-sha", $SourceSha
+) -FailureMessage "Temporal program producer failed"
 
-& $PythonExe -m alphafactory_crypto.broad_search.temporal_program_search_v1 check `
-    --repo-root $RepoRoot `
-    --runtime-date $RuntimeDate
-if ($LASTEXITCODE -ne 0) {
-    throw "Temporal program independent checker failed"
-}
+Invoke-PythonChecked -Arguments @(
+    "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
+    "check", "--repo-root", $RepoRoot, "--runtime-date", $RuntimeDate
+) -FailureMessage "Temporal program independent checker failed"
