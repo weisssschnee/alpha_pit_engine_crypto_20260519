@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-08T13:39:48.122714+00:00",
+  "generated_at": "2026-08-08T15:40:49.853577+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -4577,10 +4577,12 @@
         "alphafactory_crypto_broad_search_temporal_program_search_v1_program_family",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_program_family_metric_rows",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_program_process_evidence_errors",
+        "alphafactory_crypto_broad_search_temporal_program_search_v1_program_process_evidence_summary",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_programbudgetexhausted",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_programruninvalid",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_rationale_1",
-        "alphafactory_crypto_broad_search_temporal_program_search_v1_rationale_1337",
+        "alphafactory_crypto_broad_search_temporal_program_search_v1_rationale_1338",
+        "alphafactory_crypto_broad_search_temporal_program_search_v1_rationale_1354",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_rationale_98",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_receipt_content_sha",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_run",
@@ -4590,6 +4592,7 @@
         "alphafactory_crypto_broad_search_temporal_program_search_v1_stage0_checkpoint_lane_targets",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_stage0_family_decisions",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_stage0_lane_targets",
+        "alphafactory_crypto_broad_search_temporal_program_search_v1_stage0_pair_task_capacity",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_stage0_policies",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_top_decile",
         "alphafactory_crypto_broad_search_temporal_program_search_v1_validate_config",
@@ -6028,11 +6031,14 @@
         "tests_test_crypto_temporal_program_v1_test_paired_authority_rejects_before_any_store_access",
         "tests_test_crypto_temporal_program_v1_test_paired_batch_process_evidence_closes_and_carries_raw_attempts",
         "tests_test_crypto_temporal_program_v1_test_pc2_runner_treats_native_exit_code_as_authority_not_stderr",
+        "tests_test_crypto_temporal_program_v1_test_process_evidence_rejects_systematic_half_pool_submission",
         "tests_test_crypto_temporal_program_v1_test_program_nesting_requires_explicit_run_local_registry_limits",
         "tests_test_crypto_temporal_program_v1_test_random_cem_and_evolution_replay_the_program_genome",
         "tests_test_crypto_temporal_program_v1_test_stage0_attempts_rotate_even_when_no_lane_completes",
         "tests_test_crypto_temporal_program_v1_test_stage0_checkpoint_allocation_is_exact_without_rounding_underfill",
         "tests_test_crypto_temporal_program_v1_test_stage0_continuation_is_family_local_or_plus_breadth_not_all_family_veto",
+        "tests_test_crypto_temporal_program_v1_test_stage0_full_pool_batching_preserves_deterministic_lane_sequence",
+        "tests_test_crypto_temporal_program_v1_test_stage0_pair_tasks_use_every_configured_worker_process",
         "tests_test_crypto_temporal_program_v1_test_worker_preserves_run_global_contract_failure_as_system_error",
         "tests_test_instrument_capability_primitives_mapping",
         "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests",
@@ -6087,7 +6093,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_program_throughput_stopped_research_hold",
       "validation": {
-        "checked_at": "2026-08-08T13:39:48.122714+00:00",
+        "checked_at": "2026-08-08T15:40:49.853577+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260808r1/independent_checker.json",
         "evidence_sha256": "77FEF7B2C73C730561B611E15E2ADD41816D5B49480D5690F479923205F90C39",
         "level": "PARTIAL",
@@ -8994,13 +9000,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "5ebb7a7b70a3e7cee1e81370faaa561f7102e25f",
-    "edge_count": 41788,
-    "node_count": 22409,
+    "built_at_commit": "3e414c6e58b7f5a7aa8fc729c9d7828fdf46b1d4",
+    "edge_count": 41822,
+    "node_count": 22424,
     "path": ".planning/graphs/graph.json",
-    "sha256": "19BD74023D74CF49B71AD02B484BF16EF7FD4E193591D41948548992D69451ED"
+    "sha256": "2289949435D4AF5D46033A0F8B29E42A08E984988482AF5C7E97311091F7525A"
   },
-  "repo_head": "5ebb7a7b70a3e7cee1e81370faaa561f7102e25f",
+  "repo_head": "3e414c6e58b7f5a7aa8fc729c9d7828fdf46b1d4",
   "schema_version": 1,
   "semantic_authorities": [
     {
