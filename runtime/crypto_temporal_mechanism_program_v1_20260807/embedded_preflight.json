@@ -1,0 +1,81 @@
+{
+  "candidate_evaluations": 0,
+  "catalog_count": 464,
+  "catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "family_count": 4,
+  "market_arrays_read": 0,
+  "records": [
+    {
+      "depth": 4,
+      "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "bybit__open_interest_mean",
+        "hyperliquid_futures__open_interest_mean",
+        "buy_agg_trade_count"
+      ],
+      "rolling_windows": [
+        48,
+        168,
+        168,
+        25
+      ],
+      "static_candidate_id": "9C091E275CE9F2F80D8DCC1580AA06FE0393FDB7A920E7809CF3C864731A467A",
+      "temporal_candidate_id": "7401D339F0A6CFB977357B043BE3DD10148CBC7DA22C002D30E75745544AED9B"
+    },
+    {
+      "depth": 4,
+      "family_id": "P2_RECENT_CROWDING_EVENT_TO_RESPONSE",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "buy_sell_notional_ratio",
+        "bybit__open_interest_std"
+      ],
+      "rolling_windows": [
+        168,
+        8,
+        720
+      ],
+      "static_candidate_id": "BA2E25496257F863720ACF2ADDCA2F4F4B601589693A915C719150A79E9DDDEF",
+      "temporal_candidate_id": "0619E7E9FEC71A5E105ECDA33D72E33007E2F50C267F3162662EACEF70F00FC0"
+    },
+    {
+      "depth": 5,
+      "family_id": "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "close_to_open_bps",
+        "signed_aggressor_quantity"
+      ],
+      "rolling_windows": [
+        168,
+        5,
+        168,
+        9,
+        168,
+        9,
+        48
+      ],
+      "static_candidate_id": "A1C7ED04E8043FE70888CFAEC9410E589FB8ACC3CE2E29F2FFE6BE4FCC2C54EB",
+      "temporal_candidate_id": "576B2E1216B9044AE9711E9BC02BAE703D0B700B86B289DDD756872A576433FB"
+    },
+    {
+      "depth": 4,
+      "family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "bybit__open_interest_std",
+        "buy_agg_trade_count"
+      ],
+      "rolling_windows": [
+        720,
+        48,
+        168,
+        168
+      ],
+      "static_candidate_id": "D7C0EAE85C2031A346E418D4AD638E098D8A9E13EFB46825087E6BDACABCF687",
+      "temporal_candidate_id": "5D4B4909C1470FDAC1C0684D9CC386DE3958EA6D8B7494109B7B53320924C9EE"
+    }
+  ],
+  "status": "PASS"
+}

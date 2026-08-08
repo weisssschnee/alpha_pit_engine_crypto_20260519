@@ -1,0 +1,68 @@
+{
+  "bundle_sha256": "346648F7E71D14FACEA2101043A0AA653E4AF171EC7F936DE58A856D2307A105",
+  "files": [
+    {
+      "bytes": 31856,
+      "path": "frozen_contract.json",
+      "sha256": "2CCB3C7BCA74B393E3972AB4912A80C0080B813011D30901C09DE98B7FF23FE7"
+    },
+    {
+      "bytes": 2284,
+      "path": "embedded_preflight.json",
+      "sha256": "1FF822FD9D676A1BB93DBF54CE997EEDBA51B0936FFA4BC7EB972582745A1D9A"
+    },
+    {
+      "bytes": 782345,
+      "path": "program_catalog.json",
+      "sha256": "038DD82241FA433BA7149E97C00BBF284EE7493AAE0F1319708FD22CADF8F465"
+    },
+    {
+      "bytes": 2822,
+      "path": "search_authority_binding_receipt.json",
+      "sha256": "B01AC4E4D1075C37A40EAE2329B758E3EFD8227080CF32D6876CC55FCCB534D3"
+    },
+    {
+      "bytes": 15922218,
+      "path": "work_state.json",
+      "sha256": "E9F9B7CB4F9B245F6E4BB61F61EBA8B0718E4B7B7A23C648C20F10FD5888BE35"
+    },
+    {
+      "bytes": 600,
+      "path": "candidate_ledger.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 600,
+      "path": "behavior_archive.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 600,
+      "path": "paired_program_diagnostics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 600,
+      "path": "program_family_metrics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 600,
+      "path": "arm_checkpoint_metrics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 8591873,
+      "path": "rejected_candidate_ledger.parquet",
+      "sha256": "B3531CFACD188BB7C0B342E2FC94873BD1734D4BFDE54AF23725A47CD0470FF9"
+    },
+    {
+      "bytes": 1069,
+      "path": "final_decision.json",
+      "sha256": "865BC91340DF6E813439DFF6FF1401BE1AF3441A2FDA3FF85E88196D462D02AD"
+    }
+  ],
+  "frozen_contract_sha256": "8977F73E192795BF8EED7E1277DF22D17CAE4C218B9A61F0F1796756EC0F940F",
+  "producer_source_sha": "26be90d75540ab773001cddbdf5cd59478b863cb",
+  "schema_version": 1
+}

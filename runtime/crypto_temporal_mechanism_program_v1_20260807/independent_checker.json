@@ -1,0 +1,10 @@
+{
+  "checkpoint_count": 0,
+  "errors": [],
+  "producer_source_sha": "26be90d75540ab773001cddbdf5cd59478b863cb",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "stage0_pair_count": 0,
+  "status": "PASS",
+  "strict_evaluated_count": 0
+}

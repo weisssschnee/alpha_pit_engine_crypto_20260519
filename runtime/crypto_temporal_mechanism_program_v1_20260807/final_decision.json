@@ -1,0 +1,32 @@
+{
+  "active_program_families": [],
+  "active_wall_seconds": 64803.34366989997,
+  "arm_states": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "automatic_next_run_started": false,
+  "behavior_family_count": 0,
+  "budget_checkpoint_written": false,
+  "checkpoint_count": 0,
+  "completed_full_checkpoint_count": 0,
+  "frozen_contract_sha256": "8977F73E192795BF8EED7E1277DF22D17CAE4C218B9A61F0F1796756EC0F940F",
+  "generation_attempts": 117522,
+  "matched_positive_behavior_family_count": 0,
+  "matched_positive_count": 0,
+  "matched_positive_program_family_count": 0,
+  "memory_fallback_used": false,
+  "oos": false,
+  "parameters_changed": false,
+  "producer_source_sha": "26be90d75540ab773001cddbdf5cd59478b863cb",
+  "promotion": false,
+  "rescue_rerun_started": false,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "seed_changed": false,
+  "status": "ENGINE_BUDGET_EXHAUSTED",
+  "strict_evaluated_count": 0,
+  "terminal_reason": "ENGINE_BUDGET_EXHAUSTED:ACTIVE_WALL_TIME_LIMIT",
+  "validation": false,
+  "workers_final": 10
+}

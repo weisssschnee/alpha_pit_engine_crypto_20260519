@@ -1,8 +1,44 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-07 Asia/Hong_Kong
+Last updated: 2026-08-08 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_TERMINAL_INVALID_ZERO_STRICT_RESEARCH_HOLD`
+
+The one authorized fresh-state sequential Temporal Mechanism Program V1 run is
+consumed and closed. Exact PC2 producer
+`26be90d75540ab773001cddbdf5cd59478b863cb` used 10 workers for
+`64,803.3437` active seconds and stopped at the frozen 18-hour wall limit after
+117,522 raw generation attempts. It produced zero strict evaluations, zero
+checkpoints, zero behavior families, zero matched-positive candidates, and zero
+sealed, validation, holdout, OOS, or promotion reads. The terminal producer code
+is `ENGINE_BUDGET_EXHAUSTED:ACTIVE_WALL_TIME_LIMIT`; the one-time receipt is
+consumed with `run_authorized=false` and no restart, reseed, tuning, rescue, or
+automatic continuation occurred.
+
+Independent artifact-only attribution shows that this is not an economic
+negative for the four temporal program families. The rejected ledger persists
+117,457 of the 117,522 attempts: 99,966 failed with
+`PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE`, 13,792 were
+exact/replay rejects, and 3,699 reached control-behavior degeneracy. The program
+worker bound role `DEVELOPMENT_ONLY_TEMPORAL_MECHANISM_PROGRAM_SEARCH`, while the
+retained paired-diagnostic evaluator admits only
+`FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY`. Consequently no proposal
+could complete the intended paired economic path. PC2 and local independent
+checkers pass artifact integrity with zero errors, but that PASS does not repair
+or qualify the invalid research run.
+
+The zero-strict terminal also wrote no budget checkpoint
+(`budget_checkpoint_written=false`); the final decision, work state, rejected
+ledger, frozen catalog, receipt, and manifest remain preserved. A later one-time
+scheduled-task invocation failed before market work because the already-written
+report made the producer worktree dirty; it created no second market run. The
+durable conclusion is therefore `RUN_INVALID_FOR_RESEARCH`: temporal program
+economics, CEM, Evolution, and program-family continuation remain untested, and
+Alpha remains HOLD.
+
+The preceding completed phase was:
 
 `CRYPTO_SEARCH_TEMPORAL_ACTIVATION_V1_STOPPED_NOT_SUPPORTED_RESEARCH_HOLD`
 
@@ -1412,16 +1448,18 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart or extend the consumed Temporal Activation V1 campaign. Its
-frozen tranche-0 gate answered the registered question negatively and did not
-release later tranches. Do not add the tested canonical temporal transforms to
-Evolution, tune their parameters, or reinterpret primitive-level positive
-medians as mechanism qualification. Any different mechanism space or search
-policy requires a separately justified question, explicit authorization, and a
-new receipt; this closure grants none.
+Do not restart, extend, or reinterpret the consumed Temporal Mechanism Program
+V1 campaign. Before any separately authorized market run, perform an
+artifact/source-only repair review of the paired-diagnostic development-role
+contract and add a fail-fast pre-market admission check that exercises the exact
+worker call path. The 117,522-attempt rejected ledger may be analyzed without
+market re-evaluation, but it cannot support a temporal-mechanism, optimizer, or
+Alpha conclusion. A corrected run would require a new explicit authorization
+and receipt; this closure grants neither.
 
-The prior replication-aware, funding-flow residual, family-consensus, and V1.1
-development/validation conclusions remain unchanged. No market search,
+The prior Temporal Activation, replication-aware, funding-flow residual,
+family-consensus, and V1.1 development/validation conclusions remain unchanged.
+No market search,
 validation, data Arena, reward/mapping/optimizer change, tuning, reseed, rescue,
 holdout/OOS/challenge/forward read, promotion, new compiler, AST, evaluator,
 grammar, temporal Evolution, or Graph node is authorized by this closure.
