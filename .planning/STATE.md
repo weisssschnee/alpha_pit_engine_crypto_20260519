@@ -1346,6 +1346,15 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
     matched-positive candidates were observed and CEM/Evolution never started.
     Do not restart, resume, import its state, or interpret this throughput-stop
     cohort as a complete temporal-program or optimizer comparison.
+14. Preserve the source-only Stage-0 throughput repair recorded in
+    `reports/CRYPTO_TEMPORAL_PROGRAM_STAGE0_THROUGHPUT_AUDIT_20260808.md`.
+    Independent recomputation found five observed worker PIDs and a maximum of
+    five submitted pair tasks despite the declared ten-worker contract. Stage 0
+    now submits one paired task per configured worker, records configured versus
+    observed worker capacity, and fails closed on systematic pool underfill.
+    The frozen throughput floor, 10-to-8 memory fallback, evaluation semantics,
+    market contracts, and all consumed campaign evidence are unchanged. This is
+    source-only repair evidence and not realized speedup or research evidence.
 
 No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
 further performance search or sealed replay is authorized by this plan.
@@ -1358,11 +1367,10 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 
 - The corrected Temporal Mechanism Program V1 crossed the prior zero-strict
   authority failure and exercised all 16 family/seed lanes, but stopped after
-  2,000 strict evaluations on the frozen throughput floor. Stage 0 schedules
-  five paired worker tasks while reporting a 10-worker contract, so the
-  effective parallelism and throughput denominator require an artifact/source-
-  only review before any separately authorized successor. This closure does
-  not authorize a restart or rescue run.
+  2,000 strict evaluations on the frozen throughput floor. The proven half-pool
+  Stage-0 scheduling defect is repaired and guarded in source, but realized
+  post-repair throughput remains unobserved. No restart, rescue run, or successor
+  market budget is authorized by this source closure.
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
 - The completed continuation and V1.1-V1.3 policy comparisons optimized strict matched-feasibility distance, not portfolio Sortino. Their throughput and engineering evidence remain valid, but reward-improvement claims do not establish better Alpha-search ability.
@@ -1475,13 +1483,14 @@ authority binding or research qualification was promoted.
 ## Next action
 
 Do not restart, extend, or reinterpret either consumed Temporal Mechanism
-Program V1 campaign. The corrected producer closed the authority, liveness,
-checkpoint, and process-evidence gaps, but its 2,000-strict cohort terminated on
-the frozen throughput floor before the 10,000-strict family gate and before any
-adaptive arm started. The highest-information next action is an artifact/source-
-only audit of Stage-0 paired-task parallelism, worker accounting, and throughput
-gate semantics. Any implementation repair remains source-only until a new user
-authorization and receipt; this closure grants no market rerun.
+Program V1 campaign. The Stage-0 paired-task, worker-accounting, and throughput-
+gate audit is complete: the half-pool defect is repaired without changing the
+frozen throughput floor or any economic/search semantics, and the historical
+artifact is now independently identifiable as capacity-underfilled. The next
+decision-changing action, if separately authorized with a fresh receipt, is a
+fresh same-contract throughput qualification that observes full 10-worker
+submission and keeps the existing 8-worker memory fallback. Until then, no
+market run or realized speedup claim is authorized.
 
 The prior Temporal Activation, replication-aware, funding-flow residual,
 family-consensus, and V1.1 development/validation conclusions remain unchanged.

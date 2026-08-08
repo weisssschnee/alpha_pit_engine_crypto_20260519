@@ -853,6 +853,7 @@ def _new_state(source_sha: str, frozen_hash: str, config: Mapping[str, Any]) -> 
         "strict_evaluated": 0,
         "attempted_exact_ids": [],
         "completed_pair_ids": [],
+        "workers_initial": int(config["search_budget"]["workers_default"]),
         "workers": int(config["search_budget"]["workers_default"]),
         "memory_fallback_used": False,
         "wall_elapsed_seconds": 0.0,
@@ -1349,6 +1350,14 @@ def _next_stage0_lane(
     return None, next_cursor
 
 
+def _stage0_pair_task_capacity(workers: int) -> int:
+    """Return concurrent pair tasks; each task already evaluates both representations."""
+
+    if int(workers) <= 0:
+        raise ValueError("stage-0 worker count must be positive")
+    return int(workers)
+
+
 def _later_checkpoint_targets(
     allocation: Mapping[str, int], config: Mapping[str, Any]
 ) -> dict[str, int]:
@@ -1384,16 +1393,53 @@ def _write_status(
             "active_wall_seconds": active_elapsed,
             "observed_strict_per_hour": strict_count * 3600.0 / max(active_elapsed, 1.0),
             "workers": int(state["workers"]),
+            "worker_accounting": {
+                "configured_worker_processes": int(state["workers"]),
+                "configured_paired_task_capacity": _stage0_pair_task_capacity(
+                    int(state["workers"])
+                ),
+                "strict_rows_per_successful_pair_task": 2,
+                "configured_strict_row_capacity_per_paired_batch": 2
+                * _stage0_pair_task_capacity(int(state["workers"])),
+            },
             "active_program_families": list(state["active_program_families"]),
             "arm_states": dict(state["arm_states"]),
         },
     )
 
 
+def _program_process_evidence_summary(runtime_root: Path) -> dict[str, int]:
+    initializer_rows = [
+        engine._read_json(path)
+        for path in sorted(
+            (runtime_root / "process_evidence").glob("*_initializer.json")
+        )
+    ]
+    worker_pids = {
+        int(row["worker_pid"])
+        for row in initializer_rows
+        if row.get("worker_pid") is not None
+    }
+    batch_rows = [
+        engine._read_json(path)
+        for path in sorted(
+            (runtime_root / "process_evidence").glob("producer_batch_*.json")
+        )
+    ]
+    submitted = [int(row.get("submitted_count", 0)) for row in batch_rows]
+    return {
+        "observed_worker_process_count": len(worker_pids),
+        "observed_batch_count": len(batch_rows),
+        "total_submitted_worker_task_count": sum(submitted),
+        "maximum_submitted_worker_tasks_per_batch": max(submitted, default=0),
+    }
+
+
 def _program_process_evidence_errors(
     runtime_root: Path,
     *,
     expected_batch_count: int,
+    configured_worker_processes: int | None = None,
 ) -> list[str]:
     errors: list[str] = []
     if expected_batch_count <= 0:
@@ -1415,8 +1461,10 @@ def _program_process_evidence_errors(
     )
     if len(batch_paths) != expected_batch_count:
         errors.append("producer_batch_evidence_count")
+    submitted_counts: list[int] = []
     for index, path in enumerate(batch_paths):
         row = engine._read_json(path)
+        submitted_counts.append(int(row.get("submitted_count", 0)))
         if (
             int(row.get("evaluation_batch_index", -1)) != index
             or row.get("stage") != "WORKER_RESULTS_RETURNED"
@@ -1426,6 +1474,23 @@ def _program_process_evidence_errors(
             != int(row.get("returned_count", -2))
         ):
             errors.append(f"producer_batch_evidence:{index}")
+    if configured_worker_processes is not None:
+        capacity = _stage0_pair_task_capacity(configured_worker_processes)
+        maximum_submitted = max(submitted_counts, default=0)
+        total_submitted = sum(submitted_counts)
+        if maximum_submitted > capacity:
+            errors.append("producer_batch_worker_capacity_exceeded")
+        if total_submitted >= capacity and maximum_submitted < capacity:
+            errors.append("producer_batch_worker_capacity_underfilled")
+        observed_workers = len(
+            {
+                int(row["worker_pid"])
+                for row in initializer_rows
+                if row.get("worker_pid") is not None
+            }
+        )
+        if observed_workers < maximum_submitted:
+            errors.append("worker_initializer_count_below_submitted_capacity")
     return errors
 
 
@@ -1521,6 +1586,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         metrics: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
     for key, default in (
+        ("workers_initial", int(config["search_budget"]["workers_default"])),
         ("stage0_lane_cursor", 0),
         ("evaluation_batch_index", 0),
         ("returned_pair_results", 0),
@@ -1619,7 +1685,9 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 while pair_completed_in_checkpoint < pair_target:
                     batch: list[dict[str, Any]] = []
                     lane_pending: Counter[str] = Counter()
-                    while len(batch) < max(1, int(state["workers"]) // 2):
+                    while len(batch) < _stage0_pair_task_capacity(
+                        int(state["workers"])
+                    ):
                         key, next_cursor = _next_stage0_lane(
                             ordered_lanes=ordered_lanes,
                             lane_targets=lane_targets,
@@ -2182,7 +2250,9 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     process_evidence_errors = _program_process_evidence_errors(
         runtime_root,
         expected_batch_count=int(state["evaluation_batch_index"]),
+        configured_worker_processes=int(state["workers_initial"]),
     )
+    process_evidence_summary = _program_process_evidence_summary(runtime_root)
     if process_evidence_errors:
         terminal_reason = "ENGINE_RUN_INVALID:PROCESS_EVIDENCE:" + ",".join(
             process_evidence_errors
@@ -2277,6 +2347,18 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "system_error_count": int(state["system_error_count"]),
         "active_wall_seconds": elapsed(),
         "workers_final": int(state["workers"]),
+        "worker_accounting": {
+            "configured_worker_processes_initial": int(state["workers_initial"]),
+            "configured_worker_processes_final": int(state["workers"]),
+            "configured_paired_task_capacity_initial": _stage0_pair_task_capacity(
+                int(state["workers_initial"])
+            ),
+            "configured_paired_task_capacity_final": _stage0_pair_task_capacity(
+                int(state["workers"])
+            ),
+            "strict_rows_per_successful_pair_task": 2,
+            **process_evidence_summary,
+        },
         "memory_fallback_used": bool(state["memory_fallback_used"]),
         "behavior_family_count": len(archive.champion_by_family),
         "matched_positive_count": len(matched),
@@ -2449,12 +2531,48 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
             local = invalid_checkpoint.parent / str(row["name"])
             if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
                 errors.append(f"run_invalid_checkpoint_file:{row['name']}")
+    worker_accounting = final.get("worker_accounting")
     errors.extend(
         _program_process_evidence_errors(
             runtime_root,
             expected_batch_count=int(final.get("evaluation_batch_count", 0)),
+            configured_worker_processes=(
+                int(worker_accounting["configured_worker_processes_initial"])
+                if isinstance(worker_accounting, Mapping)
+                and "configured_worker_processes_initial" in worker_accounting
+                else None
+            ),
         )
     )
+    if isinstance(worker_accounting, Mapping):
+        default_workers = int(config["search_budget"]["workers_default"])
+        fallback_workers = int(config["search_budget"]["workers_memory_fallback"])
+        initial_workers = int(
+            worker_accounting.get("configured_worker_processes_initial", -1)
+        )
+        final_workers = int(
+            worker_accounting.get("configured_worker_processes_final", -1)
+        )
+        if initial_workers != default_workers:
+            errors.append("worker_accounting:configured_worker_processes_initial")
+        if final_workers not in {default_workers, fallback_workers} or final_workers != int(
+            final.get("workers_final", -1)
+        ):
+            errors.append("worker_accounting:configured_worker_processes_final")
+        if initial_workers > 0 and int(
+            worker_accounting.get("configured_paired_task_capacity_initial", -1)
+        ) != _stage0_pair_task_capacity(initial_workers):
+            errors.append("worker_accounting:configured_paired_task_capacity_initial")
+        if final_workers > 0 and int(
+            worker_accounting.get("configured_paired_task_capacity_final", -1)
+        ) != _stage0_pair_task_capacity(final_workers):
+            errors.append("worker_accounting:configured_paired_task_capacity_final")
+        if int(worker_accounting.get("strict_rows_per_successful_pair_task", -1)) != 2:
+            errors.append("worker_accounting:strict_rows_per_successful_pair_task")
+        observed_worker_accounting = _program_process_evidence_summary(runtime_root)
+        for key, value in observed_worker_accounting.items():
+            if int(worker_accounting.get(key, -1)) != int(value):
+                errors.append("worker_accounting:" + key)
     batch_raw_attempts = 0
     for path in sorted(
         (runtime_root / "process_evidence").glob("producer_batch_*.json")

@@ -47,6 +47,8 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _new_state,
     _next_stage0_lane,
     _program_process_evidence_errors,
+    _program_process_evidence_summary,
+    _stage0_pair_task_capacity,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
     _write_checkpoint,
@@ -369,6 +371,49 @@ def test_stage0_attempts_rotate_even_when_no_lane_completes() -> None:
     assert observed == ordered * 3
 
 
+def test_stage0_pair_tasks_use_every_configured_worker_process() -> None:
+    assert _stage0_pair_task_capacity(10) == 10
+    assert _stage0_pair_task_capacity(8) == 8
+    with pytest.raises(ValueError, match="worker count must be positive"):
+        _stage0_pair_task_capacity(0)
+
+
+def test_stage0_full_pool_batching_preserves_deterministic_lane_sequence() -> None:
+    targets = _stage0_checkpoint_lane_targets(CONFIG, 0)
+    ordered = sorted(targets)
+
+    def schedule(capacity: int) -> tuple[list[str], int]:
+        completed: Counter[str] = Counter()
+        cursor = 0
+        output: list[str] = []
+        batches = 0
+        while sum(completed.values()) < sum(targets.values()):
+            pending: Counter[str] = Counter()
+            local: list[str] = []
+            while len(local) < capacity:
+                key, cursor = _next_stage0_lane(
+                    ordered_lanes=ordered,
+                    lane_targets=targets,
+                    lane_completed=completed,
+                    lane_pending=pending,
+                    cursor=cursor,
+                )
+                if key is None:
+                    break
+                pending[key] += 1
+                local.append(key)
+            completed.update(pending)
+            output.extend(local)
+            batches += 1
+        return output, batches
+
+    old_sequence, old_batch_count = schedule(5)
+    repaired_sequence, repaired_batch_count = schedule(10)
+    assert repaired_sequence == old_sequence
+    assert old_batch_count == 200
+    assert repaired_batch_count == 100
+
+
 def test_paired_authority_rejects_before_any_store_access() -> None:
     class StoreMustNotBeTouched:
         def __getattribute__(self, name):
@@ -533,8 +578,73 @@ def test_paired_batch_process_evidence_closes_and_carries_raw_attempts(
     )
     assert payload["proposals"][0]["raw_attempts"] == 7
     assert _program_process_evidence_errors(
-        tmp_path, expected_batch_count=1
+        tmp_path, expected_batch_count=1, configured_worker_processes=10
     ) == []
+    assert _program_process_evidence_summary(tmp_path) == {
+        "observed_worker_process_count": 1,
+        "observed_batch_count": 1,
+        "total_submitted_worker_task_count": 1,
+        "maximum_submitted_worker_tasks_per_batch": 1,
+    }
+
+
+def test_process_evidence_rejects_systematic_half_pool_submission(
+    tmp_path: Path,
+) -> None:
+    registry = _registry()
+    mechanism, program = _catalog()[0]
+    candidate = sample_temporal_program_candidate(
+        registry=registry,
+        mechanism=mechanism,
+        program=program,
+        domains=mechanism_role_domains(_contracts()),
+        scale_contract=CONFIG["time_scale_authority"],
+        rng=random.Random(41),
+    )
+    evidence_root = tmp_path / "process_evidence"
+    engine_module._write_worker_process_evidence(
+        evidence_root=evidence_root,
+        channel="initializer",
+        stage="INITIALIZER_READY",
+    )
+    engine_module._write_worker_process_evidence(
+        evidence_root=evidence_root,
+        channel="task",
+        stage="TASK_COMPLETED",
+        candidate_id="paired-id",
+        outcome="PAIR_EVALUATED",
+    )
+    proposals = [
+        {
+            "paired_program_id": f"pair-{index}",
+            "arm": "temporal_program_random",
+            "seed": 1,
+            "policy_key": "lane",
+            "static": candidate,
+            "temporal": candidate,
+            "metadata": {"operation": "TEST", "raw_attempts": 1},
+            "generation_attempt_ordinal": index + 1,
+        }
+        for index in range(5)
+    ]
+    for batch_index in range(2):
+        engine_module._write_proposal_batch_process_evidence(
+            evidence_root=evidence_root,
+            stage="WORKER_RESULTS_RETURNED",
+            source_sha="a" * 40,
+            frozen_contract_sha256="B" * 64,
+            checkpoint_index=0,
+            batch_index=batch_index,
+            generation_attempts=(batch_index + 1) * 5,
+            attempted_exact_id_count=(batch_index + 1) * 10,
+            proposals=proposals,
+            submitted_count=5,
+            returned_count=5,
+        )
+    errors = _program_process_evidence_errors(
+        tmp_path, expected_batch_count=2, configured_worker_processes=10
+    )
+    assert "producer_batch_worker_capacity_underfilled" in errors
 
 
 def test_stage0_continuation_is_family_local_or_plus_breadth_not_all_family_veto() -> None:
