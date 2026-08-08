@@ -1,6 +1,6 @@
 {
   "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
-  "authorized_implementation_sha": "f30bc63676d7df3bc07365fb8e58b36d2eeb8ff4",
+  "authorized_implementation_sha": "9dbd0dde1189c8e240f86574a8c2df8e51f5ec8c",
   "boundaries": {
     "automatic_next_run": false,
     "development_only": true,
@@ -30,13 +30,15 @@
   "component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/expression.py": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE",
-    "alphafactory_crypto/broad_search/search_engine_v1.py": "6F0A1EA7C08E87AAC2FDCEEF90559078F326B952DCDB19A997EC3A8EAC28C72E",
-    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "BD9512133FAA096775A61FF701E7A3B5548F8B5B43419CE27706CC7A61520376",
+    "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "11F5AC78FA622031A10D58CC2C9DBA082CE8A237B7AEEF60A9CB774B009E414D",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
-    "config/crypto_temporal_mechanism_program_v1.json": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
+    "config/crypto_temporal_mechanism_program_v1.json": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "E4A29D09AA55840019E6E332DCA3ACDD822CF5B17875C47312032B0E4D97965D"
   },
-  "config_sha256": "A72A09A70E660125631318B15DC124FBD35D3D2D9D0E5D90381CAC1046256049",
+  "config_sha256": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
   "expected_branch": "experiment/crypto-temporal-program-search-v1-20260807",
   "market_authority": {
     "carrier": "EXISTING_115_FIELD_OI_MARK_X_AGGTRADES_ALIGNED_CARRIER",
@@ -47,27 +49,21 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "D9B360D213783C55D712A4EF4055A2B6010CD634B78FB2E879086166CCCD576B",
+  "receipt_sha256": "33FDA90264A97FB5B537C24B05F0115355A53DE51967C1069CE91E3E1C0261F8",
   "replacement_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION_20260808",
     "budget_contract_unchanged": true,
     "market_contract_unchanged": true,
-    "prior_generation_attempts": 0,
+    "prior_generation_attempts": 117522,
+    "prior_run_status": "ENGINE_BUDGET_EXHAUSTED_INVALIDATED_BY_SYSTEMIC_FAILURE_AUDIT",
+    "prior_runtime_state_import_allowed": false,
     "prior_strict_evaluated": 0,
-    "reason": "PRE_CANDIDATE_WINDOWS_POWERSHELL_NATIVE_STDERR_WARNING_ABORT",
-    "replaces_receipt_sha256": "D45CEA37C6817F84EEC05C484CA726FBE7E3A15FF34F1AA24C85993F287628C1",
+    "reason": "PRIOR_RUN_INVALID_EVALUATOR_AUTHORITY_RUNNER_LIVENESS_AND_CHECKER_CHAIN",
+    "replaces_receipt_sha256": "D9B360D213783C55D712A4EF4055A2B6010CD634B78FB2E879086166CCCD576B",
     "rescue_rerun": false,
     "seed_contract_unchanged": true
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "checkpoint_count": 0,
-    "generation_attempts": 117522,
-    "producer_source_sha": "26be90d75540ab773001cddbdf5cd59478b863cb",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260807",
-    "status": "ENGINE_BUDGET_EXHAUSTED",
-    "strict_evaluated_count": 0
-  },
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }
