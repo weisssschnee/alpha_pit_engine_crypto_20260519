@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import random
+import subprocess
+import hashlib
 from collections import Counter
 from pathlib import Path
 
@@ -40,6 +42,7 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
     temporal_program_candidate_from_genes,
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
+    _sha256_committed_file,
     _load_checkpoint,
     _new_state,
     _next_stage0_lane,
@@ -58,6 +61,35 @@ CONFIG = json.loads(
         encoding="utf-8"
     )
 )
+
+
+def test_committed_component_hash_is_checkout_line_ending_independent(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "config", "user.email", "test@example.invalid"],
+        cwd=repo,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "Temporal Test"], cwd=repo, check=True
+    )
+    source = repo / "component.py"
+    committed = b"first = 1\nsecond = 2\n"
+    source.write_bytes(committed)
+    subprocess.run(["git", "add", "component.py"], cwd=repo, check=True)
+    subprocess.run(["git", "commit", "-m", "fixture"], cwd=repo, check=True, capture_output=True)
+    source.write_bytes(committed.replace(b"\n", b"\r\n"))
+
+    assert hashlib.sha256(source.read_bytes()).hexdigest().upper() != hashlib.sha256(
+        committed
+    ).hexdigest().upper()
+    assert _sha256_committed_file(repo, "component.py") == hashlib.sha256(
+        committed
+    ).hexdigest().upper()
 
 
 def _contracts() -> tuple[FieldContract, ...]:

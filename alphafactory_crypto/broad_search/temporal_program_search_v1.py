@@ -94,6 +94,33 @@ def _sha256_file(path: Path) -> str:
     return engine.sha256_file(path)
 
 
+def _sha256_committed_file(repo_root: Path, path: str) -> str:
+    """Hash the exact committed blob, independent of checkout line endings."""
+    object_id = subprocess.check_output(
+        ["git", "rev-parse", f"HEAD:{path}"], cwd=repo_root, text=True
+    ).strip()
+    payload = subprocess.check_output(
+        ["git", "cat-file", "blob", object_id], cwd=repo_root
+    )
+    return hashlib.sha256(payload).hexdigest().upper()
+
+
+def _component_worktree_is_clean(repo_root: Path) -> bool:
+    paths = list(COMPONENT_PATHS)
+    return (
+        subprocess.run(
+            ["git", "diff", "--quiet", "--", *paths], cwd=repo_root, check=False
+        ).returncode
+        == 0
+        and subprocess.run(
+            ["git", "diff", "--cached", "--quiet", "--", *paths],
+            cwd=repo_root,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
 def _limits(config: Mapping[str, Any]) -> dict[str, int]:
     values = dict(config["expression_limits"])
     return {
@@ -271,11 +298,15 @@ def validate_receipt(
         stderr=subprocess.DEVNULL,
     ).returncode != 0:
         raise RuntimeError("temporal program authorized implementation is not an ancestor")
-    if receipt.get("config_sha256") != _sha256_file(repo_root / CONFIG_PATH):
+    if not _component_worktree_is_clean(repo_root):
+        raise RuntimeError("temporal program component worktree changed")
+    if receipt.get("config_sha256") != _sha256_committed_file(
+        repo_root, CONFIG_PATH
+    ):
         raise RuntimeError("temporal program receipt config changed")
     component_hashes = dict(receipt.get("component_sha256") or {})
     if set(component_hashes) != set(COMPONENT_PATHS) or any(
-        _sha256_file(repo_root / path) != str(component_hashes[path])
+        _sha256_committed_file(repo_root, path) != str(component_hashes[path])
         for path in COMPONENT_PATHS
     ):
         raise RuntimeError("temporal program component bundle changed")

@@ -22,6 +22,7 @@ allowed to consume the wall budget without a zero-progress liveness stop.
 | Independent checker | The checker validates artifact hashes/counts but does not reject nonzero-attempt, zero-strict invalid runs. | Artifact integrity could be reported without research-run validity. | Report artifact integrity and run validity separately; require fatal/liveness and process-evidence consistency. |
 | Source smoke | Smoke compiles/replays representatives but performs no exact evaluator-admission check. | The source bundle passed while its runner/evaluator authority pair was incompatible. | Add a no-market exact-path admission preflight and a sentinel test proving no store access precedes it. |
 | Receipt enforcement | `expected_branch` and `authorized_implementation_sha` were recorded but not enforced by the program receipt validator. | A correctly hashed component bundle could run from an unintended branch or without proving the authorized implementation is an ancestor. | Enforce exact branch plus Git ancestry, and bind receipt budget, market authority, and prohibited boundaries. |
+| Checkout portability | Component identity used raw worktree bytes even though Git permits semantically identical LF/CRLF checkouts. | A clean exact-SHA PC2 checkout failed before candidate evaluation on one unchanged Python file. | Bind component identity to committed Git blobs and separately require a clean component worktree. |
 
 ## Scope of the repair
 
