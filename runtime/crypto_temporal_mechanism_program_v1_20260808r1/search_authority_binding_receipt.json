@@ -49,7 +49,7 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "2E3611DF9885520A8B8ABE8899523BDA9B24313EED355B457415E3AAC97E35F9",
+  "receipt_sha256": "3156FA4844977252914F6FE527328126E0092672179BE7F2861AE9F608607C8F",
   "replacement_authorization": {
     "authority": "CURRENT_USER_INSTRUCTION_20260808",
     "budget_contract_unchanged": true,
@@ -63,26 +63,7 @@
     "rescue_rerun": false,
     "seed_contract_unchanged": true
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "status": "ENGINE_BUDGET_EXHAUSTED",
-    "terminal_reason": "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR",
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260808r1",
-    "producer_source_sha": "1a847cece5014d6d4891538a2a44c3885a00059a",
-    "generation_attempts": 2061,
-    "strict_evaluated_count": 2000,
-    "completed_checkpoint": "checkpoint_000",
-    "terminal_checkpoint": "checkpoint_budget_exhausted",
-    "checkpoint_count": 2,
-    "observed_strict_per_hour": 1749.5621059094417,
-    "minimum_strict_per_hour": 2777.777777777778,
-    "behavior_family_count": 1993,
-    "matched_positive_count": 0,
-    "sealed_reads": 0,
-    "system_error_count": 0,
-    "adaptive_stage_started": false,
-    "rescue_rerun_started": false
-  },
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }

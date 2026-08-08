@@ -1336,6 +1336,16 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 10. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 11. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 12. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
+13. Preserve the consumed corrected Temporal Mechanism Program V1 outcome at
+    producer `1a847cece5014d6d4891538a2a44c3885a00059a`: 2,000 strict
+    evaluations from 2,061 attempts, 1,993 behavior families, one completed
+    restore-verified checkpoint plus the terminal throughput checkpoint, zero
+    system errors, zero sealed reads, and independent PC2 plus local checker
+    PASS. The frozen first-checkpoint throughput gate stopped the campaign at
+    `1,749.5621 strict/hour` below the required `2,777.7778`; zero
+    matched-positive candidates were observed and CEM/Evolution never started.
+    Do not restart, resume, import its state, or interpret this throughput-stop
+    cohort as a complete temporal-program or optimizer comparison.
 
 No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
 further performance search or sealed replay is authorized by this plan.
@@ -1345,6 +1355,14 @@ further performance search or sealed replay is authorized by this plan.
 The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. The frozen OOS replay provides positive pooled total-policy attribution and Q10 support, and the read-only bias audit supports ranking/selection value after deterministic behavior-family de-overlap. It does not establish broad mechanism Alpha: 256 Evolution train-top expressions collapse to 161 behavior families and about 7.3 effective primary path dimensions, while the strongest mechanism occurs in only one seed. No economic optimizer, search arm, or archive is formally qualified for a future Arena because the replay had no binary qualification or promotion authority. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
 
 ## Blockers
+
+- The corrected Temporal Mechanism Program V1 crossed the prior zero-strict
+  authority failure and exercised all 16 family/seed lanes, but stopped after
+  2,000 strict evaluations on the frozen throughput floor. Stage 0 schedules
+  five paired worker tasks while reporting a 10-worker contract, so the
+  effective parallelism and throughput denominator require an artifact/source-
+  only review before any separately authorized successor. This closure does
+  not authorize a restart or rescue run.
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
 - The completed continuation and V1.1-V1.3 policy comparisons optimized strict matched-feasibility distance, not portfolio Sortino. Their throughput and engineering evidence remain valid, but reward-improvement claims do not establish better Alpha-search ability.
@@ -1456,14 +1474,14 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Do not restart, extend, or reinterpret the consumed Temporal Mechanism Program
-V1 campaign. Before any separately authorized market run, perform an
-artifact/source-only repair review of the paired-diagnostic development-role
-contract and add a fail-fast pre-market admission check that exercises the exact
-worker call path. The 117,522-attempt rejected ledger may be analyzed without
-market re-evaluation, but it cannot support a temporal-mechanism, optimizer, or
-Alpha conclusion. A corrected run would require a new explicit authorization
-and receipt; this closure grants neither.
+Do not restart, extend, or reinterpret either consumed Temporal Mechanism
+Program V1 campaign. The corrected producer closed the authority, liveness,
+checkpoint, and process-evidence gaps, but its 2,000-strict cohort terminated on
+the frozen throughput floor before the 10,000-strict family gate and before any
+adaptive arm started. The highest-information next action is an artifact/source-
+only audit of Stage-0 paired-task parallelism, worker accounting, and throughput
+gate semantics. Any implementation repair remains source-only until a new user
+authorization and receipt; this closure grants no market rerun.
 
 The prior Temporal Activation, replication-aware, funding-flow residual,
 family-consensus, and V1.1 development/validation conclusions remain unchanged.

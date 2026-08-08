@@ -1,0 +1,19 @@
+{
+  "active_program_families": [],
+  "active_wall_seconds": 4115.31546990003,
+  "arm_states": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "checkpoint_index": 1,
+  "generation_attempts": 2061,
+  "heartbeat_utc": "2026-08-08T12:08:26.610034+00:00",
+  "observed_strict_per_hour": 1749.5621059094417,
+  "producer_pid": 28392,
+  "producer_source_sha": "1a847cece5014d6d4891538a2a44c3885a00059a",
+  "schema_version": 1,
+  "status": "ENGINE_BUDGET_EXHAUSTED",
+  "strict_evaluated": 2000,
+  "strict_maximum": 50000,
+  "workers": 10
+}
