@@ -46,7 +46,13 @@ from .expression import (
     FieldContract,
     TypedExpressionRegistry,
 )
-from .pair18m import ControlBehaviorDegeneracyError, evaluate_pair
+from .pair18m import (
+    ControlBehaviorDegeneracyError,
+    EvaluationContractError,
+    PAIRED_DIAGNOSTIC_BLOCK_ROLE,
+    evaluate_pair,
+    evaluation_failure_is_contract_error,
+)
 from . import search_engine_v1 as engine
 
 
@@ -58,7 +64,7 @@ ECONOMIC_RECEIPT_PATH = (
 CATALOG_PATH = "config/crypto_typed_mechanism_catalog_v2_1.json"
 BLOCK_CONFIG_PATH = "config/crypto_search_replication_aware_gate_v1.json"
 CAMPAIGN = "crypto_search_temporal_activation_v1"
-BLOCK_ROLE = "FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY"
+BLOCK_ROLE = PAIRED_DIAGNOSTIC_BLOCK_ROLE
 ALLOWED_PRIMITIVES = (
     "Delta",
     "Acceleration",
@@ -829,9 +835,23 @@ def _worker_pair(payload: Mapping[str, Any]) -> dict[str, Any]:
             "common_support": None,
             "error": type(failure).__name__ + ":" + str(failure),
         }
-    except (ValueError, FloatingPointError) as failure:
+    except EvaluationContractError as failure:
         result = {
-            "status": "PAIR_REJECTED",
+            "status": "SYSTEM_ERROR",
+            "paired_proposal_id": pair_id,
+            "static": None,
+            "temporal": None,
+            "common_support": None,
+            "error": type(failure).__name__ + ":" + str(failure),
+        }
+    except (ValueError, FloatingPointError) as failure:
+        status = (
+            "SYSTEM_ERROR"
+            if evaluation_failure_is_contract_error(failure)
+            else "PAIR_REJECTED"
+        )
+        result = {
+            "status": status,
             "paired_proposal_id": pair_id,
             "static": None,
             "temporal": None,

@@ -80,6 +80,78 @@ class ControlBehaviorDegeneracyError(ValueError):
         self.evidence = dict(evidence or {})
 
 
+class EvaluationContractError(RuntimeError):
+    """Raised when a run-global evaluator authority contract is inconsistent."""
+
+
+PAIRED_DIAGNOSTIC_BLOCK_ROLE = (
+    "FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY"
+)
+_EVALUATION_CONTRACT_ERROR_PREFIXES = (
+    "ECONOMIC_RECEIPT_",
+    "PAIR_EVALUATION_BLOCK_",
+    "BLOCK_ROBUST_ORDERING_",
+    "EVALUATION_PATHS_",
+    "PAIRED_DIAGNOSTIC_",
+    "ECONOMIC_PATH_",
+)
+
+
+def evaluation_failure_is_contract_error(failure: BaseException) -> bool:
+    """Classify run-global authority failures without hiding candidate rejects."""
+
+    return isinstance(failure, EvaluationContractError) or str(failure).startswith(
+        _EVALUATION_CONTRACT_ERROR_PREFIXES
+    )
+
+
+def validate_pair_evaluation_request(
+    *,
+    block_start: str,
+    block_end: str,
+    block_role: str,
+    economic_receipt: Mapping[str, Any] | None,
+    include_paired_diagnostic_paths: bool,
+) -> str:
+    """Validate partition/role authority before any market data is touched."""
+
+    if economic_receipt is None:
+        if include_paired_diagnostic_paths:
+            raise EvaluationContractError(
+                "PAIRED_DIAGNOSTIC_PATHS_REQUIRE_ECONOMIC_RECEIPT"
+            )
+        return "legacy"
+    receipt = dict(economic_receipt)
+    train = dict(receipt.get("train") or {})
+    validation = dict(receipt.get("validation") or {})
+    holdout = dict(receipt.get("holdout") or {})
+    coordinates = (str(block_start), str(block_end))
+    if coordinates == (
+        str(train.get("start")),
+        str(train.get("end_exclusive")),
+    ):
+        partition = "train"
+    elif coordinates == (
+        str(validation.get("start")),
+        str(validation.get("end_exclusive")),
+    ):
+        partition = "validation"
+    elif coordinates == (
+        str(holdout.get("start")),
+        str(holdout.get("end_exclusive")),
+    ):
+        partition = "holdout"
+    else:
+        raise EvaluationContractError("ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED")
+    if include_paired_diagnostic_paths and (
+        partition != "train" or block_role != PAIRED_DIAGNOSTIC_BLOCK_ROLE
+    ):
+        raise EvaluationContractError(
+            "PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE"
+        )
+    return partition
+
+
 def _array_sha(values: np.ndarray) -> str:
     array = np.nan_to_num(np.asarray(values, dtype="<f8"), nan=9.87654321e37)
     digest = hashlib.sha256()
@@ -1187,6 +1259,13 @@ def evaluate_pair(
     include_control_provenance: bool = False,
     optimizer_block_contract: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
+    requested_partition = validate_pair_evaluation_request(
+        block_start=block_start,
+        block_end=block_end,
+        block_role=block_role,
+        economic_receipt=economic_receipt,
+        include_paired_diagnostic_paths=include_paired_diagnostic_paths,
+    )
     timings: dict[str, float] = {}
     process = psutil.Process()
     rss_samples = [process.memory_info().rss]
@@ -1581,7 +1660,13 @@ def evaluate_pair(
             train_orientation = float(frozen_train_orientation)
             evaluation_partition = "holdout"
         else:
-            raise ValueError("ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED")
+            raise EvaluationContractError(
+                "ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED"
+            )
+        if evaluation_partition != requested_partition:
+            raise EvaluationContractError(
+                "ECONOMIC_RECEIPT_EVALUATION_PARTITION_DRIFT"
+            )
         primary_signal = primary_signal * train_orientation
         control_signal = control_signal * train_orientation
         right_control_signal = right_control_signal * train_orientation
@@ -1990,10 +2075,9 @@ def evaluate_pair(
         )
     if include_paired_diagnostic_paths and (
         evaluation_partition != "train"
-        or block_role
-        != "FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY"
+        or block_role != PAIRED_DIAGNOSTIC_BLOCK_ROLE
     ):
-        raise ValueError(
+        raise EvaluationContractError(
             "PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE"
         )
     economic_paths: dict[str, Any] | None = None

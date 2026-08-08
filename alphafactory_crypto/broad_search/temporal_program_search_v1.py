@@ -15,6 +15,7 @@ import json
 import math
 import os
 import shutil
+import subprocess
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -28,8 +29,15 @@ from . import search_engine_v1 as engine
 from .compositional18m import CandidateSpec, MechanismSpec, mechanism_role_domains
 from .experiment_authority import resolve_search_economic_receipt
 from .expression import FieldContract, TypedExpressionRegistry
-from .pair18m import ControlBehaviorDegeneracyError, evaluate_pair
-from .temporal_activation_v1 import _paired_common_support
+from .pair18m import (
+    ControlBehaviorDegeneracyError,
+    EvaluationContractError,
+    PAIRED_DIAGNOSTIC_BLOCK_ROLE,
+    evaluate_pair,
+    evaluation_failure_is_contract_error,
+    validate_pair_evaluation_request,
+)
+from .temporal_activation_v1 import _paired_common_support, _process_evidence_closed
 from .temporal_program_v1 import (
     PROGRAM_BUILDER_ID,
     TemporalProgramSpec,
@@ -42,7 +50,7 @@ from .temporal_program_v1 import (
 CONFIG_PATH = "config/crypto_temporal_mechanism_program_v1.json"
 RECEIPT_PATH = "config/crypto_temporal_mechanism_program_v1_receipt.json"
 CAMPAIGN = "crypto_temporal_mechanism_program_v1"
-BLOCK_ROLE = "DEVELOPMENT_ONLY_TEMPORAL_MECHANISM_PROGRAM_SEARCH"
+BLOCK_ROLE = PAIRED_DIAGNOSTIC_BLOCK_ROLE
 REPORT_PREFIX = "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1"
 ARMS = (
     "temporal_program_random",
@@ -52,7 +60,9 @@ ARMS = (
 COMPONENT_PATHS = (
     "alphafactory_crypto/broad_search/expression.py",
     "alphafactory_crypto/broad_search/compositional18m.py",
+    "alphafactory_crypto/broad_search/pair18m.py",
     "alphafactory_crypto/broad_search/search_engine_v1.py",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py",
     "alphafactory_crypto/broad_search/temporal_program_v1.py",
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1",
@@ -61,6 +71,10 @@ COMPONENT_PATHS = (
 
 
 class ProgramBudgetExhausted(RuntimeError):
+    pass
+
+
+class ProgramRunInvalid(RuntimeError):
     pass
 
 
@@ -125,6 +139,15 @@ def validate_config(config: Mapping[str, Any]) -> None:
         or budget.get("later_tranche_proposal_pregeneration") is not False
     ):
         raise ValueError("temporal program sequential release contract changed")
+    runtime_safety = dict(config.get("runtime_safety") or {})
+    expected_runtime_safety = {
+        "system_error_fatal": True,
+        "stage0_attempt_round_robin": True,
+        "process_evidence_required": True,
+        "zero_strict_returned_pair_maximum": 64,
+    }
+    if runtime_safety != expected_runtime_safety:
+        raise ValueError("temporal program runtime safety contract changed")
     seeds = tuple(int(value) for value in config["seed_authority"]["seeds"])
     if seeds != (2594819233, 4246332867, 3389304867, 168281835):
         raise ValueError("temporal program seed authority changed")
@@ -192,6 +215,62 @@ def validate_receipt(
         raise RuntimeError("temporal program receipt is not authorized")
     if receipt.get("authorization") != config["authorization"]:
         raise RuntimeError("temporal program receipt authorization changed")
+    expected_budget = {
+        "strict_evaluated_maximum": 50_000,
+        "raw_generation_attempts_maximum": 250_000,
+        "wall_time_seconds_maximum": 64_800,
+        "checkpoint_size": 2_000,
+        "release_boundaries_strict": [10_000, 20_000, 30_000, 40_000, 50_000],
+        "workers": [10, 8],
+    }
+    if dict(receipt.get("budget") or {}) != expected_budget:
+        raise RuntimeError("temporal program receipt budget changed")
+    expected_boundaries = {
+        "automatic_next_run": False,
+        "development_only": True,
+        "holdout": False,
+        "oos": False,
+        "promotion": False,
+        "rescue_rerun": False,
+        "validation": False,
+    }
+    if dict(receipt.get("boundaries") or {}) != expected_boundaries:
+        raise RuntimeError("temporal program receipt boundaries changed")
+    expected_market = {
+        "carrier": config["market_contract"]["carrier"],
+        "cost_bps": 5,
+        "horizon_hours": int(config["market_contract"]["horizon_hours"]),
+        "matched_controls": config["market_contract"]["matched_controls"],
+        "target": config["market_contract"]["target"],
+    }
+    if dict(receipt.get("market_authority") or {}) != expected_market:
+        raise RuntimeError("temporal program receipt market authority changed")
+    replacement = dict(receipt.get("replacement_authorization") or {})
+    if replacement and (
+        replacement.get("budget_contract_unchanged") is not True
+        or replacement.get("market_contract_unchanged") is not True
+        or replacement.get("seed_contract_unchanged") is not True
+        or replacement.get("rescue_rerun") is not False
+        or int(replacement.get("prior_strict_evaluated", -1)) != 0
+        or int(replacement.get("prior_generation_attempts", -1)) < 0
+        or replacement.get("prior_runtime_state_import_allowed") is not False
+        or len(str(replacement.get("replaces_receipt_sha256") or "")) != 64
+    ):
+        raise RuntimeError("temporal program replacement authority changed")
+    branch = subprocess.check_output(
+        ["git", "branch", "--show-current"], cwd=repo_root, text=True
+    ).strip()
+    if branch != receipt.get("expected_branch"):
+        raise RuntimeError("temporal program receipt branch changed")
+    implementation_sha = str(receipt.get("authorized_implementation_sha") or "")
+    if not implementation_sha or subprocess.run(
+        ["git", "merge-base", "--is-ancestor", implementation_sha, "HEAD"],
+        cwd=repo_root,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode != 0:
+        raise RuntimeError("temporal program authorized implementation is not an ancestor")
     if receipt.get("config_sha256") != _sha256_file(repo_root / CONFIG_PATH):
         raise RuntimeError("temporal program receipt config changed")
     component_hashes = dict(receipt.get("component_sha256") or {})
@@ -231,6 +310,17 @@ def source_smoke(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(config)
+    economic = resolve_search_economic_receipt(
+        repo_root, str(config["source_authorities"]["economic_receipt_template"])
+    )
+    train = dict(economic["evidence_partition"]["train"])
+    paired_partition = validate_pair_evaluation_request(
+        block_start=str(train["start"]),
+        block_end=str(train["end_exclusive"]),
+        block_role=BLOCK_ROLE,
+        economic_receipt=economic,
+        include_paired_diagnostic_paths=True,
+    )
     contracts = _contracts_from_manifest(repo_root, config)
     registry = TypedExpressionRegistry(contracts, **_limits(config))
     domains = {**mechanism_role_domains(contracts), "__HORIZONS__": (4,)}
@@ -267,6 +357,7 @@ def source_smoke(repo_root: Path) -> dict[str, Any]:
         "status": "PASS",
         "market_arrays_read": 0,
         "candidate_evaluations": 0,
+        "paired_context_admission": paired_partition,
         "family_count": len(family_rows),
         "catalog_count": len(catalog),
         "catalog_sha256": program_catalog_payload(catalog)["catalog_sha256"],
@@ -314,6 +405,12 @@ def _make_policy(
 
 def _worker_program_pair(payload: Mapping[str, Any]) -> dict[str, Any]:
     pair_id = str(payload["paired_program_id"])
+    engine._write_worker_process_evidence(
+        evidence_root=engine._WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="task",
+        stage="TASK_STARTED",
+        candidate_id=pair_id,
+    )
     started_cpu = time.process_time()
     started_wall = time.perf_counter()
     process = psutil.Process(os.getpid())
@@ -360,13 +457,31 @@ def _worker_program_pair(payload: Mapping[str, Any]) -> dict[str, Any]:
         error = type(failure).__name__ + ":" + str(failure)
         evaluations = {}
         common = None
-    except (ValueError, FloatingPointError) as failure:
-        status = "PAIR_REJECTED"
+    except EvaluationContractError as failure:
+        status = "SYSTEM_ERROR"
         error = type(failure).__name__ + ":" + str(failure)
         evaluations = {}
         common = None
+    except (ValueError, FloatingPointError) as failure:
+        status = (
+            "SYSTEM_ERROR"
+            if evaluation_failure_is_contract_error(failure)
+            else "PAIR_REJECTED"
+        )
+        error = type(failure).__name__ + ":" + str(failure)
+        evaluations = {}
+        common = None
+    except BaseException as failure:
+        engine._write_worker_process_evidence(
+            evidence_root=engine._WORKER_PROCESS_EVIDENCE_ROOT,
+            channel="task",
+            stage="TASK_FAILED",
+            candidate_id=pair_id,
+            error=failure,
+        )
+        raise
     memory = process.memory_info()
-    return {
+    result = {
         "status": status,
         "paired_program_id": pair_id,
         "static": evaluations.get("static"),
@@ -378,7 +493,16 @@ def _worker_program_pair(payload: Mapping[str, Any]) -> dict[str, Any]:
         "worker_rss_bytes": int(memory.rss),
         "worker_private_bytes": int(getattr(memory, "private", memory.rss)),
         "memory_error": status == "MEMORY_ERROR",
+        "system_error": status == "SYSTEM_ERROR",
     }
+    engine._write_worker_process_evidence(
+        evidence_root=engine._WORKER_PROCESS_EVIDENCE_ROOT,
+        channel="task",
+        stage="TASK_COMPLETED",
+        candidate_id=pair_id,
+        outcome=status,
+    )
+    return result
 
 
 def _dual_net(evaluation: Mapping[str, Any]) -> bool:
@@ -704,6 +828,10 @@ def _new_state(source_sha: str, frozen_hash: str, config: Mapping[str, Any]) -> 
         "arm_states": {ARMS[1]: "ACTIVE", ARMS[2]: "ACTIVE"},
         "active_program_families": [],
         "failure_counts": {},
+        "stage0_lane_cursor": 0,
+        "evaluation_batch_index": 0,
+        "returned_pair_results": 0,
+        "system_error_count": 0,
         "arm_counters": {
             arm: {
                 "generation_attempts": 0,
@@ -1167,6 +1295,29 @@ def _stage0_checkpoint_lane_targets(
     return dict(output)
 
 
+def _next_stage0_lane(
+    *,
+    ordered_lanes: Sequence[str],
+    lane_targets: Mapping[str, int],
+    lane_completed: Mapping[str, int],
+    lane_pending: Mapping[str, int],
+    cursor: int,
+) -> tuple[str | None, int]:
+    """Select one eligible lane and advance even when its proposal is rejected."""
+
+    if not ordered_lanes:
+        return None, 0
+    next_cursor = int(cursor) % len(ordered_lanes)
+    for _ in range(len(ordered_lanes)):
+        key = str(ordered_lanes[next_cursor])
+        next_cursor = (next_cursor + 1) % len(ordered_lanes)
+        if int(lane_completed.get(key, 0)) + int(lane_pending.get(key, 0)) < int(
+            lane_targets[key]
+        ):
+            return key, next_cursor
+    return None, next_cursor
+
+
 def _later_checkpoint_targets(
     allocation: Mapping[str, int], config: Mapping[str, Any]
 ) -> dict[str, int]:
@@ -1208,6 +1359,45 @@ def _write_status(
     )
 
 
+def _program_process_evidence_errors(
+    runtime_root: Path,
+    *,
+    expected_batch_count: int,
+) -> list[str]:
+    errors: list[str] = []
+    if expected_batch_count <= 0:
+        return errors
+    initializer_rows = [
+        engine._read_json(path)
+        for path in sorted(
+            (runtime_root / "process_evidence").glob("*_initializer.json")
+        )
+    ]
+    if not initializer_rows or any(
+        row.get("stage") != "INITIALIZER_READY" for row in initializer_rows
+    ):
+        errors.append("worker_initializer_evidence_not_ready")
+    if not _process_evidence_closed(runtime_root):
+        errors.append("worker_process_evidence_not_closed")
+    batch_paths = sorted(
+        (runtime_root / "process_evidence").glob("producer_batch_*.json")
+    )
+    if len(batch_paths) != expected_batch_count:
+        errors.append("producer_batch_evidence_count")
+    for index, path in enumerate(batch_paths):
+        row = engine._read_json(path)
+        if (
+            int(row.get("evaluation_batch_index", -1)) != index
+            or row.get("stage") != "WORKER_RESULTS_RETURNED"
+            or int(row.get("proposal_count", -1))
+            != int(row.get("submitted_count", -2))
+            or int(row.get("submitted_count", -1))
+            != int(row.get("returned_count", -2))
+        ):
+            errors.append(f"producer_batch_evidence:{index}")
+    return errors
+
+
 def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config = engine._read_json(repo_root / CONFIG_PATH)
@@ -1227,6 +1417,13 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )
     train = dict(economic["evidence_partition"]["train"])
+    validate_pair_evaluation_request(
+        block_start=str(train["start"]),
+        block_end=str(train["end_exclusive"]),
+        block_role=BLOCK_ROLE,
+        economic_receipt=economic,
+        include_paired_diagnostic_paths=True,
+    )
     store, contracts, behavior, identities, _ = engine._load_v14_inputs(
         repo_root, behavior_window=train
     )
@@ -1270,8 +1467,11 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         engine._write_json(runtime_root / "search_authority_binding_receipt.json", receipt)
         engine._write_json(runtime_root / "embedded_preflight.json", source_smoke(repo_root))
 
-    if (runtime_root / "checkpoints/checkpoint_budget_exhausted").is_dir():
-        raise RuntimeError("budget-exhausted runtime cannot be resumed")
+    if any(
+        (runtime_root / "checkpoints" / label).is_dir()
+        for label in ("checkpoint_budget_exhausted", "checkpoint_run_invalid")
+    ):
+        raise RuntimeError("terminal runtime cannot be resumed")
     checkpoints = sorted((runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
     if checkpoints:
         state, policies, ledger, archive, pair_rows, metrics, rejected = _load_checkpoint(
@@ -1289,6 +1489,13 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         pair_rows: list[dict[str, Any]] = []
         metrics: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
+    for key, default in (
+        ("stage0_lane_cursor", 0),
+        ("evaluation_batch_index", 0),
+        ("returned_pair_results", 0),
+        ("system_error_count", 0),
+    ):
+        state.setdefault(key, default)
     attempted = set(str(value) for value in state["attempted_exact_ids"])
     completed_pairs = set(str(value) for value in state["completed_pair_ids"])
     budget = dict(config["search_budget"])
@@ -1306,6 +1513,14 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         if elapsed() >= float(budget["wall_time_seconds_maximum"]):
             raise ProgramBudgetExhausted("ACTIVE_WALL_TIME_LIMIT")
 
+    def proposal_attempt_reservation(arm: str) -> int:
+        policy_arm = (
+            "temporal_program_random"
+            if arm in {"paired_static", "temporal_program_random_diagnostic"}
+            else str(arm)
+        )
+        return int(config["policy_parameters"][policy_arm]["duplicate_resample_limit"]) + 1
+
     cache_root = repo_root / str(identities["raw_cache"]["root"])
 
     def make_executor(workers: int) -> concurrent.futures.ProcessPoolExecutor:
@@ -1322,9 +1537,31 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 economic,
                 True,
                 block_contract,
-                None,
+                str(runtime_root / "process_evidence"),
                 _limits(config),
             ),
+        )
+
+    def persist_batch_stage(
+        *,
+        proposals: Sequence[Mapping[str, Any]],
+        checkpoint_index: int,
+        stage: str,
+        submitted_count: int,
+        returned_count: int,
+    ) -> None:
+        engine._write_proposal_batch_process_evidence(
+            evidence_root=runtime_root / "process_evidence",
+            stage=stage,
+            source_sha=source_sha,
+            frozen_contract_sha256=frozen_hash,
+            checkpoint_index=checkpoint_index,
+            batch_index=int(state["evaluation_batch_index"]),
+            generation_attempts=int(state["generation_attempts"]),
+            attempted_exact_id_count=len(attempted),
+            proposals=proposals,
+            submitted_count=submitted_count,
+            returned_count=returned_count,
         )
 
     executor: concurrent.futures.ProcessPoolExecutor | None = None
@@ -1349,86 +1586,165 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 pair_target = 1_000
                 pair_completed_in_checkpoint = len(ledger[checkpoint_start:]) // 2
                 while pair_completed_in_checkpoint < pair_target:
-                    enforce_budget()
                     batch: list[dict[str, Any]] = []
-                    for key in ordered_lanes:
-                        while (
-                            lane_completed[key]
-                            + sum(item["policy_key"] == key for item in batch)
-                            < lane_targets[key]
-                            and len(batch) < max(1, int(state["workers"]) // 2)
-                        ):
-                            policy = policies[key]
-                            proposal_cpu = time.process_time()
-                            try:
-                                temporal, metadata = policy.propose()
-                                static = static_counterpart(registry, temporal)
-                            except (ValueError, RuntimeError) as failure:
-                                state["generation_attempts"] += 1
-                                rejected.append(
-                                    {
-                                        "checkpoint_index": checkpoint_index,
-                                        "policy_key": key,
-                                        "status": "PROPOSAL_REJECT",
-                                        "error": type(failure).__name__ + ":" + str(failure),
-                                    }
-                                )
-                                continue
-                            raw_attempts = int(metadata["raw_attempts"])
-                            state["generation_attempts"] += raw_attempts
-                            state["compile_valid"] += int(metadata.get("compile_valid_attempts", raw_attempts))
-                            state["arm_counters"][ARMS[0]]["generation_attempts"] += raw_attempts
-                            state["arm_counters"][ARMS[0]]["compile_valid"] += int(metadata.get("compile_valid_attempts", raw_attempts))
-                            if (
-                                temporal.candidate_id in attempted
-                                or static.candidate_id in attempted
-                                or not engine._candidate_rebuild_verified(registry, temporal, {})
-                                or not engine._candidate_rebuild_verified(registry, static, {})
-                            ):
-                                attempted.update((temporal.candidate_id, static.candidate_id))
-                                rejected.append(
-                                    {
-                                        "checkpoint_index": checkpoint_index,
-                                        "policy_key": key,
-                                        "status": "EXACT_OR_REPLAY_REJECT",
-                                        "temporal_candidate_id": temporal.candidate_id,
-                                        "static_candidate_id": static.candidate_id,
-                                    }
-                                )
-                                continue
-                            attempted.update((temporal.candidate_id, static.candidate_id))
-                            pair_id = _json_sha([static.candidate_id, temporal.candidate_id])
-                            if pair_id in completed_pairs:
-                                continue
-                            _, family, seed_text = key.split("|", 2)
-                            batch.append(
+                    lane_pending: Counter[str] = Counter()
+                    while len(batch) < max(1, int(state["workers"]) // 2):
+                        key, next_cursor = _next_stage0_lane(
+                            ordered_lanes=ordered_lanes,
+                            lane_targets=lane_targets,
+                            lane_completed=lane_completed,
+                            lane_pending=lane_pending,
+                            cursor=int(state["stage0_lane_cursor"]),
+                        )
+                        state["stage0_lane_cursor"] = next_cursor
+                        if key is None:
+                            break
+                        enforce_budget(proposal_attempt_reservation(ARMS[0]))
+                        policy = policies[key]
+                        proposal_cpu = time.process_time()
+                        try:
+                            temporal, metadata = policy.propose()
+                            static = static_counterpart(registry, temporal)
+                        except (ValueError, RuntimeError) as failure:
+                            failed_raw_attempts = int(
+                                getattr(failure, "raw_attempts", 1)
+                            )
+                            state["generation_attempts"] += failed_raw_attempts
+                            state["arm_counters"][ARMS[0]][
+                                "generation_attempts"
+                            ] += failed_raw_attempts
+                            rejected.append(
                                 {
+                                    "checkpoint_index": checkpoint_index,
                                     "policy_key": key,
-                                    "seed": int(seed_text),
-                                    "program_family_id": family,
-                                    "program_id": str(temporal.generation_genes["program_id"]),
-                                    "paired_program_id": pair_id,
-                                    "static": static,
-                                    "temporal": temporal,
-                                    "metadata": metadata,
-                                    "proposal_cpu_seconds": time.process_time() - proposal_cpu,
+                                    "status": "PROPOSAL_REJECT",
+                                    "raw_attempts": failed_raw_attempts,
+                                    "error": type(failure).__name__ + ":" + str(failure),
                                 }
                             )
+                            continue
+                        raw_attempts = int(metadata["raw_attempts"])
+                        state["generation_attempts"] += raw_attempts
+                        state["compile_valid"] += int(metadata.get("compile_valid_attempts", raw_attempts))
+                        state["arm_counters"][ARMS[0]]["generation_attempts"] += raw_attempts
+                        state["arm_counters"][ARMS[0]]["compile_valid"] += int(metadata.get("compile_valid_attempts", raw_attempts))
+                        if (
+                            temporal.candidate_id in attempted
+                            or static.candidate_id in attempted
+                            or not engine._candidate_rebuild_verified(registry, temporal, {})
+                            or not engine._candidate_rebuild_verified(registry, static, {})
+                        ):
+                            attempted.update((temporal.candidate_id, static.candidate_id))
+                            rejected.append(
+                                {
+                                    "checkpoint_index": checkpoint_index,
+                                    "policy_key": key,
+                                    "status": "EXACT_OR_REPLAY_REJECT",
+                                    "raw_attempts": raw_attempts,
+                                    "temporal_candidate_id": temporal.candidate_id,
+                                    "static_candidate_id": static.candidate_id,
+                                }
+                            )
+                            continue
+                        attempted.update((temporal.candidate_id, static.candidate_id))
+                        pair_id = _json_sha([static.candidate_id, temporal.candidate_id])
+                        if pair_id in completed_pairs:
+                            rejected.append(
+                                {
+                                    "checkpoint_index": checkpoint_index,
+                                    "policy_key": key,
+                                    "status": "COMPLETED_PAIR_DUPLICATE",
+                                    "raw_attempts": raw_attempts,
+                                    "paired_program_id": pair_id,
+                                }
+                            )
+                            continue
+                        _, family, seed_text = key.split("|", 2)
+                        lane_pending[key] += 1
+                        batch.append(
+                            {
+                                "policy_key": key,
+                                "arm": ARMS[0],
+                                "seed": int(seed_text),
+                                "program_family_id": family,
+                                "program_id": str(temporal.generation_genes["program_id"]),
+                                "paired_program_id": pair_id,
+                                "static": static,
+                                "temporal": temporal,
+                                "metadata": metadata,
+                                "generation_attempt_ordinal": int(state["generation_attempts"]),
+                                "proposal_cpu_seconds": time.process_time() - proposal_cpu,
+                            }
+                        )
                     if not batch:
                         continue
                     assert executor is not None
-                    futures = {
-                        executor.submit(
-                            _worker_program_pair,
-                            {
-                                "paired_program_id": item["paired_program_id"],
-                                "static": item["static"].to_dict(),
-                                "temporal": item["temporal"].to_dict(),
-                            },
-                        ): item
-                        for item in batch
-                    }
+                    persist_batch_stage(
+                        proposals=batch,
+                        checkpoint_index=checkpoint_index,
+                        stage="PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT",
+                        submitted_count=0,
+                        returned_count=0,
+                    )
+                    futures: dict[concurrent.futures.Future[dict[str, Any]], dict[str, Any]] = {}
+                    try:
+                        for item in batch:
+                            futures[
+                                executor.submit(
+                                    _worker_program_pair,
+                                    {
+                                        "paired_program_id": item["paired_program_id"],
+                                        "static": item["static"].to_dict(),
+                                        "temporal": item["temporal"].to_dict(),
+                                    },
+                                )
+                            ] = item
+                    except BaseException:
+                        persist_batch_stage(
+                            proposals=batch,
+                            checkpoint_index=checkpoint_index,
+                            stage="WORKER_SUBMISSION_FAILED",
+                            submitted_count=len(futures),
+                            returned_count=0,
+                        )
+                        raise
+                    persist_batch_stage(
+                        proposals=batch,
+                        checkpoint_index=checkpoint_index,
+                        stage="WORKERS_SUBMITTED",
+                        submitted_count=len(futures),
+                        returned_count=0,
+                    )
                     results = [(futures[future], future.result()) for future in concurrent.futures.as_completed(futures)]
+                    persist_batch_stage(
+                        proposals=batch,
+                        checkpoint_index=checkpoint_index,
+                        stage="WORKER_RESULTS_RETURNED",
+                        submitted_count=len(futures),
+                        returned_count=len(results),
+                    )
+                    state["evaluation_batch_index"] += 1
+                    state["returned_pair_results"] += len(results)
+                    system_failures = [
+                        (item, result)
+                        for item, result in results
+                        if bool(result.get("system_error"))
+                    ]
+                    if system_failures:
+                        state["system_error_count"] += len(system_failures)
+                        for item, result in system_failures:
+                            rejected.append(
+                                {
+                                    "checkpoint_index": checkpoint_index,
+                                    "policy_key": item["policy_key"],
+                                    "status": "SYSTEM_ERROR",
+                                    "error": result["error"],
+                                    "paired_program_id": item["paired_program_id"],
+                                }
+                            )
+                        raise ProgramRunInvalid(
+                            "WORKER_SYSTEM_ERROR:" + str(system_failures[0][1]["error"])
+                        )
                     if any(result["memory_error"] for _, result in results):
                         if int(state["workers"]) == int(budget["workers_default"]):
                             executor.shutdown(wait=True)
@@ -1524,6 +1840,14 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                             )
                         )
                         pair_completed_in_checkpoint += 1
+                    if (
+                        not ledger
+                        and int(state["returned_pair_results"])
+                        >= int(config["runtime_safety"]["zero_strict_returned_pair_maximum"])
+                    ):
+                        raise ProgramRunInvalid(
+                            "ZERO_STRICT_LIVENESS_LIMIT_AFTER_RETURNED_PAIRS"
+                        )
                     _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
             else:
                 allocation = _checkpoint_allocation(state, checkpoint_index)
@@ -1561,16 +1885,24 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                             if local_index % 10 == 9:
                                 actual_policy_key = f"temporal_program_random_diagnostic|{seed_text}"
                         policy = policies[actual_policy_key]
+                        enforce_budget(proposal_attempt_reservation(arm))
                         proposal_cpu = time.process_time()
                         try:
                             candidate, metadata = engine._policy_propose(policy, archive)
                         except (ValueError, RuntimeError) as failure:
-                            state["generation_attempts"] += int(getattr(failure, "raw_attempts", 1))
+                            failed_raw_attempts = int(
+                                getattr(failure, "raw_attempts", 1)
+                            )
+                            state["generation_attempts"] += failed_raw_attempts
+                            state["arm_counters"][arm][
+                                "generation_attempts"
+                            ] += failed_raw_attempts
                             rejected.append(
                                 {
                                     "checkpoint_index": checkpoint_index,
                                     "policy_key": actual_policy_key,
                                     "status": "PROPOSAL_REJECT",
+                                    "raw_attempts": failed_raw_attempts,
                                     "error": type(failure).__name__ + ":" + str(failure),
                                 }
                             )
@@ -1587,6 +1919,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                                     "checkpoint_index": checkpoint_index,
                                     "policy_key": actual_policy_key,
                                     "status": "EXACT_OR_REPLAY_REJECT",
+                                    "raw_attempts": raw_attempts,
                                     "candidate_id": candidate.candidate_id,
                                 }
                             )
@@ -1600,17 +1933,74 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                                 "seed": int(seed_text),
                                 "candidate": candidate,
                                 "metadata": metadata,
+                                "generation_attempt_ordinal": int(state["generation_attempts"]),
                                 "proposal_cpu_seconds": time.process_time() - proposal_cpu,
                             }
                         )
                     if not proposals:
                         continue
                     assert executor is not None
-                    futures = {
-                        executor.submit(engine._worker_evaluate, row["candidate"].to_dict()): row
-                        for row in proposals
-                    }
+                    persist_batch_stage(
+                        proposals=proposals,
+                        checkpoint_index=checkpoint_index,
+                        stage="PROPOSAL_BATCH_READY_BEFORE_WORKER_SUBMIT",
+                        submitted_count=0,
+                        returned_count=0,
+                    )
+                    futures: dict[concurrent.futures.Future[dict[str, Any]], dict[str, Any]] = {}
+                    try:
+                        for row in proposals:
+                            futures[
+                                executor.submit(
+                                    engine._worker_evaluate,
+                                    row["candidate"].to_dict(),
+                                )
+                            ] = row
+                    except BaseException:
+                        persist_batch_stage(
+                            proposals=proposals,
+                            checkpoint_index=checkpoint_index,
+                            stage="WORKER_SUBMISSION_FAILED",
+                            submitted_count=len(futures),
+                            returned_count=0,
+                        )
+                        raise
+                    persist_batch_stage(
+                        proposals=proposals,
+                        checkpoint_index=checkpoint_index,
+                        stage="WORKERS_SUBMITTED",
+                        submitted_count=len(futures),
+                        returned_count=0,
+                    )
                     results = [(futures[future], future.result()) for future in concurrent.futures.as_completed(futures)]
+                    persist_batch_stage(
+                        proposals=proposals,
+                        checkpoint_index=checkpoint_index,
+                        stage="WORKER_RESULTS_RETURNED",
+                        submitted_count=len(futures),
+                        returned_count=len(results),
+                    )
+                    state["evaluation_batch_index"] += 1
+                    system_failures = [
+                        (row, result)
+                        for row, result in results
+                        if bool(result.get("system_error"))
+                    ]
+                    if system_failures:
+                        state["system_error_count"] += len(system_failures)
+                        for row, result in system_failures:
+                            rejected.append(
+                                {
+                                    "checkpoint_index": checkpoint_index,
+                                    "policy_key": row["actual_policy_key"],
+                                    "status": "SYSTEM_ERROR",
+                                    "error": result["error"],
+                                    "candidate_id": row["candidate"].candidate_id,
+                                }
+                            )
+                        raise ProgramRunInvalid(
+                            "WORKER_SYSTEM_ERROR:" + str(system_failures[0][1]["error"])
+                        )
                     if any(result["memory_error"] for _, result in results):
                         if int(state["workers"]) == int(budget["workers_default"]):
                             executor.shutdown(wait=True)
@@ -1745,9 +2135,27 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 break
     except ProgramBudgetExhausted as failure:
         terminal_reason = "ENGINE_BUDGET_EXHAUSTED:" + str(failure)
+    except ProgramRunInvalid as failure:
+        terminal_reason = "ENGINE_RUN_INVALID:" + str(failure)
+    except Exception as failure:
+        terminal_reason = (
+            "ENGINE_RUN_INVALID:UNEXPECTED_"
+            + type(failure).__name__
+            + ":"
+            + str(failure)
+        )
     finally:
         if executor is not None:
             executor.shutdown(wait=True, cancel_futures=False)
+
+    process_evidence_errors = _program_process_evidence_errors(
+        runtime_root,
+        expected_batch_count=int(state["evaluation_batch_index"]),
+    )
+    if process_evidence_errors:
+        terminal_reason = "ENGINE_RUN_INVALID:PROCESS_EVIDENCE:" + ",".join(
+            process_evidence_errors
+        )
 
     state["attempted_exact_ids"] = sorted(attempted)
     state["completed_pair_ids"] = sorted(completed_pairs)
@@ -1762,10 +2170,11 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         rejected=rejected,
     )
     budget_checkpoint_written = False
+    run_invalid_checkpoint_written = False
     if (
         terminal_reason
         and terminal_reason.startswith("ENGINE_BUDGET_EXHAUSTED")
-        and len(ledger) > int(state["next_checkpoint_index"]) * 2_000
+        and (int(state["generation_attempts"]) > 0 or len(ledger) > 0)
         and not (runtime_root / "checkpoints/checkpoint_budget_exhausted").exists()
     ):
         _write_checkpoint(
@@ -1782,12 +2191,34 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
             identities=identities,
         )
         budget_checkpoint_written = True
+    if (
+        terminal_reason
+        and terminal_reason.startswith("ENGINE_RUN_INVALID")
+        and (int(state["generation_attempts"]) > 0 or int(state["evaluation_batch_index"]) > 0)
+        and not (runtime_root / "checkpoints/checkpoint_run_invalid").exists()
+    ):
+        _write_checkpoint(
+            runtime_root,
+            checkpoint_index=int(state["next_checkpoint_index"]),
+            label="checkpoint_run_invalid",
+            state=state,
+            policies=policies,
+            ledger=ledger,
+            archive=archive,
+            pair_rows=pair_rows,
+            metrics=metrics,
+            rejected=rejected,
+            identities=identities,
+        )
+        run_invalid_checkpoint_written = True
     strict_count = len(ledger)
     matched = [row for row in ledger if bool(row["matched_positive"])]
     matched_families = {str(row["behavior_family_id"]) for row in matched}
     contributing = {str(row["program_family_id"]) for row in matched}
     if terminal_reason and terminal_reason.startswith("ENGINE_BUDGET_EXHAUSTED"):
         status = "ENGINE_BUDGET_EXHAUSTED"
+    elif terminal_reason and terminal_reason.startswith("ENGINE_RUN_INVALID"):
+        status = "ENGINE_RUN_INVALID"
     elif strict_count == 10_000 and not state["active_program_families"]:
         status = "TEMPORAL_PROGRAM_SPACE_NOT_SUPPORTED"
     elif len(matched_families) >= 2 and len(contributing) >= 2:
@@ -1805,9 +2236,14 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "strict_evaluated_count": strict_count,
         "generation_attempts": int(state["generation_attempts"]),
         "checkpoint_count": int(state["next_checkpoint_index"])
-        + int(budget_checkpoint_written),
+        + int(budget_checkpoint_written)
+        + int(run_invalid_checkpoint_written),
         "completed_full_checkpoint_count": int(state["next_checkpoint_index"]),
         "budget_checkpoint_written": budget_checkpoint_written,
+        "run_invalid_checkpoint_written": run_invalid_checkpoint_written,
+        "process_evidence_errors": process_evidence_errors,
+        "evaluation_batch_count": int(state["evaluation_batch_index"]),
+        "system_error_count": int(state["system_error_count"]),
         "active_wall_seconds": elapsed(),
         "workers_final": int(state["workers"]),
         "memory_fallback_used": bool(state["memory_fallback_used"]),
@@ -1825,6 +2261,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "parameters_changed": False,
         "seed_changed": False,
         "rescue_rerun_started": False,
+        "research_conclusion_forbidden": status == "ENGINE_RUN_INVALID",
     }
     engine._write_json(runtime_root / "final_decision.json", final)
     manifest_paths = [
@@ -1838,6 +2275,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "paired_program_diagnostics.parquet",
         "program_family_metrics.parquet",
         "arm_checkpoint_metrics.parquet",
+        "rejected_candidate_ledger.parquet",
         "rejected_candidate_ledger.parquet",
         "final_decision.json",
     ]
@@ -1886,7 +2324,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         + "\n",
         encoding="utf-8",
     )
-    _write_status(runtime_root, state=state, status="COMPLETE", active_elapsed=elapsed())
+    _write_status(runtime_root, state=state, status=status, active_elapsed=elapsed())
     return final
 
 
@@ -1894,6 +2332,7 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
     repo_root = repo_root.resolve()
     runtime_root = repo_root / f"runtime/{CAMPAIGN}_{runtime_date}"
     errors: list[str] = []
+    validity_errors: list[str] = []
     required = (
         "frozen_contract.json",
         "embedded_preflight.json",
@@ -1920,6 +2359,7 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         errors.append("config:" + str(failure))
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
     pairs = pd.read_parquet(runtime_root / "paired_program_diagnostics.parquet")
+    rejected = pd.read_parquet(runtime_root / "rejected_candidate_ledger.parquet")
     if len(ledger) != int(final["strict_evaluated_count"]):
         errors.append("strict_count")
     if len(ledger) >= 10_000:
@@ -1934,7 +2374,12 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]/manifest.json")
     )
     budget_checkpoint = runtime_root / "checkpoints/checkpoint_budget_exhausted/manifest.json"
-    all_checkpoints = [*checkpoints, *([budget_checkpoint] if budget_checkpoint.is_file() else [])]
+    invalid_checkpoint = runtime_root / "checkpoints/checkpoint_run_invalid/manifest.json"
+    all_checkpoints = [
+        *checkpoints,
+        *([budget_checkpoint] if budget_checkpoint.is_file() else []),
+        *([invalid_checkpoint] if invalid_checkpoint.is_file() else []),
+    ]
     if len(all_checkpoints) != int(final["checkpoint_count"]):
         errors.append("checkpoint_count")
     for index, path in enumerate(checkpoints):
@@ -1961,6 +2406,49 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
             local = budget_checkpoint.parent / str(row["name"])
             if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
                 errors.append(f"budget_checkpoint_file:{row['name']}")
+    if invalid_checkpoint.is_file():
+        manifest = engine._read_json(invalid_checkpoint)
+        if (
+            manifest.get("restore_verified") is not True
+            or int(manifest["completed_ledger_row_count"]) != len(ledger)
+            or final.get("status") != "ENGINE_RUN_INVALID"
+        ):
+            errors.append("run_invalid_checkpoint_manifest")
+        for row in manifest["files"]:
+            local = invalid_checkpoint.parent / str(row["name"])
+            if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
+                errors.append(f"run_invalid_checkpoint_file:{row['name']}")
+    errors.extend(
+        _program_process_evidence_errors(
+            runtime_root,
+            expected_batch_count=int(final.get("evaluation_batch_count", 0)),
+        )
+    )
+    batch_raw_attempts = 0
+    for path in sorted(
+        (runtime_root / "process_evidence").glob("producer_batch_*.json")
+    ):
+        batch_raw_attempts += sum(
+            int(row.get("raw_attempts", 0))
+            for row in engine._read_json(path).get("proposals", ())
+        )
+    rejected_raw_attempts = (
+        int(pd.to_numeric(rejected["raw_attempts"], errors="coerce").fillna(0).sum())
+        if "raw_attempts" in rejected.columns
+        else 0
+    )
+    if batch_raw_attempts + rejected_raw_attempts != int(
+        final.get("generation_attempts", 0)
+    ):
+        errors.append("generation_attempt_reconciliation")
+    if final.get("status") == "ENGINE_RUN_INVALID":
+        validity_errors.append("engine_run_invalid")
+        if not invalid_checkpoint.is_file():
+            errors.append("missing:checkpoint_run_invalid")
+    elif int(final.get("generation_attempts", 0)) > 0 and len(ledger) == 0:
+        validity_errors.append("nonzero_attempts_zero_strict")
+    if int(final.get("system_error_count", 0)) > 0 and final.get("status") != "ENGINE_RUN_INVALID":
+        validity_errors.append("system_error_without_invalid_terminal")
     manifest = engine._read_json(runtime_root / "run_manifest.json")
     for row in manifest["files"]:
         local = runtime_root / str(row["path"])
@@ -1971,16 +2459,20 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         errors.append("receipt_not_consumed")
     result = {
         "schema_version": 1,
-        "status": "PASS" if not errors else "FAIL",
+        "status": "PASS" if not errors and not validity_errors else "FAIL",
+        "artifact_integrity_status": "PASS" if not errors else "FAIL",
+        "run_validity_status": "PASS" if not validity_errors else "INVALID",
         "errors": sorted(set(errors)),
+        "validity_errors": sorted(set(validity_errors)),
         "producer_source_sha": final["producer_source_sha"],
         "strict_evaluated_count": len(ledger),
         "checkpoint_count": len(all_checkpoints),
         "stage0_pair_count": len(pairs),
+        "reconciled_generation_attempts": batch_raw_attempts
+        + rejected_raw_attempts,
         "sealed_reads": 0,
     }
-    if result["status"] == "PASS":
-        engine._write_json(runtime_root / "independent_checker.json", result)
+    engine._write_json(runtime_root / "independent_checker.json", result)
     return result
 
 

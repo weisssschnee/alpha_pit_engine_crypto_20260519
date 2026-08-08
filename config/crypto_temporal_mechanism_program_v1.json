@@ -136,6 +136,12 @@
     "automatic_release_only_through_frozen_gate": true,
     "later_tranche_proposal_pregeneration": false
   },
+  "runtime_safety": {
+    "system_error_fatal": true,
+    "stage0_attempt_round_robin": true,
+    "process_evidence_required": true,
+    "zero_strict_returned_pair_maximum": 64
+  },
   "stage_allocations": [
     {
       "stage_id": "PROGRAM_SPACE_ACTIVATION",

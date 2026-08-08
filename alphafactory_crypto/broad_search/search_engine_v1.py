@@ -73,9 +73,11 @@ from .experiment_authority import (
 )
 from .pair18m import (
     ControlBehaviorDegeneracyError,
+    EvaluationContractError,
     FIXED_COST_BPS,
     SEARCH_REWARD_AUTHORITY,
     evaluate_pair,
+    evaluation_failure_is_contract_error,
     feedback_contract_payload,
     pair_contract_payload,
 )
@@ -990,20 +992,46 @@ def _write_proposal_batch_process_evidence(
 ) -> dict[str, Any]:
     proposal_rows: list[dict[str, Any]] = []
     for proposal in proposals:
-        candidate = proposal["candidate"]
-        if not isinstance(candidate, CandidateSpec):
-            raise TypeError("proposal process evidence requires CandidateSpec")
+        candidate = proposal.get("candidate")
         receipt = proposal.get("receipt")
+        if isinstance(candidate, CandidateSpec):
+            candidate_id = candidate.candidate_id
+            candidate_spec_sha256 = _payload_sha(candidate.to_dict())
+        else:
+            static = proposal.get("static")
+            temporal = proposal.get("temporal")
+            if not isinstance(static, CandidateSpec) or not isinstance(
+                temporal, CandidateSpec
+            ):
+                raise TypeError(
+                    "proposal process evidence requires CandidateSpec or paired CandidateSpecs"
+                )
+            candidate_id = str(proposal["paired_program_id"])
+            candidate_spec_sha256 = _payload_sha(
+                {"static": static.to_dict(), "temporal": temporal.to_dict()}
+            )
+            metadata = proposal.get("metadata")
+            if isinstance(metadata, Mapping):
+                receipt = metadata.get("receipt")
         proposal_rows.append(
             {
-                "candidate_id": candidate.candidate_id,
-                "candidate_spec_sha256": _payload_sha(candidate.to_dict()),
-                "arm": str(proposal["arm"]),
+                "candidate_id": candidate_id,
+                "candidate_spec_sha256": candidate_spec_sha256,
+                "arm": str(proposal.get("arm") or "paired_static_vs_temporal"),
                 "seed": int(proposal["seed"]),
                 "policy_key": str(proposal["policy_key"]),
-                "operation": str(proposal.get("operation") or ""),
+                "operation": str(
+                    proposal.get("operation")
+                    or dict(proposal.get("metadata") or {}).get("operation")
+                    or ""
+                ),
                 "generation_attempt_ordinal": int(
                     proposal["generation_attempt_ordinal"]
+                ),
+                "raw_attempts": int(
+                    proposal.get("raw_attempts")
+                    or dict(proposal.get("metadata") or {}).get("raw_attempts")
+                    or 1
                 ),
                 "receipt_sha256": (
                     str(receipt.get("receipt_sha256"))
@@ -7251,6 +7279,7 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
         evaluation = None
         error = None
         memory_error = False
+        system_error = False
         try:
             evaluation = evaluate_pair(
                 store=_WORKER_STORE,
@@ -7270,14 +7299,19 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
         except MemoryError as failure:
             error = type(failure).__name__ + ":" + str(failure)
             memory_error = True
+        except EvaluationContractError as failure:
+            error = type(failure).__name__ + ":" + str(failure)
+            system_error = True
         except (ValueError, FloatingPointError) as failure:
             error = type(failure).__name__ + ":" + str(failure)
+            system_error = evaluation_failure_is_contract_error(failure)
         memory = process.memory_info()
         result = {
             "candidate_id": candidate.candidate_id,
             "evaluation": evaluation,
             "error": error,
             "memory_error": memory_error,
+            "system_error": system_error,
             "degeneracy_evidence": (
                 degeneracy_evidence if "degeneracy_evidence" in locals() else None
             ),
@@ -7300,7 +7334,13 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
         channel="task",
         stage="TASK_COMPLETED",
         candidate_id=candidate.candidate_id,
-        outcome="PAIR_EVALUATED" if evaluation is not None else "PAIR_REJECTED",
+        outcome=(
+            "PAIR_EVALUATED"
+            if evaluation is not None
+            else "SYSTEM_ERROR"
+            if system_error
+            else "PAIR_REJECTED"
+        ),
     )
     return result
 

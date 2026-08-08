@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from alphafactory_crypto.broad_search import search_engine_v1 as engine_module
+from alphafactory_crypto.broad_search import temporal_program_search_v1 as program_module
 from alphafactory_crypto.broad_search.compositional18m import (
     CandidateSpec,
     mechanism_role_domains,
@@ -16,10 +18,18 @@ from alphafactory_crypto.broad_search.expression import (
     TypedExpressionRegistry,
 )
 from alphafactory_crypto.broad_search.search_engine_v1 import (
+    BehaviorArchive,
     MECHANISM_EVOLUTION_OPERATIONS,
     MechanismCEMV2,
     MechanismEvolutionV2,
     MechanismRandomV2,
+)
+from alphafactory_crypto.broad_search.pair18m import (
+    EvaluationContractError,
+    PAIRED_DIAGNOSTIC_BLOCK_ROLE,
+    evaluate_pair,
+    evaluation_failure_is_contract_error,
+    validate_pair_evaluation_request,
 )
 from alphafactory_crypto.broad_search.temporal_program_v1 import (
     PROGRAM_BUILDER_ID,
@@ -30,8 +40,13 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
     temporal_program_candidate_from_genes,
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
+    _load_checkpoint,
+    _new_state,
+    _next_stage0_lane,
+    _program_process_evidence_errors,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
+    _write_checkpoint,
     stage0_family_decisions,
     validate_config,
 )
@@ -268,6 +283,12 @@ def test_contract_is_sequential_development_only_and_not_an_all_family_veto() ->
     assert all(value is False for value in CONFIG["boundaries"].values()) is False
     for key in ("validation", "oos", "holdout", "promotion", "rescue_rerun"):
         assert CONFIG["boundaries"][key] is False
+    assert CONFIG["runtime_safety"] == {
+        "system_error_fatal": True,
+        "stage0_attempt_round_robin": True,
+        "process_evidence_required": True,
+        "zero_strict_returned_pair_maximum": 64,
+    }
 
 
 def test_pc2_runner_treats_native_exit_code_as_authority_not_stderr() -> None:
@@ -295,6 +316,193 @@ def test_stage0_checkpoint_allocation_is_exact_without_rounding_underfill() -> N
         }
         cumulative.update(local)
     assert dict(cumulative) == _stage0_lane_targets(CONFIG)
+
+
+def test_stage0_attempts_rotate_even_when_no_lane_completes() -> None:
+    ordered = ["lane-a", "lane-b", "lane-c", "lane-d"]
+    targets = {key: 10 for key in ordered}
+    completed: Counter[str] = Counter()
+    pending: Counter[str] = Counter()
+    cursor = 0
+    observed = []
+    for _ in range(12):
+        key, cursor = _next_stage0_lane(
+            ordered_lanes=ordered,
+            lane_targets=targets,
+            lane_completed=completed,
+            lane_pending=pending,
+            cursor=cursor,
+        )
+        observed.append(key)
+    assert observed == ordered * 3
+
+
+def test_paired_authority_rejects_before_any_store_access() -> None:
+    class StoreMustNotBeTouched:
+        def __getattribute__(self, name):
+            raise AssertionError(f"store touched before authority admission: {name}")
+
+    receipt = {
+        "train": {"start": "2025-01-01", "end_exclusive": "2025-02-01"},
+        "validation": {"start": "2025-02-01", "end_exclusive": "2025-03-01"},
+        "holdout": {"start": "2025-03-01", "end_exclusive": "2025-04-01"},
+    }
+    with pytest.raises(
+        EvaluationContractError,
+        match="PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE",
+    ):
+        evaluate_pair(
+            store=StoreMustNotBeTouched(),
+            registry=None,
+            candidate=None,
+            block_start="2025-01-01",
+            block_end="2025-02-01",
+            block_role="WRONG_ROLE",
+            economic_receipt=receipt,
+            include_paired_diagnostic_paths=True,
+        )
+    assert evaluation_failure_is_contract_error(
+        ValueError("ECONOMIC_RECEIPT_TARGET_CONTRACT_CHANGED:venue")
+    )
+    assert (
+        validate_pair_evaluation_request(
+            block_start="2025-01-01",
+            block_end="2025-02-01",
+            block_role=PAIRED_DIAGNOSTIC_BLOCK_ROLE,
+            economic_receipt=receipt,
+            include_paired_diagnostic_paths=True,
+        )
+        == "train"
+    )
+
+
+def test_worker_preserves_run_global_contract_failure_as_system_error(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    registry = _registry()
+    mechanism, program = _catalog()[0]
+    candidate = sample_temporal_program_candidate(
+        registry=registry,
+        mechanism=mechanism,
+        program=program,
+        domains=mechanism_role_domains(_contracts()),
+        scale_contract=CONFIG["time_scale_authority"],
+        rng=random.Random(31),
+    )
+
+    def fail_contract(**kwargs):
+        raise EvaluationContractError("ECONOMIC_RECEIPT_TARGET_CONTRACT_CHANGED:venue")
+
+    monkeypatch.setattr(program_module, "evaluate_pair", fail_contract)
+    monkeypatch.setattr(engine_module, "_WORKER_STORE", object())
+    monkeypatch.setattr(engine_module, "_WORKER_REGISTRY", registry)
+    monkeypatch.setattr(engine_module, "_WORKER_PROCESS_EVIDENCE_ROOT", tmp_path)
+    result = program_module._worker_program_pair(
+        {
+            "paired_program_id": "pair-system-error",
+            "static": candidate.to_dict(),
+            "temporal": candidate.to_dict(),
+        }
+    )
+    assert result["status"] == "SYSTEM_ERROR"
+    assert result["system_error"] is True
+    task_rows = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in tmp_path.glob("*_task.json")
+    ]
+    assert task_rows and task_rows[0]["stage"] == "TASK_COMPLETED"
+    assert task_rows[0]["outcome"] == "SYSTEM_ERROR"
+
+
+def test_empty_invalid_terminal_checkpoint_is_atomic_and_restorable(tmp_path: Path) -> None:
+    state = _new_state("a" * 40, "B" * 64, CONFIG)
+    state["generation_attempts"] = 5
+    identities = {
+        "raw_cache": {"root": "unused", "identity_sha256": "C" * 64},
+        "compiler_identity": {"identity_sha256": "D" * 64},
+    }
+    target = _write_checkpoint(
+        tmp_path,
+        checkpoint_index=0,
+        label="checkpoint_run_invalid",
+        state=state,
+        policies={},
+        ledger=[],
+        archive=BehaviorArchive(),
+        pair_rows=[],
+        metrics=[],
+        rejected=[{"status": "SYSTEM_ERROR"}],
+        identities=identities,
+    )
+    manifest = json.loads((target / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["restore_verified"] is True
+    assert manifest["completed_ledger_row_count"] == 0
+    restored = _load_checkpoint(
+        target,
+        registry=None,
+        expected_source="a" * 40,
+        expected_frozen="B" * 64,
+        expected_identities=identities,
+        verify_policy_restore=False,
+    )
+    assert restored[0]["generation_attempts"] == 5
+
+
+def test_paired_batch_process_evidence_closes_and_carries_raw_attempts(
+    tmp_path: Path,
+) -> None:
+    registry = _registry()
+    mechanism, program = _catalog()[0]
+    candidate = sample_temporal_program_candidate(
+        registry=registry,
+        mechanism=mechanism,
+        program=program,
+        domains=mechanism_role_domains(_contracts()),
+        scale_contract=CONFIG["time_scale_authority"],
+        rng=random.Random(37),
+    )
+    evidence_root = tmp_path / "process_evidence"
+    engine_module._write_worker_process_evidence(
+        evidence_root=evidence_root,
+        channel="initializer",
+        stage="INITIALIZER_READY",
+    )
+    engine_module._write_worker_process_evidence(
+        evidence_root=evidence_root,
+        channel="task",
+        stage="TASK_COMPLETED",
+        candidate_id="paired-id",
+        outcome="PAIR_EVALUATED",
+    )
+    payload = engine_module._write_proposal_batch_process_evidence(
+        evidence_root=evidence_root,
+        stage="WORKER_RESULTS_RETURNED",
+        source_sha="a" * 40,
+        frozen_contract_sha256="B" * 64,
+        checkpoint_index=0,
+        batch_index=0,
+        generation_attempts=7,
+        attempted_exact_id_count=2,
+        proposals=[
+            {
+                "paired_program_id": "paired-id",
+                "static": candidate,
+                "temporal": candidate,
+                "arm": "temporal_program_random",
+                "seed": 1,
+                "policy_key": "lane",
+                "metadata": {"operation": "TEST", "raw_attempts": 7},
+                "generation_attempt_ordinal": 7,
+            }
+        ],
+        submitted_count=1,
+        returned_count=1,
+    )
+    assert payload["proposals"][0]["raw_attempts"] == 7
+    assert _program_process_evidence_errors(
+        tmp_path, expected_batch_count=1
+    ) == []
 
 
 def test_stage0_continuation_is_family_local_or_plus_breadth_not_all_family_veto() -> None:
