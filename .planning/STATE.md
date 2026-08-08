@@ -38,6 +38,14 @@ durable conclusion is therefore `RUN_INVALID_FOR_RESEARCH`: temporal program
 economics, CEM, Evolution, and program-family continuation remain untested, and
 Alpha remains HOLD.
 
+The existing `real_policy_upgrade_canary` overlay is updated in place with this
+consumed invalid outcome; no Graph node is added. RAW/CURRENT regeneration was
+attempted after the evidence commit, but Graphify's configured DeepSeek backend
+returned HTTP 402 `Insufficient Balance` for all 52 semantic batches. The failed
+projection is not committed and no global Graph freshness claim is made. The
+overlay remains the pending canonical projection input until the existing
+Graphify backend is available again.
+
 The preceding completed phase was:
 
 `CRYPTO_SEARCH_TEMPORAL_ACTIVATION_V1_STOPPED_NOT_SUPPORTED_RESEARCH_HOLD`

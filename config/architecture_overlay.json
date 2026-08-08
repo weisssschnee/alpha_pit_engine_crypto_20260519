@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (canonical temporal activation not supported; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (temporal program run invalid; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -587,19 +587,26 @@
                                     ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/final_decision.json"
                                     ,"runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/validation_a_gate.json"
                                     ,"reports/CRYPTO_FUNDING_FLOW_RESIDUAL_NESTED_CONFIRMATION_V1_20260806r1.md"
-                                    ,"alphafactory_crypto/broad_search/temporal_activation_v1.py"
-                                    ,"config/crypto_search_temporal_activation_v1_receipt.json"
-                                    ,"runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json"
-                                    ,"reports/CRYPTO_SEARCH_CORE_V3_CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_20260807r1.md"
-                                ],
+                                     ,"alphafactory_crypto/broad_search/temporal_activation_v1.py"
+                                     ,"config/crypto_search_temporal_activation_v1_receipt.json"
+                                     ,"runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json"
+                                     ,"reports/CRYPTO_SEARCH_CORE_V3_CANONICAL_TEMPORAL_PRIMITIVE_ACTIVATION_20260807r1.md"
+                                     ,"alphafactory_crypto/broad_search/temporal_program_search_v1.py"
+                                     ,"alphafactory_crypto/broad_search/temporal_program_v1.py"
+                                     ,"config/crypto_temporal_mechanism_program_v1.json"
+                                     ,"config/crypto_temporal_mechanism_program_v1_receipt.json"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260807/final_decision.json"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260807/independent_checker.json"
+                                     ,"reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_20260807.md"
+                                 ],
                       "critical":  true,
-                      "semantic_role":  "search_engine_system_canary_pass_research_hold",
+                      "semantic_role":  "search_engine_temporal_program_runtime_invalid_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_temporal_activation_v1_receipt.json",
-                                        "repo_ref":  "experiment/crypto-search-evidence-v1-1-20260805",
-                                        "verified_sha":  "3d4872e31af1c57f83231132ad07ff0149742b2b",
-                                        "sha256":  "27F30CEE6FA8847FCC588C6A568CCA32E3AA32648B9EE402652E35E9838D3ADB"
+                                        "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
+                                        "repo_ref":  "experiment/crypto-temporal-program-search-v1-20260807",
+                                        "verified_sha":  "576fd2e10ee47717f5657fa297213b3f0b4b067f",
+                                        "sha256":  "D9B360D213783C55D712A4EF4055A2B6010CD634B78FB2E879086166CCCD576B"
                                     },
                       "contracts":  [
                                         {
@@ -971,15 +978,24 @@
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_funding_flow_residual_nested_confirmation_v1_20260806r1/final_decision.json"
                                         },
-                                        {
-                                            "id":  "crypto_search_temporal_activation_v1_consumed_outcome",
+                                         {
+                                             "id":  "crypto_search_temporal_activation_v1_consumed_outcome",
                                             "type":  "EVIDENCE",
                                             "rule":  "The one authorized canonical temporal-primitive activation receipt is consumed with run_authorized false. Producer 07247878576daf56b66b3fb251a8d9faf02b3b6a completed exactly 2,048 strict evaluations as 1,024 matched static/temporal development pairs with one restore-verified checkpoint, 10 workers, and zero sealed reads. Temporal transforms reduced paired median worst-axis net, dual-axis net-positive rate, and 2-of-3 replication relative to the frozen static comparator; both representations had zero matched-positive candidates. The frozen gate returned STOP_TEMPORAL_NOT_SUPPORTED after tranche 0, generated no later-tranche proposals, and did not authorize temporal Evolution. Checker repair 12cfc9bd07a6aae06df2bcec89f6eed5a39509ac corrected receipt self-hash verification without rerunning or changing the immutable market runtime; independent PC2 and local checkers pass. No Alpha, validation, OOS, promotion, tuning, rescue, new grammar, or further search is authorized.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.temporal_activation_v1 run/check, frozen continuation_decision_002048, and the consumed one-time receipt",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json"
-                                        },
+                                             "evidence_ref":  "runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json"
+                                         },
+                                         {
+                                             "id":  "crypto_temporal_mechanism_program_v1_consumed_invalid_outcome",
+                                             "type":  "EVIDENCE",
+                                             "rule":  "The one authorized fresh-state sequential Temporal Mechanism Program V1 receipt is consumed with run_authorized false. Producer 26be90d75540ab773001cddbdf5cd59478b863cb stopped at the frozen 18-hour wall limit after 117,522 raw attempts with 10 workers, zero strict evaluations, zero checkpoints, zero sealed reads, and no validation, holdout, OOS, or promotion. The persisted rejected ledger records 99,966 paired-path failures caused by a development block-role mismatch: the program worker bound DEVELOPMENT_ONLY_TEMPORAL_MECHANISM_PROGRAM_SEARCH while the retained paired-diagnostic evaluator admitted only FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY. It also records 13,792 exact/replay rejects and 3,699 control-degeneracy rejects. Independent PC2 and local checkers pass artifact integrity, but the run is invalid for research and supports no temporal-mechanism, CEM, Evolution, Alpha, or continuation conclusion. The terminal wrote no budget checkpoint because no strict checkpoint existed. No restart, rescue, reseed, tuning, rerun, new Arena, or sealed read is authorized.",
+                                             "severity":  "HARD",
+                                             "enforced_by":  "broad_search.temporal_program_search_v1, broad_search.pair18m.evaluate_pair, the consumed one-time receipt, and independent artifact checks",
+                                             "bypass_forbidden":  true,
+                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260807/final_decision.json"
+                                         },
                                         {
                                             "id":  "real_experiment_authority_preflight",
                                             "type":  "ADMISSION",
@@ -991,19 +1007,19 @@
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "STATIC_VERIFIED",
+                                         "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json",
-                       "evidence_sha256":  "EF970F0F811A5456362CF5F41C49E217390F4F984C24AA020CA7AC22C997651B",
-                       "verified_at_sha":  "3d4872e31af1c57f83231132ad07ff0149742b2b"
+                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260807/independent_checker.json",
+                       "evidence_sha256":  "12609A11A158B16C71256C6E0A493174F3FF25D069A92CD602809A0947D310B7",
+                       "verified_at_sha":  "576fd2e10ee47717f5657fa297213b3f0b4b067f"
                    },
     "claim_badges":  [
-                         "TEMPORAL ACTIVATION 2048 STRICT COMPLETE",
-                         "FROZEN GATE STOPPED AFTER TRANCHE 0",
-                         "TEMPORAL PRIMITIVES NOT SUPPORTED",
-                         "CHECKER PASS ZERO SEALED READS",
-                         "TEMPORAL EVOLUTION NOT AUTHORIZED",
+                         "TEMPORAL PROGRAM 117522 ATTEMPTS TERMINAL",
+                         "ZERO STRICT EVALUATIONS",
+                         "RUN INVALID FOR RESEARCH",
+                         "PAIRED ROLE BINDING MISMATCH",
+                         "ARTIFACT CHECKER PASS ZERO SEALED READS",
                          "NO OOS OR PROMOTION"
                      ],
                       "promotion_requirements":  [
