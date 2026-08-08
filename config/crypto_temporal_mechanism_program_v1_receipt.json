@@ -1,6 +1,6 @@
 {
   "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
-  "authorized_implementation_sha": "9dbd0dde1189c8e240f86574a8c2df8e51f5ec8c",
+  "authorized_implementation_sha": "e9219b362df7f6d986874d8976f39de4543acf6e",
   "boundaries": {
     "automatic_next_run": false,
     "development_only": true,
@@ -33,7 +33,7 @@
     "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
     "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
     "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
-    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "11F5AC78FA622031A10D58CC2C9DBA082CE8A237B7AEEF60A9CB774B009E414D",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "C4D4C1F219234C56DD198D46E46004D330A47F1B04BABE511043DAAC1E106B7D",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
     "config/crypto_temporal_mechanism_program_v1.json": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "E4A29D09AA55840019E6E332DCA3ACDD822CF5B17875C47312032B0E4D97965D"
@@ -49,7 +49,7 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "33FDA90264A97FB5B537C24B05F0115355A53DE51967C1069CE91E3E1C0261F8",
+  "receipt_sha256": "3156FA4844977252914F6FE527328126E0092672179BE7F2861AE9F608607C8F",
   "replacement_authorization": {
     "authority": "CURRENT_USER_INSTRUCTION_20260808",
     "budget_contract_unchanged": true,
