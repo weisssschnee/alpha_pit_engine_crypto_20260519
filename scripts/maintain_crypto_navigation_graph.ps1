@@ -238,6 +238,27 @@ function Invoke-GraphBuild([string]$Executable) {
             }
         }
 
+        $headCommit = (git -C $RepoRoot rev-parse HEAD).Trim()
+        if ($LASTEXITCODE -ne 0 -or -not $headCommit) {
+            throw "Unable to bind the rebuilt raw graph to repository HEAD."
+        }
+        $builtGraphText = [IO.File]::ReadAllText($builtGraph, [Text.Encoding]::UTF8)
+        if ($builtGraphText -notmatch '"built_at_commit"\s*:') {
+            $openingBrace = $builtGraphText.IndexOf("{")
+            if ($openingBrace -lt 0) {
+                throw "Rebuilt graph.json is not a JSON object."
+            }
+            $builtGraphText = $builtGraphText.Insert(
+                $openingBrace + 1,
+                "`n  `"built_at_commit`": `"$headCommit`","
+            )
+            [IO.File]::WriteAllText(
+                $builtGraph,
+                $builtGraphText,
+                [Text.UTF8Encoding]::new($false)
+            )
+        }
+
         New-Item -ItemType Directory -Path $GraphDir -Force | Out-Null
         Copy-Item -LiteralPath $builtGraph -Destination $GraphJson -Force
         Copy-Item -LiteralPath $builtReport -Destination $GraphReport -Force
