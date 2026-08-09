@@ -49,7 +49,7 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "EA4D1821CA69B613A98FD8B8398CCE82815100FE40E6997BFE0BF59A7B4F85DA",
+  "receipt_sha256": "BFCF2F7AA58726BDBBFB00691268D9A4B0183DCCEFCA5353A542FB63D9F51763",
   "replacement_authorization": {
     "authority": "CURRENT_USER_INSTRUCTION_20260810",
     "budget_contract_unchanged": true,
@@ -67,7 +67,18 @@
     "seed_contract_unchanged": true,
     "stage0_only": true
   },
-  "run_authorized": true,
+  "run_authorized": false,
+  "run_outcome": {
+    "candidate_evaluations": 0,
+    "generation_attempts": 0,
+    "market_arrays_read": 0,
+    "pc2_task": "job_20260810_001417_9eb7b3",
+    "producer_source_sha": "5336e6614f478c2af5fb041fba5b9923467f81ce",
+    "reason": "AUTHORIZED_IMPLEMENTATION_SHA_NOT_ANCESTOR",
+    "runtime_created": false,
+    "status": "ENGINE_RUN_INVALID_PRE_CANDIDATE_AUTHORITY_PREFLIGHT",
+    "strict_evaluated_count": 0
+  },
   "schema_version": 1,
-  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
+  "status": "RUN_AUTHORIZATION_CONSUMED_PRE_CANDIDATE_FAILURE"
 }
