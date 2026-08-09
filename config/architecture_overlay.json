@@ -601,15 +601,18 @@
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260808r1/final_decision.json"
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260808r1/independent_checker.json"
                                      ,"reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_20260808r1.md"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260809q2/final_decision.json"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260809q2/independent_checker.json"
+                                     ,"reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_20260809q2.md"
                                  ],
                       "critical":  true,
-                      "semantic_role":  "search_engine_temporal_program_throughput_stopped_research_hold",
+                      "semantic_role":  "search_engine_temporal_program_post_repair_throughput_stopped_research_hold",
                       "active_authority":  false,
                       "authority":  {
                                         "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
                                         "repo_ref":  "experiment/crypto-temporal-program-search-v1-20260807",
-                                        "verified_sha":  "9b6b01ead80a521a48bfb9bbed25edf2e291c9d2",
-                                        "sha256":  "ADA11EE9E8D19C0D9905284B56C3674E03E41C57341DC74213010706C13D35A4"
+                                        "verified_sha":  "a9502964e9a25ca70c092ffe29bb17ac4004885a",
+                                        "sha256":  "7CC4749150F40820E82DF5164D9D1E5B773F0C580D1E498D121C01E283CC4915"
                                     },
                       "contracts":  [
                                         {
@@ -993,11 +996,11 @@
                                          {
                                              "id":  "crypto_temporal_mechanism_program_v1_consumed_throughput_stop_outcome",
                                              "type":  "EVIDENCE",
-                                             "rule":  "The corrected one-run fresh-state sequential Temporal Mechanism Program V1 receipt is consumed with run_authorized false. Producer 1a847cece5014d6d4891538a2a44c3885a00059a completed 2,000 strict evaluations from 2,061 attempts, exercised all 16 family/seed lanes, produced 1,993 behavior families, wrote checkpoint_000 plus a terminal budget checkpoint, recorded zero system errors and zero sealed reads, and passed independent PC2 and local artifact/run-validity checks. The frozen first-checkpoint throughput gate stopped the campaign at 1,749.5621 strict evaluations per hour below the required 2,777.7778, before the 10,000-strict family gate and before adaptive CEM or Evolution began. Zero matched-positive candidates were observed, but this partial throughput-stopped cohort does not establish a temporal-program, optimizer, Alpha, validation, OOS, or promotion conclusion. No restart, rescue, reseed, tuning, continuation, new Arena, or sealed read is authorized.",
+                                             "rule":  "The post-repair fresh-state Stage-0 qualification receipt is consumed with run_authorized false. Producer f846eb04c023fdf20a5130b40d7846a1ccdad3df completed 2,000 strict evaluations from 2,061 attempts as 1,000 matched static/temporal pairs, produced 1,993 behavior families, wrote checkpoint_000 plus a terminal budget checkpoint, recorded zero system errors and zero sealed reads, and passed independent PC2 plus local artifact/run-validity checks. All ten worker initializers were observed and the producer submitted a maximum of ten paired tasks per batch, closing the prior systematic half-pool defect. End-to-end throughput still reached only 2,024.4987 strict evaluations per hour below the frozen 2,777.7778 floor, so the campaign stopped before the 10,000-strict family gate and adaptive_stage_started remained false. The preceding q1 target-cache deployment failure is preserved as ENGINE_RUN_INVALID at zero strict and is neither resumed nor interpreted. Zero matched-positive candidates in this partial cohort do not establish a temporal-program, optimizer, Alpha, validation, OOS, or promotion conclusion. No restart, rescue, reseed, tuning, continuation, new Arena, or sealed read is authorized.",
                                              "severity":  "HARD",
                                              "enforced_by":  "broad_search.temporal_program_search_v1, broad_search.pair18m.evaluate_pair, the consumed one-time receipt, and independent artifact checks",
                                              "bypass_forbidden":  true,
-                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260808r1/final_decision.json"
+                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260809q2/final_decision.json"
                                          },
                                         {
                                             "id":  "real_experiment_authority_preflight",
@@ -1013,14 +1016,15 @@
                                          "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260808r1/independent_checker.json",
-                       "evidence_sha256":  "77FEF7B2C73C730561B611E15E2ADD41816D5B49480D5690F479923205F90C39",
-                       "verified_at_sha":  "9b6b01ead80a521a48bfb9bbed25edf2e291c9d2"
+                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260809q2/independent_checker.json",
+                       "evidence_sha256":  "4D9BD467634E45F5F5800501428CCC9F295A9B3A5DC831BF2E5332E97977AA49",
+                       "verified_at_sha":  "a9502964e9a25ca70c092ffe29bb17ac4004885a"
                    },
     "claim_badges":  [
-                         "TEMPORAL PROGRAM 2000 STRICT THROUGHPUT STOP",
+                         "POST-REPAIR STAGE0 2000 STRICT THROUGHPUT STOP",
+                         "10 OF 10 WORKERS AND TASK CAPACITY OBSERVED",
+                         "2024.4987 PER HOUR BELOW 2777.7778 FLOOR",
                          "1993 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
-                         "16 FAMILY SEED LANES EXERCISED",
                          "ADAPTIVE ARMS NOT STARTED",
                          "CHECKER PASS ZERO SEALED READS",
                          "NO OOS OR PROMOTION"
