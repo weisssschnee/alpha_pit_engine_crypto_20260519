@@ -1,0 +1,53 @@
+{
+  "attempted_exact_id_count": 13919,
+  "checkpoint_index": 3,
+  "evaluation_batch_index": 707,
+  "evidence_sha256": "112D2D85B38D968B015FDF3EEF2BE93B04087A4C32C3248679B7A46C81B82BA4",
+  "frozen_contract_sha256": "E5655426AF4791869D802E82819554A01006F13A40FD3B93FD022D6F34CA6D13",
+  "generation_attempts": 8178,
+  "heartbeat_utc": "2026-08-09T21:59:00.942783+00:00",
+  "producer_parent_pid": 30792,
+  "producer_pid": 31532,
+  "producer_source_sha": "a051f557844d59d829be80c33b7517157828a482",
+  "proposal_count": 3,
+  "proposal_identity_sha256": "C07916B204BD50B4AF944849E5CD90B898F8CCD2BC48E0DA43A508FC7498FB86",
+  "proposals": [
+    {
+      "arm": "temporal_program_random",
+      "candidate_id": "44DC1D7673FC55D6DE04964171550CEE094734580C75711F18AA45A4D15A1001",
+      "candidate_spec_sha256": "A8690FF1E1A946F4690297C06087BDE8D3D3C8780A62AC02FB7B5CCAE6F97A70",
+      "generation_attempt_ordinal": 8175,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "stage0|P4_MULTISCALE_STATE_X_TRANSITION_ROUTING|3389304867",
+      "raw_attempts": 1,
+      "receipt_sha256": null,
+      "seed": 3389304867
+    },
+    {
+      "arm": "temporal_program_random",
+      "candidate_id": "72E8FD8A35ED08FBDE9F40820B7BFF4CF6568FB60F25D220CBEEACE2E505F7DB",
+      "candidate_spec_sha256": "8F0B9FC6361EFA0DC6CAC755A58399842B507E7137374E4F585F466181F9A670",
+      "generation_attempt_ordinal": 8177,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "stage0|P4_MULTISCALE_STATE_X_TRANSITION_ROUTING|168281835",
+      "raw_attempts": 1,
+      "receipt_sha256": null,
+      "seed": 168281835
+    },
+    {
+      "arm": "temporal_program_random",
+      "candidate_id": "2F6AE1CAE27A50694BC3FDD475B03E1F6FF2525F285A2F5DB75E182B5D8D0051",
+      "candidate_spec_sha256": "7DB81E944CFF7B0A1C3F2ABCD61B4B7FFADA5B3197895786F1289B26A930CE79",
+      "generation_attempt_ordinal": 8178,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "stage0|P4_MULTISCALE_STATE_X_TRANSITION_ROUTING|168281835",
+      "raw_attempts": 1,
+      "receipt_sha256": null,
+      "seed": 168281835
+    }
+  ],
+  "returned_count": 3,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 3
+}

@@ -1,0 +1,73 @@
+{
+  "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
+  "authorized_implementation_sha": "41d7efedc230ba4dd79945187c34eb5768d203e8",
+  "boundaries": {
+    "automatic_next_run": false,
+    "development_only": true,
+    "holdout": false,
+    "oos": false,
+    "promotion": false,
+    "rescue_rerun": false,
+    "validation": false
+  },
+  "budget": {
+    "checkpoint_size": 2000,
+    "raw_generation_attempts_maximum": 250000,
+    "release_boundaries_strict": [
+      10000,
+      20000,
+      30000,
+      40000,
+      50000
+    ],
+    "strict_evaluated_maximum": 50000,
+    "wall_time_seconds_maximum": 64800,
+    "workers": [
+      10,
+      8
+    ]
+  },
+  "component_sha256": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
+    "alphafactory_crypto/broad_search/expression.py": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE",
+    "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "B4AADCE856C32814E42962F4621256F6AD76163FDF95DB7C6882B97298C54512",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
+    "config/crypto_temporal_mechanism_program_v1.json": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
+    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "E4A29D09AA55840019E6E332DCA3ACDD822CF5B17875C47312032B0E4D97965D"
+  },
+  "config_sha256": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
+  "expected_branch": "experiment/crypto-temporal-program-search-v1-20260807",
+  "market_authority": {
+    "carrier": "EXISTING_115_FIELD_OI_MARK_X_AGGTRADES_ALIGNED_CARRIER",
+    "cost_bps": 5,
+    "horizon_hours": 4,
+    "matched_controls": "DUAL_AXIS_A_B_AB",
+    "target": "EXISTING_BINANCE_USDM_DELAYED_OPEN_TARGET"
+  },
+  "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
+  "receipt_sha256": "4C419B789569054C82356EA5010A8E90EC16CBB7AE068950116C7C66C70E2C36",
+  "replacement_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION_20260810_STAGE0_FAMILY_GATE",
+    "budget_contract_unchanged": true,
+    "first_checkpoint_economic_increment": false,
+    "first_checkpoint_role": "STAGE0_PARTIAL_NONCONCLUSIVE_CHECKPOINT",
+    "market_contract_unchanged": true,
+    "prior_generation_attempts": 2061,
+    "prior_run_status": "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
+    "prior_runtime_state_import_allowed": false,
+    "prior_strict_evaluated": 2000,
+    "qualification_strict_cap": 10000,
+    "reason": "POST_MAPPING_QUALIFIED_FRESH_STAGE0_FAMILY_GATE",
+    "replaces_receipt_sha256": "E5C01590B6ED807FBB275299FF53258AB28460509104C7AEF0E29F749CBD3A6E",
+    "rescue_rerun": false,
+    "seed_contract_unchanged": true,
+    "stage0_only": true
+  },
+  "run_authorized": true,
+  "schema_version": 1,
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
+}

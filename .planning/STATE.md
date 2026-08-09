@@ -1437,6 +1437,14 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
     retain worker CPU/wall/memory fields in the existing ledger. This does not
     establish PC2 end-to-end throughput, consume another market budget, or
     alter the research HOLD.
+17. Preserve the consumed 10,000-strict Stage-0 family gate at producer
+    `a051f557844d59d829be80c33b7517157828a482`. P1 and P4 crossed one
+    family-local continuation route each, but temporal random underperformed
+    paired static globally and both arms produced zero matched-positive rows.
+    The result supports narrow temporal-family attribution only; it does not
+    authorize adaptive search, validation, OOS, promotion, tuning, rescue, or
+    another campaign, and none of its candidate, policy or Archive state may be
+    imported.
 
 No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
 further performance search or sealed replay is authorized by this plan.
@@ -1447,12 +1455,14 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 
 ## Blockers
 
-- The post-repair Stage-0 qualification observed all ten workers and ten paired
-  tasks per batch, closing the systematic half-pool scheduling defect. End-to-end
-  throughput still reached only `2,024.4987 strict/hour`, so the bottleneck is
-  not solved by worker occupancy alone and the frozen `2,777.7778` gate stopped
-  the campaign at 2,000 strict. No restart, rescue run, or successor market
-  budget is authorized by this closure.
+- The fresh post-mapping Stage-0 family gate closed the prior throughput blocker:
+  all ten workers and ten paired tasks per batch were observed, end-to-end
+  throughput reached `3,959.8469 strict/hour`, and the uninterrupted run completed
+  all 10,000 strict rows. The resulting economic evidence is mixed rather than a
+  broad temporal-program qualification: P1 and P4 crossed one frozen family-local
+  route each, while temporal random underperformed paired static globally and
+  produced zero matched-positive candidates. No adaptive, validation, OOS,
+  promotion, rescue, or successor market budget is authorized by this closure.
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
 - The completed continuation and V1.1-V1.3 policy comparisons optimized strict matched-feasibility distance, not portfolio Sortino. Their throughput and engineering evidence remain valid, but reward-improvement claims do not establish better Alpha-search ability.
@@ -1562,38 +1572,41 @@ or suspension-calendar rule. Verification is synthetic and source-only. No
 candidate was generated, replayed or evaluated against market data, and no
 authority binding or research qualification was promoted.
 
-## Active phase: fresh Stage-0 throughput and family qualification
+## Completed phase: Stage-0 temporal-program family gate
 
-The current user authorized one fresh-state, same-contract Temporal Mechanism
-Program Stage-0 qualification after the half-pool worker-capacity repair. The
-one-time receipt releases at most 10,000 strict evaluations in five 2,000-row
-checkpoints. Checkpoint 0 must independently demonstrate the frozen
-`2777.777777777778` strict/hour floor, full 10-task batch submission and matching
-worker-process evidence; the existing 8-worker fallback remains available only
-for an observed in-run memory error. The first 2,000 rows replay the prior
-economic exposure only to qualify repaired throughput and are not a new
-economic increment.
+The one-time receipt is consumed with `run_authorized=false`. Producer
+`a051f557844d59d829be80c33b7517157828a482` and PC2 task
+`job_20260810_035743_38e6b6` completed exactly 10,000 strict evaluations from
+10,194 generation attempts as 5,000 paired static/temporal programs. Five atomic
+checkpoints contain 2,000 strict rows each and independently restore. The run
+produced 9,839 behavior families, observed all ten workers and a maximum of ten
+submitted paired tasks per batch, used no memory fallback, recorded zero system
+errors and zero sealed reads, and reached `3,959.8469 strict/hour`. Independent
+PC2 and local artifact/run-validity checks pass. Adaptive Stage C did not start,
+and the ledger contains only `paired_static` and `temporal_program_random` arms.
 
-If checkpoint 0 passes, the same uninterrupted fresh run may finish Stage 0 and
-write the existing family-local decision at 10,000 strict rows. Receipt-scoped
-code prevents any adaptive stage from starting. No prior candidates,
-population, Archive, policy state or runtime may be imported, and the consumed
-2,000-row campaign must not be resumed or reinterpreted.
+The four frozen program families each received exactly 1,250 pairs. Globally,
+temporal random was weaker than its paired static comparator: dual-axis net-positive
+counts were 551 versus 659, replicated 2-of-3 counts were 203 versus 318, mean
+search reward was `-0.4897395` versus `-0.3859738`, and top-decile reward was
+`0.0348805` versus `0.0566757`. Both representations produced zero strict
+matched-positive candidates.
 
-The target, mapping, 5 bps cost, reward, fixed seeds, mechanism catalog and
-family-local gate remain unchanged. Validation, data Arena, tuning, rescue,
-holdout/OOS/challenge/forward reads, promotion, new compiler, AST, evaluator,
-grammar, temporal Evolution and a new Graph node remain forbidden. A durable
-economic conclusion requires the completed 10,000-row artifact and independent
-checker; a checkpoint-0 stop establishes only post-repair throughput failure.
+The frozen family-local gate nevertheless returned
+`LOCAL_TEMPORAL_PROGRAM_LINE_IDENTIFIED` for two narrow reasons. P1 position-state
+change to response improved dual-axis net-positive rate from 1.92% to 4.96%
+with broad semantic support, but its paired median delta was negative, win rate
+was 48.72%, replication rate fell, and matched-positive count remained zero. P4
+multiscale state-transition routing crossed only the strictly-positive paired
+median route at `3.997238486450849e-07`; its win rate was 50.08%, dual-axis
+net-positive and replicated rates were slightly below static, and matched-positive
+count remained zero. P2 recent crowding and P3 flow-shock persistence failed all
+primary continuation routes.
 
-The first PC2 deployment attempt failed before source smoke because a tracked
-carrier path was incorrectly treated as an absent junction target. Its exact
-pre-candidate continuation then passed source smoke but exposed a second omitted
-non-Git input: the economic-receipt Binance target cache. The resulting `q1`
-runtime is formally `ENGINE_RUN_INVALID` with 11 generation attempts, 0 strict
-evaluations, 0 market evaluations and no reusable checkpoint. It must never be
-resumed or interpreted economically. The replacement receipt authorizes only a
-new clean workspace after both source and target cache identities are verified;
-it imports no candidate, RNG, policy, Archive or runtime state and leaves every
-research contract unchanged.
+This is development-only evidence that P1 and P4 contain local temporal variants
+worth attribution; it is not evidence that the temporal program space beats the
+static catalog, not an Alpha qualification, and not validation or OOS evidence.
+The fixed target, mapping, 5 bps cost, reward, seeds, compiler, AST and evaluator
+were unchanged. No prior state was imported and no further search, adaptive arm,
+validation, OOS, promotion, tuning, rescue, new Arena or new Graph node is
+authorized by this closure.

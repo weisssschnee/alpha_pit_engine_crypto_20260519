@@ -1,0 +1,115 @@
+{
+  "continuing_families": [
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+  ],
+  "family_decisions": [
+    {
+      "breadth_checks": {
+        "maximum_top_semantic_tuple_positive_delta_share": true,
+        "minimum_positive_semantic_tuple_count": true
+      },
+      "continue": true,
+      "pair_count": 1250,
+      "paired_delta_median": -2.723428615121254e-06,
+      "positive_semantic_tuple_count": 93,
+      "primary_routes": {
+        "dual_axis_net_positive_rate_absolute_improvement_minimum": true,
+        "matched_positive_count_above_static": false,
+        "paired_worst_axis_net_median_strictly_positive": false,
+        "program_win_fraction_minimum": false,
+        "replicated_2_of_3_rate_absolute_improvement_minimum": false
+      },
+      "program_family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+      "program_win_fraction": 0.4872,
+      "static_dual_net_rate": 0.0192,
+      "static_matched_positive_count": 0,
+      "static_replicated_rate": 0.0072,
+      "temporal_dual_net_rate": 0.0496,
+      "temporal_matched_positive_count": 0,
+      "temporal_replicated_rate": 0.0016,
+      "top_positive_semantic_tuple_share": 0.014778325123152709
+    },
+    {
+      "breadth_checks": {
+        "maximum_top_semantic_tuple_positive_delta_share": true,
+        "minimum_positive_semantic_tuple_count": true
+      },
+      "continue": false,
+      "pair_count": 1250,
+      "paired_delta_median": -4.033104157648404e-05,
+      "positive_semantic_tuple_count": 19,
+      "primary_routes": {
+        "dual_axis_net_positive_rate_absolute_improvement_minimum": false,
+        "matched_positive_count_above_static": false,
+        "paired_worst_axis_net_median_strictly_positive": false,
+        "program_win_fraction_minimum": false,
+        "replicated_2_of_3_rate_absolute_improvement_minimum": false
+      },
+      "program_family_id": "P2_RECENT_CROWDING_EVENT_TO_RESPONSE",
+      "program_win_fraction": 0.42,
+      "static_dual_net_rate": 0.148,
+      "static_matched_positive_count": 0,
+      "static_replicated_rate": 0.048,
+      "temporal_dual_net_rate": 0.1152,
+      "temporal_matched_positive_count": 0,
+      "temporal_replicated_rate": 0.0344,
+      "top_positive_semantic_tuple_share": 0.06285714285714286
+    },
+    {
+      "breadth_checks": {
+        "maximum_top_semantic_tuple_positive_delta_share": true,
+        "minimum_positive_semantic_tuple_count": true
+      },
+      "continue": false,
+      "pair_count": 1250,
+      "paired_delta_median": -2.468409202960368e-05,
+      "positive_semantic_tuple_count": 3,
+      "primary_routes": {
+        "dual_axis_net_positive_rate_absolute_improvement_minimum": false,
+        "matched_positive_count_above_static": false,
+        "paired_worst_axis_net_median_strictly_positive": false,
+        "program_win_fraction_minimum": false,
+        "replicated_2_of_3_rate_absolute_improvement_minimum": false
+      },
+      "program_family_id": "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION",
+      "program_win_fraction": 0.4512,
+      "static_dual_net_rate": 0.1016,
+      "static_matched_positive_count": 0,
+      "static_replicated_rate": 0.0824,
+      "temporal_dual_net_rate": 0.024,
+      "temporal_matched_positive_count": 0,
+      "temporal_replicated_rate": 0.0136,
+      "top_positive_semantic_tuple_share": 0.16843971631205673
+    },
+    {
+      "breadth_checks": {
+        "maximum_top_semantic_tuple_positive_delta_share": true,
+        "minimum_positive_semantic_tuple_count": true
+      },
+      "continue": true,
+      "pair_count": 1250,
+      "paired_delta_median": 3.997238486450849e-07,
+      "positive_semantic_tuple_count": 71,
+      "primary_routes": {
+        "dual_axis_net_positive_rate_absolute_improvement_minimum": false,
+        "matched_positive_count_above_static": false,
+        "paired_worst_axis_net_median_strictly_positive": true,
+        "program_win_fraction_minimum": false,
+        "replicated_2_of_3_rate_absolute_improvement_minimum": false
+      },
+      "program_family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+      "program_win_fraction": 0.5008,
+      "static_dual_net_rate": 0.2584,
+      "static_matched_positive_count": 0,
+      "static_replicated_rate": 0.1168,
+      "temporal_dual_net_rate": 0.252,
+      "temporal_matched_positive_count": 0,
+      "temporal_replicated_rate": 0.1128,
+      "top_positive_semantic_tuple_share": 0.027156549520766772
+    }
+  ],
+  "next_stage_proposals_generated": false,
+  "reason": "FROZEN_FAMILY_LOCAL_STAGE0_GATE",
+  "status": "CONTINUE"
+}

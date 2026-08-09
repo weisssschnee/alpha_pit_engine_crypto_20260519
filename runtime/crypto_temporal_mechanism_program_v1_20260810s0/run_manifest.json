@@ -1,0 +1,103 @@
+{
+  "bundle_sha256": "0B25D0032D21B8829CB09BAFA7E13C61E851A65E4B5FD638240CFC462A35A24A",
+  "files": [
+    {
+      "bytes": 32187,
+      "path": "frozen_contract.json",
+      "sha256": "D73D2AB02F38F58041D39C9B1F850FEE8D6E5A1CA1AA5784F8F2B7194EB80568"
+    },
+    {
+      "bytes": 2323,
+      "path": "embedded_preflight.json",
+      "sha256": "8ED4ED3BE895A2A3D3534AF69D61D84F91E8CC4B5F227EFA3F10D5AD6A2435EB"
+    },
+    {
+      "bytes": 782345,
+      "path": "program_catalog.json",
+      "sha256": "038DD82241FA433BA7149E97C00BBF284EE7493AAE0F1319708FD22CADF8F465"
+    },
+    {
+      "bytes": 3442,
+      "path": "search_authority_binding_receipt.json",
+      "sha256": "237AAA7E8D8720FAB70F2D28BF6708ACDBE4345F6EBF4B2A82406072BA894788"
+    },
+    {
+      "bytes": 2378237,
+      "path": "work_state.json",
+      "sha256": "781B8D731283400A0C7AA26914389A6B58CC77F8F837AA6E40E10865B9687C61"
+    },
+    {
+      "bytes": 83837775,
+      "path": "candidate_ledger.parquet",
+      "sha256": "B0002DCE69E7D32A643B94633460B947ABF3831EF0B4E0C09E6B094396CCD4CF"
+    },
+    {
+      "bytes": 9399423,
+      "path": "behavior_archive.parquet",
+      "sha256": "A45316967D3CFB9A1E1CAB418D1084E9910F654AC7D5677A9BCB873A71896A74"
+    },
+    {
+      "bytes": 3188041,
+      "path": "paired_program_diagnostics.parquet",
+      "sha256": "3DDED4299027CD833CBE1658E29FE3E7FBF4F37C24CFB3D027BA95C9105003AB"
+    },
+    {
+      "bytes": 13660,
+      "path": "program_family_metrics.parquet",
+      "sha256": "19F105633FA098E7A2B96753F186CA3918C85F5ED809570CAF7F3DDA5A4B8984"
+    },
+    {
+      "bytes": 11045,
+      "path": "arm_checkpoint_metrics.parquet",
+      "sha256": "B738F59D3F8920E9AB6A8D5ED7B3B7ABB2A6A26BDFC49961510FCBC7AA727E77"
+    },
+    {
+      "bytes": 357035,
+      "path": "rejected_candidate_ledger.parquet",
+      "sha256": "6F5FC13023577894B4B358A82F5A4DD133EF89AFAA57B3A743C3A30C9EB5A167"
+    },
+    {
+      "bytes": 357035,
+      "path": "rejected_candidate_ledger.parquet",
+      "sha256": "6F5FC13023577894B4B358A82F5A4DD133EF89AFAA57B3A743C3A30C9EB5A167"
+    },
+    {
+      "bytes": 1929,
+      "path": "final_decision.json",
+      "sha256": "4EE3BF166ED7B5EB0DE85E328B6A8769F5164F17E714E27BA7E1CFC694FF30C9"
+    },
+    {
+      "bytes": 4557,
+      "path": "continuation_decision_010000.json",
+      "sha256": "10C1C73BB1FD8AADB0F95B42EDDA12F2325DCC7485088611FDB860C5C14F57EE"
+    },
+    {
+      "bytes": 3844,
+      "path": "checkpoints/checkpoint_000/manifest.json",
+      "sha256": "854E7CE399BB5423162271B084BA29DBEA39EF44AC041F3F6DBA4A159820594F"
+    },
+    {
+      "bytes": 3846,
+      "path": "checkpoints/checkpoint_001/manifest.json",
+      "sha256": "C5DD448E7EDA136D17F4C092CFE4E21B53ED7C7D15D723B4ADCBCF6BD0B5CDE9"
+    },
+    {
+      "bytes": 3846,
+      "path": "checkpoints/checkpoint_002/manifest.json",
+      "sha256": "8A9D3B2049A7CBEA1F5515D5D0A5300B65ED4376A1F83EE7FE8D12D998D4FC66"
+    },
+    {
+      "bytes": 3846,
+      "path": "checkpoints/checkpoint_003/manifest.json",
+      "sha256": "7F82C9AD4E2AA7030ED3DB246C67BF26A5121B90184D7F9799ED74063CC6BE54"
+    },
+    {
+      "bytes": 3847,
+      "path": "checkpoints/checkpoint_004/manifest.json",
+      "sha256": "ACD93C7C4346B987E23D373831385D93C135472BDE758FFB207379A19D8E0430"
+    }
+  ],
+  "frozen_contract_sha256": "E5655426AF4791869D802E82819554A01006F13A40FD3B93FD022D6F34CA6D13",
+  "producer_source_sha": "a051f557844d59d829be80c33b7517157828a482",
+  "schema_version": 1
+}

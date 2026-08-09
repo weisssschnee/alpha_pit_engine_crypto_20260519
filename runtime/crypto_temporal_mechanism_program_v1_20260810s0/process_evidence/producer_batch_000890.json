@@ -1,0 +1,31 @@
+{
+  "attempted_exact_id_count": 17350,
+  "checkpoint_index": 4,
+  "evaluation_batch_index": 890,
+  "evidence_sha256": "D499DF7C5548AF3FDE86588D74824DA386444A3DDDCA1DF699FDAD4F2EEF89D7",
+  "frozen_contract_sha256": "E5655426AF4791869D802E82819554A01006F13A40FD3B93FD022D6F34CA6D13",
+  "generation_attempts": 10194,
+  "heartbeat_utc": "2026-08-09T22:29:15.731364+00:00",
+  "producer_parent_pid": 30792,
+  "producer_pid": 31532,
+  "producer_source_sha": "a051f557844d59d829be80c33b7517157828a482",
+  "proposal_count": 1,
+  "proposal_identity_sha256": "264D3B26A977FF11CD173D1FAFD83FCEC117EFE6624342A714F401C774345FE1",
+  "proposals": [
+    {
+      "arm": "temporal_program_random",
+      "candidate_id": "6B1890B8C31B1D316C4014C52663EEDBAF47A918FEB61FC6C6788B99C600FA4F",
+      "candidate_spec_sha256": "F99A5094F6DA9060A23DCCA733596EB132CF8001225548996B23E18E9141F3FB",
+      "generation_attempt_ordinal": 10194,
+      "operation": "EXTENSIBLE_MECHANISM_TYPED_RANDOM",
+      "policy_key": "stage0|P4_MULTISCALE_STATE_X_TRANSITION_ROUTING|2594819233",
+      "raw_attempts": 1,
+      "receipt_sha256": null,
+      "seed": 2594819233
+    }
+  ],
+  "returned_count": 1,
+  "schema_version": 1,
+  "stage": "WORKER_RESULTS_RETURNED",
+  "submitted_count": 1
+}

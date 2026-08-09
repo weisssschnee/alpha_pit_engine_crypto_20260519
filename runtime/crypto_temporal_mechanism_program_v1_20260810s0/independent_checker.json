@@ -1,0 +1,14 @@
+{
+  "artifact_integrity_status": "PASS",
+  "checkpoint_count": 5,
+  "errors": [],
+  "producer_source_sha": "a051f557844d59d829be80c33b7517157828a482",
+  "reconciled_generation_attempts": 10194,
+  "run_validity_status": "PASS",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "stage0_pair_count": 5000,
+  "status": "PASS",
+  "strict_evaluated_count": 10000,
+  "validity_errors": []
+}
