@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import unittest
 
 import numpy as np
@@ -273,6 +274,57 @@ class ExplicitMappingTests(unittest.TestCase):
             traced.behavior_provenance["stages"]["SIGNAL"]["semantic"]
             == "raw_expression_signal_before_train_orientation"
         )
+
+    def test_mapping_hot_path_preserves_frozen_randomized_semantics(self) -> None:
+        rng = np.random.default_rng(20260809)
+        signal = rng.standard_normal((121, 1523))
+        signal[::17, ::29] = np.nan
+        source = -signal
+        expected = {
+            CROSS_SECTIONAL_ZERO_NET: (
+                "DF799BB7AF929EF60A8237D0FBAC736BA71A4C5D53DA18BBF620B33FDDA5C544",
+                "05D34A9A8BADEB0C0CF0F235CD922070167A9D86CFC33E7633DBCA0139139D92",
+                "D02E007B6AA916942E097509CEE003F807D4448FF7B7043063E098734FA8620D",
+                "A8484C2A1B8170184DE17F2951703E9EECC5047F20B7FBA004BD7DF0D39734EB",
+            ),
+            TIME_SERIES_DIRECTIONAL_STATEFUL: (
+                "C5AA3D3C3EA2F0FEC2F88B349B41C7FE5DE4C7408934653022B7D22A00A7678B",
+                "3CBE70B36DE78893AB6D7B8BD0B43E2265784F39775FEBA37265A40F6F520833",
+                "1120957B0517A2ACC9CF7E8CD8E81AEA35B94CC091413DC7C103D2E4A8521759",
+                "AB885529A7CBE39A4E25EA88B072EA31E1B2F27A13883A0CBB84F768BC8B0F5C",
+            ),
+            SPARSE_EVENT_OR_CARRY: (
+                "BFC4435309C52F7B06837F05C56708D829012AE60846FCB271297A87EA6EE464",
+                "4AEC68348E5E23380835C5766BACF65075A10773FADEC4EF6414771AAE8941D9",
+                "8F5F8CF9392642809C00408AB156926D4C4F872E097FDAEF173832FF01C07C9D",
+                "2DF681E5D51AE61E459F54CF6FE71F87051B7ABBE2BFC3D281EBDF0FE5BDCDF3",
+            ),
+        }
+
+        def byte_digest(values: np.ndarray) -> str:
+            return hashlib.sha256(np.asarray(values).tobytes(order="C")).hexdigest().upper()
+
+        def json_digest(values: object) -> str:
+            payload = json.dumps(
+                values,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ).encode("utf-8")
+            return hashlib.sha256(payload).hexdigest().upper()
+
+        for mapping_id, identities in expected.items():
+            with self.subTest(mapping_id=mapping_id):
+                result = map_portfolio(
+                    signal,
+                    DEFAULT_MAPPING_CONTRACTS[mapping_id],
+                    include_behavior_provenance=True,
+                    source_signal_for_provenance=source,
+                )
+                self.assertEqual(byte_digest(result.weights), identities[0])
+                self.assertEqual(json_digest(result.transition_reasons), identities[1])
+                self.assertEqual(json_digest(result.diagnostics), identities[2])
+                self.assertEqual(json_digest(result.behavior_provenance), identities[3])
 
     def test_turnover_decomposition_and_full_l1_cost(self) -> None:
         signal = np.array([[1.0, -1.0]], dtype=float)

@@ -561,6 +561,17 @@ def _worker_program_pair(payload: Mapping[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _rejected_worker_runtime_fields(result: Mapping[str, Any]) -> dict[str, Any]:
+    """Preserve worker cost for rejected pairs without changing gate authority."""
+
+    return {
+        "pair_process_cpu_seconds": float(result["process_cpu_seconds"]),
+        "pair_wall_seconds": float(result["wall_seconds"]),
+        "worker_rss_bytes": int(result["worker_rss_bytes"]),
+        "worker_private_bytes": int(result["worker_private_bytes"]),
+    }
+
+
 def _dual_net(evaluation: Mapping[str, Any]) -> bool:
     return bool(
         float(evaluation["left_incremental"]["net_mean"]) > 0.0
@@ -1872,6 +1883,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                                     "status": "SYSTEM_ERROR",
                                     "error": result["error"],
                                     "paired_program_id": item["paired_program_id"],
+                                    **_rejected_worker_runtime_fields(result),
                                 }
                             )
                         raise ProgramRunInvalid(
@@ -1914,6 +1926,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                                     "status": result["status"],
                                     "error": result["error"],
                                     "paired_program_id": item["paired_program_id"],
+                                    **_rejected_worker_runtime_fields(result),
                                 }
                             )
                             continue

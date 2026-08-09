@@ -160,24 +160,42 @@ active wall was 4.77 concurrent successful tasks. These are lower bounds because
 the 755 rejected-task timings were discarded. A host saturated-compute fraction
 cannot be honestly reconstructed from the retained artifacts.
 
-## Next source repair, in order
+## Source repair closure
 
-1. Optimize the existing mapping hot path without changing mapping outputs:
-   reuse the selected train-orientation primary map, eliminate repeated
-   provenance stage work for identical/sign-flipped arrays, and remove Python
-   inner asset loops where exact transition reasons can be preserved.
-2. Preserve behavior/control gates. Do not count degenerate pairs as strict and
-   do not lower the throughput floor.
-3. Persist worker CPU/wall for future rejected tasks in the existing rejected
-   ledger so the remaining rejection cost is measurable; do not create a new
-   telemetry service.
-4. Run exact same-input parity for weights, transition reasons, provenance
-   hashes, economic rows, and rejection reasons before any future market run.
+The authorized source-only repair is implemented without changing a mapping
+contract, behavior/control gate, evaluator, reward, candidate policy, worker
+count, budget, or dependency:
 
-No worker downgrade, worker increase, dependency installation, search-policy
-change, family-budget reallocation, reward change, or market rerun is justified
-by this audit. The next performance check should keep ten workers, batch capacity
-ten, the 8-worker memory fallback only on the existing fail-closed trigger, the
-`2,777.7778 strict/hour` end-to-end floor, and the unchanged 2,000-strict first
-checkpoint. It must stop at that checkpoint if the floor is still missed.
+- stateful and sparse per-asset transition logic now uses NumPy masks while
+  retaining asset-order transition reasons and the exact state machine;
+- repeated numeric identity/support scans for the same provenance array are
+  reused inside one mapping receipt;
+- future `PAIR_REJECTED` and worker `SYSTEM_ERROR` rows preserve the worker's
+  already-computed process CPU, wall time, RSS and private bytes in the existing
+  rejected ledger. Historical q2 reject timing remains unknowable.
 
+The frozen local parity input was a `121 x 1,523` signal generated with seed
+`20260809`, deterministic missing coordinates, train-orientation source, and
+behavior provenance enabled. Every pre/post SHA256 remained exact for weights,
+feasibility, transition reasons, diagnostics and provenance across all three
+mapping families. Same-process, alternating-order five-run medians were:
+
+| Mapping | Before | After | Local hot-path change |
+|---|---:|---:|---:|
+| Cross-sectional zero-net | 0.1839 s | 0.1872 s | within local noise |
+| Time-series directional stateful | 0.8899 s | 0.2493 s | 3.57x faster |
+| Sparse event/carry | 0.7221 s | 0.2752 s | 2.62x faster |
+
+The focused mapping, acceleration-parity and temporal-program suite passed
+`47/47`; the full repository suite passed `518/518` with the pre-existing NumPy
+degrees-of-freedom warning. The frozen randomized parity test is committed so
+future edits must preserve the same behavior identities and reason stream.
+
+This is source and local-benchmark evidence only. It does not prove that PC2
+end-to-end throughput now exceeds the frozen floor, and it does not authorize a
+market rerun. Any separately authorized performance qualification must retain
+ten workers, batch capacity ten, the 8-worker memory fallback only on the
+existing fail-closed trigger, the `2,777.7778 strict/hour` floor, and the same
+2,000-strict first checkpoint. No worker downgrade, behavior-gate weakening,
+reward change, dependency installation, validation, OOS, or search expansion is
+implied by this closure.

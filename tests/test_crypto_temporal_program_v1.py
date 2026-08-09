@@ -49,6 +49,7 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _program_process_evidence_errors,
     _program_process_evidence_summary,
     _qualification_scope,
+    _rejected_worker_runtime_fields,
     _stage0_pair_task_capacity,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
@@ -540,6 +541,22 @@ def test_worker_preserves_run_global_contract_failure_as_system_error(
     ]
     assert task_rows and task_rows[0]["stage"] == "TASK_COMPLETED"
     assert task_rows[0]["outcome"] == "SYSTEM_ERROR"
+
+
+def test_rejected_worker_runtime_fields_preserve_existing_worker_cost() -> None:
+    assert _rejected_worker_runtime_fields(
+        {
+            "process_cpu_seconds": 1.25,
+            "wall_seconds": 2.5,
+            "worker_rss_bytes": 123,
+            "worker_private_bytes": 456,
+        }
+    ) == {
+        "pair_process_cpu_seconds": 1.25,
+        "pair_wall_seconds": 2.5,
+        "worker_rss_bytes": 123,
+        "worker_private_bytes": 456,
+    }
 
 
 def test_empty_invalid_terminal_checkpoint_is_atomic_and_restorable(tmp_path: Path) -> None:

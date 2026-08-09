@@ -119,16 +119,22 @@ def _matrix(values: np.ndarray, name: str) -> np.ndarray:
     return result
 
 
-def _array_identity(values: np.ndarray) -> str:
+def _array_identity(
+    values: np.ndarray,
+    *,
+    finite: np.ndarray | None = None,
+) -> str:
     """Hash a numeric stage with an explicit finite mask and stable zeros."""
 
     array = np.asarray(values, dtype="<f8")
-    finite = np.isfinite(array)
-    canonical = np.where(finite, array, 0.0).astype("<f8", copy=False)
+    finite_mask = np.isfinite(array) if finite is None else np.asarray(finite, dtype=bool)
+    if finite_mask.shape != array.shape:
+        raise ValueError("finite mask shape mismatch")
+    canonical = np.where(finite_mask, array, 0.0).astype("<f8", copy=False)
     canonical[canonical == 0.0] = 0.0
     digest = hashlib.sha256()
     digest.update(str(array.shape).encode("ascii"))
-    digest.update(finite.astype(np.uint8).tobytes(order="C"))
+    digest.update(finite_mask.astype(np.uint8).tobytes(order="C"))
     digest.update(canonical.tobytes(order="C"))
     return digest.hexdigest().upper()
 
@@ -151,15 +157,28 @@ def _rank_entropy_mean(values: np.ndarray) -> float:
     return float(np.mean(entropies)) if entropies else 0.0
 
 
-def _stage_record(values: np.ndarray, *, semantic: str) -> dict[str, Any]:
+def _stage_numeric_record(values: np.ndarray) -> dict[str, Any]:
+    array = np.asarray(values, dtype=float)
+    finite = np.isfinite(array)
+    return {
+        "identity_sha256": _array_identity(array, finite=finite),
+        "shape": [int(value) for value in array.shape],
+        "finite_count": int(finite.sum()),
+        "non_null_rate": float(finite.mean()) if finite.size else 0.0,
+    }
+
+
+def _stage_record(
+    values: np.ndarray,
+    *,
+    semantic: str,
+    numeric_record: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     array = np.asarray(values, dtype=float)
     finite = np.isfinite(array)
     record: dict[str, Any] = {
         "semantic": str(semantic),
-        "identity_sha256": _array_identity(array),
-        "shape": [int(value) for value in array.shape],
-        "finite_count": int(finite.sum()),
-        "non_null_rate": float(finite.mean()) if finite.size else 0.0,
+        **dict(numeric_record or _stage_numeric_record(array)),
     }
     if semantic in {
         "mapping_input_signal",
@@ -192,10 +211,31 @@ def _mapping_behavior_provenance(
     stage_values: Mapping[str, tuple[np.ndarray, str]],
     unavailable_stages: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
-    stages = {
-        name: _stage_record(values, semantic=semantic)
-        for name, (values, semantic) in stage_values.items()
-    }
+    numeric_records: dict[
+        tuple[int, tuple[int, ...], tuple[int, ...] | None, str], dict[str, Any]
+    ] = {}
+    stages: dict[str, dict[str, Any]] = {}
+    for name, (values, semantic) in stage_values.items():
+        array = np.asarray(values, dtype=float)
+        key = (
+            id(values),
+            tuple(int(value) for value in array.shape),
+            (
+                tuple(int(value) for value in array.strides)
+                if array.strides is not None
+                else None
+            ),
+            str(array.dtype),
+        )
+        numeric = numeric_records.get(key)
+        if numeric is None:
+            numeric = _stage_numeric_record(array)
+            numeric_records[key] = numeric
+        stages[name] = _stage_record(
+            array,
+            semantic=semantic,
+            numeric_record=numeric,
+        )
     payload: dict[str, Any] = {
         "schema_version": "CRYPTO_MAPPING_BEHAVIOR_PROVENANCE_V1",
         "mapping_id": str(mapping_id),
@@ -480,29 +520,45 @@ def _directional(
     for column in range(signal.shape[1]):
         coordinate_reasons: list[str] = []
         if column % interval == 0:
-            for asset, value in enumerate(signal[:, column]):
-                if not np.isfinite(value):
-                    if current[asset] != 0:
-                        coordinate_reasons.append("MISSING_SIGNAL_HELD")
-                    continue
-                confidence = abs(float(value))
-                direction = float(np.sign(value))
-                if current[asset] == 0:
-                    if confidence >= entry:
-                        current[asset] = direction * min(maximum, confidence)
-                        coordinate_reasons.append("ENTRY")
-                elif confidence <= exit_threshold:
-                    current[asset] = 0.0
-                    coordinate_reasons.append("EXIT_THRESHOLD")
-                elif direction != np.sign(current[asset]):
-                    if confidence >= entry:
-                        current[asset] = direction * min(maximum, confidence)
-                        coordinate_reasons.append("REVERSAL")
-                    else:
-                        current[asset] = 0.0
-                        coordinate_reasons.append("EXIT_ON_WEAK_REVERSAL")
-                else:
-                    coordinate_reasons.append("HOLD")
+            values = signal[:, column]
+            finite = np.isfinite(values)
+            confidence = np.abs(values)
+            direction = np.sign(values)
+            was_zero = current == 0.0
+            reason_codes = np.full(current.shape, "", dtype=object)
+
+            missing_held = ~finite & ~was_zero
+            entries = finite & was_zero & (confidence >= entry)
+            existing = finite & ~was_zero
+            exits = existing & (confidence <= exit_threshold)
+            reversals = (
+                existing
+                & ~exits
+                & (direction != np.sign(current))
+            )
+            strong_reversals = reversals & (confidence >= entry)
+            weak_reversals = reversals & ~strong_reversals
+            holds = existing & ~exits & ~reversals
+
+            current[entries] = direction[entries] * np.minimum(
+                maximum,
+                confidence[entries],
+            )
+            current[exits | weak_reversals] = 0.0
+            current[strong_reversals] = direction[strong_reversals] * np.minimum(
+                maximum,
+                confidence[strong_reversals],
+            )
+
+            reason_codes[missing_held] = "MISSING_SIGNAL_HELD"
+            reason_codes[entries] = "ENTRY"
+            reason_codes[exits] = "EXIT_THRESHOLD"
+            reason_codes[strong_reversals] = "REVERSAL"
+            reason_codes[weak_reversals] = "EXIT_ON_WEAK_REVERSAL"
+            reason_codes[holds] = "HOLD"
+            coordinate_reasons.extend(
+                str(code) for code in reason_codes.tolist() if code
+            )
         else:
             coordinate_reasons.append("CADENCE_HOLD")
         gross = float(np.abs(current).sum())
@@ -602,24 +658,45 @@ def _sparse(
     entry_mask: list[bool] = []
     for column in range(signal.shape[1]):
         coordinate_reasons: list[str] = []
+        values = signal[:, column]
+        finite = np.isfinite(values)
         opportunity_mask.append(
             bool(
                 column % settlement == 0
-                and np.any(np.isfinite(signal[:, column]) & (np.abs(signal[:, column]) >= threshold))
+                and np.any(finite & (np.abs(values) >= threshold))
             )
         )
-        for asset, value in enumerate(signal[:, column]):
-            if remaining[asset] > 0:
-                remaining[asset] -= 1
-                if remaining[asset] == 0:
-                    current[asset] = 0.0
-                    coordinate_reasons.append("EXPLICIT_HOLD_EXIT")
-            if remaining[asset] == 0 and column % settlement == 0 and np.isfinite(value) and abs(value) >= threshold:
-                current[asset] = np.sign(value) * min(maximum, abs(float(value)))
-                remaining[asset] = hold_period
-                coordinate_reasons.append("EVENT_ENTRY")
-            elif not np.isfinite(value) and current[asset] != 0:
-                coordinate_reasons.append("MISSING_SIGNAL_HELD")
+        first_reason_codes = np.full(current.shape, "", dtype=object)
+        second_reason_codes = np.full(current.shape, "", dtype=object)
+        active_holds = remaining > 0
+        remaining[active_holds] -= 1
+        hold_exits = active_holds & (remaining == 0)
+        current[hold_exits] = 0.0
+        first_reason_codes[hold_exits] = "EXPLICIT_HOLD_EXIT"
+
+        entries = (
+            (remaining == 0)
+            & (column % settlement == 0)
+            & finite
+            & (np.abs(values) >= threshold)
+        )
+        current[entries] = np.sign(values[entries]) * np.minimum(
+            maximum,
+            np.abs(values[entries]),
+        )
+        remaining[entries] = hold_period
+        second_reason_codes[entries] = "EVENT_ENTRY"
+        missing_held = ~entries & ~finite & (current != 0.0)
+        second_reason_codes[missing_held] = "MISSING_SIGNAL_HELD"
+        coordinate_reasons.extend(
+            str(code)
+            for pair in zip(
+                first_reason_codes.tolist(),
+                second_reason_codes.tolist(),
+            )
+            for code in pair
+            if code
+        )
         gross = float(np.abs(current).sum())
         raw_weights[:, column] = current
         if gross > gross_cap:

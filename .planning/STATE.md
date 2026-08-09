@@ -53,9 +53,23 @@ mapping. Successful-pair process CPU changed only +1.2% from r1 to q2, while
 pair wall rose 71.9% and combined static/temporal mapping consumed `11.8206 s`
 or 69.64% of successful-pair wall. P2/P4 also consumed 70.26% of raw attempts
 and 85.96% of pair rejects to fill equal family quotas; 622 of 755 pair rejects
-were behavior-equality failures reached after mapping work. The next action is
+were behavior-equality failures reached after mapping work. It prescribed
 a source-only, semantics-parity mapping hot-path repair, not another market run,
 worker downgrade, behavior-gate weakening, reward change, or dependency install.
+
+That source-only repair is now complete. On the frozen `121 x 1,523`, seed
+`20260809` local input, all pre/post hashes remained exact for weights,
+feasibility, transition reasons, diagnostics and behavior provenance.
+Same-process alternating-order five-run medians improved time-series directional
+mapping from 0.8899 to 0.2493 seconds (3.57x), and sparse event/carry from
+0.7221 to 0.2752 seconds (2.62x); cross-sectional mapping was unchanged within
+local noise.
+Future rejected worker tasks now retain their already-computed CPU, wall and
+memory fields in the existing rejected ledger. Focused tests pass 47/47 and the
+full suite passes 518/518 with the existing NumPy warning. This is static and
+local-benchmark verification, not PC2 throughput qualification or new economic
+evidence. No market run, validation, OOS, optimizer, mapping-contract, reward,
+cost, gate, budget, worker-count, or dependency change was made or authorized.
 
 The preceding completed phase was:
 
@@ -1376,6 +1390,14 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
     The q1 deployment-bound zero-strict invalid runtime is preserved separately
     and imported no state. Do not restart, resume, import state, or interpret
     this throughput-stop cohort as a temporal-program or optimizer comparison.
+16. Preserve the source-only mapping hot-path closure recorded in
+    `reports/CRYPTO_TEMPORAL_PROGRAM_STAGE0_POST_REPAIR_PERFORMANCE_ATTRIBUTION_20260809.md`.
+    Frozen randomized parity keeps weights, feasibility, transition reasons,
+    diagnostics and behavior provenance byte-identical; local medians improve
+    stateful mapping by 3.57x and sparse mapping by 2.62x. Future rejected tasks
+    retain worker CPU/wall/memory fields in the existing ledger. This does not
+    establish PC2 end-to-end throughput, consume another market budget, or
+    alter the research HOLD.
 
 No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
 further performance search or sealed replay is authorized by this plan.
