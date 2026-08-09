@@ -1504,3 +1504,14 @@ holdout/OOS/challenge/forward reads, promotion, new compiler, AST, evaluator,
 grammar, temporal Evolution and a new Graph node remain forbidden. A durable
 economic conclusion requires the completed 10,000-row artifact and independent
 checker; a checkpoint-0 stop establishes only post-repair throughput failure.
+
+The first PC2 deployment attempt failed before source smoke because a tracked
+carrier path was incorrectly treated as an absent junction target. Its exact
+pre-candidate continuation then passed source smoke but exposed a second omitted
+non-Git input: the economic-receipt Binance target cache. The resulting `q1`
+runtime is formally `ENGINE_RUN_INVALID` with 11 generation attempts, 0 strict
+evaluations, 0 market evaluations and no reusable checkpoint. It must never be
+resumed or interpreted economically. The replacement receipt authorizes only a
+new clean workspace after both source and target cache identities are verified;
+it imports no candidate, RNG, policy, Archive or runtime state and leaves every
+research contract unchanged.
