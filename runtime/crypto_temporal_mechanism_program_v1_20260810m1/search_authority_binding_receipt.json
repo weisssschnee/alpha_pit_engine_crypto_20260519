@@ -49,7 +49,7 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "E5C01590B6ED807FBB275299FF53258AB28460509104C7AEF0E29F749CBD3A6E",
+  "receipt_sha256": "BA3C9891F0AA89DC8B9EA51D34024C1B9FAA51C32B354CAD70A648CD5DCCFF86",
   "replacement_authorization": {
     "authority": "CURRENT_USER_INSTRUCTION_20260810",
     "budget_contract_unchanged": true,
@@ -67,16 +67,7 @@
     "seed_contract_unchanged": true,
     "stage0_only": true
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "checkpoint_count": 1,
-    "generation_attempts": 2061,
-    "producer_source_sha": "49010c89e840320a873accdb27fa15fa6ea9c320",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260810m1",
-    "status": "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
-    "strict_evaluated_count": 2000
-  },
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }

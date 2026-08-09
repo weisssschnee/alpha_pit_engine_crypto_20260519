@@ -1,8 +1,47 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-09 Asia/Hong_Kong
+Last updated: 2026-08-10 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_TEMPORAL_MAPPING_THROUGHPUT_QUALIFIED_RESEARCH_HOLD`
+
+The one authorized post-mapping-repair checkpoint-only PC2 qualification is
+consumed and closed. Exact producer
+`49010c89e840320a873accdb27fa15fa6ea9c320` and detached task
+`job_20260810_002520_d1ebdc` completed exactly 2,000 strict evaluations from
+2,061 generation attempts as 1,000 matched static/temporal pairs. The run wrote
+one restore-verified checkpoint, produced 1,993 behavior families, observed all
+ten workers and ten submitted tasks per full batch, and recorded zero system
+errors, zero sealed reads, zero validation/OOS/promotion reads, and no memory
+fallback.
+
+Realized end-to-end throughput was `3,983.8184 strict/hour`, above the frozen
+`2,777.7778` floor by 43.4% and 1.97x the preceding q2 result. Active wall for
+2,000 strict fell from 3,556.4084 to 1,807.2817 seconds. On a consistent
+pairwise median, successful-pair wall fell from 18.2825 to 9.2357 seconds and
+combined static/temporal mapping fell from 13.8233 to 3.8058 seconds. The new
+rejected ledger also retains CPU, wall, RSS and private-byte evidence for 755
+worker-side rejects. PC2 and local independent checkers pass artifact integrity
+and run validity with zero errors and reconcile all attempts.
+
+The producer correctly stopped at checkpoint 0 with
+`CHECKPOINT_ONLY_QUALIFICATION_COMPLETE`; code and receipt prohibited release
+to the 10,000-strict family gate. `adaptive_stage_started=false` remained
+frozen, parameters and seed were unchanged, and no prior runtime, policy,
+Archive, or candidates were imported. The preceding remote transport failure
+`job_20260810_001417_9eb7b3` occurred before runtime creation, market read, or
+candidate evaluation because its receipt bound an incorrect implementation
+SHA; its consumed failure receipt is retained, and source-smoke now validates
+the active authorization receipt before launch.
+
+The durable result is an execution-capacity qualification, not an economic or
+optimizer qualification. Zero matched-positive rows in this capped cohort are
+explicitly non-interpretable for research. No continuation, second search,
+validation, OOS, promotion, challenge, new Arena, reseed, tuning, or sealed read
+is authorized. Research remains HOLD.
+
+The preceding completed phase was:
 
 `CRYPTO_TEMPORAL_STAGE0_QUALIFICATION_THROUGHPUT_GATE_FAILED_RESEARCH_HOLD`
 

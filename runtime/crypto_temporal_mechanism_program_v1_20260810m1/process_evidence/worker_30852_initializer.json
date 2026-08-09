@@ -1,0 +1,13 @@
+{
+  "candidate_id": null,
+  "channel": "initializer",
+  "error_message": null,
+  "error_type": null,
+  "evidence_sha256": "C7D218855349F53838C76E60DE915DB2A7BB25B6C53E38ABF55A8D099E3E61CC",
+  "heartbeat_utc": "2026-08-09T16:25:48.017826+00:00",
+  "outcome": null,
+  "schema_version": 1,
+  "stage": "INITIALIZER_READY",
+  "worker_parent_pid": 2864,
+  "worker_pid": 30852
+}

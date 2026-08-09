@@ -199,3 +199,34 @@ existing fail-closed trigger, the `2,777.7778 strict/hour` floor, and the same
 2,000-strict first checkpoint. No worker downgrade, behavior-gate weakening,
 reward change, dependency installation, validation, OOS, or search expansion is
 implied by this closure.
+
+## PC2 checkpoint-only qualification addendum (2026-08-10)
+
+The separately authorized fresh-state qualification is complete at
+`runtime/crypto_temporal_mechanism_program_v1_20260810m1`. It used producer
+`49010c89e840320a873accdb27fa15fa6ea9c320`, the unchanged seed, ten workers,
+ten submitted tasks per full batch, the same target/mapping/cost/reward and a
+hard `2,000` strict cap. It could not continue to the 10,000-strict family gate.
+
+| Measure | q2 before mapping repair | m1 after mapping repair | Change |
+|---|---:|---:|---:|
+| Strict rows | 2,000 | 2,000 | same |
+| Raw attempts | 2,061 | 2,061 | same |
+| Active wall seconds | 3,556.4084 | 1,807.2817 | -49.2% |
+| Strict/hour | 2,024.4987 | 3,983.8184 | +96.8% |
+| Successful-pair wall median | 18.2825 s | 9.2357 s | 1.98x faster |
+| Successful-pair mapping median, static plus temporal | 13.8233 s | 3.8058 s | 3.63x faster |
+
+The observed `3,983.8184 strict/hour` exceeds the frozen
+`2,777.7778 strict/hour` floor by 43.4%. All ten workers were observed, maximum
+submitted tasks per batch was ten, memory fallback was not used, and process
+evidence recorded zero system errors. The new rejected ledger retains CPU,
+wall and memory fields for 755 worker-side rejects; its median rejected-pair
+wall was `4.9104 s`.
+
+PC2 and local independent checkers both pass artifact integrity and run
+validity, reconcile all 2,061 attempts, and confirm zero sealed reads. The
+one-time receipt is consumed. This qualifies the repaired mapping hot path and
+Stage-0 execution capacity only. The cohort had zero matched-positive rows, but
+the checkpoint-only contract explicitly forbids a temporal-family, optimizer,
+Alpha, validation, OOS, or promotion conclusion from this run.
