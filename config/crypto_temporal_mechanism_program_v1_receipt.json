@@ -1,6 +1,6 @@
 {
   "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
-  "authorized_implementation_sha": "cb401dc2bd1186f0c262b39c7640f63773bd0cc9",
+  "authorized_implementation_sha": "41d7efedc230ba4dd79945187c34eb5768d203e8",
   "boundaries": {
     "automatic_next_run": false,
     "development_only": true,
@@ -49,34 +49,25 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "E5C01590B6ED807FBB275299FF53258AB28460509104C7AEF0E29F749CBD3A6E",
+  "receipt_sha256": "4C419B789569054C82356EA5010A8E90EC16CBB7AE068950116C7C66C70E2C36",
   "replacement_authorization": {
-    "authority": "CURRENT_USER_INSTRUCTION_20260810",
+    "authority": "CURRENT_USER_INSTRUCTION_20260810_STAGE0_FAMILY_GATE",
     "budget_contract_unchanged": true,
     "first_checkpoint_economic_increment": false,
-    "first_checkpoint_role": "POST_MAPPING_HOT_PATH_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION",
+    "first_checkpoint_role": "STAGE0_PARTIAL_NONCONCLUSIVE_CHECKPOINT",
     "market_contract_unchanged": true,
-    "prior_generation_attempts": 0,
-    "prior_run_status": "ENGINE_RUN_INVALID_PRE_CANDIDATE_AUTHORITY_PREFLIGHT",
+    "prior_generation_attempts": 2061,
+    "prior_run_status": "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
     "prior_runtime_state_import_allowed": false,
-    "prior_strict_evaluated": 0,
-    "qualification_strict_cap": 2000,
-    "reason": "PRE_CANDIDATE_AUTHORITY_SHA_REPAIR_AND_SOURCE_SMOKE_HARDENING",
-    "replaces_receipt_sha256": "BFCF2F7AA58726BDBBFB00691268D9A4B0183DCCEFCA5353A542FB63D9F51763",
+    "prior_strict_evaluated": 2000,
+    "qualification_strict_cap": 10000,
+    "reason": "POST_MAPPING_QUALIFIED_FRESH_STAGE0_FAMILY_GATE",
+    "replaces_receipt_sha256": "E5C01590B6ED807FBB275299FF53258AB28460509104C7AEF0E29F749CBD3A6E",
     "rescue_rerun": false,
     "seed_contract_unchanged": true,
     "stage0_only": true
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "checkpoint_count": 1,
-    "generation_attempts": 2061,
-    "producer_source_sha": "49010c89e840320a873accdb27fa15fa6ea9c320",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260810m1",
-    "status": "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
-    "strict_evaluated_count": 2000
-  },
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }
