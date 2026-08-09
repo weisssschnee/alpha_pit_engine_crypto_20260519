@@ -1480,21 +1480,27 @@ or suspension-calendar rule. Verification is synthetic and source-only. No
 candidate was generated, replayed or evaluated against market data, and no
 authority binding or research qualification was promoted.
 
-## Next action
+## Active phase: fresh Stage-0 throughput and family qualification
 
-Do not restart, extend, or reinterpret either consumed Temporal Mechanism
-Program V1 campaign. The Stage-0 paired-task, worker-accounting, and throughput-
-gate audit is complete: the half-pool defect is repaired without changing the
-frozen throughput floor or any economic/search semantics, and the historical
-artifact is now independently identifiable as capacity-underfilled. The next
-decision-changing action, if separately authorized with a fresh receipt, is a
-fresh same-contract throughput qualification that observes full 10-worker
-submission and keeps the existing 8-worker memory fallback. Until then, no
-market run or realized speedup claim is authorized.
+The current user authorized one fresh-state, same-contract Temporal Mechanism
+Program Stage-0 qualification after the half-pool worker-capacity repair. The
+one-time receipt releases at most 10,000 strict evaluations in five 2,000-row
+checkpoints. Checkpoint 0 must independently demonstrate the frozen
+`2777.777777777778` strict/hour floor, full 10-task batch submission and matching
+worker-process evidence; the existing 8-worker fallback remains available only
+for an observed in-run memory error. The first 2,000 rows replay the prior
+economic exposure only to qualify repaired throughput and are not a new
+economic increment.
 
-The prior Temporal Activation, replication-aware, funding-flow residual,
-family-consensus, and V1.1 development/validation conclusions remain unchanged.
-No market search,
-validation, data Arena, reward/mapping/optimizer change, tuning, reseed, rescue,
-holdout/OOS/challenge/forward read, promotion, new compiler, AST, evaluator,
-grammar, temporal Evolution, or Graph node is authorized by this closure.
+If checkpoint 0 passes, the same uninterrupted fresh run may finish Stage 0 and
+write the existing family-local decision at 10,000 strict rows. Receipt-scoped
+code prevents any adaptive stage from starting. No prior candidates,
+population, Archive, policy state or runtime may be imported, and the consumed
+2,000-row campaign must not be resumed or reinterpreted.
+
+The target, mapping, 5 bps cost, reward, fixed seeds, mechanism catalog and
+family-local gate remain unchanged. Validation, data Arena, tuning, rescue,
+holdout/OOS/challenge/forward reads, promotion, new compiler, AST, evaluator,
+grammar, temporal Evolution and a new Graph node remain forbidden. A durable
+economic conclusion requires the completed 10,000-row artifact and independent
+checker; a checkpoint-0 stop establishes only post-repair throughput failure.
