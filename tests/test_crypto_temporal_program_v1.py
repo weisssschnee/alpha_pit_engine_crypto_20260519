@@ -48,6 +48,7 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _next_stage0_lane,
     _program_process_evidence_errors,
     _program_process_evidence_summary,
+    _qualification_scope,
     _stage0_pair_task_capacity,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
@@ -63,6 +64,55 @@ CONFIG = json.loads(
         encoding="utf-8"
     )
 )
+
+
+def test_stage0_qualification_scope_is_receipt_scoped_and_exact() -> None:
+    assert _qualification_scope({}) == {
+        "strict_cap": 50_000,
+        "stage0_only": False,
+        "scope": "FULL_SEQUENTIAL_PROGRAM",
+    }
+    assert _qualification_scope(
+        {
+            "replacement_authorization": {
+                "qualification_strict_cap": 10_000,
+                "stage0_only": True,
+            }
+        }
+    ) == {
+        "strict_cap": 10_000,
+        "stage0_only": True,
+        "scope": "FRESH_STATE_STAGE0_QUALIFICATION_ONLY",
+    }
+
+
+@pytest.mark.parametrize(
+    "replacement",
+    (
+        {"qualification_strict_cap": 10_000},
+        {"stage0_only": True},
+        {"qualification_strict_cap": 20_000, "stage0_only": True},
+        {"qualification_strict_cap": 10_000, "stage0_only": False},
+    ),
+)
+def test_stage0_qualification_scope_fails_closed_on_drift(
+    replacement: dict[str, object],
+) -> None:
+    with pytest.raises(RuntimeError, match="qualification scope"):
+        _qualification_scope({"replacement_authorization": replacement})
+
+
+def test_stage0_qualification_scope_does_not_reclassify_prior_completed_work_as_rescue() -> None:
+    receipt = {
+        "replacement_authorization": {
+            "prior_strict_evaluated": 2_000,
+            "prior_runtime_state_import_allowed": False,
+            "rescue_rerun": False,
+            "qualification_strict_cap": 10_000,
+            "stage0_only": True,
+        }
+    }
+    assert _qualification_scope(receipt)["strict_cap"] == 10_000
 
 
 def test_committed_component_hash_is_checkout_line_ending_independent(

@@ -224,6 +224,30 @@ def _receipt_content_sha(receipt: Mapping[str, Any]) -> str:
     )
 
 
+def _qualification_scope(receipt: Mapping[str, Any]) -> dict[str, Any]:
+    """Resolve a one-run release cap without changing the program budget contract."""
+    replacement = dict(receipt.get("replacement_authorization") or {})
+    has_cap = "qualification_strict_cap" in replacement
+    has_stage0_only = "stage0_only" in replacement
+    if not has_cap and not has_stage0_only:
+        return {
+            "strict_cap": 50_000,
+            "stage0_only": False,
+            "scope": "FULL_SEQUENTIAL_PROGRAM",
+        }
+    if not has_cap or not has_stage0_only:
+        raise RuntimeError("temporal program qualification scope is incomplete")
+    strict_cap = int(replacement["qualification_strict_cap"])
+    stage0_only = replacement["stage0_only"]
+    if strict_cap != 10_000 or stage0_only is not True:
+        raise RuntimeError("temporal program qualification scope changed")
+    return {
+        "strict_cap": strict_cap,
+        "stage0_only": True,
+        "scope": "FRESH_STATE_STAGE0_QUALIFICATION_ONLY",
+    }
+
+
 def validate_receipt(
     repo_root: Path,
     *,
@@ -278,12 +302,13 @@ def validate_receipt(
         or replacement.get("market_contract_unchanged") is not True
         or replacement.get("seed_contract_unchanged") is not True
         or replacement.get("rescue_rerun") is not False
-        or int(replacement.get("prior_strict_evaluated", -1)) != 0
+        or int(replacement.get("prior_strict_evaluated", -1)) < 0
         or int(replacement.get("prior_generation_attempts", -1)) < 0
         or replacement.get("prior_runtime_state_import_allowed") is not False
         or len(str(replacement.get("replaces_receipt_sha256") or "")) != 64
     ):
         raise RuntimeError("temporal program replacement authority changed")
+    _qualification_scope(receipt)
     branch = subprocess.check_output(
         ["git", "branch", "--show-current"], cwd=repo_root, text=True
     ).strip()
@@ -1388,7 +1413,7 @@ def _write_status(
             "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
             "checkpoint_index": int(state["next_checkpoint_index"]),
             "strict_evaluated": strict_count,
-            "strict_maximum": 50_000,
+            "strict_maximum": int(state.get("authorized_strict_cap", 50_000)),
             "generation_attempts": int(state["generation_attempts"]),
             "active_wall_seconds": active_elapsed,
             "observed_strict_per_hour": strict_count * 3600.0 / max(active_elapsed, 1.0),
@@ -1499,6 +1524,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(config)
     receipt = validate_receipt(repo_root, config=config, require_authorized=True)
+    qualification_scope = _qualification_scope(receipt)
     observed_sha = engine._git_sha(repo_root)
     source_sha = str(source_sha or observed_sha).lower()
     if source_sha != observed_sha:
@@ -1540,6 +1566,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "source_sha": source_sha,
         "config": config,
         "receipt_sha256": receipt["receipt_sha256"],
+        "qualification_scope": qualification_scope,
         "economic_receipt": economic,
         "input_identities": identities,
         "behavior_contract_sha256": _json_sha(behavior),
@@ -1585,6 +1612,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         pair_rows: list[dict[str, Any]] = []
         metrics: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
+    state["authorized_strict_cap"] = int(qualification_scope["strict_cap"])
     for key, default in (
         ("workers_initial", int(config["search_budget"]["workers_default"])),
         ("stage0_lane_cursor", 0),
@@ -1666,7 +1694,12 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     try:
         executor = make_executor(int(state["workers"]))
         _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
-        for checkpoint_index in range(int(state["next_checkpoint_index"]), 25):
+        checkpoint_count_cap = int(qualification_scope["strict_cap"]) // int(
+            budget["checkpoint_size"]
+        )
+        for checkpoint_index in range(
+            int(state["next_checkpoint_index"]), checkpoint_count_cap
+        ):
             checkpoint_start = len(ledger)
             checkpoint_target = checkpoint_start + 2_000
             if checkpoint_index < 5:
@@ -2187,12 +2220,15 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                     terminal_reason = decision["status"]
                 else:
                     state["active_program_families"] = list(decision["continuing_families"])
-                    policies = _later_policies(
-                        registry=registry,
-                        config=config,
-                        catalog=catalog,
-                        active_families=state["active_program_families"],
-                    )
+                    if bool(qualification_scope["stage0_only"]):
+                        terminal_reason = "STAGE0_QUALIFICATION_CAP_REACHED"
+                    else:
+                        policies = _later_policies(
+                            registry=registry,
+                            config=config,
+                            catalog=catalog,
+                            active_families=state["active_program_families"],
+                        )
             elif checkpoint_index in {9, 14, 19}:
                 boundary = (checkpoint_index + 1) * 2_000
                 decision = adaptive_gate(
@@ -2332,6 +2368,8 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "schema_version": 1,
         "status": status,
         "terminal_reason": terminal_reason,
+        "qualification_scope": qualification_scope,
+        "adaptive_stage_started": strict_count > 10_000,
         "producer_source_sha": source_sha,
         "frozen_contract_sha256": frozen_hash,
         "strict_evaluated_count": strict_count,
@@ -2466,6 +2504,7 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
     frozen = engine._read_json(runtime_root / "frozen_contract.json")
     final = engine._read_json(runtime_root / "final_decision.json")
     config = dict(frozen["config"])
+    qualification_scope = dict(frozen.get("qualification_scope") or {})
     try:
         validate_config(config)
     except (KeyError, ValueError, PermissionError) as failure:
@@ -2475,6 +2514,21 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
     rejected = pd.read_parquet(runtime_root / "rejected_candidate_ledger.parquet")
     if len(ledger) != int(final["strict_evaluated_count"]):
         errors.append("strict_count")
+    if dict(final.get("qualification_scope") or {}) != qualification_scope:
+        errors.append("qualification_scope")
+    if bool(qualification_scope.get("stage0_only")):
+        strict_cap = int(qualification_scope.get("strict_cap", -1))
+        if strict_cap != 10_000:
+            errors.append("qualification_strict_cap")
+        if len(ledger) > strict_cap:
+            errors.append("qualification_strict_cap_exceeded")
+        if final.get("adaptive_stage_started") is not False:
+            errors.append("adaptive_stage_started")
+        if any(
+            int(path.stem.rsplit("_", 1)[-1]) > strict_cap
+            for path in runtime_root.glob("continuation_decision_*.json")
+        ):
+            errors.append("qualification_adaptive_decision")
     if len(ledger) >= 10_000:
         if len(pairs) != 5_000:
             errors.append("stage0_pair_count")
