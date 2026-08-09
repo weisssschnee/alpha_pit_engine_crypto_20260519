@@ -42,6 +42,7 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
     temporal_program_candidate_from_genes,
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
+    _checkpoint_qualification_terminal_reason,
     _sha256_committed_file,
     _load_checkpoint,
     _new_state,
@@ -72,6 +73,18 @@ def test_stage0_qualification_scope_is_receipt_scoped_and_exact() -> None:
         "strict_cap": 50_000,
         "stage0_only": False,
         "scope": "FULL_SEQUENTIAL_PROGRAM",
+    }
+    assert _qualification_scope(
+        {
+            "replacement_authorization": {
+                "qualification_strict_cap": 2_000,
+                "stage0_only": True,
+            }
+        }
+    ) == {
+        "strict_cap": 2_000,
+        "stage0_only": True,
+        "scope": "FRESH_STATE_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION",
     }
     assert _qualification_scope(
         {
@@ -114,6 +127,26 @@ def test_stage0_qualification_scope_does_not_reclassify_prior_completed_work_as_
         }
     }
     assert _qualification_scope(receipt)["strict_cap"] == 10_000
+
+
+def test_checkpoint_only_qualification_stops_after_first_checkpoint() -> None:
+    scope = {
+        "strict_cap": 2_000,
+        "stage0_only": True,
+        "scope": "FRESH_STATE_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION",
+    }
+    assert _checkpoint_qualification_terminal_reason(
+        checkpoint_index=0,
+        qualification_scope=scope,
+        observed_strict_per_hour=3_000.0,
+        minimum_strict_per_hour=2_777.7778,
+    ) == "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED"
+    assert _checkpoint_qualification_terminal_reason(
+        checkpoint_index=0,
+        qualification_scope=scope,
+        observed_strict_per_hour=2_000.0,
+        minimum_strict_per_hour=2_777.7778,
+    ) == "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
 
 
 def test_committed_component_hash_is_checkout_line_ending_independent(

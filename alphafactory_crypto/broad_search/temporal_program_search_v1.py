@@ -239,13 +239,34 @@ def _qualification_scope(receipt: Mapping[str, Any]) -> dict[str, Any]:
         raise RuntimeError("temporal program qualification scope is incomplete")
     strict_cap = int(replacement["qualification_strict_cap"])
     stage0_only = replacement["stage0_only"]
-    if strict_cap != 10_000 or stage0_only is not True:
+    if strict_cap not in {2_000, 10_000} or stage0_only is not True:
         raise RuntimeError("temporal program qualification scope changed")
     return {
         "strict_cap": strict_cap,
         "stage0_only": True,
-        "scope": "FRESH_STATE_STAGE0_QUALIFICATION_ONLY",
+        "scope": (
+            "FRESH_STATE_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION"
+            if strict_cap == 2_000
+            else "FRESH_STATE_STAGE0_QUALIFICATION_ONLY"
+        ),
     }
+
+
+def _checkpoint_qualification_terminal_reason(
+    *,
+    checkpoint_index: int,
+    qualification_scope: Mapping[str, Any],
+    observed_strict_per_hour: float,
+    minimum_strict_per_hour: float,
+) -> str | None:
+    if observed_strict_per_hour < minimum_strict_per_hour:
+        return "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+    if (
+        int(qualification_scope["strict_cap"]) == 2_000
+        and checkpoint_index == 0
+    ):
+        return "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED"
+    return None
 
 
 def validate_receipt(
@@ -2276,8 +2297,14 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 identities=identities,
             )
             observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
-            if checkpoint_index >= 0 and observed_rate < float(budget["minimum_strict_per_hour_after_first_checkpoint"]):
-                terminal_reason = "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+            terminal_reason = _checkpoint_qualification_terminal_reason(
+                checkpoint_index=checkpoint_index,
+                qualification_scope=qualification_scope,
+                observed_strict_per_hour=observed_rate,
+                minimum_strict_per_hour=float(
+                    budget["minimum_strict_per_hour_after_first_checkpoint"]
+                ),
+            )
             _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
             if terminal_reason:
                 break
@@ -2369,6 +2396,8 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         status = "ENGINE_BUDGET_EXHAUSTED"
     elif terminal_reason and terminal_reason.startswith("ENGINE_RUN_INVALID"):
         status = "ENGINE_RUN_INVALID"
+    elif terminal_reason == "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED":
+        status = "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE"
     elif strict_count == 10_000 and not state["active_program_families"]:
         status = "TEMPORAL_PROGRAM_SPACE_NOT_SUPPORTED"
     elif len(matched_families) >= 2 and len(contributing) >= 2:
@@ -2425,7 +2454,10 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "parameters_changed": False,
         "seed_changed": False,
         "rescue_rerun_started": False,
-        "research_conclusion_forbidden": status == "ENGINE_RUN_INVALID",
+        "research_conclusion_forbidden": status in {
+            "ENGINE_RUN_INVALID",
+            "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
+        },
     }
     engine._write_json(runtime_root / "final_decision.json", final)
     manifest_paths = [
@@ -2531,7 +2563,7 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         errors.append("qualification_scope")
     if bool(qualification_scope.get("stage0_only")):
         strict_cap = int(qualification_scope.get("strict_cap", -1))
-        if strict_cap != 10_000:
+        if strict_cap not in {2_000, 10_000}:
             errors.append("qualification_strict_cap")
         if len(ledger) > strict_cap:
             errors.append("qualification_strict_cap_exceeded")
