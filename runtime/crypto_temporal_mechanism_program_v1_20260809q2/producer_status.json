@@ -1,0 +1,25 @@
+{
+  "active_program_families": [],
+  "active_wall_seconds": 3556.4359704998787,
+  "arm_states": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "checkpoint_index": 1,
+  "generation_attempts": 2061,
+  "heartbeat_utc": "2026-08-09T12:05:21.253531+00:00",
+  "observed_strict_per_hour": 2024.4987003064184,
+  "producer_pid": 29708,
+  "producer_source_sha": "f846eb04c023fdf20a5130b40d7846a1ccdad3df",
+  "schema_version": 1,
+  "status": "ENGINE_BUDGET_EXHAUSTED",
+  "strict_evaluated": 2000,
+  "strict_maximum": 10000,
+  "worker_accounting": {
+    "configured_paired_task_capacity": 10,
+    "configured_strict_row_capacity_per_paired_batch": 20,
+    "configured_worker_processes": 10,
+    "strict_rows_per_successful_pair_task": 2
+  },
+  "workers": 10
+}

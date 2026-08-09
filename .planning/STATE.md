@@ -1,50 +1,48 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-08 Asia/Hong_Kong
+Last updated: 2026-08-09 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_TERMINAL_INVALID_ZERO_STRICT_RESEARCH_HOLD`
+`CRYPTO_TEMPORAL_STAGE0_QUALIFICATION_THROUGHPUT_GATE_FAILED_RESEARCH_HOLD`
 
-The one authorized fresh-state sequential Temporal Mechanism Program V1 run is
-consumed and closed. Exact PC2 producer
-`26be90d75540ab773001cddbdf5cd59478b863cb` used 10 workers for
-`64,803.3437` active seconds and stopped at the frozen 18-hour wall limit after
-117,522 raw generation attempts. It produced zero strict evaluations, zero
-checkpoints, zero behavior families, zero matched-positive candidates, and zero
-sealed, validation, holdout, OOS, or promotion reads. The terminal producer code
-is `ENGINE_BUDGET_EXHAUSTED:ACTIVE_WALL_TIME_LIMIT`; the one-time receipt is
-consumed with `run_authorized=false` and no restart, reseed, tuning, rescue, or
-automatic continuation occurred.
+The one authorized post-repair fresh-state Stage-0 qualification is consumed
+and closed. Exact PC2 producer
+`f846eb04c023fdf20a5130b40d7846a1ccdad3df` and detached task
+`job_20260809_190549_48e93e` completed exactly 2,000 strict evaluations from
+2,061 generation attempts as 1,000 matched static/temporal pairs. The run wrote
+restore-verified `checkpoint_000` plus the terminal budget checkpoint, produced
+1,993 behavior families, and recorded zero system errors, zero sealed reads,
+zero validation/OOS/promotion reads, and zero matched-positive candidates.
 
-Independent artifact-only attribution shows that this is not an economic
-negative for the four temporal program families. The rejected ledger persists
-117,457 of the 117,522 attempts: 99,966 failed with
-`PAIRED_DIAGNOSTIC_PATHS_REQUIRE_BOUND_DEVELOPMENT_TRAIN_ROLE`, 13,792 were
-exact/replay rejects, and 3,699 reached control-behavior degeneracy. The program
-worker bound role `DEVELOPMENT_ONLY_TEMPORAL_MECHANISM_PROGRAM_SEARCH`, while the
-retained paired-diagnostic evaluator admits only
-`FRESH_DEVELOPMENT_TEMPORAL_PAIRED_ATTRIBUTION_ONLY`. Consequently no proposal
-could complete the intended paired economic path. PC2 and local independent
-checkers pass artifact integrity with zero errors, but that PASS does not repair
-or qualify the invalid research run.
+The source repair is now runtime-observed: all ten worker initializers were
+present, the producer submitted a maximum of ten paired tasks per batch, and
+the final accounting records 180 batches and 1,755 submitted paired tasks with
+no memory fallback. Full worker utilization therefore no longer has the prior
+systematic half-pool defect. Realized end-to-end throughput was nevertheless
+only `2,024.4987 strict/hour`, below the frozen `2,777.7778` floor. The producer
+correctly returned
+`ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR` at checkpoint 0; the 10,000-strict
+family gate was never reached and `adaptive_stage_started=false` remained
+frozen. This is about 15.7% faster than the prior 1,749.5621 strict/hour cohort,
+but it does not qualify the repaired program for expansion.
 
-The zero-strict terminal also wrote no budget checkpoint
-(`budget_checkpoint_written=false`); the final decision, work state, rejected
-ledger, frozen catalog, receipt, and manifest remain preserved. A later one-time
-scheduled-task invocation failed before market work because the already-written
-report made the producer worktree dirty; it created no second market run. The
-durable conclusion is therefore `RUN_INVALID_FOR_RESEARCH`: temporal program
-economics, CEM, Evolution, and program-family continuation remain untested, and
-Alpha remains HOLD.
+The preceding q1 deployment-bound runtime is preserved as
+`ENGINE_RUN_INVALID` with 11 raw attempts and zero strict evaluations because
+the target cache was absent from the deployed checkout. It is not resumed or
+interpreted. The replacement q2 receipt kept the seed, market, evaluator,
+mapping, cost, and budget contracts unchanged and imported no runtime, policy,
+Archive, or candidate state. Independent PC2 and local checkers pass artifact
+integrity and run validity with zero errors, reconcile all 2,061 attempts, and
+the one-time receipt is consumed with `run_authorized=false`.
 
-The existing `real_policy_upgrade_canary` overlay is updated in place with this
-consumed invalid outcome; no Graph node is added. RAW/CURRENT regeneration was
-attempted after the evidence commit, but Graphify's configured DeepSeek backend
-returned HTTP 402 `Insufficient Balance` for all 52 semantic batches. The failed
-projection is not committed and no global Graph freshness claim is made. The
-overlay remains the pending canonical projection input until the existing
-Graphify backend is available again.
+The durable result is a throughput qualification failure, not a temporal
+mechanism or optimizer verdict. Zero matched-positive rows from this partial
+cohort cannot reject the four program families; CEM and Evolution did not run.
+No restart, rescue, reseed, tuning, continuation, validation, OOS, promotion,
+new Arena, or sealed read is authorized. The existing
+`real_policy_upgrade_canary` CURRENT role is updated in place; no Graph node is
+added.
 
 The preceding completed phase was:
 
@@ -1351,10 +1349,20 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
     Independent recomputation found five observed worker PIDs and a maximum of
     five submitted pair tasks despite the declared ten-worker contract. Stage 0
     now submits one paired task per configured worker, records configured versus
-    observed worker capacity, and fails closed on systematic pool underfill.
-    The frozen throughput floor, 10-to-8 memory fallback, evaluation semantics,
-    market contracts, and all consumed campaign evidence are unchanged. This is
-    source-only repair evidence and not realized speedup or research evidence.
+    observed worker capacity, and fails closed on systematic pool underfill. The
+    source-only audit remains immutable; item 15 records its separate runtime
+    qualification without rewriting the prior campaign.
+15. Preserve the consumed post-repair Stage-0 qualification at producer
+    `f846eb04c023fdf20a5130b40d7846a1ccdad3df`: 2,000 strict evaluations
+    from 2,061 attempts, 1,993 behavior families, 1,000 paired diagnostics,
+    ten observed workers, a maximum of ten submitted paired tasks per batch,
+    zero system errors, zero sealed reads, and independent PC2 plus local
+    checker PASS. The half-pool defect is closed, but realized throughput was
+    only `2,024.4987 strict/hour`, below the frozen `2,777.7778` floor, so the
+    producer stopped at checkpoint 0 before the family gate or adaptive arms.
+    The q1 deployment-bound zero-strict invalid runtime is preserved separately
+    and imported no state. Do not restart, resume, import state, or interpret
+    this throughput-stop cohort as a temporal-program or optimizer comparison.
 
 No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
 further performance search or sealed replay is authorized by this plan.
@@ -1365,12 +1373,12 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 
 ## Blockers
 
-- The corrected Temporal Mechanism Program V1 crossed the prior zero-strict
-  authority failure and exercised all 16 family/seed lanes, but stopped after
-  2,000 strict evaluations on the frozen throughput floor. The proven half-pool
-  Stage-0 scheduling defect is repaired and guarded in source, but realized
-  post-repair throughput remains unobserved. No restart, rescue run, or successor
-  market budget is authorized by this source closure.
+- The post-repair Stage-0 qualification observed all ten workers and ten paired
+  tasks per batch, closing the systematic half-pool scheduling defect. End-to-end
+  throughput still reached only `2,024.4987 strict/hour`, so the bottleneck is
+  not solved by worker occupancy alone and the frozen `2,777.7778` gate stopped
+  the campaign at 2,000 strict. No restart, rescue run, or successor market
+  budget is authorized by this closure.
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
 - The completed continuation and V1.1-V1.3 policy comparisons optimized strict matched-feasibility distance, not portfolio Sortino. Their throughput and engineering evidence remain valid, but reward-improvement claims do not establish better Alpha-search ability.

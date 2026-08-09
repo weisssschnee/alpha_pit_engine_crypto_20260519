@@ -1,0 +1,13 @@
+{
+  "candidate_id": "5540319340F15FAA2C4879429ABB1C8436DCB54861E80CF26F8014362128CB20",
+  "channel": "task",
+  "error_message": null,
+  "error_type": null,
+  "evidence_sha256": "9DDF62B318CC5B105D9BFD81C465813FBEA0B7DCBB476F6AC261B30BA76D9F62",
+  "heartbeat_utc": "2026-08-09T12:04:47.306975+00:00",
+  "outcome": "PAIR_REJECTED",
+  "schema_version": 1,
+  "stage": "TASK_COMPLETED",
+  "worker_parent_pid": 29708,
+  "worker_pid": 25644
+}
