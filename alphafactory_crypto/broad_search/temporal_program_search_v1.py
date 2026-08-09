@@ -383,10 +383,25 @@ def _contracts_from_manifest(repo_root: Path, config: Mapping[str, Any]) -> tupl
     return contracts
 
 
+def _validate_active_source_smoke_receipt(
+    repo_root: Path,
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    receipt = engine._read_json(repo_root / RECEIPT_PATH)
+    if receipt.get("run_authorized") is True:
+        return validate_receipt(
+            repo_root,
+            config=config,
+            require_authorized=True,
+        )
+    return receipt
+
+
 def source_smoke(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(config)
+    _validate_active_source_smoke_receipt(repo_root, config)
     economic = resolve_search_economic_receipt(
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )

@@ -54,6 +54,7 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _stage0_pair_task_capacity,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
+    _validate_active_source_smoke_receipt,
     _write_checkpoint,
     stage0_family_decisions,
     validate_config,
@@ -147,6 +148,40 @@ def test_checkpoint_only_qualification_stops_after_first_checkpoint() -> None:
         observed_strict_per_hour=2_000.0,
         minimum_strict_per_hour=2_777.7778,
     ) == "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+
+
+def test_source_smoke_validates_active_run_receipt(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    observed: dict[str, object] = {}
+
+    monkeypatch.setattr(
+        engine_module,
+        "_read_json",
+        lambda path: {"run_authorized": True},
+    )
+
+    def validate(repo_root, *, config, require_authorized):
+        observed.update(
+            {
+                "repo_root": repo_root,
+                "config": config,
+                "require_authorized": require_authorized,
+            }
+        )
+        return {"run_authorized": True}
+
+    monkeypatch.setattr(program_module, "validate_receipt", validate)
+    config = {"authorization": "test"}
+    assert _validate_active_source_smoke_receipt(tmp_path, config) == {
+        "run_authorized": True
+    }
+    assert observed == {
+        "repo_root": tmp_path,
+        "config": config,
+        "require_authorized": True,
+    }
 
 
 def test_committed_component_hash_is_checkout_line_ending_independent(
