@@ -44,6 +44,19 @@ new Arena, or sealed read is authorized. The existing
 `real_policy_upgrade_canary` CURRENT role is updated in place; no Graph node is
 added.
 
+A zero-market-budget post-repair performance attribution is now complete at
+`reports/CRYPTO_TEMPORAL_PROGRAM_STAGE0_POST_REPAIR_PERFORMANCE_ATTRIBUTION_20260809.md`.
+It confirms that coordinator fill is no longer the primary defect: 173 of 180
+batches submitted all ten tasks and median batch overhead beyond the slowest
+successful task was only `0.153 s`. The remaining measured hot path is portfolio
+mapping. Successful-pair process CPU changed only +1.2% from r1 to q2, while
+pair wall rose 71.9% and combined static/temporal mapping consumed `11.8206 s`
+or 69.64% of successful-pair wall. P2/P4 also consumed 70.26% of raw attempts
+and 85.96% of pair rejects to fill equal family quotas; 622 of 755 pair rejects
+were behavior-equality failures reached after mapping work. The next action is
+a source-only, semantics-parity mapping hot-path repair, not another market run,
+worker downgrade, behavior-gate weakening, reward change, or dependency install.
+
 The preceding completed phase was:
 
 `CRYPTO_SEARCH_TEMPORAL_ACTIVATION_V1_STOPPED_NOT_SUPPORTED_RESEARCH_HOLD`
