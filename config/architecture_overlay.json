@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (temporal program throughput stop; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (mapping throughput qualified; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -604,15 +604,18 @@
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260809q2/final_decision.json"
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260809q2/independent_checker.json"
                                      ,"reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_20260809q2.md"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260810m1/final_decision.json"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json"
+                                     ,"reports/CRYPTO_TEMPORAL_PROGRAM_STAGE0_POST_REPAIR_PERFORMANCE_ATTRIBUTION_20260809.md"
                                  ],
                       "critical":  true,
-                      "semantic_role":  "search_engine_temporal_program_post_repair_throughput_stopped_research_hold",
+                      "semantic_role":  "search_engine_temporal_program_post_mapping_throughput_qualified_research_hold",
                       "active_authority":  false,
                       "authority":  {
                                         "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
                                         "repo_ref":  "experiment/crypto-temporal-program-search-v1-20260807",
-                                        "verified_sha":  "a9502964e9a25ca70c092ffe29bb17ac4004885a",
-                                        "sha256":  "7CC4749150F40820E82DF5164D9D1E5B773F0C580D1E498D121C01E283CC4915"
+                                        "verified_sha":  "c014d506fc5ea1a408a14a37adf432cbb310035e",
+                                        "sha256":  "C5C8CE45DB75594AC233FC6A2CE3499871FDA0D51B4ACF88BEC6925687B66E45"
                                     },
                       "contracts":  [
                                         {
@@ -994,13 +997,13 @@
                                              "evidence_ref":  "runtime/crypto_search_temporal_activation_v1_20260807r1/independent_checker.json"
                                          },
                                          {
-                                             "id":  "crypto_temporal_mechanism_program_v1_consumed_throughput_stop_outcome",
+                                             "id":  "crypto_temporal_mechanism_program_v1_consumed_throughput_qualification_outcome",
                                              "type":  "EVIDENCE",
-                                             "rule":  "The post-repair fresh-state Stage-0 qualification receipt is consumed with run_authorized false. Producer f846eb04c023fdf20a5130b40d7846a1ccdad3df completed 2,000 strict evaluations from 2,061 attempts as 1,000 matched static/temporal pairs, produced 1,993 behavior families, wrote checkpoint_000 plus a terminal budget checkpoint, recorded zero system errors and zero sealed reads, and passed independent PC2 plus local artifact/run-validity checks. All ten worker initializers were observed and the producer submitted a maximum of ten paired tasks per batch, closing the prior systematic half-pool defect. End-to-end throughput still reached only 2,024.4987 strict evaluations per hour below the frozen 2,777.7778 floor, so the campaign stopped before the 10,000-strict family gate and adaptive_stage_started remained false. The preceding q1 target-cache deployment failure is preserved as ENGINE_RUN_INVALID at zero strict and is neither resumed nor interpreted. Zero matched-positive candidates in this partial cohort do not establish a temporal-program, optimizer, Alpha, validation, OOS, or promotion conclusion. No restart, rescue, reseed, tuning, continuation, new Arena, or sealed read is authorized.",
+                                             "rule":  "The checkpoint-only post-mapping-repair qualification receipt is consumed with run_authorized false. Producer 49010c89e840320a873accdb27fa15fa6ea9c320 and PC2 task job_20260810_002520_d1ebdc completed 2,000 strict evaluations from 2,061 attempts as 1,000 matched static/temporal pairs, produced 1,993 behavior families, wrote one restore-verified checkpoint, recorded zero system errors and zero sealed reads, and passed independent PC2 plus local artifact/run-validity checks. All ten workers were observed, the producer submitted a maximum of ten paired tasks per batch, and end-to-end throughput reached 3,983.8184 strict evaluations per hour above the frozen 2,777.7778 floor. The hard 2,000-strict cap stopped the run before the 10,000-strict family gate and adaptive_stage_started remained false. This qualifies the repaired mapping hot path and Stage-0 execution capacity only. Zero matched-positive rows are explicitly non-interpretable for temporal-program, optimizer, Alpha, validation, OOS, or promotion conclusions. No continuation, second search, rescue, reseed, tuning, new Arena, or sealed read is authorized.",
                                              "severity":  "HARD",
                                              "enforced_by":  "broad_search.temporal_program_search_v1, broad_search.pair18m.evaluate_pair, the consumed one-time receipt, and independent artifact checks",
                                              "bypass_forbidden":  true,
-                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260809q2/final_decision.json"
+                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810m1/final_decision.json"
                                          },
                                         {
                                             "id":  "real_experiment_authority_preflight",
@@ -1016,16 +1019,16 @@
                                          "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260809q2/independent_checker.json",
-                       "evidence_sha256":  "4D9BD467634E45F5F5800501428CCC9F295A9B3A5DC831BF2E5332E97977AA49",
-                       "verified_at_sha":  "a9502964e9a25ca70c092ffe29bb17ac4004885a"
+                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json",
+                       "evidence_sha256":  "A817219073D943C6340DA244A7AFC2C3F8D88CF94891887AA971B51C8E1E51C7",
+                       "verified_at_sha":  "c014d506fc5ea1a408a14a37adf432cbb310035e"
                    },
     "claim_badges":  [
-                         "POST-REPAIR STAGE0 2000 STRICT THROUGHPUT STOP",
+                         "POST-MAPPING 2000 STRICT THROUGHPUT QUALIFIED",
                          "10 OF 10 WORKERS AND TASK CAPACITY OBSERVED",
-                         "2024.4987 PER HOUR BELOW 2777.7778 FLOOR",
+                         "3983.8184 PER HOUR ABOVE 2777.7778 FLOOR",
                          "1993 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
-                         "ADAPTIVE ARMS NOT STARTED",
+                         "HARD CAP BEFORE FAMILY OR ADAPTIVE GATES",
                          "CHECKER PASS ZERO SEALED READS",
                          "NO OOS OR PROMOTION"
                      ],
