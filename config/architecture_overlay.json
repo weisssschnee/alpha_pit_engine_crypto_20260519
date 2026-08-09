@@ -614,7 +614,7 @@
                       "authority":  {
                                         "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
                                         "repo_ref":  "experiment/crypto-temporal-program-search-v1-20260807",
-                                        "verified_sha":  "c014d506fc5ea1a408a14a37adf432cbb310035e",
+                                        "verified_sha":  "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a",
                                         "sha256":  "C5C8CE45DB75594AC233FC6A2CE3499871FDA0D51B4ACF88BEC6925687B66E45"
                                     },
                       "contracts":  [
@@ -1021,7 +1021,7 @@
                                          "profile":  "crypto-development-research",
                        "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json",
                        "evidence_sha256":  "A817219073D943C6340DA244A7AFC2C3F8D88CF94891887AA971B51C8E1E51C7",
-                       "verified_at_sha":  "c014d506fc5ea1a408a14a37adf432cbb310035e"
+                       "verified_at_sha":  "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a"
                    },
     "claim_badges":  [
                          "POST-MAPPING 2000 STRICT THROUGHPUT QUALIFIED",

@@ -232,12 +232,21 @@
           "runtime/crypto_temporal_mechanism_program_v1_20260809q2/run_manifest.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260809q2/search_authority_binding_receipt.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260809q2/work_state.json",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/behavior_archive.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/candidate_ledger.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/behavior_archive.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/candidate_ledger.parquet",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/manifest.json",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/paired_program_diagnostics.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/rejected_candidate_ledger.parquet",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/checkpoints/checkpoint_000/state.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/embedded_preflight.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/final_decision.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/frozen_contract.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/paired_program_diagnostics.parquet",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/process_evidence/producer_batch_000000.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/process_evidence/producer_batch_000001.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/process_evidence/producer_batch_000002.json",
@@ -440,6 +449,8 @@
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/process_evidence/worker_952_task.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/producer_status.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/program_catalog.json",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/program_family_metrics.parquet",
+          "runtime/crypto_temporal_mechanism_program_v1_20260810m1/rejected_candidate_ledger.parquet",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/run_manifest.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/search_authority_binding_receipt.json",
           "runtime/crypto_temporal_mechanism_program_v1_20260810m1/work_state.json",
@@ -447,7 +458,7 @@
           "tests/test_instrument_capability_primitives_mapping.py"
         ],
         "raw_sha": "3e414c6e58b7f5a7aa8fc729c9d7828fdf46b1d4",
-        "repo_head": "c014d506fc5ea1a408a14a37adf432cbb310035e"
+        "repo_head": "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1529,7 +1540,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-09T17:19:41.524096+00:00",
+  "generated_at": "2026-08-09T17:45:24.072261+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3497,7 +3508,7 @@
         "path": "config/crypto_temporal_mechanism_program_v1_receipt.json",
         "repo_ref": "experiment/crypto-temporal-program-search-v1-20260807",
         "sha256": "C5C8CE45DB75594AC233FC6A2CE3499871FDA0D51B4ACF88BEC6925687B66E45",
-        "verified_sha": "c014d506fc5ea1a408a14a37adf432cbb310035e"
+        "verified_sha": "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a"
       },
       "authority_bindings": [
         {
@@ -6545,7 +6556,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_program_post_mapping_throughput_qualified_research_hold",
       "validation": {
-        "checked_at": "2026-08-09T17:19:41.524096+00:00",
+        "checked_at": "2026-08-09T17:45:24.072261+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json",
         "evidence_sha256": "A817219073D943C6340DA244A7AFC2C3F8D88CF94891887AA971B51C8E1E51C7",
         "level": "PARTIAL",
@@ -6554,7 +6565,7 @@
         ],
         "profile": "crypto-development-research",
         "result": "INSUFFICIENT_EVIDENCE",
-        "verified_at_sha": "c014d506fc5ea1a408a14a37adf432cbb310035e"
+        "verified_at_sha": "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a"
       },
       "visible_by_default": true
     },
@@ -9424,7 +9435,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "24668A8B864AA3DE06B48BF2C5F64ED5078D2B40CC5520565C9051D7680832A6"
+    "sha256": "87C51C262F92C4733AC646C30E072A61BF75D3A60077846C78DDF9F91EFA7A01"
   },
   "profile_id": null,
   "profiles": [
@@ -9461,7 +9472,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "2289949435D4AF5D46033A0F8B29E42A08E984988482AF5C7E97311091F7525A"
   },
-  "repo_head": "c014d506fc5ea1a408a14a37adf432cbb310035e",
+  "repo_head": "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a",
   "schema_version": 1,
   "semantic_authorities": [
     {
