@@ -1,6 +1,6 @@
 {
   "authorization": "ONE_FRESH_STATE_SEQUENTIAL_UP_TO_50000_STRICT_TEMPORAL_PROGRAM_DEVELOPMENT_CAMPAIGN",
-  "authorized_implementation_sha": "298c3491b3fa1c621413e9ccd5dea15a7746def2",
+  "authorized_implementation_sha": "0833a8a57384c9386056a96e1f08b70f542f504e",
   "boundaries": {
     "automatic_next_run": false,
     "development_only": true,
@@ -33,7 +33,7 @@
     "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
     "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
     "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
-    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "B721276ECBE30475A4F50CD95842F98816E01A5576C0371A0E71B3621CF30BBB",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "CC2B574C604B51E94724BC9BEADF67BA4DC24F5F25AE50783E7CC20C05211173",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
     "config/crypto_temporal_mechanism_program_v1.json": "85B86CA3296880F23CE978205D5FA84B9F74DC1264AA9275B0E730AE355100B7",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "E4A29D09AA55840019E6E332DCA3ACDD822CF5B17875C47312032B0E4D97965D"
@@ -49,35 +49,25 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "38D2D56AE3B00A723719E008B206455AF154DFC19A74A73B639A36E56E3EFED9",
+  "receipt_sha256": "EA4D1821CA69B613A98FD8B8398CCE82815100FE40E6997BFE0BF59A7B4F85DA",
   "replacement_authorization": {
-    "authority": "CURRENT_USER_INSTRUCTION_20260809",
+    "authority": "CURRENT_USER_INSTRUCTION_20260810",
     "budget_contract_unchanged": true,
     "first_checkpoint_economic_increment": false,
-    "first_checkpoint_role": "POST_REPAIR_THROUGHPUT_AND_FULL_UTILIZATION_REPLAY",
+    "first_checkpoint_role": "POST_MAPPING_HOT_PATH_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION",
     "market_contract_unchanged": true,
-    "pre_candidate_failure_runtime": "runtime/crypto_temporal_mechanism_program_v1_20260809q1",
-    "prior_generation_attempts": 11,
-    "prior_run_status": "ENGINE_RUN_INVALID_ECONOMIC_RECEIPT_TARGET_CACHE_MISSING",
+    "prior_generation_attempts": 2061,
+    "prior_run_status": "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR",
     "prior_runtime_state_import_allowed": false,
-    "prior_strict_evaluated": 0,
-    "qualification_strict_cap": 10000,
-    "reason": "ZERO_STRICT_PRE_CANDIDATE_TARGET_CACHE_DEPLOYMENT_BINDING_REPAIR",
-    "replaces_receipt_sha256": "5009E67A19A136640F8CF43797FFEDA86C39D179419DAC397F343DB2C31ECA1D",
+    "prior_strict_evaluated": 2000,
+    "qualification_strict_cap": 2000,
+    "reason": "SOURCE_ONLY_MAPPING_HOT_PATH_RUNTIME_QUALIFICATION",
+    "replaces_receipt_sha256": "38D2D56AE3B00A723719E008B206455AF154DFC19A74A73B639A36E56E3EFED9",
     "rescue_rerun": false,
     "seed_contract_unchanged": true,
     "stage0_only": true
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "checkpoint_count": 2,
-    "generation_attempts": 2061,
-    "producer_source_sha": "f846eb04c023fdf20a5130b40d7846a1ccdad3df",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260809q2",
-    "status": "ENGINE_BUDGET_EXHAUSTED",
-    "strict_evaluated_count": 2000
-  },
+  "run_authorized": true,
   "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }
