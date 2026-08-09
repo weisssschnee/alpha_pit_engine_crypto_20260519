@@ -607,15 +607,18 @@
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260810m1/final_decision.json"
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json"
                                      ,"reports/CRYPTO_TEMPORAL_PROGRAM_STAGE0_POST_REPAIR_PERFORMANCE_ATTRIBUTION_20260809.md"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260810s0/final_decision.json"
+                                     ,"runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json"
+                                     ,"reports/CRYPTO_TEMPORAL_MECHANISM_PROGRAM_SEARCH_V1_20260810s0.md"
                                  ],
                       "critical":  true,
-                      "semantic_role":  "search_engine_temporal_program_post_mapping_throughput_qualified_research_hold",
+                      "semantic_role":  "search_engine_temporal_program_stage0_local_lines_research_hold",
                       "active_authority":  false,
                       "authority":  {
                                         "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
                                         "repo_ref":  "experiment/crypto-temporal-program-search-v1-20260807",
-                                        "verified_sha":  "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a",
-                                        "sha256":  "C5C8CE45DB75594AC233FC6A2CE3499871FDA0D51B4ACF88BEC6925687B66E45"
+                                        "verified_sha":  "b24d1145de4aaebb440a62636e36c5d0bb17ef5f",
+                                        "sha256":  "A11317D4AE4288B4354CD3C00D69186EFFAA49B865C189C9D6D0DFAE6E45AD59"
                                     },
                       "contracts":  [
                                         {
@@ -1005,6 +1008,15 @@
                                              "bypass_forbidden":  true,
                                              "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810m1/final_decision.json"
                                          },
+                                         {
+                                             "id":  "crypto_temporal_mechanism_program_v1_consumed_stage0_family_gate_outcome",
+                                             "type":  "EVIDENCE",
+                                             "rule":  "The one-time fresh-state Stage-0 family-gate receipt is consumed with run_authorized false. Producer a051f557844d59d829be80c33b7517157828a482 and PC2 task job_20260810_035743_38e6b6 completed exactly 10,000 strict evaluations from 10,194 attempts as 5,000 matched static/temporal pairs across five restore-verified checkpoints, produced 9,839 behavior families, observed all ten workers and ten paired tasks per batch, reached 3,959.8469 strict/hour, and recorded zero system errors and zero sealed reads. Independent PC2 and local checkers pass. Temporal random was globally weaker than paired static on dual-axis net positives, 2-of-3 replication, mean reward and top-decile reward; both produced zero matched-positive candidates. P1 crossed only the dual-axis net-rate route and P4 crossed only an extremely thin positive paired-median route, with breadth checks passing. The status LOCAL_TEMPORAL_PROGRAM_LINE_IDENTIFIED supports narrow family attribution only. Adaptive Stage C did not start, no prior state was imported, and no Alpha, validation, OOS, promotion, tuning, rescue, new Arena, or successor search is authorized.",
+                                             "severity":  "HARD",
+                                             "enforced_by":  "broad_search.temporal_program_search_v1, broad_search.pair18m.evaluate_pair, the consumed one-time receipt, frozen continuation_decision_010000, and independent artifact checks",
+                                             "bypass_forbidden":  true,
+                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810s0/final_decision.json"
+                                         },
                                         {
                                             "id":  "real_experiment_authority_preflight",
                                             "type":  "ADMISSION",
@@ -1019,18 +1031,17 @@
                                          "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810m1/independent_checker.json",
-                       "evidence_sha256":  "A817219073D943C6340DA244A7AFC2C3F8D88CF94891887AA971B51C8E1E51C7",
-                       "verified_at_sha":  "5aa7bfa6c3f1f954eede51dfefb0c8feec47c71a"
+                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
+                       "evidence_sha256":  "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
+                       "verified_at_sha":  "b24d1145de4aaebb440a62636e36c5d0bb17ef5f"
                    },
     "claim_badges":  [
-                         "POST-MAPPING 2000 STRICT THROUGHPUT QUALIFIED",
-                         "10 OF 10 WORKERS AND TASK CAPACITY OBSERVED",
-                         "3983.8184 PER HOUR ABOVE 2777.7778 FLOOR",
-                         "1993 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
-                         "HARD CAP BEFORE FAMILY OR ADAPTIVE GATES",
-                         "CHECKER PASS ZERO SEALED READS",
-                         "NO OOS OR PROMOTION"
+                         "STAGE0 10000 STRICT FAMILY GATE COMPLETE",
+                         "10 OF 10 WORKERS 3959.8469 PER HOUR",
+                         "P1 AND P4 LOCAL ROUTES ONLY",
+                         "TEMPORAL RANDOM GLOBALLY BELOW STATIC",
+                         "9839 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
+                         "CHECKER PASS ZERO SEALED READS NO OOS OR PROMOTION"
                      ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
