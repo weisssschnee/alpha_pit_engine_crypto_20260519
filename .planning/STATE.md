@@ -4,6 +4,36 @@ Last updated: 2026-08-10 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1_PRE_CANDIDATE_ENGINE_RUN_INVALID_RESEARCH_HOLD`
+
+The one authorized P4 mechanism-pocket fresh-development gate is consumed and
+closed without an economic evaluation. Exact producer
+`5179bd2875d4bad56c02919bf774ddc7483ee984` and PC2 detached task
+`job_20260811_010941_00029d` preserved the frozen 80-candidate cohort and train
+orientation. OI/mark acquisition completed all `27/27` venue-days across
+Bybit, OKX futures and Hyperliquid futures with zero failures, and the frozen
+symbol map matched exactly.
+
+The external PC2 wrapper then observed a null/empty `Start-Process.ExitCode`
+after the successful OI child had written its complete terminal status and
+misclassified that success as a native-process failure. It stopped before
+aggTrades acquisition, carrier preparation, target construction or candidate
+evaluation. Strict evaluated count is therefore zero. Candidate generation,
+optimizer feedback, policy memory, Archive writes and automatic expansion all
+remained false; OOS read count remained zero.
+
+PC2 and local independent checkers correctly return
+`FAIL_MISSING_RUN_MANIFEST`. This establishes a
+`PRE_CANDIDATE_ENGINE_RUN_INVALID` orchestration failure, not a failed P4,
+Evolution, matched-control, cost, reward, stability or Alpha result. The
+one-time receipt is consumed with `run_authorized=false`; no continuation,
+rescue, second run, validation, OOS, promotion or new Arena is authorized.
+The completed OI payload is retained on PC2 to avoid repeated network use and
+may be reused only under a separately authorized, hash-bound source-repaired
+replacement.
+
+The preceding completed phase was:
+
 `CRYPTO_TEMPORAL_MAPPING_THROUGHPUT_QUALIFIED_RESEARCH_HOLD`
 
 The one authorized post-mapping-repair checkpoint-only PC2 qualification is

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "receipt_id": "CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1",
   "decision_id": "USER_AUTHORIZED_P4_MECHANISM_POCKET_FRESH_DEVELOPMENT_GATE_20260811",
-  "run_authorized": true,
+  "run_authorized": false,
   "source_implementation_sha": "3100227ff493626458e58fd62430cb42e16ed8e1",
   "allowed_post_implementation_paths": [
     "config/crypto_p4_mechanism_pocket_validation_v1_receipt.json"
@@ -103,5 +103,40 @@
     "validation_oos_holdout_read": false,
     "promotion": false,
     "automatic_expansion": false
+  },
+  "status": "RUN_AUTHORIZATION_CONSUMED_PRE_CANDIDATE_ENGINE_RUN_INVALID",
+  "run_outcome": {
+    "status": "PRE_CANDIDATE_ENGINE_RUN_INVALID",
+    "task_id": "job_20260811_010941_00029d",
+    "producer_source_sha": "5179bd2875d4bad56c02919bf774ddc7483ee984",
+    "started_at_local": "2026-08-11T01:09:46+08:00",
+    "ended_at_local": "2026-08-11T03:08:23+08:00",
+    "terminal_phase": "OI_MARK_ACQUISITION",
+    "terminal_reason": "START_PROCESS_EXIT_CODE_NULL_AFTER_SUCCESSFUL_OI_ACQUISITION",
+    "oi_acquisition": {
+      "status": "complete",
+      "completed_days": 27,
+      "total_days": 27,
+      "failure_count": 0,
+      "frozen_symbol_map_exact_match": true
+    },
+    "aggtrades_acquisition_started": false,
+    "carrier_preparation_started": false,
+    "candidate_evaluation_started": false,
+    "strict_evaluated_count": 0,
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "oos_read_count": 0,
+    "promotion_authorized": false,
+    "automatic_expansion": false,
+    "independent_checker_pc2": "FAIL_MISSING_RUN_MANIFEST",
+    "independent_checker_local": "FAIL_MISSING_RUN_MANIFEST",
+    "economic_result_available": false,
+    "research_conclusion_authorized": false,
+    "rescue_rerun_started": false,
+    "second_run_started": false,
+    "evidence_manifest": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/invalid_run_artifact_manifest.json",
+    "final_decision": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json"
   }
 }

@@ -58,14 +58,19 @@ def test_frozen_selection_contains_exact_candidates_and_directions() -> None:
     assert sum(row["selection_group"] == "discovery_matched_positive" for row in rows) == 40
 
 
-def test_run_receipt_freezes_one_no_feedback_development_gate() -> None:
-    receipt = load_receipt(ROOT, require_authorized=True)
+def test_consumed_run_receipt_preserves_no_feedback_development_gate() -> None:
+    receipt = load_receipt(ROOT, require_authorized=False)
     assert receipt["compute"]["candidate_count"] == 80
     assert receipt["economic_contract"]["cost_bps"] == 5.0
     assert receipt["development_fresh_interval"]["role"] == (
         "DEVELOPMENT_FRESH_NO_FEEDBACK_NOT_OOS"
     )
     assert not any(receipt["boundaries"].values())
+    assert receipt["status"] == (
+        "RUN_AUTHORIZATION_CONSUMED_PRE_CANDIDATE_ENGINE_RUN_INVALID"
+    )
+    assert receipt["run_outcome"]["strict_evaluated_count"] == 0
+    assert receipt["run_outcome"]["economic_result_available"] is False
 
 
 def test_summary_reports_raw_and_behavior_deoverlapped_views() -> None:

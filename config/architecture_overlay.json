@@ -616,6 +616,10 @@
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260810adaptive/invalid_run_artifact_manifest.json"
                                      ,"runtime/crypto_temporal_mechanism_program_v1_20260810adaptive/independent_checker_failure.json"
                                      ,"reports/CRYPTO_TEMPORAL_ADAPTIVE_BROAD_GATE_20260810.md"
+                                     ,"config/crypto_p4_mechanism_pocket_validation_v1_receipt.json"
+                                     ,"runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json"
+                                     ,"runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/invalid_run_artifact_manifest.json"
+                                     ,"reports/CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1_20260811.md"
                                  ],
                       "critical":  true,
                       "semantic_role":  "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
@@ -1023,17 +1027,26 @@
                                              "bypass_forbidden":  true,
                                              "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810s0/final_decision.json"
                                          },
-                                         {
-                                             "id":  "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
+                                          {
+                                              "id":  "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
                                              "type":  "EVIDENCE",
                                              "rule":  "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached frozen 10k, 20k and 30k gates with zero sealed reads. CEM exited at 20k. Evolution improved equal-count dual-axis net-positive and 2-of-3 replication density but failed behavior breadth as its top positive program-family share rose to 86.12%, so the 30k gate issued STOP_ALL_ADAPTIVE_ARMS_EXITED and no arm qualified. A later throughput check incorrectly overwrote that terminal reason with None; operator intervention stopped the producer at 36,277 observed strict rows and preserved checkpoint 017 at 36,000. Six thousand post-gate checkpoint rows are contamination evidence only. PC2 and local checkers correctly fail because the interrupted invalid run has no normal final decision or run manifest. Source ee9a69416475aa303eb96add929aa479d5c4cafe preserves an earlier gate stop when checkpoint qualification returns None. The run is ENGINE_RUN_INVALID; no rerun, validation, OOS, promotion, tuning, new Arena or authority promotion is authorized.",
                                              "severity":  "HARD",
                                              "enforced_by":  "broad_search.temporal_program_search_v1 frozen adaptive_gate terminal reason, regression test, consumed receipt, and invalid-run evidence manifest",
                                              "bypass_forbidden":  true,
-                                             "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810adaptive/invalid_run_artifact_manifest.json"
-                                         },
-                                        {
-                                            "id":  "real_experiment_authority_preflight",
+                                              "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810adaptive/invalid_run_artifact_manifest.json"
+                                          },
+                                          {
+                                              "id":  "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",
+                                              "type":  "EVIDENCE",
+                                              "rule":  "The one authorized 80-candidate P4 mechanism-pocket fresh-development receipt is consumed with run_authorized false. Producer 5179bd2875d4bad56c02919bf774ddc7483ee984 and PC2 task job_20260811_010941_00029d completed all 27 OI/mark venue-days with zero failures and an exact frozen symbol-map match. The external wrapper then observed a null native ExitCode after the successful acquisition child had written complete status and stopped before aggTrades acquisition, carrier preparation, target construction or candidate evaluation. Strict evaluated count is zero; PC2 and local independent checkers correctly fail on the absent run manifest. This is PRE_CANDIDATE_ENGINE_RUN_INVALID orchestration evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No continuation, rescue, second run or automatic expansion is authorized.",
+                                              "severity":  "HARD",
+                                              "enforced_by":  "the consumed P4 validation receipt, PC2 task evidence, OI terminal status, and independent missing-manifest checks",
+                                              "bypass_forbidden":  true,
+                                              "evidence_ref":  "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json"
+                                          },
+                                         {
+                                             "id":  "real_experiment_authority_preflight",
                                             "type":  "ADMISSION",
                                             "rule":  "Every Search Engine run command resolves target, optimizer reward, execution price, portfolio mapping, cost, validation role, and promotion gate from CURRENT, then requires a concrete evidence increment and decision impact. Vacancy, conflict, stale authority, or missing intent blocks execution. A bound component normally requires active_authority true; the only exception is an exact content-hashed schema-2 one-run receipt explicitly authorized by the current user and registered to the requested campaign. NON_FORMAL roles and the receipt exception keep formal claims and promotion unauthorized.",
                                             "severity":  "HARD",
@@ -1052,14 +1065,11 @@
                    },
     "claim_badges":  [
                          "STAGE0 10000 STRICT FAMILY GATE COMPLETE",
-                         "10 OF 10 WORKERS 3959.8469 PER HOUR",
                          "P1 AND P4 LOCAL ROUTES ONLY",
-                         "TEMPORAL RANDOM GLOBALLY BELOW STATIC",
-                         "9839 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
-                         "CHECKER PASS ZERO SEALED READS NO OOS OR PROMOTION",
                          "ADAPTIVE BROAD INVALID AFTER 30K STOP OVERRIDE",
-                         "EVOLUTION DENSE BUT 86.12 PERCENT TOP FAMILY",
-                         "STOP AUTHORITY SOURCE REPAIRED 523 TESTS"
+                         "P4 FRESH GATE PRE-CANDIDATE INVALID",
+                         "OI 27 OF 27 ZERO FAILURE",
+                         "ZERO CANDIDATES NO ECONOMIC RESULT NO OOS"
                      ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",

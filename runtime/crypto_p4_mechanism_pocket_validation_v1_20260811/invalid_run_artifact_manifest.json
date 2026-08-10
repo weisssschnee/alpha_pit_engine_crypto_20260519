@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "PRE_CANDIDATE_ENGINE_RUN_INVALID",
+  "task_id": "job_20260811_010941_00029d",
+  "producer_source_sha": "5179bd2875d4bad56c02919bf774ddc7483ee984",
+  "failure_class": "ORCHESTRATION_NATIVE_EXIT_CODE_NULL",
+  "files": [
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/pipeline_status.json",
+      "bytes": 1121,
+      "sha256": "55102C42260D743B19295B9CD707BC17856AB30CC3BF043B38BCE1608F7B9210"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/oi_status.json",
+      "bytes": 171,
+      "sha256": "CEE2193711873934F800A3E336410004D780789C72D10364ED775C6DC997959C"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/frozen_symbol_map_proof.json",
+      "bytes": 764,
+      "sha256": "6ED515E5EA613C7B9851AB5E890E035A8862C48BBDB6341BF18FFC75C75FAEB2"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/task_status.json",
+      "bytes": 692,
+      "sha256": "2DC5760E07BC2A9C78D9951F7C742DA6E21485EE4A3236DC66A8729F3AE54CFE"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/run_pc2_crypto_p4_pocket_gate_20260811.ps1",
+      "bytes": 9578,
+      "sha256": "4E220DB17A24CBF2912213BC6B4D18AC49EB268F7F8524AAAB5FAFEBD8F3771F"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/independent_checker.json",
+      "bytes": 439,
+      "sha256": "DBFA29D493AEB04B96D3808D3A9672D7B07D4EA743F35B83215CF689F15026BB"
+    },
+    {
+      "path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/independent_checker.json",
+      "bytes": 429,
+      "sha256": "064EBCA9314B412C0864FBEBDE0C58C671C57022746B7930C4E466767BEDBDF1"
+    }
+  ],
+  "forbidden_claims": [
+    "ALPHA_RESULT",
+    "MECHANISM_RESULT",
+    "OPTIMIZER_RESULT",
+    "VALIDATION_RESULT",
+    "OOS_RESULT",
+    "PROMOTION_RESULT"
+  ],
+  "rescue_rerun_started": false,
+  "second_run_started": false
+}

@@ -1,0 +1,16 @@
+{
+  "frozen_symbol_map": "C:\\HermesWorker\\runtime\\crypto_family_consensus_frozen_symbol_map_20260805.json",
+  "frozen_symbol_map_sha256": "B9E5C594710D73E0C508DE1CBBC6CD56B843C67D850371A92A0CF77B78880888",
+  "generated_symbol_map_sha256": "79D178E59E3B8920F3C934BE3E905791B16C99F9F02604AD6F1DCE6CB66A0240",
+  "mapping_exact_match": true,
+  "ranked_base_count": 150,
+  "schema_version": 1,
+  "source_script": "D:\\HermesWorker\\runtime\\cryptohft_crossvenue_oi_mark_compact_ranks51_200_pc2_20260720.py",
+  "source_script_sha256": "D84B43DEB0A76B2D9838637B2BDC0B65DAE337B22DBF91D8CDED7BC80A431FE9",
+  "status": "PASS_FROZEN_SYMBOL_MAP_USED",
+  "venue_mapped_counts": {
+    "bybit": 142,
+    "hyperliquid_futures": 89,
+    "okx_futures": 116
+  }
+}

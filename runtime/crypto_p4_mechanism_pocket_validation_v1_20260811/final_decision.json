@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "PRE_CANDIDATE_ENGINE_RUN_INVALID",
+  "decision": "NO_ECONOMIC_RESULT_AUTHORIZATION_CONSUMED",
+  "task_id": "job_20260811_010941_00029d",
+  "producer_source_sha": "5179bd2875d4bad56c02919bf774ddc7483ee984",
+  "selection_sha256": "E9AB5D4D27B3BC20C0AB6AB673DE7FE6D505084B7B98F910E21CCB606D3916C8",
+  "receipt_sha256_before_consumption": "F80DA0531A46660766423B90073F1F861DA89F56A00F3869939BF7CFFCDE6858",
+  "terminal_phase": "OI_MARK_ACQUISITION",
+  "failure_class": "ORCHESTRATION_NATIVE_EXIT_CODE_NULL",
+  "observed_facts": {
+    "oi_completed_days": 27,
+    "oi_total_days": 27,
+    "oi_failure_count": 0,
+    "frozen_symbol_map_exact_match": true,
+    "aggtrades_started": false,
+    "carrier_preparation_started": false,
+    "candidate_evaluation_started": false,
+    "strict_evaluated_count": 0,
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "oos_read_count": 0
+  },
+  "independent_check": {
+    "pc2": "FAIL_MISSING_RUN_MANIFEST",
+    "local": "FAIL_MISSING_RUN_MANIFEST"
+  },
+  "research_interpretation": "No portfolio, target, reward, cost, matched-control or stability evaluation ran. The run creates no Alpha, mechanism, optimizer, validation, OOS or promotion conclusion.",
+  "next_authority": "No continuation or replacement run is authorized by this consumed receipt. A separately authorized source-repaired replacement may reuse only independently hash-bound immutable acquisition payloads and the unchanged frozen cohort.",
+  "promotion_authorized": false,
+  "automatic_expansion": false
+}

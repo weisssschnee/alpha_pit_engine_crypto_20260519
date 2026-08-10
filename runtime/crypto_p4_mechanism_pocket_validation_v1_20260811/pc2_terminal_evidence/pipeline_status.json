@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "status":  "FAILED",
+    "phase":  "TERMINAL",
+    "producer_source_sha":  "5179bd2875d4bad56c02919bf774ddc7483ee984",
+    "workspace":  "C:\\HermesWorker\\workspace\\crypto_p4_pocket_validation_5179bd28",
+    "runtime":  "C:\\HermesWorker\\workspace\\crypto_p4_pocket_validation_5179bd28\\runtime\\crypto_p4_mechanism_pocket_validation_v1_20260811",
+    "data_root":  "C:\\HermesWorker\\data\\crypto_p4_pocket_validation_20260811",
+    "updated_utc":  "2026-08-10T19:08:23.5084741+00:00",
+    "elapsed_seconds":  7116.5749067,
+    "candidate_generation_performed":  false,
+    "optimizer_feedback_written":  false,
+    "archive_written":  false,
+    "oos_read_count":  0,
+    "promotion_authorized":  false,
+    "automatic_expansion":  false,
+    "error":  "oi_acquisition failed exit=: ",
+    "no_second_run":  true,
+    "script_stack":  "在 Invoke-Native、C:\\HermesWorker\\runtime\\run_pc2_crypto_p4_pocket_gate_20260811.ps1 中: 第 66 行\r\n在 \u003cScriptBlock\u003e、C:\\HermesWorker\\runtime\\run_pc2_crypto_p4_pocket_gate_20260811.ps1 中: 第 94 行"
+}
