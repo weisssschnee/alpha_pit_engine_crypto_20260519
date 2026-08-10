@@ -57,6 +57,8 @@ REQUIRED_COLUMNS = {
     "matched_control_valid",
     "strict_cost_evaluated",
     "strict_evaluated",
+    "train_orientation",
+    "train_orientation_fitted",
     "search_reward",
     "matched_positive",
     "left_incremental_net_mean",
@@ -123,6 +125,11 @@ def _best_per_behavior(frame: pd.DataFrame) -> pd.DataFrame:
 
 def select_frozen_cohort(frame: pd.DataFrame) -> list[dict[str, Any]]:
     eligible = _eligible(frame)
+    if (
+        not _bool_series(eligible, "train_orientation_fitted").all()
+        or not eligible["train_orientation"].astype(float).isin({-1.0, 1.0}).all()
+    ):
+        raise ValueError("eligible candidates lack a frozen train orientation")
     positive = eligible.loc[
         eligible["arm"].astype(str).eq(EVOLUTION)
         & _bool_series(eligible, "matched_positive")
@@ -183,6 +190,7 @@ def select_frozen_cohort(frame: pd.DataFrame) -> list[dict[str, Any]]:
                 "source_completion_ordinal": int(row["completion_ordinal"]),
                 "source_arm": str(row["arm"]),
                 "source_seed": int(row["seed"]),
+                "train_orientation": float(row["train_orientation"]),
                 "program_family_id": str(row["program_family_id"]),
                 "program_id": str(row["program_id"]),
                 "behavior_family_id": str(row["behavior_family_id"]),
@@ -212,9 +220,26 @@ def freeze_selection(
     stop_decision_path: Path,
     frozen_contract_path: Path,
     output_path: Path,
+    replace_incomplete_receipt_sha256: str | None = None,
 ) -> dict[str, Any]:
+    superseded_receipt_sha256 = None
     if output_path.exists():
-        raise FileExistsError(f"selection already exists: {output_path}")
+        if not replace_incomplete_receipt_sha256:
+            raise FileExistsError(f"selection already exists: {output_path}")
+        prior = json.loads(output_path.read_text(encoding="utf-8"))
+        observed_prior_sha256 = str(prior.get("receipt_sha256") or "").upper()
+        if (
+            observed_prior_sha256 != replace_incomplete_receipt_sha256.upper()
+            or canonical_sha256(
+                {key: value for key, value in prior.items() if key != "receipt_sha256"}
+            )
+            != observed_prior_sha256
+            or prior.get("market_payload_read") is not False
+            or prior.get("validation_or_oos_read") is not False
+            or any("train_orientation" in row for row in prior.get("selected_candidates") or ())
+        ):
+            raise ValueError("prior incomplete receipt is not eligible for replacement")
+        superseded_receipt_sha256 = observed_prior_sha256
     source_contract = json.loads(frozen_contract_path.read_text(encoding="utf-8"))
     source_sha = str(
         source_contract.get("source_git_sha")
@@ -251,6 +276,12 @@ def freeze_selection(
         "selection_tool_source_sha": git_head(repo_root),
         "market_payload_read": False,
         "validation_or_oos_read": False,
+        "superseded_incomplete_receipt_sha256": superseded_receipt_sha256,
+        "replacement_reason": (
+            "SOURCE_ONLY_ADD_FROZEN_TRAIN_ORIENTATION_BEFORE_MARKET_PAYLOAD_READ"
+            if superseded_receipt_sha256
+            else None
+        ),
         "source": {
             "producer_source_sha": SOURCE_PRODUCER_SHA,
             "runtime_status": "ENGINE_RUN_INVALID",
@@ -314,6 +345,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--stop-decision", type=Path, required=True)
     parser.add_argument("--frozen-contract", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--replace-incomplete-receipt-sha256")
     arguments = parser.parse_args(argv)
     result = freeze_selection(
         repo_root=arguments.repo_root.resolve(),
@@ -321,6 +353,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         stop_decision_path=arguments.stop_decision.resolve(),
         frozen_contract_path=arguments.frozen_contract.resolve(),
         output_path=arguments.output.resolve(),
+        replace_incomplete_receipt_sha256=arguments.replace_incomplete_receipt_sha256,
     )
     print(
         json.dumps(

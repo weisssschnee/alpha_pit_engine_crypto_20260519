@@ -44,6 +44,8 @@ def _row(
         "matched_control_valid": True,
         "strict_cost_evaluated": True,
         "strict_evaluated": True,
+        "train_orientation": -1.0 if ordinal % 2 else 1.0,
+        "train_orientation_fitted": True,
         "search_reward": reward,
         "matched_positive": matched_positive,
         "left_incremental_net_mean": 0.1,
@@ -98,6 +100,7 @@ def test_frozen_selection_is_exact_balanced_and_deterministic() -> None:
     second = select_frozen_cohort(frame.sample(frac=1.0, random_state=19))
     assert first == second
     assert len(first) == 80
+    assert {row["train_orientation"] for row in first} == {-1.0, 1.0}
     groups = pd.Series([row["selection_group"] for row in first]).value_counts()
     assert groups.to_dict() == {
         "discovery_matched_positive": 40,
