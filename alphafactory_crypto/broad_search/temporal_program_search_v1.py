@@ -57,6 +57,11 @@ ARMS = (
     "temporal_program_cem",
     "temporal_program_evolution",
 )
+ADAPTIVE_BROAD_FAMILIES = (
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+)
+ADAPTIVE_BROAD_SEEDS = (1118667271, 873488160, 3664147548, 193613803)
 COMPONENT_PATHS = (
     "alphafactory_crypto/broad_search/expression.py",
     "alphafactory_crypto/broad_search/compositional18m.py",
@@ -175,8 +180,20 @@ def validate_config(config: Mapping[str, Any]) -> None:
     }
     if runtime_safety != expected_runtime_safety:
         raise ValueError("temporal program runtime safety contract changed")
-    seeds = tuple(int(value) for value in config["seed_authority"]["seeds"])
-    if seeds != (2594819233, 4246332867, 3389304867, 168281835):
+    seed_authority = dict(config["seed_authority"])
+    seeds = tuple(int(value) for value in seed_authority["seeds"])
+    campaign = seed_authority.get("campaign")
+    if campaign is None:
+        expected_seeds = (2594819233, 4246332867, 3389304867, 168281835)
+    elif campaign == "CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1":
+        expected_seeds = ADAPTIVE_BROAD_SEEDS
+        if seed_authority.get("derivation") != (
+            "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1_PIPE_LANE_INDEX"
+        ):
+            raise ValueError("temporal adaptive broad seed derivation changed")
+    else:
+        raise ValueError("temporal program seed campaign changed")
+    if seeds != expected_seeds:
         raise ValueError("temporal program seed authority changed")
     catalog = compile_temporal_program_catalog(config)
     if len(catalog) != 464 or {program.family_id for _, program in catalog} != {
@@ -227,12 +244,41 @@ def _receipt_content_sha(receipt: Mapping[str, Any]) -> str:
 def _qualification_scope(receipt: Mapping[str, Any]) -> dict[str, Any]:
     """Resolve a one-run release cap without changing the program budget contract."""
     replacement = dict(receipt.get("replacement_authorization") or {})
+    if replacement.get("adaptive_broad_fresh_state") is True:
+        families = tuple(
+            str(value)
+            for value in replacement.get("prequalified_program_families", ())
+        )
+        seeds = tuple(int(value) for value in replacement.get("fresh_state_seeds", ()))
+        if (
+            families != ADAPTIVE_BROAD_FAMILIES
+            or seeds != ADAPTIVE_BROAD_SEEDS
+            or int(replacement.get("qualification_strict_cap", -1)) != 50_000
+            or replacement.get("stage0_only") is not False
+            or replacement.get("prior_runtime_state_import_allowed") is not False
+            or replacement.get("old_candidate_import") is not False
+            or replacement.get("old_distribution_import") is not False
+            or replacement.get("old_population_import") is not False
+            or replacement.get("old_archive_import") is not False
+        ):
+            raise RuntimeError("temporal adaptive broad qualification scope changed")
+        return {
+            "strict_cap": 50_000,
+            "stage0_only": False,
+            "skip_stage0": True,
+            "adaptive_start_strict": 0,
+            "active_program_families": list(ADAPTIVE_BROAD_FAMILIES),
+            "scope": "FRESH_STATE_PREQUALIFIED_ADAPTIVE_BROAD_PROGRAM",
+        }
     has_cap = "qualification_strict_cap" in replacement
     has_stage0_only = "stage0_only" in replacement
     if not has_cap and not has_stage0_only:
         return {
             "strict_cap": 50_000,
             "stage0_only": False,
+            "skip_stage0": False,
+            "adaptive_start_strict": 10_000,
+            "active_program_families": [],
             "scope": "FULL_SEQUENTIAL_PROGRAM",
         }
     if not has_cap or not has_stage0_only:
@@ -244,12 +290,36 @@ def _qualification_scope(receipt: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "strict_cap": strict_cap,
         "stage0_only": True,
+        "skip_stage0": False,
+        "adaptive_start_strict": 10_000,
+        "active_program_families": [],
         "scope": (
             "FRESH_STATE_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION"
             if strict_cap == 2_000
             else "FRESH_STATE_STAGE0_QUALIFICATION_ONLY"
         ),
     }
+
+
+def _effective_config(
+    config: Mapping[str, Any], receipt: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Apply only receipt-frozen per-run seeds; never import campaign state."""
+
+    effective = json.loads(json.dumps(config))
+    scope = _qualification_scope(receipt)
+    if bool(scope.get("skip_stage0")):
+        effective["seed_authority"] = {
+            **dict(effective["seed_authority"]),
+            "campaign": "CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1",
+            "derivation": (
+                "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1_PIPE_LANE_INDEX"
+            ),
+            "seeds": list(ADAPTIVE_BROAD_SEEDS),
+            "old_campaign_seed_reuse": False,
+        }
+    validate_config(effective)
+    return effective
 
 
 def _checkpoint_qualification_terminal_reason(
@@ -318,10 +388,17 @@ def validate_receipt(
     if dict(receipt.get("market_authority") or {}) != expected_market:
         raise RuntimeError("temporal program receipt market authority changed")
     replacement = dict(receipt.get("replacement_authorization") or {})
+    adaptive_broad = replacement.get("adaptive_broad_fresh_state") is True
+    seed_contract_valid = (
+        replacement.get("seed_contract_unchanged") is True
+        if not adaptive_broad
+        else replacement.get("seed_contract_unchanged") is False
+        and replacement.get("fresh_seed_contract_new") is True
+    )
     if replacement and (
         replacement.get("budget_contract_unchanged") is not True
         or replacement.get("market_contract_unchanged") is not True
-        or replacement.get("seed_contract_unchanged") is not True
+        or not seed_contract_valid
         or replacement.get("rescue_rerun") is not False
         or int(replacement.get("prior_strict_evaluated", -1)) < 0
         or int(replacement.get("prior_generation_attempts", -1)) < 0
@@ -329,7 +406,26 @@ def validate_receipt(
         or len(str(replacement.get("replaces_receipt_sha256") or "")) != 64
     ):
         raise RuntimeError("temporal program replacement authority changed")
-    _qualification_scope(receipt)
+    scope = _qualification_scope(receipt)
+    if adaptive_broad:
+        selection = dict(receipt.get("selection_evidence") or {})
+        expected_paths = {
+            "runtime/crypto_temporal_mechanism_program_v1_20260810s0/final_decision.json",
+            "runtime/crypto_temporal_mechanism_program_v1_20260810s0/continuation_decision_010000.json",
+        }
+        files = dict(selection.get("committed_file_sha256") or {})
+        if (
+            set(files) != expected_paths
+            or selection.get("producer_source_sha")
+            != "a051f557844d59d829be80c33b7517157828a482"
+            or tuple(selection.get("continuing_families") or ())
+            != ADAPTIVE_BROAD_FAMILIES
+            or any(
+                _sha256_committed_file(repo_root, path) != str(files[path])
+                for path in expected_paths
+            )
+        ):
+            raise RuntimeError("temporal adaptive broad selection evidence changed")
     branch = subprocess.check_output(
         ["git", "branch", "--show-current"], cwd=repo_root, text=True
     ).strip()
@@ -401,7 +497,8 @@ def source_smoke(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(config)
-    _validate_active_source_smoke_receipt(repo_root, config)
+    receipt = _validate_active_source_smoke_receipt(repo_root, config)
+    config = _effective_config(config, receipt)
     economic = resolve_search_economic_receipt(
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )
@@ -796,12 +893,20 @@ def adaptive_gate(
     config: Mapping[str, Any],
 ) -> dict[str, Any]:
     frame = pd.DataFrame(list(ledger))
-    tranche_start = max(10_000, int(strict_boundary) - 10_000)
+    adaptive_start = int(state.get("adaptive_start_strict", 10_000))
+    tranche_start = max(adaptive_start, int(strict_boundary) - 10_000)
     frame = frame.loc[
         (frame["completion_ordinal"].astype(int) > tranche_start)
         & (frame["completion_ordinal"].astype(int) <= int(strict_boundary))
     ]
-    random_count = int((frame["arm"].astype(str) == ARMS[0]).sum())
+    active_families = set(
+        str(value) for value in state.get("active_program_families", ())
+    )
+    random_mask = frame["arm"].astype(str) == ARMS[0]
+    if active_families:
+        random_mask &= frame["program_family_id"].astype(str).isin(active_families)
+    random_frame = frame.loc[random_mask]
+    random_count = len(random_frame)
     decisions: dict[str, Any] = {}
     updated_states = dict(state["arm_states"])
     for arm in ARMS[1:]:
@@ -810,7 +915,9 @@ def adaptive_gate(
         if common <= 0:
             decisions[arm] = {"decision": "NO_OBSERVATIONS", "same_count": 0}
             continue
-        random_rows = _arm_slice(frame, ARMS[0], common)
+        random_rows = random_frame.sort_values(
+            "arm_completion_ordinal", kind="stable"
+        ).iloc[:common]
         arm_rows = _arm_slice(frame, arm, common)
 
         def metrics(local: pd.DataFrame) -> dict[str, Any]:
@@ -894,7 +1001,7 @@ def adaptive_gate(
 
 
 def _checkpoint_allocation(state: Mapping[str, Any], checkpoint_index: int) -> dict[str, int]:
-    if checkpoint_index < 5:
+    if not bool(state.get("skip_stage0")) and checkpoint_index < 5:
         return {"paired_static": 1_000, "temporal_program_random": 1_000}
     states = dict(state["arm_states"])
     allocation = {ARMS[0]: 400, ARMS[1]: 0, ARMS[2]: 0}
@@ -931,6 +1038,8 @@ def _new_state(source_sha: str, frozen_hash: str, config: Mapping[str, Any]) -> 
         "wall_elapsed_seconds": 0.0,
         "arm_states": {ARMS[1]: "ACTIVE", ARMS[2]: "ACTIVE"},
         "active_program_families": [],
+        "skip_stage0": False,
+        "adaptive_start_strict": 10_000,
         "failure_counts": {},
         "stage0_lane_cursor": 0,
         "evaluation_batch_index": 0,
@@ -955,6 +1064,7 @@ def _program_family_metric_rows(
     ledger: Sequence[Mapping[str, Any]],
     pair_rows: Sequence[Mapping[str, Any]],
     config: Mapping[str, Any],
+    adaptive_start_strict: int = 10_000,
 ) -> list[dict[str, Any]]:
     output: list[dict[str, Any]] = []
     if len(pair_rows) == 5_000:
@@ -977,7 +1087,7 @@ def _program_family_metric_rows(
     if ledger:
         frame = pd.DataFrame(list(ledger))
         frame = frame.loc[
-            (frame["completion_ordinal"].astype(int) > 10_000)
+            (frame["completion_ordinal"].astype(int) > int(adaptive_start_strict))
             & (frame["representation"].astype(str) == "TEMPORAL_PROGRAM")
         ]
         for (arm, family), local in frame.groupby(
@@ -1034,6 +1144,7 @@ def _write_runtime_views(
             ledger=ledger,
             pair_rows=pair_rows,
             config=frozen_config,
+            adaptive_start_strict=int(state.get("adaptive_start_strict", 10_000)),
         ),
     )
     engine._write_parquet(runtime_root / "rejected_candidate_ledger.parquet", rejected)
@@ -1568,10 +1679,11 @@ def _program_process_evidence_errors(
 
 def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) -> dict[str, Any]:
     repo_root = repo_root.resolve()
-    config = engine._read_json(repo_root / CONFIG_PATH)
-    validate_config(config)
-    receipt = validate_receipt(repo_root, config=config, require_authorized=True)
+    base_config = engine._read_json(repo_root / CONFIG_PATH)
+    validate_config(base_config)
+    receipt = validate_receipt(repo_root, config=base_config, require_authorized=True)
     qualification_scope = _qualification_scope(receipt)
+    config = _effective_config(base_config, receipt)
     observed_sha = engine._git_sha(repo_root)
     source_sha = str(source_sha or observed_sha).lower()
     if source_sha != observed_sha:
@@ -1653,7 +1765,23 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         )
     else:
         state = _new_state(source_sha, frozen_hash, config)
-        policies = _stage0_policies(registry=registry, config=config, catalog=catalog)
+        state["skip_stage0"] = bool(qualification_scope.get("skip_stage0"))
+        state["adaptive_start_strict"] = int(
+            qualification_scope.get("adaptive_start_strict", 10_000)
+        )
+        state["active_program_families"] = list(
+            qualification_scope.get("active_program_families", ())
+        )
+        policies = (
+            _later_policies(
+                registry=registry,
+                config=config,
+                catalog=catalog,
+                active_families=state["active_program_families"],
+            )
+            if state["skip_stage0"]
+            else _stage0_policies(registry=registry, config=config, catalog=catalog)
+        )
         ledger: list[dict[str, Any]] = []
         archive = engine.BehaviorArchive()
         pair_rows: list[dict[str, Any]] = []
@@ -1666,6 +1794,11 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         ("evaluation_batch_index", 0),
         ("returned_pair_results", 0),
         ("system_error_count", 0),
+        ("skip_stage0", bool(qualification_scope.get("skip_stage0"))),
+        (
+            "adaptive_start_strict",
+            int(qualification_scope.get("adaptive_start_strict", 10_000)),
+        ),
     ):
         state.setdefault(key, default)
     attempted = set(str(value) for value in state["attempted_exact_ids"])
@@ -1749,7 +1882,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         ):
             checkpoint_start = len(ledger)
             checkpoint_target = checkpoint_start + 2_000
-            if checkpoint_index < 5:
+            if not bool(state.get("skip_stage0")) and checkpoint_index < 5:
                 lane_targets = _stage0_checkpoint_lane_targets(
                     config, checkpoint_index
                 )
@@ -2262,7 +2395,8 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
             state["attempted_exact_ids"] = sorted(attempted)
             state["completed_pair_ids"] = sorted(completed_pairs)
             state["wall_elapsed_seconds"] = elapsed()
-            if checkpoint_index == 4:
+            strict_boundary = len(ledger)
+            if not bool(state.get("skip_stage0")) and checkpoint_index == 4:
                 decision = stage0_family_decisions(pair_rows, config)
                 engine._write_json(runtime_root / "continuation_decision_010000.json", decision)
                 if decision["status"] != "CONTINUE":
@@ -2278,8 +2412,18 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                             catalog=catalog,
                             active_families=state["active_program_families"],
                         )
-            elif checkpoint_index in {9, 14, 19}:
-                boundary = (checkpoint_index + 1) * 2_000
+            elif (
+                strict_boundary > int(state.get("adaptive_start_strict", 10_000))
+                and strict_boundary
+                in {
+                    int(state.get("adaptive_start_strict", 10_000)) + 10_000,
+                    int(state.get("adaptive_start_strict", 10_000)) + 20_000,
+                    int(state.get("adaptive_start_strict", 10_000)) + 30_000,
+                    int(state.get("adaptive_start_strict", 10_000)) + 40_000,
+                }
+                and strict_boundary < int(qualification_scope["strict_cap"])
+            ):
+                boundary = strict_boundary
                 decision = adaptive_gate(
                     ledger,
                     state=state,
@@ -2426,7 +2570,8 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "status": status,
         "terminal_reason": terminal_reason,
         "qualification_scope": qualification_scope,
-        "adaptive_stage_started": strict_count > 10_000,
+        "adaptive_stage_started": strict_count
+        > int(state.get("adaptive_start_strict", 10_000)),
         "producer_source_sha": source_sha,
         "frozen_contract_sha256": frozen_hash,
         "strict_evaluated_count": strict_count,
@@ -2525,7 +2670,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 f"- Behavior families: `{len(archive.champion_by_family):,}`",
                 f"- Matched-positive candidates/families: `{len(matched)}` / `{len(matched_families)}`",
                 f"- Contributing program families: `{sorted(contributing)}`",
-                f"- Stage-0 continuing families: `{state['active_program_families']}`",
+                f"- Active program families: `{state['active_program_families']}`",
                 f"- Adaptive arm states: `{state['arm_states']}`",
                 f"- Terminal reason: `{terminal_reason}`",
                 "",
@@ -2589,7 +2734,12 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
             for path in runtime_root.glob("continuation_decision_*.json")
         ):
             errors.append("qualification_adaptive_decision")
-    if len(ledger) >= 10_000:
+    if bool(qualification_scope.get("skip_stage0")):
+        if len(pairs) != 0:
+            errors.append("adaptive_bootstrap_stage0_pairs_present")
+        if bool(final.get("adaptive_stage_started")) != bool(len(ledger) > 0):
+            errors.append("adaptive_stage_started")
+    elif len(ledger) >= 10_000:
         if len(pairs) != 5_000:
             errors.append("stage0_pair_count")
         else:

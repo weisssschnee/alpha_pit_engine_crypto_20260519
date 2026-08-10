@@ -43,6 +43,8 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _checkpoint_qualification_terminal_reason,
+    _checkpoint_allocation,
+    _effective_config,
     _sha256_committed_file,
     _load_checkpoint,
     _new_state,
@@ -73,6 +75,9 @@ def test_stage0_qualification_scope_is_receipt_scoped_and_exact() -> None:
     assert _qualification_scope({}) == {
         "strict_cap": 50_000,
         "stage0_only": False,
+        "skip_stage0": False,
+        "adaptive_start_strict": 10_000,
+        "active_program_families": [],
         "scope": "FULL_SEQUENTIAL_PROGRAM",
     }
     assert _qualification_scope(
@@ -85,6 +90,9 @@ def test_stage0_qualification_scope_is_receipt_scoped_and_exact() -> None:
     ) == {
         "strict_cap": 2_000,
         "stage0_only": True,
+        "skip_stage0": False,
+        "adaptive_start_strict": 10_000,
+        "active_program_families": [],
         "scope": "FRESH_STATE_CHECKPOINT_ONLY_THROUGHPUT_QUALIFICATION",
     }
     assert _qualification_scope(
@@ -97,7 +105,50 @@ def test_stage0_qualification_scope_is_receipt_scoped_and_exact() -> None:
     ) == {
         "strict_cap": 10_000,
         "stage0_only": True,
+        "skip_stage0": False,
+        "adaptive_start_strict": 10_000,
+        "active_program_families": [],
         "scope": "FRESH_STATE_STAGE0_QUALIFICATION_ONLY",
+    }
+
+
+def test_adaptive_broad_scope_is_fresh_state_and_skips_spent_stage0() -> None:
+    replacement = {
+        "adaptive_broad_fresh_state": True,
+        "prequalified_program_families": [
+            "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+            "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        ],
+        "fresh_state_seeds": [1118667271, 873488160, 3664147548, 193613803],
+        "qualification_strict_cap": 50_000,
+        "stage0_only": False,
+        "prior_runtime_state_import_allowed": False,
+        "old_candidate_import": False,
+        "old_distribution_import": False,
+        "old_population_import": False,
+        "old_archive_import": False,
+    }
+    receipt = {"replacement_authorization": replacement}
+    scope = _qualification_scope(receipt)
+    assert scope == {
+        "strict_cap": 50_000,
+        "stage0_only": False,
+        "skip_stage0": True,
+        "adaptive_start_strict": 0,
+        "active_program_families": [
+            "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+            "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        ],
+        "scope": "FRESH_STATE_PREQUALIFIED_ADAPTIVE_BROAD_PROGRAM",
+    }
+    effective = _effective_config(CONFIG, receipt)
+    assert effective["seed_authority"]["seeds"] == replacement["fresh_state_seeds"]
+    state = _new_state("a" * 40, "B" * 64, effective)
+    state["skip_stage0"] = True
+    assert _checkpoint_allocation(state, 0) == {
+        "temporal_program_random": 400,
+        "temporal_program_cem": 800,
+        "temporal_program_evolution": 800,
     }
 
 
@@ -807,3 +858,62 @@ def test_stage0_continuation_is_family_local_or_plus_breadth_not_all_family_veto
     assert decision["continuing_families"] == [
         "P1_POSITION_STATE_CHANGE_TO_RESPONSE"
     ]
+
+
+def test_adaptive_gate_excludes_inactive_family_random_diagnostics() -> None:
+    rows = []
+    ordinal = 0
+
+    def add(arm: str, family: str, reward: float, positive: bool) -> None:
+        nonlocal ordinal
+        ordinal += 1
+        rows.append(
+            {
+                "arm": arm,
+                "completion_ordinal": ordinal,
+                "arm_completion_ordinal": ordinal,
+                "behavior_family_id": f"behavior-{ordinal}",
+                "left_incremental_net_mean": 0.1 if positive else -0.1,
+                "right_incremental_net_mean": 0.1 if positive else -0.1,
+                "replicated_candidate": positive,
+                "program_family_id": family,
+                "search_reward": reward,
+                "total_process_cpu_seconds": 1.0,
+            }
+        )
+
+    for family in (
+        "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+    ):
+        add("temporal_program_random", family, 0.0, False)
+        add("temporal_program_random", family, 0.0, False)
+    add("temporal_program_random", "P2_RECENT_CROWDING_EVENT_TO_RESPONSE", 100.0, True)
+    add("temporal_program_random", "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION", 100.0, True)
+    for family in (
+        "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+    ):
+        add("temporal_program_cem", family, 1.0, True)
+        add("temporal_program_cem", family, 1.0, True)
+
+    decision = program_module.adaptive_gate(
+        rows,
+        state={
+            "adaptive_start_strict": 0,
+            "active_program_families": [
+                "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+                "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+            ],
+            "arm_states": {
+                "temporal_program_cem": "ACTIVE",
+                "temporal_program_evolution": "ACTIVE",
+            },
+        },
+        strict_boundary=len(rows),
+        config=CONFIG,
+    )
+    cem = decision["arm_decisions"]["temporal_program_cem"]
+    assert cem["decision"] == "ACTIVE"
+    assert cem["same_count"] == 4
+    assert cem["random"]["mean_search_reward"] == 0.0
