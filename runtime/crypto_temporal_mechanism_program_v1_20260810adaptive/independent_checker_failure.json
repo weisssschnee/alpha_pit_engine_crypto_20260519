@@ -1,0 +1,12 @@
+{
+  "artifact_integrity_status": "INCOMPLETE_NORMAL_TERMINAL",
+  "errors": [
+    "missing:final_decision.json",
+    "missing:run_manifest.json"
+  ],
+  "local_checker_reproduced": true,
+  "pc2_checker_reproduced": true,
+  "run_validity_status": "INVALID",
+  "sealed_reads": 0,
+  "status": "FAIL"
+}

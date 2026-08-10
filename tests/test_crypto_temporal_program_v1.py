@@ -43,6 +43,7 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _checkpoint_qualification_terminal_reason,
+    _merge_checkpoint_terminal_reason,
     _checkpoint_allocation,
     _effective_config,
     _sha256_committed_file,
@@ -198,6 +199,17 @@ def test_checkpoint_only_qualification_stops_after_first_checkpoint() -> None:
         qualification_scope=scope,
         observed_strict_per_hour=2_000.0,
         minimum_strict_per_hour=2_777.7778,
+    ) == "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+
+
+def test_checkpoint_qualification_cannot_overwrite_frozen_gate_stop() -> None:
+    assert _merge_checkpoint_terminal_reason(
+        "STOP_ALL_ADAPTIVE_ARMS_EXITED",
+        None,
+    ) == "STOP_ALL_ADAPTIVE_ARMS_EXITED"
+    assert _merge_checkpoint_terminal_reason(
+        None,
+        "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR",
     ) == "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
 
 

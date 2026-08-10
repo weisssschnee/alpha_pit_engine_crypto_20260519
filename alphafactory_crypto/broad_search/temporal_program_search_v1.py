@@ -339,6 +339,14 @@ def _checkpoint_qualification_terminal_reason(
     return None
 
 
+def _merge_checkpoint_terminal_reason(
+    current_reason: str | None,
+    qualification_reason: str | None,
+) -> str | None:
+    """Keep an already-issued market/gate stop authoritative."""
+    return current_reason if current_reason is not None else qualification_reason
+
+
 def validate_receipt(
     repo_root: Path,
     *,
@@ -2456,13 +2464,17 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 identities=identities,
             )
             observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
-            terminal_reason = _checkpoint_qualification_terminal_reason(
+            qualification_terminal_reason = _checkpoint_qualification_terminal_reason(
                 checkpoint_index=checkpoint_index,
                 qualification_scope=qualification_scope,
                 observed_strict_per_hour=observed_rate,
                 minimum_strict_per_hour=float(
                     budget["minimum_strict_per_hour_after_first_checkpoint"]
                 ),
+            )
+            terminal_reason = _merge_checkpoint_terminal_reason(
+                terminal_reason,
+                qualification_terminal_reason,
             )
             _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
             if terminal_reason:

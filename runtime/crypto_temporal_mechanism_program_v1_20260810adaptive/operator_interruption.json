@@ -1,0 +1,7 @@
+﻿{
+    "status":  "STOPPED_AFTER_FROZEN_GATE_VIOLATION",
+    "frozen_gate":  "STOP_ALL_ADAPTIVE_ARMS_EXITED",
+    "preserved_checkpoint":  "checkpoint_017",
+    "producer_pid":  28764,
+    "stopped_at":  "2026-08-10T18:34:32.6947365+08:00"
+}

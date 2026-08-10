@@ -1610,3 +1610,34 @@ The fixed target, mapping, 5 bps cost, reward, seeds, compiler, AST and evaluato
 were unchanged. No prior state was imported and no further search, adaptive arm,
 validation, OOS, promotion, tuning, rescue, new Arena or new Graph node is
 authorized by this closure.
+
+## Completed phase: adaptive broad gate invalid stop and source repair
+
+The one-time fresh-state adaptive-broad receipt is consumed. Producer
+`6450be52f7ff85385ac7de86e1d62819a48c1e66` and PC2 task
+`job_20260810_101654_098175` reached frozen gates at 10k, 20k and 30k strict
+rows using only P1/P4, fresh seeds, Random/CEM/Evolution, the unchanged 115-field
+carrier, Binance USD-M target, 4h horizon, existing mapping, 5 bps cost and
+dual-axis evaluator. No prior campaign state or sealed evidence was read.
+
+CEM moved to diagnostic at 10k and exited at 20k. Evolution improved equal-count
+economic density at every gate, reaching 605 dual-axis net-positive and 393
+2-of-3 replicated rows per 1k at 30k versus Random's 126 and 43. That improvement
+collapsed into one program family: the positive-family concentration rose to
+86.12%, so Evolution failed breadth and exited. The frozen 30k decision was
+`STOP_ALL_ADAPTIVE_ARMS_EXITED`; neither arm qualifies for validation, OOS,
+promotion or a future Arena.
+
+The producer then violated that stop because the subsequent throughput check
+overwrote the existing terminal reason with `None`. It continued Random-only
+until operator intervention at 36,277 observed strict rows; checkpoint 017
+preserves 36,000. All 6,000 checkpointed post-gate rows are contamination
+evidence only and are excluded from economic interpretation. The process was
+stopped without restart or rescue. Independent checking correctly fails on the
+missing normal terminal manifest/final decision, so the run is recorded as
+`ENGINE_RUN_INVALID`, not retrofitted into a valid campaign.
+
+Source now preserves an already-issued gate terminal reason when applying
+checkpoint throughput qualification. The focused regression suite passes 32/32.
+This source repair changes no market, optimizer or evaluator semantics and grants
+no new research authority. No rerun is authorized by this closure.

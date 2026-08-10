@@ -1,0 +1,82 @@
+{
+  "candidate_evaluations": 0,
+  "catalog_count": 464,
+  "catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "family_count": 4,
+  "market_arrays_read": 0,
+  "paired_context_admission": "train",
+  "records": [
+    {
+      "depth": 4,
+      "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "bybit__open_interest_min",
+        "hyperliquid_futures__open_interest_min",
+        "trade_count_le_100"
+      ],
+      "rolling_windows": [
+        48,
+        72,
+        72,
+        5
+      ],
+      "static_candidate_id": "E8C155B72AB55AA54BC4FB159925BB58474070629B28817F10417E2362F7F689",
+      "temporal_candidate_id": "3AA9C5ABFA0AD99EA441AC7664AC19D92DC43E48B2CF19C06BB5775AE8332236"
+    },
+    {
+      "depth": 4,
+      "family_id": "P2_RECENT_CROWDING_EVENT_TO_RESPONSE",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "signed_aggressor_notional",
+        "hyperliquid_futures__open_interest_max"
+      ],
+      "rolling_windows": [
+        72,
+        8,
+        24
+      ],
+      "static_candidate_id": "D9FCCBF8336E5AF8A3366939BED1B5718F69892529EE1866A292ADA47B39D49E",
+      "temporal_candidate_id": "4498691762413B3D1AE588DD1F357B2E3B083590DF0C7C158DF26CAE05802CC9"
+    },
+    {
+      "depth": 5,
+      "family_id": "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "close_to_open_bps",
+        "volume_imbalance"
+      ],
+      "rolling_windows": [
+        72,
+        2,
+        12,
+        9,
+        12,
+        9,
+        8
+      ],
+      "static_candidate_id": "55A1C5C6D7D094E1CD996CD1DC17B505B0193FDF3D65256D6D270A19387E58A7",
+      "temporal_candidate_id": "36B242F70D4DD8D6FFAC35299FFAACEB6EA77BF69DCAC666812D06C361402C0C"
+    },
+    {
+      "depth": 4,
+      "family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+      "raw_attempts": 1,
+      "raw_fields": [
+        "hyperliquid_futures__open_interest_max",
+        "trade_count_le_100"
+      ],
+      "rolling_windows": [
+        24,
+        48,
+        72,
+        72
+      ],
+      "static_candidate_id": "61CE322DE322548881EDA91A044F6992E0077C73C6E222403755C61EC8671A67",
+      "temporal_candidate_id": "CB34493988455B9E1A818FA5F38AA89ED378BBB4F8E44FA90402C0DEB4A6AF20"
+    }
+  ],
+  "status": "PASS"
+}

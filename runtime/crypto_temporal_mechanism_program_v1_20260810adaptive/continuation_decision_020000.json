@@ -1,0 +1,73 @@
+{
+  "arm_decisions": {
+    "temporal_program_cem": {
+      "breadth_pass": false,
+      "decision": "EXITED",
+      "observed": {
+        "behavior_family_count": 997,
+        "dual_axis_net_positive_per_1k": 157.0,
+        "mean_search_reward": -0.4796024575251263,
+        "new_behavior_families_per_1k": 997.0,
+        "replicated_2_of_3_per_1k": 62.0,
+        "same_count": 1000,
+        "strict_per_process_cpu_hour": 1582.5697525861003,
+        "top_decile_search_reward": 0.10680975283671212,
+        "top_program_family_positive_share": 0.8662420382165605
+      },
+      "productivity_improvement": true,
+      "quality_improvement": true,
+      "random": {
+        "behavior_family_count": 1000,
+        "dual_axis_net_positive_per_1k": 134.0,
+        "mean_search_reward": -0.5255633354358754,
+        "new_behavior_families_per_1k": 1000.0,
+        "replicated_2_of_3_per_1k": 44.0,
+        "same_count": 1000,
+        "strict_per_process_cpu_hour": 1657.0294295330975,
+        "top_decile_search_reward": 0.025930058308661588,
+        "top_program_family_positive_share": 0.7164179104477612
+      },
+      "same_count": 1000
+    },
+    "temporal_program_evolution": {
+      "breadth_pass": false,
+      "decision": "DIAGNOSTIC",
+      "observed": {
+        "behavior_family_count": 1763,
+        "dual_axis_net_positive_per_1k": 514.2061281337047,
+        "mean_search_reward": -0.12028276195945345,
+        "new_behavior_families_per_1k": 982.1727019498608,
+        "replicated_2_of_3_per_1k": 290.8077994428969,
+        "same_count": 1795,
+        "strict_per_process_cpu_hour": 1538.3482307254528,
+        "top_decile_search_reward": 0.4619194830537344,
+        "top_program_family_positive_share": 0.7778981581798483
+      },
+      "productivity_improvement": true,
+      "quality_improvement": true,
+      "random": {
+        "behavior_family_count": 1794,
+        "dual_axis_net_positive_per_1k": 125.34818941504179,
+        "mean_search_reward": -0.5075846067922845,
+        "new_behavior_families_per_1k": 999.4428969359332,
+        "replicated_2_of_3_per_1k": 39.55431754874652,
+        "same_count": 1795,
+        "strict_per_process_cpu_hour": 1638.7497622519495,
+        "top_decile_search_reward": 0.031143718879985717,
+        "top_program_family_positive_share": 0.7288888888888889
+      },
+      "same_count": 1795
+    }
+  },
+  "arm_states_after": {
+    "temporal_program_cem": "EXITED",
+    "temporal_program_evolution": "DIAGNOSTIC"
+  },
+  "arm_states_before": {
+    "temporal_program_cem": "DIAGNOSTIC",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "next_stage_proposals_generated": false,
+  "status": "CONTINUE",
+  "strict_boundary": 20000
+}

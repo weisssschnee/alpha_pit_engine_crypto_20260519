@@ -1,0 +1,24 @@
+{
+  "artifact_bundle_sha256": "EFBDBB7FA492A1AB96D1FC19C32E668584F5F7A2DB2D0E15F9A99A03D56FA542",
+  "artifact_bundle_size": 269356189,
+  "external_evidence_path": "G:/AlphaFactory_CryptoData/deliveries/crypto_temporal_adaptive_broad_20260810/crypto_temporal_adaptive_broad_compact_evidence_20260810.tar.gz",
+  "checkpoint_count": 18,
+  "files": {
+    "behavior_archive.parquet": "ADD236EDC5313BAF09A86303BE54174668AFF4C41F21C1AEF59D0155E6D128CC",
+    "candidate_ledger.parquet": "90DD15F53AC0891F8D157B50D8027EAABFBF9C195D1717C372041FB5A0067C47",
+    "checkpoints/checkpoint_017/manifest.json": "E70D2103D1050890CD347558EB9D73C24763F6914DC4417D6F2B8E490BD95EF9",
+    "checkpoints/checkpoint_017/state.json": "AC341BB5D316E8F35E2A8ECA4F2058EA9AC411E1E2388B17B107806FA5AD8F1F",
+    "continuation_decision_010000.json": "027E174A9DA5912E55794F0B9F85F282CD4CD384121C645A9119EAA3F72D504D",
+    "continuation_decision_020000.json": "2E93704954679B812EEAE5AB834C9FE797E9F5214753F95516D091413CDF7AA4",
+    "continuation_decision_030000.json": "708285F7F4DC02A02B3DFD99CD908C79933832B994D53525DEFEE2EDB9038F55",
+    "frozen_contract.json": "25C8D3A9A7621EDE81D2F8C9091B26D8D8EDE2FD846854CD0248BBF528BE76FE",
+    "operator_interruption.json": "175D95E4305D1F78BE5AF16AA18A09CD83984190CC9471B31C995E793BF6CD67"
+  },
+  "generation_attempts_at_checkpoint": 59084,
+  "post_gate_checkpoint_rows_excluded": 6000,
+  "preserved_checkpoint": "checkpoint_017",
+  "producer_source_sha": "6450be52f7ff85385ac7de86e1d62819a48c1e66",
+  "status": "ENGINE_RUN_INVALID",
+  "strict_evaluated_at_checkpoint": 36000,
+  "terminal_reason": "GATE_TERMINAL_REASON_OVERWRITTEN_BY_QUALIFICATION_NONE"
+}

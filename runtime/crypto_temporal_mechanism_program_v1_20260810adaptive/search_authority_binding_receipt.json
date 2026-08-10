@@ -49,13 +49,18 @@
   },
   "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
   "receipt_id": "CRYPTO_TEMPORAL_MECHANISM_PROGRAM_V1_RECEIPT",
-  "receipt_sha256": "6AC05E0BB6FFB1A925EA7AFBAD1EC8DD2CF4F875E1843A4DFA5512DFCDA4FA45",
+  "receipt_sha256": "D53B375618DA58F80B52D9BFA8C86E08B36E30C2C7400C5067F79E005CCF0C24",
   "replacement_authorization": {
     "adaptive_broad_fresh_state": true,
     "authority": "CURRENT_USER_INSTRUCTION_20260810_MORE_AGGRESSIVE_BROAD",
     "budget_contract_unchanged": true,
     "fresh_seed_contract_new": true,
-    "fresh_state_seeds": [1118667271, 873488160, 3664147548, 193613803],
+    "fresh_state_seeds": [
+      1118667271,
+      873488160,
+      3664147548,
+      193613803
+    ],
     "market_contract_unchanged": true,
     "old_archive_import": false,
     "old_candidate_import": false,
@@ -76,22 +81,8 @@
     "seed_contract_unchanged": false,
     "stage0_only": false
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "checkpoint_count": 18,
-    "generation_attempts_at_checkpoint": 59084,
-    "frozen_stop_boundary": 30000,
-    "generation_attempts_observed_before_stop": 59518,
-    "independent_checker_status": "FAIL_MISSING_NORMAL_TERMINAL_ARTIFACTS",
-    "post_gate_checkpoint_rows_excluded": 6000,
-    "producer_source_sha": "6450be52f7ff85385ac7de86e1d62819a48c1e66",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_mechanism_program_v1_20260810adaptive",
-    "status": "ENGINE_RUN_INVALID",
-    "stopped_after_observed_strict_count": 36277,
-    "strict_evaluated_count": 36000,
-    "terminal_reason": "GATE_TERMINAL_REASON_OVERWRITTEN_BY_QUALIFICATION_NONE"
-  },
+  "run_authorized": true,
+  "schema_version": 1,
   "selection_evidence": {
     "committed_file_sha256": {
       "runtime/crypto_temporal_mechanism_program_v1_20260810s0/continuation_decision_010000.json": "10C1C73BB1FD8AADB0F95B42EDDA12F2325DCC7485088611FDB860C5C14F57EE",
@@ -103,6 +94,5 @@
     ],
     "producer_source_sha": "a051f557844d59d829be80c33b7517157828a482"
   },
-  "schema_version": 1,
-  "status": "RUN_AUTHORIZATION_CONSUMED"
+  "status": "RUN_AUTHORIZED_DEVELOPMENT_ONLY"
 }

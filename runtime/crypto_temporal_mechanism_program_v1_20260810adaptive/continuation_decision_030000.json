@@ -1,0 +1,48 @@
+{
+  "arm_decisions": {
+    "temporal_program_cem": {
+      "decision": "NO_OBSERVATIONS",
+      "same_count": 0
+    },
+    "temporal_program_evolution": {
+      "breadth_pass": false,
+      "decision": "EXITED",
+      "observed": {
+        "behavior_family_count": 991,
+        "dual_axis_net_positive_per_1k": 605.0,
+        "mean_search_reward": -0.00672748164355256,
+        "new_behavior_families_per_1k": 991.0,
+        "replicated_2_of_3_per_1k": 393.0,
+        "same_count": 1000,
+        "strict_per_process_cpu_hour": 1496.6772984455083,
+        "top_decile_search_reward": 0.9287126373243191,
+        "top_program_family_positive_share": 0.8611570247933884
+      },
+      "productivity_improvement": true,
+      "quality_improvement": true,
+      "random": {
+        "behavior_family_count": 1000,
+        "dual_axis_net_positive_per_1k": 126.0,
+        "mean_search_reward": -0.5033219132056477,
+        "new_behavior_families_per_1k": 1000.0,
+        "replicated_2_of_3_per_1k": 43.0,
+        "same_count": 1000,
+        "strict_per_process_cpu_hour": 1643.8238882428066,
+        "top_decile_search_reward": 0.0357988407792182,
+        "top_program_family_positive_share": 0.7142857142857143
+      },
+      "same_count": 1000
+    }
+  },
+  "arm_states_after": {
+    "temporal_program_cem": "EXITED",
+    "temporal_program_evolution": "EXITED"
+  },
+  "arm_states_before": {
+    "temporal_program_cem": "EXITED",
+    "temporal_program_evolution": "DIAGNOSTIC"
+  },
+  "next_stage_proposals_generated": false,
+  "status": "STOP_ALL_ADAPTIVE_ARMS_EXITED",
+  "strict_boundary": 30000
+}
