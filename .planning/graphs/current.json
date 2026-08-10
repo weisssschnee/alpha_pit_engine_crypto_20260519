@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-10T11:13:14.035459+00:00",
+  "generated_at": "2026-08-10T11:18:09.323023+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3082,7 +3082,10 @@
         "P1 AND P4 LOCAL ROUTES ONLY",
         "TEMPORAL RANDOM GLOBALLY BELOW STATIC",
         "9839 BEHAVIOR FAMILIES ZERO MATCHED POSITIVE",
-        "CHECKER PASS ZERO SEALED READS NO OOS OR PROMOTION"
+        "CHECKER PASS ZERO SEALED READS NO OOS OR PROMOTION",
+        "ADAPTIVE BROAD INVALID AFTER 30K STOP OVERRIDE",
+        "EVOLUTION DENSE BUT 86.12 PERCENT TOP FAMILY",
+        "STOP AUTHORITY SOURCE REPAIRED 523 TESTS"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -6167,7 +6170,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
       "validation": {
-        "checked_at": "2026-08-10T11:07:08.727252+00:00",
+        "checked_at": "2026-08-10T11:18:09.323023+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
         "evidence_sha256": "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
         "level": "PARTIAL",
@@ -8093,7 +8096,10 @@
         "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
-        "HELD-OUT CALIBRATION VERIFIED"
+        "HELD-OUT CALIBRATION VERIFIED",
+        "UNPURGED EVIDENCE SUPERSEDED",
+        "ECONOMIC INCREMENT NOT ESTABLISHED",
+        "NO OOS"
       ],
       "color": "#2e7d32",
       "contracts": [
@@ -8447,7 +8453,7 @@
       "required": false,
       "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-08-09T23:16:17.213760+00:00",
+        "checked_at": "2026-08-10T11:18:09.323023+00:00",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
         "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
         "level": "PARTIAL",
