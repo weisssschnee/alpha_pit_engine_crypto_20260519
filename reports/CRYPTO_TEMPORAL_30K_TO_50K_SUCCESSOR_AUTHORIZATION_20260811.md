@@ -4,22 +4,24 @@
 
 `GO_WITH_LIMITED_SEARCH_POLICY_CHANGE`
 
-The current user authorized exactly one PC2 development continuation in
-`30K_TO_50K_SUCCESSOR` mode. The authorization is schema-2, branch-,
+The current user authorized one PC2 development continuation in
+`30K_TO_50K_SUCCESSOR` mode. The first process failed before market access
+because its Git checkout omitted the manifest-bound carrier cache. One
+source-only replacement is now authorized; it is schema-2, branch-,
 implementation-, component-, host-, workspace- and runtime-bound. It does not
 authorize validation, OOS, holdout, forward reads, promotion, rescue, reseed,
-tuning, automatic expansion or a second successor.
+tuning, automatic expansion or a second replacement.
 
 ## Bound identity
 
-- implementation SHA: `b5985037492a81198953629480c75db12e2a8afd`
+- implementation SHA: `c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb`
 - branch: `experiment/crypto-p4-pocket-validation-v1-20260811`
-- authorization SHA256: `F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A`
-- authorization decision: `USER_GO_WITH_LIMITED_SEARCH_POLICY_CHANGE_20260811`
+- authorization SHA256: `6C294B79185C1E97657A5C2EC958C9DE585450F1B5868C382E85B72E776C994C`
+- authorization decision: `USER_GO_WITH_LIMITED_SEARCH_POLICY_CHANGE_PREMARKET_REPLACEMENT_20260811`
 - PC2 host: `desktop-a2h3a2g`
-- PC2 workspace: `C:\HermesWorker\workspace\crypto_temporal_successor_b5985037`
-- workspace identity SHA256: `237C577530372798A4E021721764830F0544F0FC0054C9DE3742A442CFBDA71D`
-- runtime id: `crypto_temporal_program_30k_to_50k_successor_v1_20260811`
+- PC2 workspace: `C:\HermesWorker\workspace\crypto_temporal_successor_replacement_c1ab6bf6`
+- workspace identity SHA256: `805E8957A78A903A8E487B0E92385BF98D7C305E151FC6D75C96FB468B53AD41`
+- runtime id: `crypto_temporal_program_30k_to_50k_successor_v1_20260811r1`
 - reconstructed policy bundle SHA256: `DA229B716EC23C864C25E89443241345ECA645DB7EC7C7B1D57E0C1C7EA4485F`
 - source artifact identity SHA256: `4A86407E9D399EDF4900AFB98A27B0FDC5FFE34D138D96882FCF30706A3338F6`
 
@@ -36,6 +38,12 @@ tuning, automatic expansion or a second successor.
 - family concentration: allocation/diagnostic only, never a campaign-stop owner
 
 ## PC2 preflight evidence
+
+The first task `job_20260811_212229_f6d45d` is retained as
+`PRE_MARKET_DEPLOYMENT_INVALID`: its launch claim is hash-bound at
+`09D63C46C65037823776F91DD2E467BD0CE882C007715E98DE105AA143A0550A`,
+and it observed zero market arrays, zero candidate evaluations and zero sealed
+reads. Its old runtime cannot resume.
 
 The physical PC2 preflight observed no active Python process and no active
 Crypto Search task. The machine exposed 20 logical processors, about 21.1 GiB
@@ -56,7 +64,9 @@ and checkpoint-017 state
 
 The authorized preflight returned `SUCCESSOR_PREFLIGHT_PASS`, reconstructed the
 30,000-row state with zero suffix contribution, derived the four frozen fresh
-Random lane seeds, and observed:
+Random lane seeds, verified the 122-file carrier cache bundle
+`340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`,
+and observed:
 
 ```text
 market_arrays_read: 0

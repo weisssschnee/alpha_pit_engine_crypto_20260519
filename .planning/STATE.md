@@ -4,6 +4,32 @@ Last updated: 2026-08-11 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_PRE_MARKET_REPLACEMENT_AUTHORIZED_NOT_STARTED`
+
+One source-only schema-2 replacement is now authorized for the still-unperformed
+market run. It is bound to repaired implementation
+`c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb`, authorization SHA256
+`6C294B79185C1E97657A5C2EC958C9DE585450F1B5868C382E85B72E776C994C`,
+PC2 workspace
+`C:\HermesWorker\workspace\crypto_temporal_successor_replacement_c1ab6bf6`
+and distinct runtime
+`crypto_temporal_program_30k_to_50k_successor_v1_20260811r1`. The replacement
+receipt binds the old authorization, failed task and launch-claim hash; the old
+runtime cannot resume. PC2 preflight independently verified the tracked carrier
+manifest plus all 122 required cache files, 598,775,942 bytes and directory
+bundle SHA256
+`340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`
+without loading market arrays. The replacement runtime remains absent and the
+observed market, candidate and sealed counts remain zero.
+
+The research contract is unchanged: only the valid 30k prefix contributes;
+Random is fresh; CEM/Evolution restore only the verified bundle; allocation is
+20/20/60; decisions occur every additional 5k; cumulative 50k is the mechanical
+hard stop; and validation/OOS/holdout/forward/promotion remain forbidden. No
+second replacement is authorized.
+
+The preceding repaired boundary was:
+
 `CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_PRE_MARKET_DEPLOYMENT_INVALID_SOURCE_REPAIR_IMPLEMENTED_REPLACEMENT_NOT_AUTHORIZED`
 
 The sole authorized PC2 task `job_20260811_212229_f6d45d` wrote the one-time
