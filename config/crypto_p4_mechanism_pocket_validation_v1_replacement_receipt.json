@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "receipt_id": "CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1",
+  "decision_id": "USER_AUTHORIZED_SOURCE_REPAIRED_P4_POCKET_REPLACEMENT_20260811",
+  "status": "RUN_AUTHORIZED_SOURCE_REPAIRED_REPLACEMENT",
+  "run_authorized": true,
+  "runtime_date": "20260811r1",
+  "source_implementation_sha": "068ab807274525f22de5af3d891444609844d02c",
+  "allowed_post_implementation_paths": [
+    "config/crypto_p4_mechanism_pocket_validation_v1_replacement_receipt.json"
+  ],
+  "source_components": {
+    "validation_gate": {
+      "path": "alphafactory_crypto/broad_search/p4_mechanism_pocket_validation_v1.py",
+      "sha256": "4BABE34EAB238DF4F76D9BC00C8FC9B39FB6CB9C6997A4DF506FCEF0CA16E9CD"
+    },
+    "pc2_launcher": {
+      "path": "scripts/crypto_p4_mechanism_pocket_validation_v1_pc2_launcher.ps1",
+      "sha256": "F67E38FA270011132217CFD1A8A0D5C5BC72D324CEF9796AA32FC3DF772373C6"
+    },
+    "daily_aggtrades_adapter": {
+      "path": "scripts/acquire_binance_daily_aggtrades_compact_v1.py",
+      "sha256": "7D0ACA2583BE4F37B7DCB55A51709AC79DE4DD6B4C43B60B6D567C493BF10490"
+    },
+    "target_authority": {
+      "path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+      "sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60"
+    }
+  },
+  "replacement_for": {
+    "consumed_receipt_path": "config/crypto_p4_mechanism_pocket_validation_v1_receipt.json",
+    "consumed_receipt_file_sha256": "188C400EA350DB0D1C7B3BB7A01389A70557D3B7FA157FAAEFB11409E7D64D4A",
+    "failed_task_id": "job_20260811_010941_00029d",
+    "failed_producer_source_sha": "5179bd2875d4bad56c02919bf774ddc7483ee984",
+    "failure_class": "ORCHESTRATION_NATIVE_EXIT_CODE_NULL",
+    "strict_evaluated_count": 0,
+    "candidate_evaluation_started": false,
+    "candidate_generation_performed": false,
+    "optimizer_feedback_written": false,
+    "archive_written": false,
+    "oos_read_count": 0,
+    "replacement_scope": "REUSE_HASH_BOUND_OI_THEN_ACQUIRE_ONLY_MISSING_AGGTRADES_AND_EVALUATE_EXACT_FROZEN_80"
+  },
+  "selection_receipt_path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/behavior_family_selection_receipt.json",
+  "selection_receipt_file_sha256": "297C680BF363C8705052BB803E9E1D7EE7F2D64E61A33AB16FD75E52DE923627",
+  "selection_receipt_sha256": "F80DA0531A46660766423B90073F1F861DA89F56A00F3869939BF7CFFCDE6858",
+  "selection_sha256": "E9AB5D4D27B3BC20C0AB6AB673DE7FE6D505084B7B98F910E21CCB606D3916C8",
+  "selection": {
+    "candidate_count": 80,
+    "discovery_matched_positive": 40,
+    "evolution_near_miss_control": 20,
+    "random_near_miss_control": 20,
+    "positive_program_families": {
+      "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 8,
+      "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 32
+    },
+    "train_orientation_frozen_for_all_candidates": true,
+    "candidate_generation_allowed": false
+  },
+  "development_fresh_interval": {
+    "feature_warmup_start": "2026-07-18T00:00:00Z",
+    "evaluation_start": "2026-08-01T00:00:00Z",
+    "evaluation_end_exclusive": "2026-08-10T00:00:00Z",
+    "role": "DEVELOPMENT_FRESH_NO_FEEDBACK_NOT_OOS",
+    "warmup_rows_cannot_enter_labels_or_metrics": true
+  },
+  "economic_receipt_path": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+  "economic_receipt_file_sha256": "A85E83412F274F4AC0117193F79BC9FF6E2FB332581B203BCC695F906CD204F4",
+  "economic_contract": {
+    "target": "BINANCE_USDM_DELAYED_OPEN_2H_V1",
+    "horizon_hours": 4,
+    "mapping": "EXISTING_CANDIDATE_MAPPING_UNCHANGED",
+    "cost_bps": 5.0,
+    "reward": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2_UNCHANGED",
+    "matched_control": "DUAL_AXIS_A_B_AB",
+    "direction": "TRAIN_FROZEN_SIGN_ORIENTATION"
+  },
+  "carrier": {
+    "field_count": 115,
+    "previous_extended_identity_sha256": "48981474E2C77D0A91A0932211C101CB043D79D801CE3577E5CA6979A89EFA00",
+    "new_oi_cache": ".cache/crypto_p4_mechanism_pocket_validation_v1_replacement/oi_mark_20260801_20260810",
+    "new_aligned_cache": ".cache/crypto_p4_mechanism_pocket_validation_v1_replacement/aligned_new_20260801_20260810",
+    "extended_aligned_cache": ".cache/crypto_p4_mechanism_pocket_validation_v1_replacement/aligned_extended_to_20260810",
+    "target_cache": ".cache/crypto_p4_mechanism_pocket_validation_v1_replacement/binance_target_to_20260810",
+    "missing_value_fill": null,
+    "dynamic_eligibility_intersection": true
+  },
+  "retained_oi_payload": {
+    "reuse_authorized": true,
+    "source_root": "C:\\HermesWorker\\data\\crypto_p4_pocket_validation_20260811\\oi_mark_compact_20260801_20260809",
+    "manifest_path": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/retained_oi_payload_manifest.json",
+    "manifest_file_sha256": "B169203566B7AEB0DEBA1B223D664476745990F7446227B82DAE8CE75A7EBE33",
+    "manifest_sha256": "AD936EA4CE9C3A9239653E80497E036BCA22167B96A1E6D48C8AA69D52348B84",
+    "artifact_bundle_sha256": "D79B31BCC3BFD53984BCD20C8423584F65CF2A28452DB6362CD4B35CDE3C825B",
+    "file_count": 84,
+    "total_bytes": 18698530,
+    "oi_completed_days": 27,
+    "oi_failure_count": 0,
+    "frozen_symbol_map_exact_match": true,
+    "redownload_allowed": false
+  },
+  "acquisition": {
+    "binance_source": "OFFICIAL_BINANCE_VISION_USDM_DAILY_AGGTRADES",
+    "binance_probe_required": "PASS_SOURCE_METADATA_AVAILABILITY",
+    "binance_base_module_sha256": "67355B7B5B8D34E6039733B4CA23116F1D9B6B4FBB6A69253F13B82DEF3A982F",
+    "classification_sha256": "B4BB2C7C8465AFA5B447554695DA7C036B5CF15B03420E47C6DDFF43D7A96BC6",
+    "binance_download_workers": 3,
+    "network_concurrency_cap": 3,
+    "raw_zip_retained": false,
+    "oi_mark_source": "HASH_BOUND_RETAINED_COMPLETE_PAYLOAD",
+    "oi_mark_redownload_allowed": false,
+    "no_fill": true
+  },
+  "compute": {
+    "candidate_count": 80,
+    "workers_default": 10,
+    "workers_fallback": 8,
+    "wall_limit_seconds": 3600,
+    "checkpoint_count": 1
+  },
+  "decision_contract": {
+    "behavior_deoverlap_rule": "HIGHEST_TRAIN_SEARCH_REWARD_THEN_CANDIDATE_ID",
+    "primary_readout": "RAW_AND_BEHAVIOR_FAMILY_DEOVERLAPPED",
+    "fresh_matched_replication": "P4_DEOVERLAPPED_MATCHED_POSITIVE_COUNT_GT_ZERO_AND_RATE_GT_BOTH_CONTROL_RATES",
+    "directional_survival_only": "P4_DEOVERLAPPED_BOTH_AXIS_NET_POSITIVE_COUNT_GT_ZERO_WITHOUT_MATCHED_REPLICATION",
+    "candidate_or_family_promotion_authorized": false
+  },
+  "boundaries": {
+    "candidate_generation": false,
+    "optimizer_feedback": false,
+    "policy_memory_write": false,
+    "archive_write": false,
+    "parameter_tuning": false,
+    "rescue_rerun": false,
+    "second_run": false,
+    "validation_oos_holdout_read": false,
+    "promotion": false,
+    "automatic_expansion": false
+  }
+}
