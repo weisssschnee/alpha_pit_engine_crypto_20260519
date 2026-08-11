@@ -71,7 +71,7 @@
           "tests/test_crypto_temporal_successor_execution_v1.py"
         ],
         "raw_sha": "ee9a69416475aa303eb96add929aa479d5c4cafe",
-        "repo_head": "1d7e3dd7a02506c354df95d6970a2cc72c7250aa"
+        "repo_head": "66acdc676069f954413d69b56738009767443d88"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1153,7 +1153,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-11T11:23:48.039795+00:00",
+  "generated_at": "2026-08-11T11:44:22.068938+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -9160,7 +9160,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "BC9EDB6E9D9A353365FF2227C36709250D372662512E04169BA5F18BE7F1D903"
   },
-  "repo_head": "1d7e3dd7a02506c354df95d6970a2cc72c7250aa",
+  "repo_head": "66acdc676069f954413d69b56738009767443d88",
   "schema_version": 1,
   "semantic_authorities": [
     {
