@@ -119,6 +119,16 @@ def executor_workspace_identity(repo_root: Path) -> dict[str, str]:
     }
 
 
+def _committed_file_sha(repo_root: Path, relative_path: str) -> str:
+    object_id = subprocess.check_output(
+        ["git", "rev-parse", f"HEAD:{relative_path}"], cwd=repo_root, text=True
+    ).strip()
+    payload = subprocess.check_output(
+        ["git", "cat-file", "blob", object_id], cwd=repo_root
+    )
+    return hashlib.sha256(payload).hexdigest().upper()
+
+
 def _complete_directory_bundle(root: Path) -> dict[str, Any]:
     rows = [
         {
@@ -143,6 +153,7 @@ def verify_successor_carrier_cache(
     """Verify the manifest-bound 115-field cache without loading market arrays."""
 
     repo_root = repo_root.resolve()
+    default_manifest = manifest_path is None
     manifest_path = (
         manifest_path.resolve()
         if manifest_path is not None
@@ -173,7 +184,11 @@ def verify_successor_carrier_cache(
         _fail(*errors)
     return {
         "carrier_manifest_path": CARRIER_MANIFEST_PATH,
-        "carrier_manifest_sha256": _file_sha(manifest_path),
+        "carrier_manifest_sha256": (
+            _committed_file_sha(repo_root, CARRIER_MANIFEST_PATH)
+            if default_manifest
+            else _file_sha(manifest_path)
+        ),
         "cache_root": str(manifest["cache_root"]),
         "cache_identity_sha256": str(manifest["cache_identity_sha256"]),
         "directory_bundle": observed_bundle,
@@ -190,6 +205,7 @@ def verify_successor_target_cache(
     """Verify the independently stored Binance target cache without np.load."""
 
     repo_root = repo_root.resolve()
+    default_economic_receipt = economic_receipt_path is None
     try:
         if economic_receipt_path is None:
             config = json.loads(
@@ -296,7 +312,11 @@ def verify_successor_target_cache(
             if economic_receipt_path.is_relative_to(repo_root)
             else str(economic_receipt_path)
         ),
-        "economic_receipt_sha256": _file_sha(economic_receipt_path),
+        "economic_receipt_sha256": (
+            _committed_file_sha(repo_root, ECONOMIC_RECEIPT_PATH)
+            if default_economic_receipt
+            else _file_sha(economic_receipt_path)
+        ),
         "target_cache_path": str(execution["target_cache_path"]),
         "target_cache_identity_sha256": str(target_metadata["identity_sha256"]),
         "directory_bundle": target_bundle,
