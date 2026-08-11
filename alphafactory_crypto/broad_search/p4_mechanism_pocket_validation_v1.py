@@ -79,6 +79,69 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest().upper()
 
 
+def verify_retained_oi_payload(
+    repo_root: Path,
+    *,
+    source_root: Path,
+    receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Verify the exact immutable OI payload reused by a replacement run."""
+
+    authority = dict(receipt.get("retained_oi_payload") or {})
+    if authority.get("reuse_authorized") is not True:
+        raise RuntimeError("P4_POCKET_RETAINED_OI_REUSE_NOT_AUTHORIZED")
+    root = Path(source_root).resolve()
+    expected_root = Path(str(authority["source_root"])).resolve()
+    if os.path.normcase(str(root)) != os.path.normcase(str(expected_root)):
+        raise RuntimeError("P4_POCKET_RETAINED_OI_SOURCE_ROOT_CHANGED")
+    manifest_path = Path(repo_root) / str(authority["manifest_path"])
+    if file_sha256(manifest_path) != str(authority["manifest_file_sha256"]):
+        raise RuntimeError("P4_POCKET_RETAINED_OI_MANIFEST_FILE_CHANGED")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    saved_manifest_sha = str(manifest.pop("manifest_sha256", ""))
+    if (
+        canonical_sha256(manifest) != saved_manifest_sha
+        or saved_manifest_sha != str(authority["manifest_sha256"])
+        or manifest.get("status") != "RETAINED_OI_PAYLOAD_HASH_BOUND"
+    ):
+        raise RuntimeError("P4_POCKET_RETAINED_OI_MANIFEST_CHANGED")
+    rows = sorted(
+        (dict(row) for row in manifest.get("files") or ()),
+        key=lambda row: str(row["path"]),
+    )
+    actual_paths = sorted(
+        path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()
+    )
+    expected_paths = [str(row["path"]) for row in rows]
+    if actual_paths != expected_paths:
+        raise RuntimeError("P4_POCKET_RETAINED_OI_FILE_SET_CHANGED")
+    for row in rows:
+        path = root / str(row["path"])
+        if path.stat().st_size != int(row["bytes"]):
+            raise RuntimeError("P4_POCKET_RETAINED_OI_FILE_SIZE_CHANGED")
+        if file_sha256(path) != str(row["sha256"]):
+            raise RuntimeError("P4_POCKET_RETAINED_OI_FILE_HASH_CHANGED")
+    bundle = "\n".join(
+        f"{row['path']}|{row['bytes']}|{row['sha256']}" for row in rows
+    ).encode("utf-8")
+    bundle_sha = hashlib.sha256(bundle).hexdigest().upper()
+    if (
+        bundle_sha != str(manifest["artifact_bundle_sha256"])
+        or bundle_sha != str(authority["artifact_bundle_sha256"])
+        or len(rows) != int(authority["file_count"])
+        or sum(int(row["bytes"]) for row in rows) != int(authority["total_bytes"])
+    ):
+        raise RuntimeError("P4_POCKET_RETAINED_OI_BUNDLE_CHANGED")
+    return {
+        "status": "RETAINED_OI_PAYLOAD_REVERIFIED",
+        "manifest_file_sha256": str(authority["manifest_file_sha256"]),
+        "manifest_sha256": saved_manifest_sha,
+        "artifact_bundle_sha256": bundle_sha,
+        "file_count": len(rows),
+        "total_bytes": sum(int(row["bytes"]) for row in rows),
+    }
+
+
 def write_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".tmp-{os.getpid()}")
@@ -183,6 +246,18 @@ def load_receipt(
     ):
         if boundaries.get(key) is not False:
             blockers.append(key)
+    retained = receipt.get("retained_oi_payload")
+    if retained is not None:
+        retained = dict(retained)
+        if (
+            retained.get("reuse_authorized") is not True
+            or len(str(retained.get("manifest_file_sha256") or "")) != 64
+            or len(str(retained.get("manifest_sha256") or "")) != 64
+            or len(str(retained.get("artifact_bundle_sha256") or "")) != 64
+            or int(retained.get("file_count", -1)) < 1
+            or int(retained.get("total_bytes", -1)) < 1
+        ):
+            blockers.append("retained_oi_payload")
     if blockers:
         raise RuntimeError("P4_POCKET_RECEIPT_INVALID:" + ",".join(blockers))
     return receipt
@@ -241,6 +316,13 @@ def prepare_carrier(
     receipt = load_receipt(root, require_authorized=True, receipt_path=receipt_path)
     source_sha = _validate_execution_source(root, receipt)
     selection, selected = load_selection(root)
+    retained_oi_proof = None
+    if receipt.get("retained_oi_payload") is not None:
+        retained_oi_proof = verify_retained_oi_payload(
+            root,
+            source_root=Path(new_oi_source_root),
+            receipt=receipt,
+        )
     runtime_root = root / "runtime" / f"{RUNTIME_PREFIX}_{runtime_date}"
     if not runtime_root.exists():
         runtime_root.mkdir(parents=True)
@@ -355,6 +437,7 @@ def prepare_carrier(
         "market_payload_read_after_selection_freeze": True,
         "missing_value_fill": None,
         "candidate_generation_performed": False,
+        "retained_oi_payload": retained_oi_proof,
     }
     manifest["manifest_sha256"] = canonical_sha256(manifest)
     write_json(runtime_root / "aligned_carrier_manifest.json", manifest)

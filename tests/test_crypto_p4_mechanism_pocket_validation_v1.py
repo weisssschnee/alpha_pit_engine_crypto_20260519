@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import tarfile
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from alphafactory_crypto.broad_search.p4_mechanism_pocket_validation_v1 import (
     build_summary,
     load_receipt,
     load_selection,
+    verify_retained_oi_payload,
 )
 from scripts.acquire_binance_daily_aggtrades_compact_v1 import package_rank_group
 
@@ -122,3 +124,69 @@ def test_daily_compact_packaging_preserves_existing_carrier_layout(tmp_path: Pat
         names = set(archive.getnames())
     assert "combined/done/BTCUSDT/2026-08.json" in names
     assert "combined/compact_1m/symbol=BTCUSDT/month=2026-08/part.parquet" in names
+
+
+def test_retained_oi_payload_requires_exact_file_set_bytes_and_hashes(tmp_path: Path) -> None:
+    source = tmp_path / "retained"
+    source.mkdir()
+    (source / "status.json").write_text('{"status":"complete"}\n', encoding="utf-8")
+    (source / "part.bin").write_bytes(b"immutable-oi")
+    rows = []
+    for path in sorted(item for item in source.rglob("*") if item.is_file()):
+        payload = path.read_bytes()
+        rows.append(
+            {
+                "path": path.relative_to(source).as_posix(),
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest().upper(),
+            }
+        )
+    bundle = "\n".join(
+        f"{row['path']}|{row['bytes']}|{row['sha256']}" for row in rows
+    ).encode()
+    manifest = {
+        "schema_version": 1,
+        "status": "RETAINED_OI_PAYLOAD_HASH_BOUND",
+        "source_root": str(source.resolve()),
+        "file_count": len(rows),
+        "total_bytes": sum(int(row["bytes"]) for row in rows),
+        "files": rows,
+        "artifact_bundle_sha256": hashlib.sha256(bundle).hexdigest().upper(),
+    }
+    from alphafactory_crypto.broad_search.p4_mechanism_pocket_validation_v1 import canonical_sha256, file_sha256
+
+    manifest["manifest_sha256"] = canonical_sha256(manifest)
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
+    receipt = {
+        "retained_oi_payload": {
+            "reuse_authorized": True,
+            "source_root": str(source.resolve()),
+            "manifest_path": manifest_path.relative_to(tmp_path).as_posix(),
+            "manifest_file_sha256": file_sha256(manifest_path),
+            "manifest_sha256": manifest["manifest_sha256"],
+            "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
+            "file_count": len(rows),
+            "total_bytes": manifest["total_bytes"],
+        }
+    }
+    proof = verify_retained_oi_payload(tmp_path, source_root=source, receipt=receipt)
+    assert proof["status"] == "RETAINED_OI_PAYLOAD_REVERIFIED"
+    (source / "part.bin").write_bytes(b"changed")
+    try:
+        verify_retained_oi_payload(tmp_path, source_root=source, receipt=receipt)
+    except RuntimeError as exc:
+        assert "FILE_SIZE_CHANGED" in str(exc) or "FILE_HASH_CHANGED" in str(exc)
+    else:
+        raise AssertionError("mutated retained payload was accepted")
+
+
+def test_pc2_launcher_waits_for_terminal_exit_and_tests_zero_and_nonzero() -> None:
+    launcher = (
+        ROOT / "scripts/crypto_p4_mechanism_pocket_validation_v1_pc2_launcher.ps1"
+    ).read_text(encoding="utf-8")
+    assert "$process.WaitForExit()" in launcher
+    assert "$process.HasExited" in launcher
+    assert "native exit code unavailable after terminal wait" in launcher
+    assert "nonzero_exit=$nonzero" in launcher
+    assert "oi_redownload_performed = $false" in launcher
