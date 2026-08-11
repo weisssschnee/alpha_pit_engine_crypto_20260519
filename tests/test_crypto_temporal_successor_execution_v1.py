@@ -25,6 +25,7 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
     successor_budget_state,
     successor_checkpoint_decision,
     validate_authorization_payload,
+    verify_successor_carrier_cache,
 )
 from alphafactory_crypto.broad_search import temporal_successor_v1 as successor
 
@@ -80,6 +81,17 @@ def _authorization(**changes: object) -> dict[str, object]:
         "receipt_bound_role_bindings": receipt_bound_role_bindings(
             authority_identity
         ),
+        "market_input_preflight": {
+            "carrier_manifest_path": successor.CARRIER_MANIFEST_PATH,
+            "carrier_manifest_sha256": "6" * 64,
+            "cache_root": ".cache/test-carrier",
+            "cache_identity_sha256": "7" * 64,
+            "directory_bundle": {
+                "file_count": 1,
+                "bytes": 1,
+                "bundle_sha256": "8" * 64,
+            },
+        },
         "executor_identity": executor_identity,
         "run_authorization": {
             "authority": "CURRENT_USER_INSTRUCTION",
@@ -110,6 +122,78 @@ def test_fresh_random_seed_authority_is_deterministic_and_not_historical_resume(
     assert len(first) == len(set(first)) == 4
     assert all(0 <= value < 2**32 for value in first)
     assert FRESH_RANDOM_IDENTITY == "FRESH_RANDOM_CONTROL_AFTER_30K"
+
+
+def test_successor_carrier_cache_preflight_is_content_bound_and_market_free(
+    tmp_path: Path,
+) -> None:
+    cache_root = tmp_path / ".cache" / "test-carrier"
+    fields_root = cache_root / "fields"
+    fields_root.mkdir(parents=True)
+    identity = "A" * 64
+    (cache_root / "metadata.json").write_text(
+        json.dumps({"identity_sha256": identity, "field_ids": ["field_a"]}) + "\n",
+        encoding="utf-8",
+    )
+    for name in (
+        "timestamp_ns.npy",
+        "observed.npy",
+        "base_eligible.npy",
+        "source_segment.npy",
+        "target_return_1h.npy",
+        "target_return_4h.npy",
+    ):
+        (cache_root / name).write_bytes(name.encode("ascii"))
+    (fields_root / "field_a.npy").write_bytes(b"field-a")
+    bundle = successor.carrier_directory_bundle(cache_root)
+    manifest_path = tmp_path / "aligned_carrier_manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "cache_root": ".cache/test-carrier",
+                "cache_identity_sha256": identity,
+                "directory_bundle": bundle,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    result = verify_successor_carrier_cache(
+        tmp_path, manifest_path=manifest_path
+    )
+    assert result["directory_bundle"] == bundle
+    assert result["market_arrays_read"] == 0
+    assert result["sealed_reads"] == 0
+
+    (fields_root / "field_a.npy").write_bytes(b"tampered")
+    with pytest.raises(
+        SuccessorPreflightError, match="carrier_cache_directory_bundle"
+    ):
+        verify_successor_carrier_cache(tmp_path, manifest_path=manifest_path)
+
+
+def test_successor_carrier_cache_missing_fails_before_launch_claim(
+    tmp_path: Path,
+) -> None:
+    manifest_path = tmp_path / "aligned_carrier_manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "cache_root": ".cache/missing",
+                "cache_identity_sha256": "A" * 64,
+                "directory_bundle": {
+                    "file_count": 1,
+                    "bytes": 1,
+                    "bundle_sha256": "B" * 64,
+                },
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SuccessorPreflightError, match="carrier_cache_unavailable"):
+        verify_successor_carrier_cache(tmp_path, manifest_path=manifest_path)
 
 
 def test_authorization_payload_distinguishes_ready_from_one_time_authorized() -> None:

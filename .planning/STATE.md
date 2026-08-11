@@ -4,6 +4,34 @@ Last updated: 2026-08-11 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_PRE_MARKET_DEPLOYMENT_INVALID_SOURCE_REPAIR_IMPLEMENTED_REPLACEMENT_NOT_AUTHORIZED`
+
+The sole authorized PC2 task `job_20260811_212229_f6d45d` wrote the one-time
+launch claim and then exited before reading a market array or evaluating a
+candidate. The failed runtime contains exactly
+`successor_launch_claim.json`; its SHA256 is
+`09D63C46C65037823776F91DD2E467BD0CE882C007715E98DE105AA143A0550A` and
+records zero market-array reads, zero candidate evaluations and zero sealed
+reads. The task-level status is `FAILED` with exit code 1. The exception is a
+`FileNotFoundError` for the manifest-bound but Git-excluded 115-field cache at
+`.cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115/metadata.json` in the
+new PC2 checkout. No successor process remains active.
+
+This is a pre-market deployment-portability invalid run, not development
+economics and not a consumed candidate budget. The old runtime must not be
+resumed or deleted to manufacture freshness. Source now verifies the tracked
+carrier manifest, cache identity and the complete required directory bundle
+before a successor launch claim can be written. The failure identity is
+committed at
+`config/crypto_temporal_program_30k_to_50k_successor_v1_pre_market_failure.json`.
+The repair does not alter target, mapping, cost, reward, evaluator, prefix,
+Random seeds, CEM/Evolution state, allocation, tranche gates, budget or sealed
+boundaries. A market run remains absent. One source-only replacement requires
+an explicit new schema-2 authorization bound to this failed claim, the repaired
+implementation, a distinct PC2 runtime and the exact manifest-verified cache.
+
+The preceding authorized boundary was:
+
 `CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZED_NOT_STARTED`
 
 Current user decision `GO_WITH_LIMITED_SEARCH_POLICY_CHANGE` authorizes exactly
@@ -31,10 +59,9 @@ Validation, OOS, holdout, forward reads, promotion, rescue, reseed, tuning,
 automatic expansion and a second successor remain forbidden. Authorization
 does not promote the experimental node or fill any global economic authority;
 the schema-2 target, optimizer-reward, execution-price and cost bindings are
-receipt-scoped NON_FORMAL exceptions for this run only. The next action is to
-commit/push this exact authorization, reverify the authorization-bearing PC2
-checkout, launch once, and stop for development-evidence audit at the first
-frozen terminal condition or cumulative 50,000 strict.
+receipt-scoped NON_FORMAL exceptions for this run only. At that boundary the
+next action was to commit/push the authorization and launch once; the
+pre-market failure and replacement requirement above supersede that action.
 
 The preceding completed phase was:
 

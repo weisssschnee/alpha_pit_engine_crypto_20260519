@@ -1,0 +1,17 @@
+{
+  "authorization_sha256": "F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A",
+  "candidate_evaluations": 0,
+  "exception_type": "FileNotFoundError",
+  "failed_runtime_id": "crypto_temporal_program_30k_to_50k_successor_v1_20260811",
+  "failed_task_id": "job_20260811_212229_f6d45d",
+  "failure_reason": "DEPLOYED_TARGET_CACHE_ABSENT",
+  "launch_claim_sha256": "09D63C46C65037823776F91DD2E467BD0CE882C007715E98DE105AA143A0550A",
+  "market_arrays_read": 0,
+  "missing_path": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115/metadata.json",
+  "old_runtime_resume_allowed": false,
+  "producer_source_sha": "7d1e88b71f46bbfcf99290418321522c31323e37",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PRE_MARKET_DEPLOYMENT_INVALID",
+  "task_exit_code": 1
+}

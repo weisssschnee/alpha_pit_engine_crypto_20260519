@@ -20,6 +20,7 @@ from typing import Any, Mapping, Sequence
 import pandas as pd
 
 from . import search_engine_v1 as engine
+from .runner18m import _directory_bundle as carrier_directory_bundle
 from .temporal_prefix_reconstruction_v1 import (
     PREFIX_BOUNDARY,
     _file_sha,
@@ -43,6 +44,14 @@ SUCCESSOR_AUTHORIZATION_PATH = (
 RECONSTRUCTION_REPORT_PATH = (
     "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/"
     "prefix_policy_state_reconstruction_030000.json"
+)
+CARRIER_MANIFEST_PATH = (
+    "runtime/crypto_search_engine_v1_4_oi_flow_20260728/"
+    "aligned_carrier_manifest.json"
+)
+PREMARKET_FAILURE_PATH = (
+    "config/crypto_temporal_program_30k_to_50k_successor_v1_"
+    "pre_market_failure.json"
 )
 CHECKPOINT_SIZE = 5_000
 MAXIMUM_ADDITIONAL_STRICT = 20_000
@@ -74,6 +83,8 @@ SUCCESSOR_COMPONENT_PATHS = (
     "scripts/check_crypto_temporal_30k_successor_v1.py",
     "scripts/check_crypto_temporal_successor_execution_v1.py",
     "config/crypto_temporal_mechanism_program_v1.json",
+    CARRIER_MANIFEST_PATH,
+    PREMARKET_FAILURE_PATH,
     SUCCESSOR_RECEIPT_PATH,
 )
 
@@ -102,6 +113,53 @@ def executor_workspace_identity(repo_root: Path) -> dict[str, str]:
         "workspace_path_sha256": hashlib.sha256(
             resolved.encode("utf-8")
         ).hexdigest().upper(),
+    }
+
+
+def verify_successor_carrier_cache(
+    repo_root: Path,
+    *,
+    manifest_path: Path | None = None,
+) -> dict[str, Any]:
+    """Verify the manifest-bound 115-field cache without loading market arrays."""
+
+    repo_root = repo_root.resolve()
+    manifest_path = (
+        manifest_path.resolve()
+        if manifest_path is not None
+        else (repo_root / CARRIER_MANIFEST_PATH).resolve()
+    )
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        raw_cache_root = Path(str(manifest["cache_root"]))
+        cache_root = (
+            raw_cache_root
+            if raw_cache_root.is_absolute()
+            else repo_root / raw_cache_root
+        ).resolve()
+        metadata_path = cache_root / "metadata.json"
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        observed_bundle = carrier_directory_bundle(cache_root)
+    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as failure:
+        _fail("carrier_cache_unavailable:" + type(failure).__name__)
+    expected_bundle = dict(manifest.get("directory_bundle") or {})
+    errors: list[str] = []
+    if str(metadata.get("identity_sha256") or "") != str(
+        manifest.get("cache_identity_sha256") or ""
+    ):
+        errors.append("carrier_cache_identity")
+    if observed_bundle != expected_bundle:
+        errors.append("carrier_cache_directory_bundle")
+    if errors:
+        _fail(*errors)
+    return {
+        "carrier_manifest_path": CARRIER_MANIFEST_PATH,
+        "carrier_manifest_sha256": _file_sha(manifest_path),
+        "cache_root": str(manifest["cache_root"]),
+        "cache_identity_sha256": str(manifest["cache_identity_sha256"]),
+        "directory_bundle": observed_bundle,
+        "market_arrays_read": 0,
+        "sealed_reads": 0,
     }
 
 
@@ -220,6 +278,35 @@ def validate_authorization_payload(
         receipt_bound_role_bindings(expected_authority_identity)
     ):
         errors.append("receipt_bound_role_bindings")
+    market_input = dict(authorization.get("market_input_preflight") or {})
+    market_bundle = dict(market_input.get("directory_bundle") or {})
+    if (
+        market_input.get("carrier_manifest_path") != CARRIER_MANIFEST_PATH
+        or len(str(market_input.get("carrier_manifest_sha256") or "")) != 64
+        or len(str(market_input.get("cache_identity_sha256") or "")) != 64
+        or not str(market_input.get("cache_root") or "")
+        or len(str(market_bundle.get("bundle_sha256") or "")) != 64
+        or int(market_bundle.get("file_count", -1)) <= 0
+        or int(market_bundle.get("bytes", -1)) <= 0
+    ):
+        errors.append("market_input_preflight")
+    replacement = dict(authorization.get("replacement_authorization") or {})
+    if replacement and (
+        replacement.get("authority") != "CURRENT_USER_INSTRUCTION"
+        or replacement.get("reason") != "PRE_MARKET_DEPLOYMENT_PORTABILITY_REPAIR"
+        or int(replacement.get("replacement_index", -1)) != 1
+        or len(str(replacement.get("replaces_authorization_sha256") or "")) != 64
+        or len(str(replacement.get("failed_launch_claim_sha256") or "")) != 64
+        or not str(replacement.get("failed_task_id") or "")
+        or not str(replacement.get("failed_runtime_id") or "")
+        or int(replacement.get("market_arrays_read", -1)) != 0
+        or int(replacement.get("candidate_evaluations", -1)) != 0
+        or int(replacement.get("sealed_reads", -1)) != 0
+        or replacement.get("old_runtime_resume_allowed") is not False
+        or replacement.get("economic_contract_unchanged") is not True
+        or replacement.get("search_contract_unchanged") is not True
+    ):
+        errors.append("replacement_authorization")
     if not str(authorization.get("evidence_to_add") or "").strip():
         errors.append("evidence_to_add")
     if not str(authorization.get("decision_to_change") or "").strip():
@@ -629,6 +716,14 @@ def prepare_successor_execution(
         expected_authority_identity=dict(reconstruction["authority_identity"]),
         expected_executor_identity=executor_workspace_identity(repo_root),
     )
+    observed_market_input = verify_successor_carrier_cache(repo_root)
+    expected_market_input = dict(authorization.get("market_input_preflight") or {})
+    if {
+        key: value
+        for key, value in observed_market_input.items()
+        if key not in {"market_arrays_read", "sealed_reads"}
+    } != expected_market_input:
+        _fail("market_input_preflight_binding")
     errors = _verify_implementation_binding(repo_root, authorization)
     branch = subprocess.check_output(
         ["git", "branch", "--show-current"], cwd=repo_root, text=True
@@ -689,6 +784,7 @@ def prepare_successor_execution(
         "reconstructed_policy_bundle": bundle,
         "restored_prefix": restored,
         "fresh_random_lane_seeds": list(derive_fresh_random_lane_seeds()),
+        "market_input_preflight": observed_market_input,
     }
 
 
