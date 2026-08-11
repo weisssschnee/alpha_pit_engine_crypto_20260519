@@ -891,8 +891,8 @@ def prepare_successor_execution(
     authorization = validate_authorization_payload(
         authorization,
         expected_successor_receipt_sha256=str(receipt["receipt_sha256"]),
-        expected_reconstruction_report_sha256=_file_sha(
-            repo_root / RECONSTRUCTION_REPORT_PATH
+        expected_reconstruction_report_sha256=_committed_file_sha(
+            repo_root, RECONSTRUCTION_REPORT_PATH
         ),
         expected_bundle_sha256=_file_sha(bundle_path),
         expected_source_identity_sha256=str(
@@ -1028,7 +1028,7 @@ def check_successor_implementation(
         authorization.get("successor_receipt_sha256")
         != receipt.get("receipt_sha256")
         or authorization.get("reconstruction_report_sha256")
-        != _file_sha(repo_root / RECONSTRUCTION_REPORT_PATH)
+        != _committed_file_sha(repo_root, RECONSTRUCTION_REPORT_PATH)
         or authorization.get("reconstructed_policy_bundle_sha256")
         != _file_sha(bundle_path)
         or authorization.get("source_artifact_identity_sha256")
