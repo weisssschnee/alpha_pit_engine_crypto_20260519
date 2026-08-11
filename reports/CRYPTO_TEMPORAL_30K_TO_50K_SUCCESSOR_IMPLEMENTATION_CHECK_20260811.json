@@ -1,0 +1,14 @@
+{
+  "authorization_sha256": "D6B17783D88446C2F7B5B27401B266315AC05C82C1E340E7000AE27F25DF31B1",
+  "candidate_evaluations": 0,
+  "errors": [],
+  "market_arrays_read": 0,
+  "market_continuation": "NOT_RUN",
+  "prefix_reconstruction": "PREFIX_POLICY_STATE_RECONSTRUCTION_PASS",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "successor_authorization": "NOT_AUTHORIZED",
+  "successor_implementation": "READY",
+  "validation_oos_promotion": "FORBIDDEN"
+}

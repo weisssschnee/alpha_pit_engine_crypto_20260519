@@ -45,6 +45,23 @@ from .temporal_program_v1 import (
     program_catalog_payload,
     static_counterpart,
 )
+from .temporal_successor_v1 import (
+    AUTHORIZED_STATUS as SUCCESSOR_AUTHORIZED_STATUS,
+    CONSUMED_STATUS as SUCCESSOR_CONSUMED_STATUS,
+    EXECUTION_MODE as SUCCESSOR_EXECUTION_MODE,
+    FRESH_RANDOM_IDENTITY,
+    PREFIX_BOUNDARY as SUCCESSOR_PREFIX_BOUNDARY,
+    SUCCESSOR_AUTHORIZATION_PATH,
+    SUCCESSOR_CAMPAIGN,
+    SuccessorPreflightError,
+    authorization_content_sha,
+    derive_fresh_random_lane_seeds,
+    prepare_successor_execution,
+    successor_allocation,
+    successor_budget_state,
+    successor_checkpoint_decision,
+    successor_lane_targets,
+)
 
 
 CONFIG_PATH = "config/crypto_temporal_mechanism_program_v1.json"
@@ -335,6 +352,23 @@ def _effective_config(
             "seeds": list(ADAPTIVE_BROAD_SEEDS),
             "old_campaign_seed_reuse": False,
         }
+    validate_config(effective)
+    return effective
+
+
+def _successor_effective_config(config: Mapping[str, Any]) -> dict[str, Any]:
+    """Use the frozen adaptive-broad lanes; Random has a separate fresh contract."""
+
+    effective = json.loads(json.dumps(config))
+    effective["seed_authority"] = {
+        **dict(effective["seed_authority"]),
+        "campaign": "CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1",
+        "derivation": (
+            "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1_PIPE_LANE_INDEX"
+        ),
+        "seeds": list(ADAPTIVE_BROAD_SEEDS),
+        "old_campaign_seed_reuse": False,
+    }
     validate_config(effective)
     return effective
 
@@ -994,10 +1028,13 @@ def adaptive_gate(
     state: Mapping[str, Any],
     strict_boundary: int,
     config: Mapping[str, Any],
+    tranche_size: int = 10_000,
 ) -> dict[str, Any]:
     frame = pd.DataFrame(list(ledger))
     adaptive_start = int(state.get("adaptive_start_strict", 10_000))
-    tranche_start = max(adaptive_start, int(strict_boundary) - 10_000)
+    if int(tranche_size) <= 0:
+        raise ValueError("adaptive gate tranche size must be positive")
+    tranche_start = max(adaptive_start, int(strict_boundary) - int(tranche_size))
     frame = frame.loc[
         (frame["completion_ordinal"].astype(int) > tranche_start)
         & (frame["completion_ordinal"].astype(int) <= int(strict_boundary))
@@ -1593,6 +1630,63 @@ def _later_policies(
     return output
 
 
+def _restore_successor_policies(
+    *,
+    registry: TypedExpressionRegistry,
+    config: Mapping[str, Any],
+    catalog: Sequence[tuple[MechanismSpec, TemporalProgramSpec]],
+    successor_context: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Restore eight adaptive lanes and construct fresh Random control lanes."""
+
+    policies = {
+        key: engine._restore_policy(registry, value)
+        for key, value in dict(
+            successor_context["reconstructed_policy_bundle"]["policies"]
+        ).items()
+    }
+    expected_adaptive = {
+        f"{arm}|{seed}"
+        for arm in ("temporal_program_cem", "temporal_program_evolution")
+        for seed in ADAPTIVE_BROAD_SEEDS
+    }
+    if set(policies) != expected_adaptive:
+        raise RuntimeError(
+            "FAIL_CLOSED_BEFORE_MARKET_READ:successor_adaptive_policy_lane_identity"
+        )
+    active_catalog = tuple(
+        pair
+        for pair in catalog
+        if pair[1].family_id in set(ADAPTIVE_BROAD_FAMILIES)
+    )
+    diagnostic_catalog = tuple(
+        pair
+        for pair in catalog
+        if pair[1].family_id not in set(ADAPTIVE_BROAD_FAMILIES)
+    )
+    for seed in successor_context["fresh_random_lane_seeds"]:
+        key = f"temporal_program_random|{int(seed)}"
+        policies[key] = _make_policy(
+            arm="temporal_program_random",
+            seed=int(seed),
+            registry=registry,
+            config=config,
+            catalog=active_catalog,
+        )
+        policies[f"temporal_program_random_diagnostic|{int(seed)}"] = _make_policy(
+            arm="temporal_program_random",
+            seed=int(seed) ^ 0xA5A5A5A5,
+            registry=registry,
+            config=config,
+            catalog=diagnostic_catalog,
+        )
+    if len(policies) != 16:
+        raise RuntimeError(
+            "FAIL_CLOSED_BEFORE_MARKET_READ:successor_policy_lane_count"
+        )
+    return policies
+
+
 def _stage0_policies(
     *,
     registry: TypedExpressionRegistry,
@@ -1808,24 +1902,82 @@ def _program_process_evidence_errors(
     return errors
 
 
-def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) -> dict[str, Any]:
+def run(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+    source_sha: str | None = None,
+    execution_mode: str = "FRESH_SEQUENTIAL_PROGRAM",
+    successor_artifact_root: Path | None = None,
+    successor_policy_bundle: Path | None = None,
+) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     base_config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(base_config)
-    receipt = validate_receipt(repo_root, config=base_config, require_authorized=True)
-    qualification_scope = _qualification_scope(receipt)
-    config = _effective_config(base_config, receipt)
+    successor_mode = str(execution_mode) == SUCCESSOR_EXECUTION_MODE
+    if str(execution_mode) not in {
+        "FRESH_SEQUENTIAL_PROGRAM",
+        SUCCESSOR_EXECUTION_MODE,
+    }:
+        raise ValueError("unknown temporal program execution mode")
+    if successor_mode:
+        if successor_artifact_root is None or successor_policy_bundle is None:
+            raise RuntimeError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:successor_source_paths_required"
+            )
+        config = _successor_effective_config(base_config)
+        qualification_scope = {
+            "strict_cap": 50_000,
+            "stage0_only": False,
+            "skip_stage0": True,
+            "adaptive_start_strict": SUCCESSOR_PREFIX_BOUNDARY,
+            "active_program_families": list(ADAPTIVE_BROAD_FAMILIES),
+            "scope": SUCCESSOR_EXECUTION_MODE,
+            "source_evidence_prefix": SUCCESSOR_PREFIX_BOUNDARY,
+            "maximum_additional_strict": 20_000,
+            "checkpoint_size": 5_000,
+        }
+        runtime_root = repo_root / f"runtime/{SUCCESSOR_CAMPAIGN}_{runtime_date}"
+        successor_context = prepare_successor_execution(
+            repo_root,
+            artifact_root=successor_artifact_root,
+            bundle_path=successor_policy_bundle,
+            runtime_root=runtime_root,
+        )
+        receipt = dict(successor_context["authorization"])
+    else:
+        receipt = validate_receipt(
+            repo_root, config=base_config, require_authorized=True
+        )
+        qualification_scope = _qualification_scope(receipt)
+        config = _effective_config(base_config, receipt)
+        runtime_root = repo_root / f"runtime/{CAMPAIGN}_{runtime_date}"
+        successor_context = None
     observed_sha = engine._git_sha(repo_root)
     source_sha = str(source_sha or observed_sha).lower()
     if source_sha != observed_sha:
+        if successor_mode:
+            raise SuccessorPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:producer_sha_differs_from_checkout"
+            )
         raise RuntimeError("temporal program producer SHA differs from checkout")
-    runtime_root = repo_root / f"runtime/{CAMPAIGN}_{runtime_date}"
-    report_path = repo_root / f"reports/{REPORT_PREFIX}_{runtime_date}.md"
+    report_name = (
+        "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1"
+        if successor_mode
+        else REPORT_PREFIX
+    )
+    report_path = repo_root / f"reports/{report_name}_{runtime_date}.md"
     if not engine._source_tree_clean_for_run(
         repo_root, allowed_paths=(runtime_root, report_path)
     ):
+        if successor_mode:
+            raise SuccessorPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:producer_tree_not_clean"
+            )
         raise RuntimeError("temporal program producer tree is not clean")
     if runtime_root.is_dir():
+        if successor_mode:
+            raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:non_fresh_output_root")
         prior_checkpoints = sorted(
             (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
         )
@@ -1837,9 +1989,64 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                     prior_state,
                     action="resume_before_market_or_worker_initialization",
                 )
+    if successor_mode:
+        assert successor_context is not None
+        runtime_root.mkdir(parents=True)
+        engine._write_json(
+            runtime_root / "successor_launch_claim.json",
+            {
+                "schema_version": 1,
+                "status": "ONE_TIME_SUCCESSOR_LAUNCH_CLAIMED",
+                "execution_mode": SUCCESSOR_EXECUTION_MODE,
+                "authorization_sha256": successor_context[
+                    "authorization_sha256"
+                ],
+                "producer_source_sha": source_sha,
+                "runtime_id": runtime_root.name,
+                "market_arrays_read_at_claim": 0,
+                "candidate_evaluations_at_claim": 0,
+                "sealed_reads": 0,
+            },
+        )
     economic = resolve_search_economic_receipt(
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )
+    if successor_mode:
+        assert successor_context is not None
+        authority = dict(
+            successor_context["authorization"]["authority_identity"]
+        )
+        economic_components = dict(economic.get("component_sha256") or {})
+        observed_economic = {
+            "economic_receipt_sha256": str(economic.get("receipt_sha256") or ""),
+            "target_contract_sha256": str(
+                economic_components.get("target_contract") or ""
+            ),
+            "target_execution_sha256": str(
+                economic_components.get("target_execution") or ""
+            ),
+            "portfolio_mapping_and_cost_sha256": str(
+                economic_components.get("portfolio_mapping_and_cost") or ""
+            ),
+            "optimizer_reward_and_matched_attribution_sha256": str(
+                economic_components.get("optimizer_reward_and_matched_attribution")
+                or ""
+            ),
+        }
+        if any(
+            observed_economic[key] != str(authority[key])
+            for key in observed_economic
+        ):
+            raise SuccessorPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:current_economic_authority_changed"
+            )
+        premarket_catalog_sha = program_catalog_payload(
+            compile_temporal_program_catalog(config)
+        )["catalog_sha256"]
+        if premarket_catalog_sha != str(authority["program_catalog_sha256"]):
+            raise SuccessorPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:current_program_catalog_changed"
+            )
     train = dict(economic["evidence_partition"]["train"])
     validate_pair_evaluation_request(
         block_start=str(train["start"]),
@@ -1862,12 +2069,53 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     block_contract = dict(block_config["block_robust_contract"])
     compiler_identity = engine._compiler_binding(repo_root)
     identities = {**identities, "compiler_identity": compiler_identity}
+    successor_preflight_evidence = None
+    if successor_mode:
+        assert successor_context is not None
+        restored_evidence = dict(successor_context["restored_prefix"])
+        restored_archive = restored_evidence.pop("archive")
+        restored_evidence.pop("ledger")
+        successor_preflight_evidence = {
+            "status": successor_context["status"],
+            "authorization_sha256": successor_context["authorization_sha256"],
+            "successor_receipt_sha256": successor_context[
+                "successor_receipt_sha256"
+            ],
+            "reconstructed_policy_bundle_sha256": receipt[
+                "reconstructed_policy_bundle_sha256"
+            ],
+            "source_artifact_identity_sha256": receipt[
+                "source_artifact_identity_sha256"
+            ],
+            "state_restoration_sha256": restored_evidence[
+                "state_restoration_sha256"
+            ],
+            "prefix_archive_state_sha256": restored_archive.state_hash(),
+            "prefix_ledger_count": SUCCESSOR_PREFIX_BOUNDARY,
+            "attempted_exact_id_count": len(
+                restored_evidence["attempted_exact_ids"]
+            ),
+            "policy_local_lane_count": len(
+                restored_evidence["policy_local_family_counts"]
+            ),
+            "suffix_contribution": restored_evidence["suffix_contribution"],
+            "fresh_random_lane_seeds": successor_context[
+                "fresh_random_lane_seeds"
+            ],
+            "market_arrays_read": 0,
+            "sealed_reads": 0,
+        }
     frozen = {
         "schema_version": 1,
         "experiment_id": config["experiment_id"],
+        "execution_mode": str(execution_mode),
         "source_sha": source_sha,
         "config": config,
-        "receipt_sha256": receipt["receipt_sha256"],
+        "receipt_sha256": (
+            receipt["authorization_sha256"]
+            if successor_mode
+            else receipt["receipt_sha256"]
+        ),
         "qualification_scope": qualification_scope,
         "economic_receipt": economic,
         "input_identities": identities,
@@ -1876,21 +2124,51 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "program_catalog_sha256": catalog_payload["catalog_sha256"],
         "block_robust_contract": block_contract,
         "expression_registry_limits": _limits(config),
+        "successor_preflight": successor_preflight_evidence,
         "sealed_reads": 0,
     }
     frozen_hash = _json_sha(frozen)
     frozen = {**frozen, "frozen_contract_sha256": frozen_hash}
     if runtime_root.exists():
-        if engine._read_json(runtime_root / "frozen_contract.json") != frozen:
-            raise RuntimeError("temporal program runtime contract changed")
-        if (runtime_root / "final_decision.json").is_file():
-            raise FileExistsError("temporal program campaign already completed")
+        if successor_mode:
+            claim = engine._read_json(runtime_root / "successor_launch_claim.json")
+            if (
+                claim.get("authorization_sha256")
+                != receipt.get("authorization_sha256")
+                or claim.get("producer_source_sha") != source_sha
+                or (runtime_root / "frozen_contract.json").exists()
+            ):
+                raise RuntimeError(
+                    "FAIL_CLOSED_BEFORE_MARKET_READ:successor_launch_claim_changed"
+                )
+        else:
+            if engine._read_json(runtime_root / "frozen_contract.json") != frozen:
+                raise RuntimeError("temporal program runtime contract changed")
+            if (runtime_root / "final_decision.json").is_file():
+                raise FileExistsError("temporal program campaign already completed")
     else:
         runtime_root.mkdir(parents=True)
+    if successor_mode or not (runtime_root / "frozen_contract.json").exists():
         engine._write_json(runtime_root / "frozen_contract.json", frozen)
         engine._write_json(runtime_root / "program_catalog.json", catalog_payload)
         engine._write_json(runtime_root / "search_authority_binding_receipt.json", receipt)
-        engine._write_json(runtime_root / "embedded_preflight.json", source_smoke(repo_root))
+        engine._write_json(
+            runtime_root / "embedded_preflight.json",
+            (
+                successor_preflight_evidence
+                if successor_mode
+                else source_smoke(repo_root)
+            ),
+        )
+        if successor_mode:
+            assert successor_context is not None
+            engine._write_json(
+                runtime_root / "successor_authorization_snapshot.json", receipt
+            )
+            engine._write_json(
+                runtime_root / "prefix_state_restoration_receipt.json",
+                successor_preflight_evidence,
+            )
 
     if any(
         (runtime_root / "checkpoints" / label).is_dir()
@@ -1899,6 +2177,8 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         raise RuntimeError("terminal runtime cannot be resumed")
     checkpoints = sorted((runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
     if checkpoints:
+        if successor_mode:
+            raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:successor_resume_forbidden")
         state, policies, ledger, archive, pair_rows, metrics, rejected = _load_checkpoint(
             checkpoints[-1],
             registry=registry,
@@ -1907,29 +2187,70 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
             expected_identities=identities,
         )
     else:
-        state = _new_state(source_sha, frozen_hash, config)
-        state["skip_stage0"] = bool(qualification_scope.get("skip_stage0"))
-        state["adaptive_start_strict"] = int(
-            qualification_scope.get("adaptive_start_strict", 10_000)
-        )
-        state["active_program_families"] = list(
-            qualification_scope.get("active_program_families", ())
-        )
-        policies = (
-            _later_policies(
+        if successor_mode:
+            assert successor_context is not None
+            restored = successor_context["restored_prefix"]
+            state = _new_state(source_sha, frozen_hash, config)
+            state.update(
+                {
+                    "next_checkpoint_index": 15,
+                    "successor_next_checkpoint_index": 0,
+                    "strict_evaluated": SUCCESSOR_PREFIX_BOUNDARY,
+                    "source_evidence_prefix": SUCCESSOR_PREFIX_BOUNDARY,
+                    "additional_strict_evaluated": 0,
+                    "cumulative_valid_strict": SUCCESSOR_PREFIX_BOUNDARY,
+                    "skip_stage0": True,
+                    "adaptive_start_strict": SUCCESSOR_PREFIX_BOUNDARY,
+                    "active_program_families": list(ADAPTIVE_BROAD_FAMILIES),
+                    "attempted_exact_ids": list(restored["attempted_exact_ids"]),
+                    "completed_pair_ids": list(restored["completed_pair_ids"]),
+                    "policy_local_family_counts": dict(
+                        restored["policy_local_family_counts"]
+                    ),
+                    "prefix_state_restoration_sha256": restored[
+                        "state_restoration_sha256"
+                    ],
+                    "invalid_suffix_contribution": dict(
+                        restored["suffix_contribution"]
+                    ),
+                    "execution_mode": SUCCESSOR_EXECUTION_MODE,
+                }
+            )
+            ledger = list(restored["ledger"])
+            archive = restored["archive"]
+            pair_rows = []
+            metrics = []
+            rejected = []
+            policies = _restore_successor_policies(
                 registry=registry,
                 config=config,
                 catalog=catalog,
-                active_families=state["active_program_families"],
+                successor_context=successor_context,
             )
-            if state["skip_stage0"]
-            else _stage0_policies(registry=registry, config=config, catalog=catalog)
-        )
-        ledger: list[dict[str, Any]] = []
-        archive = engine.BehaviorArchive()
-        pair_rows: list[dict[str, Any]] = []
-        metrics: list[dict[str, Any]] = []
-        rejected: list[dict[str, Any]] = []
+        else:
+            state = _new_state(source_sha, frozen_hash, config)
+            state["skip_stage0"] = bool(qualification_scope.get("skip_stage0"))
+            state["adaptive_start_strict"] = int(
+                qualification_scope.get("adaptive_start_strict", 10_000)
+            )
+            state["active_program_families"] = list(
+                qualification_scope.get("active_program_families", ())
+            )
+            policies = (
+                _later_policies(
+                    registry=registry,
+                    config=config,
+                    catalog=catalog,
+                    active_families=state["active_program_families"],
+                )
+                if state["skip_stage0"]
+                else _stage0_policies(registry=registry, config=config, catalog=catalog)
+            )
+            ledger = []
+            archive = engine.BehaviorArchive()
+            pair_rows = []
+            metrics = []
+            rejected = []
     state["authorized_strict_cap"] = int(qualification_scope["strict_cap"])
     for key, default in (
         ("workers_initial", int(config["search_budget"]["workers_default"])),
@@ -2017,15 +2338,20 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     try:
         executor = make_executor(int(state["workers"]))
         _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
-        checkpoint_count_cap = int(qualification_scope["strict_cap"]) // int(
-            budget["checkpoint_size"]
+        checkpoint_count_cap = (
+            19
+            if successor_mode
+            else int(qualification_scope["strict_cap"])
+            // int(budget["checkpoint_size"])
         )
         for checkpoint_index in range(
             int(state["next_checkpoint_index"]), checkpoint_count_cap
         ):
             _assert_terminal_market_open(state, action="next_checkpoint")
             checkpoint_start = len(ledger)
-            checkpoint_target = checkpoint_start + 2_000
+            checkpoint_target = checkpoint_start + (
+                5_000 if successor_mode else 2_000
+            )
             if not bool(state.get("skip_stage0")) and checkpoint_index < 5:
                 lane_targets = _stage0_checkpoint_lane_targets(
                     config, checkpoint_index
@@ -2318,8 +2644,22 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                         )
                     _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
             else:
-                allocation = _checkpoint_allocation(state, checkpoint_index)
-                targets = _later_checkpoint_targets(allocation, config)
+                allocation = (
+                    successor_allocation(state["arm_states"])
+                    if successor_mode
+                    else _checkpoint_allocation(state, checkpoint_index)
+                )
+                targets = (
+                    successor_lane_targets(
+                        allocation,
+                        fresh_random_seeds=successor_context[
+                            "fresh_random_lane_seeds"
+                        ],
+                        adaptive_seeds=config["seed_authority"]["seeds"],
+                    )
+                    if successor_mode
+                    else _later_checkpoint_targets(allocation, config)
+                )
                 completed_by_lane = Counter(
                     str(row["policy_key"])
                     for row in ledger
@@ -2570,7 +2910,36 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
             state["completed_pair_ids"] = sorted(completed_pairs)
             state["wall_elapsed_seconds"] = elapsed()
             strict_boundary = len(ledger)
-            if not bool(state.get("skip_stage0")) and checkpoint_index == 4:
+            if successor_mode:
+                budget_state = successor_budget_state(strict_boundary)
+                state.update(budget_state)
+                base_decision = adaptive_gate(
+                    ledger,
+                    state=state,
+                    strict_boundary=strict_boundary,
+                    config=config,
+                    tranche_size=5_000,
+                )
+                decision = successor_checkpoint_decision(base_decision)
+                additional_boundary = int(
+                    budget_state["additional_strict_evaluated"]
+                )
+                engine._write_json(
+                    runtime_root
+                    / f"successor_decision_additional_{additional_boundary:06d}.json",
+                    decision,
+                )
+                state["arm_states"] = dict(decision["arm_states_after"])
+                state["successor_next_checkpoint_index"] = (
+                    int(state.get("successor_next_checkpoint_index", 0)) + 1
+                )
+                if decision["status"] == "STOP_ECONOMIC_FUTILITY":
+                    terminal_reason = "STOP_ECONOMIC_FUTILITY"
+                elif decision["status"] == "STOP_INVALID":
+                    terminal_reason = "ENGINE_RUN_INVALID:SUCCESSOR_GATE_STOP_INVALID"
+                elif bool(budget_state["mechanical_stop_required"]):
+                    terminal_reason = "SUCCESSOR_ADDITIONAL_BUDGET_COMPLETE"
+            elif not bool(state.get("skip_stage0")) and checkpoint_index == 4:
                 decision = stage0_family_decisions(pair_rows, config)
                 engine._write_json(runtime_root / "continuation_decision_010000.json", decision)
                 if decision["status"] != "CONTINUE":
@@ -2635,19 +3004,20 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 rejected=rejected,
                 identities=identities,
             )
-            observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
-            qualification_terminal_reason = _checkpoint_qualification_terminal_reason(
-                checkpoint_index=checkpoint_index,
-                qualification_scope=qualification_scope,
-                observed_strict_per_hour=observed_rate,
-                minimum_strict_per_hour=float(
-                    budget["minimum_strict_per_hour_after_first_checkpoint"]
-                ),
-            )
-            terminal_reason = _merge_checkpoint_terminal_reason(
-                terminal_reason,
-                qualification_terminal_reason,
-            )
+            if not successor_mode:
+                observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
+                qualification_terminal_reason = _checkpoint_qualification_terminal_reason(
+                    checkpoint_index=checkpoint_index,
+                    qualification_scope=qualification_scope,
+                    observed_strict_per_hour=observed_rate,
+                    minimum_strict_per_hour=float(
+                        budget["minimum_strict_per_hour_after_first_checkpoint"]
+                    ),
+                )
+                terminal_reason = _merge_checkpoint_terminal_reason(
+                    terminal_reason,
+                    qualification_terminal_reason,
+                )
             _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
             if terminal_reason:
                 break
@@ -2739,6 +3109,14 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         status = "ENGINE_BUDGET_EXHAUSTED"
     elif terminal_reason and terminal_reason.startswith("ENGINE_RUN_INVALID"):
         status = "ENGINE_RUN_INVALID"
+    elif successor_mode and terminal_reason == "STOP_INVALID":
+        status = "ENGINE_RUN_INVALID"
+    elif successor_mode and terminal_reason == "STOP_ECONOMIC_FUTILITY":
+        status = "SUCCESSOR_STOPPED_ECONOMIC_FUTILITY"
+    elif successor_mode and terminal_reason == "SUCCESSOR_ADDITIONAL_BUDGET_COMPLETE":
+        status = "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE"
+    elif successor_mode:
+        status = "SUCCESSOR_DEVELOPMENT_STOPPED"
     elif terminal_reason == "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED":
         status = "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE"
     elif strict_count == 10_000 and not state["active_program_families"]:
@@ -2751,6 +3129,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         status = "TEMPORAL_PROGRAM_SPACE_NOT_SUPPORTED"
     final = {
         "schema_version": 1,
+        "execution_mode": str(execution_mode),
         "status": status,
         "terminal_reason": terminal_reason,
         "qualification_scope": qualification_scope,
@@ -2760,10 +3139,18 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "frozen_contract_sha256": frozen_hash,
         "strict_evaluated_count": strict_count,
         "generation_attempts": int(state["generation_attempts"]),
-        "checkpoint_count": int(state["next_checkpoint_index"])
+        "checkpoint_count": (
+            int(state.get("successor_next_checkpoint_index", 0))
+            if successor_mode
+            else int(state["next_checkpoint_index"])
+        )
         + int(budget_checkpoint_written)
         + int(run_invalid_checkpoint_written),
-        "completed_full_checkpoint_count": int(state["next_checkpoint_index"]),
+        "completed_full_checkpoint_count": (
+            int(state.get("successor_next_checkpoint_index", 0))
+            if successor_mode
+            else int(state["next_checkpoint_index"])
+        ),
         "budget_checkpoint_written": budget_checkpoint_written,
         "run_invalid_checkpoint_written": run_invalid_checkpoint_written,
         "process_evidence_errors": process_evidence_errors,
@@ -2790,6 +3177,27 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "matched_positive_program_family_count": len(contributing),
         "active_program_families": list(state["active_program_families"]),
         "arm_states": dict(state["arm_states"]),
+        "source_evidence_prefix": (
+            SUCCESSOR_PREFIX_BOUNDARY if successor_mode else None
+        ),
+        "source_invalid_suffix_start": (
+            SUCCESSOR_PREFIX_BOUNDARY + 1 if successor_mode else None
+        ),
+        "additional_strict_evaluated": (
+            strict_count - SUCCESSOR_PREFIX_BOUNDARY if successor_mode else None
+        ),
+        "cumulative_valid_strict": strict_count if successor_mode else None,
+        "invalid_source_suffix_contribution": (
+            dict(state.get("invalid_suffix_contribution") or {})
+            if successor_mode
+            else None
+        ),
+        "successor_authorization_sha256": (
+            receipt.get("authorization_sha256") if successor_mode else None
+        ),
+        "fresh_random_control_identity": (
+            FRESH_RANDOM_IDENTITY if successor_mode else None
+        ),
         "sealed_reads": 0,
         "validation": False,
         "oos": False,
@@ -2821,12 +3229,25 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         "program_family_metrics.parquet",
         "arm_checkpoint_metrics.parquet",
         "rejected_candidate_ledger.parquet",
-        "rejected_candidate_ledger.parquet",
         "final_decision.json",
     ]
+    if successor_mode:
+        manifest_paths.extend(
+            [
+                "successor_launch_claim.json",
+                "successor_authorization_snapshot.json",
+                "prefix_state_restoration_receipt.json",
+            ]
+        )
     manifest_paths.extend(
         path.relative_to(runtime_root).as_posix()
         for path in sorted(runtime_root.glob("continuation_decision_*.json"))
+    )
+    manifest_paths.extend(
+        path.relative_to(runtime_root).as_posix()
+        for path in sorted(
+            runtime_root.glob("successor_decision_additional_*.json")
+        )
     )
     manifest_paths.extend(
         path.relative_to(runtime_root).as_posix()
@@ -2854,7 +3275,9 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 "# Crypto Temporal Mechanism Program Search V1",
                 "",
                 f"- Decision: `{status}`",
+                f"- Execution mode: `{execution_mode}`",
                 f"- Strict evaluated: `{strict_count:,}`",
+                f"- Source prefix / additional strict: `{SUCCESSOR_PREFIX_BOUNDARY if successor_mode else 0:,}` / `{strict_count - SUCCESSOR_PREFIX_BOUNDARY if successor_mode else strict_count:,}`",
                 f"- Raw generation attempts: `{state['generation_attempts']:,}`",
                 f"- Behavior families: `{len(archive.champion_by_family):,}`",
                 f"- Matched-positive candidates/families: `{len(matched)}` / `{len(matched_families)}`",
@@ -2871,6 +3294,169 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
     )
     _write_status(runtime_root, state=state, status=status, active_elapsed=elapsed())
     return final
+
+
+def check_successor_runtime(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+) -> dict[str, Any]:
+    """Independently verify one completed successor runtime without market reads."""
+
+    repo_root = repo_root.resolve()
+    runtime_root = repo_root / f"runtime/{SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    errors: list[str] = []
+    required = (
+        "successor_launch_claim.json",
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "program_catalog.json",
+        "search_authority_binding_receipt.json",
+        "successor_authorization_snapshot.json",
+        "prefix_state_restoration_receipt.json",
+        "work_state.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "arm_checkpoint_metrics.parquet",
+        "rejected_candidate_ledger.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for value in required:
+        if not (runtime_root / value).is_file():
+            errors.append("missing:" + value)
+    if errors:
+        return {"status": "FAIL", "errors": errors, "sealed_reads": 0}
+    frozen = engine._read_json(runtime_root / "frozen_contract.json")
+    final = engine._read_json(runtime_root / "final_decision.json")
+    state = engine._read_json(runtime_root / "work_state.json")
+    authorization = engine._read_json(
+        runtime_root / "successor_authorization_snapshot.json"
+    )
+    claim = engine._read_json(runtime_root / "successor_launch_claim.json")
+    restoration = engine._read_json(
+        runtime_root / "prefix_state_restoration_receipt.json"
+    )
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    if frozen.get("execution_mode") != SUCCESSOR_EXECUTION_MODE:
+        errors.append("execution_mode")
+    if authorization.get("authorization_sha256") != authorization_content_sha(
+        authorization
+    ):
+        errors.append("authorization_sha256")
+    if (
+        authorization.get("status") != SUCCESSOR_AUTHORIZED_STATUS
+        or authorization.get("run_authorized") is not True
+        or authorization.get("consumed") is not False
+    ):
+        errors.append("authorization_snapshot_state")
+    if final.get("successor_authorization_sha256") != authorization.get(
+        "authorization_sha256"
+    ):
+        errors.append("authorization_final_binding")
+    if (
+        claim.get("status") != "ONE_TIME_SUCCESSOR_LAUNCH_CLAIMED"
+        or claim.get("execution_mode") != SUCCESSOR_EXECUTION_MODE
+        or claim.get("authorization_sha256")
+        != authorization.get("authorization_sha256")
+        or claim.get("producer_source_sha") != final.get("producer_source_sha")
+        or claim.get("runtime_id") != runtime_root.name
+        or int(claim.get("market_arrays_read_at_claim", -1)) != 0
+        or int(claim.get("candidate_evaluations_at_claim", -1)) != 0
+        or int(claim.get("sealed_reads", -1)) != 0
+    ):
+        errors.append("successor_launch_claim")
+    if (
+        int(final.get("source_evidence_prefix", -1)) != SUCCESSOR_PREFIX_BOUNDARY
+        or int(final.get("source_invalid_suffix_start", -1))
+        != SUCCESSOR_PREFIX_BOUNDARY + 1
+        or int(final.get("additional_strict_evaluated", -1))
+        != len(ledger) - SUCCESSOR_PREFIX_BOUNDARY
+        or int(final.get("cumulative_valid_strict", -1)) != len(ledger)
+    ):
+        errors.append("successor_budget_accounting")
+    try:
+        successor_budget_state(len(ledger))
+    except RuntimeError:
+        errors.append("successor_budget_limit")
+    if len(ledger) < SUCCESSOR_PREFIX_BOUNDARY or ledger[
+        "completion_ordinal"
+    ].astype(int).tolist() != list(range(1, len(ledger) + 1)):
+        errors.append("completion_ordinal")
+    expected_suffix_zero = {
+        "candidate_rows": 0,
+        "archive_rows": 0,
+        "attempted_exact_ids": 0,
+        "completed_pair_ids": 0,
+        "policy_local_family_counts": 0,
+    }
+    if (
+        dict(restoration.get("suffix_contribution") or {}) != expected_suffix_zero
+        or dict(final.get("invalid_source_suffix_contribution") or {})
+        != expected_suffix_zero
+    ):
+        errors.append("invalid_source_suffix_contribution")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_0[1][5-8]/manifest.json")
+    )
+    for offset, path in enumerate(checkpoints):
+        manifest = engine._read_json(path)
+        expected_index = 15 + offset
+        expected_count = SUCCESSOR_PREFIX_BOUNDARY + (offset + 1) * 5_000
+        if (
+            int(manifest.get("checkpoint_index", -1)) != expected_index
+            or int(manifest.get("completed_ledger_row_count", -1)) != expected_count
+            or manifest.get("restore_verified") is not True
+        ):
+            errors.append(f"successor_checkpoint:{expected_index}")
+        for row in manifest.get("files", ()):
+            local = path.parent / str(row["name"])
+            if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
+                errors.append(f"successor_checkpoint_file:{expected_index}:{row['name']}")
+    if len(checkpoints) != int(final.get("completed_full_checkpoint_count", -1)):
+        errors.append("successor_checkpoint_count")
+    decisions = sorted(runtime_root.glob("successor_decision_additional_*.json"))
+    if len(decisions) != len(checkpoints):
+        errors.append("successor_decision_count")
+    allowed_actions = {
+        "CONTINUE",
+        "PRUNE_ARM_AND_CONTINUE",
+        "STOP_ECONOMIC_FUTILITY",
+        "STOP_INVALID",
+    }
+    for index, path in enumerate(decisions, start=1):
+        decision = engine._read_json(path)
+        if (
+            decision.get("status") not in allowed_actions
+            or int(path.stem.rsplit("_", 1)[-1]) != index * 5_000
+            or decision.get("family_concentration_is_diagnostic_only") is not True
+        ):
+            errors.append("successor_decision:" + path.name)
+    terminal = dict(state.get("terminal_decision") or {})
+    if terminal.get("status") != "SEALED":
+        errors.append("terminal_seal")
+    if int(final.get("sealed_reads", -1)) != 0:
+        errors.append("sealed_reads")
+    manifest = engine._read_json(runtime_root / "run_manifest.json")
+    for row in manifest.get("files", ()):
+        local = runtime_root / str(row["path"])
+        if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
+            errors.append("manifest:" + str(row["path"]))
+    result = {
+        "schema_version": 1,
+        "status": "PASS" if not errors else "FAIL",
+        "errors": sorted(set(errors)),
+        "producer_source_sha": final.get("producer_source_sha"),
+        "source_evidence_prefix": SUCCESSOR_PREFIX_BOUNDARY,
+        "additional_strict_evaluated": len(ledger) - SUCCESSOR_PREFIX_BOUNDARY,
+        "cumulative_valid_strict": len(ledger),
+        "checkpoint_count": len(checkpoints),
+        "market_arrays_read_by_checker": 0,
+        "candidate_evaluations_by_checker": 0,
+        "sealed_reads": 0,
+    }
+    engine._write_json(runtime_root / "independent_checker.json", result)
+    return result
 
 
 def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False) -> dict[str, Any]:
@@ -3135,34 +3721,114 @@ def consume_receipt(
     return updated
 
 
+def consume_successor_authorization(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+) -> dict[str, Any]:
+    repo_root = repo_root.resolve()
+    path = repo_root / SUCCESSOR_AUTHORIZATION_PATH
+    authorization = engine._read_json(path)
+    if (
+        authorization.get("status") != SUCCESSOR_AUTHORIZED_STATUS
+        or authorization.get("run_authorized") is not True
+        or authorization.get("consumed") is not False
+    ):
+        raise RuntimeError("successor authorization is not active or already consumed")
+    runtime_root = repo_root / f"runtime/{SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    if runtime_root.name != str(authorization.get("runtime_id") or ""):
+        raise RuntimeError("successor authorization runtime identity changed")
+    final = engine._read_json(runtime_root / "final_decision.json")
+    checker = engine._read_json(runtime_root / "independent_checker.json")
+    if checker.get("status") != "PASS":
+        raise RuntimeError("successor independent checker did not pass")
+    updated = {
+        key: value
+        for key, value in authorization.items()
+        if key not in {"authorization_sha256", "run_outcome"}
+    }
+    updated.update(
+        {
+            "status": SUCCESSOR_CONSUMED_STATUS,
+            "run_authorized": False,
+            "consumed": True,
+            "run_outcome": {
+                "status": final["status"],
+                "runtime": runtime_root.relative_to(repo_root).as_posix(),
+                "producer_source_sha": final["producer_source_sha"],
+                "source_evidence_prefix": final["source_evidence_prefix"],
+                "additional_strict_evaluated": final[
+                    "additional_strict_evaluated"
+                ],
+                "cumulative_valid_strict": final["cumulative_valid_strict"],
+                "second_launch_started": False,
+                "rescue_rerun_started": False,
+            },
+        }
+    )
+    updated["authorization_sha256"] = authorization_content_sha(updated)
+    engine._write_json(path, updated)
+    return updated
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("run", "check", "consume-receipt"):
+    for name in (
+        "run",
+        "check",
+        "check-successor",
+        "consume-receipt",
+        "consume-successor-authorization",
+    ):
         command = sub.add_parser(name)
         command.add_argument("--repo-root", type=Path, required=True)
         command.add_argument("--runtime-date", required=True)
         if name == "run":
             command.add_argument("--source-sha")
+            command.add_argument(
+                "--execution-mode",
+                choices=("FRESH_SEQUENTIAL_PROGRAM", SUCCESSOR_EXECUTION_MODE),
+                default="FRESH_SEQUENTIAL_PROGRAM",
+            )
+            command.add_argument("--successor-artifact-root", type=Path)
+            command.add_argument("--successor-policy-bundle", type=Path)
         if name == "check":
             command.add_argument("--require-consumed", action="store_true")
     smoke = sub.add_parser("source-smoke")
     smoke.add_argument("--repo-root", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "run":
-        result = run(args.repo_root, runtime_date=args.runtime_date, source_sha=args.source_sha)
+        result = run(
+            args.repo_root,
+            runtime_date=args.runtime_date,
+            source_sha=args.source_sha,
+            execution_mode=args.execution_mode,
+            successor_artifact_root=args.successor_artifact_root,
+            successor_policy_bundle=args.successor_policy_bundle,
+        )
     elif args.command == "check":
         result = check(
             args.repo_root,
             runtime_date=args.runtime_date,
             require_consumed=bool(args.require_consumed),
         )
+    elif args.command == "check-successor":
+        result = check_successor_runtime(
+            args.repo_root,
+            runtime_date=args.runtime_date,
+        )
     elif args.command == "consume-receipt":
         result = consume_receipt(args.repo_root, runtime_date=args.runtime_date)
+    elif args.command == "consume-successor-authorization":
+        result = consume_successor_authorization(
+            args.repo_root,
+            runtime_date=args.runtime_date,
+        )
     else:
         result = source_smoke(args.repo_root)
     print(json.dumps(result, sort_keys=True, default=str))
-    if args.command == "check" and result["status"] != "PASS":
+    if args.command in {"check", "check-successor"} and result["status"] != "PASS":
         raise SystemExit(1)
 
 
@@ -3173,7 +3839,9 @@ if __name__ == "__main__":
 __all__ = [
     "adaptive_gate",
     "check",
+    "check_successor_runtime",
     "consume_receipt",
+    "consume_successor_authorization",
     "run",
     "source_smoke",
     "stage0_family_decisions",

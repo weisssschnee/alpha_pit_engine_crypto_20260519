@@ -1702,3 +1702,32 @@ mapping, cost, evaluator, grammar and Temporal Program semantics. Its status is
 read or promotion occurred in this phase. The next required decision is whether
 external control authorizes exactly this one development continuation or keeps
 the family on hold.
+
+## Completed phase: canonical 30k-to-50k successor implementation readiness
+
+The canonical `temporal_program_search_v1.py` runner now contains one explicit
+`30K_TO_50K_SUCCESSOR` execution mode. It reuses the existing Temporal Program
+market loader, compiler, AST, evaluator, reward, mapping, cost, archive and
+worker path. It physically consumes the reconstructed 30k adaptive-policy
+bundle, restores only `completion_ordinal <= 30000` ledger/archive/dedupe/
+lineage and policy-local state, restores all four Evolution plus four CEM lanes,
+and creates four deterministic fresh Random control lanes. The invalid source
+suffix beginning at 30,001 contributes zero state.
+
+The mode fail-closes before market access unless the sole successor
+authorization is externally and atomically moved from
+`IMPLEMENTED_NOT_AUTHORIZED` to the one-time authorized state and committed
+with the accepted implementation SHA, exact component hashes, fixed branch and
+fixed runtime identity. A launch claim is created before economic or market
+authority access, so the same runtime identity cannot be launched twice or
+resumed. Decisions occur only on complete 5,000-additional-strict tranches;
+20% fresh Random is retained, adaptive budget is deterministically reassigned
+after an arm exit, and 20,000 additional / 50,000 cumulative strict is a
+mechanical stop.
+
+The independent implementation checker reports `PASS`: prefix reconstruction
+`PASS`, successor implementation `READY`, authorization `NOT_AUTHORIZED`, and
+market continuation `NOT_RUN`. It performed zero market-array reads, zero
+candidate evaluations and zero sealed reads. Validation, OOS, holdout, forward,
+promotion and automatic expansion remain forbidden. This phase is source and
+synthetic verification only; it creates no market or Alpha evidence.
