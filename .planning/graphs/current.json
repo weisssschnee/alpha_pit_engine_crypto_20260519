@@ -15,6 +15,7 @@
           ".planning/STATE.md",
           "alphafactory_crypto/broad_search/p4_mechanism_pocket_validation_v1.py",
           "config/crypto_p4_mechanism_pocket_validation_v1_receipt.json",
+          "config/crypto_p4_mechanism_pocket_validation_v1_replacement_receipt.json",
           "reports/CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1_20260811.md",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/behavior_family_selection_receipt.json",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json",
@@ -30,13 +31,26 @@
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/task_status.json",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/task_stderr.log",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/pc2_terminal_evidence/task_stdout.log",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/retained_oi_payload_manifest.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/aggtrades_acquisition.stderr.tail.log",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/aggtrades_acquisition_status.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/aggtrades_failure_proof.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/final_decision.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/independent_checker.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/invalid_run_artifact_manifest.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/pc2_independent_checker.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/pc2_ops_status.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/pc2_task.log",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/pc2_task_status.json",
+          "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/pre_candidate_contract_audit.json",
           "scripts/acquire_binance_daily_aggtrades_compact_v1.py",
+          "scripts/crypto_p4_mechanism_pocket_validation_v1_pc2_launcher.ps1",
           "scripts/freeze_crypto_p4_mechanism_pocket_selection_v1.py",
           "tests/test_crypto_p4_mechanism_pocket_selection_v1.py",
           "tests/test_crypto_p4_mechanism_pocket_validation_v1.py"
         ],
         "raw_sha": "ee9a69416475aa303eb96add929aa479d5c4cafe",
-        "repo_head": "5179bd2875d4bad56c02919bf774ddc7483ee984"
+        "repo_head": "8c99da41c6d3b1f1ab242cea1bde7f4b1e341276"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1118,7 +1132,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-10T19:25:47.178226+00:00",
+  "generated_at": "2026-08-11T03:45:34.826681+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3114,8 +3128,9 @@
         "STAGE0 10000 STRICT FAMILY GATE COMPLETE",
         "P1 AND P4 LOCAL ROUTES ONLY",
         "ADAPTIVE BROAD INVALID AFTER 30K STOP OVERRIDE",
-        "P4 FRESH GATE PRE-CANDIDATE INVALID",
-        "OI 27 OF 27 ZERO FAILURE",
+        "P4 REPLACEMENT PRE-CANDIDATE INVALID",
+        "AGGTRADES 200 OF 200 PACKAGE MANIFEST FAILURE",
+        "WARMUP 336H BELOW SELECTED 720H",
         "ZERO CANDIDATES NO ECONOMIC RESULT NO OOS"
       ],
       "color": "#f9a825",
@@ -3527,10 +3542,10 @@
         },
         {
           "bypass_forbidden": true,
-          "enforced_by": "the consumed P4 validation receipt, PC2 task evidence, OI terminal status, and independent missing-manifest checks",
-          "evidence_ref": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json",
+          "enforced_by": "the consumed P4 replacement receipt, PC2 task and package-failure evidence, frozen-selection warmup audit, and independent missing-run-manifest checks",
+          "evidence_ref": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/final_decision.json",
           "id": "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",
-          "rule": "The one authorized 80-candidate P4 mechanism-pocket fresh-development receipt is consumed with run_authorized false. Producer 5179bd2875d4bad56c02919bf774ddc7483ee984 and PC2 task job_20260811_010941_00029d completed all 27 OI/mark venue-days with zero failures and an exact frozen symbol-map match. The external wrapper then observed a null native ExitCode after the successful acquisition child had written complete status and stopped before aggTrades acquisition, carrier preparation, target construction or candidate evaluation. Strict evaluated count is zero; PC2 and local independent checkers correctly fail on the absent run manifest. This is PRE_CANDIDATE_ENGINE_RUN_INVALID orchestration evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No continuation, rescue, second run or automatic expansion is authorized.",
+          "rule": "The sole source-repaired P4 mechanism-pocket replacement receipt is consumed with run_authorized false. Producer d6a5f7907e74868787d3d70a4736868333c3c26f and PC2 task job_20260811_101545_05f601 reused the hash-bound OI payload without redownload and processed all 200 Binance aggTrades symbols with zero symbol failures under concurrency three. Package assembly then failed because symbol=BTCUSDT/2026-08.json was absent from the monthly object manifest. Carrier preparation and candidate evaluation never started; strict evaluated count is zero and PC2 plus local independent checkers correctly fail on the absent run manifest. An independent frozen-selection audit also found that 22 of 80 candidates, all near-miss controls, require 720 complete hours against only 336 declared warmup hours, so the cohort is not comparable under the receipt even if packaging were repaired. This is PRE_CANDIDATE_ENGINE_RUN_INVALID source-package and admission-contract evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No second replacement, continuation, rescue or automatic expansion is authorized.",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -6214,7 +6229,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
       "validation": {
-        "checked_at": "2026-08-10T19:25:47.178226+00:00",
+        "checked_at": "2026-08-11T03:45:34.826681+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
         "evidence_sha256": "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
         "level": "PARTIAL",
@@ -9096,7 +9111,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "BA000EB36E1735A56B508D67B5DE4247F155CFB00E58D7F46E247F0B7E8DAEC4"
+    "sha256": "CC8B45F0AAE9AF9CA1D0D577480F8D87D0C02A17704BBD0548E8B6CA352F57A8"
   },
   "profile_id": null,
   "profiles": [
@@ -9133,7 +9148,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "BC9EDB6E9D9A353365FF2227C36709250D372662512E04169BA5F18BE7F1D903"
   },
-  "repo_head": "5179bd2875d4bad56c02919bf774ddc7483ee984",
+  "repo_head": "8c99da41c6d3b1f1ab242cea1bde7f4b1e341276",
   "schema_version": 1,
   "semantic_authorities": [
     {
