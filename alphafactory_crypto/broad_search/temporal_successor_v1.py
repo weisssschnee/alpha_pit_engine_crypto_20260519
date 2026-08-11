@@ -49,6 +49,8 @@ CARRIER_MANIFEST_PATH = (
     "runtime/crypto_search_engine_v1_4_oi_flow_20260728/"
     "aligned_carrier_manifest.json"
 )
+TEMPORAL_PROGRAM_CONFIG_PATH = "config/crypto_temporal_mechanism_program_v1.json"
+ECONOMIC_RECEIPT_PATH = "config/crypto_search_replication_aware_gate_v1_r3_receipt.json"
 PREMARKET_FAILURE_PATH = (
     "config/crypto_temporal_program_30k_to_50k_successor_v1_"
     "pre_market_failure.json"
@@ -82,7 +84,8 @@ SUCCESSOR_COMPONENT_PATHS = (
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
     "scripts/check_crypto_temporal_30k_successor_v1.py",
     "scripts/check_crypto_temporal_successor_execution_v1.py",
-    "config/crypto_temporal_mechanism_program_v1.json",
+    TEMPORAL_PROGRAM_CONFIG_PATH,
+    ECONOMIC_RECEIPT_PATH,
     CARRIER_MANIFEST_PATH,
     PREMARKET_FAILURE_PATH,
     SUCCESSOR_RECEIPT_PATH,
@@ -113,6 +116,22 @@ def executor_workspace_identity(repo_root: Path) -> dict[str, str]:
         "workspace_path_sha256": hashlib.sha256(
             resolved.encode("utf-8")
         ).hexdigest().upper(),
+    }
+
+
+def _complete_directory_bundle(root: Path) -> dict[str, Any]:
+    rows = [
+        {
+            "path": str(path.relative_to(root)).replace("\\", "/"),
+            "bytes": int(path.stat().st_size),
+            "sha256": _file_sha(path),
+        }
+        for path in sorted(path for path in root.rglob("*") if path.is_file())
+    ]
+    return {
+        "file_count": len(rows),
+        "bytes": sum(int(row["bytes"]) for row in rows),
+        "bundle_sha256": _json_sha(rows),
     }
 
 
@@ -158,6 +177,139 @@ def verify_successor_carrier_cache(
         "cache_root": str(manifest["cache_root"]),
         "cache_identity_sha256": str(manifest["cache_identity_sha256"]),
         "directory_bundle": observed_bundle,
+        "market_arrays_read": 0,
+        "sealed_reads": 0,
+    }
+
+
+def verify_successor_target_cache(
+    repo_root: Path,
+    *,
+    economic_receipt_path: Path | None = None,
+) -> dict[str, Any]:
+    """Verify the independently stored Binance target cache without np.load."""
+
+    repo_root = repo_root.resolve()
+    try:
+        if economic_receipt_path is None:
+            config = json.loads(
+                (repo_root / TEMPORAL_PROGRAM_CONFIG_PATH).read_text(
+                    encoding="utf-8"
+                )
+            )
+            configured_receipt = str(
+                dict(config.get("source_authorities") or {}).get(
+                    "economic_receipt_template"
+                )
+                or ""
+            )
+            if configured_receipt != ECONOMIC_RECEIPT_PATH:
+                _fail("economic_receipt_path_changed")
+            economic_receipt_path = repo_root / configured_receipt
+        else:
+            economic_receipt_path = economic_receipt_path.resolve()
+        receipt = json.loads(economic_receipt_path.read_text(encoding="utf-8"))
+        execution = dict(receipt.get("execution") or {})
+        raw_target_root = Path(str(execution["target_cache_path"]))
+        target_root = (
+            raw_target_root
+            if raw_target_root.is_absolute()
+            else repo_root / raw_target_root
+        ).resolve()
+        target_metadata = json.loads(
+            (target_root / "metadata.json").read_text(encoding="utf-8")
+        )
+        target_bundle = _complete_directory_bundle(target_root)
+
+        carrier_manifest = json.loads(
+            (repo_root / CARRIER_MANIFEST_PATH).read_text(encoding="utf-8")
+        )
+        raw_carrier_root = Path(str(carrier_manifest["cache_root"]))
+        carrier_root = (
+            raw_carrier_root
+            if raw_carrier_root.is_absolute()
+            else repo_root / raw_carrier_root
+        ).resolve()
+        carrier_metadata = json.loads(
+            (carrier_root / "metadata.json").read_text(encoding="utf-8")
+        )
+    except SuccessorPreflightError:
+        raise
+    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as failure:
+        _fail("target_cache_unavailable:" + type(failure).__name__)
+
+    errors: list[str] = []
+    if str(target_metadata.get("identity_sha256") or "") != str(
+        execution.get("target_cache_identity_sha256") or ""
+    ):
+        errors.append("target_cache_identity")
+    if str(target_metadata.get("source_cache_identity_sha256") or "") != str(
+        carrier_metadata.get("identity_sha256") or ""
+    ):
+        errors.append("target_cache_source_identity")
+    if tuple(int(value) for value in target_metadata.get("shape") or ()) != tuple(
+        int(value) for value in carrier_metadata.get("shape") or ()
+    ):
+        errors.append("target_cache_source_shape")
+    timestamp_path = carrier_root / "timestamp_ns.npy"
+    if (
+        not timestamp_path.is_file()
+        or str(target_metadata.get("timestamp_sha256") or "")
+        != _file_sha(timestamp_path)
+    ):
+        errors.append("target_cache_timestamp")
+    for field in (
+        "venue",
+        "source",
+        "price_field",
+        "formula",
+        "execution_delay_hours",
+        "horizons_hours",
+        "positive_price_required",
+        "missing_value_fill",
+    ):
+        if target_metadata.get(field) != execution.get(field):
+            errors.append("target_cache_execution:" + field)
+    target_files = dict(target_metadata.get("target_files") or {})
+    if set(target_files) != {
+        str(int(value)) for value in execution.get("horizons_hours") or ()
+    }:
+        errors.append("target_cache_horizon_files")
+    for target_file in target_files.values():
+        target_file = dict(target_file or {})
+        path = target_root / str(target_file.get("path") or "")
+        if (
+            not path.is_file()
+            or int(path.stat().st_size) != int(target_file.get("bytes", -1))
+            or _file_sha(path) != str(target_file.get("sha256") or "")
+        ):
+            errors.append("target_cache_file")
+    if errors:
+        _fail(*errors)
+    return {
+        "economic_receipt_path": (
+            str(economic_receipt_path.relative_to(repo_root)).replace("\\", "/")
+            if economic_receipt_path.is_relative_to(repo_root)
+            else str(economic_receipt_path)
+        ),
+        "economic_receipt_sha256": _file_sha(economic_receipt_path),
+        "target_cache_path": str(execution["target_cache_path"]),
+        "target_cache_identity_sha256": str(target_metadata["identity_sha256"]),
+        "directory_bundle": target_bundle,
+    }
+
+
+def verify_successor_market_inputs(repo_root: Path) -> dict[str, Any]:
+    """Bind every market-side cache needed by the successor before its claim."""
+
+    carrier = verify_successor_carrier_cache(repo_root)
+    return {
+        **{
+            key: value
+            for key, value in carrier.items()
+            if key not in {"market_arrays_read", "sealed_reads"}
+        },
+        "target_cache": verify_successor_target_cache(repo_root),
         "market_arrays_read": 0,
         "sealed_reads": 0,
     }
@@ -280,6 +432,8 @@ def validate_authorization_payload(
         errors.append("receipt_bound_role_bindings")
     market_input = dict(authorization.get("market_input_preflight") or {})
     market_bundle = dict(market_input.get("directory_bundle") or {})
+    target_input = dict(market_input.get("target_cache") or {})
+    target_bundle = dict(target_input.get("directory_bundle") or {})
     if (
         market_input.get("carrier_manifest_path") != CARRIER_MANIFEST_PATH
         or len(str(market_input.get("carrier_manifest_sha256") or "")) != 64
@@ -288,6 +442,13 @@ def validate_authorization_payload(
         or len(str(market_bundle.get("bundle_sha256") or "")) != 64
         or int(market_bundle.get("file_count", -1)) <= 0
         or int(market_bundle.get("bytes", -1)) <= 0
+        or target_input.get("economic_receipt_path") != ECONOMIC_RECEIPT_PATH
+        or len(str(target_input.get("economic_receipt_sha256") or "")) != 64
+        or not str(target_input.get("target_cache_path") or "")
+        or len(str(target_input.get("target_cache_identity_sha256") or "")) != 64
+        or len(str(target_bundle.get("bundle_sha256") or "")) != 64
+        or int(target_bundle.get("file_count", -1)) <= 0
+        or int(target_bundle.get("bytes", -1)) <= 0
     ):
         errors.append("market_input_preflight")
     replacement = dict(authorization.get("replacement_authorization") or {})
@@ -716,7 +877,7 @@ def prepare_successor_execution(
         expected_authority_identity=dict(reconstruction["authority_identity"]),
         expected_executor_identity=executor_workspace_identity(repo_root),
     )
-    observed_market_input = verify_successor_carrier_cache(repo_root)
+    observed_market_input = verify_successor_market_inputs(repo_root)
     expected_market_input = dict(authorization.get("market_input_preflight") or {})
     if {
         key: value
@@ -933,4 +1094,7 @@ __all__ = [
     "successor_checkpoint_decision",
     "successor_lane_targets",
     "validate_authorization_payload",
+    "verify_successor_carrier_cache",
+    "verify_successor_market_inputs",
+    "verify_successor_target_cache",
 ]

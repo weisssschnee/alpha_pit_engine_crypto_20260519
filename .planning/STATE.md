@@ -4,29 +4,33 @@ Last updated: 2026-08-11 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_PRE_MARKET_REPLACEMENT_AUTHORIZED_NOT_STARTED`
+`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_COMPLETE_MARKET_INPUT_PREFLIGHT_REPAIRED_NOT_AUTHORIZED`
 
-One source-only schema-2 replacement is now authorized for the still-unperformed
-market run. It is bound to repaired implementation
-`c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb`, authorization SHA256
-`6C294B79185C1E97657A5C2EC958C9DE585450F1B5868C382E85B72E776C994C`,
-PC2 workspace
-`C:\HermesWorker\workspace\crypto_temporal_successor_replacement_c1ab6bf6`
-and distinct runtime
-`crypto_temporal_program_30k_to_50k_successor_v1_20260811r1`. The replacement
-receipt binds the old authorization, failed task and launch-claim hash; the old
-runtime cannot resume. PC2 preflight independently verified the tracked carrier
-manifest plus all 122 required cache files, 598,775,942 bytes and directory
-bundle SHA256
-`340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`
-without loading market arrays. The replacement runtime remains absent and the
-observed market, candidate and sealed counts remain zero.
+The sole source-only replacement task `job_20260811_220208_ed60dd` is terminal
+`ENGINE_RUN_INVALID`. It restored the valid 30k prefix and wrote launch claim
+SHA256 `54A65F02C3952211C25A8C2E1A7F3947FBAF87369DCC74A07EEFADC37941E337`,
+then failed in worker initialization because the independently stored Binance
+execution-target cache was absent from the clean PC2 checkout. The root error
+is `ECONOMIC_RECEIPT_TARGET_CACHE_MISSING`; no initializer became ready, no
+evaluation batch returned, no additional strict row was written, and cumulative
+valid strict remains the restored 30,000-row source prefix. Sealed reads remain
+zero. The launch claim itself records zero market-array reads and candidate
+evaluations; after that claim the source store was opened, so this state does not
+mislabel the entire task as market-free.
 
-The research contract is unchanged: only the valid 30k prefix contributes;
-Random is fresh; CEM/Evolution restore only the verified bundle; allocation is
-20/20/60; decisions occur every additional 5k; cumulative 50k is the mechanical
-hard stop; and validation/OOS/holdout/forward/promotion remain forbidden. No
-second replacement is authorized.
+The source repair now fail-closes before any future launch claim unless both the
+122-file/598,775,942-byte carrier bundle and the independent 3-file/10,170,182-byte
+Binance target bundle are present and hash-bound. Target preflight verifies target
+identity `27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0`,
+source carrier identity, shape, timestamp, execution semantics, target-file
+hashes/sizes and a complete directory bundle without loading NumPy arrays. The
+authorization materializer now records both bundles.
+
+Both attempted runtimes are terminal and cannot resume. The current authorization
+template is reset to `IMPLEMENTED_NOT_AUTHORIZED`; no second replacement is
+authorized. Target, mapping, cost, reward, evaluator, valid prefix, fresh Random,
+reconstructed CEM/Evolution, 20/20/60 allocation, 5k decisions, 50k hard stop and
+all validation/OOS/holdout/forward/promotion boundaries remain unchanged.
 
 The preceding repaired boundary was:
 

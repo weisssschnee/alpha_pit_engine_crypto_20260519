@@ -42,6 +42,7 @@ def main() -> None:
         SUCCESSOR_COMPONENT_PATHS,
         authorization_content_sha,
         executor_workspace_identity,
+        verify_successor_market_inputs,
     )
 
     path = repo_root / SUCCESSOR_AUTHORIZATION_PATH
@@ -84,6 +85,11 @@ def main() -> None:
             "expected_branch": branch,
             "runtime_id": f"{SUCCESSOR_CAMPAIGN}_{args.runtime_date}",
             "executor_identity": executor_workspace_identity(repo_root),
+            "market_input_preflight": {
+                key: value
+                for key, value in verify_successor_market_inputs(repo_root).items()
+                if key not in {"market_arrays_read", "sealed_reads"}
+            },
             "run_authorization": {
                 "authority": "CURRENT_USER_INSTRUCTION",
                 "decision_id": decision_id,

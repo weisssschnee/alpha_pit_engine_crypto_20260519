@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import concurrent.futures
+import hashlib
 import json
 import shutil
 from collections.abc import Callable
@@ -26,6 +27,7 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
     successor_checkpoint_decision,
     validate_authorization_payload,
     verify_successor_carrier_cache,
+    verify_successor_target_cache,
 )
 from alphafactory_crypto.broad_search import temporal_successor_v1 as successor
 
@@ -90,6 +92,17 @@ def _authorization(**changes: object) -> dict[str, object]:
                 "file_count": 1,
                 "bytes": 1,
                 "bundle_sha256": "8" * 64,
+            },
+            "target_cache": {
+                "economic_receipt_path": successor.ECONOMIC_RECEIPT_PATH,
+                "economic_receipt_sha256": "9" * 64,
+                "target_cache_path": ".cache/test-target",
+                "target_cache_identity_sha256": "A" * 64,
+                "directory_bundle": {
+                    "file_count": 1,
+                    "bytes": 1,
+                    "bundle_sha256": "B" * 64,
+                },
             },
         },
         "executor_identity": executor_identity,
@@ -194,6 +207,92 @@ def test_successor_carrier_cache_missing_fails_before_launch_claim(
     )
     with pytest.raises(SuccessorPreflightError, match="carrier_cache_unavailable"):
         verify_successor_carrier_cache(tmp_path, manifest_path=manifest_path)
+
+
+def test_successor_target_cache_preflight_binds_execution_and_source_without_numpy_load(
+    tmp_path: Path,
+) -> None:
+    carrier_root = tmp_path / ".cache" / "test-carrier"
+    carrier_root.mkdir(parents=True)
+    timestamp_path = carrier_root / "timestamp_ns.npy"
+    timestamp_path.write_bytes(b"timestamp-bytes")
+    carrier_identity = "C" * 64
+    (carrier_root / "metadata.json").write_text(
+        json.dumps({"identity_sha256": carrier_identity, "shape": [2, 3]}) + "\n",
+        encoding="utf-8",
+    )
+    manifest_path = tmp_path / successor.CARRIER_MANIFEST_PATH
+    manifest_path.parent.mkdir(parents=True)
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "cache_root": ".cache/test-carrier",
+                "cache_identity_sha256": carrier_identity,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    target_root = tmp_path / ".cache" / "test-target"
+    target_root.mkdir(parents=True)
+    target_path = target_root / "target_return_4h.npy"
+    target_path.write_bytes(b"target-bytes")
+    target_sha = hashlib.sha256(target_path.read_bytes()).hexdigest().upper()
+    target_identity = "D" * 64
+    execution = {
+        "target_cache_path": ".cache/test-target",
+        "target_cache_identity_sha256": target_identity,
+        "venue": "BINANCE_USD_M",
+        "source": "TEST_SOURCE",
+        "price_field": "open_price",
+        "formula": "log(open[t+6]/open[t+2])",
+        "execution_delay_hours": 2,
+        "horizons_hours": [4],
+        "positive_price_required": True,
+        "missing_value_fill": None,
+    }
+    (target_root / "metadata.json").write_text(
+        json.dumps(
+            {
+                **{
+                    key: value
+                    for key, value in execution.items()
+                    if key
+                    not in {"target_cache_path", "target_cache_identity_sha256"}
+                },
+                "identity_sha256": target_identity,
+                "source_cache_identity_sha256": carrier_identity,
+                "shape": [2, 3],
+                "timestamp_sha256": hashlib.sha256(
+                    timestamp_path.read_bytes()
+                ).hexdigest().upper(),
+                "target_files": {
+                    "4": {
+                        "path": target_path.name,
+                        "bytes": target_path.stat().st_size,
+                        "sha256": target_sha,
+                    }
+                },
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    receipt_path = tmp_path / "economic_receipt.json"
+    receipt_path.write_text(
+        json.dumps({"execution": execution}) + "\n", encoding="utf-8"
+    )
+
+    observed = verify_successor_target_cache(
+        tmp_path, economic_receipt_path=receipt_path
+    )
+    assert observed["target_cache_identity_sha256"] == target_identity
+    assert observed["directory_bundle"]["file_count"] == 2
+
+    target_path.write_bytes(b"tampered")
+    with pytest.raises(SuccessorPreflightError, match="target_cache_file"):
+        verify_successor_target_cache(tmp_path, economic_receipt_path=receipt_path)
 
 
 def test_authorization_payload_distinguishes_ready_from_one_time_authorized() -> None:
