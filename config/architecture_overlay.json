@@ -1039,11 +1039,11 @@
                                           {
                                               "id":  "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",
                                               "type":  "EVIDENCE",
-                                              "rule":  "The one authorized 80-candidate P4 mechanism-pocket fresh-development receipt is consumed with run_authorized false. Producer 5179bd2875d4bad56c02919bf774ddc7483ee984 and PC2 task job_20260811_010941_00029d completed all 27 OI/mark venue-days with zero failures and an exact frozen symbol-map match. The external wrapper then observed a null native ExitCode after the successful acquisition child had written complete status and stopped before aggTrades acquisition, carrier preparation, target construction or candidate evaluation. Strict evaluated count is zero; PC2 and local independent checkers correctly fail on the absent run manifest. This is PRE_CANDIDATE_ENGINE_RUN_INVALID orchestration evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No continuation, rescue, second run or automatic expansion is authorized.",
+                                              "rule":  "The sole source-repaired P4 mechanism-pocket replacement receipt is consumed with run_authorized false. Producer d6a5f7907e74868787d3d70a4736868333c3c26f and PC2 task job_20260811_101545_05f601 reused the hash-bound OI payload without redownload and processed all 200 Binance aggTrades symbols with zero symbol failures under concurrency three. Package assembly then failed because symbol=BTCUSDT/2026-08.json was absent from the monthly object manifest. Carrier preparation and candidate evaluation never started; strict evaluated count is zero and PC2 plus local independent checkers correctly fail on the absent run manifest. An independent frozen-selection audit also found that 22 of 80 candidates, all near-miss controls, require 720 complete hours against only 336 declared warmup hours, so the cohort is not comparable under the receipt even if packaging were repaired. This is PRE_CANDIDATE_ENGINE_RUN_INVALID source-package and admission-contract evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No second replacement, continuation, rescue or automatic expansion is authorized.",
                                               "severity":  "HARD",
-                                              "enforced_by":  "the consumed P4 validation receipt, PC2 task evidence, OI terminal status, and independent missing-manifest checks",
+                                              "enforced_by":  "the consumed P4 replacement receipt, PC2 task and package-failure evidence, frozen-selection warmup audit, and independent missing-run-manifest checks",
                                               "bypass_forbidden":  true,
-                                              "evidence_ref":  "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json"
+                                              "evidence_ref":  "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1/final_decision.json"
                                           },
                                          {
                                              "id":  "real_experiment_authority_preflight",
@@ -1067,8 +1067,9 @@
                          "STAGE0 10000 STRICT FAMILY GATE COMPLETE",
                          "P1 AND P4 LOCAL ROUTES ONLY",
                          "ADAPTIVE BROAD INVALID AFTER 30K STOP OVERRIDE",
-                         "P4 FRESH GATE PRE-CANDIDATE INVALID",
-                         "OI 27 OF 27 ZERO FAILURE",
+                         "P4 REPLACEMENT PRE-CANDIDATE INVALID",
+                         "AGGTRADES 200 OF 200 PACKAGE MANIFEST FAILURE",
+                         "WARMUP 336H BELOW SELECTED 720H",
                          "ZERO CANDIDATES NO ECONOMIC RESULT NO OOS"
                      ],
                       "promotion_requirements":  [

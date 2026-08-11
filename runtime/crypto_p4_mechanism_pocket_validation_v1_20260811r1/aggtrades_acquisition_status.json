@@ -1,0 +1,17 @@
+{
+  "base_module": "D:\\HermesWorker\\runtime\\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py",
+  "base_module_sha256": "67355B7B5B8D34E6039733B4CA23116F1D9B6B4FBB6A69253F13B82DEF3A982F",
+  "classification_sha256": "B4BB2C7C8465AFA5B447554695DA7C036B5CF15B03420E47C6DDFF43D7A96BC6",
+  "completed_symbols": 200,
+  "end_exclusive": "2026-08-10",
+  "failure_count": 0,
+  "raw_retention_policy": "delete_after_checksum_and_compact_write",
+  "recent_failures": [],
+  "schema_version": 1,
+  "start": "2026-08-01",
+  "started_at": "2026-08-11T02:15:58.465840+00:00",
+  "status": "running",
+  "symbols": 200,
+  "updated_at": "2026-08-11T02:45:25.226722+00:00",
+  "workers": 3
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "PRE_CANDIDATE_ENGINE_RUN_INVALID",
+  "task_id": "job_20260811_101545_05f601",
+  "producer_source_sha": "d6a5f7907e74868787d3d70a4736868333c3c26f",
+  "strict_evaluated_count": 0,
+  "artifacts": [
+    {
+      "path": "aggtrades_acquisition.stderr.tail.log",
+      "bytes": 6039,
+      "sha256": "EE3F135EFF347A05C9364756FEB46A87C5686C8D0512D52A761ADF1B5115392F"
+    },
+    {
+      "path": "aggtrades_acquisition_status.json",
+      "bytes": 699,
+      "sha256": "0954D47996E217E48AE6E5D1A70855D66A82193CB93AE476AEBDFC17A7FE16EB"
+    },
+    {
+      "path": "aggtrades_failure_proof.json",
+      "bytes": 717,
+      "sha256": "AFEA5E900FCBBAE4BD003CCDE287B70AD682C6BF1D3273AB1400316F7E93A9CE"
+    },
+    {
+      "path": "final_decision.json",
+      "sha256": "0DC512514A47D0249EAED711D6D346C0271477AB9E169229E29A85C6FA3D9D5D"
+    },
+    {
+      "path": "independent_checker.json",
+      "bytes": 433,
+      "sha256": "2CBAE0DA32424D0A54D2CFF3160624C20B5E0227F8207777E737F50480C2A437"
+    },
+    {
+      "path": "pc2_independent_checker.json",
+      "bytes": 444,
+      "sha256": "5218E508FC9BE3BA29875AA15BBD2803BA6229455ABB6FC42AEC5482A9E44687"
+    },
+    {
+      "path": "pc2_ops_status.json",
+      "bytes": 1122,
+      "sha256": "D74724F4F87F0F2FB3B67E24A620AE345E93A7BA4FB471C77C781A6AE0F02553"
+    },
+    {
+      "path": "pc2_task.log",
+      "bytes": 84,
+      "sha256": "9789646ED54BCF7C3B3A4C04D56D0315DAF9F818166CCFA43BEF80CA6D125949"
+    },
+    {
+      "path": "pc2_task_status.json",
+      "bytes": 692,
+      "sha256": "D87D7D4BC535462EB7038ED9B08DE6F53FE0AC8CAC8B8367B2B9E4F81527AB6E"
+    },
+    {
+      "path": "pre_candidate_contract_audit.json",
+      "sha256": "026F1ADBA6A08BB4670C46653A4E7449FB6BC3FE02E0B27C6A3B51AA4BAD82FB"
+    }
+  ],
+  "remote_full_stderr": {
+    "path": "C:\\HermesWorker\\runtime\\crypto_p4_pocket_replacement_20260811\\aggtrades_acquisition.stderr.log",
+    "bytes": 20711220,
+    "sha256": "7D55635654CD12855DDA8BC7E66092DBC715B053E456F39612302B042AA25067"
+  },
+  "economic_result_available": false,
+  "second_replacement_authorized": false
+}

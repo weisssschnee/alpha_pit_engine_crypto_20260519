@@ -1,0 +1,10 @@
+﻿{
+    "schema_version":  1,
+    "source_path":  "C:\\HermesWorker\\runtime\\crypto_p4_pocket_replacement_20260811\\aggtrades_acquisition.stderr.log",
+    "source_sha256":  "7D55635654CD12855DDA8BC7E66092DBC715B053E456F39612302B042AA25067",
+    "source_bytes":  20711220,
+    "tail_path":  "C:\\HermesWorker\\runtime\\crypto_p4_pocket_replacement_20260811\\aggtrades_acquisition.stderr.tail.log",
+    "tail_sha256":  "EE3F135EFF347A05C9364756FEB46A87C5686C8D0512D52A761ADF1B5115392F",
+    "missing_manifest_path":  "C:\\HermesWorker\\data\\crypto_p4_pocket_validation_20260811\\aggtrades_20260801_20260809\\combined\\object_manifest\\symbol=BTCUSDT\\2026-08.json",
+    "missing_manifest_exists":  false
+}

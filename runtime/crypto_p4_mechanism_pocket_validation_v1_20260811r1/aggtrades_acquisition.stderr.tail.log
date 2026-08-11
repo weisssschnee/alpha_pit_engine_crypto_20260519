@@ -1,0 +1,80 @@
+﻿A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:129: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:129: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:129: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:129: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:129: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"trade_count_{label}"] = mask.astype("int64")
+D:\HermesWorker\runtime\binance_vision_aggtrades_top100_compact_1m_pc2_20260721.py:130: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk[f"notional_{label}"] = chunk["notional_row"].where(mask, 0.0)
+Traceback (most recent call last):
+  File "C:\HermesWorker\workspace\crypto_p4_pocket_replacement_d6a5f790\scripts\acquire_binance_daily_aggtrades_compact_v1.py", line 365, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\workspace\crypto_p4_pocket_replacement_d6a5f790\scripts\acquire_binance_daily_aggtrades_compact_v1.py", line 338, in main
+    package_rank_group(
+  File "C:\HermesWorker\workspace\crypto_p4_pocket_replacement_d6a5f790\scripts\acquire_binance_daily_aggtrades_compact_v1.py", line 243, in package_rank_group
+    raise RuntimeError(f"missing archive member: {path}")
+RuntimeError: missing archive member: C:\HermesWorker\data\crypto_p4_pocket_validation_20260811\aggtrades_20260801_20260809\combined\object_manifest\symbol=BTCUSDT\2026-08.json

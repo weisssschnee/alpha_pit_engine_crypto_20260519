@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-08-11T03:37:22.513013+00:00",
+  "errors": [
+    "checker_exception:FileNotFoundError:[Errno 2] No such file or directory: 'G:\\\\Project_V7_Rotation\\\\alpha_pit_engine_crypto_20260519\\\\runtime\\\\crypto_p4_mechanism_pocket_validation_v1_20260811r1\\\\run_manifest.json'"
+  ],
+  "runtime": "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811r1",
+  "schema_version": 1,
+  "status": "FAIL"
+}
