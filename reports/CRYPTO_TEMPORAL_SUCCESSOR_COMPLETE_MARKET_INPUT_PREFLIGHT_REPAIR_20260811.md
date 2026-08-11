@@ -49,3 +49,23 @@ the schema-2 receipt.
 Both attempted runtimes are terminal and must not resume. The repository is
 returned to `IMPLEMENTED_NOT_AUTHORIZED`. A further PC2 task requires a new,
 explicit, exact-SHA authorization; this repair itself does not authorize it.
+
+## Independent PC2 source-only verification
+
+At source SHA `a2f0bb5d8031bd7cef5df2107bf553c8b74bcc0e` and with both retained
+payloads copied locally (no download), PC2 returned:
+
+- complete market-input preflight: `PASS`
+- carrier bundle: `122` files, `598,775,942` bytes,
+  `340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`
+- target bundle: `3` files, `10,170,182` bytes,
+  `1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3`
+- committed carrier-manifest SHA256:
+  `5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6`
+- committed economic-receipt SHA256:
+  `A85E83412F274F4AC0117193F79BC9FF6E2FB332581B203BCC695F906CD204F4`
+- independent successor checker: `PASS`
+- implementation: `READY`
+- authorization: `NOT_AUTHORIZED`
+- market continuation: `NOT_RUN`
+- candidate evaluations/runtime creation/sealed reads: `0 / false / 0`

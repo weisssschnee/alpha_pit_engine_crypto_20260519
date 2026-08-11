@@ -26,6 +26,17 @@ source carrier identity, shape, timestamp, execution semantics, target-file
 hashes/sizes and a complete directory bundle without loading NumPy arrays. The
 authorization materializer now records both bundles.
 
+At repaired source SHA `a2f0bb5d8031bd7cef5df2107bf553c8b74bcc0e`,
+an independent PC2 source-only preflight returned
+`COMPLETE_MARKET_INPUT_PREFLIGHT_PASS`: carrier bundle SHA256
+`340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`
+and target bundle SHA256
+`1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3`
+both matched, with zero market-array loads, zero candidate evaluations and no
+runtime creation. The independent successor checker also returned `PASS` with
+implementation `READY`, authorization `NOT_AUTHORIZED` and market continuation
+`NOT_RUN`.
+
 Both attempted runtimes are terminal and cannot resume. The current authorization
 template is reset to `IMPLEMENTED_NOT_AUTHORIZED`; no second replacement is
 authorized. Target, mapping, cost, reward, evaluator, valid prefix, fresh Random,
