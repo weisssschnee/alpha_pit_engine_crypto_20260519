@@ -30,6 +30,7 @@
           "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
           "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json",
           "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_V1_20260811.md",
+          "reports/CRYPTO_TEMPORAL_SUCCESSOR_COMPLETE_MARKET_INPUT_PREFLIGHT_REPAIR_20260811.md",
           "reports/CRYPTO_TEMPORAL_SUCCESSOR_PRE_MARKET_DEPLOYMENT_REPAIR_20260811.md",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/behavior_family_selection_receipt.json",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json",
@@ -74,7 +75,7 @@
           "tests/test_crypto_temporal_successor_execution_v1.py"
         ],
         "raw_sha": "ee9a69416475aa303eb96add929aa479d5c4cafe",
-        "repo_head": "c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb"
+        "repo_head": "f9a79a7153fc11f962743d9905c5ef66556ca0c6"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1156,7 +1157,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-11T13:51:12.416239+00:00",
+  "generated_at": "2026-08-11T14:33:36.071910+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3531,9 +3532,9 @@
         {
           "bypass_forbidden": true,
           "enforced_by": "broad_search.experiment_authority.require_real_experiment_authority, broad_search.temporal_successor_v1.prepare_successor_execution, broad_search.temporal_program_search_v1.run 30K_TO_50K_SUCCESSOR mode, one-workspace launch claim, regression tests, consumed predecessor receipt, and invalid-run evidence manifest",
-          "evidence_ref": "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
+          "evidence_ref": "reports/CRYPTO_TEMPORAL_SUCCESSOR_COMPLETE_MARKET_INPUT_PREFLIGHT_REPAIR_20260811.md",
           "id": "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
-          "rule": "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. The first schema-2 successor process, task job_20260811_212229_f6d45d, wrote launch claim 09D63C46C65037823776F91DD2E467BD0CE882C007715E98DE105AA143A0550A and then failed before market access because the Git-excluded carrier cache was absent; market arrays, candidate evaluations and sealed reads are zero and its runtime cannot resume. Current user decision GO_WITH_LIMITED_SEARCH_POLICY_CHANGE now activates one source-only pre-market replacement authorization, SHA256 6C294B79185C1E97657A5C2EC958C9DE585450F1B5868C382E85B72E776C994C, bound to repaired implementation c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb and a distinct exact PC2 workspace/runtime. Preflight independently verifies the tracked 122-file carrier bundle before any launch claim, returns SUCCESSOR_PREFLIGHT_PASS with zero suffix contribution and zero market/sealed reads, and leaves the replacement runtime absent. Random is fresh and CEM/Evolution restore only the verified 30k bundle. The run remains capped at 20,000 additional strict with 5,000-strict decisions and an unconditional cumulative 50,000 mechanical stop; family concentration is diagnostic/allocation only. Receipt-scoped target, optimizer-reward, execution-price and cost bindings remain NON_FORMAL exceptions for this run and confer no global economic authority, validation, Alpha, OOS, promotion or formal authority. No second replacement is authorized.",
+          "rule": "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. The first schema-2 successor task job_20260811_212229_f6d45d failed before market access because the Git-excluded 115-field carrier cache was absent. Its sole source-only replacement job_20260811_220208_ed60dd then failed before any additional strict evaluation because the independent Binance execution-target cache was absent: no initializer became ready, no evaluation batch returned, additional strict is zero, cumulative valid strict remains 30000, and both runtimes are terminal/non-resumable. Source now fail-closes before launch claim unless both the 122-file carrier bundle and 3-file Binance target bundle match their committed manifest/receipt, identity, shape, timestamp, execution semantics, declared file hashes and complete directory hashes. Independent PC2 source-only preflight and checker pass with implementation READY, authorization NOT_AUTHORIZED, market continuation NOT_RUN, no runtime creation and zero candidate/sealed reads. Random remains fresh and CEM/Evolution may restore only the verified 30k bundle. Any future authorization remains capped at 20,000 additional strict with 5,000-strict decisions and an unconditional cumulative 50,000 mechanical stop; family concentration is diagnostic/allocation only. Receipt-scoped target, optimizer-reward, execution-price and cost bindings confer no global economic authority, validation, Alpha, OOS, promotion or formal authority. No second replacement is authorized.",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -3561,7 +3562,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (30k valid prefix reconstructed; pre-market replacement AUTHORIZED/NOT_STARTED; Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (30k prefix reconstructed; complete market-input preflight READY/NOT_AUTHORIZED; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3800,6 +3801,7 @@
         "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_V1_20260811.md",
         "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
         "reports/CRYPTO_TEMPORAL_SUCCESSOR_PRE_MARKET_DEPLOYMENT_REPAIR_20260811.md",
+        "reports/CRYPTO_TEMPORAL_SUCCESSOR_COMPLETE_MARKET_INPUT_PREFLIGHT_REPAIR_20260811.md",
         "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
         "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json",
         "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/independent_successor_preflight.json"
@@ -6243,7 +6245,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
       "validation": {
-        "checked_at": "2026-08-11T13:51:12.416239+00:00",
+        "checked_at": "2026-08-11T14:33:36.071910+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
         "evidence_sha256": "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
         "level": "PARTIAL",
@@ -9130,7 +9132,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "D882B757D6F447008D83E3393FC45AC09D77D692CD85E369DC180DE6E2AE6724"
+    "sha256": "1E6C388E8D339493647DE7AA750A244A0082B527E31A08FFD1A9739D330407C0"
   },
   "profile_id": null,
   "profiles": [
@@ -9167,7 +9169,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "BC9EDB6E9D9A353365FF2227C36709250D372662512E04169BA5F18BE7F1D903"
   },
-  "repo_head": "c1ab6bf6493a02cebd5d6c05d3c2aacb04f5affb",
+  "repo_head": "f9a79a7153fc11f962743d9905c5ef66556ca0c6",
   "schema_version": 1,
   "semantic_authorities": [
     {
