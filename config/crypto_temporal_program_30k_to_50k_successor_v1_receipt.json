@@ -1,0 +1,65 @@
+{
+  "allocation": {
+    "FRESH_RANDOM_CONTROL_AFTER_30K": 0.2,
+    "temporal_program_cem": 0.2,
+    "temporal_program_evolution": 0.6
+  },
+  "allowed_checkpoint_decisions": [
+    "CONTINUE",
+    "PRUNE_ARM_AND_CONTINUE",
+    "STOP_ECONOMIC_FUTILITY",
+    "STOP_INVALID"
+  ],
+  "authority_identity": {
+    "behavior_contract_sha256": "E3E41C3D9820558AE11E79C0767854B9AADDDFED4955F0F1B1CA9FD458BC8088",
+    "economic_receipt_sha256": "244ADFC59AD7AAB453928365B68CAAB6B8537CDF55795EC9F97629F1B15A46AC",
+    "market_contract_sha256": "E104F1A18901FC2370BE2CEE26D66BEE23EC3B33CE0719AC212F1BCADC161618",
+    "optimizer_reward_and_matched_attribution_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
+    "portfolio_mapping_and_cost_sha256": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF",
+    "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+    "source_frozen_contract_sha256": "F4F6D90F13E2BDFD113C912A6FD26BF57CB048AB39645B48138EDFAD81CCD6E5",
+    "source_producer_sha": "6450be52f7ff85385ac7de86e1d62819a48c1e66",
+    "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+    "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
+  },
+  "boundaries": {
+    "automatic_expansion": false,
+    "forward": false,
+    "holdout": false,
+    "market_run_started": false,
+    "oos": false,
+    "promotion": false,
+    "train_only": true,
+    "validation": false
+  },
+  "checkpoint_size": 5000,
+  "development_adaptive_policy_changed_after_observing_30k": true,
+  "family_concentration_is_diagnostic_only": true,
+  "forbidden_additions": [
+    "MCTS",
+    "RL",
+    "NOVELTY_QD",
+    "NEW_OPTIMIZER",
+    "NEW_GRAMMAR"
+  ],
+  "maximum_additional_strict": 20000,
+  "random_control_identity": "FRESH_RANDOM_CONTROL_AFTER_30K",
+  "receipt_id": "CRYPTO_TEMPORAL_PROGRAM_30K_TO_50K_SUCCESSOR_V1",
+  "receipt_sha256": "B361E3118FB6D3F07BC16ACB1C21C4A6AFAF2B1C6484FF7BF4031A3AB3536850",
+  "reconstructed_policy_bundle_sha256": "DA229B716EC23C864C25E89443241345ECA645DB7EC7C7B1D57E0C1C7EA4485F",
+  "run_authorized": false,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_artifact_identity_sha256": "4A86407E9D399EDF4900AFB98A27B0FDC5FFE34D138D96882FCF30706A3338F6",
+  "source_evidence_prefix": 30000,
+  "status": "IMPLEMENTED_NOT_AUTHORIZED",
+  "unchanged_authorities": {
+    "cost": true,
+    "evaluator": true,
+    "execution": true,
+    "grammar": true,
+    "portfolio_mapping": true,
+    "target": true,
+    "temporal_program_semantics": true
+  }
+}

@@ -19,7 +19,7 @@ import subprocess
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence, TypeVar
 
 import numpy as np
 import pandas as pd
@@ -81,6 +81,9 @@ class ProgramBudgetExhausted(RuntimeError):
 
 class ProgramRunInvalid(RuntimeError):
     pass
+
+
+_T = TypeVar("_T")
 
 
 def _json_sha(value: Any) -> str:
@@ -180,6 +183,20 @@ def validate_config(config: Mapping[str, Any]) -> None:
     }
     if runtime_safety != expected_runtime_safety:
         raise ValueError("temporal program runtime safety contract changed")
+    adaptive_gate_contract = dict(
+        dict(config["continuation_gates"])["stages_20000_30000_40000"]
+    )
+    if (
+        float(
+            adaptive_gate_contract["maximum_top_program_family_positive_share"]
+        )
+        != 0.60
+        or adaptive_gate_contract.get(
+            "program_family_concentration_is_diagnostic_only"
+        )
+        is not True
+    ):
+        raise ValueError("program-family concentration diagnostic contract changed")
     seed_authority = dict(config["seed_authority"])
     seeds = tuple(int(value) for value in seed_authority["seeds"])
     campaign = seed_authority.get("campaign")
@@ -345,6 +362,84 @@ def _merge_checkpoint_terminal_reason(
 ) -> str | None:
     """Keep an already-issued market/gate stop authoritative."""
     return current_reason if current_reason is not None else qualification_reason
+
+
+def _seal_terminal_decision(
+    state: dict[str, Any],
+    *,
+    reason: str,
+    strict_boundary: int,
+) -> dict[str, Any]:
+    """Persist the point after which market/search state is immutable."""
+
+    if not reason:
+        raise ValueError("terminal decision reason is empty")
+    boundary = int(strict_boundary)
+    payload = {
+        "schema_version": 1,
+        "status": "SEALED",
+        "terminal_reason": str(reason),
+        "valid_prefix_boundary": boundary,
+        "invalid_suffix_start": boundary + 1,
+    }
+    existing = state.get("terminal_decision")
+    if existing is not None and dict(existing) != payload:
+        raise ProgramRunInvalid("TERMINAL_DECISION_IDENTITY_CHANGED")
+    state["terminal_decision"] = payload
+    return payload
+
+
+def _assert_terminal_market_open(
+    state: Mapping[str, Any],
+    *,
+    action: str,
+) -> None:
+    sealed = state.get("terminal_decision")
+    if isinstance(sealed, Mapping) and sealed.get("status") == "SEALED":
+        raise RuntimeError(
+            "TERMINAL_DECISION_SEALED:"
+            + str(sealed.get("terminal_reason"))
+            + ":"
+            + str(action)
+        )
+
+
+def _call_with_terminal_invariant(
+    state: Mapping[str, Any],
+    action: str,
+    callback: Callable[..., _T],
+    *args: Any,
+    **kwargs: Any,
+) -> _T:
+    _assert_terminal_market_open(state, action=action)
+    return callback(*args, **kwargs)
+
+
+def _valid_prefix_fields(
+    state: Mapping[str, Any],
+    *,
+    status: str,
+    strict_count: int,
+) -> dict[str, Any]:
+    sealed = state.get("terminal_decision")
+    if isinstance(sealed, Mapping) and sealed.get("status") == "SEALED":
+        boundary = int(sealed["valid_prefix_boundary"])
+        invalid_suffix_start = int(sealed["invalid_suffix_start"])
+        terminal_invalid = bool(
+            str(status) == "ENGINE_RUN_INVALID" or int(strict_count) > boundary
+        )
+        return {
+            "valid_prefix_boundary": boundary,
+            "invalid_suffix_start": invalid_suffix_start,
+            "economic_prefix_valid": True,
+            "orchestration_terminal_invalid": terminal_invalid,
+        }
+    return {
+        "valid_prefix_boundary": None,
+        "invalid_suffix_start": None,
+        "economic_prefix_valid": False,
+        "orchestration_terminal_invalid": str(status) == "ENGINE_RUN_INVALID",
+    }
 
 
 def validate_receipt(
@@ -915,6 +1010,12 @@ def adaptive_gate(
         random_mask &= frame["program_family_id"].astype(str).isin(active_families)
     random_frame = frame.loc[random_mask]
     random_count = len(random_frame)
+    adaptive_contract = dict(
+        dict(config["continuation_gates"])["stages_20000_30000_40000"]
+    )
+    family_concentration_threshold = float(
+        adaptive_contract["maximum_top_program_family_positive_share"]
+    )
     decisions: dict[str, Any] = {}
     updated_states = dict(state["arm_states"])
     for arm in ARMS[1:]:
@@ -940,6 +1041,23 @@ def adaptive_gate(
                 if len(positives)
                 else pd.Series(dtype=int)
             )
+            dominant_program_family = (
+                str(family_positive.idxmax()) if len(family_positive) else None
+            )
+            dominant_program_family_positive_share = (
+                float(family_positive.max() / family_positive.sum())
+                if len(family_positive)
+                else 0.0
+            )
+            if not len(family_positive):
+                family_concentration_diagnostic = "NO_POSITIVE_PROGRAM_FAMILY"
+            elif (
+                dominant_program_family_positive_share
+                > family_concentration_threshold
+            ):
+                family_concentration_diagnostic = "ABOVE_DIAGNOSTIC_THRESHOLD"
+            else:
+                family_concentration_diagnostic = "WITHIN_DIAGNOSTIC_THRESHOLD"
             return {
                 "same_count": len(local),
                 "mean_search_reward": float(local["search_reward"].astype(float).mean()),
@@ -953,10 +1071,12 @@ def adaptive_gate(
                     * 3600.0
                     / max(1.0e-12, float(local["total_process_cpu_seconds"].sum()))
                 ),
-                "top_program_family_positive_share": (
-                    float(family_positive.max() / family_positive.sum())
-                    if len(family_positive)
-                    else 0.0
+                "dominant_program_family": dominant_program_family,
+                "dominant_program_family_positive_share": (
+                    dominant_program_family_positive_share
+                ),
+                "family_concentration_diagnostic": (
+                    family_concentration_diagnostic
                 ),
             }
 
@@ -975,12 +1095,11 @@ def adaptive_gate(
                 "strict_per_process_cpu_hour",
             )
         ]
-        breadth = bool(
+        behavior_breadth = bool(
             observed["behavior_family_count"]
             >= 0.8 * control["behavior_family_count"]
-            and observed["top_program_family_positive_share"] <= 0.6
         )
-        incremental = any(quality) and any(productivity) and breadth
+        incremental = any(quality) and any(productivity) and behavior_breadth
         old = str(updated_states.get(arm, "ACTIVE"))
         if incremental:
             new = "ACTIVE"
@@ -994,7 +1113,10 @@ def adaptive_gate(
             "same_count": common,
             "quality_improvement": any(quality),
             "productivity_improvement": any(productivity),
-            "breadth_pass": breadth,
+            "behavior_breadth_pass": behavior_breadth,
+            "family_concentration_diagnostic": observed[
+                "family_concentration_diagnostic"
+            ],
             "random": control,
             "observed": observed,
         }
@@ -1325,6 +1447,7 @@ def _observe_candidate(
     ledger: list[dict[str, Any]],
     checkpoint_index: int,
 ) -> None:
+    _assert_terminal_market_open(state, action="candidate_observe_and_ledger_append")
     arm = str(proposal["arm"])
     completion = len(ledger) + 1
     local_counts = state["policy_local_family_counts"].setdefault(
@@ -1702,6 +1825,18 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         repo_root, allowed_paths=(runtime_root, report_path)
     ):
         raise RuntimeError("temporal program producer tree is not clean")
+    if runtime_root.is_dir():
+        prior_checkpoints = sorted(
+            (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+        )
+        if prior_checkpoints:
+            prior_state_path = prior_checkpoints[-1] / "state.json"
+            if prior_state_path.is_file():
+                prior_state = engine._read_json(prior_state_path)
+                _assert_terminal_market_open(
+                    prior_state,
+                    action="resume_before_market_or_worker_initialization",
+                )
     economic = resolve_search_economic_receipt(
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )
@@ -1888,6 +2023,7 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
         for checkpoint_index in range(
             int(state["next_checkpoint_index"]), checkpoint_count_cap
         ):
+            _assert_terminal_market_open(state, action="next_checkpoint")
             checkpoint_start = len(ledger)
             checkpoint_target = checkpoint_start + 2_000
             if not bool(state.get("skip_stage0")) and checkpoint_index < 5:
@@ -1923,7 +2059,11 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                         policy = policies[key]
                         proposal_cpu = time.process_time()
                         try:
-                            temporal, metadata = policy.propose()
+                            temporal, metadata = _call_with_terminal_invariant(
+                                state,
+                                "candidate_generation",
+                                policy.propose,
+                            )
                             static = static_counterpart(registry, temporal)
                         except (ValueError, RuntimeError) as failure:
                             failed_raw_attempts = int(
@@ -2010,7 +2150,10 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                     try:
                         for item in batch:
                             futures[
-                                executor.submit(
+                                _call_with_terminal_invariant(
+                                    state,
+                                    "worker_submission",
+                                    executor.submit,
                                     _worker_program_pair,
                                     {
                                         "paired_program_id": item["paired_program_id"],
@@ -2074,7 +2217,10 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                             executor = make_executor(int(state["workers"]))
                             retry_items = [item for item, result in results if result["memory_error"]]
                             retry = {
-                                executor.submit(
+                                _call_with_terminal_invariant(
+                                    state,
+                                    "worker_retry_submission",
+                                    executor.submit,
                                     _worker_program_pair,
                                     {
                                         "paired_program_id": item["paired_program_id"],
@@ -2210,7 +2356,13 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                         enforce_budget(proposal_attempt_reservation(arm))
                         proposal_cpu = time.process_time()
                         try:
-                            candidate, metadata = engine._policy_propose(policy, archive)
+                            candidate, metadata = _call_with_terminal_invariant(
+                                state,
+                                "candidate_generation",
+                                engine._policy_propose,
+                                policy,
+                                archive,
+                            )
                         except (ValueError, RuntimeError) as failure:
                             failed_raw_attempts = int(
                                 getattr(failure, "raw_attempts", 1)
@@ -2273,7 +2425,10 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                     try:
                         for row in proposals:
                             futures[
-                                executor.submit(
+                                _call_with_terminal_invariant(
+                                    state,
+                                    "worker_submission",
+                                    executor.submit,
                                     engine._worker_evaluate,
                                     row["candidate"].to_dict(),
                                 )
@@ -2331,7 +2486,13 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                             executor = make_executor(int(state["workers"]))
                             retry_rows = [row for row, result in results if result["memory_error"]]
                             retry = {
-                                executor.submit(engine._worker_evaluate, row["candidate"].to_dict()): row
+                                _call_with_terminal_invariant(
+                                    state,
+                                    "worker_retry_submission",
+                                    executor.submit,
+                                    engine._worker_evaluate,
+                                    row["candidate"].to_dict(),
+                                ): row
                                 for row in retry_rows
                             }
                             retry_by_id = {
@@ -2395,7 +2556,12 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 if key in policies:
                     local = [row for row in checkpoint_rows if row["arm"] == ARMS[1] and int(row["seed"]) == int(seed)]
                     if local:
-                        policies[key].update(local)
+                        _call_with_terminal_invariant(
+                            state,
+                            "policy_update",
+                            policies[key].update,
+                            local,
+                        )
             metrics.extend(
                 _checkpoint_metrics(checkpoint_index=checkpoint_index, ledger=ledger, state=state)
             )
@@ -2442,6 +2608,12 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
                 state["arm_states"] = dict(decision["arm_states_after"])
                 if decision["status"] != "CONTINUE":
                     terminal_reason = decision["status"]
+            if terminal_reason is not None:
+                _seal_terminal_decision(
+                    state,
+                    reason=terminal_reason,
+                    strict_boundary=strict_boundary,
+                )
             _write_runtime_views(
                 runtime_root,
                 state=state,
@@ -2630,6 +2802,11 @@ def run(repo_root: Path, *, runtime_date: str, source_sha: str | None = None) ->
             "ENGINE_RUN_INVALID",
             "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE",
         },
+        **_valid_prefix_fields(
+            state,
+            status=status,
+            strict_count=strict_count,
+        ),
     }
     engine._write_json(runtime_root / "final_decision.json", final)
     manifest_paths = [
@@ -2874,6 +3051,19 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         validity_errors.append("nonzero_attempts_zero_strict")
     if int(final.get("system_error_count", 0)) > 0 and final.get("status") != "ENGINE_RUN_INVALID":
         validity_errors.append("system_error_without_invalid_terminal")
+    if final.get("economic_prefix_valid") is True:
+        prefix_boundary = int(final.get("valid_prefix_boundary", -1))
+        if (
+            prefix_boundary <= 0
+            or int(final.get("invalid_suffix_start", -1)) != prefix_boundary + 1
+            or prefix_boundary > len(ledger)
+        ):
+            errors.append("valid_prefix_contract")
+        expected_terminal_invalid = bool(
+            final.get("status") == "ENGINE_RUN_INVALID" or len(ledger) > prefix_boundary
+        )
+        if bool(final.get("orchestration_terminal_invalid")) != expected_terminal_invalid:
+            errors.append("orchestration_terminal_invalid")
     manifest = engine._read_json(runtime_root / "run_manifest.json")
     for row in manifest["files"]:
         local = runtime_root / str(row["path"])
@@ -2895,6 +3085,12 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         "stage0_pair_count": len(pairs),
         "reconciled_generation_attempts": batch_raw_attempts
         + rejected_raw_attempts,
+        "valid_prefix_boundary": final.get("valid_prefix_boundary"),
+        "invalid_suffix_start": final.get("invalid_suffix_start"),
+        "economic_prefix_valid": bool(final.get("economic_prefix_valid", False)),
+        "orchestration_terminal_invalid": bool(
+            final.get("orchestration_terminal_invalid", False)
+        ),
         "sealed_reads": 0,
     }
     engine._write_json(runtime_root / "independent_checker.json", result)

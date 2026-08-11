@@ -1573,16 +1573,18 @@ declares `active_authority: true`; they grant no formal claim or promotion
 authority.
 
 ADR 0015 records the preflight and ADR 0016 records the active-authority rule,
-economic authority suspension, reuse map, and successor receipt. The current
-target, optimizer-reward, execution-price, cost, and validation bindings remain
-NON_FORMAL and are not promoted to active formal authority. The exact schema-2
-receipt binds those named experimental components only for the one conditional
-development campaign. Portfolio mapping remains formal; that does not promote
-the venue cost assumption. Canonical and direct `run*` entry points verify the
-content-hashed successor receipt and exact user authorization. Historical
-entrypoints cannot use this exception. That one frozen OOS exception is now
-consumed; any further OOS access, promotion, cost tuning, seed changes, or rescue
-reruns remain forbidden.
+economic authority suspension, reuse map, and successor receipt. The former
+target, optimizer-reward and execution-price bindings to
+`real_policy_upgrade_canary` were erroneous and are now vacant; the canary is
+implementation/evidence and cannot own them. Cost remains inactive NON_FORMAL,
+while validation access and promotion remain fail-closed under the formal sealed
+boundary. Portfolio mapping remains formal; that does not promote the venue cost
+assumption. Vacancy and inactivity intentionally block canonical Search Engine
+execution until an explicit external-control/ADR transition names valid owners.
+The implementation-only 30k-to-50k successor receipt does not fill those roles
+or authorize a run. That one frozen OOS exception remains consumed; any further
+OOS access, promotion, cost tuning, seed changes, or rescue reruns remain
+forbidden.
 
 ## Crypto reward uncertainty V2 source repair
 
@@ -1671,3 +1673,32 @@ Source now preserves an already-issued gate terminal reason when applying
 checkpoint throughput qualification. The focused regression suite passes 32/32.
 This source repair changes no market, optimizer or evaluator semantics and grants
 no new research authority. No rerun is authorized by this closure.
+
+## Completed phase: 30k valid-prefix policy reconstruction and successor preflight
+
+The historical adaptive-broad runtime remains a whole-run
+`ENGINE_RUN_INVALID`: its valid economic prefix ends at strict row 30,000 and
+its invalid orchestration suffix begins at 30,001. Source now treats a persisted
+`STOP_*` decision as a mechanical mutation barrier across generation, executor
+submission, ledger append, Behavior Archive mutation and policy observation.
+Program-family concentration remains a reported allocation diagnostic but is
+no longer an arm-survival or campaign-stop predicate.
+
+Artifact-only reconstruction from the persisted `<=30k` candidate, lineage,
+reward and operation facts returned
+`PREFIX_POLICY_STATE_RECONSTRUCTION_PASS`. All four CEM and all four Evolution
+lane learning states match the checkpoint-017 snapshots; the checkpoint policy
+hash and input hashes verify, post-prefix adaptive mutation rows are zero, and
+the procedure performed zero market-array reads, zero candidate reevaluations
+and zero sealed reads. Random has no proved exact 30k RNG state and is therefore
+identified only as `FRESH_RANDOM_CONTROL_AFTER_30K`.
+
+A minimal 30k-to-50k successor receipt and independent preflight now exist with
+20% fresh Random, 60% reconstructed Evolution and 20% reconstructed CEM, 5k
+checkpoint decisions, train-only access and unchanged target, execution,
+mapping, cost, evaluator, grammar and Temporal Program semantics. Its status is
+`IMPLEMENTED_NOT_AUTHORIZED`; `run_authorized=false` and
+`market_run_started=false`. No continuation, validation, OOS, holdout, forward
+read or promotion occurred in this phase. The next required decision is whether
+external control authorizes exactly this one development continuation or keeps
+the family on hold.

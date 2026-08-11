@@ -232,6 +232,7 @@
       "adaptive_arm_requires_one_quality_and_one_productivity_improvement": true,
       "behavior_family_rate_minimum_fraction_of_random": 0.8,
       "maximum_top_program_family_positive_share": 0.6,
+      "program_family_concentration_is_diagnostic_only": true,
       "first_all-metric_nonincremental_checkpoint_action": "DIAGNOSTIC_FLOOR_10_PERCENT",
       "second_consecutive_all-metric_nonincremental_checkpoint_action": "EXIT_ARM",
       "typed_random_minimum_share": 0.2

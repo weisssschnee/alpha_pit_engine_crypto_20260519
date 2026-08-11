@@ -694,11 +694,10 @@ def test_committed_current_blocks_inactive_search_economic_roles() -> None:
     resolution = resolve_real_experiment_authorities(repo_root)
 
     assert set(resolution["blockers"]) == {
-        "target:INACTIVE_AUTHORITY",
-        "optimizer_reward:INACTIVE_AUTHORITY",
-        "execution_price:INACTIVE_AUTHORITY",
+        "target:VACANT",
+        "optimizer_reward:VACANT",
+        "execution_price:VACANT",
         "cost:INACTIVE_AUTHORITY",
-        "validation_role:INACTIVE_AUTHORITY",
     }
     current = json.loads(
         (repo_root / ".planning" / "graphs" / "current.json").read_text(

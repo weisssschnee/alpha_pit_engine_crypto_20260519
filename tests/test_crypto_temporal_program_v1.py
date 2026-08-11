@@ -42,6 +42,8 @@ from alphafactory_crypto.broad_search.temporal_program_v1 import (
     temporal_program_candidate_from_genes,
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
+    _assert_terminal_market_open,
+    _call_with_terminal_invariant,
     _checkpoint_qualification_terminal_reason,
     _merge_checkpoint_terminal_reason,
     _checkpoint_allocation,
@@ -57,6 +59,7 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _stage0_pair_task_capacity,
     _stage0_checkpoint_lane_targets,
     _stage0_lane_targets,
+    _seal_terminal_decision,
     _validate_active_source_smoke_receipt,
     _write_checkpoint,
     stage0_family_decisions,
@@ -211,6 +214,125 @@ def test_checkpoint_qualification_cannot_overwrite_frozen_gate_stop() -> None:
         None,
         "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR",
     ) == "ENGINE_BUDGET_EXHAUSTED_THROUGHPUT_FLOOR"
+
+
+def test_terminal_decision_is_a_mechanical_market_mutation_invariant() -> None:
+    state = _new_state("a" * 40, "B" * 64, CONFIG)
+    ledger: list[dict[str, object]] = []
+    rejected: list[dict[str, object]] = []
+    calls = Counter()
+
+    sealed = _seal_terminal_decision(
+        state,
+        reason="STOP_ALL_ADAPTIVE_ARMS_EXITED",
+        strict_boundary=30_000,
+    )
+    assert sealed == {
+        "schema_version": 1,
+        "status": "SEALED",
+        "terminal_reason": "STOP_ALL_ADAPTIVE_ARMS_EXITED",
+        "valid_prefix_boundary": 30_000,
+        "invalid_suffix_start": 30_001,
+    }
+
+    def mutate(name: str) -> None:
+        calls[name] += 1
+        ledger.append({"name": name})
+        rejected.append({"name": name})
+        state["generation_attempts"] += 1
+
+    for action in (
+        "candidate_generation",
+        "executor_submit",
+        "ledger_append",
+        "archive_mutation",
+        "policy_observe",
+    ):
+        with pytest.raises(RuntimeError, match="TERMINAL_DECISION_SEALED"):
+            _call_with_terminal_invariant(state, action, mutate, action)
+
+    with pytest.raises(RuntimeError, match="TERMINAL_DECISION_SEALED"):
+        _assert_terminal_market_open(state, action="resume_next_loop")
+
+    assert calls == Counter()
+    assert ledger == []
+    assert rejected == []
+    assert state["generation_attempts"] == 0
+
+
+def test_sealed_checkpoint_resume_stops_before_market_workers_or_artifact_mutation(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    config_path = tmp_path / "config/crypto_temporal_mechanism_program_v1.json"
+    config_path.parent.mkdir(parents=True)
+    config_path.write_text("{}\n", encoding="utf-8")
+    runtime_root = (
+        tmp_path / "runtime/crypto_temporal_mechanism_program_v1_resume-test"
+    )
+    checkpoint = runtime_root / "checkpoints/checkpoint_014"
+    checkpoint.mkdir(parents=True)
+    state = _new_state("a" * 40, "B" * 64, CONFIG)
+    _seal_terminal_decision(
+        state,
+        reason="STOP_ALL_ADAPTIVE_ARMS_EXITED",
+        strict_boundary=30_000,
+    )
+    (checkpoint / "state.json").write_text(
+        json.dumps(state, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    observed_artifacts = {
+        runtime_root / "candidate_ledger.parquet": b"ledger-before",
+        runtime_root / "behavior_archive.parquet": b"archive-before",
+        runtime_root / "process_evidence/producer_batch_000001.json": (
+            b"submission-before"
+        ),
+    }
+    for path, payload in observed_artifacts.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+    before = {
+        path: hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in observed_artifacts
+    }
+    calls = Counter()
+
+    monkeypatch.setattr(program_module, "validate_config", lambda config: None)
+    monkeypatch.setattr(
+        program_module,
+        "validate_receipt",
+        lambda *args, **kwargs: {},
+    )
+    monkeypatch.setattr(engine_module, "_git_sha", lambda root: "a" * 40)
+    monkeypatch.setattr(
+        engine_module,
+        "_source_tree_clean_for_run",
+        lambda *args, **kwargs: True,
+    )
+
+    def market_read(*args, **kwargs):
+        calls["market_read"] += 1
+        raise AssertionError("sealed resume reached market loading")
+
+    def executor(*args, **kwargs):
+        calls["executor"] += 1
+        raise AssertionError("sealed resume initialized an executor")
+
+    monkeypatch.setattr(program_module, "resolve_search_economic_receipt", market_read)
+    monkeypatch.setattr(
+        program_module.concurrent.futures,
+        "ProcessPoolExecutor",
+        executor,
+    )
+
+    with pytest.raises(RuntimeError, match="TERMINAL_DECISION_SEALED"):
+        program_module.run(tmp_path, runtime_date="resume-test", source_sha="a" * 40)
+
+    assert calls == Counter()
+    assert before == {
+        path: hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in observed_artifacts
+    }
 
 
 def test_source_smoke_validates_active_run_receipt(
@@ -929,3 +1051,86 @@ def test_adaptive_gate_excludes_inactive_family_random_diagnostics() -> None:
     assert cem["decision"] == "ACTIVE"
     assert cem["same_count"] == 4
     assert cem["random"]["mean_search_reward"] == 0.0
+
+
+def test_program_family_concentration_is_diagnostic_not_an_exit_gate() -> None:
+    rows = []
+    ordinal = 0
+
+    def add(
+        arm: str,
+        *,
+        positive: bool,
+        family: str,
+        reward: float,
+        replicated: bool,
+    ) -> None:
+        nonlocal ordinal
+        ordinal += 1
+        rows.append(
+            {
+                "arm": arm,
+                "completion_ordinal": ordinal,
+                "arm_completion_ordinal": ordinal,
+                "behavior_family_id": f"behavior-{arm}-{ordinal}",
+                "left_incremental_net_mean": 0.1 if positive else -0.1,
+                "right_incremental_net_mean": 0.1 if positive else -0.1,
+                "replicated_candidate": replicated,
+                "program_family_id": family,
+                "search_reward": reward,
+                "total_process_cpu_seconds": 1.0,
+            }
+        )
+
+    for index in range(1_000):
+        add(
+            "temporal_program_random",
+            positive=index < 100,
+            family="P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+            reward=0.0,
+            replicated=index < 50,
+        )
+        add(
+            "temporal_program_evolution",
+            positive=True,
+            family=(
+                "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+                if index < 861
+                else "P1_POSITION_STATE_CHANGE_TO_RESPONSE"
+            ),
+            reward=1.0,
+            replicated=index < 700,
+        )
+
+    decision = program_module.adaptive_gate(
+        rows,
+        state={
+            "adaptive_start_strict": 0,
+            "active_program_families": [
+                "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+                "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+            ],
+            "arm_states": {
+                "temporal_program_cem": "EXITED",
+                "temporal_program_evolution": "ACTIVE",
+            },
+        },
+        strict_boundary=len(rows),
+        config=CONFIG,
+    )
+    evolution = decision["arm_decisions"]["temporal_program_evolution"]
+    observed = evolution["observed"]
+    assert evolution["decision"] == "ACTIVE"
+    assert evolution["quality_improvement"] is True
+    assert evolution["productivity_improvement"] is True
+    assert evolution["behavior_breadth_pass"] is True
+    assert observed["dominant_program_family"] == (
+        "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+    )
+    assert observed["dominant_program_family_positive_share"] == pytest.approx(
+        0.861
+    )
+    assert observed["family_concentration_diagnostic"] == (
+        "ABOVE_DIAGNOSTIC_THRESHOLD"
+    )
+    assert decision["status"] == "CONTINUE"

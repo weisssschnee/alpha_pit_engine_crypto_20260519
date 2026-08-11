@@ -4,12 +4,12 @@
     "nodes":  [
                   {
                       "id":  "accepted_frontier_closure",
-                      "label":  "Accepted Frontier closure and economic decision",
+                      "label":  "Historical Frontier closure qualification",
                       "kind":  "decision",
-                      "lifecycle":  "ACTIVE",
+                      "lifecycle":  "DEPRECATED",
                       "critical":  true,
-                      "semantic_role":  "research_decision_authority",
-                      "active_authority":  true,
+                      "semantic_role":  "historical_frontier_qualification",
+                      "active_authority":  false,
                       "authority":  {
                                         "path":  "runtime/crypto_frontier_provenance_closure_20260714/closure_manifest.json",
                                         "repo_ref":  "crypto-frontier-provenance-closure-20260714",
@@ -19,8 +19,8 @@
                       "contracts":  [
                                         {
                                             "id":  "accepted_economic_state",
-                                            "type":  "AUTHORITY",
-                                            "rule":  "The annotated closure tag and committed closure manifest own CURRENT_DATA_UNDERPOWERED and HOLD_RESEARCH",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The annotated closure tag and committed closure manifest preserve the historical Frontier qualification result only; they do not own the current project objective, search governance, or research decision authority",
                                             "severity":  "HARD",
                                             "evidence_ref":  "runtime/crypto_frontier_provenance_closure_20260714/closure_manifest.json"
                                         },
@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (adaptive breadth failed; stop authority repaired; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (30k valid prefix reconstructed; successor implemented but unauthorized; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -620,6 +620,12 @@
                                      ,"runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/final_decision.json"
                                      ,"runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/invalid_run_artifact_manifest.json"
                                      ,"reports/CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1_20260811.md"
+                                     ,"alphafactory_crypto/broad_search/temporal_prefix_reconstruction_v1.py"
+                                     ,"scripts/reconstruct_crypto_temporal_30k_policy_state_v1.py"
+                                     ,"scripts/check_crypto_temporal_30k_successor_v1.py"
+                                     ,"config/crypto_temporal_program_30k_to_50k_successor_v1_receipt.json"
+                                     ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json"
+                                     ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/independent_successor_preflight.json"
                                  ],
                       "critical":  true,
                       "semantic_role":  "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
@@ -1030,11 +1036,11 @@
                                           {
                                               "id":  "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
                                              "type":  "EVIDENCE",
-                                             "rule":  "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached frozen 10k, 20k and 30k gates with zero sealed reads. CEM exited at 20k. Evolution improved equal-count dual-axis net-positive and 2-of-3 replication density but failed behavior breadth as its top positive program-family share rose to 86.12%, so the 30k gate issued STOP_ALL_ADAPTIVE_ARMS_EXITED and no arm qualified. A later throughput check incorrectly overwrote that terminal reason with None; operator intervention stopped the producer at 36,277 observed strict rows and preserved checkpoint 017 at 36,000. Six thousand post-gate checkpoint rows are contamination evidence only. PC2 and local checkers correctly fail because the interrupted invalid run has no normal final decision or run manifest. Source ee9a69416475aa303eb96add929aa479d5c4cafe preserves an earlier gate stop when checkpoint qualification returns None. The run is ENGINE_RUN_INVALID; no rerun, validation, OOS, promotion, tuning, new Arena or authority promotion is authorized.",
+                                             "rule":  "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. The successor receipt is IMPLEMENTED_NOT_AUTHORIZED, uses FRESH_RANDOM_CONTROL_AFTER_30K, and starts no market run. This evidence supports a bounded future development continuation decision only and confers no target, optimizer-reward, execution, validation, Alpha, OOS, promotion, or formal authority.",
                                              "severity":  "HARD",
                                              "enforced_by":  "broad_search.temporal_program_search_v1 frozen adaptive_gate terminal reason, regression test, consumed receipt, and invalid-run evidence manifest",
                                              "bypass_forbidden":  true,
-                                              "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810adaptive/invalid_run_artifact_manifest.json"
+                                               "evidence_ref":  "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json"
                                           },
                                           {
                                               "id":  "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",
@@ -2921,11 +2927,6 @@
                      ],
     "semantic_authorities":  [
                                  {
-                                     "semantic_role":  "research_decision_authority",
-                                     "authoritative_component":  "accepted_frontier_closure",
-                                     "authority_class":  "FORMAL"
-                                 },
-                                 {
                                      "semantic_role":  "historical_instrument_diagnosis",
                                      "authoritative_component":  "instrument_semantics_audit",
                                      "authority_class":  "FORMAL"
@@ -2991,21 +2992,6 @@
                                      "authority_class":  "FORMAL"
                                  },
                                  {
-                                     "semantic_role":  "target",
-                                     "authoritative_component":  "real_policy_upgrade_canary",
-                                     "authority_class":  "NON_FORMAL"
-                                 },
-                                 {
-                                     "semantic_role":  "optimizer_reward",
-                                     "authoritative_component":  "real_policy_upgrade_canary",
-                                     "authority_class":  "NON_FORMAL"
-                                 },
-                                 {
-                                     "semantic_role":  "execution_price",
-                                     "authoritative_component":  "real_policy_upgrade_canary",
-                                     "authority_class":  "NON_FORMAL"
-                                 },
-                                 {
                                      "semantic_role":  "portfolio_mapping",
                                      "authoritative_component":  "explicit_portfolio_mapping",
                                      "authority_class":  "FORMAL"
@@ -3017,8 +3003,8 @@
                                  },
                                  {
                                      "semantic_role":  "validation_role",
-                                     "authoritative_component":  "real_policy_upgrade_canary",
-                                     "authority_class":  "NON_FORMAL"
+                                     "authoritative_component":  "sealed_research_boundaries",
+                                     "authority_class":  "FORMAL"
                                  },
                                  {
                                      "semantic_role":  "promotion_gate",

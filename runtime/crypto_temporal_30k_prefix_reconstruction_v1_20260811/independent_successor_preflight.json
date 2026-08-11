@@ -1,0 +1,10 @@
+{
+  "errors": [],
+  "fresh_random_control_identity": "FRESH_RANDOM_CONTROL_AFTER_30K",
+  "market_run_started": false,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_evidence_prefix": 30000,
+  "status": "PASS",
+  "target_mapping_cost_evaluator_unchanged": true
+}
