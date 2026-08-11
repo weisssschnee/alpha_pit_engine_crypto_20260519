@@ -1,47 +1,49 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-11 Asia/Hong_Kong
+Last updated: 2026-08-12 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_COMPLETE_MARKET_INPUT_PREFLIGHT_REPAIRED_NOT_AUTHORIZED`
+`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_COMPLETE_SEARCH_POLICY_EVIDENCE_PASS_ALPHA_HOLD`
 
-The sole source-only replacement task `job_20260811_220208_ed60dd` is terminal
-`ENGINE_RUN_INVALID`. It restored the valid 30k prefix and wrote launch claim
-SHA256 `54A65F02C3952211C25A8C2E1A7F3947FBAF87369DCC74A07EEFADC37941E337`,
-then failed in worker initialization because the independently stored Binance
-execution-target cache was absent from the clean PC2 checkout. The root error
-is `ECONOMIC_RECEIPT_TARGET_CACHE_MISSING`; no initializer became ready, no
-evaluation batch returned, no additional strict row was written, and cumulative
-valid strict remains the restored 30,000-row source prefix. Sealed reads remain
-zero. The launch claim itself records zero market-array reads and candidate
-evaluations; after that claim the source store was opened, so this state does not
-mislabel the entire task as market-free.
+The one current-user-authorized schema-2 second replacement completed on PC2 as
+task `job_20260811_233723_fbaac8` at exact producer
+`d8106f271f86886621fd084c542671e23b695864`. It restored only the verified
+30,000-row prefix, evaluated exactly 20,000 additional train-only strict rows,
+and stopped mechanically at 50,000 cumulative strict after four frozen 5,000-row
+decisions. The run used ten workers without memory fallback, wrote zero system
+errors and zero sealed reads, and recorded zero contribution from every invalid
+historical suffix state category. No proposal, submit, observe, Archive or ledger
+mutation occurred after the 50,000 boundary. PC2 and relocated-artifact local
+independent checkers both pass.
 
-The source repair now fail-closes before any future launch claim unless both the
-122-file/598,775,942-byte carrier bundle and the independent 3-file/10,170,182-byte
-Binance target bundle are present and hash-bound. Target preflight verifies target
-identity `27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0`,
-source carrier identity, shape, timestamp, execution semantics, target-file
-hashes/sizes and a complete directory bundle without loading NumPy arrays. The
-authorization materializer now records both bundles.
+The successor produced 229 matched-positive candidates and 208 matched-positive
+behavior families cumulatively. In the valid 20,000-row successor suffix, a
+read-only economic-independence audit defines a new cluster as a behavior family
+absent from the verified 30k prefix. Evolution produced 6,024 new dual-axis
+net-positive economic clusters (`502.00/1k`) and 168 new matched-positive clusters
+(`14.00/1k`), compared with Random at 370 (`92.50/1k`) and one (`0.25/1k`), and
+CEM at 570 (`142.50/1k`) and zero. Evolution yielded 880.07 new economic clusters
+per process CPU-hour. Under the equal 3,598-proposal tranche comparison it retained
+673 new economic clusters after removing the three largest program basins
+(`187.05/1k`) and 380 after removing the dominant P4 family (`105.61/1k`). Its
+development productivity advantage is therefore real under this contract and is
+not explained solely by the largest program basin or P4 concentration.
 
-At repaired source SHA `a2f0bb5d8031bd7cef5df2107bf553c8b74bcc0e`,
-an independent PC2 source-only preflight returned
-`COMPLETE_MARKET_INPUT_PREFLIGHT_PASS`: carrier bundle SHA256
-`340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97`
-and target bundle SHA256
-`1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3`
-both matched, with zero market-array loads, zero candidate evaluations and no
-runtime creation. The independent successor checker also returned `PASS` with
-implementation `READY`, authorization `NOT_AUTHORIZED` and market continuation
-`NOT_RUN`.
+The authorization is consumed with `run_authorized=false`. The durable research
+decision is `SEARCH_POLICY_DEVELOPMENT_EVIDENCE_PASS / ALPHA_QUALIFICATION_HOLD`:
+Evolution is qualified as a productive development search policy under the frozen
+contract, but none of this train-only evidence proves temporal migration or Alpha.
+No more same-window search, validation, OOS, holdout, promotion, tuning, new grammar,
+or new Arena is authorized. The current bottleneck is cluster-level representative
+selection and migration. If separately authorized, the next action is to freeze a
+small behavior-cluster-stratified cohort before one fresh development validation;
+there is no automatic continuation.
 
-Both attempted runtimes are terminal and cannot resume. The current authorization
-template is reset to `IMPLEMENTED_NOT_AUTHORIZED`; no second replacement is
-authorized. Target, mapping, cost, reward, evaluator, valid prefix, fresh Random,
-reconstructed CEM/Evolution, 20/20/60 allocation, 5k decisions, 50k hard stop and
-all validation/OOS/holdout/forward/promotion boundaries remain unchanged.
+Authoritative closure report:
+`reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_CLOSURE_20260812.md`.
+Machine-readable economic audit:
+`reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_ECONOMIC_INDEPENDENCE_20260812.json`.
 
 The preceding repaired boundary was:
 

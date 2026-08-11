@@ -1,0 +1,91 @@
+{
+  "arm_decisions": {
+    "temporal_program_cem": {
+      "behavior_breadth_pass": true,
+      "decision": "ACTIVE",
+      "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+      "observed": {
+        "behavior_family_count": 897,
+        "dominant_program_family": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        "dominant_program_family_positive_share": 0.8774193548387097,
+        "dual_axis_net_positive_per_1k": 172.41379310344828,
+        "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+        "mean_search_reward": -0.48849715489166085,
+        "new_behavior_families_per_1k": 997.7753058954394,
+        "replicated_2_of_3_per_1k": 64.51612903225806,
+        "same_count": 899,
+        "strict_per_process_cpu_hour": 1695.8653326565034,
+        "top_decile_search_reward": 0.08867798065751213
+      },
+      "productivity_improvement": true,
+      "quality_improvement": true,
+      "random": {
+        "behavior_family_count": 896,
+        "dominant_program_family": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        "dominant_program_family_positive_share": 0.7169811320754716,
+        "dual_axis_net_positive_per_1k": 117.90878754171301,
+        "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+        "mean_search_reward": -0.5008294481525409,
+        "new_behavior_families_per_1k": 996.6629588431591,
+        "replicated_2_of_3_per_1k": 34.48275862068966,
+        "same_count": 899,
+        "strict_per_process_cpu_hour": 1811.8404478656403,
+        "top_decile_search_reward": 0.006904810662853806
+      },
+      "same_count": 899
+    },
+    "temporal_program_evolution": {
+      "behavior_breadth_pass": true,
+      "decision": "ACTIVE",
+      "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+      "observed": {
+        "behavior_family_count": 877,
+        "dominant_program_family": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        "dominant_program_family_positive_share": 0.761996161228407,
+        "dual_axis_net_positive_per_1k": 579.5328142380423,
+        "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+        "mean_search_reward": 0.18284914998748247,
+        "new_behavior_families_per_1k": 975.5283648498331,
+        "replicated_2_of_3_per_1k": 282.5361512791991,
+        "same_count": 899,
+        "strict_per_process_cpu_hour": 1777.0060311768086,
+        "top_decile_search_reward": 2.7988883142042495
+      },
+      "productivity_improvement": true,
+      "quality_improvement": true,
+      "random": {
+        "behavior_family_count": 896,
+        "dominant_program_family": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        "dominant_program_family_positive_share": 0.7169811320754716,
+        "dual_axis_net_positive_per_1k": 117.90878754171301,
+        "family_concentration_diagnostic": "ABOVE_DIAGNOSTIC_THRESHOLD",
+        "mean_search_reward": -0.5008294481525409,
+        "new_behavior_families_per_1k": 996.6629588431591,
+        "replicated_2_of_3_per_1k": 34.48275862068966,
+        "same_count": 899,
+        "strict_per_process_cpu_hour": 1811.8404478656403,
+        "top_decile_search_reward": 0.006904810662853806
+      },
+      "same_count": 899
+    }
+  },
+  "arm_states_after": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "arm_states_before": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "family_concentration_is_diagnostic_only": true,
+  "newly_pruned_arms": [],
+  "next_allocation": {
+    "temporal_program_cem": 1000,
+    "temporal_program_evolution": 3000,
+    "temporal_program_random": 1000
+  },
+  "next_stage_proposals_generated": false,
+  "status": "CONTINUE",
+  "strict_boundary": 45000,
+  "successor_action": "CONTINUE"
+}

@@ -1,0 +1,28 @@
+{
+  "active_program_families": [
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+  ],
+  "active_wall_seconds": 15243.832251600223,
+  "arm_states": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE"
+  },
+  "checkpoint_index": 19,
+  "generation_attempts": 32959,
+  "heartbeat_utc": "2026-08-11T19:52:20.478218+00:00",
+  "observed_strict_per_hour": 11808.054367765984,
+  "producer_pid": 29772,
+  "producer_source_sha": "d8106f271f86886621fd084c542671e23b695864",
+  "schema_version": 1,
+  "status": "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE",
+  "strict_evaluated": 50000,
+  "strict_maximum": 50000,
+  "worker_accounting": {
+    "configured_paired_task_capacity": 10,
+    "configured_strict_row_capacity_per_paired_batch": 20,
+    "configured_worker_processes": 10,
+    "strict_rows_per_successful_pair_task": 2
+  },
+  "workers": 10
+}

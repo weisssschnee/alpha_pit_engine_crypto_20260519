@@ -1,0 +1,27 @@
+{
+  "attempted_exact_id_count": 39937,
+  "authorization_sha256": "16101D62E85392A7D9037148EBAFE84F41186680C1CC5C117D6487F0A3498F9D",
+  "fresh_random_lane_seeds": [
+    2982983148,
+    4222554958,
+    3603721345,
+    955174069
+  ],
+  "market_arrays_read": 0,
+  "policy_local_lane_count": 12,
+  "prefix_archive_state_sha256": "33E8C76463EDA1517EC5FD8CE54BC499145B0E6B4B789DD33DDE809B4E463161",
+  "prefix_ledger_count": 30000,
+  "reconstructed_policy_bundle_sha256": "DA229B716EC23C864C25E89443241345ECA645DB7EC7C7B1D57E0C1C7EA4485F",
+  "sealed_reads": 0,
+  "source_artifact_identity_sha256": "4A86407E9D399EDF4900AFB98A27B0FDC5FFE34D138D96882FCF30706A3338F6",
+  "state_restoration_sha256": "F271E8E2599FB71FFDE22E800C2DF06CAFD7FCFA6A0574E7D15AFA8E7326F848",
+  "status": "SUCCESSOR_PREFLIGHT_PASS",
+  "successor_receipt_sha256": "B361E3118FB6D3F07BC16ACB1C21C4A6AFAF2B1C6484FF7BF4031A3AB3536850",
+  "suffix_contribution": {
+    "archive_rows": 0,
+    "attempted_exact_ids": 0,
+    "candidate_rows": 0,
+    "completed_pair_ids": 0,
+    "policy_local_family_counts": 0
+  }
+}

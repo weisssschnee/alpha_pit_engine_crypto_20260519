@@ -3318,10 +3318,62 @@ def run(
     return final
 
 
+def _successor_executor_identity_errors(
+    repo_root: Path,
+    authorization: Mapping[str, Any],
+    *,
+    artifact_relocated: bool,
+) -> list[str]:
+    if not artifact_relocated:
+        return (
+            []
+            if dict(authorization.get("executor_identity") or {})
+            == executor_workspace_identity(repo_root)
+            else ["authorization_executor_identity"]
+        )
+    canonical_path = repo_root / SUCCESSOR_AUTHORIZATION_PATH
+    if not canonical_path.is_file():
+        return ["authorization_canonical_receipt_missing"]
+    canonical = engine._read_json(canonical_path)
+    if canonical.get("authorization_sha256") != authorization_content_sha(canonical):
+        return ["authorization_canonical_receipt_sha256"]
+    if dict(canonical.get("executor_identity") or {}) != dict(
+        authorization.get("executor_identity") or {}
+    ):
+        return ["authorization_canonical_executor_identity"]
+    if canonical.get("authorization_sha256") == authorization.get(
+        "authorization_sha256"
+    ):
+        return []
+    if not (
+        canonical.get("status") == SUCCESSOR_CONSUMED_STATUS
+        and canonical.get("run_authorized") is False
+        and canonical.get("consumed") is True
+    ):
+        return ["authorization_canonical_receipt_binding"]
+    mutable_keys = {
+        "authorization_sha256",
+        "consumed",
+        "run_authorized",
+        "run_outcome",
+        "status",
+    }
+    canonical_immutable = {
+        key: value for key, value in canonical.items() if key not in mutable_keys
+    }
+    runtime_immutable = {
+        key: value for key, value in authorization.items() if key not in mutable_keys
+    }
+    if canonical_immutable != runtime_immutable:
+        return ["authorization_canonical_consumed_lineage"]
+    return []
+
+
 def check_successor_runtime(
     repo_root: Path,
     *,
     runtime_date: str,
+    artifact_relocated: bool = False,
 ) -> dict[str, Any]:
     """Independently verify one completed successor runtime without market reads."""
 
@@ -3372,10 +3424,13 @@ def check_successor_runtime(
         or authorization.get("consumed") is not False
     ):
         errors.append("authorization_snapshot_state")
-    if dict(authorization.get("executor_identity") or {}) != (
-        executor_workspace_identity(repo_root)
-    ):
-        errors.append("authorization_executor_identity")
+    errors.extend(
+        _successor_executor_identity_errors(
+            repo_root,
+            authorization,
+            artifact_relocated=artifact_relocated,
+        )
+    )
     if final.get("successor_authorization_sha256") != authorization.get(
         "authorization_sha256"
     ):
@@ -3480,6 +3535,11 @@ def check_successor_runtime(
         "market_arrays_read_by_checker": 0,
         "candidate_evaluations_by_checker": 0,
         "sealed_reads": 0,
+        "executor_identity_verification": (
+            "CANONICAL_AUTHORIZATION_LINEAGE_MATCHED_RUNTIME_SNAPSHOT"
+            if artifact_relocated
+            else "CHECKER_HOST_AND_WORKSPACE_MATCHED_RUNTIME_AUTHORIZATION"
+        ),
     }
     engine._write_json(runtime_root / "independent_checker.json", result)
     return result
@@ -3751,6 +3811,7 @@ def consume_successor_authorization(
     repo_root: Path,
     *,
     runtime_date: str,
+    artifact_relocated: bool = False,
 ) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     path = repo_root / SUCCESSOR_AUTHORIZATION_PATH
@@ -3761,17 +3822,30 @@ def consume_successor_authorization(
         or authorization.get("consumed") is not False
     ):
         raise RuntimeError("successor authorization is not active or already consumed")
-    if dict(authorization.get("executor_identity") or {}) != (
-        executor_workspace_identity(repo_root)
-    ):
-        raise RuntimeError("successor authorization executor identity changed")
     runtime_root = repo_root / f"runtime/{SUCCESSOR_CAMPAIGN}_{runtime_date}"
     if runtime_root.name != str(authorization.get("runtime_id") or ""):
         raise RuntimeError("successor authorization runtime identity changed")
+    runtime_authorization = engine._read_json(
+        runtime_root / "successor_authorization_snapshot.json"
+    )
+    identity_errors = _successor_executor_identity_errors(
+        repo_root,
+        runtime_authorization,
+        artifact_relocated=artifact_relocated,
+    )
+    if identity_errors:
+        raise RuntimeError("successor authorization executor identity changed")
     final = engine._read_json(runtime_root / "final_decision.json")
     checker = engine._read_json(runtime_root / "independent_checker.json")
     if checker.get("status") != "PASS":
         raise RuntimeError("successor independent checker did not pass")
+    expected_identity_verification = (
+        "CANONICAL_AUTHORIZATION_LINEAGE_MATCHED_RUNTIME_SNAPSHOT"
+        if artifact_relocated
+        else "CHECKER_HOST_AND_WORKSPACE_MATCHED_RUNTIME_AUTHORIZATION"
+    )
+    if checker.get("executor_identity_verification") != expected_identity_verification:
+        raise RuntimeError("successor checker identity mode changed")
     updated = {
         key: value
         for key, value in authorization.items()
@@ -3827,6 +3901,8 @@ def main() -> None:
             command.add_argument("--successor-policy-bundle", type=Path)
         if name == "check":
             command.add_argument("--require-consumed", action="store_true")
+        if name in {"check-successor", "consume-successor-authorization"}:
+            command.add_argument("--artifact-relocated", action="store_true")
     smoke = sub.add_parser("source-smoke")
     smoke.add_argument("--repo-root", type=Path, required=True)
     args = parser.parse_args()
@@ -3849,6 +3925,7 @@ def main() -> None:
         result = check_successor_runtime(
             args.repo_root,
             runtime_date=args.runtime_date,
+            artifact_relocated=bool(args.artifact_relocated),
         )
     elif args.command == "consume-receipt":
         result = consume_receipt(args.repo_root, runtime_date=args.runtime_date)
@@ -3856,6 +3933,7 @@ def main() -> None:
         result = consume_successor_authorization(
             args.repo_root,
             runtime_date=args.runtime_date,
+            artifact_relocated=bool(args.artifact_relocated),
         )
     else:
         result = source_smoke(args.repo_root)

@@ -129,6 +129,62 @@ def _authorization(**changes: object) -> dict[str, object]:
     return payload
 
 
+def test_relocated_successor_checker_uses_canonical_authorization_identity(
+    tmp_path: Path,
+) -> None:
+    authorization = _authorization()
+    path = tmp_path / runner.SUCCESSOR_AUTHORIZATION_PATH
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps(authorization), encoding="utf-8")
+
+    assert runner._successor_executor_identity_errors(
+        tmp_path,
+        authorization,
+        artifact_relocated=True,
+    ) == []
+    assert runner._successor_executor_identity_errors(
+        tmp_path,
+        authorization,
+        artifact_relocated=False,
+    ) == ["authorization_executor_identity"]
+
+    changed = dict(authorization)
+    changed["runtime_id"] = "different-runtime"
+    changed["authorization_sha256"] = authorization_content_sha(changed)
+    path.write_text(json.dumps(changed), encoding="utf-8")
+    assert runner._successor_executor_identity_errors(
+        tmp_path,
+        authorization,
+        artifact_relocated=True,
+    ) == ["authorization_canonical_receipt_binding"]
+
+    consumed = dict(authorization)
+    consumed.update(
+        {
+            "status": runner.SUCCESSOR_CONSUMED_STATUS,
+            "run_authorized": False,
+            "consumed": True,
+            "run_outcome": {"status": "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE"},
+        }
+    )
+    consumed["authorization_sha256"] = authorization_content_sha(consumed)
+    path.write_text(json.dumps(consumed), encoding="utf-8")
+    assert runner._successor_executor_identity_errors(
+        tmp_path,
+        authorization,
+        artifact_relocated=True,
+    ) == []
+
+    consumed["execution_mode"] = "different-mode"
+    consumed["authorization_sha256"] = authorization_content_sha(consumed)
+    path.write_text(json.dumps(consumed), encoding="utf-8")
+    assert runner._successor_executor_identity_errors(
+        tmp_path,
+        authorization,
+        artifact_relocated=True,
+    ) == ["authorization_canonical_consumed_lineage"]
+
+
 def test_fresh_random_seed_authority_is_deterministic_and_not_historical_resume() -> None:
     first = derive_fresh_random_lane_seeds()
     assert first == derive_fresh_random_lane_seeds()

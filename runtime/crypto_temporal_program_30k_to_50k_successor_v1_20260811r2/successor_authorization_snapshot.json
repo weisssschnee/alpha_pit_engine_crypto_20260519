@@ -17,7 +17,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1_AUTHORIZATION",
-  "authorization_sha256": "1C71BCEB81CEB6FFE999124C8E6FF35E966F9241CC71BAA8D77FC2F7DE5D67AA",
+  "authorization_sha256": "16101D62E85392A7D9037148EBAFE84F41186680C1CC5C117D6487F0A3498F9D",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "730B86904678228C7304C09DFD3931620E569156177EDADF6331DDDD7CD333C4",
@@ -55,7 +55,7 @@
     "maximum_cumulative_valid_strict": 50000,
     "pruned_adaptive_budget_reallocation": "KEEP_RANDOM_20_PERCENT_AND_ASSIGN_ALL_ADAPTIVE_80_PERCENT_TO_SURVIVING_ADAPTIVE_ARMS_PROPORTIONAL_TO_3_TO_1_BASE_WEIGHTS"
   },
-  "consumed": true,
+  "consumed": false,
   "decision_to_change": "Whether the reconstructed 30k Temporal Program adaptive state earns any bounded development continuation beyond the 50k cumulative hard stop",
   "evidence_to_add": "Incremental 30k-to-50k train-only Temporal Program economics under reconstructed CEM/Evolution and deterministic fresh Random control",
   "execution_mode": "30K_TO_50K_SUCCESSOR",
@@ -140,17 +140,7 @@
     "decision_id": "AUTHORIZE_SECOND_REPLACEMENT_30K_TO_50K_SUCCESSOR",
     "scope": "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR"
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "additional_strict_evaluated": 20000,
-    "cumulative_valid_strict": 50000,
-    "producer_source_sha": "d8106f271f86886621fd084c542671e23b695864",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_program_30k_to_50k_successor_v1_20260811r2",
-    "second_launch_started": false,
-    "source_evidence_prefix": 30000,
-    "status": "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE"
-  },
+  "run_authorized": true,
   "runtime_id": "crypto_temporal_program_30k_to_50k_successor_v1_20260811r2",
   "schema_version": 2,
   "source_artifact_identity_sha256": "4A86407E9D399EDF4900AFB98A27B0FDC5FFE34D138D96882FCF30706A3338F6",
@@ -161,6 +151,6 @@
     "rejected_candidate_ledger.parquet": "C9875502D4781310DA85846E3E504FB8F54C4384C2B3DA35BF1891930595E76E"
   },
   "source_evidence_prefix": 30000,
-  "status": "RUN_AUTHORIZATION_CONSUMED_30K_TO_50K_DEVELOPMENT_SUCCESSOR",
+  "status": "RUN_AUTHORIZED_ONE_TIME_30K_TO_50K_DEVELOPMENT_SUCCESSOR",
   "successor_receipt_sha256": "B361E3118FB6D3F07BC16ACB1C21C4A6AFAF2B1C6484FF7BF4031A3AB3536850"
 }

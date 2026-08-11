@@ -1,0 +1,123 @@
+{
+  "bundle_sha256": "CE31E1360D8E76CC2E0662606B3D9E1D7668CAFC7BB3A5D88B42BCDB33CF0C4A",
+  "files": [
+    {
+      "bytes": 36830,
+      "path": "frozen_contract.json",
+      "sha256": "2DF1F38F0D4F019C81325FF6D82BD2283AB72E664C947FF44B562A8DDDA1D799"
+    },
+    {
+      "bytes": 1070,
+      "path": "embedded_preflight.json",
+      "sha256": "651FC7EFEBE9748C456D34C1A1BC057ABD6BD6DD214CCA3FBA0F3FCE0A27BACE"
+    },
+    {
+      "bytes": 782345,
+      "path": "program_catalog.json",
+      "sha256": "038DD82241FA433BA7149E97C00BBF284EE7493AAE0F1319708FD22CADF8F465"
+    },
+    {
+      "bytes": 9301,
+      "path": "search_authority_binding_receipt.json",
+      "sha256": "8C23AC7531D9A31DC3AA8E904DD9BEBC4B8935984F0DD7BCC27B3E48A1413883"
+    },
+    {
+      "bytes": 8470223,
+      "path": "work_state.json",
+      "sha256": "2B2C33B5132D031FE144A7F32BC462834224097D307F5A352184E87CD798C0DC"
+    },
+    {
+      "bytes": 424503892,
+      "path": "candidate_ledger.parquet",
+      "sha256": "34BD491481B6CFEEB7029E07B09B8207B92220D296105A6B499CBDCBBDA88483"
+    },
+    {
+      "bytes": 44868907,
+      "path": "behavior_archive.parquet",
+      "sha256": "8516D87BE9175FBD0EE0419FC6E7C2ABE866281F33CAF3099F9594E47FD8833D"
+    },
+    {
+      "bytes": 636,
+      "path": "paired_program_diagnostics.parquet",
+      "sha256": "8B6E33D47F4E1DF33F587D9B1D420F756A6C705B8496E0912C223C5D83371DF9"
+    },
+    {
+      "bytes": 7709,
+      "path": "program_family_metrics.parquet",
+      "sha256": "2E1CCD0222F4E975E6DB0235839C1C1322D6CB684B2A04909E0FD40A31650CB5"
+    },
+    {
+      "bytes": 11609,
+      "path": "arm_checkpoint_metrics.parquet",
+      "sha256": "70BFD7A779F2C08C2F6152AD57C8A4B39411D10DA6C81AA0EE71926212B6F682"
+    },
+    {
+      "bytes": 442377,
+      "path": "rejected_candidate_ledger.parquet",
+      "sha256": "CEDC4677CB6CB9CA84DBE9D0EBB7BCB3662F1787C93B07124F03965CA67688F5"
+    },
+    {
+      "bytes": 2957,
+      "path": "final_decision.json",
+      "sha256": "4C103B4AE1DD7FB73F492868FAE1BA519EA7448418049B644932EB4E83594AD8"
+    },
+    {
+      "bytes": 456,
+      "path": "successor_launch_claim.json",
+      "sha256": "FBD58B8272F49E4E8E9A3F29D0BA2FE7912B742A612B3B7440169B7FA0FDF596"
+    },
+    {
+      "bytes": 9301,
+      "path": "successor_authorization_snapshot.json",
+      "sha256": "8C23AC7531D9A31DC3AA8E904DD9BEBC4B8935984F0DD7BCC27B3E48A1413883"
+    },
+    {
+      "bytes": 1070,
+      "path": "prefix_state_restoration_receipt.json",
+      "sha256": "651FC7EFEBE9748C456D34C1A1BC057ABD6BD6DD214CCA3FBA0F3FCE0A27BACE"
+    },
+    {
+      "bytes": 3726,
+      "path": "successor_decision_additional_005000.json",
+      "sha256": "2C70379A3306A3D00778F12A202880FED83AA1905571D2F0B08BBD05D35F9DE0"
+    },
+    {
+      "bytes": 3733,
+      "path": "successor_decision_additional_010000.json",
+      "sha256": "335EE3CF12170B9D521220E8AABA733507228CD1B90D2BE7E42F4BE5C02A43AC"
+    },
+    {
+      "bytes": 3768,
+      "path": "successor_decision_additional_015000.json",
+      "sha256": "706E8F633188E1B1A52D21E2BD001A0CA728C7CEF4178EEDDE1FDB029220548A"
+    },
+    {
+      "bytes": 3768,
+      "path": "successor_decision_additional_020000.json",
+      "sha256": "CA5F2B09AC8E01C367CB58625C87F96CA5B1ABF15828F9AB5220E89C196A6842"
+    },
+    {
+      "bytes": 3848,
+      "path": "checkpoints/checkpoint_015/manifest.json",
+      "sha256": "35209E3ED2DEDA35C79CDF7493902FFD85CAA64254220F1BCAD6F2227F31D7BE"
+    },
+    {
+      "bytes": 3848,
+      "path": "checkpoints/checkpoint_016/manifest.json",
+      "sha256": "269760E578EA6F12F60510FE0140093A541F45CC146323DE433227B7A0A437A8"
+    },
+    {
+      "bytes": 3848,
+      "path": "checkpoints/checkpoint_017/manifest.json",
+      "sha256": "E5793650D454CC248FF948C5BB1DF868C8FECD5B603EB9AF93C3DA4B1E5F2FE8"
+    },
+    {
+      "bytes": 3848,
+      "path": "checkpoints/checkpoint_018/manifest.json",
+      "sha256": "D17E233BB936FB276F90458C8CC8A106D0A8EA088905ECD98A82FD2B205E1020"
+    }
+  ],
+  "frozen_contract_sha256": "55F40F4037D584352EDC5D17B5A5DBC62B0362F3D9E818730F56134AB4F146AE",
+  "producer_source_sha": "d8106f271f86886621fd084c542671e23b695864",
+  "schema_version": 1
+}

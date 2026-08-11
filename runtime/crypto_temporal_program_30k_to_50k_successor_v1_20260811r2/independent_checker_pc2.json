@@ -1,0 +1,13 @@
+{
+  "additional_strict_evaluated": 20000,
+  "candidate_evaluations_by_checker": 0,
+  "checkpoint_count": 4,
+  "cumulative_valid_strict": 50000,
+  "errors": [],
+  "market_arrays_read_by_checker": 0,
+  "producer_source_sha": "d8106f271f86886621fd084c542671e23b695864",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_evidence_prefix": 30000,
+  "status": "PASS"
+}

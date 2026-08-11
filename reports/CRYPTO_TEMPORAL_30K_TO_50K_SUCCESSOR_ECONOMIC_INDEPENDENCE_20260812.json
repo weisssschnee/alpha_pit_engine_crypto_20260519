@@ -1,0 +1,609 @@
+{
+  "definitions": {
+    "cpu": "sum of proposal_compile_cpu_seconds plus pair_process_cpu_seconds",
+    "economic_opportunity_cluster": "new unique behavior_family_id with both left and right incremental net mean above zero",
+    "matched_positive_cluster": "new unique behavior_family_id with matched_positive true",
+    "new_cluster": "behavior_family_id absent from the verified completion_ordinal <= 30000 prefix",
+    "program_basin": "canonical temporal program_id"
+  },
+  "equal_count_by_tranche": {
+    "temporal_program_cem": {
+      "adaptive": {
+        "behavior_cluster_count": 3584,
+        "economic_cluster_yield_per_process_cpu_hour": 243.67002191618965,
+        "economic_opportunity_cluster_count": 512,
+        "economic_opportunity_cluster_count_all": 567,
+        "economic_opportunity_clusters_per_1k": 142.30127848804892,
+        "economic_program_id_count": 154,
+        "leave_dominant_p4_family": {
+          "economic_cluster_count": 73,
+          "economic_clusters_per_1k_original_proposals": 20.28904947192885
+        },
+        "leave_largest_program_basin": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A"
+          ],
+          "economic_cluster_count": 484,
+          "economic_clusters_per_1k_original_proposals": 134.51917732073375
+        },
+        "leave_top3_program_basins": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+            "TEMPORAL_PROGRAM_V1_3DD58DB12C582EC38D26F69D729EC5E9",
+            "TEMPORAL_PROGRAM_V1_009968F757887D096D1CC76B73FB307D"
+          ],
+          "economic_cluster_count": 446,
+          "economic_clusters_per_1k_original_proposals": 123.95775430794886
+        },
+        "matched_cluster_yield_per_process_cpu_hour": 0.0,
+        "matched_positive_economic_cluster_count": 0,
+        "matched_positive_economic_cluster_count_all": 0,
+        "matched_positive_economic_clusters_per_1k": 0.0,
+        "mean_search_reward": -0.48673759311416775,
+        "new_behavior_cluster_count": 3496,
+        "new_behavior_clusters_per_1k": 971.650917176209,
+        "positive_reward_per_1k": 68.64924958310172,
+        "process_cpu_hours": 2.1012022569444446,
+        "program_id_count": 311,
+        "proposal_count": 3598,
+        "replicated_2_of_3_per_1k": 57.254030016675934,
+        "top_economic_program_ids": [
+          [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+            28
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_3DD58DB12C582EC38D26F69D729EC5E9",
+            24
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_009968F757887D096D1CC76B73FB307D",
+            14
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_9643240F7F0A2749EFAC96EA55070D23",
+            14
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_33B592A25FF222260775050725812FDF",
+            13
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_ACB5DB0AB338112808C3FD3041BEB3E3",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_3FF0DCBE8F2915A5ADE7DD7923014A9D",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_DFD7267371572D0A60CD8BF457409B81",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_2EBF017CF70B4B8B799190312C439CE8",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_CA2AEFBFD0D0242173D7920F01E95B08",
+            10
+          ]
+        ]
+      },
+      "random": {
+        "behavior_cluster_count": 3584,
+        "economic_cluster_yield_per_process_cpu_hour": 175.84841493671271,
+        "economic_opportunity_cluster_count": 351,
+        "economic_opportunity_cluster_count_all": 393,
+        "economic_opportunity_clusters_per_1k": 97.55419677598665,
+        "economic_program_id_count": 160,
+        "leave_dominant_p4_family": {
+          "economic_cluster_count": 122,
+          "economic_clusters_per_1k_original_proposals": 33.907726514730406
+        },
+        "leave_largest_program_basin": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8"
+          ],
+          "economic_cluster_count": 340,
+          "economic_clusters_per_1k_original_proposals": 94.49694274596999
+        },
+        "leave_top3_program_basins": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+            "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+            "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F"
+          ],
+          "economic_cluster_count": 322,
+          "economic_clusters_per_1k_original_proposals": 89.49416342412451
+        },
+        "matched_cluster_yield_per_process_cpu_hour": 0.5009926351473297,
+        "matched_positive_economic_cluster_count": 1,
+        "matched_positive_economic_cluster_count_all": 1,
+        "matched_positive_economic_clusters_per_1k": 0.27793218454697055,
+        "mean_search_reward": -0.4998689712152144,
+        "new_behavior_cluster_count": 3519,
+        "new_behavior_clusters_per_1k": 978.0433574207893,
+        "positive_reward_per_1k": 41.13396331295164,
+        "process_cpu_hours": 1.9960373263888889,
+        "program_id_count": 306,
+        "proposal_count": 3598,
+        "replicated_2_of_3_per_1k": 34.741523068371315,
+        "top_economic_program_ids": [
+          [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_57033415CA0E75EB8001E0211189DFB2",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_AE046F77168D6269B165FC7EF33477B3",
+            8
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_0D643394672231B1E75322DF86216C7C",
+            7
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_CF3D6B64548DBE41AF4D3EDE5B2B1D2A",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_1F9A591C602DD493D3E14C3D725481BF",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_912BFF695C488A60271AA5A19ABE43DD",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+            6
+          ]
+        ]
+      },
+      "tranche_same_counts": [
+        899,
+        900,
+        899,
+        900
+      ]
+    },
+    "temporal_program_evolution": {
+      "adaptive": {
+        "behavior_cluster_count": 3457,
+        "economic_cluster_yield_per_process_cpu_hour": 933.0549240309228,
+        "economic_opportunity_cluster_count": 1922,
+        "economic_opportunity_cluster_count_all": 2042,
+        "economic_opportunity_clusters_per_1k": 534.1856586992774,
+        "economic_program_id_count": 76,
+        "leave_dominant_p4_family": {
+          "economic_cluster_count": 380,
+          "economic_clusters_per_1k_original_proposals": 105.6142301278488
+        },
+        "leave_largest_program_basin": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B"
+          ],
+          "economic_cluster_count": 1443,
+          "economic_clusters_per_1k_original_proposals": 401.0561423012785
+        },
+        "leave_top3_program_basins": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B",
+            "TEMPORAL_PROGRAM_V1_A8DD36BD5232C3BCFCA3D8F7E775BD04",
+            "TEMPORAL_PROGRAM_V1_CA2AEFBFD0D0242173D7920F01E95B08"
+          ],
+          "economic_cluster_count": 673,
+          "economic_clusters_per_1k_original_proposals": 187.04836020011118
+        },
+        "matched_cluster_yield_per_process_cpu_hour": 25.243941753177932,
+        "matched_positive_economic_cluster_count": 52,
+        "matched_positive_economic_cluster_count_all": 56,
+        "matched_positive_economic_clusters_per_1k": 14.452473596442468,
+        "mean_search_reward": 0.15859171290056306,
+        "new_behavior_cluster_count": 3314,
+        "new_behavior_clusters_per_1k": 921.0672595886604,
+        "positive_reward_per_1k": 528.349082823791,
+        "process_cpu_hours": 2.059900173611111,
+        "program_id_count": 179,
+        "proposal_count": 3598,
+        "replicated_2_of_3_per_1k": 313.78543635352975,
+        "top_economic_program_ids": [
+          [
+            "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B",
+            487
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_A8DD36BD5232C3BCFCA3D8F7E775BD04",
+            455
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_CA2AEFBFD0D0242173D7920F01E95B08",
+            343
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+            214
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_794A39A9D12FD13C3B00E57C546C8343",
+            179
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_D22E20CE0E26F12B36E3E55B44C656F2",
+            54
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_EA46A426B5F40662485F783AC7947760",
+            22
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_6AF37F6F0B946EC9315E5DDDB616E3F9",
+            19
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_5499DE6102192971516627175D8E5FDB",
+            16
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_9643240F7F0A2749EFAC96EA55070D23",
+            15
+          ]
+        ]
+      },
+      "random": {
+        "behavior_cluster_count": 3584,
+        "economic_cluster_yield_per_process_cpu_hour": 175.84841493671271,
+        "economic_opportunity_cluster_count": 351,
+        "economic_opportunity_cluster_count_all": 393,
+        "economic_opportunity_clusters_per_1k": 97.55419677598665,
+        "economic_program_id_count": 160,
+        "leave_dominant_p4_family": {
+          "economic_cluster_count": 122,
+          "economic_clusters_per_1k_original_proposals": 33.907726514730406
+        },
+        "leave_largest_program_basin": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8"
+          ],
+          "economic_cluster_count": 340,
+          "economic_clusters_per_1k_original_proposals": 94.49694274596999
+        },
+        "leave_top3_program_basins": {
+          "dropped_program_ids": [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+            "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+            "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F"
+          ],
+          "economic_cluster_count": 322,
+          "economic_clusters_per_1k_original_proposals": 89.49416342412451
+        },
+        "matched_cluster_yield_per_process_cpu_hour": 0.5009926351473297,
+        "matched_positive_economic_cluster_count": 1,
+        "matched_positive_economic_cluster_count_all": 1,
+        "matched_positive_economic_clusters_per_1k": 0.27793218454697055,
+        "mean_search_reward": -0.4998689712152144,
+        "new_behavior_cluster_count": 3519,
+        "new_behavior_clusters_per_1k": 978.0433574207893,
+        "positive_reward_per_1k": 41.13396331295164,
+        "process_cpu_hours": 1.9960373263888889,
+        "program_id_count": 306,
+        "proposal_count": 3598,
+        "replicated_2_of_3_per_1k": 34.741523068371315,
+        "top_economic_program_ids": [
+          [
+            "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+            11
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_57033415CA0E75EB8001E0211189DFB2",
+            9
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_AE046F77168D6269B165FC7EF33477B3",
+            8
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_0D643394672231B1E75322DF86216C7C",
+            7
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_CF3D6B64548DBE41AF4D3EDE5B2B1D2A",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_1F9A591C602DD493D3E14C3D725481BF",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_912BFF695C488A60271AA5A19ABE43DD",
+            6
+          ],
+          [
+            "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+            6
+          ]
+        ]
+      },
+      "tranche_same_counts": [
+        899,
+        900,
+        899,
+        900
+      ]
+    }
+  },
+  "status": "SUCCESSOR_ECONOMIC_INDEPENDENCE_ANALYSIS",
+  "suffix_arm_counts": {
+    "temporal_program_cem": 4000,
+    "temporal_program_evolution": 12000,
+    "temporal_program_random": 4000
+  },
+  "suffix_by_arm": {
+    "temporal_program_cem": {
+      "behavior_cluster_count": 3981,
+      "economic_cluster_yield_per_process_cpu_hour": 243.94856067600026,
+      "economic_opportunity_cluster_count": 570,
+      "economic_opportunity_cluster_count_all": 629,
+      "economic_opportunity_clusters_per_1k": 142.5,
+      "economic_program_id_count": 162,
+      "leave_dominant_p4_family": {
+        "economic_cluster_count": 80,
+        "economic_clusters_per_1k_original_proposals": 20.0
+      },
+      "leave_largest_program_basin": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A"
+        ],
+        "economic_cluster_count": 541,
+        "economic_clusters_per_1k_original_proposals": 135.25
+      },
+      "leave_top3_program_basins": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+          "TEMPORAL_PROGRAM_V1_3DD58DB12C582EC38D26F69D729EC5E9",
+          "TEMPORAL_PROGRAM_V1_009968F757887D096D1CC76B73FB307D"
+        ],
+        "economic_cluster_count": 496,
+        "economic_clusters_per_1k_original_proposals": 124.0
+      },
+      "matched_cluster_yield_per_process_cpu_hour": 0.0,
+      "matched_positive_economic_cluster_count": 0,
+      "matched_positive_economic_cluster_count_all": 0,
+      "matched_positive_economic_clusters_per_1k": 0.0,
+      "mean_search_reward": -0.48816700182329886,
+      "new_behavior_cluster_count": 3885,
+      "new_behavior_clusters_per_1k": 971.25,
+      "positive_reward_per_1k": 68.5,
+      "process_cpu_hours": 2.3365581597222222,
+      "program_id_count": 311,
+      "proposal_count": 4000,
+      "replicated_2_of_3_per_1k": 56.75,
+      "top_economic_program_ids": [
+        [
+          "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+          29
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_3DD58DB12C582EC38D26F69D729EC5E9",
+          28
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_009968F757887D096D1CC76B73FB307D",
+          17
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_9643240F7F0A2749EFAC96EA55070D23",
+          17
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_33B592A25FF222260775050725812FDF",
+          13
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_ACB5DB0AB338112808C3FD3041BEB3E3",
+          12
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_57033415CA0E75EB8001E0211189DFB2",
+          11
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_3FF0DCBE8F2915A5ADE7DD7923014A9D",
+          11
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_DFD7267371572D0A60CD8BF457409B81",
+          11
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_2EBF017CF70B4B8B799190312C439CE8",
+          11
+        ]
+      ]
+    },
+    "temporal_program_evolution": {
+      "behavior_cluster_count": 11021,
+      "economic_cluster_yield_per_process_cpu_hour": 880.0656912321862,
+      "economic_opportunity_cluster_count": 6024,
+      "economic_opportunity_cluster_count_all": 6278,
+      "economic_opportunity_clusters_per_1k": 502.0,
+      "economic_program_id_count": 120,
+      "leave_dominant_p4_family": {
+        "economic_cluster_count": 1191,
+        "economic_clusters_per_1k_original_proposals": 99.25
+      },
+      "leave_largest_program_basin": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B"
+        ],
+        "economic_cluster_count": 4515,
+        "economic_clusters_per_1k_original_proposals": 376.25
+      },
+      "leave_top3_program_basins": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B",
+          "TEMPORAL_PROGRAM_V1_A8DD36BD5232C3BCFCA3D8F7E775BD04",
+          "TEMPORAL_PROGRAM_V1_CA2AEFBFD0D0242173D7920F01E95B08"
+        ],
+        "economic_cluster_count": 2119,
+        "economic_clusters_per_1k_original_proposals": 176.58333333333334
+      },
+      "matched_cluster_yield_per_process_cpu_hour": 24.543664695718338,
+      "matched_positive_economic_cluster_count": 168,
+      "matched_positive_economic_cluster_count_all": 173,
+      "matched_positive_economic_clusters_per_1k": 14.0,
+      "mean_search_reward": 0.17974471794077443,
+      "new_behavior_cluster_count": 10705,
+      "new_behavior_clusters_per_1k": 892.0833333333334,
+      "positive_reward_per_1k": 517.0,
+      "process_cpu_hours": 6.844943576388889,
+      "program_id_count": 205,
+      "proposal_count": 12000,
+      "replicated_2_of_3_per_1k": 303.75,
+      "top_economic_program_ids": [
+        [
+          "TEMPORAL_PROGRAM_V1_FCA9F4AE903698CE9F63499FAED84B5B",
+          1578
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_A8DD36BD5232C3BCFCA3D8F7E775BD04",
+          1437
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_CA2AEFBFD0D0242173D7920F01E95B08",
+          1157
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_794A39A9D12FD13C3B00E57C546C8343",
+          716
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+          640
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_D22E20CE0E26F12B36E3E55B44C656F2",
+          201
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_EA46A426B5F40662485F783AC7947760",
+          86
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_9643240F7F0A2749EFAC96EA55070D23",
+          65
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_6AF37F6F0B946EC9315E5DDDB616E3F9",
+          63
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_5499DE6102192971516627175D8E5FDB",
+          43
+        ]
+      ]
+    },
+    "temporal_program_random": {
+      "behavior_cluster_count": 3985,
+      "economic_cluster_yield_per_process_cpu_hour": 163.58015807682787,
+      "economic_opportunity_cluster_count": 370,
+      "economic_opportunity_cluster_count_all": 413,
+      "economic_opportunity_clusters_per_1k": 92.5,
+      "economic_program_id_count": 177,
+      "leave_dominant_p4_family": {
+        "economic_cluster_count": 122,
+        "economic_clusters_per_1k_original_proposals": 30.5
+      },
+      "leave_largest_program_basin": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8"
+        ],
+        "economic_cluster_count": 359,
+        "economic_clusters_per_1k_original_proposals": 89.75
+      },
+      "leave_top3_program_basins": {
+        "dropped_program_ids": [
+          "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+          "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+          "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F"
+        ],
+        "economic_cluster_count": 341,
+        "economic_clusters_per_1k_original_proposals": 85.25
+      },
+      "matched_cluster_yield_per_process_cpu_hour": 0.44210853534277805,
+      "matched_positive_economic_cluster_count": 1,
+      "matched_positive_economic_cluster_count_all": 1,
+      "matched_positive_economic_clusters_per_1k": 0.25,
+      "mean_search_reward": -0.48948799056444725,
+      "new_behavior_cluster_count": 3920,
+      "new_behavior_clusters_per_1k": 980.0,
+      "positive_reward_per_1k": 39.25,
+      "process_cpu_hours": 2.261888020833333,
+      "program_id_count": 373,
+      "proposal_count": 4000,
+      "replicated_2_of_3_per_1k": 32.75,
+      "top_economic_program_ids": [
+        [
+          "TEMPORAL_PROGRAM_V1_441B0BE75FC29235DE6A9BD4E9E2F5B8",
+          11
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_331C79652E7018A37C29BB183ED9CAE9",
+          9
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_29EFB809F8E8B11234C582B18816684F",
+          9
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_57033415CA0E75EB8001E0211189DFB2",
+          9
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_AE046F77168D6269B165FC7EF33477B3",
+          8
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_0D643394672231B1E75322DF86216C7C",
+          7
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_CF3D6B64548DBE41AF4D3EDE5B2B1D2A",
+          6
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_1F9A591C602DD493D3E14C3D725481BF",
+          6
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_912BFF695C488A60271AA5A19ABE43DD",
+          6
+        ],
+        [
+          "TEMPORAL_PROGRAM_V1_1721C02F0CF5F53175266EA40404922A",
+          6
+        ]
+      ]
+    }
+  }
+}

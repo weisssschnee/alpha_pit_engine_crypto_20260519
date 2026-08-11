@@ -1,0 +1,11 @@
+{
+  "authorization_sha256": "16101D62E85392A7D9037148EBAFE84F41186680C1CC5C117D6487F0A3498F9D",
+  "candidate_evaluations_at_claim": 0,
+  "execution_mode": "30K_TO_50K_SUCCESSOR",
+  "market_arrays_read_at_claim": 0,
+  "producer_source_sha": "d8106f271f86886621fd084c542671e23b695864",
+  "runtime_id": "crypto_temporal_program_30k_to_50k_successor_v1_20260811r2",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "ONE_TIME_SUCCESSOR_LAUNCH_CLAIMED"
+}
