@@ -3,7 +3,9 @@
 ## Outcome
 
 - Base SHA: `9600853e86d091f876cc3feae5e09374308998da`
+- Final implementation SHA: `716fb1e1559cd425479e2ff260e7d1f64bf8e79c`
 - Branch: `experiment/crypto-p4-pocket-validation-v1-20260811`
+- Worktree at implementation verification: `CLEAN`
 - Prefix reconstruction: `PREFIX_POLICY_STATE_RECONSTRUCTION_PASS`
 - Successor implementation: `READY`
 - Successor authorization: `NOT_AUTHORIZED`
@@ -57,8 +59,11 @@ preflight. This report does not authorize or start that run.
 ## Verification
 
 - Focused successor / authority / reconstruction / Temporal Program tests:
-  `77 passed`.
-- Full repository suite: `557 passed`, `1` pre-existing NumPy degrees-of-freedom
+  `92 passed`.
+- Canonical four-tranche synthetic integration: `PASS`; the physical `run()`
+  wrote the 5k/10k/15k/20k successor decisions and checkpoints 015-018, stopped
+  at 20k additional / 50k cumulative, and rejected a post-terminal mutation.
+- Full repository suite: `570 passed`, `1` pre-existing NumPy degrees-of-freedom
   warning.
 - Independent implementation checker: `PASS`.
 - Independent checker artifact:
