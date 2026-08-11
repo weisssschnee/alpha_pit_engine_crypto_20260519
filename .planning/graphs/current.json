@@ -26,6 +26,7 @@
           "docs/adr/0023-temporal-30k-to-50k-successor-execution-mode.md",
           "reports/CRYPTO_P4_MECHANISM_POCKET_VALIDATION_V1_20260811.md",
           "reports/CRYPTO_TEMPORAL_30K_PREFIX_RECONSTRUCTION_AND_SUCCESSOR_PREFLIGHT_20260811.md",
+          "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
           "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json",
           "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_V1_20260811.md",
           "runtime/crypto_p4_mechanism_pocket_validation_v1_20260811/behavior_family_selection_receipt.json",
@@ -71,7 +72,7 @@
           "tests/test_crypto_temporal_successor_execution_v1.py"
         ],
         "raw_sha": "ee9a69416475aa303eb96add929aa479d5c4cafe",
-        "repo_head": "66acdc676069f954413d69b56738009767443d88"
+        "repo_head": "b5985037492a81198953629480c75db12e2a8afd"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1153,7 +1154,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-11T11:44:22.068938+00:00",
+  "generated_at": "2026-08-11T13:11:09.145151+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3528,9 +3529,9 @@
         {
           "bypass_forbidden": true,
           "enforced_by": "broad_search.experiment_authority.require_real_experiment_authority, broad_search.temporal_successor_v1.prepare_successor_execution, broad_search.temporal_program_search_v1.run 30K_TO_50K_SUCCESSOR mode, one-workspace launch claim, regression tests, consumed predecessor receipt, and invalid-run evidence manifest",
-          "evidence_ref": "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json",
+          "evidence_ref": "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
           "id": "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
-          "rule": "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. The successor receipt is IMPLEMENTED_NOT_AUTHORIZED, uses FRESH_RANDOM_CONTROL_AFTER_30K, and starts no market run. This evidence supports a bounded future development continuation decision only and confers no target, optimizer-reward, execution, validation, Alpha, OOS, promotion, or formal authority.",
+          "rule": "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. Current user decision GO_WITH_LIMITED_SEARCH_POLICY_CHANGE has activated exactly one schema-2 successor authorization, SHA256 F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A, bound to implementation b5985037492a81198953629480c75db12e2a8afd and the exact PC2 host/workspace/runtime identity. Authorized preflight passes with zero market, candidate and sealed reads, the runtime is not started, Random is fresh, and CEM/Evolution restore only the verified 30k bundle. The run is capped at 20,000 additional strict with 5,000-strict decisions and an unconditional cumulative 50,000 mechanical stop; family concentration is diagnostic/allocation only. Receipt-scoped target, optimizer-reward, execution-price and cost bindings remain NON_FORMAL exceptions for this run and confer no global economic authority, validation, Alpha, OOS, promotion or formal authority.",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -3558,7 +3559,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (30k valid prefix reconstructed; canonical successor READY/NOT_AUTHORIZED/NOT_RUN; Alpha HOLD)",
+      "label": "Search Engine conditional-development campaigns (30k valid prefix reconstructed; one canonical successor AUTHORIZED/NOT_STARTED; Alpha HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3794,6 +3795,7 @@
         "docs/adr/0023-temporal-30k-to-50k-successor-execution-mode.md",
         "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json",
         "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_V1_20260811.md",
+        "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md",
         "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json",
         "runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/independent_successor_preflight.json"
       ],
@@ -6236,7 +6238,7 @@
       "required": false,
       "semantic_role": "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
       "validation": {
-        "checked_at": "2026-08-11T11:11:35.612216+00:00",
+        "checked_at": "2026-08-11T13:11:09.145151+00:00",
         "evidence_ref": "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
         "evidence_sha256": "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
         "level": "PARTIAL",
@@ -9123,7 +9125,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "EDE0B899BBF1324533450BFB183F188795E3177F1D3EEA5649A6CDBDF82C57AD"
+    "sha256": "A646BD7EE30675E6AA84EC42DE45869EF69BFD059A072B7A57AD0B25257D9606"
   },
   "profile_id": null,
   "profiles": [
@@ -9160,7 +9162,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "BC9EDB6E9D9A353365FF2227C36709250D372662512E04169BA5F18BE7F1D903"
   },
-  "repo_head": "66acdc676069f954413d69b56738009767443d88",
+  "repo_head": "b5985037492a81198953629480c75db12e2a8afd",
   "schema_version": 1,
   "semantic_authorities": [
     {

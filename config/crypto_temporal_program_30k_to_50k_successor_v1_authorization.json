@@ -5,9 +5,24 @@
     "temporal_program_evolution": 0.6
   },
   "authorization_id": "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1_AUTHORIZATION",
-  "authorization_sha256": "C5F5781FD199D67D66FA5B2F347892B9C7129BFA7E21123E346C57A87E2DB229",
-  "authorized_component_sha256": {},
-  "authorized_implementation_sha": null,
+  "authorization_sha256": "F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A",
+  "authorized_component_sha256": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
+    "alphafactory_crypto/broad_search/experiment_authority.py": "730B86904678228C7304C09DFD3931620E569156177EDADF6331DDDD7CD333C4",
+    "alphafactory_crypto/broad_search/expression.py": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE",
+    "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
+    "alphafactory_crypto/broad_search/temporal_prefix_reconstruction_v1.py": "AF880B47C54D7D44344DA44F7A65B5584E7908C673C3605131E67201D604E42A",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "3732A25597E8553F60CD8C7DFCCCFC70C914581F5E9E4E193CF7EE026B38FCF9",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py": "D42D8597B83D72D13E376FA4AE424C8A3EA4986AB8BC3198F4120504348407D3",
+    "config/crypto_temporal_mechanism_program_v1.json": "5F595E59CD5E537B4BBC2ADAB63B5A96B09C7D81D53A32ADDAD94435F0C48FE7",
+    "config/crypto_temporal_program_30k_to_50k_successor_v1_receipt.json": "ABE2456E75E118BED8A0CEA99447247403E2045EED5A4E3FCBA312F75F92942B",
+    "scripts/check_crypto_temporal_30k_successor_v1.py": "D9274810D99413F40076ABDB96A623A43A2CA56FA1448A62635414236812E93E",
+    "scripts/check_crypto_temporal_successor_execution_v1.py": "7A61554E028AB207C8AD126D595A347B02C3A3DDEDA0F71E94A1256F7ED55DD1"
+  },
+  "authorized_implementation_sha": "b5985037492a81198953629480c75db12e2a8afd",
   "authority_identity": {
     "behavior_contract_sha256": "E3E41C3D9820558AE11E79C0767854B9AADDDFED4955F0F1B1CA9FD458BC8088",
     "economic_receipt_sha256": "244ADFC59AD7AAB453928365B68CAAB6B8537CDF55795EC9F97629F1B15A46AC",
@@ -40,7 +55,10 @@
   "consumed": false,
   "decision_to_change": "Whether the reconstructed 30k Temporal Program adaptive state earns any bounded development continuation beyond the 50k cumulative hard stop",
   "evidence_to_add": "Incremental 30k-to-50k train-only Temporal Program economics under reconstructed CEM/Evolution and deterministic fresh Random control",
-  "executor_identity": null,
+  "executor_identity": {
+    "host": "desktop-a2h3a2g",
+    "workspace_path_sha256": "237C577530372798A4E021721764830F0544F0FC0054C9DE3742A442CFBDA71D"
+  },
   "execution_mode": "30K_TO_50K_SUCCESSOR",
   "expected_branch": "experiment/crypto-p4-pocket-validation-v1-20260811",
   "invalid_suffix_start": 30001,
@@ -75,9 +93,13 @@
       "component_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60"
     }
   },
-  "run_authorized": false,
-  "run_authorization": null,
-  "runtime_id": null,
+  "run_authorized": true,
+  "run_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "decision_id": "USER_GO_WITH_LIMITED_SEARCH_POLICY_CHANGE_20260811",
+    "scope": "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR"
+  },
+  "runtime_id": "crypto_temporal_program_30k_to_50k_successor_v1_20260811",
   "schema_version": 2,
   "source_artifact_identity_sha256": "4A86407E9D399EDF4900AFB98A27B0FDC5FFE34D138D96882FCF30706A3338F6",
   "source_artifact_sha256": {
@@ -87,6 +109,6 @@
     "rejected_candidate_ledger.parquet": "C9875502D4781310DA85846E3E504FB8F54C4384C2B3DA35BF1891930595E76E"
   },
   "source_evidence_prefix": 30000,
-  "status": "IMPLEMENTED_NOT_AUTHORIZED",
+  "status": "RUN_AUTHORIZED_ONE_TIME_30K_TO_50K_DEVELOPMENT_SUCCESSOR",
   "successor_receipt_sha256": "B361E3118FB6D3F07BC16ACB1C21C4A6AFAF2B1C6484FF7BF4031A3AB3536850"
 }

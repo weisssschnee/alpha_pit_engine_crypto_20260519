@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (30k valid prefix reconstructed; canonical successor READY/NOT_AUTHORIZED/NOT_RUN; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (30k valid prefix reconstructed; one canonical successor AUTHORIZED/NOT_STARTED; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -631,6 +631,7 @@
                                      ,"docs/adr/0023-temporal-30k-to-50k-successor-execution-mode.md"
                                      ,"reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json"
                                      ,"reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_V1_20260811.md"
+                                     ,"reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md"
                                      ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json"
                                      ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/independent_successor_preflight.json"
                                  ],
@@ -1043,11 +1044,11 @@
                                           {
                                               "id":  "crypto_temporal_adaptive_broad_gate_invalid_stop_repair",
                                              "type":  "EVIDENCE",
-                                             "rule":  "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. The successor receipt is IMPLEMENTED_NOT_AUTHORIZED, uses FRESH_RANDOM_CONTROL_AFTER_30K, and starts no market run. This evidence supports a bounded future development continuation decision only and confers no target, optimizer-reward, execution, validation, Alpha, OOS, promotion, or formal authority.",
+                                             "rule":  "The one fresh-state P1/P4 adaptive-broad receipt is consumed with run_authorized false. Producer 6450be52f7ff85385ac7de86e1d62819a48c1e66 reached 30,000 strict train rows with zero sealed reads. Evolution materially improved equal-count economic quality and productivity while retaining behavior-family breadth; the 86.12% dominant program-family share was a coarse concentration diagnostic that was incorrectly included in arm survival and caused STOP_ALL_ADAPTIVE_ARMS_EXITED. A later orchestration bug then appended 6,000 Random-only rows, so the whole 36k run remains ENGINE_RUN_INVALID, <=30000 is VALID_PREFIX, and >30000 is INVALID_SUFFIX. Artifact-only reconstruction reads zero market arrays and re-evaluates zero candidates; all four Evolution populations/counters and all four CEM distributions/update counts exactly match checkpoint017, while adaptive suffix candidate and rejection rows are both zero. Current user decision GO_WITH_LIMITED_SEARCH_POLICY_CHANGE has activated exactly one schema-2 successor authorization, SHA256 F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A, bound to implementation b5985037492a81198953629480c75db12e2a8afd and the exact PC2 host/workspace/runtime identity. Authorized preflight passes with zero market, candidate and sealed reads, the runtime is not started, Random is fresh, and CEM/Evolution restore only the verified 30k bundle. The run is capped at 20,000 additional strict with 5,000-strict decisions and an unconditional cumulative 50,000 mechanical stop; family concentration is diagnostic/allocation only. Receipt-scoped target, optimizer-reward, execution-price and cost bindings remain NON_FORMAL exceptions for this run and confer no global economic authority, validation, Alpha, OOS, promotion or formal authority.",
                                              "severity":  "HARD",
                                              "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.temporal_successor_v1.prepare_successor_execution, broad_search.temporal_program_search_v1.run 30K_TO_50K_SUCCESSOR mode, one-workspace launch claim, regression tests, consumed predecessor receipt, and invalid-run evidence manifest",
                                              "bypass_forbidden":  true,
-                                               "evidence_ref":  "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_IMPLEMENTATION_CHECK_20260811.json"
+                                               "evidence_ref":  "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZATION_20260811.md"
                                           },
                                           {
                                               "id":  "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",

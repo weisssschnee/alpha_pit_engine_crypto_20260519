@@ -4,6 +4,40 @@ Last updated: 2026-08-11 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_AUTHORIZED_NOT_STARTED`
+
+Current user decision `GO_WITH_LIMITED_SEARCH_POLICY_CHANGE` authorizes exactly
+one schema-2 PC2 `30K_TO_50K_SUCCESSOR` development continuation. The committed
+implementation remains `b5985037492a81198953629480c75db12e2a8afd`; the
+materialized one-time authorization is bound to branch
+`experiment/crypto-p4-pocket-validation-v1-20260811`, PC2 host
+`desktop-a2h3a2g`, workspace
+`C:\HermesWorker\workspace\crypto_temporal_successor_b5985037`, runtime
+`crypto_temporal_program_30k_to_50k_successor_v1_20260811`, and authorization
+SHA256 `F125061CD9DBFA0CAF2FFAC34B2479F370C600B6CF73A61352A309278DB5A38A`.
+
+PC2 physical preflight found no active Python/search process, verified the
+retained source file sizes and exact receipt-bound hashes, and returned
+`SUCCESSOR_PREFLIGHT_PASS` from the authorized reconstruction path. Only
+`completion_ordinal <= 30000` contributes state; the historical suffix from
+30,001 contributes zero. Fresh Random remains fresh, while CEM and Evolution
+restore only the verified reconstructed bundle. Allocation remains 20% Random,
+20% CEM and 60% Evolution, with one decision every 5,000 additional strict and
+an unconditional cumulative 50,000 mechanical hard stop. Market reads,
+candidate evaluations, sealed reads and runtime-root creation remain zero at
+this authorization boundary.
+
+Validation, OOS, holdout, forward reads, promotion, rescue, reseed, tuning,
+automatic expansion and a second successor remain forbidden. Authorization
+does not promote the experimental node or fill any global economic authority;
+the schema-2 target, optimizer-reward, execution-price and cost bindings are
+receipt-scoped NON_FORMAL exceptions for this run only. The next action is to
+commit/push this exact authorization, reverify the authorization-bearing PC2
+checkout, launch once, and stop for development-evidence audit at the first
+frozen terminal condition or cumulative 50,000 strict.
+
+The preceding completed phase was:
+
 `CRYPTO_P4_MECHANISM_POCKET_REPLACEMENT_PRE_CANDIDATE_ENGINE_RUN_INVALID_RESEARCH_HOLD`
 
 The sole source-repaired replacement authorization is consumed and closed
