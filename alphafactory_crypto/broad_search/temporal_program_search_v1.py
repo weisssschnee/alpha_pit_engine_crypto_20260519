@@ -27,7 +27,10 @@ import psutil
 
 from . import search_engine_v1 as engine
 from .compositional18m import CandidateSpec, MechanismSpec, mechanism_role_domains
-from .experiment_authority import resolve_search_economic_receipt
+from .experiment_authority import (
+    require_real_experiment_authority,
+    resolve_search_economic_receipt,
+)
 from .expression import FieldContract, TypedExpressionRegistry
 from .pair18m import (
     ControlBehaviorDegeneracyError,
@@ -56,6 +59,7 @@ from .temporal_successor_v1 import (
     SuccessorPreflightError,
     authorization_content_sha,
     derive_fresh_random_lane_seeds,
+    executor_workspace_identity,
     prepare_successor_execution,
     successor_allocation,
     successor_budget_state,
@@ -1945,6 +1949,7 @@ def run(
             runtime_root=runtime_root,
         )
         receipt = dict(successor_context["authorization"])
+        successor_authority_preflight = None
     else:
         receipt = validate_receipt(
             repo_root, config=base_config, require_authorized=True
@@ -1953,6 +1958,7 @@ def run(
         config = _effective_config(base_config, receipt)
         runtime_root = repo_root / f"runtime/{CAMPAIGN}_{runtime_date}"
         successor_context = None
+        successor_authority_preflight = None
     observed_sha = engine._git_sha(repo_root)
     source_sha = str(source_sha or observed_sha).lower()
     if source_sha != observed_sha:
@@ -1991,6 +1997,21 @@ def run(
                 )
     if successor_mode:
         assert successor_context is not None
+        run_authorization = dict(receipt.get("run_authorization") or {})
+        successor_authority_preflight = require_real_experiment_authority(
+            repo_root,
+            evidence_to_add=str(receipt.get("evidence_to_add") or ""),
+            decision_to_change=str(receipt.get("decision_to_change") or ""),
+            economic_receipt_required=False,
+            receipt_bound_non_formal_authorization={
+                "decision_id": str(run_authorization.get("decision_id") or ""),
+                "authority": str(run_authorization.get("authority") or ""),
+                "scope": str(run_authorization.get("scope") or ""),
+                "receipt_path": SUCCESSOR_AUTHORIZATION_PATH,
+                "receipt_sha256": _json_sha(receipt),
+                "run_authorized": True,
+            },
+        )
         runtime_root.mkdir(parents=True)
         engine._write_json(
             runtime_root / "successor_launch_claim.json",
@@ -2125,6 +2146,7 @@ def run(
         "block_robust_contract": block_contract,
         "expression_registry_limits": _limits(config),
         "successor_preflight": successor_preflight_evidence,
+        "successor_current_authority_preflight": successor_authority_preflight,
         "sealed_reads": 0,
     }
     frozen_hash = _json_sha(frozen)
@@ -3350,6 +3372,10 @@ def check_successor_runtime(
         or authorization.get("consumed") is not False
     ):
         errors.append("authorization_snapshot_state")
+    if dict(authorization.get("executor_identity") or {}) != (
+        executor_workspace_identity(repo_root)
+    ):
+        errors.append("authorization_executor_identity")
     if final.get("successor_authorization_sha256") != authorization.get(
         "authorization_sha256"
     ):
@@ -3735,6 +3761,10 @@ def consume_successor_authorization(
         or authorization.get("consumed") is not False
     ):
         raise RuntimeError("successor authorization is not active or already consumed")
+    if dict(authorization.get("executor_identity") or {}) != (
+        executor_workspace_identity(repo_root)
+    ):
+        raise RuntimeError("successor authorization executor identity changed")
     runtime_root = repo_root / f"runtime/{SUCCESSOR_CAMPAIGN}_{runtime_date}"
     if runtime_root.name != str(authorization.get("runtime_id") or ""):
         raise RuntimeError("successor authorization runtime identity changed")
@@ -3767,7 +3797,9 @@ def consume_successor_authorization(
         }
     )
     updated["authorization_sha256"] = authorization_content_sha(updated)
-    engine._write_json(path, updated)
+    temporary = path.with_name(path.name + ".consuming.tmp")
+    engine._write_json(temporary, updated)
+    os.replace(temporary, path)
     return updated
 
 

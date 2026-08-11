@@ -12,6 +12,7 @@ import gzip
 import hashlib
 import json
 import math
+import platform
 import subprocess
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -51,6 +52,9 @@ RANDOM_SEED_DERIVATION_AUTHORITY = (
     "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1_PIPE_LANE_INDEX"
 )
 RANDOM_RNG_IMPLEMENTATION_IDENTITY = "python.random.Random|CPYTHON_MT19937_V1"
+SUCCESSOR_AUTHORIZATION_SCOPE = (
+    "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR"
+)
 ADAPTIVE_ARMS = ("temporal_program_cem", "temporal_program_evolution")
 BASE_ADAPTIVE_WEIGHTS = {
     "temporal_program_evolution": 3,
@@ -61,6 +65,7 @@ SUCCESSOR_COMPONENT_PATHS = (
     "alphafactory_crypto/broad_search/compositional18m.py",
     "alphafactory_crypto/broad_search/pair18m.py",
     "alphafactory_crypto/broad_search/search_engine_v1.py",
+    "alphafactory_crypto/broad_search/experiment_authority.py",
     "alphafactory_crypto/broad_search/temporal_activation_v1.py",
     "alphafactory_crypto/broad_search/temporal_program_v1.py",
     "alphafactory_crypto/broad_search/temporal_prefix_reconstruction_v1.py",
@@ -90,6 +95,44 @@ def authorization_content_sha(payload: Mapping[str, Any]) -> str:
     )
 
 
+def executor_workspace_identity(repo_root: Path) -> dict[str, str]:
+    resolved = str(repo_root.resolve()).replace("\\", "/").casefold()
+    return {
+        "host": platform.node().strip().casefold(),
+        "workspace_path_sha256": hashlib.sha256(
+            resolved.encode("utf-8")
+        ).hexdigest().upper(),
+    }
+
+
+def receipt_bound_role_bindings(
+    authority_identity: Mapping[str, Any],
+) -> dict[str, dict[str, str]]:
+    authority = dict(authority_identity)
+    return {
+        "target": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": str(authority["target_contract_sha256"]),
+        },
+        "optimizer_reward": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": str(
+                authority["optimizer_reward_and_matched_attribution_sha256"]
+            ),
+        },
+        "execution_price": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": str(authority["target_execution_sha256"]),
+        },
+        "cost": {
+            "component": "real_data_mapping_cost_evaluator",
+            "component_sha256": str(
+                authority["portfolio_mapping_and_cost_sha256"]
+            ),
+        },
+    }
+
+
 def derive_fresh_random_lane_seeds(lane_count: int = 4) -> tuple[int, ...]:
     seeds = tuple(
         int.from_bytes(
@@ -116,8 +159,11 @@ def validate_authorization_payload(
     expected_bundle_sha256: str,
     expected_source_identity_sha256: str,
     expected_authority_identity: Mapping[str, Any],
+    expected_executor_identity: Mapping[str, Any],
 ) -> dict[str, Any]:
     errors: list[str] = []
+    if authorization.get("schema_version") != 2:
+        errors.append("schema_version")
     if authorization.get("authorization_sha256") != authorization_content_sha(
         authorization
     ):
@@ -159,6 +205,25 @@ def validate_authorization_payload(
         errors.append("authorized_component_sha256")
     if not str(authorization.get("runtime_id") or ""):
         errors.append("runtime_id")
+    run_authorization = dict(authorization.get("run_authorization") or {})
+    if (
+        run_authorization.get("authority") != "CURRENT_USER_INSTRUCTION"
+        or run_authorization.get("scope") != SUCCESSOR_AUTHORIZATION_SCOPE
+        or not str(run_authorization.get("decision_id") or "")
+    ):
+        errors.append("run_authorization")
+    if dict(authorization.get("executor_identity") or {}) != dict(
+        expected_executor_identity
+    ):
+        errors.append("executor_identity")
+    if dict(authorization.get("receipt_bound_role_bindings") or {}) != (
+        receipt_bound_role_bindings(expected_authority_identity)
+    ):
+        errors.append("receipt_bound_role_bindings")
+    if not str(authorization.get("evidence_to_add") or "").strip():
+        errors.append("evidence_to_add")
+    if not str(authorization.get("decision_to_change") or "").strip():
+        errors.append("decision_to_change")
     random_control = dict(authorization.get("random_control") or {})
     if (
         random_control.get("identity") != FRESH_RANDOM_IDENTITY
@@ -550,6 +615,7 @@ def prepare_successor_execution(
             reconstruction["source_artifact_identity_sha256"]
         ),
         expected_authority_identity=dict(reconstruction["authority_identity"]),
+        expected_executor_identity=executor_workspace_identity(repo_root),
     )
     errors = _verify_implementation_binding(repo_root, authorization)
     branch = subprocess.check_output(
@@ -668,6 +734,8 @@ def check_successor_implementation(
         or authorization.get("authorized_implementation_sha") is not None
         or dict(authorization.get("authorized_component_sha256") or {})
         or authorization.get("runtime_id") is not None
+        or authorization.get("run_authorization") is not None
+        or authorization.get("executor_identity") is not None
     ):
         errors.append("implementation_only_authorization_state")
     if (
@@ -694,6 +762,16 @@ def check_successor_implementation(
         != derive_fresh_random_lane_seeds()
     ):
         errors.append("fresh_random_contract")
+    if authorization.get("schema_version") != 2:
+        errors.append("schema_version")
+    if dict(authorization.get("receipt_bound_role_bindings") or {}) != (
+        receipt_bound_role_bindings(reconstruction["authority_identity"])
+    ):
+        errors.append("receipt_bound_role_bindings")
+    if not str(authorization.get("evidence_to_add") or "").strip():
+        errors.append("evidence_to_add")
+    if not str(authorization.get("decision_to_change") or "").strip():
+        errors.append("decision_to_change")
     source_hashes = dict(authorization.get("source_artifact_sha256") or {})
     source_paths = {
         "candidate_ledger.parquet": artifact_root / "candidate_ledger.parquet",
@@ -743,9 +821,12 @@ __all__ = [
     "authorization_content_sha",
     "check_successor_implementation",
     "derive_fresh_random_lane_seeds",
+    "executor_workspace_identity",
     "prepare_successor_execution",
     "reconstruct_prefix_state_tables",
     "reconstruct_valid_prefix_state",
+    "receipt_bound_role_bindings",
+    "SUCCESSOR_AUTHORIZATION_SCOPE",
     "successor_allocation",
     "successor_budget_state",
     "successor_checkpoint_decision",

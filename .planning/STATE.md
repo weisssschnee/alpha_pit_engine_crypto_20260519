@@ -1581,10 +1581,16 @@ while validation access and promotion remain fail-closed under the formal sealed
 boundary. Portfolio mapping remains formal; that does not promote the venue cost
 assumption. Vacancy and inactivity intentionally block canonical Search Engine
 execution until an explicit external-control/ADR transition names valid owners.
-The implementation-only 30k-to-50k successor receipt does not fill those roles
-or authorize a run. That one frozen OOS exception remains consumed; any further
-OOS access, promotion, cost tuning, seed changes, or rescue reruns remain
-forbidden.
+The committed implementation-only 30k-to-50k successor authorization remains
+`IMPLEMENTED_NOT_AUTHORIZED` and fills no role. ADR 0023 registers one narrower
+schema-2 exception only if a current user decision atomically activates and
+commits that exact receipt: it may receipt-bind the frozen target,
+optimizer-reward, execution-price and cost identities as NON_FORMAL for one
+host/workspace/runtime, while the formal portfolio-mapping, validation-role and
+promotion-gate authorities must still resolve in CURRENT. The canonical runner
+then rechecks the complete economic identity before any market-array load. That
+one frozen OOS exception remains consumed; any further OOS access, promotion,
+cost tuning, seed changes, or rescue reruns remain forbidden.
 
 ## Crypto reward uncertainty V2 source repair
 
@@ -1718,9 +1724,13 @@ The mode fail-closes before market access unless the sole successor
 authorization is externally and atomically moved from
 `IMPLEMENTED_NOT_AUTHORIZED` to the one-time authorized state and committed
 with the accepted implementation SHA, exact component hashes, fixed branch and
-fixed runtime identity. A launch claim is created before economic or market
-authority access, so the same runtime identity cannot be launched twice or
-resumed. Decisions occur only on complete 5,000-additional-strict tranches;
+fixed host/workspace/runtime identity. It must also pass the existing seven-role
+CURRENT preflight; only the receipt-scoped target, optimizer-reward,
+execution-price and cost identities may remain NON_FORMAL, while mapping,
+validation and promotion stay under their existing formal authorities. A launch
+claim is created before economic or market authority access, so the same
+workspace/runtime identity cannot be launched twice or resumed. Decisions occur
+only on complete 5,000-additional-strict tranches;
 20% fresh Random is retained, adaptive budget is deterministically reassigned
 after an arm exit, and 20,000 additional / 50,000 cumulative strict is a
 mechanical stop.

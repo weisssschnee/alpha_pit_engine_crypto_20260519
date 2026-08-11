@@ -14,13 +14,20 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     SEARCH_ECONOMIC_V4_RECEIPT_PATH,
     SEARCH_ECONOMIC_V5_RECEIPT_PATH,
     SEARCH_ECONOMIC_V6_RECEIPT_PATH,
+    TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH,
+    TEMPORAL_SUCCESSOR_SCOPE,
     ECONOMIC_SEARCH_V6_SEEDS,
+    _canonical_sha256,
     _file_sha256,
     _validate_search_economic_receipt,
     evaluate_search_validation_kill_line,
     require_real_experiment_authority,
     resolve_search_economic_receipt,
     resolve_real_experiment_authorities,
+)
+from alphafactory_crypto.broad_search.temporal_successor_v1 import (
+    authorization_content_sha,
+    receipt_bound_role_bindings,
 )
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     _require_bound_authority_preflight,
@@ -74,6 +81,149 @@ def _write_current(
         json.dumps({"nodes": nodes, "semantic_authorities": bindings}),
         encoding="utf-8",
     )
+
+
+def _write_successor_exception_current(repo_root: Path) -> None:
+    graph_root = repo_root / ".planning" / "graphs"
+    graph_root.mkdir(parents=True)
+    nodes = []
+    bindings = []
+    for role in ("portfolio_mapping", "validation_role", "promotion_gate"):
+        component = f"{role}_component"
+        nodes.append(
+            {
+                "id": component,
+                "lifecycle": "ACTIVE",
+                "active_authority": True,
+                "validation": {"result": "PASS"},
+            }
+        )
+        bindings.append(
+            {
+                "semantic_role": role,
+                "authoritative_component": component,
+                "authority_class": "FORMAL",
+            }
+        )
+    nodes.append(
+        {
+            "id": "real_data_mapping_cost_evaluator",
+            "lifecycle": "EXPERIMENTAL",
+            "active_authority": False,
+            "validation": {"result": "PASS"},
+        }
+    )
+    bindings.append(
+        {
+            "semantic_role": "cost",
+            "authoritative_component": "real_data_mapping_cost_evaluator",
+            "authority_class": "NON_FORMAL",
+        }
+    )
+    (graph_root / "current.json").write_text(
+        json.dumps({"nodes": nodes, "semantic_authorities": bindings}),
+        encoding="utf-8",
+    )
+
+
+def _write_active_successor_authorization(repo_root: Path) -> dict[str, object]:
+    authority_identity = {
+        "target_contract_sha256": "1" * 64,
+        "target_execution_sha256": "2" * 64,
+        "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+        "portfolio_mapping_and_cost_sha256": "4" * 64,
+    }
+    payload: dict[str, object] = {
+        "schema_version": 2,
+        "execution_mode": "30K_TO_50K_SUCCESSOR",
+        "status": "RUN_AUTHORIZED_ONE_TIME_30K_TO_50K_DEVELOPMENT_SUCCESSOR",
+        "run_authorized": True,
+        "consumed": False,
+        "run_authorization": {
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "decision_id": "TEST_SUCCESSOR_AUTHORIZATION",
+            "scope": TEMPORAL_SUCCESSOR_SCOPE,
+        },
+        "authority_identity": authority_identity,
+        "receipt_bound_role_bindings": receipt_bound_role_bindings(
+            authority_identity
+        ),
+        "boundaries": {
+            "train_only": True,
+            "validation": False,
+            "oos": False,
+            "holdout": False,
+            "forward": False,
+            "promotion": False,
+            "automatic_expansion": False,
+            "sealed_reads": 0,
+        },
+    }
+    payload["authorization_sha256"] = authorization_content_sha(payload)
+    path = repo_root / TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    return payload
+
+
+def test_successor_schema2_receipt_closes_only_registered_current_vacancies(
+    tmp_path: Path,
+) -> None:
+    _write_successor_exception_current(tmp_path)
+    payload = _write_active_successor_authorization(tmp_path)
+    run_authorization = dict(payload["run_authorization"])
+
+    result = require_real_experiment_authority(
+        tmp_path,
+        evidence_to_add="measure bounded successor development economics",
+        decision_to_change="continue or stop at the frozen successor gate",
+        economic_receipt_required=False,
+        receipt_bound_non_formal_authorization={
+            "decision_id": run_authorization["decision_id"],
+            "authority": run_authorization["authority"],
+            "scope": run_authorization["scope"],
+            "receipt_path": TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH,
+            "receipt_sha256": _canonical_sha256(payload),
+            "run_authorized": True,
+        },
+    )
+
+    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
+    assert result["formal_claims_authorized"] is False
+    for role in ("target", "optimizer_reward", "execution_price", "cost"):
+        assert result["authority_refs"][role]["status"] == (
+            "BOUND_NON_FORMAL_EXPERIMENT"
+        )
+
+
+def test_successor_current_exception_fails_closed_on_receipt_role_tamper(
+    tmp_path: Path,
+) -> None:
+    _write_successor_exception_current(tmp_path)
+    payload = _write_active_successor_authorization(tmp_path)
+    payload["receipt_bound_role_bindings"]["target"]["component_sha256"] = (
+        "9" * 64
+    )
+    payload["authorization_sha256"] = authorization_content_sha(payload)
+    path = tmp_path / TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    run_authorization = dict(payload["run_authorization"])
+
+    with pytest.raises(RuntimeError, match="ROLE_BINDING"):
+        require_real_experiment_authority(
+            tmp_path,
+            evidence_to_add="measure bounded successor development economics",
+            decision_to_change="continue or stop at the frozen successor gate",
+            economic_receipt_required=False,
+            receipt_bound_non_formal_authorization={
+                "decision_id": run_authorization["decision_id"],
+                "authority": run_authorization["authority"],
+                "scope": run_authorization["scope"],
+                "receipt_path": TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH,
+                "receipt_sha256": _canonical_sha256(payload),
+                "run_authorized": True,
+            },
+        )
 
 
 def test_active_non_formal_authority_is_visible_but_not_formal(tmp_path: Path) -> None:

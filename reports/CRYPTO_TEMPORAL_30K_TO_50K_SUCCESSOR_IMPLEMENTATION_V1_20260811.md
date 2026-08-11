@@ -24,10 +24,15 @@ worker implementation. No parallel search engine was added.
    artifact plus reconstructed adaptive-policy bundle.
 2. `prepare_successor_execution` verifies the frozen successor receipt,
    reconstruction report, policy bundle, four source hashes, authority identity,
-   current implementation binding, branch, fixed runtime identity, unconsumed
-   one-time authorization and fresh output root before market access.
-3. The runner atomically claims the fixed runtime identity before reading the
-   economic/market authority. A second launch or resume fails closed.
+   current implementation binding, branch, host/workspace identity, fixed
+   runtime identity, unconsumed one-time authorization and fresh output root
+   before market access.
+3. The canonical runner then passes the existing seven-role CURRENT authority
+   preflight. The schema-2 receipt may bind only the frozen non-formal target,
+   optimizer-reward, execution-price and cost identities; formal mapping,
+   validation and promotion authorities remain mandatory. It then atomically
+   claims the fixed runtime identity before reading the economic/market
+   authority. A second launch, clone mismatch or resume fails closed.
 4. Only `completion_ordinal <= 30000` ledger, Behavior Archive, champion,
    attempted/dedupe, lineage, operation and policy-local family state is rebuilt.
    Source rows beginning at 30,001 contribute zero state.
@@ -45,14 +50,15 @@ worker implementation. No parallel search engine was added.
 The committed authorization artifact remains
 `IMPLEMENTED_NOT_AUTHORIZED`. The external authorizer may alter only that
 artifact, from a clean accepted implementation commit, and binds exact component
-blob hashes, branch, runtime identity and an external decision ID. The change
-must be committed before the canonical runner can pass preflight. This report
-does not authorize or start that run.
+blob hashes, branch, host/workspace identity, runtime identity and an external
+decision ID. The change must be committed before the canonical runner can pass
+preflight. This report does not authorize or start that run.
 
 ## Verification
 
-- Focused successor / reconstruction / Temporal Program tests: `47 passed`.
-- Full repository suite: `546 passed`, `1` pre-existing NumPy degrees-of-freedom
+- Focused successor / authority / reconstruction / Temporal Program tests:
+  `77 passed`.
+- Full repository suite: `557 passed`, `1` pre-existing NumPy degrees-of-freedom
   warning.
 - Independent implementation checker: `PASS`.
 - Independent checker artifact:
@@ -61,3 +67,14 @@ does not authorize or start that run.
 
 All verification in this phase is source, artifact and synthetic-state only.
 No real candidate was generated or evaluated.
+
+## Independent readiness answer
+
+`YES`, conditional on an external current-user decision activating and
+committing the sole schema-2 successor authorization from the exact accepted
+implementation checkout. Under that condition the canonical runner has one
+physical path for this bounded 30k-to-50k development continuation, and the
+host/workspace/runtime binding plus atomic launch claim prevent a second clean
+clone or second launch from consuming the same active authorization. In the
+committed default state the answer remains operationally `NOT_RUN`, because the
+authorization is deliberately `IMPLEMENTED_NOT_AUTHORIZED`.

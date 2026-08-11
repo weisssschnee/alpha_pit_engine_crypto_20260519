@@ -36,6 +36,12 @@ CONDITIONAL_RUN_NON_FORMAL_COMPONENTS = {
 V23_FROZEN_OOS_RECEIPT_PATH = (
     "config/crypto_search_v2_3_frozen_oos_receipt.json"
 )
+TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH = (
+    "config/crypto_temporal_program_30k_to_50k_successor_v1_authorization.json"
+)
+TEMPORAL_SUCCESSOR_SCOPE = (
+    "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR"
+)
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
@@ -2032,6 +2038,101 @@ def resolve_real_experiment_authorities(repo_root: Path) -> dict[str, Any]:
     }
 
 
+def _validate_temporal_successor_authority_exception(
+    repo_root: Path,
+    authorization: Mapping[str, Any],
+) -> tuple[list[str], dict[str, dict[str, Any]]]:
+    """Validate the registered schema-2, one-workspace successor exception."""
+
+    blockers: list[str] = []
+    path = repo_root / TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH
+    if not path.is_file():
+        return ["receipt_bound_non_formal_authorization:MISSING"], {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return ["receipt_bound_non_formal_authorization:READ"], {}
+    run_authorization = dict(payload.get("run_authorization") or {})
+    expected_call = {
+        "decision_id": str(run_authorization.get("decision_id") or ""),
+        "authority": "CURRENT_USER_INSTRUCTION",
+        "scope": TEMPORAL_SUCCESSOR_SCOPE,
+        "receipt_path": TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH,
+        "receipt_sha256": _canonical_sha256(payload),
+        "run_authorized": True,
+    }
+    if dict(authorization) != expected_call:
+        blockers.append("receipt_bound_non_formal_authorization:INVALID")
+    content_sha = _canonical_sha256(
+        {
+            key: value
+            for key, value in payload.items()
+            if key != "authorization_sha256"
+        }
+    )
+    if (
+        payload.get("schema_version") != 2
+        or payload.get("execution_mode") != "30K_TO_50K_SUCCESSOR"
+        or payload.get("status")
+        != "RUN_AUTHORIZED_ONE_TIME_30K_TO_50K_DEVELOPMENT_SUCCESSOR"
+        or payload.get("run_authorized") is not True
+        or payload.get("consumed") is not False
+        or payload.get("authorization_sha256") != content_sha
+        or run_authorization
+        != {
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "decision_id": expected_call["decision_id"],
+            "scope": TEMPORAL_SUCCESSOR_SCOPE,
+        }
+        or not expected_call["decision_id"]
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:HASH_OR_SCOPE")
+    boundaries = dict(payload.get("boundaries") or {})
+    if (
+        boundaries.get("train_only") is not True
+        or boundaries.get("validation") is not False
+        or boundaries.get("oos") is not False
+        or boundaries.get("holdout") is not False
+        or boundaries.get("forward") is not False
+        or boundaries.get("promotion") is not False
+        or boundaries.get("automatic_expansion") is not False
+        or int(boundaries.get("sealed_reads", -1)) != 0
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:SEALED_BOUNDARY")
+    authority_identity = dict(payload.get("authority_identity") or {})
+    expected_role_bindings = {
+        "target": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get("target_contract_sha256"),
+        },
+        "optimizer_reward": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get(
+                "optimizer_reward_and_matched_attribution_sha256"
+            ),
+        },
+        "execution_price": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get("target_execution_sha256"),
+        },
+        "cost": {
+            "component": "real_data_mapping_cost_evaluator",
+            "component_sha256": authority_identity.get(
+                "portfolio_mapping_and_cost_sha256"
+            ),
+        },
+    }
+    role_bindings = dict(payload.get("receipt_bound_role_bindings") or {})
+    if role_bindings != expected_role_bindings or any(
+        not str(value.get("component_sha256") or "")
+        for value in expected_role_bindings.values()
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:ROLE_BINDING")
+    return blockers, {
+        role: dict(value) for role, value in expected_role_bindings.items()
+    }
+
+
 def require_real_experiment_authority(
     repo_root: Path,
     *,
@@ -2045,43 +2146,53 @@ def require_real_experiment_authority(
     blockers = list(resolution["blockers"])
     economic_receipt = None
     non_formal_binding_authorized = False
+    receipt_bound_role_bindings: dict[str, dict[str, Any]] = {}
     if receipt_bound_non_formal_authorization is not None:
         authorization = dict(receipt_bound_non_formal_authorization)
-        expected_authorization = {
-            "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
-            "authority": "CURRENT_USER_INSTRUCTION",
-            "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
-            "receipt_path": V23_FROZEN_OOS_RECEIPT_PATH,
-            "receipt_sha256": str(authorization.get("receipt_sha256") or ""),
-            "run_authorized": True,
-        }
-        receipt_path = repo_root / V23_FROZEN_OOS_RECEIPT_PATH
-        if authorization != expected_authorization:
-            blockers.append("receipt_bound_non_formal_authorization:INVALID")
-        elif not receipt_path.is_file():
-            blockers.append("receipt_bound_non_formal_authorization:MISSING")
-        else:
-            receipt_payload = json.loads(
-                receipt_path.read_text(encoding="utf-8-sig")
+        if authorization.get("scope") == TEMPORAL_SUCCESSOR_SCOPE:
+            successor_blockers, receipt_bound_role_bindings = (
+                _validate_temporal_successor_authority_exception(
+                    repo_root, authorization
+                )
             )
-            if (
-                _canonical_sha256(receipt_payload)
-                != authorization["receipt_sha256"]
-                or receipt_payload.get("run_authorized") is not True
-                or dict(receipt_payload.get("run_authorization") or {}).get(
-                    "decision_id"
-                )
-                != authorization["decision_id"]
-                or dict(receipt_payload.get("run_authorization") or {}).get(
-                    "scope"
-                )
-                != authorization["scope"]
-            ):
-                blockers.append(
-                    "receipt_bound_non_formal_authorization:HASH_OR_SCOPE"
-                )
+            blockers.extend(successor_blockers)
+            non_formal_binding_authorized = not successor_blockers
+        else:
+            expected_authorization = {
+                "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
+                "authority": "CURRENT_USER_INSTRUCTION",
+                "scope": "ONE_READ_ONLY_FROZEN_V23_1024_COHORT_OOS_REPLAY",
+                "receipt_path": V23_FROZEN_OOS_RECEIPT_PATH,
+                "receipt_sha256": str(authorization.get("receipt_sha256") or ""),
+                "run_authorized": True,
+            }
+            receipt_path = repo_root / V23_FROZEN_OOS_RECEIPT_PATH
+            if authorization != expected_authorization:
+                blockers.append("receipt_bound_non_formal_authorization:INVALID")
+            elif not receipt_path.is_file():
+                blockers.append("receipt_bound_non_formal_authorization:MISSING")
             else:
-                non_formal_binding_authorized = True
+                receipt_payload = json.loads(
+                    receipt_path.read_text(encoding="utf-8-sig")
+                )
+                if (
+                    _canonical_sha256(receipt_payload)
+                    != authorization["receipt_sha256"]
+                    or receipt_payload.get("run_authorized") is not True
+                    or dict(receipt_payload.get("run_authorization") or {}).get(
+                        "decision_id"
+                    )
+                    != authorization["decision_id"]
+                    or dict(receipt_payload.get("run_authorization") or {}).get(
+                        "scope"
+                    )
+                    != authorization["scope"]
+                ):
+                    blockers.append(
+                        "receipt_bound_non_formal_authorization:HASH_OR_SCOPE"
+                    )
+                else:
+                    non_formal_binding_authorized = True
     if economic_receipt_required:
         economic_receipt = resolve_search_economic_receipt(
             repo_root,
@@ -2101,6 +2212,27 @@ def require_real_experiment_authority(
             CONDITIONAL_RUN_NON_FORMAL_COMPONENTS.items()
         ):
             ref = authority_refs.get(role, {})
+            receipt_binding = receipt_bound_role_bindings.get(role)
+            if receipt_binding is not None and ref.get("status") in {
+                "VACANT",
+                "INACTIVE_AUTHORITY",
+            }:
+                blockers = [
+                    value
+                    for value in blockers
+                    if value
+                    not in {f"{role}:VACANT", f"{role}:INACTIVE_AUTHORITY"}
+                ]
+                authority_refs[role] = {
+                    "status": "BOUND_NON_FORMAL_EXPERIMENT",
+                    "component": receipt_binding["component"],
+                    "component_sha256": receipt_binding["component_sha256"],
+                    "authority_class": "NON_FORMAL",
+                    "lifecycle": "RECEIPT_SCOPED",
+                    "active_authority": False,
+                }
+                non_formal_roles.add(role)
+                continue
             if (
                 ref.get("status") == "INACTIVE_AUTHORITY"
                 and ref.get("component") == expected_component
@@ -2157,6 +2289,8 @@ __all__ = [
     "ECONOMIC_SEARCH_V6_SEED_DERIVATION",
     "ECONOMIC_SEARCH_V6_SEEDS",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
+    "TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH",
+    "TEMPORAL_SUCCESSOR_SCOPE",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",
     "resolve_real_experiment_authorities",

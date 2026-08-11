@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+from collections.abc import Callable
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -18,6 +19,7 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
     authorization_content_sha,
     derive_fresh_random_lane_seeds,
     reconstruct_prefix_state_tables,
+    receipt_bound_role_bindings,
     successor_allocation,
     successor_budget_state,
     successor_checkpoint_decision,
@@ -26,8 +28,15 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
 
 
 def _authorization(**changes: object) -> dict[str, object]:
+    authority_identity = {
+        "target_contract_sha256": "1" * 64,
+        "target_execution_sha256": "2" * 64,
+        "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+        "portfolio_mapping_and_cost_sha256": "4" * 64,
+    }
+    executor_identity = {"host": "test-host", "workspace_path_sha256": "5" * 64}
     payload: dict[str, object] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "authorization_id": "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1_AUTHORIZATION",
         "execution_mode": EXECUTION_MODE,
         "status": AUTHORIZED_STATUS,
@@ -65,7 +74,18 @@ def _authorization(**changes: object) -> dict[str, object]:
                 "KEEP_RANDOM_20_PERCENT_AND_ASSIGN_ALL_ADAPTIVE_80_PERCENT_TO_SURVIVING_ADAPTIVE_ARMS_PROPORTIONAL_TO_3_TO_1_BASE_WEIGHTS"
             ),
         },
-        "authority_identity": {"target_contract_sha256": "1" * 64},
+        "authority_identity": authority_identity,
+        "receipt_bound_role_bindings": receipt_bound_role_bindings(
+            authority_identity
+        ),
+        "executor_identity": executor_identity,
+        "run_authorization": {
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "decision_id": "TEST_SUCCESSOR_AUTHORIZATION",
+            "scope": "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR",
+        },
+        "evidence_to_add": "synthetic successor evidence",
+        "decision_to_change": "synthetic continuation decision",
         "boundaries": {
             "train_only": True,
             "validation": False,
@@ -97,6 +117,8 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
         authorized_implementation_sha=None,
         authorized_component_sha256={},
         runtime_id=None,
+        executor_identity=None,
+        run_authorization=None,
     )
     with pytest.raises(SuccessorPreflightError, match="FAIL_CLOSED_BEFORE_MARKET_READ"):
         validate_authorization_payload(
@@ -105,7 +127,11 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
             expected_reconstruction_report_sha256="B" * 64,
             expected_bundle_sha256="C" * 64,
             expected_source_identity_sha256="D" * 64,
-            expected_authority_identity={"target_contract_sha256": "1" * 64},
+            expected_authority_identity=dict(ready["authority_identity"]),
+            expected_executor_identity={
+                "host": "test-host",
+                "workspace_path_sha256": "5" * 64,
+            },
         )
 
     authorized = _authorization()
@@ -115,7 +141,8 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
         expected_reconstruction_report_sha256="B" * 64,
         expected_bundle_sha256="C" * 64,
         expected_source_identity_sha256="D" * 64,
-        expected_authority_identity={"target_contract_sha256": "1" * 64},
+        expected_authority_identity=dict(authorized["authority_identity"]),
+        expected_executor_identity=dict(authorized["executor_identity"]),
     )
     assert validated["status"] == AUTHORIZED_STATUS
 
@@ -128,7 +155,74 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
             expected_reconstruction_report_sha256="B" * 64,
             expected_bundle_sha256="C" * 64,
             expected_source_identity_sha256="D" * 64,
-            expected_authority_identity={"target_contract_sha256": "1" * 64},
+            expected_authority_identity=dict(authorized["authority_identity"]),
+            expected_executor_identity=dict(authorized["executor_identity"]),
+        )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_error"),
+    [
+        (lambda payload: payload.update(schema_version=1), "schema_version"),
+        (lambda payload: payload.update(consumed=True), "authorization_consumed"),
+        (
+            lambda payload: payload.update(
+                executor_identity={
+                    "host": "other-host",
+                    "workspace_path_sha256": "5" * 64,
+                }
+            ),
+            "executor_identity",
+        ),
+        (
+            lambda payload: payload["run_authorization"].update(
+                scope="UNREGISTERED_SCOPE"
+            ),
+            "run_authorization",
+        ),
+        (
+            lambda payload: payload["authority_identity"].update(
+                target_contract_sha256="9" * 64
+            ),
+            "authority_identity",
+        ),
+        (
+            lambda payload: payload["receipt_bound_role_bindings"][
+                "execution_price"
+            ].update(component_sha256="9" * 64),
+            "receipt_bound_role_bindings",
+        ),
+        (
+            lambda payload: payload["boundaries"].update(validation=True),
+            "sealed_boundaries",
+        ),
+    ],
+)
+def test_authorization_payload_negative_matrix_fails_before_market_read(
+    mutation: Callable[[dict[str, object]], object],
+    expected_error: str,
+) -> None:
+    authorized = _authorization()
+    mutation(authorized)
+    authorized["authorization_sha256"] = authorization_content_sha(authorized)
+
+    with pytest.raises(SuccessorPreflightError, match=expected_error):
+        validate_authorization_payload(
+            authorized,
+            expected_successor_receipt_sha256="A" * 64,
+            expected_reconstruction_report_sha256="B" * 64,
+            expected_bundle_sha256="C" * 64,
+            expected_source_identity_sha256="D" * 64,
+            expected_authority_identity={
+                "target_contract_sha256": "1" * 64,
+                "target_execution_sha256": "2" * 64,
+                "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+                "portfolio_mapping_and_cost_sha256": "4" * 64,
+            },
+            expected_executor_identity={
+                "host": "test-host",
+                "workspace_path_sha256": "5" * 64,
+            },
         )
 
 
@@ -371,6 +465,51 @@ def test_successor_checkpoint_decision_prunes_only_on_economic_gate_state() -> N
     assert decision["family_concentration_is_diagnostic_only"] is True
 
 
+def test_successor_four_tranche_schedule_reaches_only_the_20k_hard_stop() -> None:
+    decisions = []
+    for cumulative in (35_000, 40_000, 45_000, 50_000):
+        budget = successor_budget_state(cumulative)
+        decision = successor_checkpoint_decision(
+            {
+                "status": "CONTINUE",
+                "arm_states_before": {
+                    "temporal_program_cem": "ACTIVE",
+                    "temporal_program_evolution": "ACTIVE",
+                },
+                "arm_states_after": {
+                    "temporal_program_cem": "ACTIVE",
+                    "temporal_program_evolution": "ACTIVE",
+                },
+                "arm_decisions": {},
+            }
+        )
+        decisions.append(
+            (
+                budget["additional_strict_evaluated"],
+                budget["cumulative_valid_strict"],
+                budget["mechanical_stop_required"],
+                decision["status"],
+                decision["next_allocation"],
+            )
+        )
+
+    assert [row[:4] for row in decisions] == [
+        (5_000, 35_000, False, "CONTINUE"),
+        (10_000, 40_000, False, "CONTINUE"),
+        (15_000, 45_000, False, "CONTINUE"),
+        (20_000, 50_000, True, "CONTINUE"),
+    ]
+    assert all(
+        row[4]
+        == {
+            "temporal_program_random": 1_000,
+            "temporal_program_evolution": 3_000,
+            "temporal_program_cem": 1_000,
+        }
+        for row in decisions
+    )
+
+
 def test_canonical_successor_fails_before_any_market_authority_read(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -401,6 +540,73 @@ def test_canonical_successor_fails_before_any_market_authority_read(
     assert market_read is False
 
 
+def test_canonical_successor_calls_current_preflight_before_market_authority(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    runtime_date = "20990103_current_preflight"
+    runtime_root = (
+        repo_root / "runtime" / f"{runner.SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    )
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    observed: list[str] = []
+    authorization = _authorization(
+        runtime_id=runtime_root.name,
+        executor_identity={
+            "host": "synthetic-host",
+            "workspace_path_sha256": "5" * 64,
+        },
+    )
+
+    monkeypatch.setattr(
+        runner,
+        "prepare_successor_execution",
+        lambda *args, **kwargs: {
+            "authorization": authorization,
+            "authorization_sha256": authorization["authorization_sha256"],
+        },
+    )
+    monkeypatch.setattr(
+        runner.engine, "_source_tree_clean_for_run", lambda *args, **kwargs: True
+    )
+
+    def current_preflight(*args: object, **kwargs: object) -> dict[str, object]:
+        observed.append("CURRENT")
+        assert kwargs["evidence_to_add"] == authorization["evidence_to_add"]
+        assert kwargs["decision_to_change"] == authorization["decision_to_change"]
+        assert kwargs["receipt_bound_non_formal_authorization"] == {
+            "decision_id": "TEST_SUCCESSOR_AUTHORIZATION",
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "scope": (
+                "ONE_30K_TO_50K_TRAIN_ONLY_TEMPORAL_PROGRAM_DEVELOPMENT_SUCCESSOR"
+            ),
+            "receipt_path": runner.SUCCESSOR_AUTHORIZATION_PATH,
+            "receipt_sha256": runner._json_sha(authorization),
+            "run_authorized": True,
+        }
+        return {"result": "READY_WITH_NON_FORMAL_BOUNDARIES"}
+
+    def stop_at_market(*args: object, **kwargs: object) -> None:
+        observed.append("MARKET")
+        raise RuntimeError("synthetic stop at market authority")
+
+    monkeypatch.setattr(runner, "require_real_experiment_authority", current_preflight)
+    monkeypatch.setattr(runner, "resolve_search_economic_receipt", stop_at_market)
+    try:
+        with pytest.raises(RuntimeError, match="synthetic stop at market authority"):
+            runner.run(
+                repo_root,
+                runtime_date=runtime_date,
+                execution_mode=EXECUTION_MODE,
+                successor_artifact_root=repo_root / "unused-source",
+                successor_policy_bundle=repo_root / "unused-bundle.json.gz",
+            )
+        assert observed == ["CURRENT", "MARKET"]
+        assert (runtime_root / "successor_launch_claim.json").is_file()
+    finally:
+        shutil.rmtree(runtime_root, ignore_errors=True)
+
+
 def test_successor_launch_claim_blocks_second_launch_before_market_read(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -429,6 +635,14 @@ def test_successor_launch_claim_blocks_second_launch_before_market_read(
     )
     monkeypatch.setattr(
         runner.engine, "_source_tree_clean_for_run", lambda *args, **kwargs: True
+    )
+    monkeypatch.setattr(
+        runner,
+        "require_real_experiment_authority",
+        lambda *args, **kwargs: {
+            "result": "READY_WITH_NON_FORMAL_BOUNDARIES",
+            "formal_claims_authorized": False,
+        },
     )
     monkeypatch.setattr(
         runner, "resolve_search_economic_receipt", stop_at_first_market_authority

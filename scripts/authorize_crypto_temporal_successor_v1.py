@@ -36,10 +36,12 @@ def main() -> None:
     from alphafactory_crypto.broad_search.temporal_successor_v1 import (
         AUTHORIZED_STATUS,
         NOT_AUTHORIZED_STATUS,
+        SUCCESSOR_AUTHORIZATION_SCOPE,
         SUCCESSOR_AUTHORIZATION_PATH,
         SUCCESSOR_CAMPAIGN,
         SUCCESSOR_COMPONENT_PATHS,
         authorization_content_sha,
+        executor_workspace_identity,
     )
 
     path = repo_root / SUCCESSOR_AUTHORIZATION_PATH
@@ -62,6 +64,11 @@ def main() -> None:
     branch = subprocess.check_output(
         ["git", "branch", "--show-current"], cwd=repo_root, text=True
     ).strip()
+    decision_id = str(args.authorization_decision_id).strip()
+    if not branch:
+        raise RuntimeError("successor authorization requires a named branch")
+    if not decision_id:
+        raise RuntimeError("successor authorization decision id is required")
     updated = {
         key: value for key, value in payload.items() if key != "authorization_sha256"
     }
@@ -76,9 +83,12 @@ def main() -> None:
             },
             "expected_branch": branch,
             "runtime_id": f"{SUCCESSOR_CAMPAIGN}_{args.runtime_date}",
-            "external_authorization_decision_id": str(
-                args.authorization_decision_id
-            ),
+            "executor_identity": executor_workspace_identity(repo_root),
+            "run_authorization": {
+                "authority": "CURRENT_USER_INSTRUCTION",
+                "decision_id": decision_id,
+                "scope": SUCCESSOR_AUTHORIZATION_SCOPE,
+            },
         }
     )
     updated["authorization_sha256"] = authorization_content_sha(updated)

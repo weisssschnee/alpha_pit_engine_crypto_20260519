@@ -26,6 +26,16 @@ economic and program-catalog identities, implementation component bundle, one
 unconsumed authorization and a fresh fixed runtime root.  Any mismatch is
 `FAIL_CLOSED_BEFORE_MARKET_READ`.
 
+The successor does not bypass the existing seven-role CURRENT authority
+preflight.  Its schema-2 authorization is the sole registered, receipt-scoped
+exception for the currently vacant or inactive target, optimizer-reward,
+execution-price and cost roles.  Those four bindings are non-formal, exact-hash
+identities from the frozen economic receipt; the existing formal portfolio
+mapping, validation-role and promotion-gate authorities must still resolve in
+CURRENT.  After that preflight, the canonical runner independently re-resolves
+the complete economic receipt and rejects any target, execution, mapping, cost
+or reward identity drift before loading market arrays.
+
 The mode restores only state attributable to completion ordinals 1 through
 30,000: evaluated ledger and lineage, attempted exact identities, Behavior
 Archive and champions, family counters, policy-local family counts, and the
@@ -49,9 +59,12 @@ Its committed default is `IMPLEMENTED_NOT_AUTHORIZED`.  An external decision may
 atomically transition that one artifact to
 `RUN_AUTHORIZED_ONE_TIME_30K_TO_50K_DEVELOPMENT_SUCCESSOR`, binding the accepted
 implementation commit, exact component hashes and one fixed runtime identity.
-That authorization-only transition must be committed before execution.  A
-second launch, a non-fresh output root, a terminal resume, or a consumed
-authorization fails closed.
+The authorization is also bound to the authorizing host and resolved workspace
+path hash, so the same active authorization commit cannot be consumed from a
+second clean clone.  That authorization-only transition must be committed
+before execution.  An atomic launch claim in the bound runtime root blocks a
+second launch in that workspace; a non-fresh output root, terminal resume,
+executor-identity mismatch or consumed authorization fails closed.
 
 ## Boundaries
 
@@ -60,4 +73,3 @@ continuation.  It does not reactivate the old consumed receipt or historical
 runtime.  Validation, OOS, holdout, forward, promotion, automatic expansion,
 parameter tuning, rescue rerun and sealed reads remain forbidden.  Readiness is
 not market evidence and creates no new formal economic authority.
-
