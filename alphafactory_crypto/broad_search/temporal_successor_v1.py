@@ -247,8 +247,12 @@ def verify_successor_target_cache(
         carrier_metadata.get("identity_sha256") or ""
     ):
         errors.append("target_cache_source_identity")
+    carrier_shape = carrier_metadata.get("shape") or (
+        carrier_metadata.get("assets"),
+        carrier_metadata.get("timestamps"),
+    )
     if tuple(int(value) for value in target_metadata.get("shape") or ()) != tuple(
-        int(value) for value in carrier_metadata.get("shape") or ()
+        int(value) for value in carrier_shape
     ):
         errors.append("target_cache_source_shape")
     timestamp_path = carrier_root / "timestamp_ns.npy"
