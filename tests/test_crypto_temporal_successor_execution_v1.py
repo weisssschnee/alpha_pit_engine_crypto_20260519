@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import concurrent.futures
 import json
 import shutil
 from collections.abc import Callable
@@ -25,6 +26,7 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
     successor_checkpoint_decision,
     validate_authorization_payload,
 )
+from alphafactory_crypto.broad_search import temporal_successor_v1 as successor
 
 
 def _authorization(**changes: object) -> dict[str, object]:
@@ -166,6 +168,20 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
         (lambda payload: payload.update(schema_version=1), "schema_version"),
         (lambda payload: payload.update(consumed=True), "authorization_consumed"),
         (
+            lambda payload: payload.update(successor_receipt_sha256="9" * 64),
+            "successor_receipt_sha256",
+        ),
+        (
+            lambda payload: payload.update(
+                reconstructed_policy_bundle_sha256="9" * 64
+            ),
+            "reconstructed_policy_bundle_sha256",
+        ),
+        (
+            lambda payload: payload.update(authorized_implementation_sha="0" * 39),
+            "authorized_implementation_sha",
+        ),
+        (
             lambda payload: payload.update(
                 executor_identity={
                     "host": "other-host",
@@ -183,6 +199,24 @@ def test_authorization_payload_distinguishes_ready_from_one_time_authorized() ->
         (
             lambda payload: payload["authority_identity"].update(
                 target_contract_sha256="9" * 64
+            ),
+            "authority_identity",
+        ),
+        (
+            lambda payload: payload["authority_identity"].update(
+                target_execution_sha256="9" * 64
+            ),
+            "authority_identity",
+        ),
+        (
+            lambda payload: payload["authority_identity"].update(
+                portfolio_mapping_and_cost_sha256="9" * 64
+            ),
+            "authority_identity",
+        ),
+        (
+            lambda payload: payload["authority_identity"].update(
+                optimizer_reward_and_matched_attribution_sha256="9" * 64
             ),
             "authority_identity",
         ),
@@ -344,6 +378,23 @@ def test_valid_prefix_state_restoration_excludes_suffix_and_rebuilds_archive() -
     assert restored["policy_local_family_counts"] == {
         "temporal_program_evolution|7": {"family-1": 2}
     }
+
+
+def test_suffix_state_injection_is_rejected_by_physical_successor_preflight() -> None:
+    with pytest.raises(
+        SuccessorPreflightError, match="invalid_suffix_state_injection"
+    ):
+        successor._require_zero_suffix_contribution(
+            {
+                "suffix_contribution": {
+                    "candidate_rows": 1,
+                    "archive_rows": 0,
+                    "attempted_exact_ids": 0,
+                    "completed_pair_ids": 0,
+                    "policy_local_family_counts": 0,
+                }
+            }
+        )
 
 
 def test_successor_allocation_and_budget_are_additional_not_fresh_campaign() -> None:
@@ -675,3 +726,464 @@ def test_successor_launch_claim_blocks_second_launch_before_market_read(
         assert market_reads == 1
     finally:
         shutil.rmtree(runtime_root, ignore_errors=True)
+
+
+@pytest.mark.parametrize(
+    "changed_component",
+    [
+        "target_contract",
+        "target_execution",
+        "portfolio_mapping_and_cost",
+        "optimizer_reward_and_matched_attribution",
+    ],
+)
+def test_canonical_successor_economic_authority_drift_stops_before_market_arrays(
+    monkeypatch: pytest.MonkeyPatch,
+    changed_component: str,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    runtime_date = "20990105_" + changed_component
+    runtime_root = repo_root / "runtime" / f"{runner.SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    market_arrays_read = False
+    authority = {
+        "economic_receipt_sha256": "7" * 64,
+        "target_contract_sha256": "1" * 64,
+        "target_execution_sha256": "2" * 64,
+        "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+        "portfolio_mapping_and_cost_sha256": "4" * 64,
+        "program_catalog_sha256": "6" * 64,
+    }
+    authorization = _authorization(authority_identity=authority)
+    authorization["receipt_bound_role_bindings"] = receipt_bound_role_bindings(
+        authority
+    )
+    authorization["runtime_id"] = runtime_root.name
+    authorization["authorization_sha256"] = authorization_content_sha(authorization)
+    observed = {
+        "target_contract": authority["target_contract_sha256"],
+        "target_execution": authority["target_execution_sha256"],
+        "portfolio_mapping_and_cost": authority[
+            "portfolio_mapping_and_cost_sha256"
+        ],
+        "optimizer_reward_and_matched_attribution": authority[
+            "optimizer_reward_and_matched_attribution_sha256"
+        ],
+    }
+    observed[changed_component] = "9" * 64
+
+    monkeypatch.setattr(
+        runner,
+        "prepare_successor_execution",
+        lambda *args, **kwargs: {
+            "authorization": authorization,
+            "authorization_sha256": authorization["authorization_sha256"],
+        },
+    )
+    monkeypatch.setattr(
+        runner.engine, "_source_tree_clean_for_run", lambda *args, **kwargs: True
+    )
+    monkeypatch.setattr(
+        runner,
+        "require_real_experiment_authority",
+        lambda *args, **kwargs: {"result": "READY_WITH_NON_FORMAL_BOUNDARIES"},
+    )
+    monkeypatch.setattr(
+        runner,
+        "resolve_search_economic_receipt",
+        lambda *args, **kwargs: {
+            "receipt_sha256": authority["economic_receipt_sha256"],
+            "component_sha256": observed,
+        },
+    )
+
+    def forbidden_market_arrays(*args: object, **kwargs: object) -> None:
+        nonlocal market_arrays_read
+        market_arrays_read = True
+        raise AssertionError("market arrays must remain unread")
+
+    monkeypatch.setattr(runner.engine, "_load_v14_inputs", forbidden_market_arrays)
+    try:
+        with pytest.raises(
+            SuccessorPreflightError, match="current_economic_authority_changed"
+        ):
+            runner.run(
+                repo_root,
+                runtime_date=runtime_date,
+                execution_mode=EXECUTION_MODE,
+                successor_artifact_root=repo_root / "unused-source",
+                successor_policy_bundle=repo_root / "unused-bundle.json.gz",
+            )
+        assert market_arrays_read is False
+    finally:
+        shutil.rmtree(runtime_root, ignore_errors=True)
+
+
+def test_terminal_successor_runtime_cannot_resume_before_market_read(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    runtime_date = "20990106_terminal_resume"
+    runtime_root = repo_root / "runtime" / f"{runner.SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    (runtime_root / "checkpoints" / "checkpoint_budget_exhausted").mkdir(
+        parents=True
+    )
+    market_read = False
+
+    def forbidden_market_read(*args: object, **kwargs: object) -> None:
+        nonlocal market_read
+        market_read = True
+        raise AssertionError("terminal successor must not reach market authority")
+
+    monkeypatch.setattr(
+        runner,
+        "prepare_successor_execution",
+        lambda *args, **kwargs: (_ for _ in ()).throw(
+            SuccessorPreflightError("FAIL_CLOSED_BEFORE_MARKET_READ:non_fresh_output_root")
+        ),
+    )
+    monkeypatch.setattr(runner, "resolve_search_economic_receipt", forbidden_market_read)
+    try:
+        with pytest.raises(SuccessorPreflightError, match="non_fresh_output_root"):
+            runner.run(
+                repo_root,
+                runtime_date=runtime_date,
+                execution_mode=EXECUTION_MODE,
+                successor_artifact_root=repo_root / "unused-source",
+                successor_policy_bundle=repo_root / "unused-bundle.json.gz",
+            )
+        assert market_read is False
+    finally:
+        shutil.rmtree(runtime_root, ignore_errors=True)
+
+
+def test_canonical_run_executes_four_synthetic_successor_tranches_and_seals(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    runtime_date = "20990107_four_tranches"
+    runtime_root = repo_root / "runtime" / f"{runner.SUCCESSOR_CAMPAIGN}_{runtime_date}"
+    report_path = (
+        repo_root
+        / "reports"
+        / f"CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1_{runtime_date}.md"
+    )
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    report_path.unlink(missing_ok=True)
+
+    class Candidate:
+        def __init__(self, candidate_id: str) -> None:
+            self.candidate_id = candidate_id
+
+        def to_dict(self) -> dict[str, str]:
+            return {"candidate_id": self.candidate_id}
+
+    class Policy:
+        def update(self, rows: object) -> None:
+            return None
+
+        def state_hash(self) -> str:
+            return "policy-state"
+
+    class ImmediateExecutor:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            pass
+
+        def submit(self, function: object, *args: object, **kwargs: object):
+            future: concurrent.futures.Future[dict[str, object]] = (
+                concurrent.futures.Future()
+            )
+            future.set_result(
+                {
+                    "system_error": False,
+                    "memory_error": False,
+                    "evaluation": {"matched_positive": False},
+                }
+            )
+            return future
+
+        def shutdown(self, *args: object, **kwargs: object) -> None:
+            return None
+
+    authority = {
+        "economic_receipt_sha256": "7" * 64,
+        "target_contract_sha256": "1" * 64,
+        "target_execution_sha256": "2" * 64,
+        "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+        "portfolio_mapping_and_cost_sha256": "4" * 64,
+        "program_catalog_sha256": "6" * 64,
+    }
+    authorization = _authorization(authority_identity=authority)
+    authorization["receipt_bound_role_bindings"] = receipt_bound_role_bindings(
+        authority
+    )
+    authorization["runtime_id"] = runtime_root.name
+    authorization["authorization_sha256"] = authorization_content_sha(authorization)
+    prefix_ledger = [
+        {
+            "completion_ordinal": ordinal,
+            "candidate_id": f"prefix-{ordinal}",
+            "checkpoint_index": (ordinal - 1) // 2_000,
+            "matched_positive": False,
+            "behavior_family_id": "prefix-family",
+            "program_family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+        }
+        for ordinal in range(1, 30_001)
+    ]
+    restored = {
+        "ledger": prefix_ledger,
+        "archive": runner.engine.BehaviorArchive(),
+        "attempted_exact_ids": [],
+        "completed_pair_ids": [],
+        "policy_local_family_counts": {},
+        "state_restoration_sha256": "8" * 64,
+        "suffix_contribution": {
+            "candidate_rows": 0,
+            "archive_rows": 0,
+            "attempted_exact_ids": 0,
+            "completed_pair_ids": 0,
+            "policy_local_family_counts": 0,
+        },
+    }
+    successor_context = {
+        "status": "SUCCESSOR_PREFLIGHT_PASS",
+        "authorization": authorization,
+        "authorization_sha256": authorization["authorization_sha256"],
+        "successor_receipt_sha256": authorization["successor_receipt_sha256"],
+        "reconstructed_policy_bundle": {"policies": {}},
+        "restored_prefix": restored,
+        "fresh_random_lane_seeds": list(derive_fresh_random_lane_seeds()),
+    }
+    economic = {
+        "receipt_sha256": authority["economic_receipt_sha256"],
+        "component_sha256": {
+            "target_contract": authority["target_contract_sha256"],
+            "target_execution": authority["target_execution_sha256"],
+            "portfolio_mapping_and_cost": authority[
+                "portfolio_mapping_and_cost_sha256"
+            ],
+            "optimizer_reward_and_matched_attribution": authority[
+                "optimizer_reward_and_matched_attribution_sha256"
+            ],
+        },
+        "evidence_partition": {
+            "train": {"start": "2024-01-01", "end_exclusive": "2024-02-01"}
+        },
+    }
+    proposed = 0
+
+    def propose(*args: object, **kwargs: object):
+        nonlocal proposed
+        proposed += 1
+        return Candidate(f"successor-{proposed:05d}"), {
+            "raw_attempts": 1,
+            "compile_valid_attempts": 1,
+            "operation": "SYNTHETIC",
+            "parent_ids": [],
+            "receipt": None,
+            "receipt_verified": True,
+            "policy_state_hash_before": "before",
+            "policy_state_hash_after_proposal": "after",
+        }
+
+    def observe(
+        *,
+        candidate: Candidate,
+        proposal: dict[str, object],
+        state: dict[str, object],
+        ledger: list[dict[str, object]],
+        checkpoint_index: int,
+        **kwargs: object,
+    ) -> None:
+        arm = str(proposal["arm"])
+        ledger.append(
+            {
+                "completion_ordinal": len(ledger) + 1,
+                "candidate_id": candidate.candidate_id,
+                "checkpoint_index": checkpoint_index,
+                "policy_key": str(proposal["policy_key"]),
+                "arm": arm,
+                "seed": int(proposal["seed"]),
+                "matched_positive": False,
+                "behavior_family_id": candidate.candidate_id,
+                "program_family_id": "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING",
+                "representation": "TEMPORAL_PROGRAM",
+            }
+        )
+        state["strict_evaluated"] = len(ledger)
+        state["arm_counters"][arm]["strict_evaluated"] += 1
+
+    def write_views(
+        root: Path,
+        *,
+        state: dict[str, object],
+        **kwargs: object,
+    ) -> None:
+        root.mkdir(parents=True, exist_ok=True)
+        runner.engine._write_json(root / "work_state.json", dict(state))
+        for name in (
+            "candidate_ledger.parquet",
+            "behavior_archive.parquet",
+            "paired_program_diagnostics.parquet",
+            "program_family_metrics.parquet",
+            "arm_checkpoint_metrics.parquet",
+            "rejected_candidate_ledger.parquet",
+        ):
+            (root / name).write_bytes(b"synthetic")
+
+    def write_checkpoint(
+        root: Path,
+        *,
+        checkpoint_index: int,
+        state: dict[str, object],
+        ledger: list[dict[str, object]],
+        label: str | None = None,
+        **kwargs: object,
+    ) -> Path:
+        target = root / "checkpoints" / str(
+            label or f"checkpoint_{checkpoint_index:03d}"
+        )
+        target.mkdir(parents=True)
+        runner.engine._write_json(
+            target / "manifest.json",
+            {
+                "schema_version": 1,
+                "checkpoint_index": checkpoint_index,
+                "completed_ledger_row_count": len(ledger),
+                "restore_verified": True,
+                "terminal_decision": state.get("terminal_decision"),
+                "files": [],
+            },
+        )
+        return target
+
+    policy_keys = {
+        f"{arm}|{seed}"
+        for arm in ("temporal_program_cem", "temporal_program_evolution")
+        for seed in runner.ADAPTIVE_BROAD_SEEDS
+    }
+    policy_keys.update(
+        f"temporal_program_random|{seed}"
+        for seed in derive_fresh_random_lane_seeds()
+    )
+    policy_keys.update(
+        f"temporal_program_random_diagnostic|{seed}"
+        for seed in derive_fresh_random_lane_seeds()
+    )
+    policies = {key: Policy() for key in policy_keys}
+
+    monkeypatch.setattr(
+        runner, "prepare_successor_execution", lambda *a, **k: successor_context
+    )
+    monkeypatch.setattr(
+        runner.engine, "_source_tree_clean_for_run", lambda *a, **k: True
+    )
+    monkeypatch.setattr(
+        runner,
+        "require_real_experiment_authority",
+        lambda *a, **k: {"result": "READY_WITH_NON_FORMAL_BOUNDARIES"},
+    )
+    monkeypatch.setattr(runner, "resolve_search_economic_receipt", lambda *a, **k: economic)
+    monkeypatch.setattr(runner, "validate_pair_evaluation_request", lambda *a, **k: None)
+    monkeypatch.setattr(
+        runner.engine,
+        "_load_v14_inputs",
+        lambda *a, **k: (
+            object(),
+            [object() for _ in range(115)],
+            {},
+            {"raw_cache": {"root": "synthetic-cache"}},
+            None,
+        ),
+    )
+    monkeypatch.setattr(runner, "TypedExpressionRegistry", lambda *a, **k: object())
+    monkeypatch.setattr(
+        runner,
+        "program_catalog_payload",
+        lambda catalog: {"catalog_sha256": authority["program_catalog_sha256"]},
+    )
+    monkeypatch.setattr(
+        runner.engine, "_compiler_binding", lambda root: {"identity": "synthetic"}
+    )
+    monkeypatch.setattr(runner.engine, "_contracts_payload", lambda contracts: [])
+    monkeypatch.setattr(runner, "_restore_successor_policies", lambda **k: policies)
+    monkeypatch.setattr(runner.engine, "_policy_propose", propose)
+    monkeypatch.setattr(
+        runner.engine, "_candidate_rebuild_verified", lambda *a, **k: True
+    )
+    monkeypatch.setattr(runner, "_observe_candidate", observe)
+    monkeypatch.setattr(runner, "_checkpoint_metrics", lambda **k: [])
+    monkeypatch.setattr(
+        runner,
+        "adaptive_gate",
+        lambda *a, **k: {
+            "status": "CONTINUE",
+            "arm_states_before": {
+                "temporal_program_cem": "ACTIVE",
+                "temporal_program_evolution": "ACTIVE",
+            },
+            "arm_states_after": {
+                "temporal_program_cem": "ACTIVE",
+                "temporal_program_evolution": "ACTIVE",
+            },
+            "arm_decisions": {},
+        },
+    )
+    monkeypatch.setattr(runner, "_write_runtime_views", write_views)
+    monkeypatch.setattr(runner, "_write_checkpoint", write_checkpoint)
+    monkeypatch.setattr(
+        runner.engine, "_write_proposal_batch_process_evidence", lambda **k: None
+    )
+    monkeypatch.setattr(runner, "_program_process_evidence_errors", lambda *a, **k: [])
+    monkeypatch.setattr(runner, "_program_process_evidence_summary", lambda *a, **k: {})
+    monkeypatch.setattr(
+        runner.concurrent.futures, "ProcessPoolExecutor", ImmediateExecutor
+    )
+
+    try:
+        final = runner.run(
+            repo_root,
+            runtime_date=runtime_date,
+            execution_mode=EXECUTION_MODE,
+            successor_artifact_root=repo_root / "synthetic-source",
+            successor_policy_bundle=repo_root / "synthetic-bundle.json.gz",
+        )
+        assert final["status"] == "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE", final[
+            "terminal_reason"
+        ]
+        assert final["additional_strict_evaluated"] == 20_000
+        assert final["cumulative_valid_strict"] == 50_000
+        assert final["completed_full_checkpoint_count"] == 4
+        assert proposed == 20_000
+        assert [
+            path.name
+            for path in sorted(runtime_root.glob("successor_decision_additional_*.json"))
+        ] == [
+            "successor_decision_additional_005000.json",
+            "successor_decision_additional_010000.json",
+            "successor_decision_additional_015000.json",
+            "successor_decision_additional_020000.json",
+        ]
+        assert [
+            path.parent.name
+            for path in sorted((runtime_root / "checkpoints").glob("*/manifest.json"))
+        ] == [
+            "checkpoint_015",
+            "checkpoint_016",
+            "checkpoint_017",
+            "checkpoint_018",
+        ]
+        state = json.loads((runtime_root / "work_state.json").read_text("utf-8"))
+        terminal = state["terminal_decision"]
+        assert terminal["status"] == "SEALED"
+        assert terminal["terminal_reason"] == "SUCCESSOR_ADDITIONAL_BUDGET_COMPLETE"
+        assert terminal["valid_prefix_boundary"] == 50_000
+        assert terminal["invalid_suffix_start"] == 50_001
+        with pytest.raises(RuntimeError, match="TERMINAL_DECISION_SEALED"):
+            runner._call_with_terminal_invariant(
+                state, "post_terminal_candidate_generation", lambda: None
+            )
+    finally:
+        shutil.rmtree(runtime_root, ignore_errors=True)
+        report_path.unlink(missing_ok=True)

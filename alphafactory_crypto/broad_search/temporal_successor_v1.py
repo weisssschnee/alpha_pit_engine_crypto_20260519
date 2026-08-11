@@ -384,6 +384,18 @@ def reconstruct_prefix_state_tables(
     }
 
 
+def _require_zero_suffix_contribution(restored: Mapping[str, Any]) -> None:
+    expected = {
+        "candidate_rows": 0,
+        "archive_rows": 0,
+        "attempted_exact_ids": 0,
+        "completed_pair_ids": 0,
+        "policy_local_family_counts": 0,
+    }
+    if dict(restored.get("suffix_contribution") or {}) != expected:
+        _fail("invalid_suffix_state_injection")
+
+
 def reconstruct_valid_prefix_state(artifact_root: Path) -> dict[str, Any]:
     artifact_root = artifact_root.resolve()
     checkpoint = artifact_root / "checkpoints/checkpoint_017/state.json"
@@ -647,14 +659,7 @@ def prepare_successor_execution(
     if errors:
         _fail(*errors)
     restored = reconstruct_valid_prefix_state(artifact_root)
-    if restored["suffix_contribution"] != {
-        "candidate_rows": 0,
-        "archive_rows": 0,
-        "attempted_exact_ids": 0,
-        "completed_pair_ids": 0,
-        "policy_local_family_counts": 0,
-    }:
-        _fail("invalid_suffix_state_injection")
+    _require_zero_suffix_contribution(restored)
     try:
         with gzip.open(bundle_path, "rt", encoding="utf-8") as handle:
             bundle = json.load(handle)
