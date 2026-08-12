@@ -719,6 +719,52 @@ def build_decision(frame: pd.DataFrame, receipt: Mapping[str, Any]) -> dict[str,
         arm: _arm_summary(frame.loc[frame["arm"].eq(arm)].copy(), float(yields[arm]))
         for arm in ARMS
     }
+    evolution = summaries["temporal_program_evolution"]
+    controls = [summaries["temporal_program_random"], summaries["temporal_program_cem"]]
+    control_max = max(row["migrated_replicated_cluster_yield_per_1k"] for row in controls)
+    allowed_statuses = {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
+    integrity = {
+        "exact_equal_arm_counts": all(row["candidate_count"] == 120 for row in summaries.values()),
+        "all_full_and_block_evaluation_attempts_complete": bool(
+            len(frame) == 360
+            and frame["candidate_id"].nunique() == 360
+            and set(frame["validation_status"].astype(str)) <= allowed_statuses
+            and all(
+                set(frame[f"block_{index}_validation_status"].astype(str))
+                <= allowed_statuses
+                for index in range(1, 4)
+            )
+        ),
+        "split_contract_valid": True,
+    }
+    gates = {
+        "minimum_evolution_replicated_count": evolution["replicated_2_of_3_count"] >= 6,
+        "end_to_end_yield_advantage": evolution[
+            "migrated_replicated_cluster_yield_per_1k"
+        ] > 1.5 * control_max,
+        "both_program_families_survive": evolution["replicated_program_family_count"] == 2,
+        "at_least_three_lanes_survive": evolution["replicated_lane_count"] >= 3,
+        "at_least_four_program_basins_survive": evolution["replicated_program_id_count"] >= 4,
+    }
+    passed = all(integrity.values()) and all(gates.values())
+    return {
+        "schema_version": 1,
+        "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
+        "decision": (
+            "QUALIFY_20_20_60_FIXED_DEVELOPMENT_FLOW" if passed else "HOLD_CURRENT_FIXED_FLOW"
+        ),
+        "policy_validation_pass": passed,
+        "arm_summaries": summaries,
+        "integrity_gates": integrity,
+        "economic_migration_gates": gates,
+        "alpha_qualification": "HOLD",
+        "fixed_flow_allocation_if_qualified": dict(
+            receipt["fixed_flow_transition"]["allocation_per_10000"]
+        ),
+        "automatic_search_started": False,
+        "oos": False,
+        "promotion_authorized": False,
+    }
 
 
 def _assemble_decision_frame(
@@ -927,52 +973,6 @@ def finalize_existing_runtime(
         },
     )
     return decision
-    evolution = summaries["temporal_program_evolution"]
-    controls = [summaries["temporal_program_random"], summaries["temporal_program_cem"]]
-    control_max = max(row["migrated_replicated_cluster_yield_per_1k"] for row in controls)
-    allowed_statuses = {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
-    integrity = {
-        "exact_equal_arm_counts": all(row["candidate_count"] == 120 for row in summaries.values()),
-        "all_full_and_block_evaluation_attempts_complete": bool(
-            len(frame) == 360
-            and frame["candidate_id"].nunique() == 360
-            and set(frame["validation_status"].astype(str)) <= allowed_statuses
-            and all(
-                set(frame[f"block_{index}_validation_status"].astype(str))
-                <= allowed_statuses
-                for index in range(1, 4)
-            )
-        ),
-        "split_contract_valid": True,
-    }
-    gates = {
-        "minimum_evolution_replicated_count": evolution["replicated_2_of_3_count"] >= 6,
-        "end_to_end_yield_advantage": evolution[
-            "migrated_replicated_cluster_yield_per_1k"
-        ] > 1.5 * control_max,
-        "both_program_families_survive": evolution["replicated_program_family_count"] == 2,
-        "at_least_three_lanes_survive": evolution["replicated_lane_count"] >= 3,
-        "at_least_four_program_basins_survive": evolution["replicated_program_id_count"] >= 4,
-    }
-    passed = all(integrity.values()) and all(gates.values())
-    return {
-        "schema_version": 1,
-        "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
-        "decision": (
-            "QUALIFY_20_20_60_FIXED_DEVELOPMENT_FLOW" if passed else "HOLD_CURRENT_FIXED_FLOW"
-        ),
-        "policy_validation_pass": passed,
-        "arm_summaries": summaries,
-        "integrity_gates": integrity,
-        "economic_migration_gates": gates,
-        "alpha_qualification": "HOLD",
-        "fixed_flow_allocation_if_qualified": dict(
-            receipt["fixed_flow_transition"]["allocation_per_10000"]
-        ),
-        "automatic_search_started": False,
-        "oos": False,
-        "promotion_authorized": False,
-    }
 
 
 def run_gate(
