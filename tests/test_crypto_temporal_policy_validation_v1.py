@@ -5,10 +5,12 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from alphafactory_crypto.broad_search.temporal_policy_validation_v1 import (
     ARMS,
     PROGRAM_FAMILIES,
+    _economic_context_for_interval,
     build_decision,
     canonical_sha256,
     load_receipt,
@@ -40,6 +42,46 @@ def test_split_is_balanced_after_purge_and_blocks_are_equal() -> None:
         "maximum_feature_warmup_hours": 720,
         "warmup_rows_in_labels_or_metrics": False,
     }
+
+
+def test_each_evaluation_interval_is_bound_to_its_frozen_receipt_block() -> None:
+    receipt = load_receipt(ROOT)
+    economic = {
+        "validation": {
+            "role": "DEVELOPMENT_VALIDATION_NO_FEEDBACK_NOT_OOS",
+            "start": "2025-11-01T00:00:00Z",
+            "end_exclusive": "2026-01-01T00:00:00Z",
+        },
+        "evidence_partition": {
+            "validation": {
+                "role": "DEVELOPMENT_VALIDATION_NO_FEEDBACK_NOT_OOS",
+                "start": "2025-11-01T00:00:00Z",
+                "end_exclusive": "2026-01-01T00:00:00Z",
+            }
+        },
+    }
+    for interval in receipt["split_contract"]["validation_blocks"]:
+        bound = _economic_context_for_interval(
+            economic,
+            interval=interval,
+            receipt=receipt,
+        )
+        assert bound["validation"]["start"] == interval["start"]
+        assert bound["validation"]["end_exclusive"] == interval["end_exclusive"]
+        assert bound["evidence_partition"]["validation"] == bound["validation"]
+    with pytest.raises(
+        RuntimeError,
+        match="TEMPORAL_POLICY_VALIDATION_INTERVAL_NOT_RECEIPT_BOUND",
+    ):
+        _economic_context_for_interval(
+            economic,
+            interval={
+                "label": "unregistered",
+                "start": "2025-11-02T00:00:00Z",
+                "end_exclusive": "2025-11-03T00:00:00Z",
+            },
+            receipt=receipt,
+        )
 
 
 def test_train_only_selection_is_exact_equal_count_and_hash_bound() -> None:
@@ -102,6 +144,8 @@ def _decision_frame(evolution_replicated: int, control_replicated: int) -> pd.Da
             rows.append(
                 {
                     "arm": arm,
+                    "candidate_id": f"{arm}-{index}",
+                    "validation_status": "EVALUATED",
                     "strict_evaluated": True,
                     "validation_left_incremental_net_mean": 0.1 if positive else -0.1,
                     "validation_right_incremental_net_mean": 0.1 if positive else -0.1,
@@ -113,6 +157,9 @@ def _decision_frame(evolution_replicated: int, control_replicated: int) -> pd.Da
                     "block_1_strict_evaluated": True,
                     "block_2_strict_evaluated": True,
                     "block_3_strict_evaluated": True,
+                    "block_1_validation_status": "EVALUATED",
+                    "block_2_validation_status": "EVALUATED",
+                    "block_3_validation_status": "EVALUATED",
                 }
             )
     return pd.DataFrame(rows)

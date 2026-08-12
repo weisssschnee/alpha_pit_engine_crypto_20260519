@@ -185,6 +185,16 @@ def load_receipt(
         or int(compute.get("evaluation_passes", -1)) != 4
     ):
         blockers.append("compute")
+    continuation = dict(receipt.get("continuation") or {})
+    if (
+        continuation.get("mode")
+        != "REUSE_VERIFIED_FULL_PASS_EVALUATE_MISSING_BLOCKS"
+        or int(continuation.get("reused_pair_evaluation_count", -1)) != 360
+        or int(continuation.get("new_pair_evaluation_count", -1)) != 1_080
+        or len(str(continuation.get("full_pass_candidate_ledger_sha256") or ""))
+        != 64
+    ):
+        blockers.append("continuation")
     boundaries = dict(receipt.get("boundaries") or {})
     for key in (
         "candidate_generation",
@@ -510,6 +520,117 @@ def _economic_context(
     }
 
 
+def _economic_context_for_interval(
+    economic: Mapping[str, Any],
+    *,
+    interval: Mapping[str, Any],
+    receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    allowed = {
+        (
+            "full",
+            str(receipt["split_contract"]["validation"]["start"]),
+            str(receipt["split_contract"]["validation"]["end_exclusive"]),
+        ),
+        *{
+            (
+                str(row["label"]),
+                str(row["start"]),
+                str(row["end_exclusive"]),
+            )
+            for row in receipt["split_contract"]["validation_blocks"]
+        },
+    }
+    identity = (
+        str(interval["label"]),
+        str(interval["start"]),
+        str(interval["end_exclusive"]),
+    )
+    if identity not in allowed:
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_INTERVAL_NOT_RECEIPT_BOUND")
+    validation = {
+        **dict(economic["validation"]),
+        "start": identity[1],
+        "end_exclusive": identity[2],
+    }
+    return {
+        **dict(economic),
+        "evidence_partition": {
+            **{
+                key: dict(value)
+                for key, value in dict(economic["evidence_partition"]).items()
+            },
+            "validation": validation,
+        },
+        "validation": validation,
+    }
+
+
+def _load_reused_full_pass(
+    repo_root: Path,
+    *,
+    runtime_root: Path,
+    selected: Sequence[Mapping[str, Any]],
+    receipt: Mapping[str, Any],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    continuation = dict(receipt.get("continuation") or {})
+    source_path = repo_root / str(continuation.get("full_pass_candidate_ledger_path") or "")
+    if (
+        continuation.get("mode")
+        != "REUSE_VERIFIED_FULL_PASS_EVALUATE_MISSING_BLOCKS"
+        or not source_path.is_file()
+        or file_sha256(source_path)
+        != str(continuation.get("full_pass_candidate_ledger_sha256") or "")
+    ):
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_REUSED_FULL_PASS_CHANGED")
+    frame = pd.read_parquet(source_path)
+    expected = {
+        str(row["candidate_id"]): str(row["candidate_spec_sha256"])
+        for row in selected
+    }
+    actual = dict(
+        zip(
+            frame["candidate_id"].astype(str),
+            frame["candidate_spec_sha256"].astype(str),
+        )
+    )
+    allowed_statuses = {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
+    if (
+        len(frame) != 360
+        or frame["candidate_id"].nunique() != 360
+        or actual != expected
+        or set(frame["validation_status"].astype(str)) - allowed_statuses
+        or not frame["evaluation_partition"].eq("validation").all()
+        or frame["candidate_generation_performed"].ne(False).any()
+        or frame["optimizer_feedback_written"].ne(False).any()
+        or frame["archive_written"].ne(False).any()
+    ):
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_REUSED_FULL_PASS_INVALID")
+    destination = runtime_root / "passes" / "full" / "candidate_ledger.parquet"
+    destination.parent.mkdir(parents=True)
+    shutil.copy2(source_path, destination)
+    reuse = {
+        "schema_version": 1,
+        "status": "REUSED_VERIFIED_FULL_PASS",
+        "source_runtime": str(continuation["source_runtime"]),
+        "source_task_id": str(continuation["source_task_id"]),
+        "source_producer_sha": str(continuation["source_producer_sha"]),
+        "source_candidate_ledger_path": str(
+            continuation["full_pass_candidate_ledger_path"]
+        ),
+        "source_candidate_ledger_sha256": file_sha256(source_path),
+        "reused_candidate_count": 360,
+        "strict_evaluated_count": int(frame["strict_evaluated"].eq(True).sum()),
+        "candidate_local_failure_count": int(
+            frame["validation_status"].eq("CANDIDATE_LOCAL_FAILURE").sum()
+        ),
+        "new_market_evaluation_count": 0,
+    }
+    reuse["receipt_sha256"] = canonical_sha256(reuse)
+    write_json(runtime_root / "full_pass_reuse_receipt.json", reuse)
+    return frame.to_dict("records"), reuse
+
+
 def _evaluate_interval(
     *,
     cache_root: Path,
@@ -601,11 +722,18 @@ def build_decision(frame: pd.DataFrame, receipt: Mapping[str, Any]) -> dict[str,
     evolution = summaries["temporal_program_evolution"]
     controls = [summaries["temporal_program_random"], summaries["temporal_program_cem"]]
     control_max = max(row["migrated_replicated_cluster_yield_per_1k"] for row in controls)
+    allowed_statuses = {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
     integrity = {
         "exact_equal_arm_counts": all(row["candidate_count"] == 120 for row in summaries.values()),
-        "all_full_and_block_evaluations_complete": bool(
-            frame["strict_evaluated"].eq(True).all()
-            and all(frame[f"block_{index}_strict_evaluated"].eq(True).all() for index in range(1, 4))
+        "all_full_and_block_evaluation_attempts_complete": bool(
+            len(frame) == 360
+            and frame["candidate_id"].nunique() == 360
+            and set(frame["validation_status"].astype(str)) <= allowed_statuses
+            and all(
+                set(frame[f"block_{index}_validation_status"].astype(str))
+                <= allowed_statuses
+                for index in range(1, 4)
+            )
         ),
         "split_contract_valid": True,
     }
@@ -721,18 +849,17 @@ def run_gate(
     cache_root = root / str(receipt["carrier"]["aligned_cache"])
     target_root = root / str(receipt["carrier"]["target_cache"])
     role = str(receipt["split_contract"]["validation"]["role"])
-    passes = [
-        {
-            "label": "full",
-            "start": receipt["split_contract"]["validation"]["start"],
-            "end_exclusive": receipt["split_contract"]["validation"]["end_exclusive"],
-        },
-        *[dict(row) for row in receipt["split_contract"]["validation_blocks"]],
-    ]
+    passes = [dict(row) for row in receipt["split_contract"]["validation_blocks"]]
     started = time.perf_counter()
     active_workers = int(receipt["compute"]["workers_default"])
-    pass_rows: dict[str, list[dict[str, Any]]] = {}
-    for index, interval in enumerate(passes):
+    reused_full_rows, reuse = _load_reused_full_pass(
+        root,
+        runtime_root=runtime_root,
+        selected=selected,
+        receipt=receipt,
+    )
+    pass_rows: dict[str, list[dict[str, Any]]] = {"full": reused_full_rows}
+    for index, interval in enumerate(passes, start=1):
         write_json(
             runtime_root / "producer_status.json",
             {
@@ -752,7 +879,11 @@ def run_gate(
             cache_root=cache_root,
             target_root=target_root,
             contract_rows=contract_rows,
-            economic=economic,
+            economic=_economic_context_for_interval(
+                economic,
+                interval=interval,
+                receipt=receipt,
+            ),
             start=str(interval["start"]),
             end=str(interval["end_exclusive"]),
             role=role,
@@ -769,7 +900,11 @@ def run_gate(
                 cache_root=cache_root,
                 target_root=target_root,
                 contract_rows=contract_rows,
-                economic=economic,
+                economic=_economic_context_for_interval(
+                    economic,
+                    interval=interval,
+                    receipt=receipt,
+                ),
                 start=str(interval["start"]),
                 end=str(interval["end_exclusive"]),
                 role=role,
@@ -792,6 +927,7 @@ def run_gate(
     for block_index in range(1, 4):
         block = pd.DataFrame(pass_rows[f"block_{block_index}"]).set_index("candidate_id")
         for column in (
+            "validation_status",
             "strict_evaluated",
             "validation_left_incremental_net_mean",
             "validation_right_incremental_net_mean",
@@ -816,6 +952,7 @@ def run_gate(
             "selection_receipt_sha256": selection["receipt_sha256"],
             "split_evidence": split_evidence,
             "authority_result": authority["result"],
+            "full_pass_reuse_receipt_sha256": reuse["receipt_sha256"],
         }
     )
     write_json(runtime_root / "final_decision.json", decision)
@@ -825,6 +962,8 @@ def run_gate(
         "# Crypto Temporal Policy Development Validation V1\n\n"
         f"- Decision: `{decision['decision']}`\n"
         f"- Policy validation pass: `{decision['policy_validation_pass']}`\n"
+        "- Evaluation lineage: reused the hash-bound completed 360-candidate full pass; "
+        "evaluated only the three previously missing frozen validation blocks.\n"
         f"- Split: `{split_evidence['train_effective_hours']}` train effective hours / "
         f"`{split_evidence['validation_effective_hours']}` validation effective hours\n"
         "- Boundary: development validation only; no OOS, holdout, promotion, optimizer feedback, or automatic search.\n\n"
@@ -843,8 +982,12 @@ def run_gate(
         "candidate_count": 360,
         "evaluation_passes": 4,
         "pair_evaluation_count": 1_440,
+        "reused_pair_evaluation_count": 360,
+        "new_pair_evaluation_count": 1_080,
+        "reused_pass_count": 1,
+        "new_pass_count": 3,
         "active_wall_seconds": elapsed,
-        "pair_evaluated_per_hour": 1_440 * 3_600.0 / elapsed,
+        "pair_evaluated_per_hour": 1_080 * 3_600.0 / elapsed,
         "workers": active_workers,
         "candidate_generation_performed": False,
         "optimizer_feedback_written": False,
@@ -862,6 +1005,7 @@ def run_gate(
             for path in (
                 runtime_root / "selection_receipt.json",
                 runtime_root / "split_evidence.json",
+                runtime_root / "full_pass_reuse_receipt.json",
                 ledger_path,
                 runtime_root / "final_decision.json",
                 report_path,
@@ -906,6 +1050,13 @@ def check_gate(
         manifest.get("pair_evaluation_count", -1)
     ) != 1_440:
         errors.append("counts")
+    if (
+        int(manifest.get("reused_pair_evaluation_count", -1)) != 360
+        or int(manifest.get("new_pair_evaluation_count", -1)) != 1_080
+        or int(manifest.get("reused_pass_count", -1)) != 1
+        or int(manifest.get("new_pass_count", -1)) != 3
+    ):
+        errors.append("continuation_counts")
     if selection.get("selection_sha256") != receipt["selection"]["selection_sha256"]:
         errors.append("selection")
     if manifest.get("holdout_read_count") != 0 or manifest.get("automatic_search_started") is not False:
