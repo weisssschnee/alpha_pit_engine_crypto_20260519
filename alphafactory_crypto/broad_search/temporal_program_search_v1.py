@@ -2056,6 +2056,10 @@ def run(
             repo_root,
             expected_source_sha=source_sha,
         )
+        if runtime_root.name != str(receipt.get("runtime_id") or ""):
+            raise ExpansionPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:runtime_identity_changed"
+            )
     report_name = (
         "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1"
         if successor_mode
