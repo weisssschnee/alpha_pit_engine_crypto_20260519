@@ -1171,21 +1171,42 @@ def adaptive_gate(
     }
 
 
-def _checkpoint_allocation(state: Mapping[str, Any], checkpoint_index: int) -> dict[str, int]:
+def _checkpoint_allocation(
+    state: Mapping[str, Any],
+    checkpoint_index: int,
+    config: Mapping[str, Any] | None = None,
+) -> dict[str, int]:
     if not bool(state.get("skip_stage0")) and checkpoint_index < 5:
         return {"paired_static": 1_000, "temporal_program_random": 1_000}
     states = dict(state["arm_states"])
-    allocation = {ARMS[0]: 400, ARMS[1]: 0, ARMS[2]: 0}
+    configured = {
+        ARMS[0]: 2_000,
+        ARMS[1]: 4_000,
+        ARMS[2]: 4_000,
+    }
+    if config is not None:
+        configured = {
+            str(arm): int(count)
+            for arm, count in dict(
+                config["stage_allocations"][1]["allocation_per_10000"]
+            ).items()
+        }
+    if set(configured) != set(ARMS) or sum(configured.values()) != 10_000:
+        raise RuntimeError("temporal program fixed policy allocation invalid")
+    allocation = {ARMS[0]: configured[ARMS[0]] // 5, ARMS[1]: 0, ARMS[2]: 0}
     diagnostic = [arm for arm in ARMS[1:] if states.get(arm) == "DIAGNOSTIC"]
     active = [arm for arm in ARMS[1:] if states.get(arm) == "ACTIVE"]
     for arm in diagnostic:
         allocation[arm] = 200
     remaining = 2_000 - sum(allocation.values())
     if active:
-        share = remaining // len(active)
-        for arm in active:
+        active_weight = sum(configured[arm] for arm in active)
+        assigned = 0
+        for arm in active[:-1]:
+            share = remaining * configured[arm] // active_weight
             allocation[arm] = share
-        allocation[active[0]] += 2_000 - sum(allocation.values())
+            assigned += share
+        allocation[active[-1]] = remaining - assigned
     else:
         allocation[ARMS[0]] += remaining
     return allocation
@@ -2669,7 +2690,7 @@ def run(
                 allocation = (
                     successor_allocation(state["arm_states"])
                     if successor_mode
-                    else _checkpoint_allocation(state, checkpoint_index)
+                    else _checkpoint_allocation(state, checkpoint_index, config)
                 )
                 targets = (
                     successor_lane_targets(
