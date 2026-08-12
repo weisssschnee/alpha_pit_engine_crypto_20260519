@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (30k prefix reconstructed; complete market-input preflight READY/NOT_AUTHORIZED; Alpha HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (policy validation qualified fixed 20/20/60 development flow; Alpha HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -638,9 +638,12 @@
                                      ,"runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json"
                                      ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/prefix_policy_state_reconstruction_030000.json"
                                      ,"runtime/crypto_temporal_30k_prefix_reconstruction_v1_20260811/independent_successor_preflight.json"
+                                     ,"config/crypto_temporal_policy_validation_v1_authorization.json"
+                                     ,"runtime/crypto_temporal_policy_validation_v1_20260812r2/final_decision.json"
+                                     ,"reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md"
                                  ],
                       "critical":  true,
-                      "semantic_role":  "search_engine_temporal_adaptive_broad_invalid_stop_repaired_research_hold",
+                      "semantic_role":  "search_engine_temporal_policy_validation_qualified_fixed_development_flow_alpha_hold",
                       "active_authority":  false,
                       "authority":  {
                                         "path":  "config/crypto_temporal_mechanism_program_v1_receipt.json",
@@ -1055,6 +1058,15 @@
                                                "evidence_ref":  "reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_CLOSURE_20260812.md"
                                           },
                                           {
+                                              "id":  "crypto_temporal_policy_validation_v1_consumed_outcome",
+                                              "type":  "EVIDENCE",
+                                              "rule":  "The one pre-registered Temporal Policy development validation receipt is consumed with run_authorized false. Its frozen cohort contains exactly 120 Random, 120 CEM and 120 Evolution candidates and completed one full pass plus three equal validation-block passes for 1,440 pair evaluations. Effective train and validation shares are 1,523h/1,458h or 51.09%/48.91%; each validation block contributes 482 effective hours after the frozen 6h tail purge, while the 720h warmup contributes no labels or metrics. PC2 and local independent checkers pass. Evolution's migrated replicated-cluster yield is 50.2/1k versus CEM 20.1875/1k and Random 15.4167/1k, and all frozen integrity and migration gates pass. The fixed future-development allocation is therefore Random/CEM/Evolution 2,000/2,000/6,000 per 10,000 strict. This qualifies allocation only: Alpha remains HOLD, automatic search is false, and OOS, holdout, promotion, new Arena and global economic authority remain absent.",
+                                              "severity":  "HARD",
+                                              "enforced_by":  "broad_search.temporal_policy_validation_v1 run/check, the consumed schema-2 receipt, frozen selection and split evidence, exact four-pass ledger hashes, and config/crypto_temporal_mechanism_program_v1.json",
+                                              "bypass_forbidden":  true,
+                                              "evidence_ref":  "reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md"
+                                          },
+                                          {
                                               "id":  "crypto_p4_mechanism_pocket_validation_v1_pre_candidate_invalid",
                                               "type":  "EVIDENCE",
                                               "rule":  "The sole source-repaired P4 mechanism-pocket replacement receipt is consumed with run_authorized false. Producer d6a5f7907e74868787d3d70a4736868333c3c26f and PC2 task job_20260811_101545_05f601 reused the hash-bound OI payload without redownload and processed all 200 Binance aggTrades symbols with zero symbol failures under concurrency three. Package assembly then failed because symbol=BTCUSDT/2026-08.json was absent from the monthly object manifest. Carrier preparation and candidate evaluation never started; strict evaluated count is zero and PC2 plus local independent checkers correctly fail on the absent run manifest. An independent frozen-selection audit also found that 22 of 80 candidates, all near-miss controls, require 720 complete hours against only 336 declared warmup hours, so the cohort is not comparable under the receipt even if packaging were repaired. This is PRE_CANDIDATE_ENGINE_RUN_INVALID source-package and admission-contract evidence only and creates no P4, Evolution, matched-control, cost, reward, stability, Alpha, OOS or promotion conclusion. No second replacement, continuation, rescue or automatic expansion is authorized.",
@@ -1077,18 +1089,17 @@
                                          "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                       "evidence_ref":  "runtime/crypto_temporal_mechanism_program_v1_20260810s0/independent_checker.json",
-                       "evidence_sha256":  "8BCCCAE5E738356312510A3B0F52753955D3C8570EBFBA2336A5CA2DFEDE843D",
-                       "verified_at_sha":  "b24d1145de4aaebb440a62636e36c5d0bb17ef5f"
+                       "evidence_ref":  "reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md",
+                       "evidence_sha256":  "9EE043219500F838B2DDA41C1B39A0E9FDE7ACE25C46BDE2E23E4237958DB832",
+                       "verified_at_sha":  "1efb94fa7bad8ae37b5effb16ea0165219b64e26"
                    },
     "claim_badges":  [
-                         "STAGE0 10000 STRICT FAMILY GATE COMPLETE",
-                         "P1 AND P4 LOCAL ROUTES ONLY",
-                         "ADAPTIVE BROAD INVALID AFTER 30K STOP OVERRIDE",
-                         "P4 REPLACEMENT PRE-CANDIDATE INVALID",
-                         "AGGTRADES 200 OF 200 PACKAGE MANIFEST FAILURE",
-                         "WARMUP 336H BELOW SELECTED 720H",
-                         "ZERO CANDIDATES NO ECONOMIC RESULT NO OOS"
+                         "POLICY VALIDATION 360 CANDIDATES 4 PASSES",
+                         "TRAIN VALIDATION 51.09 48.91",
+                         "EVOLUTION MIGRATED CLUSTER YIELD 50.2 PER 1K",
+                         "FIXED DEVELOPMENT FLOW 20 20 60",
+                         "ALPHA HOLD",
+                         "NO OOS NO PROMOTION NO AUTOMATIC SEARCH"
                      ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",

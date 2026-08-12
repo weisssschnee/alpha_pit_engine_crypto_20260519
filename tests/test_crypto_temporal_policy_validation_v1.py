@@ -6,10 +6,6 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from alphafactory_crypto.broad_search.experiment_authority import (
-    require_real_experiment_authority,
-)
-
 from alphafactory_crypto.broad_search.temporal_policy_validation_v1 import (
     ARMS,
     PROGRAM_FAMILIES,
@@ -88,24 +84,22 @@ def test_each_evaluation_interval_is_bound_to_its_frozen_receipt_block() -> None
         )
 
 
-def test_source_repair_continuation_is_exactly_authorized() -> None:
-    receipt = load_receipt(ROOT, require_authorized=True)
-    authorization = receipt["run_authorization"]
-    result = require_real_experiment_authority(
-        ROOT,
-        evidence_to_add=receipt["evidence_to_add"],
-        decision_to_change=receipt["decision_to_change"],
-        economic_receipt_required=False,
-        receipt_bound_non_formal_authorization={
-            "decision_id": authorization["decision_id"],
-            "authority": "CURRENT_USER_INSTRUCTION",
-            "scope": authorization["scope"],
-            "receipt_path": "config/crypto_temporal_policy_validation_v1_authorization.json",
-            "receipt_sha256": canonical_sha256(receipt),
-            "run_authorized": True,
-        },
+def test_consumed_validation_qualifies_only_the_fixed_development_flow() -> None:
+    receipt = load_receipt(ROOT, require_authorized=False)
+    assert receipt["status"] == "CONSUMED_QUALIFIED_20_20_60_FIXED_DEVELOPMENT_FLOW"
+    assert receipt["consumed"] is True
+    assert receipt["consumption"]["final_decision"] == (
+        "QUALIFY_20_20_60_FIXED_DEVELOPMENT_FLOW"
     )
-    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
+    assert receipt["consumption"]["allocation_per_10000"] == {
+        "temporal_program_random": 2000,
+        "temporal_program_cem": 2000,
+        "temporal_program_evolution": 6000,
+    }
+    assert receipt["consumption"]["automatic_search_started"] is False
+    assert receipt["consumption"]["alpha_qualification"] == "HOLD"
+    assert receipt["consumption"]["oos"] is False
+    assert receipt["consumption"]["promotion_authorized"] is False
 
 
 def test_train_only_selection_is_exact_equal_count_and_hash_bound() -> None:

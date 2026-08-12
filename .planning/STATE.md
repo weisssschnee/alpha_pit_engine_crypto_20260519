@@ -4,46 +4,54 @@ Last updated: 2026-08-12 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_TEMPORAL_POLICY_VALIDATION_COMPLETE_FIXED_20_20_60_DEVELOPMENT_FLOW_ALPHA_HOLD`
+
+The one pre-registered PC2 development validation is complete and consumed.
+Its frozen cohort contains 360 candidates, exactly 120 each from Random, CEM,
+and Evolution, with no candidate generation, optimizer feedback, Archive write,
+backfill, OOS, holdout, or promotion. The completed full pass plus three equal
+validation blocks produce exactly 1,440 pair evaluations. Independent PC2 and
+local checkers pass and the final decision is
+`QUALIFY_20_20_60_FIXED_DEVELOPMENT_FLOW`.
+
+The effective train/validation split remains balanced and unchanged: 1,523
+train hours (`51.09%`) and 1,458 validation hours (`48.91%`). Validation is
+three equal 482-hour effective blocks, each with the frozen 6-hour tail purge;
+the 720-hour feature warmup precedes evaluation and contributes no label or
+metric rows.
+
+Evolution retains the strongest end-to-end migrated replicated-cluster yield:
+`50.2/1k`, versus CEM `20.1875/1k` and Random `15.4167/1k`. It also has 53/120
+full-window dual-net-positive candidates and three validation matched-positive
+candidates. Its candidate-level 2-of-3 replication rate is lower than Random
+and CEM (`10.0%` versus `16.67%` and `14.17%`), but the frozen policy gate
+multiplies train discovery density by migration and passes all family, lane,
+program-basin, integrity, and split gates. This qualifies the existing fixed
+development allocation only: Random/CEM/Evolution is now 2,000/2,000/6,000 per
+10,000 strict. It is not an Alpha qualification, OOS result, or promotion, and
+it starts no automatic search.
+
+The first repair was required because the block runner reused the full-window
+economic receipt for subblocks. The second was aggregation-only: pass ledgers
+did not repeat frozen `program_family_id`/`program_id`/lane lineage. Both repairs
+were fail-closed and reused the already completed hash-bound full pass; the final
+aggregation repair performed zero market evaluations. Authoritative report:
+`reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md`. Machine decision:
+`runtime/crypto_temporal_policy_validation_v1_20260812r2/final_decision.json`.
+
+The preceding completed phase was:
+
 `CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_COMPLETE_SEARCH_POLICY_EVIDENCE_PASS_ALPHA_HOLD`
 
-The one current-user-authorized schema-2 second replacement completed on PC2 as
-task `job_20260811_233723_fbaac8` at exact producer
+The current-user-authorized schema-2 successor completed on PC2 as task
+`job_20260811_233723_fbaac8` at exact producer
 `d8106f271f86886621fd084c542671e23b695864`. It restored only the verified
 30,000-row prefix, evaluated exactly 20,000 additional train-only strict rows,
-and stopped mechanically at 50,000 cumulative strict after four frozen 5,000-row
-decisions. The run used ten workers without memory fallback, wrote zero system
-errors and zero sealed reads, and recorded zero contribution from every invalid
-historical suffix state category. No proposal, submit, observe, Archive or ledger
-mutation occurred after the 50,000 boundary. PC2 and relocated-artifact local
-independent checkers both pass.
-
-The successor produced 229 matched-positive candidates and 208 matched-positive
-behavior families cumulatively. In the valid 20,000-row successor suffix, a
-read-only economic-independence audit defines a new cluster as a behavior family
-absent from the verified 30k prefix. Evolution produced 6,024 new dual-axis
-net-positive economic clusters (`502.00/1k`) and 168 new matched-positive clusters
-(`14.00/1k`), compared with Random at 370 (`92.50/1k`) and one (`0.25/1k`), and
-CEM at 570 (`142.50/1k`) and zero. Evolution yielded 880.07 new economic clusters
-per process CPU-hour. Under the equal 3,598-proposal tranche comparison it retained
-673 new economic clusters after removing the three largest program basins
-(`187.05/1k`) and 380 after removing the dominant P4 family (`105.61/1k`). Its
-development productivity advantage is therefore real under this contract and is
-not explained solely by the largest program basin or P4 concentration.
-
-The authorization is consumed with `run_authorized=false`. The durable research
-decision is `SEARCH_POLICY_DEVELOPMENT_EVIDENCE_PASS / ALPHA_QUALIFICATION_HOLD`:
-Evolution is qualified as a productive development search policy under the frozen
-contract, but none of this train-only evidence proves temporal migration or Alpha.
-No more same-window search, validation, OOS, holdout, promotion, tuning, new grammar,
-or new Arena is authorized. The current bottleneck is cluster-level representative
-selection and migration. If separately authorized, the next action is to freeze a
-small behavior-cluster-stratified cohort before one fresh development validation;
-there is no automatic continuation.
-
-Authoritative closure report:
+and stopped mechanically at 50,000 cumulative strict. Its economic-independence
+audit qualified Evolution as a productive development search policy under the
+frozen contract while retaining `ALPHA_QUALIFICATION_HOLD`. Its authoritative
+closure report is
 `reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_CLOSURE_20260812.md`.
-Machine-readable economic audit:
-`reports/CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_ECONOMIC_INDEPENDENCE_20260812.json`.
 
 The preceding repaired boundary was:
 
@@ -1416,6 +1424,10 @@ CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
 UNIFIED_FIELD_MANAGEMENT_V1_NOT_FIELD_AUTHORITY
 UNIFIED_FIELD_MANAGEMENT_V1_AUTHORITY_CONFLICTS_ZERO
+CRYPTO_TEMPORAL_POLICY_VALIDATION_COMPLETE
+CRYPTO_TEMPORAL_POLICY_VALIDATION_SPLIT_51_09_48_91_PASS
+CRYPTO_TEMPORAL_FIXED_DEVELOPMENT_FLOW_20_20_60_QUALIFIED
+CRYPTO_TEMPORAL_ALPHA_QUALIFICATION_HOLD
 FORWARD_SEALED
 NO_CANDIDATE_PROMOTION
 NO_CROSS_SPRINT_ADAPTIVE_MEMORY
@@ -1579,9 +1591,18 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
     authorize adaptive search, validation, OOS, promotion, tuning, rescue, or
     another campaign, and none of its candidate, policy or Archive state may be
     imported.
+18. Use the qualified fixed Temporal Program development allocation of 2,000
+    Random, 2,000 CEM and 6,000 Evolution per 10,000 strict. This transition is
+    supported by the frozen 360-candidate development validation with a
+    1,523h/1,458h effective train/validation split, three equal 482h validation
+    blocks and PC2 plus local checker PASS. It qualifies allocation only. Do not
+    infer Alpha, read OOS/holdout, promote a candidate, or start an automatic
+    search from this state.
 
-No V2, V2.1, V2.2, V2.3, or V2.3 frozen-OOS receipt remains authorized, and no
-further performance search or sealed replay is authorized by this plan.
+No V2, V2.1, V2.2, V2.3, V2.3 frozen-OOS, successor, or policy-validation
+receipt remains authorized. The fixed development flow is reusable for a
+future separately authorized development run; no search or sealed replay starts
+automatically from this plan.
 
 ## Qualified policy components
 
