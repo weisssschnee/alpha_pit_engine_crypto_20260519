@@ -585,6 +585,8 @@ def run_gate(
     )
     if (
         len(contract_rows) != 115
+        or canonical_sha256(carrier_manifest)
+        != str(receipt["carrier"]["manifest_sha256"])
         or str(carrier_manifest["cache_identity_sha256"])
         != str(receipt["carrier"]["cache_identity_sha256"])
         or str(target_metadata["identity_sha256"])
