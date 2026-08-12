@@ -1584,6 +1584,7 @@ def _v24_worker_initialize(
     start: str,
     end_exclusive: str,
     role: str,
+    expression_registry_limits: Mapping[str, Any] | None = None,
 ) -> None:
     global _V24_WORKER_STORE, _V24_WORKER_REGISTRY, _V24_WORKER_CONTEXT
     global _V24_WORKER_START, _V24_WORKER_END, _V24_WORKER_ROLE
@@ -1602,7 +1603,8 @@ def _v24_worker_initialize(
         RawPanelStore.open(Path(cache_root)), Path(target_root)
     )
     _V24_WORKER_REGISTRY = TypedExpressionRegistry(
-        _contracts_from_payload(contract_rows)
+        _contracts_from_payload(contract_rows),
+        **dict(expression_registry_limits or {}),
     )
     _V24_WORKER_CONTEXT = dict(economic_context)
     _V24_WORKER_START = str(start)

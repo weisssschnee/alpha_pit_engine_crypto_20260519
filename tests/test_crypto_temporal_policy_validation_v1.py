@@ -14,6 +14,7 @@ from alphafactory_crypto.broad_search.temporal_policy_validation_v1 import (
     load_receipt,
     select_equal_count_cohort,
     selection_projection,
+    sweep_temporal_program_constructibility,
     validate_split_contract,
 )
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
@@ -54,6 +55,40 @@ def test_train_only_selection_is_exact_equal_count_and_hash_bound() -> None:
     assert canonical_sha256(selection_projection(rows)) == receipt["selection"][
         "selection_sha256"
     ]
+
+
+def test_temporal_program_constructibility_uses_the_temporal_builder() -> None:
+    receipt = load_receipt(ROOT)
+    rows = select_equal_count_cohort(ROOT, receipt=receipt)[:2]
+    manifest = json.loads(
+        (ROOT / receipt["carrier"]["manifest_path"]).read_text(encoding="utf-8")
+    )
+    config = json.loads(
+        (ROOT / "config" / "crypto_temporal_mechanism_program_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    limits = config["expression_limits"]
+    result = sweep_temporal_program_constructibility(
+        selected_rows=rows,
+        contract_rows=manifest["contracts"],
+        expression_registry_limits={
+            "max_depth": limits["maximum_depth"],
+            "max_raw_inputs": limits["maximum_raw_fields"],
+            "max_rolling_windows": limits["maximum_rolling_windows"],
+            "max_canonical_primitive_nodes": limits[
+                "maximum_canonical_primitive_nodes"
+            ],
+            "max_cross_asset_normalizations": limits[
+                "maximum_cross_asset_normalizations"
+            ],
+            "max_regime_gates": limits["maximum_regime_gates"],
+        },
+    )
+    assert result["status"] == "PASS_TEMPORAL_PROGRAM_CONSTRUCTIBILITY_SWEEP"
+    assert result["candidate_count"] == 2
+    assert result["unique_candidate_count"] == 2
+    assert result["market_read_performed"] is False
 
 
 def _decision_frame(evolution_replicated: int, control_replicated: int) -> pd.DataFrame:
@@ -118,4 +153,3 @@ def test_temporal_program_uses_configured_fixed_policy_weights() -> None:
         "temporal_program_cem": 400,
         "temporal_program_evolution": 1200,
     }
-

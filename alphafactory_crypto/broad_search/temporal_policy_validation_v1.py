@@ -21,7 +21,6 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 import pandas as pd
-
 from alphafactory_crypto.broad_search.experiment_authority import (
     require_real_experiment_authority,
     resolve_search_economic_receipt,
@@ -31,7 +30,6 @@ from alphafactory_crypto.broad_search.search_engine_v2_4 import (
     _v24_worker_evaluate,
     _v24_worker_initialize,
     _v24_write_batch_projections,
-    sweep_v24_static_constructibility,
 )
 from alphafactory_crypto.broad_search.search_evidence_validation_v1 import (
     _augment_projection,
@@ -53,7 +51,6 @@ PROGRAM_FAMILIES = (
 POLICY_VALIDATION_SCOPE = (
     "ONE_EQUAL_COUNT_TEMPORAL_POLICY_DEVELOPMENT_VALIDATION_NO_FEEDBACK"
 )
-
 
 def canonical_sha256(value: Any) -> str:
     payload = json.dumps(
@@ -386,6 +383,96 @@ def freeze_selection(
     return payload
 
 
+def sweep_temporal_program_constructibility(
+    *,
+    selected_rows: Sequence[Mapping[str, Any]],
+    contract_rows: Sequence[Mapping[str, Any]],
+    expression_registry_limits: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Rebuild frozen Temporal Program candidates without reading market arrays."""
+
+    from alphafactory_crypto.broad_search.compositional18m import (
+        CandidateSpec,
+        TypedExpressionRegistry,
+        mechanism_role_domains,
+    )
+    from alphafactory_crypto.broad_search.runner18m import _contracts_from_payload
+    from alphafactory_crypto.broad_search.temporal_program_v1 import (
+        temporal_program_candidate_from_genes,
+    )
+
+    registry = TypedExpressionRegistry(
+        _contracts_from_payload(contract_rows),
+        **dict(expression_registry_limits),
+    )
+    domains = mechanism_role_domains(tuple(registry.fields.values()))
+    proofs: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for ordinal, raw in enumerate(selected_rows):
+        selected = dict(raw)
+        payload = dict(selected["candidate"])
+        stored = CandidateSpec.from_dict(payload)
+        rebuilt = temporal_program_candidate_from_genes(
+            registry,
+            genes=stored.generation_genes,
+            domains=domains,
+        )
+        genes = stored.generation_genes
+        program_spec = dict(genes.get("program_spec") or {})
+        candidate_id = str(selected["candidate_id"])
+        if (
+            candidate_id in seen
+            or stored.candidate_id != candidate_id
+            or rebuilt.to_dict() != stored.to_dict()
+            or canonical_sha256(payload) != str(selected["candidate_spec_sha256"])
+            or stored.expression.expression_id == stored.control.expression_id
+            or str(genes.get("representation")) != "TEMPORAL_PROGRAM"
+            or str(genes.get("program_id")) != str(selected["program_id"])
+            or str(program_spec.get("family_id"))
+            != str(selected["program_family_id"])
+            or stored.horizon_hours != 4
+        ):
+            raise RuntimeError(
+                f"TEMPORAL_PROGRAM_CONSTRUCTIBILITY_CHANGED:{ordinal}:{candidate_id}"
+            )
+        seen.add(candidate_id)
+        proofs.append(
+            {
+                "source_ordinal": int(ordinal),
+                "candidate_id": candidate_id,
+                "candidate_spec_sha256": str(selected["candidate_spec_sha256"]),
+                "expression_id": stored.expression.expression_id,
+                "control_expression_id": stored.control.expression_id,
+                "program_id": str(genes["program_id"]),
+                "program_family_id": str(program_spec["family_id"]),
+            }
+        )
+    return {
+        "schema_version": 1,
+        "status": "PASS_TEMPORAL_PROGRAM_CONSTRUCTIBILITY_SWEEP",
+        "market_read_performed": False,
+        "candidate_count": len(proofs),
+        "unique_candidate_count": len(seen),
+        "proofs_sha256": canonical_sha256(proofs),
+    }
+
+
+def _expression_registry_limits(config: Mapping[str, Any]) -> dict[str, int]:
+    values = dict(config["expression_limits"])
+    return {
+        "max_depth": int(values["maximum_depth"]),
+        "max_raw_inputs": int(values["maximum_raw_fields"]),
+        "max_rolling_windows": int(values["maximum_rolling_windows"]),
+        "max_canonical_primitive_nodes": int(
+            values["maximum_canonical_primitive_nodes"]
+        ),
+        "max_cross_asset_normalizations": int(
+            values["maximum_cross_asset_normalizations"]
+        ),
+        "max_regime_gates": int(values["maximum_regime_gates"]),
+    }
+
+
 def _economic_context(
     repo_root: Path,
     *,
@@ -434,6 +521,7 @@ def _evaluate_interval(
     role: str,
     payloads: Sequence[Mapping[str, Any]],
     workers: int,
+    expression_registry_limits: Mapping[str, Any],
 ) -> list[dict[str, Any]]:
     with concurrent.futures.ProcessPoolExecutor(
         max_workers=workers,
@@ -446,6 +534,7 @@ def _evaluate_interval(
             start,
             end,
             role,
+            dict(expression_registry_limits),
         ),
     ) as executor:
         return list(executor.map(_v24_worker_evaluate, payloads, chunksize=1))
@@ -589,6 +678,12 @@ def run_gate(
         (root / str(receipt["carrier"]["manifest_path"])).read_text(encoding="utf-8")
     )
     contract_rows = list(carrier_manifest["contracts"])
+    program_config = json.loads(
+        (root / "config" / "crypto_temporal_mechanism_program_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expression_registry_limits = _expression_registry_limits(program_config)
     target_metadata = json.loads(
         (root / str(receipt["carrier"]["target_cache"]) / "metadata.json").read_text(
             encoding="utf-8"
@@ -604,8 +699,10 @@ def run_gate(
         != str(receipt["carrier"]["target_identity_sha256"])
     ):
         raise RuntimeError("TEMPORAL_POLICY_VALIDATION_CARRIER_OR_TARGET_CHANGED")
-    static = sweep_v24_static_constructibility(
-        selected_rows=selected, contract_rows=contract_rows
+    static = sweep_temporal_program_constructibility(
+        selected_rows=selected,
+        contract_rows=contract_rows,
+        expression_registry_limits=expression_registry_limits,
     )
     write_json(runtime_root / "static_constructibility.json", static)
     economic = _economic_context(
@@ -661,6 +758,7 @@ def run_gate(
             role=role,
             payloads=payloads,
             workers=active_workers,
+            expression_registry_limits=expression_registry_limits,
         )
         memory_indexes = [
             position for position, row in enumerate(worker_rows) if bool(row.get("memory_error"))
@@ -677,6 +775,7 @@ def run_gate(
                 role=role,
                 payloads=[payloads[position] for position in memory_indexes],
                 workers=active_workers,
+                expression_registry_limits=expression_registry_limits,
             )
             for position, row in zip(memory_indexes, retried):
                 worker_rows[position] = row
