@@ -23,7 +23,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_V1_AUTHORIZATION",
-  "authorization_sha256": "D950DE8BC5B23BC2F33FC1F8D9C9F9106F412F959500C7BC1E536C262D97A8CC",
+  "authorization_sha256": "5A07809FC104ACE630371B0E49CB39B1B7313189DE57A2B1B55062A38DA9ECBA",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "A509A32BADD5DD4BF2325C2AF4690B79FBB9E5F5EFCBC60226545634CB23FC5C",
@@ -32,12 +32,12 @@
     "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
     "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
     "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "0388DBEAA35F4C2412C9B36ECD723C146B0926B0E7DF12DF062794A0FCA0CC1A",
-    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "B2F995AD59B5EE1464E60D1C8CCB9D4E8EDB9C476DD9888C540099626198860B",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "A4842D1D553F18BC25BE59AC3B34084BFAA2638E140B7808B5CE499917D341F6",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
     "config/crypto_temporal_mechanism_program_v1.json": "B147F5EFA752526549CAA801C408835D98FCDB5831DF2CC01E5A4348D6663AD8",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "A30E5A508BBF2333A80B7D3B1090ADB750B4D8A54F33E9D5F379FE187B277C06"
   },
-  "authorized_implementation_sha": "c34cf6679b040bcb0c9e7c1d3a23d0dc61ca93c3",
+  "authorized_implementation_sha": "a396b412dd65c61e692b9e48c6a4ab2a8ecd4e1a",
   "automatic_next_run_started": false,
   "boundaries": {
     "automatic_expansion": false,
