@@ -7,6 +7,10 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from alphafactory_crypto.broad_search.experiment_authority import (
+    require_real_experiment_authority,
+)
+
 from alphafactory_crypto.broad_search.temporal_policy_validation_v1 import (
     ARMS,
     PROGRAM_FAMILIES,
@@ -82,6 +86,26 @@ def test_each_evaluation_interval_is_bound_to_its_frozen_receipt_block() -> None
             },
             receipt=receipt,
         )
+
+
+def test_source_repair_continuation_is_exactly_authorized() -> None:
+    receipt = load_receipt(ROOT, require_authorized=True)
+    authorization = receipt["run_authorization"]
+    result = require_real_experiment_authority(
+        ROOT,
+        evidence_to_add=receipt["evidence_to_add"],
+        decision_to_change=receipt["decision_to_change"],
+        economic_receipt_required=False,
+        receipt_bound_non_formal_authorization={
+            "decision_id": authorization["decision_id"],
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "scope": authorization["scope"],
+            "receipt_path": "config/crypto_temporal_policy_validation_v1_authorization.json",
+            "receipt_sha256": canonical_sha256(receipt),
+            "run_authorized": True,
+        },
+    )
+    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
 
 
 def test_train_only_selection_is_exact_equal_count_and_hash_bound() -> None:

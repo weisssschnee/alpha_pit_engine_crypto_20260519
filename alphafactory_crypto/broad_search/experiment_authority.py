@@ -2167,10 +2167,40 @@ def _validate_temporal_policy_validation_authority_exception(
     content_sha = _canonical_sha256(
         {key: value for key, value in payload.items() if key != "authorization_sha256"}
     )
+    status = payload.get("status")
+    continuation = dict(payload.get("continuation") or {})
+    continuation_authorized = (
+        status == "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION"
+        and run_authorization.get("decision_id")
+        == "USER_AUTHORIZED_TEMPORAL_POLICY_VALIDATION_SOURCE_REPAIR_CONTINUATION_20260812"
+        and continuation
+        == {
+            "mode": "REUSE_VERIFIED_FULL_PASS_EVALUATE_MISSING_BLOCKS",
+            "replacement_of_authorization_sha256": "CA0F769518435271811BA4B813F130B42287D3126D92542B811DE03FC7972E75",
+            "source_runtime": "runtime/crypto_temporal_policy_validation_v1_20260812r1",
+            "source_task_id": "job_20260812_105149_89f2cf",
+            "source_producer_sha": "cf0db857ea285880ae3528586f747967b5ea8996",
+            "full_pass_candidate_ledger_path": "runtime/crypto_temporal_policy_validation_v1_20260812r1/passes/full/candidate_ledger.parquet",
+            "full_pass_candidate_ledger_sha256": "CB40F35114DCA0666420460AD301FCB87F8A7782B85F5E975AD2598FBA36A188",
+            "reused_pair_evaluation_count": 360,
+            "new_pair_evaluation_count": 1080,
+            "missing_pass_labels": ["block_1", "block_2", "block_3"],
+            "failure_before_missing_block_evaluation": "ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED",
+            "full_pass_market_evaluation_must_not_repeat": True,
+        }
+    )
     if (
         payload.get("schema_version") != 2
         or payload.get("receipt_id") != "CRYPTO_TEMPORAL_POLICY_VALIDATION_V1"
-        or payload.get("status") != "RUN_AUTHORIZED_ONE_TIME_DEVELOPMENT_VALIDATION"
+        or status
+        not in {
+            "RUN_AUTHORIZED_ONE_TIME_DEVELOPMENT_VALIDATION",
+            "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION",
+        }
+        or (
+            status == "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION"
+            and not continuation_authorized
+        )
         or payload.get("run_authorized") is not True
         or payload.get("consumed") is not False
         or payload.get("authorization_sha256") != content_sha
