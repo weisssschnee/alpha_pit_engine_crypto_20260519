@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_TEMPORAL_POLICY_VALIDATION_V1",
-  "status": "IMPLEMENTED_NOT_AUTHORIZED",
-  "run_authorized": false,
+  "status": "RUN_AUTHORIZED_ONE_TIME_DEVELOPMENT_VALIDATION",
+  "run_authorized": true,
   "consumed": false,
-  "source_implementation_sha": "0000000000000000000000000000000000000000",
+  "source_implementation_sha": "ad093770a61e1f5fe67bd2ef07d70279c2859f20",
   "allowed_post_implementation_paths": [
     "config/crypto_temporal_policy_validation_v1_authorization.json"
   ],
@@ -12,6 +12,28 @@
     "authority": "CURRENT_USER_INSTRUCTION",
     "decision_id": "USER_AUTHORIZED_TEMPORAL_POLICY_VALIDATION_AND_CONDITIONAL_FIXED_FLOW_20260812",
     "scope": "ONE_EQUAL_COUNT_TEMPORAL_POLICY_DEVELOPMENT_VALIDATION_NO_FEEDBACK"
+  },
+  "source_components": {
+    "validation_gate": {
+      "path": "alphafactory_crypto/broad_search/temporal_policy_validation_v1.py",
+      "sha256": "ED8F3FD1F96F052760345E7B163864EEBB0E611FD6AB43B5F92A5EB529AC8121"
+    },
+    "authority_preflight": {
+      "path": "alphafactory_crypto/broad_search/experiment_authority.py",
+      "sha256": "5AF9CFCC17B95CACDBB52C16C5C4D2FEDED1A6EE092FD03E506750DE4446521A"
+    },
+    "fixed_flow_consumer": {
+      "path": "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
+      "sha256": "F9CC20DB2C884CEB80995952E2D799F785E99E009E0EC49914EA12D935108D15"
+    },
+    "independent_checker": {
+      "path": "scripts/check_crypto_temporal_policy_validation_v1.py",
+      "sha256": "925909F292D13DEE6D362E3E8A0F74817D11E4753AED5539455B8CDD008E1649"
+    },
+    "fixed_flow_config": {
+      "path": "config/crypto_temporal_mechanism_program_v1.json",
+      "sha256": "5F595E59CD5E537B4BBC2ADAB63B5A96B09C7D81D53A32ADDAD94435F0C48FE7"
+    }
   },
   "evidence_to_add": "Whether train-only economic behavior clusters produced by Random, CEM, and Evolution migrate across an untouched balanced development-validation interval under unchanged market and evaluator contracts.",
   "decision_to_change": "If and only if the frozen migration gates pass, qualify the existing 20/20/60 Random/CEM/Evolution allocation for future fixed development search flow; otherwise keep the current flow on HOLD.",
@@ -173,5 +195,5 @@
     "new_compiler": false,
     "new_graph_node": false
   },
-  "authorization_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  "authorization_sha256": "E0196757D877D6E82542212EE1409F63C8900D54064A230B25EB2427EB7CD547"
 }
