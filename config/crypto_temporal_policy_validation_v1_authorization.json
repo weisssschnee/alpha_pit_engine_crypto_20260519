@@ -4,7 +4,7 @@
   "status": "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION",
   "run_authorized": true,
   "consumed": false,
-  "source_implementation_sha": "7b80d036b7c2b1724d3ba621cb49ff99e80177d3",
+  "source_implementation_sha": "cfeab51d2373763dfd7c535b5f8819dc3e16571b",
   "allowed_post_implementation_paths": [
     "config/crypto_temporal_policy_validation_v1_authorization.json"
   ],
@@ -16,7 +16,7 @@
   "source_components": {
     "validation_gate": {
       "path": "alphafactory_crypto/broad_search/temporal_policy_validation_v1.py",
-      "sha256": "B24F679DDDE96A2B13DF2D1937E952F0BFBDB44DCA5E2EC63CD8C69F7B50EDD0"
+      "sha256": "B4A386436F5DE5B833B5A21D89F6AC5FAF5CB1B396B44DB6D6214F28F65F64DD"
     },
     "validation_worker_consumer": {
       "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
@@ -227,5 +227,5 @@
     "new_compiler": false,
     "new_graph_node": false
   },
-  "authorization_sha256": "DF80C982234A71312BA1B055DA7B37CD96AF74B521267FC0D17DB1AC81662AF6"
+  "authorization_sha256": "769989CA08B6A01BEA6FF59D131A9D3A4C6E259D8DD418A87C2D09CCA272EB19"
 }
