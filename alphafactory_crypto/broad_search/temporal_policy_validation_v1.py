@@ -158,6 +158,10 @@ def load_receipt(
     authorization = dict(receipt.get("run_authorization") or {})
     if authorization.get("scope") != POLICY_VALIDATION_SCOPE:
         blockers.append("scope")
+    if receipt.get("authorization_sha256") != canonical_sha256(
+        {key: value for key, value in receipt.items() if key != "authorization_sha256"}
+    ):
+        blockers.append("authorization_sha256")
     selection = dict(receipt.get("selection") or {})
     if (
         int(selection.get("candidate_count_per_arm", -1)) != 120
@@ -197,6 +201,40 @@ def load_receipt(
     if blockers:
         raise RuntimeError("TEMPORAL_POLICY_VALIDATION_RECEIPT_INVALID:" + ",".join(blockers))
     return receipt
+
+
+def validate_execution_source(repo_root: Path, receipt: Mapping[str, Any]) -> str:
+    root = Path(repo_root)
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip().lower()
+    implementation = str(receipt["source_implementation_sha"]).lower()
+    if subprocess.run(
+        ["git", "merge-base", "--is-ancestor", implementation, head],
+        cwd=root,
+        check=False,
+    ).returncode:
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_IMPLEMENTATION_NOT_ANCESTOR")
+    changed = sorted(
+        line.replace("\\", "/")
+        for line in subprocess.check_output(
+            ["git", "diff", "--name-only", f"{implementation}..{head}"],
+            cwd=root,
+            text=True,
+        ).splitlines()
+        if line.strip()
+    )
+    if changed != sorted(str(value) for value in receipt["allowed_post_implementation_paths"]):
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_POST_IMPLEMENTATION_SOURCE_DRIFT")
+    if subprocess.run(["git", "diff", "--quiet"], cwd=root, check=False).returncode or subprocess.run(
+        ["git", "diff", "--cached", "--quiet"], cwd=root, check=False
+    ).returncode:
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_WORKTREE_DIRTY")
+    for component in dict(receipt["source_components"]).values():
+        path = root / str(component["path"])
+        if file_sha256(path) != str(component["sha256"]):
+            raise RuntimeError(
+                f"TEMPORAL_POLICY_VALIDATION_COMPONENT_CHANGED:{component['path']}"
+            )
+    return head
 
 
 def _sampling_key(salt: str, row: Mapping[str, Any]) -> str:
@@ -509,7 +547,7 @@ def run_gate(
 ) -> dict[str, Any]:
     root = Path(repo_root)
     receipt = load_receipt(root, require_authorized=True, receipt_path=receipt_path)
-    source_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip().lower()
+    source_sha = validate_execution_source(root, receipt)
     runtime_root = root / "runtime" / f"{RUNTIME_PREFIX}_{runtime_date}"
     if runtime_root.exists():
         raise RuntimeError("TEMPORAL_POLICY_VALIDATION_RUNTIME_ALREADY_EXISTS")
