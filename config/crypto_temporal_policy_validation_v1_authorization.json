@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_TEMPORAL_POLICY_VALIDATION_V1",
-  "status": "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION",
-  "run_authorized": true,
-  "consumed": false,
+  "status": "CONSUMED_QUALIFIED_20_20_60_FIXED_DEVELOPMENT_FLOW",
+  "run_authorized": false,
+  "consumed": true,
   "source_implementation_sha": "cfeab51d2373763dfd7c535b5f8819dc3e16571b",
   "allowed_post_implementation_paths": [
     "config/crypto_temporal_policy_validation_v1_authorization.json"
@@ -36,7 +36,7 @@
     },
     "fixed_flow_config": {
       "path": "config/crypto_temporal_mechanism_program_v1.json",
-      "sha256": "5F595E59CD5E537B4BBC2ADAB63B5A96B09C7D81D53A32ADDAD94435F0C48FE7"
+      "sha256": "B147F5EFA752526549CAA801C408835D98FCDB5831DF2CC01E5A4348D6663AD8"
     }
   },
   "evidence_to_add": "Whether train-only economic behavior clusters produced by Random, CEM, and Evolution migrate across an untouched balanced development-validation interval under unchanged market and evaluator contracts.",
@@ -181,6 +181,24 @@
     "automatic_new_search": false,
     "validation_or_oos_promotion": false
   },
+  "consumption": {
+    "runtime": "runtime/crypto_temporal_policy_validation_v1_20260812r2",
+    "final_decision": "QUALIFY_20_20_60_FIXED_DEVELOPMENT_FLOW",
+    "final_decision_sha256": "A50DF3BEEB29BF0E2599ED6394B7B004C843D7037BBD7B161684467FACA40EF4",
+    "run_manifest_sha256": "F40930ACB5FB7BEE05A1641ECF7398F0193ACA068297EDB30EC9C85CA7E9D65C",
+    "pc2_independent_checker": "PASS",
+    "local_independent_checker": "PASS",
+    "fixed_flow_integration_commit": "9d832f0ab9c09eaa8c9390eec2322c9404ca3994",
+    "allocation_per_10000": {
+      "temporal_program_random": 2000,
+      "temporal_program_cem": 2000,
+      "temporal_program_evolution": 6000
+    },
+    "automatic_search_started": false,
+    "alpha_qualification": "HOLD",
+    "oos": false,
+    "promotion_authorized": false
+  },
   "authority_identity": {
     "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
     "optimizer_reward_and_matched_attribution_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
@@ -227,5 +245,5 @@
     "new_compiler": false,
     "new_graph_node": false
   },
-  "authorization_sha256": "769989CA08B6A01BEA6FF59D131A9D3A4C6E259D8DD418A87C2D09CCA272EB19"
+  "authorization_sha256": "FCE36B7A7AB33926DD1681FB5BDF0D8F36D8228D860B9BC20E332205E810EF91"
 }
