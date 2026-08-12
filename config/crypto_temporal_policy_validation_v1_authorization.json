@@ -4,7 +4,7 @@
   "status": "RUN_AUTHORIZED_SOURCE_REPAIR_CONTINUATION",
   "run_authorized": true,
   "consumed": false,
-  "source_implementation_sha": "ae7e9b8ae6d5d815ad7d0e626e252006afbee294",
+  "source_implementation_sha": "7b80d036b7c2b1724d3ba621cb49ff99e80177d3",
   "allowed_post_implementation_paths": [
     "config/crypto_temporal_policy_validation_v1_authorization.json"
   ],
@@ -16,7 +16,7 @@
   "source_components": {
     "validation_gate": {
       "path": "alphafactory_crypto/broad_search/temporal_policy_validation_v1.py",
-      "sha256": "63B7F5D4AA442ACB5BC623FEB4E2E92753B54A55C9329F19AE15E79F7D09893E"
+      "sha256": "B24F679DDDE96A2B13DF2D1937E952F0BFBDB44DCA5E2EC63CD8C69F7B50EDD0"
     },
     "validation_worker_consumer": {
       "path": "alphafactory_crypto/broad_search/search_engine_v2_4.py",
@@ -24,7 +24,7 @@
     },
     "authority_preflight": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "DCEABAC543492A1EE5286475FEDB70D76DAE25C0708D818A55DF1F1A331CD8D5"
+      "sha256": "6FB9B889CDB4A4F7A563D0040E5694A8AD7AC491E3440348782C4F7255FCD01E"
     },
     "fixed_flow_consumer": {
       "path": "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
@@ -66,7 +66,16 @@
       "block_3"
     ],
     "failure_before_missing_block_evaluation": "ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED",
-    "full_pass_market_evaluation_must_not_repeat": true
+    "full_pass_market_evaluation_must_not_repeat": true,
+    "completed_pass_ledgers_sha256": {
+      "full": "CB40F35114DCA0666420460AD301FCB87F8A7782B85F5E975AD2598FBA36A188",
+      "block_1": "F6E7C066CD845096B86DD31374C4D9AEA969191F30267825FF31CCCEBA36B65E",
+      "block_2": "CAEB7CC73C8A29E2834D2CFBC89C21033BF8F947BF6E1DB597F7C45758C955F5",
+      "block_3": "080A17F4D17BFE4E6DD6F3D2A24F1A1CE18352E1475AEDB99FB98D3806E03EF7"
+    },
+    "completed_block_evaluation_task_id": "job_20260812_164556_d9edec",
+    "completed_block_evaluation_source_sha": "728e13a348398e9c866322d11271e59e9ae2e6cd",
+    "source_repair_finalization_only": true
   },
   "selection": {
     "unit": "FIRST_DISCOVERED_NEW_DUAL_NET_POSITIVE_BEHAVIOR_CLUSTER",
@@ -218,5 +227,5 @@
     "new_compiler": false,
     "new_graph_node": false
   },
-  "authorization_sha256": "2277AC917EE8466478654E3FC259CA68DAF5A6AACFA269F4C72D4BD5A888EE6F"
+  "authorization_sha256": "DF80C982234A71312BA1B055DA7B37CD96AF74B521267FC0D17DB1AC81662AF6"
 }
