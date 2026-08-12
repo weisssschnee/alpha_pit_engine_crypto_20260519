@@ -4,7 +4,7 @@
   "status": "RUN_AUTHORIZED_ONE_TIME_DEVELOPMENT_VALIDATION",
   "run_authorized": true,
   "consumed": false,
-  "source_implementation_sha": "ad093770a61e1f5fe67bd2ef07d70279c2859f20",
+  "source_implementation_sha": "5aa1ef50c8fb5675b3a2ac143a4dd2ec422a4f96",
   "allowed_post_implementation_paths": [
     "config/crypto_temporal_policy_validation_v1_authorization.json"
   ],
@@ -16,7 +16,7 @@
   "source_components": {
     "validation_gate": {
       "path": "alphafactory_crypto/broad_search/temporal_policy_validation_v1.py",
-      "sha256": "ED8F3FD1F96F052760345E7B163864EEBB0E611FD6AB43B5F92A5EB529AC8121"
+      "sha256": "3BD18D39B1EA4FA10B2EC5CF3BB328967D8326E363BF86AB8DD88F023A66CC4B"
     },
     "authority_preflight": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
@@ -103,6 +103,7 @@
   "carrier": {
     "manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
     "manifest_file_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6",
+    "manifest_sha256": "C38CAC31D2E8C19743AF5529D64BF7D87B74ACDD8166BE7F2E33F7C5D77B0743",
     "aligned_cache": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
     "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
     "target_cache": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
@@ -195,5 +196,5 @@
     "new_compiler": false,
     "new_graph_node": false
   },
-  "authorization_sha256": "E0196757D877D6E82542212EE1409F63C8900D54064A230B25EB2427EB7CD547"
+  "authorization_sha256": "15D41DB1BCAACD2D96D900DBE849CAC9A9AEC3E6C98F1B283CE4E2A4D49660D3"
 }
