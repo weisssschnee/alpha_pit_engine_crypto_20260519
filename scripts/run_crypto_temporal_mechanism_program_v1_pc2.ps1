@@ -5,6 +5,7 @@ param(
     [string]$RuntimeDate,
     [Parameter(Mandatory = $true)]
     [string]$SourceSha,
+    [string]$ExecutionMode = "FRESH_SEQUENTIAL_PROGRAM",
     [string]$PythonExe = "python"
 )
 
@@ -36,12 +37,8 @@ function Invoke-PythonChecked {
     }
 }
 
-$branch = (git branch --show-current).Trim()
 $head = (git rev-parse HEAD).Trim().ToLowerInvariant()
 $autocrlf = (git config --get core.autocrlf).Trim().ToLowerInvariant()
-if ($branch -ne "experiment/crypto-temporal-program-search-v1-20260807") {
-    throw "Unexpected branch: $branch"
-}
 if ($head -ne $SourceSha.ToLowerInvariant()) {
     throw "Source SHA mismatch: $head"
 }
@@ -52,18 +49,21 @@ if (git status --porcelain --untracked-files=all) {
     throw "Producer worktree must be clean"
 }
 
-Invoke-PythonChecked -Arguments @(
-    "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
-    "source-smoke", "--repo-root", $RepoRoot
-) -FailureMessage "Temporal program no-market source smoke failed"
+if ($ExecutionMode -eq "FRESH_SEQUENTIAL_PROGRAM") {
+    Invoke-PythonChecked -Arguments @(
+        "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
+        "source-smoke", "--repo-root", $RepoRoot
+    ) -FailureMessage "Temporal program no-market source smoke failed"
+}
 
 Invoke-PythonChecked -Arguments @(
     "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
     "run", "--repo-root", $RepoRoot, "--runtime-date", $RuntimeDate,
-    "--source-sha", $SourceSha
+    "--source-sha", $SourceSha, "--execution-mode", $ExecutionMode
 ) -FailureMessage "Temporal program producer failed"
 
 Invoke-PythonChecked -Arguments @(
     "-m", "alphafactory_crypto.broad_search.temporal_program_search_v1",
-    "check", "--repo-root", $RepoRoot, "--runtime-date", $RuntimeDate
+    "check", "--repo-root", $RepoRoot, "--runtime-date", $RuntimeDate,
+    "--execution-mode", $ExecutionMode
 ) -FailureMessage "Temporal program independent checker failed"

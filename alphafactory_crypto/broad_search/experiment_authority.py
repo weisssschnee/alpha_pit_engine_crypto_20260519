@@ -48,6 +48,12 @@ TEMPORAL_POLICY_VALIDATION_SCOPE = (
 TEMPORAL_POLICY_VALIDATION_AUTHORIZATION_PATH = (
     "config/crypto_temporal_policy_validation_v1_authorization.json"
 )
+TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE = (
+    "ONE_50000_STRICT_TRAIN_ONLY_TEMPORAL_PROGRAM_FIXED_FLOW_EXPANSION"
+)
+TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH = (
+    "config/crypto_temporal_large_development_expansion_v1_authorization.json"
+)
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
@@ -2282,6 +2288,101 @@ def _validate_temporal_policy_validation_authority_exception(
     }
 
 
+def _validate_temporal_development_expansion_authority_exception(
+    repo_root: Path,
+    authorization: Mapping[str, Any],
+) -> tuple[list[str], dict[str, dict[str, Any]]]:
+    """Validate the one-run fixed-flow train-only expansion exception."""
+
+    blockers: list[str] = []
+    path = repo_root / TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH
+    if not path.is_file():
+        return ["receipt_bound_non_formal_authorization:MISSING"], {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return ["receipt_bound_non_formal_authorization:READ"], {}
+    run_authorization = dict(payload.get("run_authorization") or {})
+    expected_call = {
+        "decision_id": str(run_authorization.get("decision_id") or ""),
+        "authority": "CURRENT_USER_INSTRUCTION",
+        "scope": TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE,
+        "receipt_path": TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH,
+        "receipt_sha256": _canonical_sha256(payload),
+        "run_authorized": True,
+    }
+    if dict(authorization) != expected_call:
+        blockers.append("receipt_bound_non_formal_authorization:INVALID")
+    content_sha = _canonical_sha256(
+        {
+            key: value
+            for key, value in payload.items()
+            if key != "authorization_sha256"
+        }
+    )
+    if (
+        payload.get("schema_version") != 2
+        or payload.get("execution_mode") != "LARGE_DEVELOPMENT_EXPANSION_V1"
+        or payload.get("status")
+        != "RUN_AUTHORIZED_ONE_TIME_50000_STRICT_DEVELOPMENT_EXPANSION"
+        or payload.get("run_authorized") is not True
+        or payload.get("consumed") is not False
+        or payload.get("authorization_sha256") != content_sha
+        or run_authorization
+        != {
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "decision_id": expected_call["decision_id"],
+            "scope": TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE,
+        }
+        or not expected_call["decision_id"]
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:HASH_OR_SCOPE")
+    boundaries = dict(payload.get("boundaries") or {})
+    if (
+        boundaries.get("train_only") is not True
+        or boundaries.get("validation") is not False
+        or boundaries.get("oos") is not False
+        or boundaries.get("holdout") is not False
+        or boundaries.get("forward") is not False
+        or boundaries.get("promotion") is not False
+        or boundaries.get("automatic_expansion") is not False
+        or int(boundaries.get("sealed_reads", -1)) != 0
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:SEALED_BOUNDARY")
+    authority_identity = dict(payload.get("authority_identity") or {})
+    expected_role_bindings = {
+        "target": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get("target_contract_sha256"),
+        },
+        "optimizer_reward": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get(
+                "optimizer_reward_and_matched_attribution_sha256"
+            ),
+        },
+        "execution_price": {
+            "component": "real_policy_upgrade_canary",
+            "component_sha256": authority_identity.get("target_execution_sha256"),
+        },
+        "cost": {
+            "component": "real_data_mapping_cost_evaluator",
+            "component_sha256": authority_identity.get(
+                "portfolio_mapping_and_cost_sha256"
+            ),
+        },
+    }
+    role_bindings = dict(payload.get("receipt_bound_role_bindings") or {})
+    if role_bindings != expected_role_bindings or any(
+        not str(value.get("component_sha256") or "")
+        for value in expected_role_bindings.values()
+    ):
+        blockers.append("receipt_bound_non_formal_authorization:ROLE_BINDING")
+    return blockers, {
+        role: dict(value) for role, value in expected_role_bindings.items()
+    }
+
+
 def require_real_experiment_authority(
     repo_root: Path,
     *,
@@ -2314,6 +2415,14 @@ def require_real_experiment_authority(
             )
             blockers.extend(validation_blockers)
             non_formal_binding_authorized = not validation_blockers
+        elif authorization.get("scope") == TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE:
+            expansion_blockers, receipt_bound_role_bindings = (
+                _validate_temporal_development_expansion_authority_exception(
+                    repo_root, authorization
+                )
+            )
+            blockers.extend(expansion_blockers)
+            non_formal_binding_authorized = not expansion_blockers
         else:
             expected_authorization = {
                 "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",
@@ -2449,6 +2558,8 @@ __all__ = [
     "TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH",
     "TEMPORAL_SUCCESSOR_SCOPE",
     "TEMPORAL_POLICY_VALIDATION_SCOPE",
+    "TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE",
+    "TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",
     "resolve_real_experiment_authorities",

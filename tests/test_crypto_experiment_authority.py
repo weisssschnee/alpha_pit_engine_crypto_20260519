@@ -16,6 +16,8 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     SEARCH_ECONOMIC_V6_RECEIPT_PATH,
     TEMPORAL_SUCCESSOR_AUTHORIZATION_PATH,
     TEMPORAL_SUCCESSOR_SCOPE,
+    TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH,
+    TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE,
     ECONOMIC_SEARCH_V6_SEEDS,
     _canonical_sha256,
     _file_sha256,
@@ -224,6 +226,67 @@ def test_successor_current_exception_fails_closed_on_receipt_role_tamper(
                 "run_authorized": True,
             },
         )
+
+
+def test_development_expansion_schema2_receipt_closes_only_registered_current_vacancies(
+    tmp_path: Path,
+) -> None:
+    _write_successor_exception_current(tmp_path)
+    authority_identity = {
+        "target_contract_sha256": "1" * 64,
+        "target_execution_sha256": "2" * 64,
+        "optimizer_reward_and_matched_attribution_sha256": "3" * 64,
+        "portfolio_mapping_and_cost_sha256": "4" * 64,
+    }
+    payload: dict[str, object] = {
+        "schema_version": 2,
+        "execution_mode": "LARGE_DEVELOPMENT_EXPANSION_V1",
+        "status": "RUN_AUTHORIZED_ONE_TIME_50000_STRICT_DEVELOPMENT_EXPANSION",
+        "run_authorized": True,
+        "consumed": False,
+        "run_authorization": {
+            "authority": "CURRENT_USER_INSTRUCTION",
+            "decision_id": "TEST_DEVELOPMENT_EXPANSION",
+            "scope": TEMPORAL_DEVELOPMENT_EXPANSION_SCOPE,
+        },
+        "authority_identity": authority_identity,
+        "receipt_bound_role_bindings": receipt_bound_role_bindings(
+            authority_identity
+        ),
+        "boundaries": {
+            "train_only": True,
+            "validation": False,
+            "oos": False,
+            "holdout": False,
+            "forward": False,
+            "promotion": False,
+            "automatic_expansion": False,
+            "sealed_reads": 0,
+        },
+    }
+    payload["authorization_sha256"] = authorization_content_sha(payload)
+    path = tmp_path / TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    call = dict(payload["run_authorization"])
+
+    result = require_real_experiment_authority(
+        tmp_path,
+        evidence_to_add="measure fixed-flow train-only discovery",
+        decision_to_change="continue or review the Search Core",
+        economic_receipt_required=False,
+        receipt_bound_non_formal_authorization={
+            "decision_id": call["decision_id"],
+            "authority": call["authority"],
+            "scope": call["scope"],
+            "receipt_path": TEMPORAL_DEVELOPMENT_EXPANSION_AUTHORIZATION_PATH,
+            "receipt_sha256": _canonical_sha256(payload),
+            "run_authorized": True,
+        },
+    )
+
+    assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
+    assert result["formal_claims_authorized"] is False
 
 
 def test_active_non_formal_authority_is_visible_but_not_formal(tmp_path: Path) -> None:

@@ -41,6 +41,21 @@ from .pair18m import (
     validate_pair_evaluation_request,
 )
 from .temporal_activation_v1 import _paired_common_support, _process_evidence_closed
+from .temporal_development_expansion_v1 import (
+    ALL_PROGRAM_FAMILIES as EXPANSION_PROGRAM_FAMILIES,
+    AUTHORIZATION_PATH as EXPANSION_AUTHORIZATION_PATH,
+    AUTHORIZATION_SCOPE as EXPANSION_AUTHORIZATION_SCOPE,
+    CAMPAIGN as EXPANSION_CAMPAIGN,
+    DECISION_BOUNDARIES as EXPANSION_DECISION_BOUNDARIES,
+    EXECUTION_MODE as EXPANSION_EXECUTION_MODE,
+    LANE_SEEDS as EXPANSION_LANE_SEEDS,
+    SEED_CAMPAIGN as EXPANSION_SEED_CAMPAIGN,
+    SEED_DERIVATION as EXPANSION_SEED_DERIVATION,
+    discovery_diagnostics,
+    fixed_flow_decision,
+    load_diagnostic_baseline,
+    validate_authorization as validate_expansion_authorization,
+)
 from .temporal_program_v1 import (
     PROGRAM_BUILDER_ID,
     TemporalProgramSpec,
@@ -229,6 +244,10 @@ def validate_config(config: Mapping[str, Any]) -> None:
             "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1_PIPE_LANE_INDEX"
         ):
             raise ValueError("temporal adaptive broad seed derivation changed")
+    elif campaign == EXPANSION_SEED_CAMPAIGN:
+        expected_seeds = EXPANSION_LANE_SEEDS
+        if seed_authority.get("derivation") != EXPANSION_SEED_DERIVATION:
+            raise ValueError("temporal development expansion seed derivation changed")
     else:
         raise ValueError("temporal program seed campaign changed")
     if seeds != expected_seeds:
@@ -371,6 +390,21 @@ def _successor_effective_config(config: Mapping[str, Any]) -> dict[str, Any]:
             "FIRST_UINT32_SHA256_CRYPTO_TEMPORAL_ADAPTIVE_BROAD_V1_PIPE_LANE_INDEX"
         ),
         "seeds": list(ADAPTIVE_BROAD_SEEDS),
+        "old_campaign_seed_reuse": False,
+    }
+    validate_config(effective)
+    return effective
+
+
+def _expansion_effective_config(config: Mapping[str, Any]) -> dict[str, Any]:
+    """Freeze a fresh four-lane seed campaign without changing search policy."""
+
+    effective = json.loads(json.dumps(config))
+    effective["seed_authority"] = {
+        **dict(effective["seed_authority"]),
+        "campaign": EXPANSION_SEED_CAMPAIGN,
+        "derivation": EXPANSION_SEED_DERIVATION,
+        "seeds": list(EXPANSION_LANE_SEEDS),
         "old_campaign_seed_reuse": False,
     }
     validate_config(effective)
@@ -1355,6 +1389,7 @@ def _write_checkpoint(
     metrics: Sequence[Mapping[str, Any]],
     rejected: Sequence[Mapping[str, Any]],
     identities: Mapping[str, Any],
+    discovery_diagnostic: Mapping[str, Any] | None = None,
 ) -> Path:
     root = runtime_root / "checkpoints"
     root.mkdir(parents=True, exist_ok=True)
@@ -1379,6 +1414,11 @@ def _write_checkpoint(
     engine._write_parquet(temporary / "paired_program_diagnostics.parquet", pair_rows)
     engine._write_parquet(temporary / "arm_checkpoint_metrics.parquet", metrics)
     engine._write_parquet(temporary / "rejected_candidate_ledger.parquet", rejected)
+    if discovery_diagnostic is not None:
+        engine._write_json(
+            temporary / "discovery_diagnostics.json",
+            dict(discovery_diagnostic),
+        )
     files = [
         {
             "name": path.name,
@@ -1940,9 +1980,11 @@ def run(
     base_config = engine._read_json(repo_root / CONFIG_PATH)
     validate_config(base_config)
     successor_mode = str(execution_mode) == SUCCESSOR_EXECUTION_MODE
+    expansion_mode = str(execution_mode) == EXPANSION_EXECUTION_MODE
     if str(execution_mode) not in {
         "FRESH_SEQUENTIAL_PROGRAM",
         SUCCESSOR_EXECUTION_MODE,
+        EXPANSION_EXECUTION_MODE,
     }:
         raise ValueError("unknown temporal program execution mode")
     if successor_mode:
@@ -1971,6 +2013,26 @@ def run(
         )
         receipt = dict(successor_context["authorization"])
         successor_authority_preflight = None
+    elif expansion_mode:
+        if successor_artifact_root is not None or successor_policy_bundle is not None:
+            raise RuntimeError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:expansion_successor_inputs_forbidden"
+            )
+        config = _expansion_effective_config(base_config)
+        qualification_scope = {
+            "strict_cap": 50_000,
+            "stage0_only": False,
+            "skip_stage0": True,
+            "adaptive_start_strict": 0,
+            "active_program_families": list(EXPANSION_PROGRAM_FAMILIES),
+            "scope": EXPANSION_EXECUTION_MODE,
+            "fixed_flow": True,
+            "family_concentration_is_diagnostic_only": True,
+        }
+        runtime_root = repo_root / f"runtime/{EXPANSION_CAMPAIGN}_{runtime_date}"
+        receipt = {}
+        successor_context = None
+        successor_authority_preflight = None
     else:
         receipt = validate_receipt(
             repo_root, config=base_config, require_authorized=True
@@ -1988,10 +2050,19 @@ def run(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:producer_sha_differs_from_checkout"
             )
         raise RuntimeError("temporal program producer SHA differs from checkout")
+    if expansion_mode:
+        receipt = validate_expansion_authorization(
+            repo_root,
+            expected_source_sha=source_sha,
+        )
     report_name = (
         "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1"
         if successor_mode
-        else REPORT_PREFIX
+        else (
+            "CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_V1"
+            if expansion_mode
+            else REPORT_PREFIX
+        )
     )
     report_path = repo_root / f"reports/{report_name}_{runtime_date}.md"
     if not engine._source_tree_clean_for_run(
@@ -2003,7 +2074,7 @@ def run(
             )
         raise RuntimeError("temporal program producer tree is not clean")
     if runtime_root.is_dir():
-        if successor_mode:
+        if successor_mode or expansion_mode:
             raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:non_fresh_output_root")
         prior_checkpoints = sorted(
             (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
@@ -2050,14 +2121,42 @@ def run(
                 "sealed_reads": 0,
             },
         )
+    elif expansion_mode:
+        run_authorization = dict(receipt.get("run_authorization") or {})
+        successor_authority_preflight = require_real_experiment_authority(
+            repo_root,
+            evidence_to_add=str(receipt.get("evidence_to_add") or ""),
+            decision_to_change=str(receipt.get("decision_to_change") or ""),
+            economic_receipt_required=False,
+            receipt_bound_non_formal_authorization={
+                "decision_id": str(run_authorization.get("decision_id") or ""),
+                "authority": str(run_authorization.get("authority") or ""),
+                "scope": str(run_authorization.get("scope") or ""),
+                "receipt_path": EXPANSION_AUTHORIZATION_PATH,
+                "receipt_sha256": _json_sha(receipt),
+                "run_authorized": True,
+            },
+        )
+        runtime_root.mkdir(parents=True)
+        engine._write_json(
+            runtime_root / "development_expansion_launch_claim.json",
+            {
+                "schema_version": 1,
+                "status": "ONE_TIME_DEVELOPMENT_EXPANSION_LAUNCH_CLAIMED",
+                "execution_mode": EXPANSION_EXECUTION_MODE,
+                "authorization_sha256": receipt["authorization_sha256"],
+                "producer_source_sha": source_sha,
+                "runtime_id": runtime_root.name,
+                "market_arrays_read_at_claim": 0,
+                "candidate_evaluations_at_claim": 0,
+                "sealed_reads": 0,
+            },
+        )
     economic = resolve_search_economic_receipt(
         repo_root, str(config["source_authorities"]["economic_receipt_template"])
     )
-    if successor_mode:
-        assert successor_context is not None
-        authority = dict(
-            successor_context["authorization"]["authority_identity"]
-        )
+    if successor_mode or expansion_mode:
+        authority = dict(receipt["authority_identity"])
         economic_components = dict(economic.get("component_sha256") or {})
         observed_economic = {
             "economic_receipt_sha256": str(economic.get("receipt_sha256") or ""),
@@ -2079,14 +2178,14 @@ def run(
             observed_economic[key] != str(authority[key])
             for key in observed_economic
         ):
-            raise SuccessorPreflightError(
+            raise RuntimeError(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:current_economic_authority_changed"
             )
         premarket_catalog_sha = program_catalog_payload(
             compile_temporal_program_catalog(config)
         )["catalog_sha256"]
         if premarket_catalog_sha != str(authority["program_catalog_sha256"]):
-            raise SuccessorPreflightError(
+            raise RuntimeError(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:current_program_catalog_changed"
             )
     train = dict(economic["evidence_partition"]["train"])
@@ -2105,6 +2204,9 @@ def run(
     registry = TypedExpressionRegistry(contracts, **_limits(config))
     catalog = compile_temporal_program_catalog(config)
     catalog_payload = program_catalog_payload(catalog)
+    expansion_diagnostic_baseline = (
+        load_diagnostic_baseline(repo_root, receipt) if expansion_mode else None
+    )
     block_config = engine._read_json(
         repo_root / str(config["source_authorities"]["development_blocks_config"])
     )
@@ -2155,7 +2257,7 @@ def run(
         "config": config,
         "receipt_sha256": (
             receipt["authorization_sha256"]
-            if successor_mode
+            if successor_mode or expansion_mode
             else receipt["receipt_sha256"]
         ),
         "qualification_scope": qualification_scope,
@@ -2184,6 +2286,19 @@ def run(
                 raise RuntimeError(
                     "FAIL_CLOSED_BEFORE_MARKET_READ:successor_launch_claim_changed"
                 )
+        elif expansion_mode:
+            claim = engine._read_json(
+                runtime_root / "development_expansion_launch_claim.json"
+            )
+            if (
+                claim.get("authorization_sha256")
+                != receipt.get("authorization_sha256")
+                or claim.get("producer_source_sha") != source_sha
+                or (runtime_root / "frozen_contract.json").exists()
+            ):
+                raise RuntimeError(
+                    "FAIL_CLOSED_BEFORE_MARKET_READ:development_expansion_launch_claim_changed"
+                )
         else:
             if engine._read_json(runtime_root / "frozen_contract.json") != frozen:
                 raise RuntimeError("temporal program runtime contract changed")
@@ -2191,7 +2306,7 @@ def run(
                 raise FileExistsError("temporal program campaign already completed")
     else:
         runtime_root.mkdir(parents=True)
-    if successor_mode or not (runtime_root / "frozen_contract.json").exists():
+    if successor_mode or expansion_mode or not (runtime_root / "frozen_contract.json").exists():
         engine._write_json(runtime_root / "frozen_contract.json", frozen)
         engine._write_json(runtime_root / "program_catalog.json", catalog_payload)
         engine._write_json(runtime_root / "search_authority_binding_receipt.json", receipt)
@@ -2200,7 +2315,11 @@ def run(
             (
                 successor_preflight_evidence
                 if successor_mode
-                else source_smoke(repo_root)
+                else (
+                    successor_authority_preflight
+                    if expansion_mode
+                    else source_smoke(repo_root)
+                )
             ),
         )
         if successor_mode:
@@ -2212,6 +2331,15 @@ def run(
                 runtime_root / "prefix_state_restoration_receipt.json",
                 successor_preflight_evidence,
             )
+        elif expansion_mode:
+            engine._write_json(
+                runtime_root / "development_expansion_authorization_snapshot.json",
+                receipt,
+            )
+            engine._write_json(
+                runtime_root / "development_expansion_diagnostic_baseline.json",
+                expansion_diagnostic_baseline,
+            )
 
     if any(
         (runtime_root / "checkpoints" / label).is_dir()
@@ -2220,8 +2348,8 @@ def run(
         raise RuntimeError("terminal runtime cannot be resumed")
     checkpoints = sorted((runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
     if checkpoints:
-        if successor_mode:
-            raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:successor_resume_forbidden")
+        if successor_mode or expansion_mode:
+            raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:one_run_resume_forbidden")
         state, policies, ledger, archive, pair_rows, metrics, rejected = _load_checkpoint(
             checkpoints[-1],
             registry=registry,
@@ -2378,6 +2506,7 @@ def run(
 
     executor: concurrent.futures.ProcessPoolExecutor | None = None
     terminal_reason: str | None = None
+    latest_discovery_diagnostic: dict[str, Any] | None = None
     try:
         executor = make_executor(int(state["workers"]))
         _write_status(runtime_root, state=state, status="RUNNING", active_elapsed=elapsed())
@@ -2982,6 +3111,16 @@ def run(
                     terminal_reason = "ENGINE_RUN_INVALID:SUCCESSOR_GATE_STOP_INVALID"
                 elif bool(budget_state["mechanical_stop_required"]):
                     terminal_reason = "SUCCESSOR_ADDITIONAL_BUDGET_COMPLETE"
+            elif expansion_mode:
+                if strict_boundary in EXPANSION_DECISION_BOUNDARIES:
+                    decision = fixed_flow_decision(strict_boundary)
+                    engine._write_json(
+                        runtime_root
+                        / f"continuation_decision_{strict_boundary:06d}.json",
+                        decision,
+                    )
+                if strict_boundary == int(qualification_scope["strict_cap"]):
+                    terminal_reason = "FIXED_DEVELOPMENT_STRICT_CAP_REACHED"
             elif not bool(state.get("skip_stage0")) and checkpoint_index == 4:
                 decision = stage0_family_decisions(pair_rows, config)
                 engine._write_json(runtime_root / "continuation_decision_010000.json", decision)
@@ -3020,6 +3159,32 @@ def run(
                 state["arm_states"] = dict(decision["arm_states_after"])
                 if decision["status"] != "CONTINUE":
                     terminal_reason = decision["status"]
+            if expansion_mode:
+                observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
+                if checkpoint_index == 0 and observed_rate < float(
+                    budget["minimum_strict_per_hour_after_first_checkpoint"]
+                ):
+                    terminal_reason = "ENGINE_BUDGET_EXHAUSTED:THROUGHPUT_FLOOR"
+                process_cpu_seconds = sum(
+                    float(row.get("proposal_compile_cpu_seconds") or row.get("proposal_cpu_seconds") or 0.0)
+                    + float(row.get("pair_process_cpu_seconds") or row.get("process_cpu_seconds") or 0.0)
+                    for row in ledger
+                )
+                latest_discovery_diagnostic = discovery_diagnostics(
+                    ledger,
+                    baseline=expansion_diagnostic_baseline or {},
+                    strict_boundary=strict_boundary,
+                    process_cpu_seconds=process_cpu_seconds,
+                )
+                engine._write_json(
+                    runtime_root / "cluster_diagnostics_latest.json",
+                    latest_discovery_diagnostic,
+                )
+                engine._write_json(
+                    runtime_root
+                    / f"cluster_diagnostics_checkpoint_{checkpoint_index:03d}.json",
+                    latest_discovery_diagnostic,
+                )
             if terminal_reason is not None:
                 _seal_terminal_decision(
                     state,
@@ -3046,8 +3211,9 @@ def run(
                 metrics=metrics,
                 rejected=rejected,
                 identities=identities,
+                discovery_diagnostic=latest_discovery_diagnostic,
             )
-            if not successor_mode:
+            if not successor_mode and not expansion_mode:
                 observed_rate = len(ledger) * 3600.0 / max(elapsed(), 1.0)
                 qualification_terminal_reason = _checkpoint_qualification_terminal_reason(
                     checkpoint_index=checkpoint_index,
@@ -3160,6 +3326,8 @@ def run(
         status = "SUCCESSOR_DEVELOPMENT_BUDGET_COMPLETE"
     elif successor_mode:
         status = "SUCCESSOR_DEVELOPMENT_STOPPED"
+    elif expansion_mode and terminal_reason == "FIXED_DEVELOPMENT_STRICT_CAP_REACHED":
+        status = "DEVELOPMENT_EXPANSION_BUDGET_COMPLETE"
     elif terminal_reason == "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED":
         status = "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE"
     elif strict_count == 10_000 and not state["active_program_families"]:
@@ -3238,6 +3406,12 @@ def run(
         "successor_authorization_sha256": (
             receipt.get("authorization_sha256") if successor_mode else None
         ),
+        "development_expansion_authorization_sha256": (
+            receipt.get("authorization_sha256") if expansion_mode else None
+        ),
+        "development_expansion_diagnostics": (
+            latest_discovery_diagnostic if expansion_mode else None
+        ),
         "fresh_random_control_identity": (
             FRESH_RANDOM_IDENTITY if successor_mode else None
         ),
@@ -3247,7 +3421,8 @@ def run(
         "promotion": False,
         "automatic_next_run_started": False,
         "parameters_changed": False,
-        "seed_changed": False,
+        "seed_changed": bool(expansion_mode),
+        "seed_tuned": False,
         "rescue_rerun_started": False,
         "research_conclusion_forbidden": status in {
             "ENGINE_RUN_INVALID",
@@ -3282,6 +3457,21 @@ def run(
                 "prefix_state_restoration_receipt.json",
             ]
         )
+    elif expansion_mode:
+        manifest_paths.extend(
+            [
+                "development_expansion_launch_claim.json",
+                "development_expansion_authorization_snapshot.json",
+                "development_expansion_diagnostic_baseline.json",
+                "cluster_diagnostics_latest.json",
+            ]
+        )
+        manifest_paths.extend(
+            path.relative_to(runtime_root).as_posix()
+            for path in sorted(
+                runtime_root.glob("cluster_diagnostics_checkpoint_*.json")
+            )
+        )
     manifest_paths.extend(
         path.relative_to(runtime_root).as_posix()
         for path in sorted(runtime_root.glob("continuation_decision_*.json"))
@@ -3312,29 +3502,61 @@ def run(
     run_manifest["bundle_sha256"] = _json_sha(run_manifest["files"])
     engine._write_json(runtime_root / "run_manifest.json", run_manifest)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(
-        "\n".join(
-            [
-                "# Crypto Temporal Mechanism Program Search V1",
-                "",
-                f"- Decision: `{status}`",
-                f"- Execution mode: `{execution_mode}`",
-                f"- Strict evaluated: `{strict_count:,}`",
-                f"- Source prefix / additional strict: `{SUCCESSOR_PREFIX_BOUNDARY if successor_mode else 0:,}` / `{strict_count - SUCCESSOR_PREFIX_BOUNDARY if successor_mode else strict_count:,}`",
-                f"- Raw generation attempts: `{state['generation_attempts']:,}`",
-                f"- Behavior families: `{len(archive.champion_by_family):,}`",
-                f"- Matched-positive candidates/families: `{len(matched)}` / `{len(matched_families)}`",
-                f"- Contributing program families: `{sorted(contributing)}`",
-                f"- Active program families: `{state['active_program_families']}`",
-                f"- Adaptive arm states: `{state['arm_states']}`",
-                f"- Terminal reason: `{terminal_reason}`",
-                "",
-                "This is development-only evidence. No validation, OOS, promotion, target, mapping, cost, reward, AST, compiler, or evaluator change was performed.",
-            ]
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+    if expansion_mode:
+        diagnostics = latest_discovery_diagnostic or {}
+        if status in {"ENGINE_RUN_INVALID", "ENGINE_BUDGET_EXHAUSTED"}:
+            next_decision = "SYSTEM_INVALID"
+        elif int(diagnostics.get("new_matched_positive_economic_cluster_count", 0)) > 0 and int(
+            diagnostics.get("new_major_basin_count", 0)
+        ) > 0:
+            next_decision = "CONTINUE_DEVELOPMENT_DISCOVERY"
+        elif int(diagnostics.get("new_economic_opportunity_cluster_count", 0)) > 0:
+            next_decision = "SEARCH_SATURATION_REVIEW"
+        else:
+            next_decision = "SEARCH_CORE_REVIEW_REQUIRED"
+        report_lines = [
+            "# SEARCH_EXPANSION_VALIDITY",
+            f"- status: `{status}`",
+            f"- strict/raw attempts: `{strict_count}` / `{state['generation_attempts']}`",
+            f"- terminal reason: `{terminal_reason}`",
+            "- allocation: `Random/CEM/Evolution = 20/20/60`",
+            "- validation/OOS/sealed reads: `0/0/0`",
+            "",
+            "# ECONOMIC_DISCOVERY_RESULT",
+            f"- new economic opportunity clusters: `{diagnostics.get('new_economic_opportunity_cluster_count', 0)}`",
+            f"- clusters per 1k / CPU-hour: `{diagnostics.get('new_economic_opportunity_clusters_per_1000', 0.0)}` / `{diagnostics.get('new_economic_opportunity_clusters_per_cpu_hour', 0.0)}`",
+            f"- dual-positive / development 2-of-3 / matched-positive clusters: `{diagnostics.get('dual_positive_count', 0)}` / `{diagnostics.get('development_replication_2_of_3_count', 0)}` / `{diagnostics.get('new_matched_positive_economic_cluster_count', 0)}`",
+            "",
+            "# BASIN_DEPTH_RESULT",
+            f"- largest / top3 basin share: `{diagnostics.get('largest_basin_share', 0.0)}` / `{diagnostics.get('top3_basin_share', 0.0)}`",
+            f"- effective economic dimension / new major basins: `{diagnostics.get('effective_economic_dimension', 0.0)}` / `{diagnostics.get('new_major_basin_count', 0)}`",
+            "",
+            "# EVOLUTION_LEARNING_RESULT",
+            f"- operation attribution: `{json.dumps(diagnostics.get('evolution_operation_attribution', []), sort_keys=True)}`",
+            "- policy feedback from diagnostics: `false`",
+            "",
+            "# NEXT_DECISION",
+            f"`{next_decision}`",
+        ]
+    else:
+        report_lines = [
+            "# Crypto Temporal Mechanism Program Search V1",
+            "",
+            f"- Decision: `{status}`",
+            f"- Execution mode: `{execution_mode}`",
+            f"- Strict evaluated: `{strict_count:,}`",
+            f"- Source prefix / additional strict: `{SUCCESSOR_PREFIX_BOUNDARY if successor_mode else 0:,}` / `{strict_count - SUCCESSOR_PREFIX_BOUNDARY if successor_mode else strict_count:,}`",
+            f"- Raw generation attempts: `{state['generation_attempts']:,}`",
+            f"- Behavior families: `{len(archive.champion_by_family):,}`",
+            f"- Matched-positive candidates/families: `{len(matched)}` / `{len(matched_families)}`",
+            f"- Contributing program families: `{sorted(contributing)}`",
+            f"- Active program families: `{state['active_program_families']}`",
+            f"- Adaptive arm states: `{state['arm_states']}`",
+            f"- Terminal reason: `{terminal_reason}`",
+            "",
+            "This is development-only evidence. No validation, OOS, promotion, target, mapping, cost, reward, AST, compiler, or evaluator change was performed.",
+        ]
+    report_path.write_text("\n".join(report_lines) + "\n", encoding="utf-8")
     _write_status(runtime_root, state=state, status=status, active_elapsed=elapsed())
     return final
 
@@ -3566,9 +3788,16 @@ def check_successor_runtime(
     return result
 
 
-def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False) -> dict[str, Any]:
+def check(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+    require_consumed: bool = False,
+    execution_mode: str = "FRESH_SEQUENTIAL_PROGRAM",
+) -> dict[str, Any]:
     repo_root = repo_root.resolve()
-    runtime_root = repo_root / f"runtime/{CAMPAIGN}_{runtime_date}"
+    expansion_mode = str(execution_mode) == EXPANSION_EXECUTION_MODE
+    runtime_root = repo_root / f"runtime/{EXPANSION_CAMPAIGN if expansion_mode else CAMPAIGN}_{runtime_date}"
     errors: list[str] = []
     validity_errors: list[str] = []
     required = (
@@ -3583,6 +3812,13 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         "final_decision.json",
         "run_manifest.json",
     )
+    if expansion_mode:
+        required += (
+            "development_expansion_launch_claim.json",
+            "development_expansion_authorization_snapshot.json",
+            "development_expansion_diagnostic_baseline.json",
+            "cluster_diagnostics_latest.json",
+        )
     for value in required:
         if not (runtime_root / value).is_file():
             errors.append(f"missing:{value}")
@@ -3653,6 +3889,8 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
             local = path.parent / str(row["name"])
             if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
                 errors.append(f"checkpoint_file:{index}:{row['name']}")
+        if expansion_mode and not (path.parent / "discovery_diagnostics.json").is_file():
+            errors.append(f"checkpoint_discovery_diagnostics:{index}")
     if budget_checkpoint.is_file():
         manifest = engine._read_json(budget_checkpoint)
         if (
@@ -3762,9 +4000,69 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
         local = runtime_root / str(row["path"])
         if not local.is_file() or _sha256_file(local) != str(row["sha256"]):
             errors.append("manifest:" + str(row["path"]))
-    receipt = validate_receipt(repo_root, config=config, require_authorized=False)
-    if require_consumed and receipt.get("run_authorized") is not False:
-        errors.append("receipt_not_consumed")
+    if expansion_mode:
+        receipt = engine._read_json(
+            runtime_root / "development_expansion_authorization_snapshot.json"
+        )
+        if receipt.get("authorization_sha256") != authorization_content_sha(receipt):
+            errors.append("expansion_authorization_snapshot")
+        if final.get("execution_mode") != EXPANSION_EXECUTION_MODE:
+            errors.append("expansion_execution_mode")
+        claim = engine._read_json(
+            runtime_root / "development_expansion_launch_claim.json"
+        )
+        if (
+            int(claim.get("market_arrays_read_at_claim", -1)) != 0
+            or int(claim.get("candidate_evaluations_at_claim", -1)) != 0
+            or int(claim.get("sealed_reads", -1)) != 0
+        ):
+            errors.append("expansion_launch_claim")
+        expected_states = {arm: "ACTIVE" for arm in ARMS}
+        if dict(final.get("arm_states") or {}) != expected_states:
+            errors.append("expansion_arm_states")
+        if len(pairs) != 0:
+            errors.append("expansion_stage0_pairs")
+        if len(ledger) == 50_000:
+            if (
+                final.get("status") != "DEVELOPMENT_EXPANSION_BUDGET_COMPLETE"
+                or final.get("terminal_reason")
+                != "FIXED_DEVELOPMENT_STRICT_CAP_REACHED"
+                or len(checkpoints) != 25
+            ):
+                errors.append("expansion_mechanical_stop")
+            observed_arm_counts = Counter(str(value) for value in ledger["arm"])
+            if observed_arm_counts != Counter(
+                {
+                    "temporal_program_random": 10_000,
+                    "temporal_program_cem": 10_000,
+                    "temporal_program_evolution": 30_000,
+                }
+            ):
+                errors.append("expansion_fixed_allocation")
+        for boundary in EXPANSION_DECISION_BOUNDARIES:
+            path = runtime_root / f"continuation_decision_{boundary:06d}.json"
+            if len(ledger) >= boundary and (
+                not path.is_file()
+                or engine._read_json(path) != fixed_flow_decision(boundary)
+            ):
+                errors.append(f"expansion_fixed_decision:{boundary}")
+        diagnostics = engine._read_json(
+            runtime_root / "cluster_diagnostics_latest.json"
+        )
+        if (
+            diagnostics.get("status") != "DIAGNOSTIC_ONLY_NOT_SEARCH_AUTHORITY"
+            or diagnostics.get("policy_feedback_applied") is not False
+            or int(diagnostics.get("sealed_reads", -1)) != 0
+        ):
+            errors.append("expansion_diagnostics_authority")
+        if require_consumed:
+            canonical = engine._read_json(repo_root / EXPANSION_AUTHORIZATION_PATH)
+            if canonical.get("run_authorized") is not False:
+                errors.append("receipt_not_consumed")
+    else:
+        receipt = validate_receipt(repo_root, config=config, require_authorized=False)
+        if require_consumed and receipt.get("run_authorized") is not False:
+            errors.append("receipt_not_consumed")
     result = {
         "schema_version": 1,
         "status": "PASS" if not errors and not validity_errors else "FAIL",
@@ -3785,6 +4083,7 @@ def check(repo_root: Path, *, runtime_date: str, require_consumed: bool = False)
             final.get("orchestration_terminal_invalid", False)
         ),
         "sealed_reads": 0,
+        "execution_mode": str(execution_mode),
     }
     engine._write_json(runtime_root / "independent_checker.json", result)
     return result
@@ -3825,6 +4124,53 @@ def consume_receipt(
     )
     updated["receipt_sha256"] = _receipt_content_sha(updated)
     engine._write_json(path, updated)
+    return updated
+
+
+def consume_development_expansion_authorization(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+) -> dict[str, Any]:
+    repo_root = repo_root.resolve()
+    path = repo_root / EXPANSION_AUTHORIZATION_PATH
+    authorization = engine._read_json(path)
+    if (
+        authorization.get("run_authorized") is not True
+        or authorization.get("consumed") is not False
+    ):
+        raise RuntimeError("development expansion authorization is not active")
+    runtime_root = repo_root / f"runtime/{EXPANSION_CAMPAIGN}_{runtime_date}"
+    checker = engine._read_json(runtime_root / "independent_checker.json")
+    if checker.get("status") != "PASS":
+        raise RuntimeError("development expansion independent checker did not pass")
+    final = engine._read_json(runtime_root / "final_decision.json")
+    updated = {
+        key: value
+        for key, value in authorization.items()
+        if key not in {"authorization_sha256", "run_outcome"}
+    }
+    updated.update(
+        {
+            "status": "RUN_AUTHORIZATION_CONSUMED_50000_STRICT_DEVELOPMENT_EXPANSION",
+            "run_authorized": False,
+            "consumed": True,
+            "run_outcome": {
+                "status": final["status"],
+                "runtime": f"runtime/{EXPANSION_CAMPAIGN}_{runtime_date}",
+                "producer_source_sha": final["producer_source_sha"],
+                "strict_evaluated_count": final["strict_evaluated_count"],
+                "generation_attempts": final["generation_attempts"],
+                "checkpoint_count": final["checkpoint_count"],
+                "sealed_reads": 0,
+                "automatic_next_run_started": False,
+            },
+        }
+    )
+    updated["authorization_sha256"] = authorization_content_sha(updated)
+    temporary = path.with_name(path.name + ".consuming.tmp")
+    engine._write_json(temporary, updated)
+    os.replace(temporary, path)
     return updated
 
 
@@ -3907,6 +4253,7 @@ def main() -> None:
         "check-successor",
         "consume-receipt",
         "consume-successor-authorization",
+        "consume-development-expansion-authorization",
     ):
         command = sub.add_parser(name)
         command.add_argument("--repo-root", type=Path, required=True)
@@ -3915,13 +4262,22 @@ def main() -> None:
             command.add_argument("--source-sha")
             command.add_argument(
                 "--execution-mode",
-                choices=("FRESH_SEQUENTIAL_PROGRAM", SUCCESSOR_EXECUTION_MODE),
+                choices=(
+                    "FRESH_SEQUENTIAL_PROGRAM",
+                    SUCCESSOR_EXECUTION_MODE,
+                    EXPANSION_EXECUTION_MODE,
+                ),
                 default="FRESH_SEQUENTIAL_PROGRAM",
             )
             command.add_argument("--successor-artifact-root", type=Path)
             command.add_argument("--successor-policy-bundle", type=Path)
         if name == "check":
             command.add_argument("--require-consumed", action="store_true")
+            command.add_argument(
+                "--execution-mode",
+                choices=("FRESH_SEQUENTIAL_PROGRAM", EXPANSION_EXECUTION_MODE),
+                default="FRESH_SEQUENTIAL_PROGRAM",
+            )
         if name in {"check-successor", "consume-successor-authorization"}:
             command.add_argument("--artifact-relocated", action="store_true")
     smoke = sub.add_parser("source-smoke")
@@ -3941,6 +4297,7 @@ def main() -> None:
             args.repo_root,
             runtime_date=args.runtime_date,
             require_consumed=bool(args.require_consumed),
+            execution_mode=args.execution_mode,
         )
     elif args.command == "check-successor":
         result = check_successor_runtime(
@@ -3955,6 +4312,11 @@ def main() -> None:
             args.repo_root,
             runtime_date=args.runtime_date,
             artifact_relocated=bool(args.artifact_relocated),
+        )
+    elif args.command == "consume-development-expansion-authorization":
+        result = consume_development_expansion_authorization(
+            args.repo_root,
+            runtime_date=args.runtime_date,
         )
     else:
         result = source_smoke(args.repo_root)
