@@ -161,8 +161,8 @@
       "strict_end": 50000,
       "allocation_per_10000": {
         "temporal_program_random": 2000,
-        "temporal_program_cem": 4000,
-        "temporal_program_evolution": 4000
+        "temporal_program_cem": 2000,
+        "temporal_program_evolution": 6000
       }
     }
   ],

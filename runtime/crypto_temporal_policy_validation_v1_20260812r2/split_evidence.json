@@ -1,0 +1,12 @@
+{
+  "maximum_feature_warmup_hours": 720,
+  "train_effective_hours": 1523,
+  "train_effective_share": 0.5109023817510903,
+  "train_raw_hours": 1529,
+  "validation_block_effective_hours": 482,
+  "validation_block_raw_hours": 488,
+  "validation_effective_hours": 1458,
+  "validation_effective_share": 0.48909761824890974,
+  "validation_raw_hours": 1464,
+  "warmup_rows_in_labels_or_metrics": false
+}

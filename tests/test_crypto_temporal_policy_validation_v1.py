@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import copy
 import json
 from pathlib import Path
 
@@ -238,8 +237,7 @@ def test_temporal_program_uses_configured_fixed_policy_weights() -> None:
             encoding="utf-8"
         )
     )
-    qualified = copy.deepcopy(config)
-    qualified["stage_allocations"][1]["allocation_per_10000"] = {
+    assert config["stage_allocations"][1]["allocation_per_10000"] == {
         "temporal_program_random": 2000,
         "temporal_program_cem": 2000,
         "temporal_program_evolution": 6000,
@@ -251,7 +249,7 @@ def test_temporal_program_uses_configured_fixed_policy_weights() -> None:
             "temporal_program_evolution": "ACTIVE",
         },
     }
-    assert _checkpoint_allocation(state, 5, qualified) == {
+    assert _checkpoint_allocation(state, 5, config) == {
         "temporal_program_random": 400,
         "temporal_program_cem": 400,
         "temporal_program_evolution": 1200,

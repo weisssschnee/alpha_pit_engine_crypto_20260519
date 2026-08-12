@@ -1,0 +1,62 @@
+{
+  "archive_written": false,
+  "automatic_search_started": false,
+  "bundle_sha256": "8E91969E61C51A89276F1CFCA64590D5FE1B78279D2737FCB767F0F1BE36BBB7",
+  "candidate_count": 360,
+  "candidate_generation_performed": false,
+  "evaluation_passes": 4,
+  "files": [
+    {
+      "bytes": 220071,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/selection_receipt.json",
+      "sha256": "FD8D37AED5E5A3C01BAEB3F9D3EC7546559ECD08D8370B101363E288605AE5DE"
+    },
+    {
+      "bytes": 409,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/split_evidence.json",
+      "sha256": "4224D0C276F744A6CF6F4E7AF5DC56AC9AE73C340DCC9C2131175032A1279104"
+    },
+    {
+      "bytes": 742,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/full_pass_reuse_receipt.json",
+      "sha256": "FAE5DF6577730B319F87EDB98BD12C1A433CABFC9761630379B7FEA34536214F"
+    },
+    {
+      "bytes": 859,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/source_repair_finalization_receipt.json",
+      "sha256": "589737A6CC1848ABC0390AC202D1995B1B72C72C1F7082AD6B8FA53E53BFF65D"
+    },
+    {
+      "bytes": 1839261,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/candidate_ledger.parquet",
+      "sha256": "1074FD0A450A9FE99B3CA10B0C36D398B6B11B59077444707D988AABB053F301"
+    },
+    {
+      "bytes": 3557,
+      "path": "runtime/crypto_temporal_policy_validation_v1_20260812r2/final_decision.json",
+      "sha256": "A50DF3BEEB29BF0E2599ED6394B7B004C843D7037BBD7B161684467FACA40EF4"
+    },
+    {
+      "bytes": 2214,
+      "path": "reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md",
+      "sha256": "9EE043219500F838B2DDA41C1B39A0E9FDE7ACE25C46BDE2E23E4237958DB832"
+    }
+  ],
+  "finalizer_source_sha": "187db8a81a0157ab9d92bda526481d61984f9128",
+  "holdout_read_count": 0,
+  "new_pair_evaluation_count": 1080,
+  "new_pass_count": 3,
+  "oos": false,
+  "optimizer_feedback_written": false,
+  "pair_evaluation_count": 1440,
+  "producer_source_sha": "728e13a348398e9c866322d11271e59e9ae2e6cd",
+  "promotion_authorized": false,
+  "report": "reports/CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_20260812r2.md",
+  "reused_pair_evaluation_count": 360,
+  "reused_pass_count": 1,
+  "runtime": "runtime/crypto_temporal_policy_validation_v1_20260812r2",
+  "schema_version": 1,
+  "source_repair_finalization_market_evaluation_count": 0,
+  "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
+  "workers": 10
+}

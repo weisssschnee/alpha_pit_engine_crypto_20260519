@@ -1,0 +1,10 @@
+{
+  "finalizer_source_sha": "187db8a81a0157ab9d92bda526481d61984f9128",
+  "heartbeat_utc": "2026-08-12T09:13:47.347551+00:00",
+  "holdout_read_count": 0,
+  "policy_validation_pass": true,
+  "producer_source_sha": "728e13a348398e9c866322d11271e59e9ae2e6cd",
+  "schema_version": 1,
+  "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
+  "workers": 10
+}

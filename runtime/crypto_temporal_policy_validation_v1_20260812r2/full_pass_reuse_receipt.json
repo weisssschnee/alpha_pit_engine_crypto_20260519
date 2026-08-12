@@ -1,0 +1,14 @@
+{
+  "candidate_local_failure_count": 33,
+  "new_market_evaluation_count": 0,
+  "receipt_sha256": "1E2073EB133E1788D72D21A3B22008D6BB17E8C3B218397F30C64DFB04C30EBD",
+  "reused_candidate_count": 360,
+  "schema_version": 1,
+  "source_candidate_ledger_path": "runtime/crypto_temporal_policy_validation_v1_20260812r1/passes/full/candidate_ledger.parquet",
+  "source_candidate_ledger_sha256": "CB40F35114DCA0666420460AD301FCB87F8A7782B85F5E975AD2598FBA36A188",
+  "source_producer_sha": "cf0db857ea285880ae3528586f747967b5ea8996",
+  "source_runtime": "runtime/crypto_temporal_policy_validation_v1_20260812r1",
+  "source_task_id": "job_20260812_105149_89f2cf",
+  "status": "REUSED_VERIFIED_FULL_PASS",
+  "strict_evaluated_count": 327
+}

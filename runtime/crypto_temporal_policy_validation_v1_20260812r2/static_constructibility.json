@@ -1,0 +1,8 @@
+{
+  "candidate_count": 360,
+  "market_read_performed": false,
+  "proofs_sha256": "79E1AF98D7A55FCE4D39F7CF5BEBB05101C8CBE58F155EC5D88BEEBE60A425F8",
+  "schema_version": 1,
+  "status": "PASS_TEMPORAL_PROGRAM_CONSTRUCTIBILITY_SWEEP",
+  "unique_candidate_count": 360
+}
