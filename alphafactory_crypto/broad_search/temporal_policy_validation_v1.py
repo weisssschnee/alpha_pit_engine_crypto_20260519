@@ -74,6 +74,16 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest().upper()
 
 
+def committed_file_sha256(repo_root: Path, relative_path: str) -> str:
+    object_id = subprocess.check_output(
+        ["git", "rev-parse", f"HEAD:{relative_path}"], cwd=repo_root, text=True
+    ).strip()
+    payload = subprocess.check_output(
+        ["git", "cat-file", "blob", object_id], cwd=repo_root
+    )
+    return hashlib.sha256(payload).hexdigest().upper()
+
+
 def write_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".tmp-{os.getpid()}")
@@ -229,8 +239,9 @@ def validate_execution_source(repo_root: Path, receipt: Mapping[str, Any]) -> st
     ).returncode:
         raise RuntimeError("TEMPORAL_POLICY_VALIDATION_WORKTREE_DIRTY")
     for component in dict(receipt["source_components"]).values():
-        path = root / str(component["path"])
-        if file_sha256(path) != str(component["sha256"]):
+        if committed_file_sha256(root, str(component["path"])) != str(
+            component["sha256"]
+        ):
             raise RuntimeError(
                 f"TEMPORAL_POLICY_VALIDATION_COMPONENT_CHANGED:{component['path']}"
             )
