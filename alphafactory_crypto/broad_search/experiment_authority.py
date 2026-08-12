@@ -2187,6 +2187,15 @@ def _validate_temporal_policy_validation_authority_exception(
             "missing_pass_labels": ["block_1", "block_2", "block_3"],
             "failure_before_missing_block_evaluation": "ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED",
             "full_pass_market_evaluation_must_not_repeat": True,
+            "completed_pass_ledgers_sha256": {
+                "full": "CB40F35114DCA0666420460AD301FCB87F8A7782B85F5E975AD2598FBA36A188",
+                "block_1": "F6E7C066CD845096B86DD31374C4D9AEA969191F30267825FF31CCCEBA36B65E",
+                "block_2": "CAEB7CC73C8A29E2834D2CFBC89C21033BF8F947BF6E1DB597F7C45758C955F5",
+                "block_3": "080A17F4D17BFE4E6DD6F3D2A24F1A1CE18352E1475AEDB99FB98D3806E03EF7",
+            },
+            "completed_block_evaluation_task_id": "job_20260812_164556_d9edec",
+            "completed_block_evaluation_source_sha": "728e13a348398e9c866322d11271e59e9ae2e6cd",
+            "source_repair_finalization_only": True,
         }
     )
     if (

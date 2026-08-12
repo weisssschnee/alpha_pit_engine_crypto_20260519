@@ -14,6 +14,7 @@ from alphafactory_crypto.broad_search.experiment_authority import (
 from alphafactory_crypto.broad_search.temporal_policy_validation_v1 import (
     ARMS,
     PROGRAM_FAMILIES,
+    _assemble_decision_frame,
     _economic_context_for_interval,
     build_decision,
     canonical_sha256,
@@ -187,6 +188,34 @@ def _decision_frame(evolution_replicated: int, control_replicated: int) -> pd.Da
                 }
             )
     return pd.DataFrame(rows)
+
+
+def test_final_assembly_restores_frozen_lineage_metadata() -> None:
+    source = _decision_frame(24, 4)
+    selected = [
+        {
+            "candidate_id": row.candidate_id,
+            "program_family_id": row.program_family_id,
+            "program_id": row.program_id,
+            "lane_index": row.lane_index,
+        }
+        for row in source.itertuples(index=False)
+    ]
+    pass_frame = source.drop(
+        columns=["program_family_id", "program_id", "lane_index"]
+    )
+    assembled = _assemble_decision_frame(
+        {
+            "full": pass_frame.to_dict("records"),
+            "block_1": pass_frame.to_dict("records"),
+            "block_2": pass_frame.to_dict("records"),
+            "block_3": pass_frame.to_dict("records"),
+        },
+        selected=selected,
+    )
+    assert assembled["program_family_id"].nunique() == 2
+    assert assembled["lane_index"].nunique() == 4
+    assert assembled["program_id"].nunique() == 8
 
 
 def test_decision_qualifies_only_a_broad_replication_advantage() -> None:

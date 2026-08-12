@@ -719,6 +719,214 @@ def build_decision(frame: pd.DataFrame, receipt: Mapping[str, Any]) -> dict[str,
         arm: _arm_summary(frame.loc[frame["arm"].eq(arm)].copy(), float(yields[arm]))
         for arm in ARMS
     }
+
+
+def _assemble_decision_frame(
+    pass_rows: Mapping[str, Sequence[Mapping[str, Any]]],
+    *,
+    selected: Sequence[Mapping[str, Any]],
+) -> pd.DataFrame:
+    full = pd.DataFrame(pass_rows["full"])
+    metadata = {
+        str(row["candidate_id"]): {
+            "program_family_id": str(row["program_family_id"]),
+            "program_id": str(row["program_id"]),
+            "lane_index": int(row["lane_index"]),
+        }
+        for row in selected
+    }
+    for column in ("program_family_id", "program_id", "lane_index"):
+        full[column] = full["candidate_id"].map(
+            {candidate_id: row[column] for candidate_id, row in metadata.items()}
+        )
+    if full[["program_family_id", "program_id", "lane_index"]].isna().any().any():
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_LINEAGE_METADATA_MISSING")
+    for block_index in range(1, 4):
+        block = pd.DataFrame(pass_rows[f"block_{block_index}"]).set_index("candidate_id")
+        for column in (
+            "validation_status",
+            "strict_evaluated",
+            "validation_left_incremental_net_mean",
+            "validation_right_incremental_net_mean",
+            "validation_left_incremental_net_lcb",
+            "validation_right_incremental_net_lcb",
+            "validation_matched_positive",
+            "validation_search_reward",
+        ):
+            full[f"block_{block_index}_{column}"] = full["candidate_id"].map(
+                block[column]
+            )
+    full["replicated_positive_block_count"] = sum(
+        full[f"block_{index}_validation_left_incremental_net_mean"].gt(0.0)
+        & full[f"block_{index}_validation_right_incremental_net_mean"].gt(0.0)
+        for index in range(1, 4)
+    )
+    full["replicated_candidate"] = full["replicated_positive_block_count"].ge(2)
+    return full
+
+
+def finalize_existing_runtime(
+    repo_root: Path,
+    *,
+    runtime_date: str,
+    receipt_path: str = RECEIPT_PATH,
+) -> dict[str, Any]:
+    root = Path(repo_root)
+    receipt = load_receipt(root, require_authorized=True, receipt_path=receipt_path)
+    finalizer_sha = validate_execution_source(root, receipt)
+    runtime_root = root / "runtime" / f"{RUNTIME_PREFIX}_{runtime_date}"
+    if not runtime_root.is_dir() or (runtime_root / "final_decision.json").exists():
+        raise RuntimeError("TEMPORAL_POLICY_VALIDATION_FINALIZATION_STATE_INVALID")
+    continuation = dict(receipt["continuation"])
+    expected_hashes = dict(continuation["completed_pass_ledgers_sha256"])
+    selected = select_equal_count_cohort(root, receipt=receipt, receipt_path=receipt_path)
+    expected_candidates = {
+        str(row["candidate_id"]): str(row["candidate_spec_sha256"])
+        for row in selected
+    }
+    pass_rows: dict[str, list[dict[str, Any]]] = {}
+    allowed_statuses = {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
+    for label in ("full", "block_1", "block_2", "block_3"):
+        ledger_path = runtime_root / "passes" / label / "candidate_ledger.parquet"
+        if (
+            not ledger_path.is_file()
+            or file_sha256(ledger_path) != str(expected_hashes.get(label) or "")
+        ):
+            raise RuntimeError(f"TEMPORAL_POLICY_VALIDATION_PASS_CHANGED:{label}")
+        frame = pd.read_parquet(ledger_path)
+        actual_candidates = dict(
+            zip(
+                frame["candidate_id"].astype(str),
+                frame["candidate_spec_sha256"].astype(str),
+            )
+        )
+        if (
+            len(frame) != 360
+            or frame["candidate_id"].nunique() != 360
+            or actual_candidates != expected_candidates
+            or set(frame["validation_status"].astype(str)) - allowed_statuses
+            or frame["candidate_generation_performed"].ne(False).any()
+            or frame["optimizer_feedback_written"].ne(False).any()
+            or frame["archive_written"].ne(False).any()
+        ):
+            raise RuntimeError(f"TEMPORAL_POLICY_VALIDATION_PASS_INVALID:{label}")
+        pass_rows[label] = frame.to_dict("records")
+    full = _assemble_decision_frame(pass_rows, selected=selected)
+    selection = json.loads(
+        (runtime_root / "selection_receipt.json").read_text(encoding="utf-8")
+    )
+    split_evidence = validate_split_contract(receipt)
+    authority = json.loads(
+        (runtime_root / "authority_preflight.json").read_text(encoding="utf-8")
+    )
+    repair = {
+        "schema_version": 1,
+        "status": "SOURCE_REPAIR_FINALIZATION_COMPLETE",
+        "market_evaluation_task_id": continuation[
+            "completed_block_evaluation_task_id"
+        ],
+        "market_evaluation_source_sha": continuation[
+            "completed_block_evaluation_source_sha"
+        ],
+        "finalizer_source_sha": finalizer_sha,
+        "completed_pass_ledgers_sha256": expected_hashes,
+        "candidate_count_per_pass": 360,
+        "new_market_evaluation_count": 0,
+        "holdout_read_count": 0,
+    }
+    repair["receipt_sha256"] = canonical_sha256(repair)
+    write_json(runtime_root / "source_repair_finalization_receipt.json", repair)
+    ledger_path = runtime_root / "candidate_ledger.parquet"
+    full.to_parquet(ledger_path, index=False)
+    decision = build_decision(full, receipt)
+    decision.update(
+        {
+            "producer_source_sha": continuation[
+                "completed_block_evaluation_source_sha"
+            ],
+            "finalizer_source_sha": finalizer_sha,
+            "selection_receipt_sha256": selection["receipt_sha256"],
+            "split_evidence": split_evidence,
+            "authority_result": authority["result"],
+            "source_repair_finalization_receipt_sha256": repair["receipt_sha256"],
+        }
+    )
+    write_json(runtime_root / "final_decision.json", decision)
+    report_path = root / "reports" / f"CRYPTO_TEMPORAL_POLICY_VALIDATION_V1_{runtime_date}.md"
+    report_path.parent.mkdir(exist_ok=True)
+    report_path.write_text(
+        "# Crypto Temporal Policy Development Validation V1\n\n"
+        f"- Decision: `{decision['decision']}`\n"
+        f"- Policy validation pass: `{decision['policy_validation_pass']}`\n"
+        "- Evaluation lineage: reused the hash-bound 360-candidate full pass and the "
+        "three completed r2 block ledgers; source-repair finalization performed zero market evaluations.\n"
+        f"- Split: `{split_evidence['train_effective_hours']}` train effective hours / "
+        f"`{split_evidence['validation_effective_hours']}` validation effective hours\n"
+        "- Boundary: development validation only; no OOS, holdout, promotion, optimizer feedback, or automatic search.\n\n"
+        "```json\n"
+        + json.dumps(decision["arm_summaries"], indent=2, sort_keys=True)
+        + "\n```\n",
+        encoding="utf-8",
+    )
+    evidence_paths = (
+        runtime_root / "selection_receipt.json",
+        runtime_root / "split_evidence.json",
+        runtime_root / "full_pass_reuse_receipt.json",
+        runtime_root / "source_repair_finalization_receipt.json",
+        ledger_path,
+        runtime_root / "final_decision.json",
+        report_path,
+    )
+    manifest = {
+        "schema_version": 1,
+        "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
+        "producer_source_sha": continuation["completed_block_evaluation_source_sha"],
+        "finalizer_source_sha": finalizer_sha,
+        "runtime": str(runtime_root.relative_to(root).as_posix()),
+        "report": str(report_path.relative_to(root).as_posix()),
+        "candidate_count": 360,
+        "evaluation_passes": 4,
+        "pair_evaluation_count": 1_440,
+        "reused_pair_evaluation_count": 360,
+        "new_pair_evaluation_count": 1_080,
+        "source_repair_finalization_market_evaluation_count": 0,
+        "reused_pass_count": 1,
+        "new_pass_count": 3,
+        "workers": int(receipt["compute"]["workers_default"]),
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "archive_written": False,
+        "holdout_read_count": 0,
+        "oos": False,
+        "promotion_authorized": False,
+        "automatic_search_started": False,
+        "files": [
+            {
+                "path": str(path.relative_to(root).as_posix()),
+                "bytes": path.stat().st_size,
+                "sha256": file_sha256(path),
+            }
+            for path in evidence_paths
+        ],
+    }
+    manifest["bundle_sha256"] = canonical_sha256(manifest)
+    write_json(runtime_root / "run_manifest.json", manifest)
+    write_json(
+        runtime_root / "producer_status.json",
+        {
+            "schema_version": 1,
+            "status": "TEMPORAL_POLICY_VALIDATION_COMPLETE",
+            "producer_source_sha": continuation[
+                "completed_block_evaluation_source_sha"
+            ],
+            "finalizer_source_sha": finalizer_sha,
+            "workers": int(receipt["compute"]["workers_default"]),
+            "heartbeat_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+            "policy_validation_pass": decision["policy_validation_pass"],
+            "holdout_read_count": 0,
+        },
+    )
+    return decision
     evolution = summaries["temporal_program_evolution"]
     controls = [summaries["temporal_program_random"], summaries["temporal_program_cem"]]
     control_max = max(row["migrated_replicated_cluster_yield_per_1k"] for row in controls)
@@ -923,26 +1131,7 @@ def run_gate(
             workers=worker_rows,
             economic_receipt_sha256=str(economic["receipt_sha256"]),
         )
-    full = pd.DataFrame(pass_rows["full"])
-    for block_index in range(1, 4):
-        block = pd.DataFrame(pass_rows[f"block_{block_index}"]).set_index("candidate_id")
-        for column in (
-            "validation_status",
-            "strict_evaluated",
-            "validation_left_incremental_net_mean",
-            "validation_right_incremental_net_mean",
-            "validation_left_incremental_net_lcb",
-            "validation_right_incremental_net_lcb",
-            "validation_matched_positive",
-            "validation_search_reward",
-        ):
-            full[f"block_{block_index}_{column}"] = full["candidate_id"].map(block[column])
-    full["replicated_positive_block_count"] = sum(
-        full[f"block_{index}_validation_left_incremental_net_mean"].gt(0.0)
-        & full[f"block_{index}_validation_right_incremental_net_mean"].gt(0.0)
-        for index in range(1, 4)
-    )
-    full["replicated_candidate"] = full["replicated_positive_block_count"].ge(2)
+    full = _assemble_decision_frame(pass_rows, selected=selected)
     ledger_path = runtime_root / "candidate_ledger.parquet"
     full.to_parquet(ledger_path, index=False)
     decision = build_decision(full, receipt)
@@ -1082,7 +1271,7 @@ def check_gate(
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("select", "run", "check"))
+    parser.add_argument("command", choices=("select", "run", "finalize", "check"))
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--runtime-date", default=DEFAULT_RUNTIME_DATE)
     parser.add_argument("--receipt-path", default=RECEIPT_PATH)
@@ -1098,6 +1287,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(
             json.dumps(
                 run_gate(
+                    args.repo_root,
+                    runtime_date=args.runtime_date,
+                    receipt_path=args.receipt_path,
+                ),
+                indent=2,
+            )
+        )
+        return 0
+    if args.command == "finalize":
+        print(
+            json.dumps(
+                finalize_existing_runtime(
                     args.repo_root,
                     runtime_date=args.runtime_date,
                     receipt_path=args.receipt_path,
