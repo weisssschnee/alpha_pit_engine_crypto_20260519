@@ -48,6 +48,7 @@ from .temporal_development_expansion_v1 import (
     CAMPAIGN as EXPANSION_CAMPAIGN,
     DECISION_BOUNDARIES as EXPANSION_DECISION_BOUNDARIES,
     EXECUTION_MODE as EXPANSION_EXECUTION_MODE,
+    ExpansionPreflightError,
     LANE_SEEDS as EXPANSION_LANE_SEEDS,
     SEED_CAMPAIGN as EXPANSION_SEED_CAMPAIGN,
     SEED_DERIVATION as EXPANSION_SEED_DERIVATION,
@@ -2178,14 +2179,22 @@ def run(
             observed_economic[key] != str(authority[key])
             for key in observed_economic
         ):
-            raise RuntimeError(
+            raise (
+                SuccessorPreflightError
+                if successor_mode
+                else ExpansionPreflightError
+            )(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:current_economic_authority_changed"
             )
         premarket_catalog_sha = program_catalog_payload(
             compile_temporal_program_catalog(config)
         )["catalog_sha256"]
         if premarket_catalog_sha != str(authority["program_catalog_sha256"]):
-            raise RuntimeError(
+            raise (
+                SuccessorPreflightError
+                if successor_mode
+                else ExpansionPreflightError
+            )(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:current_program_catalog_changed"
             )
     train = dict(economic["evidence_partition"]["train"])
