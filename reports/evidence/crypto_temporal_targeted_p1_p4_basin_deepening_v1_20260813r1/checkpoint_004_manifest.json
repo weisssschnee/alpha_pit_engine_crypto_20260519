@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "A09181C8B9E78204B17C707E7D777E8B9D5EC84320AB86BCD01FA0929760D004",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_004",
+  "checkpoint_index": 4,
+  "compiler_identity": {
+    "bundle_sha256": "13087253F0A44017EE3656AA6E8890E33A32220E6A8BC75EA5F1704152E89F0F",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 107879,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1000728,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "87B7C9C8E6ADCFADC8E6B02F81F9A3248335FB6606FE76CA98412DA149940198",
+  "completed_ledger_row_count": 10000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 11540,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "774624ABC03CE9365B669D4E6CC47B206981387ABE2CB0FD34CF5C8D11798EA1"
+    },
+    {
+      "bytes": 9003260,
+      "name": "behavior_archive.parquet",
+      "sha256": "193A198B341C416F5CB4ED86AD624A3BD38F521FC2422AEC1860FACE2457303F"
+    },
+    {
+      "bytes": 85746719,
+      "name": "candidate_ledger.parquet",
+      "sha256": "E9E8795E1A5A87C6B8E47AFE1B0587ECF5DF5B1DA1340AD602DD2092E1C40837"
+    },
+    {
+      "bytes": 229852,
+      "name": "discovery_diagnostics.json",
+      "sha256": "7036FA61E8F2BAEEA8CF35D339E9B04666F8C97FA5D5CB86AAD0589BC156E1CA"
+    },
+    {
+      "bytes": 600,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 207541,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "EA4CFBC3A6F5FDD695E790F9704762E4AA297BDCCAB5E5162D5BD4279C01A3B3"
+    },
+    {
+      "bytes": 37897161,
+      "name": "state.json",
+      "sha256": "75FDBA2CE322C5515A160B76B4A2686B11D5EF89E35BEECBB8C7A4B5FCA3AFCD"
+    }
+  ],
+  "frozen_contract_sha256": "7DFB0E708142D2B857E48997E820B945CDECAC61BE1A6121F45AC30E2EB2742E",
+  "policy_state_sha256": "F7299BF415CE8673AE5D15534A8446E18ADD8CA4AE8648C82C5C67CA4914EF73",
+  "receipt_count": 5744,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "d8ec967c69678dfef600bed5dd68a6bbfe8810a4",
+  "state_sha256": "11EBA39EF1A8838E330A8461A0A3EE81FCB2BC688066AF9948B08AD369755428"
+}

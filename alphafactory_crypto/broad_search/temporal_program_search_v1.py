@@ -1917,6 +1917,31 @@ def _later_checkpoint_targets(
     return output
 
 
+def _random_policy_key_for_lane(
+    policy_key: str,
+    *,
+    arm: str,
+    seed_text: str,
+    local_index: int,
+    targeted_mode: bool,
+    active_program_families: Sequence[str],
+    catalog: Sequence[tuple[Any, Any]],
+) -> str:
+    if targeted_mode:
+        return policy_key
+    if (
+        arm == ARMS[0]
+        and active_program_families
+        and any(
+            pair[1].family_id not in set(active_program_families)
+            for pair in catalog
+        )
+        and int(local_index) % 10 == 9
+    ):
+        return f"temporal_program_random_diagnostic|{seed_text}"
+    return policy_key
+
+
 def _write_status(
     runtime_root: Path,
     *,
@@ -3037,14 +3062,18 @@ def run(
                         scans = 0
                         policy_key = key
                         arm, seed_text = key.rsplit("|", 1)
-                        actual_policy_key = policy_key
-                        if arm == ARMS[0] and state["active_program_families"] and any(
-                            pair[1].family_id not in set(state["active_program_families"])
-                            for pair in catalog
-                        ):
-                            local_index = completed_by_lane[key] + sum(row["policy_key"] == key for row in proposals)
-                            if local_index % 10 == 9:
-                                actual_policy_key = f"temporal_program_random_diagnostic|{seed_text}"
+                        local_index = completed_by_lane[key] + sum(
+                            row["policy_key"] == key for row in proposals
+                        )
+                        actual_policy_key = _random_policy_key_for_lane(
+                            policy_key,
+                            arm=arm,
+                            seed_text=seed_text,
+                            local_index=local_index,
+                            targeted_mode=targeted_mode,
+                            active_program_families=state["active_program_families"],
+                            catalog=catalog,
+                        )
                         policy = policies[actual_policy_key]
                         enforce_budget(proposal_attempt_reservation(arm))
                         proposal_cpu = time.process_time()
@@ -4615,6 +4644,9 @@ def consume_targeted_deepening_authorization(
     repo_root: Path,
     *,
     runtime_date: str,
+    system_invalid_audit: Path | None = None,
+    producer_status_evidence: Path | None = None,
+    task_status_evidence: Path | None = None,
 ) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     path = repo_root / TARGETED_AUTHORIZATION_PATH
@@ -4628,10 +4660,101 @@ def consume_targeted_deepening_authorization(
     runtime_root = repo_root / f"runtime/{TARGETED_CAMPAIGN}_{runtime_date}"
     if runtime_root.name != str(authorization.get("runtime_id") or ""):
         raise RuntimeError("targeted deepening runtime identity changed")
-    checker = engine._read_json(runtime_root / "independent_checker.json")
-    if checker.get("status") != "PASS":
-        raise RuntimeError("targeted deepening independent checker did not pass")
-    final = engine._read_json(runtime_root / "final_decision.json")
+    invalid_evidence = (
+        system_invalid_audit,
+        producer_status_evidence,
+        task_status_evidence,
+    )
+    if any(value is not None for value in invalid_evidence) and not all(
+        value is not None for value in invalid_evidence
+    ):
+        raise ValueError("system-invalid consumption requires all evidence paths")
+    if system_invalid_audit is None:
+        checker = engine._read_json(runtime_root / "independent_checker.json")
+        if checker.get("status") != "PASS":
+            raise RuntimeError("targeted deepening independent checker did not pass")
+        final = engine._read_json(runtime_root / "final_decision.json")
+        run_outcome = {
+            "status": final["status"],
+            "runtime": runtime_root.relative_to(repo_root).as_posix(),
+            "producer_source_sha": final["producer_source_sha"],
+            "strict_evaluated_count": final["strict_evaluated_count"],
+            "generation_attempts": final["generation_attempts"],
+            "checkpoint_count": final["checkpoint_count"],
+            "sealed_reads": 0,
+            "automatic_next_run_started": False,
+        }
+    else:
+        def evidence_path(value: Path | None) -> Path:
+            assert value is not None
+            return value if value.is_absolute() else repo_root / value
+
+        audit_path = evidence_path(system_invalid_audit)
+        producer_path = evidence_path(producer_status_evidence)
+        task_path = evidence_path(task_status_evidence)
+
+        def read_external_evidence(path: Path) -> dict[str, Any]:
+            return json.loads(path.read_text(encoding="utf-8-sig"))
+
+        audit = read_external_evidence(audit_path)
+        producer = read_external_evidence(producer_path)
+        task = read_external_evidence(task_path)
+        if (
+            audit.get("status") != "FAIL"
+            or audit.get("finding")
+            != "TARGETED_PROGRAM_FAMILY_SCOPE_VIOLATION"
+            or audit.get("next_decision") != "SYSTEM_INVALID"
+            or audit.get("runtime_id") != runtime_root.name
+            or int(audit.get("out_of_scope_strict_rows", 0)) <= 0
+            or int(audit.get("strict_rows_audited", 0)) <= 0
+            or audit.get("completion_ordinals_contiguous") is not True
+            or int(audit.get("market_arrays_read_by_audit", -1)) != 0
+            or int(audit.get("candidate_evaluations_by_audit", -1)) != 0
+            or int(audit.get("validation_reads", -1)) != 0
+            or int(audit.get("oos_reads", -1)) != 0
+            or int(audit.get("sealed_reads", -1)) != 0
+        ):
+            raise RuntimeError("targeted system-invalid audit is not admissible")
+        if (
+            producer.get("producer_source_sha")
+            != audit.get("producer_source_sha")
+            or int(producer.get("strict_evaluated", 0))
+            < int(audit["strict_rows_audited"])
+            or int(producer.get("generation_attempts", 0)) <= 0
+            or producer.get("status") != "RUNNING"
+        ):
+            raise RuntimeError("targeted invalid producer evidence changed")
+        if (
+            task.get("task_id") != audit.get("task_id")
+            or task.get("state") != "FAILED"
+            or int(task.get("exit_code", 0)) == 0
+            or not task.get("ended_at")
+        ):
+            raise RuntimeError("targeted invalid task termination is not proven")
+        run_outcome = {
+            "status": "SYSTEM_INVALID",
+            "terminal_reason": audit["finding"],
+            "runtime": runtime_root.relative_to(repo_root).as_posix(),
+            "producer_source_sha": producer["producer_source_sha"],
+            "strict_evaluated_count": int(producer["strict_evaluated"]),
+            "audited_strict_prefix": int(audit["strict_rows_audited"]),
+            "generation_attempts": int(producer["generation_attempts"]),
+            "checkpoint_count": int(producer["checkpoint_index"]),
+            "checker": "INDEPENDENT_SCOPE_AUDIT_FAIL",
+            "runtime_integrity": "INVALID_PARTIAL_NO_FINAL_MANIFEST",
+            "task_id": task["task_id"],
+            "task_state": task["state"],
+            "audit_sha256": _sha256_file(audit_path),
+            "system_invalid_audit": audit_path.relative_to(repo_root).as_posix(),
+            "producer_status_evidence": producer_path.relative_to(
+                repo_root
+            ).as_posix(),
+            "task_status_evidence": task_path.relative_to(repo_root).as_posix(),
+            "validation_reads": 0,
+            "oos_reads": 0,
+            "sealed_reads": 0,
+            "automatic_next_run_started": False,
+        }
     updated = {
         key: value
         for key, value in authorization.items()
@@ -4642,16 +4765,7 @@ def consume_targeted_deepening_authorization(
             "status": TARGETED_CONSUMED_STATUS,
             "run_authorized": False,
             "consumed": True,
-            "run_outcome": {
-                "status": final["status"],
-                "runtime": runtime_root.relative_to(repo_root).as_posix(),
-                "producer_source_sha": final["producer_source_sha"],
-                "strict_evaluated_count": final["strict_evaluated_count"],
-                "generation_attempts": final["generation_attempts"],
-                "checkpoint_count": final["checkpoint_count"],
-                "sealed_reads": 0,
-                "automatic_next_run_started": False,
-            },
+            "run_outcome": run_outcome,
         }
     )
     updated["authorization_sha256"] = authorization_content_sha(updated)
@@ -4773,6 +4887,10 @@ def main() -> None:
             )
         if name in {"check-successor", "consume-successor-authorization"}:
             command.add_argument("--artifact-relocated", action="store_true")
+        if name == "consume-targeted-deepening-authorization":
+            command.add_argument("--system-invalid-audit", type=Path)
+            command.add_argument("--producer-status-evidence", type=Path)
+            command.add_argument("--task-status-evidence", type=Path)
     smoke = sub.add_parser("source-smoke")
     smoke.add_argument("--repo-root", type=Path, required=True)
     args = parser.parse_args()
@@ -4815,6 +4933,9 @@ def main() -> None:
         result = consume_targeted_deepening_authorization(
             args.repo_root,
             runtime_date=args.runtime_date,
+            system_invalid_audit=args.system_invalid_audit,
+            producer_status_evidence=args.producer_status_evidence,
+            task_status_evidence=args.task_status_evidence,
         )
     else:
         result = source_smoke(args.repo_root)

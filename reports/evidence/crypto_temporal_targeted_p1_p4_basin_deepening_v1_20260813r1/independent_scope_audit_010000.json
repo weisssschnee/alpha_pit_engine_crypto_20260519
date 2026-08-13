@@ -1,0 +1,40 @@
+{
+  "active_families": [
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+  ],
+  "candidate_evaluations_by_audit": 0,
+  "completion_ordinals_contiguous": true,
+  "finding": "TARGETED_PROGRAM_FAMILY_SCOPE_VIOLATION",
+  "ledger_path": "C:/HermesWorker/workspace/crypto_temporal_targeted_p1_p4_deepening_20260813r1/runtime/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1/checkpoints/checkpoint_004/candidate_ledger.parquet",
+  "ledger_sha256": "E9E8795E1A5A87C6B8E47AFE1B0587ECF5DF5B1DA1340AD602DD2092E1C40837",
+  "market_arrays_read_by_audit": 0,
+  "next_decision": "SYSTEM_INVALID",
+  "oos_reads": 0,
+  "out_of_scope_arm_counts": {
+    "temporal_program_random": 201
+  },
+  "out_of_scope_family_counts": {
+    "P2_RECENT_CROWDING_EVENT_TO_RESPONSE": 77,
+    "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION": 124
+  },
+  "out_of_scope_operation_counts": {
+    "EXTENSIBLE_MECHANISM_TYPED_RANDOM": 201
+  },
+  "out_of_scope_policy_key_counts": "NOT_AVAILABLE",
+  "out_of_scope_strict_rows": 201,
+  "producer_source_sha": "d8ec967c69678dfef600bed5dd68a6bbfe8810a4",
+  "program_family_counts": {
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 3464,
+    "P2_RECENT_CROWDING_EVENT_TO_RESPONSE": 77,
+    "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION": 124,
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 6335
+  },
+  "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "FAIL",
+  "strict_rows_audited": 10000,
+  "task_id": "job_20260813_122829_4a039f",
+  "validation_reads": 0
+}

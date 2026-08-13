@@ -4,6 +4,37 @@ Last updated: 2026-08-13 Asia/Hong_Kong
 
 ## Current phase
 
+`CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_SYSTEM_INVALID_SOURCE_REPAIRED_NO_RERUN`
+
+The sole current-user-authorized targeted P1/P4 PC2 run is consumed and closed
+as `SYSTEM_INVALID`. Task `job_20260813_122829_4a039f` reached a last producer
+heartbeat of 13,691 strict rows from 23,671 generation attempts before operator
+termination. An independent audit of the exact, restore-verified and contiguous
+10,000-row checkpoint found 77 P2 and 124 P3 rows even though both families were
+paused. All 201 out-of-scope rows came from the Random arm's inherited
+`EXTENSIBLE_MECHANISM_TYPED_RANDOM` diagnostic route. The task exited 1 at
+15:36:54 HKT and no target-workspace process remains.
+
+Validation, OOS and sealed reads are all zero. The 10k checkpoint ledger hash
+matches its manifest, but the whole runtime is partial and has no normal final
+decision, run manifest or PASS checker. The independent scope audit is `FAIL`;
+the one-time receipt now has `run_authorized=false`, outcome `SYSTEM_INVALID`
+and `automatic_next_run_started=false`. Contaminated checkpoint economics are
+retained only as diagnostics and cannot support a targeted-deepening decision.
+
+Source now prevents targeted mode from substituting the broad-search
+out-of-scope Random diagnostic policy while preserving broad-mode behavior. An
+independent ledger scope-audit script and system-invalid receipt-consumption
+path close the failure without market reevaluation. Temporal regression tests
+pass 89/89 and focused closure tests pass 5/5. No replacement run, validation,
+OOS, holdout, forward read, promotion, Alpha qualification, pocket gate or new
+algorithm is authorized. Authoritative report:
+`reports/CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_20260813r1.md`.
+
+The only allowed next decision from this run is `SYSTEM_INVALID`.
+
+## Preceding completed phase
+
 `CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_COMPLETE_CONTINUE_DISCOVERY_ALPHA_HOLD`
 
 The independently authorized fresh-state Temporal Program expansion is complete
@@ -16,17 +47,18 @@ After correcting a checker-only arm-state expectation (Random is a fixed control
 not an adaptive state entry), the same immutable runtime passes PC2 independent
 artifact-integrity and run-validity checks.
 
-The run found 12,406 baseline-new economic opportunity clusters (248.12/1k),
-86 new matched-positive economic clusters, 15,487 dual-axis net-positive rows,
-5,555 development 2-of-3 replicated rows and 11 new major basins. Largest/top-3
-basin shares are 15.28%/34.71% and effective economic dimension is 3.3745, so
-the discovery surface did not collapse to one basin. Evolution supplied 301
+The historical report's 12,406 and 86 counts are baseline-new dual-positive and
+matched-positive `behavior_family_id` counts, not independent economic
+opportunities. A persisted-fingerprint-only recomputation of the 302
+matched-positive rows yields 59/47/38/33 diagnostic economic clusters at
+similarity 0.95/0.90/0.85/0.80, economic effective rank 3.6953, and PCA
+dimensions 2/4/6 for 50%/80%/90% variance. The broad run therefore expanded
+real economic breadth, but not to 86 independent Alpha. Evolution supplied 301
 matched-positive rows (10.03/1k), versus CEM one (0.1/1k) and Random zero, while
 its dual-positive and replication yields were 447.77/1k and 163.93/1k. Its
-advantage comes from both parameter-mutation/crossover deepening and breadth:
-parameter mutation produced 7,145 new clusters and 167 matched positives,
-crossover 2,821 and 134; mechanism mutation crossed basins but produced 1,348
-new clusters and zero matched positives.
+advantage came from parameter mutation and crossover; their historical
+"new cluster" fields remain behavior-family diagnostics. Mechanism mutation
+crossed program basins but produced zero matched positives.
 
 This is credible development discovery, not Alpha qualification or migration
 proof. The durable next decision is `CONTINUE_DEVELOPMENT_DISCOVERY`, but no

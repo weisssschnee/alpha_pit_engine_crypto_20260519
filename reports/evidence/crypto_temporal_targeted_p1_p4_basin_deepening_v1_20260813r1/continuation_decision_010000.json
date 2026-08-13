@@ -1,0 +1,7 @@
+{
+  "family_concentration_is_diagnostic_only": true,
+  "next_stage_proposals_generated": false,
+  "schema_version": 1,
+  "status": "CONTINUE_TO_PREDECLARED_SATURATION_CHECK",
+  "strict_boundary": 10000
+}
