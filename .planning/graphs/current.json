@@ -17,11 +17,20 @@
           "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
           "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py",
           "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/final_decision.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/producer_status.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/targeted_deepening_launch_claim.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/targeted_frozen_parent_pool.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/task_status.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/task_stderr.log",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/worker_13676_initializer.json",
+          "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/worker_18744_initializer.json",
           "scripts/check_crypto_temporal_targeted_r2_control.py",
           "tests/test_crypto_temporal_targeted_deepening_v1.py"
         ],
         "raw_sha": "2d35867bcf7f846982129b2bcef3f7a717366625",
-        "repo_head": "e05efc63cff183e1d223ee2b02e56070bec1c7bb"
+        "repo_head": "1f88a6ef772d55a64826fe00d37a7a42a914fde2"
       },
       "message": "Raw graph predates non-overlay source changes",
       "severity": "ERROR"
@@ -1228,8 +1237,8 @@
     },
     {
       "applies_to_binding": "",
-      "binding_state": "EXPERIMENTAL",
-      "color": "#f9a825",
+      "binding_state": "DEPRECATED",
+      "color": "#757575",
       "contract": null,
       "critical": false,
       "decision_ref": "",
@@ -1238,7 +1247,7 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "targeted_p1_p4_candidate_for_search_policy",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
       "relation": "candidate_for",
       "relation_class": "candidate_for",
@@ -1246,7 +1255,7 @@
       "source": "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
       "target": "real_policy_upgrade_canary",
       "validation": {
-        "checked_at": "2026-08-13T12:11:56.247808+00:00",
+        "checked_at": "2026-08-13T12:43:26.361787+00:00",
         "evidence_ref": "",
         "evidence_sha256": null,
         "level": "NOT_REQUIRED",
@@ -1258,8 +1267,8 @@
     },
     {
       "applies_to_binding": "",
-      "binding_state": "EXPERIMENTAL",
-      "color": "#f9a825",
+      "binding_state": "DEPRECATED",
+      "color": "#757575",
       "contract": null,
       "critical": false,
       "decision_ref": "",
@@ -1268,7 +1277,7 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "targeted_p1_p4_derived_from_large_expansion",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
       "relation": "derived_from",
       "relation_class": "derived_from",
@@ -1276,7 +1285,7 @@
       "source": "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
       "target": "real_policy_upgrade_canary",
       "validation": {
-        "checked_at": "2026-08-13T12:11:56.247808+00:00",
+        "checked_at": "2026-08-13T12:43:26.361787+00:00",
         "evidence_ref": "",
         "evidence_sha256": null,
         "level": "NOT_REQUIRED",
@@ -1287,7 +1296,7 @@
       }
     }
   ],
-  "generated_at": "2026-08-13T12:11:56.247808+00:00",
+  "generated_at": "2026-08-13T12:43:26.361787+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -9579,22 +9588,22 @@
       "authority_class": "NON_FORMAL",
       "binding_ref": "",
       "claim_badges": [
-        "R2 AUTHORIZED",
-        "NOT STARTED",
+        "SYSTEM INVALID",
+        "ZERO STRICT",
         "TRAIN ONLY",
         "NO VALIDATION OOS OR FORWARD",
         "NO PROMOTION",
         "NO AUTOMATIC FOLLOW-UP"
       ],
-      "color": "#f9a825",
+      "color": "#757575",
       "contract_ref": "",
       "contracts": [
         {
           "bypass_forbidden": true,
           "enforced_by": "one-time targeted authorization, e05 execution-component hashes, temporal_program_search_v1 targeted guard, and independent r2 control checker",
-          "evidence_ref": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
+          "evidence_ref": "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
           "id": "targeted_p1_p4_development_boundary",
-          "rule": "The sole r2 run is train-only P1/P4 with P2/P3 strict zero, frozen Random/CEM/Evolution 20/20/60, frozen 23-basin/228-parent pool A08112ED...AA49, 20k saturation decision, 30k hard cap, no child parent-pool injection, zero validation/OOS/holdout/forward/promotion/sealed reads, and no automatic follow-up.",
+          "rule": "The sole r2 run is consumed as PRE_STRICT_DEPLOYMENT_INVALID after ECONOMIC_RECEIPT_TARGET_CACHE_MISSING. It produced zero strict rows and zero validation/OOS/holdout/forward/promotion/sealed reads, supports no economic conclusion, and authorizes no automatic rerun.",
           "severity": "HARD",
           "type": "BOUNDARY"
         }
@@ -9605,14 +9614,15 @@
       "id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
       "implementation_bindings": [],
       "kind": "development_experiment",
-      "label": "Temporal P1/P4 targeted basin deepening r2 (authorized, not started)",
-      "lifecycle": "EXPERIMENTAL",
+      "label": "Temporal P1/P4 targeted basin deepening r2 (pre-strict system-invalid)",
+      "lifecycle": "DEPRECATED",
       "node_class": "",
       "owner": "",
       "paths": [
         "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
         "scripts/check_crypto_temporal_targeted_r2_control.py",
-        ".planning/STATE.md"
+        ".planning/STATE.md",
+        "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json"
       ],
       "promotion_requirements": [],
       "qualification_kind": "",
@@ -9643,16 +9653,18 @@
       "semantic_role": "experimental_targeted_p1_p4_basin_deepening",
       "supersedes": [],
       "validation": {
-        "checked_at": "2026-08-13T12:11:56.247808+00:00",
-        "evidence_ref": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
-        "evidence_sha256": "89D448073857F0956B6C446A09408769F22A341D7CCFDA51CC28504AFC08E798",
-        "level": "DECLARED",
-        "notes": [],
+        "checked_at": "2026-08-13T12:43:26.361787+00:00",
+        "evidence_ref": "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
+        "evidence_sha256": "DBE2962060B9A4D65CBB514AF2C1E411914F9AF97A79A5E93944B516CDDAE6A4",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
         "profile": "crypto-development-research",
-        "result": "NOT_REQUIRED",
+        "result": "INSUFFICIENT_EVIDENCE",
         "verified_at_sha": null
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": true,
@@ -9775,7 +9787,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "884A876E6A8812A17A487B91907889E99D5D93AAADA8F9057F9612E60933E6BA"
+    "sha256": "B96CC0DB2FD7C1DEAFC212F86F0F143DEA1300159DAA371A52C460471902A674"
   },
   "profile_id": null,
   "profiles": [
@@ -9812,7 +9824,7 @@
     "path": ".planning/graphs/graph.json",
     "sha256": "95868F5AD555FBD57F0C420D6E0069F358DCBC0C79070A5B76D4DAE611479887"
   },
-  "repo_head": "e05efc63cff183e1d223ee2b02e56070bec1c7bb",
+  "repo_head": "1f88a6ef772d55a64826fe00d37a7a42a914fde2",
   "schema_version": 1,
   "semantic_authorities": [
     {

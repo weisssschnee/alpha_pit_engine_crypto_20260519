@@ -1,0 +1,11 @@
+{
+  "authorization_sha256": "D26A2A1C9D100ADDEAE547FF205793799E193E5D4A0A6C2E743AB786262152A5",
+  "candidate_evaluations_at_claim": 0,
+  "execution_mode": "TARGETED_P1_P4_BASIN_DEEPENING_V1",
+  "market_arrays_read_at_claim": 0,
+  "producer_source_sha": "1f88a6ef772d55a64826fe00d37a7a42a914fde2",
+  "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "ONE_TIME_TARGETED_DEEPENING_LAUNCH_CLAIMED"
+}

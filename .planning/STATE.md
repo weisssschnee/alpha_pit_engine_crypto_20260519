@@ -4,7 +4,36 @@ Last updated: 2026-08-13 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_R2_AUTHORIZED_NOT_STARTED`
+`CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_R2_PRE_STRICT_DEPLOYMENT_INVALID`
+
+The sole r2 task `job_20260813_202156_f73045` is closed `SYSTEM_INVALID` and
+will not be restarted automatically. The committed authorization and external
+premarket gate passed at producer `1f88a6ef772d55a64826fe00d37a7a42a914fde2`,
+with all twelve execution components byte-bound to e05, exact 50k/302 source
+recovery, and frozen 23-basin/228-parent pool SHA
+`A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49`.
+The launch claim recorded zero market-array reads and zero candidate
+evaluations.
+
+The first worker initializer then failed
+`ECONOMIC_RECEIPT_TARGET_CACHE_MISSING`: the r2 workspace had the immutable
+115-field source cache but not the separately required
+`binance_open_target_v1` cache. The task stopped with exit code 1, zero strict
+rows, zero matched positives, zero completed checkpoints, 16 generation
+attempts, and no surviving process. The producer persisted an invalid
+checkpoint and final decision; the canonical checker failed because a normal
+run manifest and basin diagnostics cannot exist for a zero-strict run. A
+secondary finalization error also attempted to stat the absent basin diagnostic.
+
+No 20k saturation or 30k hard-cap decision was reached. Actual deepened basins,
+new concrete realizations and all depth increments are zero only in the literal
+not-evaluated sense; they are not economic negatives. Requested/realized
+operation and crossover-fallback attribution are unavailable because no
+proposal became strict. Validation, OOS, holdout, forward, promotion and sealed
+reads remain zero. The authorization is consumed; the only current decision is
+`SYSTEM_INVALID_NO_AUTOMATIC_RERUN`.
+
+## Previous phase: r2 authorization
 
 Current user decision authorizes exactly one fresh PC2 r2 train-only targeted
 basin-deepening run. Its execution implementation is frozen at

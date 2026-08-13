@@ -1,0 +1,13 @@
+{
+  "candidate_id": null,
+  "channel": "initializer",
+  "error_message": "ECONOMIC_RECEIPT_TARGET_CACHE_MISSING",
+  "error_type": "RuntimeError",
+  "evidence_sha256": "0B60F5AD3C7698412AC79AB312D44B34D2A1EF5DCBE9B3C3ABC0F726D4DD30B8",
+  "heartbeat_utc": "2026-08-13T12:22:10.847732+00:00",
+  "outcome": null,
+  "schema_version": 1,
+  "stage": "INITIALIZER_FAILED",
+  "worker_parent_pid": 34428,
+  "worker_pid": 18744
+}

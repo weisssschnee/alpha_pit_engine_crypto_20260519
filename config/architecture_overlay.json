@@ -2108,13 +2108,14 @@
                   },
                   {
                       "id":  "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
-                      "label":  "Temporal P1/P4 targeted basin deepening r2 (authorized, not started)",
+                      "label":  "Temporal P1/P4 targeted basin deepening r2 (pre-strict system-invalid)",
                       "kind":  "development_experiment",
-                      "lifecycle":  "EXPERIMENTAL",
+                      "lifecycle":  "DEPRECATED",
                       "paths":  [
                                     "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
                                     "scripts/check_crypto_temporal_targeted_r2_control.py",
-                                    ".planning/STATE.md"
+                                    ".planning/STATE.md",
+                                    "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json"
                                 ],
                       "critical":  false,
                       "semantic_role":  "experimental_targeted_p1_p4_basin_deepening",
@@ -2124,22 +2125,22 @@
                                         {
                                             "id":  "targeted_p1_p4_development_boundary",
                                             "type":  "BOUNDARY",
-                                            "rule":  "The sole r2 run is train-only P1/P4 with P2/P3 strict zero, frozen Random/CEM/Evolution 20/20/60, frozen 23-basin/228-parent pool A08112ED...AA49, 20k saturation decision, 30k hard cap, no child parent-pool injection, zero validation/OOS/holdout/forward/promotion/sealed reads, and no automatic follow-up.",
+                                            "rule":  "The sole r2 run is consumed as PRE_STRICT_DEPLOYMENT_INVALID after ECONOMIC_RECEIPT_TARGET_CACHE_MISSING. It produced zero strict rows and zero validation/OOS/holdout/forward/promotion/sealed reads, supports no economic conclusion, and authorizes no automatic rerun.",
                                             "severity":  "HARD",
                                             "enforced_by":  "one-time targeted authorization, e05 execution-component hashes, temporal_program_search_v1 targeted guard, and independent r2 control checker",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
+                                            "evidence_ref":  "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json"
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "DECLARED",
-                                         "result":  "NOT_REQUIRED",
+                                         "level":  "RUNTIME_VERIFIED",
+                                         "result":  "FAIL",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
+                                         "evidence_ref":  "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json"
                                      },
                       "claim_badges":  [
-                                           "R2 AUTHORIZED",
-                                           "NOT STARTED",
+                                           "SYSTEM INVALID",
+                                           "ZERO STRICT",
                                            "TRAIN ONLY",
                                            "NO VALIDATION OOS OR FORWARD",
                                            "NO PROMOTION",
@@ -2995,8 +2996,8 @@
                       "target":  "real_policy_upgrade_canary",
                       "relation":  "candidate_for",
                       "relation_class":  "candidate_for",
-                      "binding_state":  "EXPERIMENTAL",
-                      "lifecycle":  "EXPERIMENTAL",
+                      "binding_state":  "DEPRECATED",
+                      "lifecycle":  "DEPRECATED",
                       "required":  false,
                       "evidence_type":  "OBSERVED"
                   },
@@ -3006,8 +3007,8 @@
                       "target":  "real_policy_upgrade_canary",
                       "relation":  "derived_from",
                       "relation_class":  "derived_from",
-                      "binding_state":  "EXPERIMENTAL",
-                      "lifecycle":  "EXPERIMENTAL",
+                      "binding_state":  "DEPRECATED",
+                      "lifecycle":  "DEPRECATED",
                       "required":  false,
                       "evidence_type":  "OBSERVED"
                   }

@@ -30,7 +30,7 @@
     "scripts/check_crypto_temporal_targeted_r2_control.py"
   ],
   "authorization_id": "CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_AUTHORIZATION",
-  "authorization_sha256": "D26A2A1C9D100ADDEAE547FF205793799E193E5D4A0A6C2E743AB786262152A5",
+  "authorization_sha256": "38B1A82925FE0D5D5D9B09D39AD7A6887B6D09CB09893B3A1A0DB55134505C65",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "92E0C0983C8FAC691A4B7658903C6A919C07A855ABF0AA8AA27A6DAEEBA6B22F",
@@ -66,7 +66,7 @@
     "workers_default": 10,
     "workers_memory_fallback": 8
   },
-  "consumed": false,
+  "consumed": true,
   "decision_to_change": "Whether targeted deepening is sufficient to wait for forward, should continue, or exposes a Search Core realization bottleneck",
   "diagnostic_baseline_path": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_baseline.json",
   "diagnostic_baseline_policy_feedback": false,
@@ -145,7 +145,28 @@
     "decision_id": "AUTHORIZE_TARGETED_P1_P4_BASIN_DEEPENING_20260813",
     "scope": "ONE_30000_STRICT_TRAIN_ONLY_P1_P4_TARGETED_DEEPENING"
   },
-  "run_authorized": true,
+  "run_authorized": false,
+  "run_outcome": {
+    "automatic_next_run_started": false,
+    "checker": "FAIL_MISSING_RUN_MANIFEST_AND_BASIN_DIAGNOSTICS",
+    "completed_checkpoint_count": 0,
+    "execution_component_implementation_sha": "e05efc63cff183e1d223ee2b02e56070bec1c7bb",
+    "generation_attempts": 16,
+    "matched_positive_count": 0,
+    "oos_reads": 0,
+    "producer_source_sha": "1f88a6ef772d55a64826fe00d37a7a42a914fde2",
+    "rescue_rerun_started": false,
+    "runtime": "runtime/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2",
+    "runtime_integrity": "INVALID_PRE_STRICT_PARTIAL",
+    "sealed_reads": 0,
+    "status": "SYSTEM_INVALID",
+    "strict_evaluated_count": 0,
+    "system_invalid_evidence": "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
+    "task_id": "job_20260813_202156_f73045",
+    "task_state": "FAILED",
+    "terminal_reason": "PRE_STRICT_DEPLOYMENT_INVALID_TARGET_CACHE_MISSING",
+    "validation_reads": 0
+  },
   "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2",
   "saturation_rule": {
     "new_economic_clusters_since_10000_maximum": 0,
@@ -155,5 +176,5 @@
     "strict_boundary": 20000
   },
   "schema_version": 2,
-  "status": "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING"
+  "status": "RUN_AUTHORIZATION_CONSUMED_TARGETED_P1_P4_DEEPENING"
 }

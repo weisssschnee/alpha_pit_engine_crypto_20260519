@@ -1,0 +1,60 @@
+python.exe : Exception in initializer:
+����λ�� C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\scripts\run_crypto_temporal_mech
+anism_program_v1_pc2.ps1:29 �ַ�: 9
++         & $PythonExe @Arguments 2>&1 | ForEach-Object { Write-Output  ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in initializer::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Traceback (most recent call last):
+  File "D:\HermesWorker\python311\Lib\concurrent\futures\process.py", line 240, in _process_worker
+    initializer(*initargs)
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+search_engine_v1.py", line 7515, in _worker_initialize
+    _validate_receipt_target_store_binding(
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+search_engine_v1.py", line 7451, in _validate_receipt_target_store_binding
+    raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+RuntimeError: ECONOMIC_RECEIPT_TARGET_CACHE_MISSING
+Exception in initializer:
+Traceback (most recent call last):
+  File "D:\HermesWorker\python311\Lib\concurrent\futures\process.py", line 240, in _process_worker
+    initializer(*initargs)
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+search_engine_v1.py", line 7515, in _worker_initialize
+    _validate_receipt_target_store_binding(
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+search_engine_v1.py", line 7451, in _validate_receipt_target_store_binding
+    raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+RuntimeError: ECONOMIC_RECEIPT_TARGET_CACHE_MISSING
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+temporal_program_search_v1.py", line 5052, in <module>
+    main()
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+temporal_program_search_v1.py", line 5002, in main
+    result = run(
+             ^^^^
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+temporal_program_search_v1.py", line 3821, in run
+    "files": [
+             ^
+  File "C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\alphafactory_crypto\broad_search\
+temporal_program_search_v1.py", line 3824, in <listcomp>
+    "bytes": (runtime_root / value).stat().st_size,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\HermesWorker\python311\Lib\pathlib.py", line 1013, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] ϵͳ�Ҳ���ָ�����ļ���: 'C:\\HermesWorker\\workspace\\crypto_temporal_targeted_p1_p4_dee
+pening_20260813r2\\runtime\\crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2\\basin_diagnostics_latest.json
+'
+Temporal program producer failed (exit code 1)
+����λ�� C:\HermesWorker\workspace\crypto_temporal_targeted_p1_p4_deepening_20260813r2\scripts\run_crypto_temporal_mech
+anism_program_v1_pc2.ps1:36 �ַ�: 9
++         throw "$FailureMessage (exit code $nativeExitCode)"
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Temporal progra...d (exit code 1):String) [], RuntimeException
+    + FullyQualifiedErrorId : Temporal program producer failed (exit code 1)
