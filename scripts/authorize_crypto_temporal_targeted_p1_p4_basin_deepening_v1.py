@@ -9,6 +9,9 @@ from pathlib import Path
 import pandas as pd
 
 from alphafactory_crypto.broad_search import search_engine_v1 as engine
+from alphafactory_crypto.broad_search.temporal_successor_v1 import (
+    verify_successor_market_inputs,
+)
 from alphafactory_crypto.broad_search.temporal_targeted_deepening_v1 import (
     ACTIVE_PROGRAM_FAMILIES,
     AUTHORIZATION_PATH,
@@ -102,6 +105,7 @@ def main() -> None:
         role: dict(value)
         for role, value in dict(prior["receipt_bound_role_bindings"]).items()
     }
+    market_input_preflight = verify_successor_market_inputs(repo_root)
     payload = {
         "schema_version": 2,
         "authorization_id": (
@@ -120,6 +124,7 @@ def main() -> None:
         "executor_identity": _workspace_identity(
             args.executor_host, args.executor_workspace
         ),
+        "market_input_preflight": market_input_preflight,
         "lane_seeds": list(LANE_SEEDS),
         "active_program_families": list(ACTIVE_PROGRAM_FAMILIES),
         "paused_program_families": [

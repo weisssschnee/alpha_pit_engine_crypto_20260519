@@ -27,6 +27,10 @@ from .temporal_development_expansion_v1 import (
     executor_workspace_identity,
     file_sha256,
 )
+from .temporal_successor_v1 import (
+    SuccessorPreflightError,
+    verify_successor_market_inputs,
+)
 
 
 EXECUTION_MODE = "TARGETED_P1_P4_BASIN_DEEPENING_V1"
@@ -64,6 +68,7 @@ COMPONENT_PATHS = (
     "alphafactory_crypto/broad_search/temporal_activation_v1.py",
     "alphafactory_crypto/broad_search/temporal_program_v1.py",
     "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py",
     "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py",
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1",
@@ -238,6 +243,13 @@ def validate_authorization(
         != str(payload.get("diagnostic_baseline_sha256") or "")
     ):
         errors.append("diagnostic_baseline")
+    try:
+        observed_market_input = verify_successor_market_inputs(repo_root)
+    except SuccessorPreflightError as failure:
+        errors.append("market_input_preflight:" + str(failure))
+    else:
+        if dict(payload.get("market_input_preflight") or {}) != observed_market_input:
+            errors.append("market_input_preflight")
     source_sha = str(expected_source_sha or "").lower()
     implementation_sha = str(payload.get("authorized_implementation_sha") or "").lower()
     if source_sha and (

@@ -22,6 +22,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
 )
 from alphafactory_crypto.broad_search.temporal_targeted_deepening_v1 import (
     ACTIVE_PROGRAM_FAMILIES,
+    COMPONENT_PATHS,
     ECONOMIC_FINGERPRINT_FIELDS,
     EVOLUTION_OPERATION_PROBABILITIES,
     LANE_SEEDS,
@@ -490,3 +491,13 @@ def test_non_targeted_mechanism_evolution_still_uses_original_warmup() -> None:
     _, metadata = policy.propose()
     assert metadata["operation"] == "MECHANISM_EVOLUTION_TYPED_RANDOM_WARMUP"
     assert policy.targeted_parent_pool_payload is None
+
+
+def test_targeted_authorization_binds_complete_market_input_preflight() -> None:
+    assert "alphafactory_crypto/broad_search/temporal_successor_v1.py" in COMPONENT_PATHS
+    authorizer = (
+        Path(__file__).resolve().parents[1]
+        / "scripts/authorize_crypto_temporal_targeted_p1_p4_basin_deepening_v1.py"
+    ).read_text(encoding="utf-8")
+    assert "verify_successor_market_inputs" in authorizer
+    assert '"market_input_preflight": market_input_preflight' in authorizer
