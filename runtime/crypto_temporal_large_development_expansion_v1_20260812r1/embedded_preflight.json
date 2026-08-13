@@ -1,0 +1,70 @@
+{
+  "authority_refs": {
+    "cost": {
+      "active_authority": false,
+      "authority_class": "NON_FORMAL",
+      "component": "real_data_mapping_cost_evaluator",
+      "component_sha256": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF",
+      "lifecycle": "RECEIPT_SCOPED",
+      "status": "BOUND_NON_FORMAL_EXPERIMENT"
+    },
+    "execution_price": {
+      "active_authority": false,
+      "authority_class": "NON_FORMAL",
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630",
+      "lifecycle": "RECEIPT_SCOPED",
+      "status": "BOUND_NON_FORMAL_EXPERIMENT"
+    },
+    "optimizer_reward": {
+      "active_authority": false,
+      "authority_class": "NON_FORMAL",
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
+      "lifecycle": "RECEIPT_SCOPED",
+      "status": "BOUND_NON_FORMAL_EXPERIMENT"
+    },
+    "portfolio_mapping": {
+      "active_authority": true,
+      "authority_class": "FORMAL",
+      "component": "explicit_portfolio_mapping",
+      "lifecycle": "ACTIVE",
+      "status": "RESOLVED"
+    },
+    "promotion_gate": {
+      "active_authority": true,
+      "authority_class": "FORMAL",
+      "component": "sealed_research_boundaries",
+      "lifecycle": "FORBIDDEN",
+      "status": "RESOLVED"
+    },
+    "target": {
+      "active_authority": false,
+      "authority_class": "NON_FORMAL",
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+      "lifecycle": "RECEIPT_SCOPED",
+      "status": "BOUND_NON_FORMAL_EXPERIMENT"
+    },
+    "validation_role": {
+      "active_authority": true,
+      "authority_class": "FORMAL",
+      "component": "sealed_research_boundaries",
+      "lifecycle": "FORBIDDEN",
+      "status": "RESOLVED"
+    }
+  },
+  "decision_to_change": "Whether development discovery should continue, enter saturation review, or require Search Core review",
+  "economic_receipt": null,
+  "evidence_to_add": "Independent 50k train-only Temporal Program economic cluster discovery under fixed Random/CEM/Evolution 20/20/60 allocation",
+  "formal_claims_authorized": false,
+  "receipt_bound_non_formal_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "decision_id": "AUTHORIZE_LARGE_TEMPORAL_DEVELOPMENT_DISCOVERY_20260812",
+    "receipt_path": "config/crypto_temporal_large_development_expansion_v1_authorization.json",
+    "receipt_sha256": "E0676040A4F07B013707A48878FFDD0F7FC203878E963647456B45DB12D1E5FF",
+    "run_authorized": true,
+    "scope": "ONE_50000_STRICT_TRAIN_ONLY_TEMPORAL_PROGRAM_FIXED_FLOW_EXPANSION"
+  },
+  "result": "READY_WITH_NON_FORMAL_BOUNDARIES"
+}

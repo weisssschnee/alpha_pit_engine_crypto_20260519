@@ -1,8 +1,44 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-12 Asia/Hong_Kong
+Last updated: 2026-08-13 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_COMPLETE_CONTINUE_DISCOVERY_ALPHA_HOLD`
+
+The independently authorized fresh-state Temporal Program expansion is complete
+and consumed. PC2 task `job_20260812_202835_6c7c25` evaluated exactly 50,000
+train-only strict candidates from 90,692 attempts under the frozen
+Random/CEM/Evolution 20/20/60 allocation, all four existing program families,
+25 restore-verified checkpoints and the exact 50,000 mechanical stop. Ten
+workers ran without memory fallback; validation, OOS and sealed reads are zero.
+After correcting a checker-only arm-state expectation (Random is a fixed control,
+not an adaptive state entry), the same immutable runtime passes PC2 independent
+artifact-integrity and run-validity checks.
+
+The run found 12,406 baseline-new economic opportunity clusters (248.12/1k),
+86 new matched-positive economic clusters, 15,487 dual-axis net-positive rows,
+5,555 development 2-of-3 replicated rows and 11 new major basins. Largest/top-3
+basin shares are 15.28%/34.71% and effective economic dimension is 3.3745, so
+the discovery surface did not collapse to one basin. Evolution supplied 301
+matched-positive rows (10.03/1k), versus CEM one (0.1/1k) and Random zero, while
+its dual-positive and replication yields were 447.77/1k and 163.93/1k. Its
+advantage comes from both parameter-mutation/crossover deepening and breadth:
+parameter mutation produced 7,145 new clusters and 167 matched positives,
+crossover 2,821 and 134; mechanism mutation crossed basins but produced 1,348
+new clusters and zero matched positives.
+
+This is credible development discovery, not Alpha qualification or migration
+proof. The durable next decision is `CONTINUE_DEVELOPMENT_DISCOVERY`, but no
+automatic next search, validation, OOS, promotion, grammar/evaluator change, or
+new Arena is authorized by this closure. Authoritative report:
+`reports/CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_V1_20260812r1.md`.
+Retained local top-level runtime evidence:
+`runtime/crypto_temporal_large_development_expansion_v1_20260812r1`; the full
+7.85 GB checkpoint payload and process evidence remain retained on PC2 after
+the PC2 checker verified every manifest-bound file.
+
+The preceding completed phase was:
 
 `CRYPTO_TEMPORAL_POLICY_VALIDATION_COMPLETE_FIXED_20_20_60_DEVELOPMENT_FLOW_ALPHA_HOLD`
 

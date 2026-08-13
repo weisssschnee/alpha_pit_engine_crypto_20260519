@@ -1,0 +1,11 @@
+{
+  "authorization_sha256": "4107CB16F2A9F10A4E7AFCF3BE93D01975103871B671F0881ECDACDC9ABEB1FB",
+  "candidate_evaluations_at_claim": 0,
+  "execution_mode": "LARGE_DEVELOPMENT_EXPANSION_V1",
+  "market_arrays_read_at_claim": 0,
+  "producer_source_sha": "45b19aad97fb7bd9269016e24305b661b887267a",
+  "runtime_id": "crypto_temporal_large_development_expansion_v1_20260812r1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "ONE_TIME_DEVELOPMENT_EXPANSION_LAUNCH_CLAIMED"
+}

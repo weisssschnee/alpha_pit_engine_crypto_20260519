@@ -23,7 +23,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_LARGE_DEVELOPMENT_EXPANSION_V1_AUTHORIZATION",
-  "authorization_sha256": "34116642C1C71ADF486B5D3C34D1AD8B0B2807D8E2618232D3E1C5D66F7F4129",
+  "authorization_sha256": "4107CB16F2A9F10A4E7AFCF3BE93D01975103871B671F0881ECDACDC9ABEB1FB",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "A509A32BADD5DD4BF2325C2AF4690B79FBB9E5F5EFCBC60226545634CB23FC5C",
@@ -58,7 +58,7 @@
     "workers_default": 10,
     "workers_memory_fallback": 8
   },
-  "consumed": true,
+  "consumed": false,
   "decision_to_change": "Whether development discovery should continue, enter saturation review, or require Search Core review",
   "diagnostic_baseline_path": "runtime/crypto_temporal_large_development_expansion_v1_baseline_20260812/development_cluster_baseline.json",
   "diagnostic_baseline_policy_feedback": false,
@@ -99,18 +99,8 @@
     "decision_id": "AUTHORIZE_LARGE_TEMPORAL_DEVELOPMENT_DISCOVERY_20260812",
     "scope": "ONE_50000_STRICT_TRAIN_ONLY_TEMPORAL_PROGRAM_FIXED_FLOW_EXPANSION"
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "automatic_next_run_started": false,
-    "checkpoint_count": 25,
-    "generation_attempts": 90692,
-    "producer_source_sha": "45b19aad97fb7bd9269016e24305b661b887267a",
-    "runtime": "runtime/crypto_temporal_large_development_expansion_v1_20260812r1",
-    "sealed_reads": 0,
-    "status": "DEVELOPMENT_EXPANSION_BUDGET_COMPLETE",
-    "strict_evaluated_count": 50000
-  },
+  "run_authorized": true,
   "runtime_id": "crypto_temporal_large_development_expansion_v1_20260812r1",
   "schema_version": 2,
-  "status": "RUN_AUTHORIZATION_CONSUMED_50000_STRICT_DEVELOPMENT_EXPANSION"
+  "status": "RUN_AUTHORIZED_ONE_TIME_50000_STRICT_DEVELOPMENT_EXPANSION"
 }

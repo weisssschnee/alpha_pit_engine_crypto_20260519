@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "1DDC63909E7DA26B104B21DF0354A6C308867F518A98FDEB996C1FA71FF91D20",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_012",
+  "checkpoint_index": 12,
+  "compiler_identity": {
+    "bundle_sha256": "13087253F0A44017EE3656AA6E8890E33A32220E6A8BC75EA5F1704152E89F0F",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 107879,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1000728,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "7BC91AECDB291BBBD24701060D0529063754DC28F2CF9A37B8E28D6DBCECEABF",
+  "completed_ledger_row_count": 26000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 13740,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "DFF8E601B86B8CDB080B5919AD9F9DE094680E620679C1882BE193E68418EE40"
+    },
+    {
+      "bytes": 23026466,
+      "name": "behavior_archive.parquet",
+      "sha256": "910B15504CC65E89C29A2F5C21380439FC77032A29F0F84D1DCF171DDD141B24"
+    },
+    {
+      "bytes": 226377088,
+      "name": "candidate_ledger.parquet",
+      "sha256": "20D259B8BD6AC8610293352B1546093ECC97738F718DB147FA228B2EA21D5F06"
+    },
+    {
+      "bytes": 147135,
+      "name": "discovery_diagnostics.json",
+      "sha256": "C2B77E0D52E533F2F98B3869B88555B3F1E34562E47B7D95C4E518D81511AD03"
+    },
+    {
+      "bytes": 636,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "8B6E33D47F4E1DF33F587D9B1D420F756A6C705B8496E0912C223C5D83371DF9"
+    },
+    {
+      "bytes": 518171,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "0A3BFD5FF2E9F8142B423C3A07E7938EF57ACBA991F005D71BE101094A026205"
+    },
+    {
+      "bytes": 43627451,
+      "name": "state.json",
+      "sha256": "F3F88F4159B10AB099E7931D3D8B63E551214CE8078C529655E249DA3544149D"
+    }
+  ],
+  "frozen_contract_sha256": "007AB075AFA1CB4D1C29E66B3FC4C9C51D006CED52B44AB183F8D76D878220E1",
+  "policy_state_sha256": "5D8013BB1D3FB913AECB150AF6C1CAE0BFBD219581AEBAC62B93ABBF31A9ACE0",
+  "receipt_count": 15344,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "45b19aad97fb7bd9269016e24305b661b887267a",
+  "state_sha256": "AAB68217DEDF656FED26537F70B46570A8C8D9E79E085F8C01B452EB1A1E4BFF"
+}

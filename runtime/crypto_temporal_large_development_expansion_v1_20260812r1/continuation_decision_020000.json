@@ -1,0 +1,22 @@
+{
+  "allocation_per_10000": {
+    "temporal_program_cem": 2000,
+    "temporal_program_evolution": 6000,
+    "temporal_program_random": 2000
+  },
+  "arm_states_after": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE",
+    "temporal_program_random": "ACTIVE"
+  },
+  "arm_states_before": {
+    "temporal_program_cem": "ACTIVE",
+    "temporal_program_evolution": "ACTIVE",
+    "temporal_program_random": "ACTIVE"
+  },
+  "family_concentration_is_diagnostic_only": true,
+  "next_stage_proposals_generated": false,
+  "schema_version": 1,
+  "status": "CONTINUE_FIXED_FLOW_DIAGNOSTIC_ONLY",
+  "strict_boundary": 20000
+}

@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "5AAA666C9F2A4AD6C56A7DFAC680B2954CD93F53F79F8A7704FD256C996806BC",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_013",
+  "checkpoint_index": 13,
+  "compiler_identity": {
+    "bundle_sha256": "13087253F0A44017EE3656AA6E8890E33A32220E6A8BC75EA5F1704152E89F0F",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 107879,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1000728,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "213FF6A0B5DF1735E0492045FB4C5AC2E8597CACD0C151BE1FA4FAB1A8214F0E",
+  "completed_ledger_row_count": 28000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 14033,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "3900A9F572004450D433C82D4AB79F992DFE6039AEBB9920AA36842EF0FFC0B3"
+    },
+    {
+      "bytes": 24798146,
+      "name": "behavior_archive.parquet",
+      "sha256": "94A13B41EF60B0C79D10AB46360DA8F549A353581B8C8DABEF81E1487688DB28"
+    },
+    {
+      "bytes": 243421569,
+      "name": "candidate_ledger.parquet",
+      "sha256": "77527CFB06A8A60921422A5DE290F894D0B5E72ACFC4B48A486BA67AC08E49C5"
+    },
+    {
+      "bytes": 148633,
+      "name": "discovery_diagnostics.json",
+      "sha256": "10D360556B3DA94DB58679696CD3FE55DB00AFF4BE5F600BC6EB354026898E2A"
+    },
+    {
+      "bytes": 636,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "8B6E33D47F4E1DF33F587D9B1D420F756A6C705B8496E0912C223C5D83371DF9"
+    },
+    {
+      "bytes": 558393,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "C1F82B643E8AE014F542D5D763B1657BE23B734A82945B3E213F52708016E568"
+    },
+    {
+      "bytes": 44113494,
+      "name": "state.json",
+      "sha256": "DB5AA20480E870201445FC0239F1D2D72710A0B78C179407362041DA47A7B985"
+    }
+  ],
+  "frozen_contract_sha256": "007AB075AFA1CB4D1C29E66B3FC4C9C51D006CED52B44AB183F8D76D878220E1",
+  "policy_state_sha256": "9FAF5C76EEF7AB717EBA6C4FDE6973F6A67CB7B113B211A430BBD4E24A767E35",
+  "receipt_count": 16544,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "45b19aad97fb7bd9269016e24305b661b887267a",
+  "state_sha256": "68475F856FD7786E1E17AE1A5D7ACA799D4E2E1EA4DF512AF24E2D1D1FF330ED"
+}

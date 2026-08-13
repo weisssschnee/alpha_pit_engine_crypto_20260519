@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "694729D5A7E675DEFB4B22CBFD79FC0E5BFC42516A4E577F31921E99443FEC24",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_015",
+  "checkpoint_index": 15,
+  "compiler_identity": {
+    "bundle_sha256": "13087253F0A44017EE3656AA6E8890E33A32220E6A8BC75EA5F1704152E89F0F",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 107879,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1000728,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "619519F90B924B679FAD8091F66E2FD4F2DBA7E835DA89EF0B60A69D4C0CB7B7",
+  "completed_ledger_row_count": 32000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 14465,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "4C3C79A06D1917ACE6A1936779C7BF63C23DB42EEFCCA28F195B4768E78D4D8C"
+    },
+    {
+      "bytes": 28437650,
+      "name": "behavior_archive.parquet",
+      "sha256": "BABDDD67AA7D87B84FF28FE10A76E0E322CFF2048E132DF6EA7E8F5073AA18D7"
+    },
+    {
+      "bytes": 277546923,
+      "name": "candidate_ledger.parquet",
+      "sha256": "B95FA256C4432CC882F7878182CF93662228585B5920536659704B63D9271239"
+    },
+    {
+      "bytes": 151161,
+      "name": "discovery_diagnostics.json",
+      "sha256": "9C3D52C6F5471E17FC634AE079D4EC636796F0B944EBDADC64B9737B3D9A1BCF"
+    },
+    {
+      "bytes": 636,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "8B6E33D47F4E1DF33F587D9B1D420F756A6C705B8496E0912C223C5D83371DF9"
+    },
+    {
+      "bytes": 645802,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "53D1A5ACDC415010EE2665CED29EB20E1F3AC7814684B46AB425C730C1FACB2E"
+    },
+    {
+      "bytes": 45102309,
+      "name": "state.json",
+      "sha256": "A8FA1DED2C0D08FDB16844D44CD54529DE40F7D9E3827F69E01C96208907D814"
+    }
+  ],
+  "frozen_contract_sha256": "007AB075AFA1CB4D1C29E66B3FC4C9C51D006CED52B44AB183F8D76D878220E1",
+  "policy_state_sha256": "019C422DF0BD17D207A358830864457E6FAC0806CC4F3354B3E38DBAAA6B1E84",
+  "receipt_count": 18944,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "45b19aad97fb7bd9269016e24305b661b887267a",
+  "state_sha256": "821BDDBEFC3DC9039A40BD234E748866F70520204C4AD0544E443BF62B503D4A"
+}
