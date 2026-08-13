@@ -1,0 +1,121 @@
+{
+  "active_program_families": [
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+  ],
+  "allocation_per_10000": {
+    "temporal_program_cem": 2000,
+    "temporal_program_evolution": 6000,
+    "temporal_program_random": 2000
+  },
+  "authority_identity": {
+    "behavior_contract_sha256": "E3E41C3D9820558AE11E79C0767854B9AADDDFED4955F0F1B1CA9FD458BC8088",
+    "economic_receipt_sha256": "244ADFC59AD7AAB453928365B68CAAB6B8537CDF55795EC9F97629F1B15A46AC",
+    "market_contract_sha256": "E104F1A18901FC2370BE2CEE26D66BEE23EC3B33CE0719AC212F1BCADC161618",
+    "optimizer_reward_and_matched_attribution_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
+    "portfolio_mapping_and_cost_sha256": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF",
+    "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+    "source_frozen_contract_sha256": "F4F6D90F13E2BDFD113C912A6FD26BF57CB048AB39645B48138EDFAD81CCD6E5",
+    "source_producer_sha": "6450be52f7ff85385ac7de86e1d62819a48c1e66",
+    "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+    "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
+  },
+  "authorization_id": "CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_AUTHORIZATION",
+  "authorization_sha256": "75E269E96F20CEBF42558BC7BF2E01333EFF386FF3968D88EDBAAC9C8B2ECCCF",
+  "authorized_component_sha256": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
+    "alphafactory_crypto/broad_search/experiment_authority.py": "92E0C0983C8FAC691A4B7658903C6A919C07A855ABF0AA8AA27A6DAEEBA6B22F",
+    "alphafactory_crypto/broad_search/expression.py": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE",
+    "alphafactory_crypto/broad_search/pair18m.py": "A20509A0558FDA51C7CCACF00C0267970373082E3775C1A676D65B9050C75236",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "080DED71CF8381DB338C6FA23658D73F72E855A4AF01B8144418D5B370B4E3C9",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "B8413C828294888404A70267D6A57CE20E78810939A34685653FB63ABBDC8213",
+    "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "0388DBEAA35F4C2412C9B36ECD723C146B0926B0E7DF12DF062794A0FCA0CC1A",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "83CD37099D0314A6C9130D5CD05FB631C35D9515B1F2E6483B9D581337DEF2F2",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
+    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "7E98EAB3F057A997CED105109323A859CB290AFA1740D6F6DAF1A68B69E115F4",
+    "config/crypto_temporal_mechanism_program_v1.json": "B147F5EFA752526549CAA801C408835D98FCDB5831DF2CC01E5A4348D6663AD8",
+    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "A30E5A508BBF2333A80B7D3B1090ADB750B4D8A54F33E9D5F379FE187B277C06"
+  },
+  "authorized_implementation_sha": "351ac4b842734ba97526a508a9081cda382cfe75",
+  "automatic_next_run_started": false,
+  "boundaries": {
+    "automatic_expansion": false,
+    "family_concentration_can_stop": false,
+    "forward": false,
+    "holdout": false,
+    "oos": false,
+    "promotion": false,
+    "sealed_reads": 0,
+    "train_only": true,
+    "validation": false
+  },
+  "budget": {
+    "checkpoint_size": 2000,
+    "raw_generation_attempts_maximum": 150000,
+    "strict_evaluated_maximum": 30000,
+    "wall_time_seconds_maximum": 36000,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "consumed": false,
+  "decision_to_change": "Whether targeted deepening is sufficient to wait for forward, should continue, or exposes a Search Core realization bottleneck",
+  "diagnostic_baseline_path": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_baseline.json",
+  "diagnostic_baseline_policy_feedback": false,
+  "diagnostic_baseline_sha256": "B53B3A2DBA81D9CD94B2BE9A0295175CA4EA4234A93C859AF115F596477A8E37",
+  "evidence_to_add": "P1/P4 train-only evidence separating behavior family, economic similarity cluster, program basin, and concrete realization depth",
+  "evolution_operation_probabilities": {
+    "crossover_probability": 0.3,
+    "mechanism_mutation_probability": 0.1,
+    "parameter_mutation_probability": 0.6
+  },
+  "execution_mode": "TARGETED_P1_P4_BASIN_DEEPENING_V1",
+  "executor_identity": {
+    "host": "desktop-a2h3a2g",
+    "workspace_path_sha256": "5A426D3BF779C7B6232D0A7F9638793A31B75D5D21CCBAF8915A3CBC27C42EDB"
+  },
+  "expected_branch": "experiment/crypto-temporal-targeted-p1-p4-basin-deepening-v1-20260813",
+  "lane_seeds": [
+    490371535,
+    2440792857,
+    1378433431,
+    1722480701
+  ],
+  "paused_program_families": [
+    "P2_RECENT_CROWDING_EVENT_TO_RESPONSE",
+    "P3_FLOW_SHOCK_PERSISTENCE_TO_ABSORPTION"
+  ],
+  "receipt_bound_role_bindings": {
+    "cost": {
+      "component": "real_data_mapping_cost_evaluator",
+      "component_sha256": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF"
+    },
+    "execution_price": {
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
+    },
+    "optimizer_reward": {
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B"
+    },
+    "target": {
+      "component": "real_policy_upgrade_canary",
+      "component_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60"
+    }
+  },
+  "run_authorization": {
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "decision_id": "AUTHORIZE_TARGETED_P1_P4_BASIN_DEEPENING_20260813",
+    "scope": "ONE_30000_STRICT_TRAIN_ONLY_P1_P4_TARGETED_DEEPENING"
+  },
+  "run_authorized": true,
+  "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1",
+  "saturation_rule": {
+    "new_economic_clusters_since_10000_maximum": 0,
+    "new_high_quality_concrete_realizations_since_10000_maximum": 0,
+    "new_high_quality_deepened_basins_since_10000_maximum": 0,
+    "realization_depth_increase_since_10000_maximum": 0,
+    "strict_boundary": 20000
+  },
+  "schema_version": 2,
+  "status": "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING"
+}
