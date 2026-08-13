@@ -2108,16 +2108,13 @@
                   },
                   {
                       "id":  "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
-                      "label":  "Temporal P1/P4 targeted basin deepening (system-invalid, consumed)",
+                      "label":  "Temporal P1/P4 targeted basin deepening r2 (authorized, not started)",
                       "kind":  "development_experiment",
-                      "lifecycle":  "DEPRECATED",
+                      "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
-                                    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py",
-                                    "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
                                     "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
-                                    "scripts/audit_crypto_temporal_targeted_scope_v1.py",
-                                    "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1/independent_scope_audit_010000.json",
-                                    "reports/CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_20260813r1.md"
+                                    "scripts/check_crypto_temporal_targeted_r2_control.py",
+                                    ".planning/STATE.md"
                                 ],
                       "critical":  false,
                       "semantic_role":  "experimental_targeted_p1_p4_basin_deepening",
@@ -2127,28 +2124,26 @@
                                         {
                                             "id":  "targeted_p1_p4_development_boundary",
                                             "type":  "BOUNDARY",
-                                            "rule":  "The consumed one-run experiment is SYSTEM_INVALID because the exact 10,000-row checkpoint contains 77 P2 and 124 P3 rows despite the P1/P4-only boundary. The process was stopped with zero validation, OOS, holdout, sealed, or forward reads; it cannot support targeted-deepening, Alpha, or promotion claims and authorizes no replacement run.",
+                                            "rule":  "The sole r2 run is train-only P1/P4 with P2/P3 strict zero, frozen Random/CEM/Evolution 20/20/60, frozen 23-basin/228-parent pool A08112ED...AA49, 20k saturation decision, 30k hard cap, no child parent-pool injection, zero validation/OOS/holdout/forward/promotion/sealed reads, and no automatic follow-up.",
                                             "severity":  "HARD",
-                                            "enforced_by":  "consumed targeted authorization plus independent scope audit and temporal_program_search_v1 targeted lane guard",
+                                            "enforced_by":  "one-time targeted authorization, e05 execution-component hashes, temporal_program_search_v1 targeted guard, and independent r2 control checker",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1/independent_scope_audit_010000.json"
+                                            "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "RUNTIME_VERIFIED",
-                                         "result":  "FAIL",
+                                         "level":  "DECLARED",
+                                         "result":  "NOT_REQUIRED",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1/independent_scope_audit_010000.json",
-                                         "evidence_sha256":  "C989C540B7589A8FFA5D0EBC5A57C1CA94A7BAD61669574B398BF766A88E2B26",
-                                         "verified_at_sha":  "2d35867bcf7f846982129b2bcef3f7a717366625"
+                                         "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
                                      },
                       "claim_badges":  [
-                                           "SYSTEM INVALID",
-                                           "AUTHORIZATION CONSUMED",
+                                           "R2 AUTHORIZED",
+                                           "NOT STARTED",
                                            "TRAIN ONLY",
                                            "NO VALIDATION OOS OR FORWARD",
                                            "NO PROMOTION",
-                                           "NO AUTOMATIC RERUN"
+                                           "NO AUTOMATIC FOLLOW-UP"
                                        ]
                   },
                   {
@@ -3000,8 +2995,8 @@
                       "target":  "real_policy_upgrade_canary",
                       "relation":  "candidate_for",
                       "relation_class":  "candidate_for",
-                      "binding_state":  "DEPRECATED",
-                      "lifecycle":  "DEPRECATED",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
                       "evidence_type":  "OBSERVED"
                   },
@@ -3011,8 +3006,8 @@
                       "target":  "real_policy_upgrade_canary",
                       "relation":  "derived_from",
                       "relation_class":  "derived_from",
-                      "binding_state":  "DEPRECATED",
-                      "lifecycle":  "DEPRECATED",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
                       "evidence_type":  "OBSERVED"
                   }

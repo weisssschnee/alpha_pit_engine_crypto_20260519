@@ -4,7 +4,36 @@ Last updated: 2026-08-13 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_SYSTEM_INVALID_SOURCE_REPAIRED_NO_RERUN`
+`CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_R2_AUTHORIZED_NOT_STARTED`
+
+Current user decision authorizes exactly one fresh PC2 r2 train-only targeted
+basin-deepening run. Its execution implementation is frozen at
+`e05efc63cff183e1d223ee2b02e56070bec1c7bb`; the authorization-only successor
+may change only the one-time receipt, this state, the thin CURRENT experiment
+projection, and the independent control checker. Every execution component is
+bound byte-for-byte to e05. The new workspace/runtime is distinct from r1 and
+may import only the hash-bound 50,000-row development ledger, its 302
+matched-positive rows, and the reconstructed 23-basin / 228-parent frozen pool
+with SHA256
+`A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49`.
+
+The frozen run contract is P1/P4 only, P2/P3 strict zero, and
+Random/CEM/Evolution 20/20/60. Evolution uses preregistered sampling
+probabilities 60% parameter mutation, 10% mechanism mutation and 30% crossover;
+an unavailable or failed legal same-basin crossover may fall back to parameter
+mutation. The independent control checker deterministically replays the frozen
+policy to report requested and realized operation, fallback count/rate/reason,
+and proposal/strict/matched-positive/basin contribution. Children cannot enter
+the frozen parent pool. The run stops at the preregistered 20k saturation
+decision or the unconditional 30k strict cap. Validation, OOS, holdout, forward,
+promotion, sealed reads and automatic follow-up remain forbidden.
+
+No market read or candidate evaluation has occurred under r2 authorization.
+Launch is allowed only after the committed checkout is clean and tracking,
+component SHA binding, exact baseline recovery and frozen-pool reconstruction
+all independently pass before market access.
+
+## Previous phase: r1 system-invalid closure
 
 The sole current-user-authorized targeted P1/P4 PC2 run is consumed and closed
 as `SYSTEM_INVALID`. Task `job_20260813_122829_4a039f` reached a last producer
