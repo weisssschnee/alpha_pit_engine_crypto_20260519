@@ -2107,6 +2107,48 @@
                                                  ]
                   },
                   {
+                      "id":  "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
+                      "label":  "Temporal P1/P4 targeted basin deepening (train-only, 30k cap)",
+                      "kind":  "development_experiment",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "paths":  [
+                                    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py",
+                                    "alphafactory_crypto/broad_search/temporal_program_search_v1.py",
+                                    "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
+                                    "runtime/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r1/final_decision.json",
+                                    "reports/CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_20260813r1.md"
+                                ],
+                      "critical":  false,
+                      "semantic_role":  "experimental_targeted_p1_p4_basin_deepening",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "contracts":  [
+                                        {
+                                            "id":  "targeted_p1_p4_development_boundary",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "This one-run experiment searches only P1 and P4 on the existing train surface under frozen Random/CEM/Evolution 20/20/60 allocation, a 30,000 strict cap, and predeclared 20,000 saturation logic; it cannot read validation, OOS, holdout, sealed, or forward roles and cannot promote an Alpha.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "temporal_targeted_deepening_v1 authorization plus temporal_program_search_v1 run/check",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
+                                        }
+                                    ],
+                      "validation":  {
+                                         "level":  "DECLARED",
+                                         "result":  "INSUFFICIENT_EVIDENCE",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
+                                         "verified_at_sha":  "bbde1d91ae19b86507ba414d3941550e0f0e5b27"
+                                     },
+                      "claim_badges":  [
+                                           "P1 P4 ONLY",
+                                           "TRAIN ONLY",
+                                           "30K HARD CAP",
+                                           "NO VALIDATION OOS OR FORWARD",
+                                           "NO PROMOTION"
+                                       ]
+                  },
+                  {
                       "id":  "sealed_research_boundaries",
                       "label":  "Forward / Challenge / Promotion boundaries",
                       "kind":  "boundary",
@@ -2948,6 +2990,28 @@
                                          "evidence_sha256":  "471715704F061327BED566A91AA728FD81AF00F6ED1C6B3534C1539A063BDFCD",
                                          "verified_at_sha":  "4726795f61052470d56e2d1475e4f6da9d262943"
                                      }
+                  },
+                  {
+                      "id":  "targeted_p1_p4_candidate_for_search_policy",
+                      "source":  "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "candidate_for",
+                      "relation_class":  "candidate_for",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "DECLARED"
+                  },
+                  {
+                      "id":  "targeted_p1_p4_derived_from_large_expansion",
+                      "source":  "crypto_temporal_targeted_p1_p4_basin_deepening_v1",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "derived_from",
+                      "relation_class":  "derived_from",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "DECLARED"
                   }
               ],
     "profile_refs":  [
