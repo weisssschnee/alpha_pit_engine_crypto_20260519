@@ -24,6 +24,10 @@ def test_fixed_flow_uses_fresh_seeds_and_exact_20_20_60_allocation() -> None:
     effective = _expansion_effective_config(CONFIG)
     assert tuple(effective["seed_authority"]["seeds"]) == LANE_SEEDS
     state = _new_state("a" * 40, "B" * 64, effective)
+    assert state["arm_states"] == {
+        "temporal_program_cem": "ACTIVE",
+        "temporal_program_evolution": "ACTIVE",
+    }
     state["skip_stage0"] = True
     assert _checkpoint_allocation(state, 0, effective) == {
         "temporal_program_random": 400,

@@ -4030,7 +4030,7 @@ def check(
             or int(claim.get("sealed_reads", -1)) != 0
         ):
             errors.append("expansion_launch_claim")
-        expected_states = {arm: "ACTIVE" for arm in ARMS}
+        expected_states = {arm: "ACTIVE" for arm in ARMS[1:]}
         if dict(final.get("arm_states") or {}) != expected_states:
             errors.append("expansion_arm_states")
         if len(pairs) != 0:
