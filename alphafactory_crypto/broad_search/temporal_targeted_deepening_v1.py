@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 import numpy as np
+import pandas as pd
 from scipy.cluster.hierarchy import fcluster, linkage
 from scipy.spatial.distance import squareform
 
@@ -552,6 +553,211 @@ def build_diagnostic_baseline(
     }
 
 
+def _canonical_payload_sha256(value: Mapping[str, Any]) -> str:
+    return hashlib.sha256(
+        json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+            default=str,
+        ).encode("utf-8")
+    ).hexdigest().upper()
+
+
+def build_frozen_target_parent_pool(
+    repo_root: Path, baseline: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Build a train-only, hash-bound parent pool for real basin deepening.
+
+    This function reads only the already-consumed development candidate ledger.
+    It performs no market evaluation and reuses the canonical 0.90 economic
+    clustering defined in this module.
+    """
+
+    root = repo_root.resolve()
+    source_path = Path(str(baseline.get("source_ledger_path") or ""))
+    if not source_path.is_absolute():
+        source_path = root / source_path
+    expected_sha = str(baseline.get("source_ledger_sha256") or "").upper()
+    expected_rows = int(baseline.get("source_strict_count") or 0)
+    baseline_rows = [dict(row) for row in baseline.get("matched_positive_rows", ())]
+    baseline_count = int(baseline.get("matched_positive_count") or -1)
+    try:
+        if (
+            not source_path.is_file()
+            or not expected_sha
+            or file_sha256(source_path) != expected_sha
+            or baseline_count != len(baseline_rows)
+            or baseline_count <= 0
+        ):
+            raise ValueError("source identity or baseline count changed")
+        frame = pd.read_parquet(source_path)
+        required = {
+            "candidate_id",
+            "candidate_spec_json",
+            "program_family_id",
+            "behavior_family_id",
+            "block_robust_ordering_json",
+        }
+        if len(frame) != expected_rows or not required.issubset(frame.columns):
+            raise ValueError("source row count or columns changed")
+        baseline_ids = [str(row.get("candidate_id") or "") for row in baseline_rows]
+        if (
+            any(not value for value in baseline_ids)
+            or len(set(baseline_ids)) != len(baseline_ids)
+        ):
+            raise ValueError("baseline candidate identity changed")
+        selected = frame.loc[frame["candidate_id"].astype(str).isin(baseline_ids)].copy()
+        if (
+            len(selected) != len(baseline_ids)
+            or selected["candidate_id"].astype(str).nunique() != len(baseline_ids)
+        ):
+            raise ValueError("baseline/source candidate join changed")
+        source_by_id = {
+            str(row["candidate_id"]): row
+            for row in selected.to_dict("records")
+        }
+
+        clustered = [{**row, "_origin": "baseline"} for row in baseline_rows]
+        clustered.sort(key=_stable_row_id)
+        labels = _cluster_labels(
+            _fingerprint_matrix(clustered), CANONICAL_SIMILARITY_THRESHOLD
+        )
+        grouped: dict[int, list[Mapping[str, Any]]] = defaultdict(list)
+        for label, row in zip(labels, clustered, strict=True):
+            grouped[int(label)].append(row)
+        ordered_groups = sorted(
+            grouped.values(),
+            key=lambda local: min(_stable_row_id(row) for row in local),
+        )
+
+        family_counts: dict[str, int] = defaultdict(int)
+        for row in baseline_rows:
+            family_counts[str(row.get("behavior_family_id") or "")] += 1
+
+        target_basins: list[dict[str, Any]] = []
+        parent_records: dict[str, dict[str, Any]] = {}
+        for index, local in enumerate(ordered_groups, start=1):
+            if len(local) < BASELINE_HIGH_QUALITY_MINIMUM_ROWS:
+                continue
+
+            def unique(key: str) -> int:
+                return len({str(row.get(key) or "NOT_AVAILABLE") for row in local})
+
+            depth = {
+                "mapped_weight": unique("mapped_weight_descriptor_id"),
+                "turnover": unique("turnover_path_descriptor_id"),
+                "raw_field": unique("raw_fields_json"),
+                "selected_asset": unique("selected_asset_overlap_id"),
+            }
+            gaps = {
+                "mapped_weight_lt_3": depth["mapped_weight"] < 3,
+                "turnover_lt_2": depth["turnover"] < 2,
+                "raw_field_lt_2": depth["raw_field"] < 2,
+                "selected_asset_lt_2": depth["selected_asset"] < 2,
+            }
+            if not any(gaps.values()):
+                continue
+            basin_id = f"ECO_090_{index:03d}"
+            member_ids: list[str] = []
+            families: set[str] = set()
+            for baseline_row in sorted(local, key=_stable_row_id):
+                candidate_id = str(baseline_row["candidate_id"])
+                source_row = source_by_id[candidate_id]
+                baseline_family = str(baseline_row.get("program_family_id") or "")
+                source_family = str(source_row.get("program_family_id") or "")
+                if (
+                    baseline_family != source_family
+                    or baseline_family not in ACTIVE_PROGRAM_FAMILIES
+                ):
+                    raise ValueError("target parent program family changed")
+                candidate_payload = json.loads(str(source_row["candidate_spec_json"]))
+                if not isinstance(candidate_payload, dict):
+                    raise ValueError("target parent candidate payload changed")
+                ordering_raw = source_row.get("block_robust_ordering_json")
+                ordering = (
+                    json.loads(str(ordering_raw))
+                    if ordering_raw is not None
+                    and str(ordering_raw).lower() not in {"", "none", "nan"}
+                    else None
+                )
+                realization_id = _realization_id(baseline_row)
+                member_ids.append(candidate_id)
+                families.add(baseline_family)
+                parent_records[candidate_id] = {
+                    "candidate_id": candidate_id,
+                    "candidate": candidate_payload,
+                    "behavior_family_id": str(
+                        baseline_row.get("behavior_family_id") or ""
+                    ),
+                    "program_family_id": baseline_family,
+                    "family_count": int(
+                        family_counts[str(baseline_row.get("behavior_family_id") or "")]
+                    ),
+                    "search_reward": float(source_row.get("search_reward") or 0.0),
+                    "block_robust_ordering": ordering,
+                    "concrete_realization_id": realization_id,
+                    "economic_similarity_cluster_id": basin_id,
+                }
+            if len(families) != 1:
+                raise ValueError("target basin crosses program families")
+            target_basins.append(
+                {
+                    "economic_similarity_cluster_id": basin_id,
+                    "program_family_id": next(iter(families)),
+                    "baseline_row_count": len(local),
+                    "member_candidate_ids": member_ids,
+                    "realization_depth": depth,
+                    "realization_gaps": gaps,
+                }
+            )
+        if not target_basins or not parent_records:
+            raise ValueError("no frozen target basin remains")
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as failure:
+        raise ExpansionPreflightError(
+            "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_parent_pool_invalid"
+        ) from failure
+
+    core = {
+        "schema_version": 1,
+        "status": "FROZEN_TRAIN_ONLY_ECONOMIC_BASIN_PARENT_POOL",
+        "source_ledger_path": str(baseline.get("source_ledger_path") or ""),
+        "source_ledger_sha256": expected_sha,
+        "source_ledger_row_count": expected_rows,
+        "baseline_matched_positive_count": baseline_count,
+        "clustering": {
+            "fingerprint_field_count": len(ECONOMIC_FINGERPRINT_FIELDS),
+            "fingerprint_fields": list(ECONOMIC_FINGERPRINT_FIELDS),
+            "column_scaling": "STANDARDIZE_BY_BASELINE_COLUMN_MEAN_STD",
+            "similarity": "PEARSON_ROW_CORRELATION_AFTER_COLUMN_STANDARDIZATION",
+            "linkage": "AVERAGE",
+            "canonical_similarity_threshold": CANONICAL_SIMILARITY_THRESHOLD,
+        },
+        "target_rule": {
+            "minimum_baseline_rows": BASELINE_HIGH_QUALITY_MINIMUM_ROWS,
+            "under_realized_when_any": {
+                "mapped_weight_lt": 3,
+                "turnover_lt": 2,
+                "raw_field_lt": 2,
+                "selected_asset_lt": 2,
+            },
+        },
+        "target_basin_count": len(target_basins),
+        "frozen_parent_candidate_count": len(parent_records),
+        "target_basins": target_basins,
+        "parent_records": {
+            key: parent_records[key] for key in sorted(parent_records)
+        },
+        "market_arrays_read": 0,
+        "candidate_evaluations": 0,
+        "validation_reads": 0,
+        "oos_reads": 0,
+        "sealed_reads": 0,
+    }
+    return {**core, "target_parent_pool_sha256": _canonical_payload_sha256(core)}
+
+
 def targeted_diagnostics(
     rows: Sequence[Mapping[str, Any]],
     *,
@@ -851,6 +1057,7 @@ __all__ = [
     "STRICT_CAP",
     "WALL_SECONDS_CAP",
     "build_diagnostic_baseline",
+    "build_frozen_target_parent_pool",
     "final_next_decision",
     "load_diagnostic_baseline",
     "targeted_checkpoint_decision",

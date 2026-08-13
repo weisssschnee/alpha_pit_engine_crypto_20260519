@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+import pandas as pd
+import pytest
+
 from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _checkpoint_allocation,
     _later_checkpoint_targets,
@@ -12,12 +15,18 @@ from alphafactory_crypto.broad_search.temporal_program_search_v1 import (
     _targeted_effective_config,
     consume_targeted_deepening_authorization,
 )
+from alphafactory_crypto.broad_search import search_engine_v1 as engine_module
+from alphafactory_crypto.broad_search.search_engine_v1 import (
+    MechanismEvolutionV2,
+    MechanismRandomV2,
+)
 from alphafactory_crypto.broad_search.temporal_targeted_deepening_v1 import (
     ACTIVE_PROGRAM_FAMILIES,
     ECONOMIC_FINGERPRINT_FIELDS,
     EVOLUTION_OPERATION_PROBABILITIES,
     LANE_SEEDS,
     build_diagnostic_baseline,
+    build_frozen_target_parent_pool,
     final_next_decision,
     targeted_checkpoint_decision,
     targeted_diagnostics,
@@ -26,7 +35,12 @@ from alphafactory_crypto.broad_search.temporal_successor_v1 import (
     authorization_content_sha,
 )
 
-from test_crypto_temporal_program_v1 import CONFIG
+from test_crypto_temporal_program_v1 import (
+    CONFIG,
+    _catalog,
+    _policy_parameters,
+    _registry,
+)
 
 
 def _row(
@@ -299,3 +313,180 @@ def test_system_invalid_attempt_consumes_one_time_authorization(
     assert result["run_outcome"]["status"] == "SYSTEM_INVALID"
     assert result["run_outcome"]["audited_strict_prefix"] == 10_000
     assert result["run_outcome"]["automatic_next_run_started"] is False
+
+
+def _targeted_parent_candidates(count: int = 6):
+    registry = _registry()
+    catalog = _catalog()
+    mechanisms = tuple(mechanism for mechanism, _ in catalog)
+    parameters = _policy_parameters(catalog)
+    random_policy = MechanismRandomV2(7101, registry, mechanisms, parameters)
+    base = None
+    for _ in range(200):
+        candidate, _ = random_policy.propose()
+        family = str(candidate.generation_genes["program_spec"]["family_id"])
+        if family in ACTIVE_PROGRAM_FAMILIES:
+            base = candidate
+            break
+    assert base is not None
+    factory = MechanismEvolutionV2(7102, registry, mechanisms, {**parameters, "duplicate_resample_limit": 64})
+    candidates = [base]
+    while len(candidates) < count:
+        child, _ = factory._mutate_parameters(base)
+        if child.candidate_id not in {value.candidate_id for value in candidates}:
+            candidates.append(child)
+    return registry, catalog, parameters, candidates
+
+
+def _synthetic_target_parent_pool(candidates) -> dict[str, object]:
+    basin_members = {
+        "ECO_090_001": candidates[:2],
+        "ECO_090_002": candidates[2:],
+    }
+    parent_records = {}
+    target_basins = []
+    for basin_id, members in basin_members.items():
+        family = str(members[0].generation_genes["program_spec"]["family_id"])
+        ids = []
+        for index, candidate in enumerate(members):
+            candidate_id = candidate.candidate_id
+            ids.append(candidate_id)
+            parent_records[candidate_id] = {
+                "candidate_id": candidate_id,
+                "candidate": candidate.to_dict(),
+                "behavior_family_id": f"behavior-{candidate_id}",
+                "program_family_id": family,
+                "family_count": 1,
+                "search_reward": 1.0,
+                "block_robust_ordering": None,
+                "concrete_realization_id": f"realization-{basin_id}-{index}",
+                "economic_similarity_cluster_id": basin_id,
+            }
+        target_basins.append(
+            {
+                "economic_similarity_cluster_id": basin_id,
+                "program_family_id": family,
+                "baseline_row_count": len(members),
+                "member_candidate_ids": ids,
+                "realization_depth": {},
+                "realization_gaps": {"turnover_lt_2": True},
+            }
+        )
+    core = {
+        "schema_version": 1,
+        "status": "FROZEN_TRAIN_ONLY_ECONOMIC_BASIN_PARENT_POOL",
+        "source_ledger_path": "runtime/frozen.parquet",
+        "source_ledger_sha256": "A" * 64,
+        "source_ledger_row_count": len(candidates),
+        "baseline_matched_positive_count": len(candidates),
+        "clustering": {"canonical_similarity_threshold": 0.90},
+        "target_rule": {},
+        "target_basin_count": len(target_basins),
+        "frozen_parent_candidate_count": len(parent_records),
+        "target_basins": target_basins,
+        "parent_records": {key: parent_records[key] for key in sorted(parent_records)},
+        "market_arrays_read": 0,
+        "candidate_evaluations": 0,
+        "validation_reads": 0,
+        "oos_reads": 0,
+        "sealed_reads": 0,
+    }
+    return {**core, "target_parent_pool_sha256": engine_module._payload_sha(core)}
+
+
+def test_frozen_target_parent_pool_builds_from_hash_bound_development_ledger(
+    tmp_path: Path,
+) -> None:
+    _, _, _, candidates = _targeted_parent_candidates(6)
+    baseline_rows = []
+    source_rows = []
+    for index, candidate in enumerate(candidates):
+        family = str(candidate.generation_genes["program_spec"]["family_id"])
+        row = _row(
+            candidate.candidate_id,
+            family=family,
+            ordinal=index + 1,
+            scale=1.0,
+            mapped="mapped-shared",
+        )
+        baseline_rows.append(row)
+        source_rows.append(
+            {
+                "candidate_id": candidate.candidate_id,
+                "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
+                "program_family_id": family,
+                "behavior_family_id": row["behavior_family_id"],
+                "block_robust_ordering_json": None,
+                "search_reward": 1.0,
+            }
+        )
+    source = tmp_path / "candidate_ledger.parquet"
+    pd.DataFrame(source_rows).to_parquet(source, index=False)
+    from alphafactory_crypto.broad_search.temporal_development_expansion_v1 import file_sha256
+
+    baseline = {
+        "source_ledger_path": str(source),
+        "source_ledger_sha256": file_sha256(source),
+        "source_strict_count": 6,
+        "matched_positive_count": 6,
+        "matched_positive_rows": baseline_rows,
+    }
+    pool = build_frozen_target_parent_pool(tmp_path, baseline)
+    assert pool["target_basin_count"] == 1
+    assert pool["frozen_parent_candidate_count"] == 6
+    assert pool["baseline_matched_positive_count"] == 6
+    assert pool["clustering"]["canonical_similarity_threshold"] == 0.90
+    assert pool["market_arrays_read"] == pool["candidate_evaluations"] == 0
+    assert pool["validation_reads"] == pool["oos_reads"] == pool["sealed_reads"] == 0
+    bad = {**baseline, "source_ledger_sha256": "B" * 64}
+    with pytest.raises(RuntimeError, match="FAIL_CLOSED_BEFORE_MARKET_READ"):
+        build_frozen_target_parent_pool(tmp_path, bad)
+
+
+def test_targeted_evolution_uses_only_frozen_basin_parents_and_restores_exactly() -> None:
+    registry, catalog, parameters, candidates = _targeted_parent_candidates(6)
+    pool = _synthetic_target_parent_pool(candidates)
+    mechanisms = tuple(mechanism for mechanism, _ in catalog)
+    policy = MechanismEvolutionV2(991, registry, mechanisms, {
+        **parameters,
+        "warmup": 32,
+        "population_limit": 64,
+        "tournament_size": 4,
+        "parameter_mutation_probability": 0.60,
+        "mechanism_mutation_probability": 0.10,
+        "crossover_probability": 0.30,
+    })
+    policy.configure_targeted_parent_pool(pool)
+    parent_to_basin = {
+        candidate_id: basin["economic_similarity_cluster_id"]
+        for basin in pool["target_basins"]
+        for candidate_id in basin["member_candidate_ids"]
+    }
+    basin_counts = {key: 0 for key in policy.targeted_basin_order}
+    for _ in range(8):
+        _, metadata = policy.propose()
+        receipt = metadata["receipt"]
+        basin = receipt["targeted_economic_basin_id"]
+        basin_counts[basin] += 1
+        assert receipt["targeted_parent_pool_sha256"] == pool["target_parent_pool_sha256"]
+        assert all(parent_to_basin[parent] == basin for parent in metadata["parent_ids"])
+        if len(metadata["parent_ids"]) == 2:
+            assert len(set(receipt["targeted_parent_realization_ids"])) == 2
+    # 2-row and 4-row basins receive the same proposal count: scheduling is basin-balanced.
+    assert max(basin_counts.values()) - min(basin_counts.values()) <= 1
+
+    restored = MechanismEvolutionV2.from_state(registry, policy.export_state())
+    assert restored.state_hash() == policy.state_hash()
+    next_a, meta_a = policy.propose()
+    next_b, meta_b = restored.propose()
+    assert next_a.candidate_id == next_b.candidate_id
+    assert meta_a["receipt"] == meta_b["receipt"]
+
+
+def test_non_targeted_mechanism_evolution_still_uses_original_warmup() -> None:
+    registry, catalog, parameters, _ = _targeted_parent_candidates(6)
+    mechanisms = tuple(mechanism for mechanism, _ in catalog)
+    policy = MechanismEvolutionV2(1234, registry, mechanisms, {**parameters, "warmup": 2})
+    _, metadata = policy.propose()
+    assert metadata["operation"] == "MECHANISM_EVOLUTION_TYPED_RANDOM_WARMUP"
+    assert policy.targeted_parent_pool_payload is None

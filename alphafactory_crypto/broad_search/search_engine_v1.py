@@ -5332,9 +5332,195 @@ class MechanismEvolutionV2(MechanismRandomV2):
     verified_parameter_mutations: int = 0
     verified_mechanism_mutations: int = 0
     verified_crossovers: int = 0
+    targeted_parent_pool_payload: dict[str, Any] | None = None
+    targeted_basin_order: tuple[str, ...] = ()
+    targeted_member_order: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    targeted_basin_cursor: int = 0
+    targeted_parent_cursors: dict[str, int] = field(default_factory=dict)
 
     def _candidate(self, record: Mapping[str, Any]) -> CandidateSpec:
         return CandidateSpec.from_dict(record["candidate"])
+
+    def configure_targeted_parent_pool(self, payload: Mapping[str, Any]) -> None:
+        """Freeze a train-only economic-basin parent source for local exploration.
+
+        This is optional and leaves every historical/non-targeted policy path
+        unchanged.  Current-run children may still be observed for diagnostics,
+        but targeted proposals never promote them into the frozen parent source.
+        """
+
+        value = json.loads(json.dumps(dict(payload)))
+        observed_sha = str(value.get("target_parent_pool_sha256") or "")
+        core = {
+            key: item
+            for key, item in value.items()
+            if key != "target_parent_pool_sha256"
+        }
+        if (
+            not observed_sha
+            or observed_sha != _payload_sha(core)
+            or value.get("status")
+            != "FROZEN_TRAIN_ONLY_ECONOMIC_BASIN_PARENT_POOL"
+            or int(value.get("validation_reads", -1)) != 0
+            or int(value.get("oos_reads", -1)) != 0
+            or int(value.get("sealed_reads", -1)) != 0
+            or int(value.get("market_arrays_read", -1)) != 0
+            or int(value.get("candidate_evaluations", -1)) != 0
+        ):
+            raise ValueError("targeted frozen parent pool identity changed")
+        parent_records = dict(value.get("parent_records") or {})
+        basins = list(value.get("target_basins") or ())
+        if (
+            not parent_records
+            or not basins
+            or int(value.get("frozen_parent_candidate_count", -1))
+            != len(parent_records)
+            or int(value.get("target_basin_count", -1)) != len(basins)
+        ):
+            raise ValueError("targeted frozen parent pool is empty or inconsistent")
+        members_by_basin: dict[str, tuple[str, ...]] = {}
+        seen_members: set[str] = set()
+        for basin in basins:
+            basin_id = str(basin.get("economic_similarity_cluster_id") or "")
+            members = tuple(str(item) for item in basin.get("member_candidate_ids", ()))
+            if not basin_id or not members or len(set(members)) != len(members):
+                raise ValueError("targeted frozen basin membership changed")
+            for candidate_id in members:
+                record = dict(parent_records.get(candidate_id) or {})
+                if (
+                    str(record.get("candidate_id") or "") != candidate_id
+                    or str(record.get("economic_similarity_cluster_id") or "")
+                    != basin_id
+                ):
+                    raise ValueError("targeted frozen parent record changed")
+                candidate = self._candidate(record)
+                if candidate.candidate_id != candidate_id:
+                    raise ValueError("targeted frozen parent CandidateSpec changed")
+                if not _candidate_rebuild_verified(self.registry, candidate, {}):
+                    raise ValueError("targeted frozen parent replay failed")
+                family = str(
+                    candidate.generation_genes.get("program_spec", {}).get(
+                        "family_id", ""
+                    )
+                )
+                if family != str(record.get("program_family_id") or ""):
+                    raise ValueError("targeted frozen parent family changed")
+                seen_members.add(candidate_id)
+            members_by_basin[basin_id] = members
+        if seen_members != set(parent_records):
+            raise ValueError("targeted frozen parent coverage changed")
+        self.targeted_parent_pool_payload = value
+        self.targeted_basin_order = tuple(
+            sorted(
+                members_by_basin,
+                key=lambda basin_id: _payload_sha(
+                    {"seed": int(self.seed), "basin_id": basin_id}
+                ),
+            )
+        )
+        self.targeted_member_order = {
+            basin_id: tuple(
+                sorted(
+                    members,
+                    key=lambda candidate_id: _payload_sha(
+                        {
+                            "seed": int(self.seed),
+                            "basin_id": basin_id,
+                            "candidate_id": candidate_id,
+                        }
+                    ),
+                )
+            )
+            for basin_id, members in members_by_basin.items()
+        }
+        self.targeted_basin_cursor = 0
+        self.targeted_parent_cursors = {
+            basin_id: 0 for basin_id in self.targeted_basin_order
+        }
+        # Baseline parents are source material, never valid child proposals.
+        self.seen.update(parent_records)
+
+    def _targeted_parent_record(self, candidate_id: str) -> dict[str, Any]:
+        if self.targeted_parent_pool_payload is None:
+            raise RuntimeError("targeted parent source is not configured")
+        return dict(
+            dict(self.targeted_parent_pool_payload["parent_records"])[candidate_id]
+        )
+
+    def _next_targeted_basin(self) -> str:
+        if not self.targeted_basin_order:
+            raise RuntimeError("targeted parent source has no basin")
+        basin_id = self.targeted_basin_order[
+            self.targeted_basin_cursor % len(self.targeted_basin_order)
+        ]
+        self.targeted_basin_cursor += 1
+        return basin_id
+
+    def _next_targeted_parent(self, basin_id: str) -> CandidateSpec:
+        members = self.targeted_member_order[basin_id]
+        cursor = int(self.targeted_parent_cursors.get(basin_id, 0))
+        candidate_id = members[cursor % len(members)]
+        self.targeted_parent_cursors[basin_id] = cursor + 1
+        return self._candidate(self._targeted_parent_record(candidate_id))
+
+    def _targeted_crossover_parent(
+        self, basin_id: str, first: CandidateSpec
+    ) -> CandidateSpec | None:
+        members = self.targeted_member_order[basin_id]
+        first_record = self._targeted_parent_record(first.candidate_id)
+        first_realization = str(first_record.get("concrete_realization_id") or "")
+        first_spec = self._spec(first)
+        compatible: list[tuple[bool, int, CandidateSpec]] = []
+        start = int(self.targeted_parent_cursors.get(basin_id, 0))
+        for offset in range(len(members)):
+            candidate_id = members[(start + offset) % len(members)]
+            if candidate_id == first.candidate_id:
+                continue
+            record = self._targeted_parent_record(candidate_id)
+            candidate = self._candidate(record)
+            if not self._compatible(first_spec, self._spec(candidate)):
+                continue
+            different_realization = (
+                str(record.get("concrete_realization_id") or "")
+                != first_realization
+            )
+            compatible.append((not different_realization, offset, candidate))
+        if not compatible:
+            return None
+        compatible.sort(key=lambda row: (row[0], row[1], row[2].candidate_id))
+        second = compatible[0][2]
+        self.targeted_parent_cursors[basin_id] = start + compatible[0][1] + 1
+        return second
+
+    def _bind_targeted_receipt(
+        self,
+        receipt: Mapping[str, Any],
+        *,
+        basin_id: str,
+        parents: Sequence[CandidateSpec],
+    ) -> dict[str, Any]:
+        if self.targeted_parent_pool_payload is None:
+            raise RuntimeError("targeted parent source is not configured")
+        core = {key: value for key, value in receipt.items() if key != "receipt_sha256"}
+        core.update(
+            {
+                "targeted_parent_source": "FROZEN_TRAIN_ONLY_BASELINE",
+                "targeted_economic_basin_id": basin_id,
+                "targeted_parent_pool_sha256": str(
+                    self.targeted_parent_pool_payload["target_parent_pool_sha256"]
+                ),
+                "targeted_parent_realization_ids": [
+                    str(
+                        self._targeted_parent_record(parent.candidate_id).get(
+                            "concrete_realization_id"
+                        )
+                        or ""
+                    )
+                    for parent in parents
+                ],
+            }
+        )
+        return {**core, "receipt_sha256": _payload_sha(core)}
 
     def _selection_key(
         self,
@@ -5735,8 +5921,36 @@ class MechanismEvolutionV2(MechanismRandomV2):
                     )
                     and receipt.get("output_type") == "NUMERIC_ASSET_TIME"
                 )
+            targeted_verified = True
+            if receipt.get("targeted_parent_source") is not None:
+                basin_id = str(receipt.get("targeted_economic_basin_id") or "")
+                members = set(self.targeted_member_order.get(basin_id, ()))
+                targeted_verified = bool(
+                    self.targeted_parent_pool_payload is not None
+                    and receipt.get("targeted_parent_source")
+                    == "FROZEN_TRAIN_ONLY_BASELINE"
+                    and str(receipt.get("targeted_parent_pool_sha256") or "")
+                    == str(
+                        self.targeted_parent_pool_payload.get(
+                            "target_parent_pool_sha256", ""
+                        )
+                    )
+                    and members
+                    and set(parent_ids).issubset(members)
+                    and receipt.get("targeted_parent_realization_ids")
+                    == [
+                        str(
+                            self._targeted_parent_record(parent.candidate_id).get(
+                                "concrete_realization_id"
+                            )
+                            or ""
+                        )
+                        for parent in parents
+                    ]
+                )
             return bool(
-                receipt.get("schema_version") == "MECHANISM_EVOLUTION_RECEIPT_V2"
+                targeted_verified
+                and receipt.get("schema_version") == "MECHANISM_EVOLUTION_RECEIPT_V2"
                 and operation in MECHANISM_EVOLUTION_OPERATIONS
                 and operation_verified
                 and receipt.get("parent_ids") == parent_ids
@@ -5756,7 +5970,71 @@ class MechanismEvolutionV2(MechanismRandomV2):
         except (KeyError, TypeError, ValueError):
             return False
 
+    def _propose_targeted(self) -> tuple[CandidateSpec, dict[str, Any]]:
+        before = self.state_hash()
+        limit = int(self.parameters.get("duplicate_resample_limit", 64))
+        for duplicate_attempt in range(1, limit + 2):
+            basin_id = self._next_targeted_basin()
+            first = self._next_targeted_parent(basin_id)
+            draw = self.rng.random()
+            parameter_probability = float(
+                self.parameters.get("parameter_mutation_probability", 0.50)
+            )
+            mechanism_probability = float(
+                self.parameters.get("mechanism_mutation_probability", 0.30)
+            )
+            if draw < parameter_probability:
+                child, receipt = self._mutate_parameters(first)
+                parents = (first,)
+            elif draw < parameter_probability + mechanism_probability:
+                child, receipt = self._mutate_mechanism(first)
+                parents = (first,)
+            else:
+                second = self._targeted_crossover_parent(basin_id, first)
+                if second is None:
+                    child, receipt = self._mutate_parameters(first)
+                    parents = (first,)
+                else:
+                    try:
+                        child, receipt = self._crossover(first, second)
+                        parents = (first, second)
+                    except _ProposalGenerationFailure:
+                        child, receipt = self._mutate_parameters(first)
+                        parents = (first,)
+            receipt = self._bind_targeted_receipt(
+                receipt, basin_id=basin_id, parents=parents
+            )
+            if child.candidate_id in self.seen:
+                continue
+            if not self.verify_receipt(parents, child, receipt):
+                raise RuntimeError("targeted mechanism evolution receipt verification failed")
+            self.seen.add(child.candidate_id)
+            self.step += 1
+            return child, {
+                "policy_state_hash_before": before,
+                "operation": str(receipt["operation"]),
+                "parent_ids": [value.candidate_id for value in parents],
+                "receipt": receipt,
+                "receipt_verified": True,
+                "raw_attempts": duplicate_attempt
+                + int(receipt.get("internal_generation_attempts", 1))
+                - 1,
+                "compile_valid_attempts": int(
+                    receipt.get("compile_valid_attempts", 1)
+                ),
+                "targeted_economic_basin_id": basin_id,
+                "targeted_parent_pool_sha256": str(
+                    self.targeted_parent_pool_payload["target_parent_pool_sha256"]
+                ),
+            }
+        raise _ProposalGenerationFailure(
+            "targeted mechanism evolution duplicate resample limit exhausted",
+            raw_attempts=limit + 1,
+        )
+
     def propose(self) -> tuple[CandidateSpec, dict[str, Any]]:
+        if self.targeted_parent_pool_payload is not None:
+            return self._propose_targeted()
         if len(self.population) < int(self.parameters.get("warmup", 32)):
             candidate, metadata = super().propose()
             metadata["operation"] = "MECHANISM_EVOLUTION_TYPED_RANDOM_WARMUP"
@@ -5908,6 +6186,11 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 "verified_parameter_mutations": int(self.verified_parameter_mutations),
                 "verified_mechanism_mutations": int(self.verified_mechanism_mutations),
                 "verified_crossovers": int(self.verified_crossovers),
+                "targeted_parent_pool_payload": self.targeted_parent_pool_payload,
+                "targeted_basin_cursor": int(self.targeted_basin_cursor),
+                "targeted_parent_cursors": dict(
+                    sorted(self.targeted_parent_cursors.items())
+                ),
             }
         )
         return state
@@ -5935,6 +6218,18 @@ class MechanismEvolutionV2(MechanismRandomV2):
             state["verified_mechanism_mutations"]
         )
         policy.verified_crossovers = int(state["verified_crossovers"])
+        targeted_payload = state.get("targeted_parent_pool_payload")
+        if isinstance(targeted_payload, Mapping):
+            policy.configure_targeted_parent_pool(targeted_payload)
+            policy.targeted_basin_cursor = int(
+                state.get("targeted_basin_cursor", 0)
+            )
+            restored_cursors = dict(state.get("targeted_parent_cursors") or {})
+            if set(restored_cursors) != set(policy.targeted_parent_cursors):
+                raise ValueError("targeted parent cursor identity changed")
+            policy.targeted_parent_cursors = {
+                str(key): int(value) for key, value in restored_cursors.items()
+            }
         return policy
 
 

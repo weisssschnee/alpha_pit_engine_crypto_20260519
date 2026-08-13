@@ -70,6 +70,7 @@ from .temporal_targeted_deepening_v1 import (
     LANE_SEEDS as TARGETED_LANE_SEEDS,
     SEED_CAMPAIGN as TARGETED_SEED_CAMPAIGN,
     SEED_DERIVATION as TARGETED_SEED_DERIVATION,
+    build_frozen_target_parent_pool,
     final_next_decision as targeted_final_next_decision,
     load_diagnostic_baseline as load_targeted_diagnostic_baseline,
     targeted_checkpoint_decision,
@@ -2082,6 +2083,8 @@ def run(
     expansion_mode = str(execution_mode) == EXPANSION_EXECUTION_MODE
     targeted_mode = str(execution_mode) == TARGETED_EXECUTION_MODE
     fixed_development_mode = expansion_mode or targeted_mode
+    targeted_diagnostic_baseline: dict[str, Any] | None = None
+    targeted_parent_pool: dict[str, Any] | None = None
     if str(execution_mode) not in {
         "FRESH_SEQUENTIAL_PROGRAM",
         SUCCESSOR_EXECUTION_MODE,
@@ -2191,6 +2194,12 @@ def run(
             raise ExpansionPreflightError(
                 "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_runtime_identity_changed"
             )
+        targeted_diagnostic_baseline = load_targeted_diagnostic_baseline(
+            repo_root, receipt
+        )
+        targeted_parent_pool = build_frozen_target_parent_pool(
+            repo_root, targeted_diagnostic_baseline
+        )
     report_name = (
         "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1"
         if successor_mode
@@ -2292,6 +2301,11 @@ def run(
                 "sealed_reads": 0,
             },
         )
+        assert targeted_parent_pool is not None
+        engine._write_json(
+            runtime_root / "targeted_frozen_parent_pool.json",
+            targeted_parent_pool,
+        )
     elif expansion_mode:
         run_authorization = dict(receipt.get("run_authorization") or {})
         successor_authority_preflight = require_real_experiment_authority(
@@ -2386,11 +2400,10 @@ def run(
     expansion_diagnostic_baseline = (
         load_diagnostic_baseline(repo_root, receipt) if expansion_mode else None
     )
-    targeted_diagnostic_baseline = (
-        load_targeted_diagnostic_baseline(repo_root, receipt)
-        if targeted_mode
-        else None
-    )
+    if targeted_mode and targeted_diagnostic_baseline is None:
+        raise RuntimeError(
+            "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_baseline_not_frozen"
+        )
     block_config = engine._read_json(
         repo_root / str(config["source_authorities"]["development_blocks_config"])
     )
@@ -2454,6 +2467,16 @@ def run(
         "expression_registry_limits": _limits(config),
         "successor_preflight": successor_preflight_evidence,
         "successor_current_authority_preflight": successor_authority_preflight,
+        "targeted_parent_pool_sha256": (
+            str(targeted_parent_pool["target_parent_pool_sha256"])
+            if targeted_mode and targeted_parent_pool is not None
+            else None
+        ),
+        "targeted_parent_source_ledger_sha256": (
+            str(targeted_parent_pool["source_ledger_sha256"])
+            if targeted_mode and targeted_parent_pool is not None
+            else None
+        ),
         "sealed_reads": 0,
     }
     frozen_hash = _json_sha(frozen)
@@ -2623,6 +2646,18 @@ def run(
                 if state["skip_stage0"]
                 else _stage0_policies(registry=registry, config=config, catalog=catalog)
             )
+            if targeted_mode:
+                if targeted_parent_pool is None:
+                    raise RuntimeError(
+                        "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_parent_pool_missing"
+                    )
+                for key, policy in policies.items():
+                    if key.startswith("temporal_program_evolution|"):
+                        if not isinstance(policy, engine.MechanismEvolutionV2):
+                            raise RuntimeError(
+                                "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_evolution_policy_changed"
+                            )
+                        policy.configure_targeted_parent_pool(targeted_parent_pool)
             ledger = []
             archive = engine.BehaviorArchive()
             pair_rows = []
@@ -3747,6 +3782,7 @@ def run(
         manifest_paths.extend(
             [
                 "targeted_deepening_launch_claim.json",
+                "targeted_frozen_parent_pool.json",
                 "targeted_deepening_authorization_snapshot.json",
                 "targeted_deepening_diagnostic_baseline.json",
                 "basin_diagnostics_latest.json",
@@ -4174,6 +4210,7 @@ def check(
     elif targeted_mode:
         required += (
             "targeted_deepening_launch_claim.json",
+            "targeted_frozen_parent_pool.json",
             "targeted_deepening_authorization_snapshot.json",
             "targeted_deepening_diagnostic_baseline.json",
             "basin_diagnostics_latest.json",
@@ -4440,6 +4477,73 @@ def check(
             errors.append("targeted_arm_states")
         if len(pairs) != 0:
             errors.append("targeted_stage0_pairs")
+        parent_pool = engine._read_json(
+            runtime_root / "targeted_frozen_parent_pool.json"
+        )
+        parent_pool_core = {
+            key: value
+            for key, value in parent_pool.items()
+            if key != "target_parent_pool_sha256"
+        }
+        parent_pool_sha = str(parent_pool.get("target_parent_pool_sha256") or "")
+        if (
+            parent_pool_sha != _json_sha(parent_pool_core)
+            or parent_pool_sha != str(frozen.get("targeted_parent_pool_sha256") or "")
+            or int(parent_pool.get("market_arrays_read", -1)) != 0
+            or int(parent_pool.get("candidate_evaluations", -1)) != 0
+            or int(parent_pool.get("validation_reads", -1)) != 0
+            or int(parent_pool.get("oos_reads", -1)) != 0
+            or int(parent_pool.get("sealed_reads", -1)) != 0
+        ):
+            errors.append("targeted_parent_pool_identity")
+        parent_records = dict(parent_pool.get("parent_records") or {})
+        parent_to_basin = {
+            str(candidate_id): str(basin.get("economic_similarity_cluster_id") or "")
+            for basin in parent_pool.get("target_basins", ())
+            for candidate_id in basin.get("member_candidate_ids", ())
+        }
+        for row in ledger.loc[
+            ledger["arm"].astype(str).eq("temporal_program_evolution")
+        ].to_dict("records"):
+            try:
+                receipt_row = json.loads(str(row.get("receipt_json") or "{}"))
+                basin_id = str(
+                    receipt_row.get("targeted_economic_basin_id") or ""
+                )
+                parent_ids = [
+                    str(value)
+                    for value in json.loads(str(row.get("parent_ids_json") or "[]"))
+                ]
+                if (
+                    receipt_row.get("targeted_parent_source")
+                    != "FROZEN_TRAIN_ONLY_BASELINE"
+                    or str(receipt_row.get("targeted_parent_pool_sha256") or "")
+                    != parent_pool_sha
+                    or not parent_ids
+                    or any(parent_id not in parent_records for parent_id in parent_ids)
+                    or any(parent_to_basin.get(parent_id) != basin_id for parent_id in parent_ids)
+                ):
+                    raise ValueError("targeted parent lineage changed")
+                if (
+                    str(row.get("operation") or "")
+                    == "ONE_POINT_TYPED_MECHANISM_CROSSOVER"
+                    and len(parent_ids) == 2
+                ):
+                    realization_ids = list(
+                        receipt_row.get("targeted_parent_realization_ids") or ()
+                    )
+                    basin_realizations = {
+                        str(parent_records[parent_id].get("concrete_realization_id") or "")
+                        for parent_id, observed_basin in parent_to_basin.items()
+                        if observed_basin == basin_id
+                    }
+                    if len(basin_realizations) > 1 and len(set(realization_ids)) != 2:
+                        raise ValueError("targeted crossover realization collapsed")
+            except (ValueError, TypeError, json.JSONDecodeError):
+                errors.append(
+                    "targeted_evolution_parent_lineage:"
+                    + str(row.get("candidate_id") or "UNKNOWN")
+                )
         observed_families = set(str(value) for value in ledger["program_family_id"])
         if observed_families - set(TARGETED_PROGRAM_FAMILIES):
             errors.append("targeted_program_family_scope")
