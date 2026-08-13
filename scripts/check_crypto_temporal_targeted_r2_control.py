@@ -29,8 +29,8 @@ from alphafactory_crypto.broad_search.temporal_targeted_deepening_v1 import (
 )
 
 
-IMPLEMENTATION_SHA = "e05efc63cff183e1d223ee2b02e56070bec1c7bb"
-RUNTIME_ID = "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2"
+IMPLEMENTATION_SHA = "46a8dd48f1dc0183ba590bd67edc17f7e62cd359"
+RUNTIME_ID = "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3"
 PARENT_POOL_SHA256 = (
     "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49"
 )
@@ -60,9 +60,16 @@ def _git(root: Path, *args: str) -> str:
     return subprocess.check_output(["git", *args], cwd=root, text=True).strip()
 
 
-def _sha_at(root: Path, revision: str, path: str) -> str:
-    payload = subprocess.check_output(["git", "show", f"{revision}:{path}"], cwd=root)
-    return hashlib.sha256(payload).hexdigest().upper()
+def _blob_oid_at(root: Path, revision: str, path: str) -> str:
+    return _git(root, "rev-parse", f"{revision}:{path}").lower()
+
+
+def _normalized_worktree_blob_oid(root: Path, path: str) -> str:
+    return subprocess.check_output(
+        ["git", "hash-object", f"--path={path}", str(root / path)],
+        cwd=root,
+        text=True,
+    ).strip().lower()
 
 
 def _json_sha(value: Any) -> str:
@@ -98,10 +105,20 @@ def premarket(root: Path, output: Path) -> dict[str, Any]:
         if value
     }
     component_errors = []
-    for path, expected in authorization["authorized_component_sha256"].items():
-        at_implementation = _sha_at(root, IMPLEMENTATION_SHA, path)
-        at_head = _sha_at(root, head, path)
-        if expected != at_implementation or at_head != at_implementation:
+    component_identity = []
+    expected_components = dict(authorization.get("execution_component_git_identities") or {})
+    for path, expected in expected_components.items():
+        at_implementation = _blob_oid_at(root, IMPLEMENTATION_SHA, path)
+        at_head = _blob_oid_at(root, head, path)
+        observed = _normalized_worktree_blob_oid(root, path)
+        match = expected == at_implementation == at_head == observed
+        component_identity.append({
+            "path": path,
+            "expected_committed_blob_oid": expected,
+            "observed_normalized_worktree_blob_oid": observed,
+            "match": match,
+        })
+        if not match:
             component_errors.append(path)
 
     ledger_path = root / baseline["source_ledger_path"]
@@ -132,8 +149,10 @@ def premarket(root: Path, output: Path) -> dict[str, Any]:
         errors.append("implementation_sha")
     if changed - CONTROL_PATHS:
         errors.append("non_control_plane_diff")
+    if set(expected_components) != set(authorization["authorized_component_sha256"]):
+        errors.append("execution_component_identity_set")
     if component_errors:
-        errors.append("execution_component_sha")
+        errors.append("EXECUTION_COMPONENT_DRIFT")
     if len(ledger) != 50_000 or file_sha256(ledger_path) != str(
         baseline["source_ledger_sha256"]
     ):
@@ -165,6 +184,19 @@ def premarket(root: Path, output: Path) -> dict[str, Any]:
         errors.append("premarket_read_boundary")
     if expected_accounting.get("checker_path") != "scripts/check_crypto_temporal_targeted_r2_control.py":
         errors.append("operation_accounting_contract")
+    preauthorization = dict(authorization.get("preauthorization_deployment_receipt") or {})
+    receipt_path = Path(str(preauthorization.get("path") or ""))
+    try:
+        receipt = engine._read_json(receipt_path)
+    except (OSError, ValueError, json.JSONDecodeError):
+        errors.append("preauthorization_deployment_receipt")
+    else:
+        if (
+            file_sha256(receipt_path) != str(preauthorization.get("sha256") or "")
+            or receipt.get("status") != preauthorization.get("status")
+            or receipt.get("evidence_sha256") != preauthorization.get("evidence_sha256")
+        ):
+            errors.append("preauthorization_deployment_receipt")
     if (root / f"runtime/{RUNTIME_ID}").exists():
         errors.append("non_fresh_r2_runtime")
 
@@ -179,6 +211,7 @@ def premarket(root: Path, output: Path) -> dict[str, Any]:
         "implementation_sha": IMPLEMENTATION_SHA,
         "changed_paths_since_implementation": sorted(changed),
         "execution_component_count": len(authorization["authorized_component_sha256"]),
+        "execution_component_identity": component_identity,
         "execution_component_errors": component_errors,
         "baseline_ledger_sha256": file_sha256(ledger_path),
         "baseline_ledger_rows": len(ledger),
@@ -634,7 +667,7 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
     payload = {**core, "evidence_sha256": _json_sha(core)}
     _write_json(output, payload)
     if errors:
-        raise RuntimeError("TARGETED_R2_CONTROL_CHECK_FAIL:" + ",".join(sorted(set(errors))))
+        raise RuntimeError("TARGETED_R3_CONTROL_CHECK_FAIL:" + ",".join(sorted(set(errors))))
     return payload
 
 

@@ -20,17 +20,13 @@
     "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
-  "authorization_commit_parent_sha": "e05efc63cff183e1d223ee2b02e56070bec1c7bb",
+  "authorization_commit_parent_sha": "46a8dd48f1dc0183ba590bd67edc17f7e62cd359",
   "authorization_commit_scope": [
-    ".planning/STATE.md",
-    ".planning/graphs/current.html",
-    ".planning/graphs/current.json",
-    "config/architecture_overlay.json",
     "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json",
     "scripts/check_crypto_temporal_targeted_r2_control.py"
   ],
   "authorization_id": "CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_AUTHORIZATION",
-  "authorization_sha256": "38B1A82925FE0D5D5D9B09D39AD7A6887B6D09CB09893B3A1A0DB55134505C65",
+  "authorization_sha256": "F25DD461DF6E2C5ACEFD644FD373EB44B3AA92F9E8B6AFA4415FC07D0F0A8C2E",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "92E0C0983C8FAC691A4B7658903C6A919C07A855ABF0AA8AA27A6DAEEBA6B22F",
@@ -41,11 +37,12 @@
     "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "0388DBEAA35F4C2412C9B36ECD723C146B0926B0E7DF12DF062794A0FCA0CC1A",
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "869AE85A3E753A3C69E7D62D29C7878E6999219FC37F8F93322343DA4101923F",
     "alphafactory_crypto/broad_search/temporal_program_v1.py": "4CCDD6AEB5AFFF09DDEB36F6BCD4BD5363595C771E7CE27585E7A33B57F93A63",
-    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "0E7128306329D0AB16AB2AEDC5A148A127FF7B49FD4D3A566384C44B2AD4CF64",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py": "04870D26C8CC74C2A540CE0A5A4DFB5E3EF3AA29AAEC1E158ACF328089EB7735",
+    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "8111BE5D806DA4EAFFB9F9BA0B8861AC883E54BBA3896426D03AE25EEB23C45D",
     "config/crypto_temporal_mechanism_program_v1.json": "B147F5EFA752526549CAA801C408835D98FCDB5831DF2CC01E5A4348D6663AD8",
     "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "A30E5A508BBF2333A80B7D3B1090ADB750B4D8A54F33E9D5F379FE187B277C06"
   },
-  "authorized_implementation_sha": "e05efc63cff183e1d223ee2b02e56070bec1c7bb",
+  "authorized_implementation_sha": "46a8dd48f1dc0183ba590bd67edc17f7e62cd359",
   "automatic_next_run_started": false,
   "boundaries": {
     "automatic_expansion": false,
@@ -66,7 +63,7 @@
     "workers_default": 10,
     "workers_memory_fallback": 8
   },
-  "consumed": true,
+  "consumed": false,
   "decision_to_change": "Whether targeted deepening is sufficient to wait for forward, should continue, or exposes a Search Core realization bottleneck",
   "diagnostic_baseline_path": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_baseline.json",
   "diagnostic_baseline_policy_feedback": false,
@@ -80,9 +77,24 @@
   "execution_mode": "TARGETED_P1_P4_BASIN_DEEPENING_V1",
   "executor_identity": {
     "host": "desktop-a2h3a2g",
-    "workspace_path_sha256": "5E2DF1BDFCC68EC4DE18B1E96C66C528ABF2448A996379AB72D04F31888FA549"
+    "workspace_path_sha256": "EE95932D39CE9F3889A122A5ED26FA29FED484CE9D5144D5B6A93197BF35CD0B"
   },
   "expected_branch": "experiment/crypto-temporal-targeted-p1-p4-basin-deepening-v1-20260813",
+  "execution_component_git_identities": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
+    "alphafactory_crypto/broad_search/experiment_authority.py": "6a3fee7a0a22958f4e1d6540373223c3d39c0aae",
+    "alphafactory_crypto/broad_search/expression.py": "f7b1f26002c3a2ded3a819309d4edd7a9fab5368",
+    "alphafactory_crypto/broad_search/pair18m.py": "b1c8457e6b5983e526b3544421ec3421e0c59088",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "af88ddc0326311ecf29cea48c16fc488174a3f16",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "f57bfaabd26dd8539477b6409fa5b291adb8d02b",
+    "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "c360b409191753c32b9faaaa3645cc4d736ba64d",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "9a9581955e1f1701aa65f6625b0ef658b6c97d8d",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "9c7bb4a214bc69f3e6e69691d352242168fa9f19",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py": "f34c74831d9f112d474c3f57206befd035c6d81b",
+    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "fbe8c9bb0cefe9bd0208cb7d90f97757da7600a8",
+    "config/crypto_temporal_mechanism_program_v1.json": "42f420a1bbde8067b1a10a976346979f5cc8d6d3",
+    "scripts/run_crypto_temporal_mechanism_program_v1_pc2.ps1": "9a9abbeacced88a530853c3dace6cac99e739403"
+  },
   "frozen_parent_pool_identity": {
     "baseline_matched_positive_count": 302,
     "frozen_parent_candidate_count": 228,
@@ -97,6 +109,30 @@
     1378433431,
     1722480701
   ],
+  "market_input_preflight": {
+    "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "cache_root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+    "carrier_manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "carrier_manifest_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6",
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "market_arrays_read": 0,
+    "sealed_reads": 0,
+    "target_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3",
+        "bytes": 10170182,
+        "file_count": 3
+      },
+      "economic_receipt_path": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+      "economic_receipt_sha256": "A85E83412F274F4AC0117193F79BC9FF6E2FB332581B203BCC695F906CD204F4",
+      "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+      "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1"
+    }
+  },
   "operation_accounting": {
     "checker_path": "scripts/check_crypto_temporal_targeted_r2_control.py",
     "crossover_fallback_reasons": [
@@ -140,34 +176,19 @@
       "component_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60"
     }
   },
+  "preauthorization_deployment_receipt": {
+    "evidence_sha256": "B623ED01CF3BE35E7026385F649803F05AC2BF232D3937E198E34C2C417127B9",
+    "path": "C:/HermesWorker/runtime/crypto_temporal_r3_pre_authorization_ready_20260814.json",
+    "sha256": "86CF72BEF57E56F0CC7EAB8ACAED6FB6173A049806E76E70B574E4E0866D50C4",
+    "status": "PRE_AUTHORIZATION_DEPLOYMENT_READY"
+  },
   "run_authorization": {
     "authority": "CURRENT_USER_INSTRUCTION",
     "decision_id": "AUTHORIZE_TARGETED_P1_P4_BASIN_DEEPENING_20260813",
     "scope": "ONE_30000_STRICT_TRAIN_ONLY_P1_P4_TARGETED_DEEPENING"
   },
-  "run_authorized": false,
-  "run_outcome": {
-    "automatic_next_run_started": false,
-    "checker": "FAIL_MISSING_RUN_MANIFEST_AND_BASIN_DIAGNOSTICS",
-    "completed_checkpoint_count": 0,
-    "execution_component_implementation_sha": "e05efc63cff183e1d223ee2b02e56070bec1c7bb",
-    "generation_attempts": 16,
-    "matched_positive_count": 0,
-    "oos_reads": 0,
-    "producer_source_sha": "1f88a6ef772d55a64826fe00d37a7a42a914fde2",
-    "rescue_rerun_started": false,
-    "runtime": "runtime/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2",
-    "runtime_integrity": "INVALID_PRE_STRICT_PARTIAL",
-    "sealed_reads": 0,
-    "status": "SYSTEM_INVALID",
-    "strict_evaluated_count": 0,
-    "system_invalid_evidence": "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
-    "task_id": "job_20260813_202156_f73045",
-    "task_state": "FAILED",
-    "terminal_reason": "PRE_STRICT_DEPLOYMENT_INVALID_TARGET_CACHE_MISSING",
-    "validation_reads": 0
-  },
-  "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2",
+  "run_authorized": true,
+  "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3",
   "saturation_rule": {
     "new_economic_clusters_since_10000_maximum": 0,
     "new_high_quality_concrete_realizations_since_10000_maximum": 0,
@@ -176,5 +197,5 @@
     "strict_boundary": 20000
   },
   "schema_version": 2,
-  "status": "RUN_AUTHORIZATION_CONSUMED_TARGETED_P1_P4_DEEPENING"
+  "status": "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING"
 }
