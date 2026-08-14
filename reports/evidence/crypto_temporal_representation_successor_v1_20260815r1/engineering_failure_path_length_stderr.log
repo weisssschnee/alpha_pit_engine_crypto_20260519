@@ -1,0 +1,53 @@
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2053: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+Traceback (most recent call last):
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\scripts\run_crypto_temporal_representation_successor_v1.py", line 32, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\scripts\run_crypto_temporal_representation_successor_v1.py", line 25, in main
+    else run(args.repo_root, runtime_id=args.runtime_id)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\alphafactory_crypto\broad_search\temporal_representation_tournament_v1.py", line 730, in run
+    arm_results = {
+                  ^
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\alphafactory_crypto\broad_search\temporal_representation_tournament_v1.py", line 731, in <dictcomp>
+    arm: _run_arm(
+         ^^^^^^^^^
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\alphafactory_crypto\broad_search\temporal_representation_tournament_v1.py", line 571, in _run_arm
+    _write_checkpoint(
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\alphafactory_crypto\broad_search\temporal_program_search_v1.py", line 1548, in _write_checkpoint
+    engine._write_parquet(temporary / "paired_program_diagnostics.parquet", pair_rows)
+  File "C:\HermesWorker\workspace\crypto_temporal_search_core_realization_v2_20260814\alphafactory_crypto\broad_search\search_engine_v1.py", line 1082, in _write_parquet
+    pd.DataFrame(list(rows)).to_parquet(temporary, index=False)
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\core\frame.py", line 3113, in to_parquet
+    return to_parquet(
+           ^^^^^^^^^^^
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\io\parquet.py", line 480, in to_parquet
+    impl.write(
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\io\parquet.py", line 198, in write
+    path_or_handle, handles, filesystem = _get_path_or_handle(
+                                          ^^^^^^^^^^^^^^^^^^^^
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\io\parquet.py", line 140, in _get_path_or_handle
+    handles = get_handle(
+              ^^^^^^^^^^^
+  File "D:\HermesWorker\workspace\crypto_line\.venv_b251733\Lib\site-packages\pandas\io\common.py", line 882, in get_handle
+    handle = open(handle, ioargs.mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\TEMPORAL_REPRESENTATION_SUCCESSOR\\checkpoints\\.checkpoint_000.tmp-29220\\paired_program_diagnostics.parquet.tmp-29220'

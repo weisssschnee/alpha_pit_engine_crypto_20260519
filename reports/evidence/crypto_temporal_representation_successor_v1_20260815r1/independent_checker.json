@@ -1,0 +1,73 @@
+{
+  "adaptive_state_shared": false,
+  "archive_shared": false,
+  "arm_evidence": {
+    "LEGACY_REALIZATION_V2_CONTROL": {
+      "attempts": 15413,
+      "candidate_spec_hashes_verified": 10000,
+      "checkpoint_count": 5,
+      "matched_positive": 1517,
+      "parent_source_counts": {
+        "ADAPTIVE_STRICT_DESCENDANT": 3916,
+        "FROZEN_TRAIN_ONLY_BASELINE": 7175
+      },
+      "program_family_counts": {
+        "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 1630,
+        "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 8370
+      },
+      "realized_operation_counts": {
+        "crossover": 1091,
+        "mechanism_mutation": 285,
+        "parameter_mutation": 8624
+      },
+      "requested_operation_counts": {
+        "crossover": 3189,
+        "mechanism_mutation": 285,
+        "parameter_mutation": 6526
+      },
+      "strict": 10000
+    },
+    "TEMPORAL_REPRESENTATION_SUCCESSOR": {
+      "attempts": 16325,
+      "candidate_spec_hashes_verified": 10000,
+      "checkpoint_count": 5,
+      "matched_positive": 1486,
+      "parent_source_counts": {
+        "ADAPTIVE_STRICT_DESCENDANT": 3823,
+        "FROZEN_TRAIN_ONLY_BASELINE": 7278
+      },
+      "program_family_counts": {
+        "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 1522,
+        "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 8478
+      },
+      "realized_operation_counts": {
+        "crossover": 1101,
+        "mechanism_mutation": 245,
+        "parameter_mutation": 8654
+      },
+      "requested_operation_counts": {
+        "crossover": 3059,
+        "mechanism_mutation": 245,
+        "parameter_mutation": 6696
+      },
+      "strict": 10000
+    }
+  },
+  "authorization_sha256": "19277B534BA95AD9908B64272327E838231CFF277165C4934E16FA68AD437786",
+  "automatic_next_run_started": false,
+  "checker_sha256": "9885F19E74674DFCA67371D60A70823ABF25B274717A9A33BCDABB0881E62E2C",
+  "cross_arm_candidate_overlap_diagnostic": 2176,
+  "errors": [],
+  "forbidden_reads": {
+    "forward_reads": 0,
+    "holdout_reads": 0,
+    "oos_reads": 0,
+    "promotion_reads": 0,
+    "sealed_reads": 0,
+    "validation_reads": 0
+  },
+  "frozen_contract_sha256": "6BD00DCAAC992B5CD4378EAA733ED8FFB63492814336DAD0246F99A047AA5E24",
+  "offline_evidence_sha256": "094EB3E7E478EDEB1BB894845AA827AF7703D4876AB9EDD7FA654CCF2F1FD008",
+  "schema_version": 1,
+  "status": "PASS"
+}
