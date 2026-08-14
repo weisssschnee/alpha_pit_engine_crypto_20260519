@@ -346,6 +346,24 @@ def _initial_evolution_policies(root: Path, pool: Mapping[str, Any]) -> dict[str
     return selected
 
 
+def _observe_replayed_strict_rows(
+    policy: engine.MechanismEvolutionV2,
+    rows: list[Mapping[str, Any]],
+) -> None:
+    for row in sorted(rows, key=lambda value: int(value["completion_ordinal"])):
+        archive_row = dict(row)
+        block_ordering = row.get("block_robust_ordering_json")
+        archive_row["block_robust_ordering"] = (
+            json.loads(str(block_ordering))
+            if block_ordering is not None and not pd.isna(block_ordering)
+            else None
+        )
+        candidate = engine.CandidateSpec.from_dict(
+            json.loads(str(row["candidate_spec_json"]))
+        )
+        policy.observe(candidate, archive_row)
+
+
 def verify_operation_tracer(root: Path, count_per_lane: int) -> dict[str, Any]:
     authorization = engine._read_json(root / AUTHORIZATION_PATH)
     baseline = load_diagnostic_baseline(root, authorization)
@@ -407,9 +425,15 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
         ACTIVE_PROGRAM_FAMILIES
     ):
         errors.append("program_family_scope")
-    if any(
-        int(final.get(key, -1)) != 0
-        for key in ("validation_reads", "oos_reads", "sealed_reads")
+    diagnostics = dict(final.get("targeted_deepening_diagnostics") or {})
+    if (
+        bool(final.get("validation"))
+        or bool(final.get("oos"))
+        or int(final.get("sealed_reads", -1)) != 0
+        or any(
+            int(diagnostics.get(key, -1)) != 0
+            for key in ("validation_reads", "oos_reads", "sealed_reads")
+        )
     ):
         errors.append("sealed_evaluation_boundary")
 
@@ -457,7 +481,6 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
     )
     policies = _initial_evolution_policies(root, pool)
     trace_rows = []
-    observed_candidate_ids = {str(row["candidate_id"]) for row in proposal_rows}
     strict_by_id = {
         str(row["candidate_id"]): row
         for row in ledger.loc[
@@ -470,7 +493,19 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
     for checkpoint_index in checkpoints:
         for policy_key, policy in sorted(policies.items()):
             observed = observed_by_checkpoint_lane.get((checkpoint_index, policy_key), [])
+            pending_strict_rows: list[Mapping[str, Any]] = []
+            pending_batch_index: int | None = None
             for expected in observed:
+                batch_index = int(expected["evaluation_batch_index"])
+                if (
+                    pending_batch_index is not None
+                    and batch_index != pending_batch_index
+                ):
+                    _observe_replayed_strict_rows(
+                        policy, pending_strict_rows
+                    )
+                    pending_strict_rows = []
+                pending_batch_index = batch_index
                 for _ in range(100_000):
                     try:
                         candidate, metadata, audit = _trace_targeted_proposal(policy)
@@ -497,16 +532,13 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
                         "seed": int(policy_key.rsplit("|", 1)[1]),
                         "candidate_id": candidate.candidate_id,
                         "realized_operation_raw": str(metadata["operation"]),
-                        "submitted": candidate.candidate_id in observed_candidate_ids,
-                        "strict": candidate.candidate_id in strict_by_id,
-                        "matched_positive": bool(
-                            strict_by_id.get(candidate.candidate_id, {}).get(
-                                "matched_positive", False
-                            )
-                        ),
+                        "submitted": False,
+                        "strict": False,
+                        "matched_positive": False,
                     }
                     trace_rows.append(traced)
                     if candidate.candidate_id == str(expected["candidate_id"]):
+                        traced["submitted"] = True
                         if str(metadata["operation"]) != str(expected["operation"]):
                             errors.append("process_evidence_realized_operation")
                         strict_row = strict_by_id.get(candidate.candidate_id)
@@ -517,6 +549,12 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
                             != str(metadata["policy_state_hash_before"])
                         ):
                             errors.append("strict_ledger_replay_identity")
+                        if strict_row is not None:
+                            traced["strict"] = True
+                            traced["matched_positive"] = bool(
+                                strict_row.get("matched_positive", False)
+                            )
+                            pending_strict_rows.append(strict_row)
                         break
                     consumed_exact_rejects[candidate.candidate_id] += 1
                     if consumed_exact_rejects[candidate.candidate_id] > exact_reject_ids[
@@ -526,13 +564,7 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
                         break
                 else:
                     errors.append("proposal_replay_limit")
-            local = ledger.loc[
-                ledger["checkpoint_index"].astype(int).eq(checkpoint_index)
-                & ledger["arm"].astype(str).eq("temporal_program_evolution")
-                & ledger["seed"].astype(int).eq(int(policy_key.rsplit("|", 1)[1]))
-            ].to_dict("records")
-            if local:
-                policy.update(local)
+            _observe_replayed_strict_rows(policy, pending_strict_rows)
     if consumed_exact_rejects != exact_reject_ids:
         errors.append("exact_reject_reconciliation")
     if proposal_rejects != expected_proposal_rejects:
@@ -660,8 +692,8 @@ def postrun(root: Path, output: Path) -> dict[str, Any]:
         "proposal_generation_failure_count": proposal_rejects,
         "trace_row_count": len(trace_rows),
         "operation_trace_path": trace_path.relative_to(root).as_posix(),
-        "validation_reads": int(final.get("validation_reads", 0)),
-        "oos_reads": int(final.get("oos_reads", 0)),
+        "validation_reads": int(diagnostics.get("validation_reads", 0)),
+        "oos_reads": int(diagnostics.get("oos_reads", 0)),
         "sealed_reads": int(final.get("sealed_reads", 0)),
     }
     payload = {**core, "evidence_sha256": _json_sha(core)}
