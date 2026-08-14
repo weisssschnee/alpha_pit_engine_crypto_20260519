@@ -1784,6 +1784,35 @@ def _observe_candidate(
                     receipt.get("parent_identical_count") or 0
                 ),
                 "build_invalid_count": int(receipt.get("build_invalid_count") or 0),
+                "semantic_edit_type": receipt.get("semantic_edit_type"),
+                "semantic_module_sources_json": json.dumps(
+                    receipt.get("semantic_module_sources") or {}, sort_keys=True
+                ),
+                "semantic_modules_changed_json": json.dumps(
+                    receipt.get("semantic_modules_changed") or [], sort_keys=True
+                ),
+                "candidate_genes_preserved_json": json.dumps(
+                    receipt.get("candidate_genes_preserved") or [], sort_keys=True
+                ),
+                "candidate_gene_repairs_json": json.dumps(
+                    receipt.get("candidate_gene_repairs") or [], sort_keys=True
+                ),
+                "semantic_repair_size": int(receipt.get("repair_size") or 0),
+                "completion_attempts": int(receipt.get("completion_attempts") or 0),
+                "enumerated_recombination_count": int(
+                    receipt.get("enumerated_recombination_count") or 0
+                ),
+                "legal_child_count": int(receipt.get("legal_child_count") or 0),
+                "completion_failure_count": int(
+                    receipt.get("completion_failure_count") or 0
+                ),
+                "semantic_donor_catalog": receipt.get("semantic_donor_catalog"),
+                "semantic_donor_program_id": receipt.get(
+                    "semantic_donor_program_id"
+                ),
+                "semantic_donor_mechanism_id": receipt.get(
+                    "semantic_donor_mechanism_id"
+                ),
                 "selected_splice_json": json.dumps(
                     receipt.get("selected_splice"), sort_keys=True
                 ),

@@ -2148,6 +2148,72 @@
                                        ]
                   },
                   {
+                      "id":  "crypto_temporal_search_core_realization_v2",
+                      "label":  "Temporal Search Core Realization V2 completed evidence parent",
+                      "kind":  "development_experiment",
+                      "lifecycle":  "DEPRECATED",
+                      "paths":  [
+                                    "alphafactory_crypto/broad_search/temporal_realization_v2.py",
+                                    "config/crypto_temporal_search_core_realization_v2_audit.json",
+                                    "config/crypto_temporal_search_core_realization_v2_authorization.json"
+                                ],
+                      "critical":  false,
+                      "semantic_role":  "experimental_temporal_realization_v2",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "validation":  {
+                                         "level":  "STATIC_VERIFIED",
+                                         "result":  "PASS",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "config/crypto_temporal_search_core_realization_v2_audit.json"
+                                     },
+                      "claim_badges":  [
+                                           "SEARCH REPRESENTATION BOTTLENECK",
+                                           "TRAIN ONLY",
+                                           "NO VALIDATION OOS OR FORWARD",
+                                           "NO PROMOTION"
+                                       ]
+                  },
+                  {
+                      "id":  "crypto_temporal_representation_successor_v1",
+                      "label":  "Factorized temporal representation successor V1 tournament",
+                      "kind":  "development_experiment",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "paths":  [
+                                    "alphafactory_crypto/broad_search/temporal_representation_successor_v1.py",
+                                    "config/crypto_temporal_representation_successor_v1_offline_evidence.json",
+                                    "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py"
+                                ],
+                      "critical":  false,
+                      "semantic_role":  "experimental_temporal_representation_successor",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "contracts":  [
+                                        {
+                                            "id":  "temporal_representation_successor_train_only_boundary",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "The fixed 20k A/B tournament is P1/P4 train-only development evidence; validation, OOS, holdout, forward, promotion, and sealed reads remain forbidden and the experiment cannot replace a formal authority binding.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "temporal_representation_tournament_v1 authorization and independent checker",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_temporal_representation_successor_v1_offline_evidence.json"
+                                        }
+                                    ],
+                      "validation":  {
+                                         "level":  "STATIC_VERIFIED",
+                                         "result":  "PASS",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "config/crypto_temporal_representation_successor_v1_offline_evidence.json"
+                                     },
+                      "claim_badges":  [
+                                           "EXPERIMENTAL CANDIDATE",
+                                           "OFFLINE CLOSURE PASS",
+                                           "TRAIN ONLY",
+                                           "NO VALIDATION OOS OR FORWARD",
+                                           "NO PROMOTION"
+                                       ]
+                  },
+                  {
                       "id":  "sealed_research_boundaries",
                       "label":  "Forward / Challenge / Promotion boundaries",
                       "kind":  "boundary",
@@ -3011,6 +3077,39 @@
                       "lifecycle":  "DEPRECATED",
                       "required":  false,
                       "evidence_type":  "OBSERVED"
+                  },
+                  {
+                      "id":  "temporal_realization_v2_candidate_for_search_policy",
+                      "source":  "crypto_temporal_search_core_realization_v2",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "candidate_for",
+                      "relation_class":  "candidate_for",
+                      "binding_state":  "DEPRECATED",
+                      "lifecycle":  "DEPRECATED",
+                      "required":  false,
+                      "evidence_type":  "OBSERVED"
+                  },
+                  {
+                      "id":  "temporal_representation_successor_candidate_for_search_policy",
+                      "source":  "crypto_temporal_representation_successor_v1",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "candidate_for",
+                      "relation_class":  "candidate_for",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "STATIC"
+                  },
+                  {
+                      "id":  "temporal_representation_successor_derived_from_realization_v2",
+                      "source":  "crypto_temporal_representation_successor_v1",
+                      "target":  "crypto_temporal_search_core_realization_v2",
+                      "relation":  "derived_from",
+                      "relation_class":  "derived_from",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "STATIC"
                   }
               ],
     "profile_refs":  [

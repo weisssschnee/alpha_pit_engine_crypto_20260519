@@ -1,0 +1,93 @@
+{
+  "base_source_sha": "4140f54f1d264737748a8ddff5f17d3096bc03ef",
+  "candidate_evaluations": 0,
+  "execution_component_blob_oids": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
+    "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
+    "alphafactory_crypto/broad_search/expression.py": "f7b1f26002c3a2ded3a819309d4edd7a9fab5368",
+    "alphafactory_crypto/broad_search/pair18m.py": "b1c8457e6b5983e526b3544421ec3421e0c59088",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "297e4cee61281603c0bd07427ab6ea6ec111b915",
+    "alphafactory_crypto/broad_search/temporal_activation_v1.py": "f57bfaabd26dd8539477b6409fa5b291adb8d02b",
+    "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "c360b409191753c32b9faaaa3645cc4d736ba64d",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "4345d0290752dc3740f379cd115a9ba8f498de5c",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "9c7bb4a214bc69f3e6e69691d352242168fa9f19",
+    "alphafactory_crypto/broad_search/temporal_realization_v2.py": "25624d176d745282e195f46c18bacb170d371397",
+    "alphafactory_crypto/broad_search/temporal_representation_analysis_v1.py": "8e9d8b8215db3f5d58f010d572eaf0d8d7a07947",
+    "alphafactory_crypto/broad_search/temporal_representation_checker_v1.py": "fa3d4329a0f8ebce57e97c80fba0bd5aad1dd990",
+    "alphafactory_crypto/broad_search/temporal_representation_successor_v1.py": "97339b65a35052d50ebcd63df2171ea9789f88c2",
+    "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py": "f880dc73f37203c9703c18db9ab19f5ade281544",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py": "f34c74831d9f112d474c3f57206befd035c6d81b",
+    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "fbe8c9bb0cefe9bd0208cb7d90f97757da7600a8",
+    "config/crypto_search_engine_v1_4_binance_target_replay.json": "74133adb8f3ad8d715917ccd0e7866118aaf5a18",
+    "config/crypto_search_replication_aware_gate_v1.json": "d12595414c85bcd171757ba63af871524c8a6e58",
+    "config/crypto_search_replication_aware_gate_v1_r3_receipt.json": "c94d5ac4d74269777d179d8ee186c8a7d0ffbf78",
+    "config/crypto_temporal_mechanism_program_v1.json": "42f420a1bbde8067b1a10a976346979f5cc8d6d3",
+    "config/crypto_typed_mechanism_catalog_v2_1.json": "bb0d9a10ac3db2978ad97b766ac923bb73241095",
+    "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json": "28d00166356232739a74d6b6e11f7710e2607ab2",
+    "scripts/analyze_crypto_temporal_representation_successor_v1.py": "8e39b18730d412f06687805445a023cdf3c75225",
+    "scripts/check_crypto_temporal_representation_successor_v1.py": "4bae84b4afa84ea2c3d2c8446b5926dca0fc7cb0",
+    "scripts/run_crypto_temporal_representation_successor_v1.py": "330f29af41ce11e894f558be5e199fc349e729d4",
+    "scripts/run_crypto_temporal_representation_successor_v1_pc2.ps1": "3e209eb8b59d7a4d0526e30d701996f3932ce9c5"
+  },
+  "forbidden_reads": {
+    "forward": 0,
+    "holdout": 0,
+    "oos": 0,
+    "promotion": 0,
+    "sealed": 0,
+    "validation": 0
+  },
+  "frozen_development_identity": {
+    "ledger_rows": 50000,
+    "ledger_sha256": "5171CD9655944CCED18D35CCB413C725E9542889260A135E8F95F4BE7B401B46",
+    "matched_positive": 302,
+    "parent_pool_sha256": "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49",
+    "parents": 228,
+    "target_basins": 23
+  },
+  "graph_lifecycle_projection": {
+    "formal_authority_binding_changed": false,
+    "maintenance_status": "NEEDS_ATTENTION",
+    "raw_refresh_blocker": "GRAPHIFYY_RUNTIME_NOT_INSTALLED",
+    "successor_lifecycle": "EXPERIMENTAL"
+  },
+  "implementation_scope": {
+    "existing_file_changes": {
+      "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "LEDGER_RECEIPT_PROJECTION_ONLY",
+      "config/architecture_overlay.json": "NON_FORMAL_EXPERIMENT_LIFECYCLE_ONLY"
+    },
+    "new_capabilities": [
+      "FACTORIZED_TEMPORAL_PROGRAM_GENOME_V1",
+      "CONSTRAINT_AWARE_MINIMAL_COMPLETION",
+      "SEMANTIC_BLOCK_MUTATION_AND_CROSSOVER",
+      "FIXED_INDEPENDENT_10K_PLUS_10K_EVOLUTION_TOURNAMENT",
+      "INDEPENDENT_ARTIFACT_CHECKER_AND_FINAL_ATTRIBUTION"
+    ],
+    "second_ast_created": false,
+    "second_evaluator_created": false,
+    "target_mapping_cost_execution_evaluator_reward_changed": false
+  },
+  "market_arrays_read": 0,
+  "offline_evidence": {
+    "constructible_expression_identity_matches": 410,
+    "legacy_legal_child_existence_rate": 0.9184782608695652,
+    "legacy_unique_child_count": 3668,
+    "path": "config/crypto_temporal_representation_successor_v1_offline_evidence.json",
+    "raw_file_sha256": "0D58E0BBEBB4452213468E5C46AF3974ABD2C8590E9FDB5ABF9710A51F3FC91B",
+    "same_basin_pairs": 552,
+    "semantic_identity_matches": 464,
+    "semantic_sha256": "094EB3E7E478EDEB1BB894845AA827AF7703D4876AB9EDD7FA654CCF2F1FD008",
+    "status": "OFFLINE_CLOSURE_PASS_READY_FOR_TOURNAMENT",
+    "successor_legal_child_existence_rate": 0.9547101449275363,
+    "successor_unique_child_count": 4645
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_READY_FOR_IMPLEMENTATION_COMMIT",
+  "test_evidence": {
+    "command_scope": "ALL_TEMPORAL_REGRESSION_TESTS",
+    "passed": 119,
+    "result": "PASS"
+  },
+  "validation_reads": 0
+}
