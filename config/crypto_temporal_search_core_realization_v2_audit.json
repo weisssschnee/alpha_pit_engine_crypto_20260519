@@ -1,0 +1,180 @@
+{
+  "candidate_evaluations": 0,
+  "crossover_failure_archaeology": {
+    "constructive_real_parent_dry_replay": {
+      "cross_basin_contamination": 0,
+      "crossover_realized": 104,
+      "crossover_requested": 141,
+      "fallback_rate": 0.2624113475177305,
+      "legal_child_set_empty": 37,
+      "proposals": 400
+    },
+    "fallback": 2388,
+    "fallback_rate": 0.7700741696227024,
+    "persisted_fallback_reasons": {
+      "CROSSOVER_PROPOSAL_GENERATION_FAILURE": 2388
+    },
+    "r3_receipt_limitation": "r3 collapsed build, identity, duplicate, and legal-point exhaustion into CROSSOVER_PROPOSAL_GENERATION_FAILURE",
+    "realized": 713,
+    "requested": 3101,
+    "structural_finding": "one-point construction discarded legal non-contiguous gene-group splices; exhaustive legal-splice construction reduced meaningless fallback"
+  },
+  "gene_group_transition_matrix": [
+    {
+      "asset_selection_changed_percent": 96.97,
+      "economic_basin_retained_percent": 3.44,
+      "gene_group": "left_window+left_long_window+left_threshold",
+      "mapped_weight_changed_percent": 92.19,
+      "matched_positive_percent": 14.01,
+      "raw_field_changed_percent": 32.98,
+      "trials": 5609,
+      "turnover_changed_percent": 15.94
+    },
+    {
+      "asset_selection_changed_percent": 99.02,
+      "economic_basin_retained_percent": 1.14,
+      "gene_group": "right_field+right_auxiliary_field",
+      "mapped_weight_changed_percent": 98.68,
+      "matched_positive_percent": 1.42,
+      "raw_field_changed_percent": 96.81,
+      "trials": 5008,
+      "turnover_changed_percent": 88.5
+    },
+    {
+      "asset_selection_changed_percent": 98.26,
+      "economic_basin_retained_percent": 2.25,
+      "gene_group": "left_normalizer+left_normalizer_window",
+      "mapped_weight_changed_percent": 95.8,
+      "matched_positive_percent": 4.35,
+      "raw_field_changed_percent": 35.25,
+      "trials": 4712,
+      "turnover_changed_percent": 18.1
+    },
+    {
+      "asset_selection_changed_percent": 98.09,
+      "economic_basin_retained_percent": 4.1,
+      "gene_group": "left_field+left_auxiliary_field",
+      "mapped_weight_changed_percent": 91.11,
+      "matched_positive_percent": 12.11,
+      "raw_field_changed_percent": 96.3,
+      "trials": 4295,
+      "turnover_changed_percent": 20.37
+    },
+    {
+      "asset_selection_changed_percent": 75.39,
+      "economic_basin_retained_percent": 26.58,
+      "gene_group": "right_normalizer+right_normalizer_window",
+      "mapped_weight_changed_percent": 68.09,
+      "matched_positive_percent": 31.64,
+      "raw_field_changed_percent": 41.11,
+      "trials": 3739,
+      "turnover_changed_percent": 22.01
+    },
+    {
+      "asset_selection_changed_percent": 77.54,
+      "economic_basin_retained_percent": 24.99,
+      "gene_group": "right_window+right_long_window+right_threshold",
+      "mapped_weight_changed_percent": 69.57,
+      "matched_positive_percent": 29.77,
+      "raw_field_changed_percent": 42.17,
+      "trials": 3161,
+      "turnover_changed_percent": 22.68
+    },
+    {
+      "asset_selection_changed_percent": 83.48,
+      "economic_basin_retained_percent": 18.45,
+      "gene_group": "outer_threshold",
+      "mapped_weight_changed_percent": 78.55,
+      "matched_positive_percent": 24.62,
+      "raw_field_changed_percent": 43.21,
+      "trials": 2997,
+      "turnover_changed_percent": 22.72
+    },
+    {
+      "asset_selection_changed_percent": 83.79,
+      "economic_basin_retained_percent": 18.09,
+      "gene_group": "beta",
+      "mapped_weight_changed_percent": 78.58,
+      "matched_positive_percent": 23.74,
+      "raw_field_changed_percent": 44.48,
+      "trials": 2936,
+      "turnover_changed_percent": 23.71
+    },
+    {
+      "asset_selection_changed_percent": 85.07,
+      "economic_basin_retained_percent": 16.6,
+      "gene_group": "left_outer_window+left_outer_threshold",
+      "mapped_weight_changed_percent": 80.26,
+      "matched_positive_percent": 22.95,
+      "raw_field_changed_percent": 43.36,
+      "trials": 2867,
+      "turnover_changed_percent": 24.07
+    },
+    {
+      "asset_selection_changed_percent": 100.0,
+      "economic_basin_retained_percent": 0.0,
+      "gene_group": "mechanism_spec",
+      "mapped_weight_changed_percent": 97.85,
+      "matched_positive_percent": 0.04,
+      "raw_field_changed_percent": 0.0,
+      "trials": 2841,
+      "turnover_changed_percent": 8.48
+    }
+  ],
+  "market_arrays_read": 0,
+  "oos_reads": 0,
+  "p1_classification": "MIXED_ECONOMICALLY_WEAK_REPRESENTATION_CONSTRAINED_OPERATOR_CONSTRAINED",
+  "p1_parent_diversity": {
+    "concrete_realizations": 3,
+    "economic_basins": 1,
+    "frozen_parents": 6
+  },
+  "p1_vs_p4": {
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE": {
+      "matched_positive": 53,
+      "matched_positive_density": 0.019776119402985074,
+      "strict": 2680
+    },
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": {
+      "matched_positive": 2387,
+      "matched_positive_density": 0.15580939947780678,
+      "strict": 15320
+    }
+  },
+  "p4_parent_diversity": {
+    "concrete_realizations": 96,
+    "economic_basins": 22,
+    "frozen_parents": 222
+  },
+  "r3_first_10000_prefix": {
+    "crossover_fallback": 688,
+    "crossover_realized": 572,
+    "crossover_requested": 1260,
+    "evolution_matched_positive": 1220,
+    "evolution_strict": 6000,
+    "operation_trace_rows": 8661
+  },
+  "schema_version": 1,
+  "scope": "R3_TRAIN_ONLY_PERSISTED_EVIDENCE_OPERATOR_ATTRIBUTION",
+  "sealed_reads": 0,
+  "selected_v2_probabilities": {
+    "crossover_probability": 0.35,
+    "mechanism_mutation_probability": 0.03,
+    "parameter_mutation_probability": 0.62
+  },
+  "source_counts": {
+    "operation_trace": 29432,
+    "strict": 30000
+  },
+  "source_identities": {
+    "candidate_ledger.parquet": "AEFF2A76691A905EE166E47DD787A8E8C1BB0B762A0F5302A19A0D279183C16C",
+    "operation_trace.parquet": "9BDAFDBC5E72DB0C3485CA409D0DA91EFA0EF8AAFE41BDC3C483E9B946EBAD28",
+    "targeted_deepening_diagnostic_baseline.json": "B53B3A2DBA81D9CD94B2BE9A0295175CA4EA4234A93C859AF115F596477A8E37",
+    "targeted_frozen_parent_pool.json": "E961EEC052B23BC892B68B1D7F8A02CE31909E02D3988BD3A40006914EF6EE19"
+  },
+  "status": "PASS",
+  "transition_matrix_interpretation": "EMPIRICAL_OPERATOR_ATTRIBUTION_NOT_CAUSAL",
+  "turnover_basis": "right_field+right_auxiliary_field changed turnover descriptor in 88.50 percent of 5008 observed lineage trials",
+  "turnover_reachability": "TURNOVER_OPERATOR_REACHABLE",
+  "validation_reads": 0
+}

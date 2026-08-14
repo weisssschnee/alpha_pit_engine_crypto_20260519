@@ -60,6 +60,12 @@ TEMPORAL_TARGETED_DEEPENING_SCOPE = (
 TEMPORAL_TARGETED_DEEPENING_AUTHORIZATION_PATH = (
     "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_authorization.json"
 )
+TEMPORAL_REALIZATION_V2_SCOPE = (
+    "ONE_20000_STRICT_TRAIN_ONLY_TEMPORAL_SEARCH_CORE_REALIZATION_V2_CANARY"
+)
+TEMPORAL_REALIZATION_V2_AUTHORIZATION_PATH = (
+    "config/crypto_temporal_search_core_realization_v2_authorization.json"
+)
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
@@ -2392,11 +2398,17 @@ def _validate_temporal_development_expansion_authority_exception(
 def _validate_temporal_targeted_deepening_authority_exception(
     repo_root: Path,
     authorization: Mapping[str, Any],
+    *,
+    authorization_path: str = TEMPORAL_TARGETED_DEEPENING_AUTHORIZATION_PATH,
+    authorization_scope: str = TEMPORAL_TARGETED_DEEPENING_SCOPE,
+    schema_version: int = 2,
+    execution_mode: str = "TARGETED_P1_P4_BASIN_DEEPENING_V1",
+    status: str = "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING",
 ) -> tuple[list[str], dict[str, dict[str, Any]]]:
     """Validate the one-run train-only P1/P4 targeted-deepening exception."""
 
     blockers: list[str] = []
-    path = repo_root / TEMPORAL_TARGETED_DEEPENING_AUTHORIZATION_PATH
+    path = repo_root / authorization_path
     if not path.is_file():
         return ["receipt_bound_non_formal_authorization:MISSING"], {}
     try:
@@ -2407,8 +2419,8 @@ def _validate_temporal_targeted_deepening_authority_exception(
     expected_call = {
         "decision_id": str(run_authorization.get("decision_id") or ""),
         "authority": "CURRENT_USER_INSTRUCTION",
-        "scope": TEMPORAL_TARGETED_DEEPENING_SCOPE,
-        "receipt_path": TEMPORAL_TARGETED_DEEPENING_AUTHORIZATION_PATH,
+        "scope": authorization_scope,
+        "receipt_path": authorization_path,
         "receipt_sha256": _canonical_sha256(payload),
         "run_authorized": True,
     }
@@ -2418,11 +2430,9 @@ def _validate_temporal_targeted_deepening_authority_exception(
         {key: value for key, value in payload.items() if key != "authorization_sha256"}
     )
     if (
-        payload.get("schema_version") != 2
-        or payload.get("execution_mode")
-        != "TARGETED_P1_P4_BASIN_DEEPENING_V1"
-        or payload.get("status")
-        != "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING"
+        payload.get("schema_version") != schema_version
+        or payload.get("execution_mode") != execution_mode
+        or payload.get("status") != status
         or payload.get("run_authorized") is not True
         or payload.get("consumed") is not False
         or payload.get("authorization_sha256") != content_sha
@@ -2430,7 +2440,7 @@ def _validate_temporal_targeted_deepening_authority_exception(
         != {
             "authority": "CURRENT_USER_INSTRUCTION",
             "decision_id": expected_call["decision_id"],
-            "scope": TEMPORAL_TARGETED_DEEPENING_SCOPE,
+            "scope": authorization_scope,
         }
         or not expected_call["decision_id"]
     ):
@@ -2528,6 +2538,20 @@ def require_real_experiment_authority(
             )
             blockers.extend(targeted_blockers)
             non_formal_binding_authorized = not targeted_blockers
+        elif authorization.get("scope") == TEMPORAL_REALIZATION_V2_SCOPE:
+            v2_blockers, receipt_bound_role_bindings = (
+                _validate_temporal_targeted_deepening_authority_exception(
+                    repo_root,
+                    authorization,
+                    authorization_path=TEMPORAL_REALIZATION_V2_AUTHORIZATION_PATH,
+                    authorization_scope=TEMPORAL_REALIZATION_V2_SCOPE,
+                    schema_version=1,
+                    execution_mode="TEMPORAL_SEARCH_CORE_REALIZATION_V2",
+                    status="RUN_AUTHORIZED_ONE_TIME_REALIZATION_V2_CANARY",
+                )
+            )
+            blockers.extend(v2_blockers)
+            non_formal_binding_authorized = not v2_blockers
         else:
             expected_authorization = {
                 "decision_id": "USER_AUTHORIZED_V23_FROZEN_OOS_REPLAY_20260803",

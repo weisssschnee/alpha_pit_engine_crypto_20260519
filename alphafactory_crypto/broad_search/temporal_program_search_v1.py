@@ -77,6 +77,24 @@ from .temporal_targeted_deepening_v1 import (
     targeted_diagnostics,
     validate_authorization as validate_targeted_authorization,
 )
+from .temporal_realization_v2 import (
+    AUTHORIZATION_PATH as REALIZATION_V2_AUTHORIZATION_PATH,
+    CAMPAIGN as REALIZATION_V2_CAMPAIGN,
+    DECISION_BOUNDARY as REALIZATION_V2_DECISION_BOUNDARY,
+    EVOLUTION_OPERATION_PROBABILITIES as REALIZATION_V2_EVOLUTION_PROBABILITIES,
+    EXECUTION_MODE as REALIZATION_V2_EXECUTION_MODE,
+    FIXED_ALLOCATION_PER_10000 as REALIZATION_V2_FIXED_ALLOCATION_PER_10000,
+    LANE_SEEDS as REALIZATION_V2_LANE_SEEDS,
+    SEED_CAMPAIGN as REALIZATION_V2_SEED_CAMPAIGN,
+    SEED_DERIVATION as REALIZATION_V2_SEED_DERIVATION,
+    STRICT_CAP as REALIZATION_V2_STRICT_CAP,
+    archive_diagnostics as realization_v2_archive_diagnostics,
+    checkpoint_decision as realization_v2_checkpoint_decision,
+    configure_policy_realization_v2,
+    operation_diagnostics as realization_v2_operation_diagnostics,
+    load_authorized_inputs as load_realization_v2_authorized_inputs,
+    validate_authorization as validate_realization_v2_authorization,
+)
 from .temporal_program_v1 import (
     PROGRAM_BUILDER_ID,
     TemporalProgramSpec,
@@ -206,6 +224,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
     budget = dict(config.get("search_budget") or {})
     seed_campaign = dict(config.get("seed_authority") or {}).get("campaign")
     targeted = seed_campaign == TARGETED_SEED_CAMPAIGN
+    realization_v2 = seed_campaign == REALIZATION_V2_SEED_CAMPAIGN
     if config.get("experiment_id") != (
         "CRYPTO_SEARCH_CORE_V4_TEMPORAL_MECHANISM_PROGRAM_V1_20260807"
     ):
@@ -215,11 +234,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
     ):
         raise PermissionError("temporal program authorization changed")
     expected_budget = {
-        "strict_evaluated_maximum": 30_000 if targeted else 50_000,
-        "raw_generation_attempts_maximum": 150_000 if targeted else 250_000,
-        "wall_time_seconds_maximum": 36_000 if targeted else 64_800,
+        "strict_evaluated_maximum": 20_000 if realization_v2 else (30_000 if targeted else 50_000),
+        "raw_generation_attempts_maximum": 100_000 if realization_v2 else (150_000 if targeted else 250_000),
+        "wall_time_seconds_maximum": 36_000 if (targeted or realization_v2) else 64_800,
         "checkpoint_size": 2_000,
-        "checkpoint_count_maximum": 15 if targeted else 25,
+        "checkpoint_count_maximum": 10 if realization_v2 else (15 if targeted else 25),
         "workers_default": 10,
         "workers_memory_fallback": 8,
     }
@@ -228,9 +247,12 @@ def validate_config(config: Mapping[str, Any]) -> None:
     if (
         budget.get("release_boundaries_strict")
         != (
-            [10_000, 20_000, 30_000]
+            [10_000, 20_000]
+            if realization_v2
+            else ([10_000, 20_000, 30_000]
             if targeted
             else [10_000, 20_000, 30_000, 40_000, 50_000]
+            )
         )
         or budget.get("workers_12_forbidden") is not True
         or budget.get("automatic_release_only_through_frozen_gate") is not True
@@ -279,6 +301,10 @@ def validate_config(config: Mapping[str, Any]) -> None:
         expected_seeds = TARGETED_LANE_SEEDS
         if seed_authority.get("derivation") != TARGETED_SEED_DERIVATION:
             raise ValueError("temporal targeted deepening seed derivation changed")
+    elif campaign == REALIZATION_V2_SEED_CAMPAIGN:
+        expected_seeds = REALIZATION_V2_LANE_SEEDS
+        if seed_authority.get("derivation") != REALIZATION_V2_SEED_DERIVATION:
+            raise ValueError("temporal realization V2 seed derivation changed")
     else:
         raise ValueError("temporal program seed campaign changed")
     if seeds != expected_seeds:
@@ -288,13 +314,16 @@ def validate_config(config: Mapping[str, Any]) -> None:
         key: float(evolution[key]) for key in TARGETED_EVOLUTION_PROBABILITIES
     }
     expected_probabilities = (
-        TARGETED_EVOLUTION_PROBABILITIES
+        REALIZATION_V2_EVOLUTION_PROBABILITIES
+        if realization_v2
+        else (TARGETED_EVOLUTION_PROBABILITIES
         if targeted
         else {
             "parameter_mutation_probability": 0.50,
             "mechanism_mutation_probability": 0.30,
             "crossover_probability": 0.20,
         }
+        )
     )
     if probabilities != expected_probabilities or not math.isclose(
         sum(probabilities.values()), 1.0, rel_tol=0.0, abs_tol=1.0e-15
@@ -481,6 +510,36 @@ def _targeted_effective_config(config: Mapping[str, Any]) -> dict[str, Any]:
     )
     effective["policy_parameters"]["temporal_program_evolution"].update(
         TARGETED_EVOLUTION_PROBABILITIES
+    )
+    validate_config(effective)
+    return effective
+
+
+def _realization_v2_effective_config(config: Mapping[str, Any]) -> dict[str, Any]:
+    """Freeze the bounded Realization V2 canary without economic-semantic changes."""
+
+    effective = json.loads(json.dumps(config))
+    effective["seed_authority"] = {
+        **dict(effective["seed_authority"]),
+        "campaign": REALIZATION_V2_SEED_CAMPAIGN,
+        "derivation": REALIZATION_V2_SEED_DERIVATION,
+        "seeds": list(REALIZATION_V2_LANE_SEEDS),
+        "old_campaign_seed_reuse": False,
+    }
+    effective["search_budget"].update(
+        {
+            "strict_evaluated_maximum": REALIZATION_V2_STRICT_CAP,
+            "raw_generation_attempts_maximum": 100_000,
+            "wall_time_seconds_maximum": 36_000,
+            "checkpoint_count_maximum": 10,
+            "release_boundaries_strict": [
+                REALIZATION_V2_DECISION_BOUNDARY,
+                REALIZATION_V2_STRICT_CAP,
+            ],
+        }
+    )
+    effective["policy_parameters"]["temporal_program_evolution"].update(
+        REALIZATION_V2_EVOLUTION_PROBABILITIES
     )
     validate_config(effective)
     return effective
@@ -1647,9 +1706,19 @@ def _observe_candidate(
         **archive_row,
         "operation": proposal["operation"],
         "parent_ids": list(proposal["parent_ids"]),
+        "receipt": proposal.get("receipt"),
         "policy_local_family_count_at_completion": local_counts[family_id],
         "block_robust_ordering": evaluation.get("block_robust_ordering"),
     }
+    if (
+        isinstance(policy, engine.MechanismEvolutionV2)
+        and policy.realization_v2_state is not None
+    ):
+        from .temporal_realization_v2 import economic_fingerprint_from_evaluation
+
+        policy_row["realization_v2_economic_fingerprint"] = (
+            economic_fingerprint_from_evaluation(evaluation)
+        )
     if policy is not None:
         engine._policy_observe(
             policy,
@@ -1680,6 +1749,47 @@ def _observe_candidate(
     row["total_process_cpu_seconds"] = float(
         row["proposal_compile_cpu_seconds"] + row["pair_process_cpu_seconds"]
     )
+    receipt = dict(proposal.get("receipt") or {})
+    if receipt.get("targeted_parent_source") == "BASIN_LOCAL_REALIZATION_ARCHIVE_V1":
+        row.update(
+            {
+                "requested_operation": receipt.get("requested_operation"),
+                "realized_operation": receipt.get("realized_operation"),
+                "crossover_fallback": bool(receipt.get("crossover_fallback")),
+                "fallback_reason": receipt.get("fallback_reason"),
+                "mutation_target": receipt.get("mutation_target"),
+                "targeted_economic_basin_id": receipt.get(
+                    "targeted_economic_basin_id"
+                ),
+                "targeted_parent_source": receipt.get("targeted_parent_source"),
+                "targeted_parent_source_types_json": json.dumps(
+                    receipt.get("targeted_parent_source_types") or [],
+                    sort_keys=True,
+                ),
+                "targeted_parent_realization_ids_json": json.dumps(
+                    receipt.get("targeted_parent_realization_ids") or [],
+                    sort_keys=True,
+                ),
+                "changed_gene_groups_json": json.dumps(
+                    receipt.get("changed_gene_groups") or [], sort_keys=True
+                ),
+                "enumerated_splice_count": int(
+                    receipt.get("enumerated_splice_count") or 0
+                ),
+                "legal_splice_count": int(receipt.get("legal_splice_count") or 0),
+                "duplicate_splice_count": int(
+                    receipt.get("duplicate_splice_count") or 0
+                ),
+                "parent_identical_count": int(
+                    receipt.get("parent_identical_count") or 0
+                ),
+                "build_invalid_count": int(receipt.get("build_invalid_count") or 0),
+                "selected_splice_json": json.dumps(
+                    receipt.get("selected_splice"), sort_keys=True
+                ),
+                "operation_receipt_json": json.dumps(receipt, sort_keys=True),
+            }
+        )
     ledger.append(row)
     state["strict_evaluated"] = len(ledger)
     state["arm_counters"][arm]["strict_evaluated"] += 1
@@ -2082,7 +2192,9 @@ def run(
     successor_mode = str(execution_mode) == SUCCESSOR_EXECUTION_MODE
     expansion_mode = str(execution_mode) == EXPANSION_EXECUTION_MODE
     targeted_mode = str(execution_mode) == TARGETED_EXECUTION_MODE
-    fixed_development_mode = expansion_mode or targeted_mode
+    realization_v2_mode = str(execution_mode) == REALIZATION_V2_EXECUTION_MODE
+    targeted_family_mode = targeted_mode or realization_v2_mode
+    fixed_development_mode = expansion_mode or targeted_family_mode
     targeted_diagnostic_baseline: dict[str, Any] | None = None
     targeted_parent_pool: dict[str, Any] | None = None
     if str(execution_mode) not in {
@@ -2090,6 +2202,7 @@ def run(
         SUCCESSOR_EXECUTION_MODE,
         EXPANSION_EXECUTION_MODE,
         TARGETED_EXECUTION_MODE,
+        REALIZATION_V2_EXECUTION_MODE,
     }:
         raise ValueError("unknown temporal program execution mode")
     if successor_mode:
@@ -2159,6 +2272,26 @@ def run(
         receipt = {}
         successor_context = None
         successor_authority_preflight = None
+    elif realization_v2_mode:
+        if successor_artifact_root is not None or successor_policy_bundle is not None:
+            raise RuntimeError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:realization_v2_successor_inputs_forbidden"
+            )
+        config = _realization_v2_effective_config(base_config)
+        qualification_scope = {
+            "strict_cap": REALIZATION_V2_STRICT_CAP,
+            "stage0_only": False,
+            "skip_stage0": True,
+            "adaptive_start_strict": 0,
+            "active_program_families": list(TARGETED_PROGRAM_FAMILIES),
+            "scope": REALIZATION_V2_EXECUTION_MODE,
+            "fixed_flow": True,
+            "checkpoint_boundary": REALIZATION_V2_DECISION_BOUNDARY,
+        }
+        runtime_root = repo_root / f"runtime/{REALIZATION_V2_CAMPAIGN}_{runtime_date}"
+        receipt = {}
+        successor_context = None
+        successor_authority_preflight = None
     else:
         receipt = validate_receipt(
             repo_root, config=base_config, require_authorized=True
@@ -2200,6 +2333,17 @@ def run(
         targeted_parent_pool = build_frozen_target_parent_pool(
             repo_root, targeted_diagnostic_baseline
         )
+    elif realization_v2_mode:
+        receipt = validate_realization_v2_authorization(
+            repo_root, expected_source_sha=source_sha
+        )
+        if runtime_root.name != str(receipt.get("runtime_id") or ""):
+            raise ExpansionPreflightError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:realization_v2_runtime_identity_changed"
+            )
+        targeted_diagnostic_baseline, targeted_parent_pool = (
+            load_realization_v2_authorized_inputs(repo_root, receipt)
+        )
     report_name = (
         "CRYPTO_TEMPORAL_30K_TO_50K_SUCCESSOR_V1"
         if successor_mode
@@ -2209,7 +2353,11 @@ def run(
             else (
                 "CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1"
                 if targeted_mode
-                else REPORT_PREFIX
+                else (
+                    "CRYPTO_TEMPORAL_SEARCH_CORE_REALIZATION_V2"
+                    if realization_v2_mode
+                    else REPORT_PREFIX
+                )
             )
         )
     )
@@ -2223,7 +2371,7 @@ def run(
             )
         raise RuntimeError("temporal program producer tree is not clean")
     if runtime_root.is_dir():
-        if successor_mode or fixed_development_mode:
+        if successor_mode or (fixed_development_mode and not realization_v2_mode):
             raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:non_fresh_output_root")
         prior_checkpoints = sorted(
             (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
@@ -2305,6 +2453,43 @@ def run(
         engine._write_json(
             runtime_root / "targeted_frozen_parent_pool.json",
             targeted_parent_pool,
+        )
+    elif realization_v2_mode:
+        run_authorization = dict(receipt.get("run_authorization") or {})
+        successor_authority_preflight = require_real_experiment_authority(
+            repo_root,
+            evidence_to_add=str(receipt.get("evidence_to_add") or ""),
+            decision_to_change=str(receipt.get("decision_to_change") or ""),
+            economic_receipt_required=False,
+            receipt_bound_non_formal_authorization={
+                "decision_id": str(run_authorization.get("decision_id") or ""),
+                "authority": str(run_authorization.get("authority") or ""),
+                "scope": str(run_authorization.get("scope") or ""),
+                "receipt_path": REALIZATION_V2_AUTHORIZATION_PATH,
+                "receipt_sha256": _json_sha(receipt),
+                "run_authorized": True,
+            },
+        )
+        runtime_root.mkdir(parents=True)
+        engine._write_json(
+            runtime_root / "realization_v2_launch_claim.json",
+            {
+                "schema_version": 1,
+                "status": "ONE_TIME_REALIZATION_V2_LAUNCH_CLAIMED",
+                "execution_mode": REALIZATION_V2_EXECUTION_MODE,
+                "authorization_sha256": receipt["authorization_sha256"],
+                "producer_source_sha": source_sha,
+                "runtime_id": runtime_root.name,
+                "market_arrays_read_at_claim": 0,
+                "candidate_evaluations_at_claim": 0,
+                "validation_reads": 0,
+                "oos_reads": 0,
+                "sealed_reads": 0,
+            },
+        )
+        assert targeted_parent_pool is not None
+        engine._write_json(
+            runtime_root / "targeted_frozen_parent_pool.json", targeted_parent_pool
         )
     elif expansion_mode:
         run_authorization = dict(receipt.get("run_authorization") or {})
@@ -2400,7 +2585,7 @@ def run(
     expansion_diagnostic_baseline = (
         load_diagnostic_baseline(repo_root, receipt) if expansion_mode else None
     )
-    if targeted_mode and targeted_diagnostic_baseline is None:
+    if targeted_family_mode and targeted_diagnostic_baseline is None:
         raise RuntimeError(
             "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_baseline_not_frozen"
         )
@@ -2469,12 +2654,12 @@ def run(
         "successor_current_authority_preflight": successor_authority_preflight,
         "targeted_parent_pool_sha256": (
             str(targeted_parent_pool["target_parent_pool_sha256"])
-            if targeted_mode and targeted_parent_pool is not None
+            if targeted_family_mode and targeted_parent_pool is not None
             else None
         ),
         "targeted_parent_source_ledger_sha256": (
             str(targeted_parent_pool["source_ledger_sha256"])
-            if targeted_mode and targeted_parent_pool is not None
+            if targeted_family_mode and targeted_parent_pool is not None
             else None
         ),
         "sealed_reads": 0,
@@ -2519,6 +2704,18 @@ def run(
                 raise RuntimeError(
                     "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_deepening_launch_claim_changed"
                 )
+        elif realization_v2_mode:
+            claim = engine._read_json(
+                runtime_root / "realization_v2_launch_claim.json"
+            )
+            if (
+                claim.get("authorization_sha256")
+                != receipt.get("authorization_sha256")
+                or claim.get("producer_source_sha") != source_sha
+            ):
+                raise RuntimeError(
+                    "FAIL_CLOSED_BEFORE_MARKET_READ:realization_v2_launch_claim_changed"
+                )
         else:
             if engine._read_json(runtime_root / "frozen_contract.json") != frozen:
                 raise RuntimeError("temporal program runtime contract changed")
@@ -2526,7 +2723,17 @@ def run(
                 raise FileExistsError("temporal program campaign already completed")
     else:
         runtime_root.mkdir(parents=True)
-    if successor_mode or fixed_development_mode or not (runtime_root / "frozen_contract.json").exists():
+    existing_frozen = runtime_root / "frozen_contract.json"
+    if realization_v2_mode and existing_frozen.is_file():
+        if engine._read_json(existing_frozen) != frozen:
+            raise RuntimeError(
+                "FAIL_CLOSED_BEFORE_MARKET_READ:realization_v2_frozen_contract_changed"
+            )
+    if (
+        successor_mode
+        or (fixed_development_mode and not realization_v2_mode)
+        or not existing_frozen.exists()
+    ):
         engine._write_json(runtime_root / "frozen_contract.json", frozen)
         engine._write_json(runtime_root / "program_catalog.json", catalog_payload)
         engine._write_json(runtime_root / "search_authority_binding_receipt.json", receipt)
@@ -2569,6 +2776,14 @@ def run(
                 runtime_root / "targeted_deepening_diagnostic_baseline.json",
                 targeted_diagnostic_baseline,
             )
+        elif realization_v2_mode:
+            engine._write_json(
+                runtime_root / "realization_v2_authorization_snapshot.json", receipt
+            )
+            engine._write_json(
+                runtime_root / "targeted_deepening_diagnostic_baseline.json",
+                targeted_diagnostic_baseline,
+            )
 
     if any(
         (runtime_root / "checkpoints" / label).is_dir()
@@ -2577,7 +2792,7 @@ def run(
         raise RuntimeError("terminal runtime cannot be resumed")
     checkpoints = sorted((runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
     if checkpoints:
-        if successor_mode or fixed_development_mode:
+        if successor_mode or (fixed_development_mode and not realization_v2_mode):
             raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:one_run_resume_forbidden")
         state, policies, ledger, archive, pair_rows, metrics, rejected = _load_checkpoint(
             checkpoints[-1],
@@ -2646,7 +2861,7 @@ def run(
                 if state["skip_stage0"]
                 else _stage0_policies(registry=registry, config=config, catalog=catalog)
             )
-            if targeted_mode:
+            if targeted_family_mode:
                 if targeted_parent_pool is None:
                     raise RuntimeError(
                         "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_parent_pool_missing"
@@ -2658,6 +2873,12 @@ def run(
                                 "FAIL_CLOSED_BEFORE_MARKET_READ:targeted_evolution_policy_changed"
                             )
                         policy.configure_targeted_parent_pool(targeted_parent_pool)
+                        if realization_v2_mode:
+                            configure_policy_realization_v2(
+                                policy,
+                                pool=targeted_parent_pool,
+                                baseline=targeted_diagnostic_baseline or {},
+                            )
             ledger = []
             archive = engine.BehaviorArchive()
             pair_rows = []
@@ -3105,7 +3326,7 @@ def run(
                             arm=arm,
                             seed_text=seed_text,
                             local_index=local_index,
-                            targeted_mode=targeted_mode,
+                            targeted_mode=targeted_family_mode,
                             active_program_families=state["active_program_families"],
                             catalog=catalog,
                         )
@@ -3327,7 +3548,7 @@ def run(
             state["completed_pair_ids"] = sorted(completed_pairs)
             state["wall_elapsed_seconds"] = elapsed()
             strict_boundary = len(ledger)
-            if targeted_mode:
+            if targeted_family_mode:
                 latest_discovery_diagnostic = targeted_diagnostics(
                     ledger,
                     baseline=targeted_diagnostic_baseline or {},
@@ -3347,6 +3568,17 @@ def run(
                         runtime_root
                         / f"basin_diagnostics_boundary_{strict_boundary:06d}.json",
                         latest_discovery_diagnostic,
+                    )
+                if realization_v2_mode:
+                    archive_diagnostic = realization_v2_archive_diagnostics(policies)
+                    engine._write_json(
+                        runtime_root / "realization_archive_latest.json",
+                        archive_diagnostic,
+                    )
+                    engine._write_json(
+                        runtime_root
+                        / f"realization_archive_checkpoint_{checkpoint_index:03d}.json",
+                        archive_diagnostic,
                     )
             if successor_mode:
                 budget_state = successor_budget_state(strict_boundary)
@@ -3377,6 +3609,31 @@ def run(
                     terminal_reason = "ENGINE_RUN_INVALID:SUCCESSOR_GATE_STOP_INVALID"
                 elif bool(budget_state["mechanical_stop_required"]):
                     terminal_reason = "SUCCESSOR_ADDITIONAL_BUDGET_COMPLETE"
+            elif realization_v2_mode:
+                if strict_boundary in {
+                    REALIZATION_V2_DECISION_BOUNDARY,
+                    REALIZATION_V2_STRICT_CAP,
+                }:
+                    decision = realization_v2_checkpoint_decision(
+                        ledger,
+                        strict_boundary=strict_boundary,
+                        frozen_parent_pool_sha256=str(
+                            (targeted_parent_pool or {}).get(
+                                "target_parent_pool_sha256", ""
+                            )
+                        ),
+                    )
+                    engine._write_json(
+                        runtime_root
+                        / f"continuation_decision_{strict_boundary:06d}.json",
+                        decision,
+                    )
+                    if decision["status"] == "RESEARCH_INVALID":
+                        terminal_reason = "ENGINE_RUN_INVALID:REALIZATION_V2_RESEARCH_INVALID"
+                    elif decision["status"] == "STOP_REALIZATION_V2_GATE_NOT_MET_AT_10000":
+                        terminal_reason = "REALIZATION_V2_GATE_STOP_10000"
+                    elif strict_boundary == REALIZATION_V2_STRICT_CAP:
+                        terminal_reason = "REALIZATION_V2_STRICT_CAP_REACHED"
             elif targeted_mode:
                 if strict_boundary in TARGETED_DECISION_BOUNDARIES:
                     checkpoint_10000 = (
@@ -3628,6 +3885,11 @@ def run(
         "TARGETED_DEEPENING_SATURATION_REACHED_20000",
     }:
         status = "TARGETED_DEEPENING_BUDGET_COMPLETE"
+    elif realization_v2_mode and terminal_reason in {
+        "REALIZATION_V2_GATE_STOP_10000",
+        "REALIZATION_V2_STRICT_CAP_REACHED",
+    }:
+        status = "REALIZATION_V2_CANARY_COMPLETE"
     elif terminal_reason == "CHECKPOINT_ONLY_QUALIFICATION_CAP_REACHED":
         status = "CHECKPOINT_ONLY_QUALIFICATION_COMPLETE"
     elif strict_count == 10_000 and not state["active_program_families"]:
@@ -3718,6 +3980,22 @@ def run(
         "targeted_deepening_diagnostics": (
             latest_discovery_diagnostic if targeted_mode else None
         ),
+        "realization_v2_authorization_sha256": (
+            receipt.get("authorization_sha256") if realization_v2_mode else None
+        ),
+        "realization_v2_operation_diagnostics": (
+            realization_v2_operation_diagnostics(ledger)
+            if realization_v2_mode
+            else None
+        ),
+        "realization_v2_archive_diagnostics": (
+            realization_v2_archive_diagnostics(policies)
+            if realization_v2_mode
+            else None
+        ),
+        "realization_v2_economic_diagnostics": (
+            latest_discovery_diagnostic if realization_v2_mode else None
+        ),
         "fresh_random_control_identity": (
             FRESH_RANDOM_IDENTITY if successor_mode else None
         ),
@@ -3726,7 +4004,7 @@ def run(
         "oos": False,
         "promotion": False,
         "automatic_next_run_started": False,
-        "parameters_changed": bool(targeted_mode),
+        "parameters_changed": bool(targeted_family_mode),
         "seed_changed": bool(fixed_development_mode),
         "seed_tuned": False,
         "rescue_rerun_started": False,
@@ -3787,6 +4065,31 @@ def run(
                 "targeted_deepening_diagnostic_baseline.json",
                 "basin_diagnostics_latest.json",
             ]
+        )
+        manifest_paths.extend(
+            path.relative_to(runtime_root).as_posix()
+            for path in sorted(runtime_root.glob("basin_diagnostics_checkpoint_*.json"))
+        )
+        manifest_paths.extend(
+            path.relative_to(runtime_root).as_posix()
+            for path in sorted(runtime_root.glob("basin_diagnostics_boundary_*.json"))
+        )
+    elif realization_v2_mode:
+        manifest_paths.extend(
+            [
+                "realization_v2_launch_claim.json",
+                "targeted_frozen_parent_pool.json",
+                "realization_v2_authorization_snapshot.json",
+                "targeted_deepening_diagnostic_baseline.json",
+                "basin_diagnostics_latest.json",
+                "realization_archive_latest.json",
+            ]
+        )
+        manifest_paths.extend(
+            path.relative_to(runtime_root).as_posix()
+            for path in sorted(
+                runtime_root.glob("realization_archive_checkpoint_*.json")
+            )
         )
         manifest_paths.extend(
             path.relative_to(runtime_root).as_posix()
@@ -4973,6 +5276,7 @@ def main() -> None:
                     SUCCESSOR_EXECUTION_MODE,
                     EXPANSION_EXECUTION_MODE,
                     TARGETED_EXECUTION_MODE,
+                    REALIZATION_V2_EXECUTION_MODE,
                 ),
                 default="FRESH_SEQUENTIAL_PROGRAM",
             )

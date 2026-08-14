@@ -5337,6 +5337,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
     targeted_member_order: dict[str, tuple[str, ...]] = field(default_factory=dict)
     targeted_basin_cursor: int = 0
     targeted_parent_cursors: dict[str, int] = field(default_factory=dict)
+    realization_v2_state: dict[str, Any] | None = None
 
     def _candidate(self, record: Mapping[str, Any]) -> CandidateSpec:
         return CandidateSpec.from_dict(record["candidate"])
@@ -5443,13 +5444,30 @@ class MechanismEvolutionV2(MechanismRandomV2):
     def _targeted_parent_record(self, candidate_id: str) -> dict[str, Any]:
         if self.targeted_parent_pool_payload is None:
             raise RuntimeError("targeted parent source is not configured")
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import targeted_parent_record
+
+            record = targeted_parent_record(self, candidate_id)
+            if record is not None:
+                return record
         return dict(
             dict(self.targeted_parent_pool_payload["parent_records"])[candidate_id]
         )
 
+    def _targeted_members(self, basin_id: str) -> tuple[str, ...]:
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import targeted_members
+
+            return targeted_members(self, basin_id)
+        return self.targeted_member_order[basin_id]
+
     def _next_targeted_basin(self) -> str:
         if not self.targeted_basin_order:
             raise RuntimeError("targeted parent source has no basin")
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import next_targeted_basin
+
+            return next_targeted_basin(self)
         basin_id = self.targeted_basin_order[
             self.targeted_basin_cursor % len(self.targeted_basin_order)
         ]
@@ -5457,6 +5475,10 @@ class MechanismEvolutionV2(MechanismRandomV2):
         return basin_id
 
     def _next_targeted_parent(self, basin_id: str) -> CandidateSpec:
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import next_targeted_parent
+
+            return next_targeted_parent(self, basin_id)
         members = self.targeted_member_order[basin_id]
         cursor = int(self.targeted_parent_cursors.get(basin_id, 0))
         candidate_id = members[cursor % len(members)]
@@ -5466,7 +5488,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
     def _targeted_crossover_parent(
         self, basin_id: str, first: CandidateSpec
     ) -> CandidateSpec | None:
-        members = self.targeted_member_order[basin_id]
+        members = self._targeted_members(basin_id)
         first_record = self._targeted_parent_record(first.candidate_id)
         first_realization = str(first_record.get("concrete_realization_id") or "")
         first_spec = self._spec(first)
@@ -5504,7 +5526,11 @@ class MechanismEvolutionV2(MechanismRandomV2):
         core = {key: value for key, value in receipt.items() if key != "receipt_sha256"}
         core.update(
             {
-                "targeted_parent_source": "FROZEN_TRAIN_ONLY_BASELINE",
+                "targeted_parent_source": (
+                    "BASIN_LOCAL_REALIZATION_ARCHIVE_V1"
+                    if self.realization_v2_state is not None
+                    else "FROZEN_TRAIN_ONLY_BASELINE"
+                ),
                 "targeted_economic_basin_id": basin_id,
                 "targeted_parent_pool_sha256": str(
                     self.targeted_parent_pool_payload["target_parent_pool_sha256"]
@@ -5520,6 +5546,15 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 ],
             }
         )
+        if self.realization_v2_state is not None:
+            core["targeted_parent_source_types"] = [
+                str(
+                    self._targeted_parent_record(parent.candidate_id).get(
+                        "parent_source", "FROZEN_TRAIN_ONLY_BASELINE"
+                    )
+                )
+                for parent in parents
+            ]
         return {**core, "receipt_sha256": _payload_sha(core)}
 
     def _selection_key(
@@ -5633,7 +5668,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
         return tuple(groups)
 
     def _mutate_parameters(
-        self, parent: CandidateSpec
+        self, parent: CandidateSpec, *, target_dimension: str | None = None
     ) -> tuple[CandidateSpec, dict[str, Any]]:
         spec = self._spec(parent)
         limit = int(self.parameters.get("duplicate_resample_limit", 64))
@@ -5642,7 +5677,14 @@ class MechanismEvolutionV2(MechanismRandomV2):
             genome = dict(parent.generation_genes)
             groups = list(self._gene_groups(parent))
             count = self.rng.randint(1, min(3, len(groups)))
-            selected = self.rng.sample(groups, count)
+            if self.realization_v2_state is not None:
+                from .temporal_realization_v2 import select_mutation_groups
+
+                selected = select_mutation_groups(
+                    self, groups, count, target_dimension
+                )
+            else:
+                selected = self.rng.sample(groups, count)
             for group in selected:
                 for name in group:
                     genome[name] = donor.generation_genes[name]
@@ -5655,6 +5697,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 child=child,
                 details={
                     "changed_gene_groups": [list(value) for value in selected],
+                    "mutation_target": target_dimension or "generic",
                     "internal_generation_attempts": attempt,
                     "compile_valid_attempts": attempt,
                 },
@@ -5890,45 +5933,80 @@ class MechanismEvolutionV2(MechanismRandomV2):
                     tuple(str(name) for name in group)
                     for group in receipt.get("gene_groups", ())
                 )
-                point = int(receipt.get("crossover_point", -1))
                 expected_groups = self._gene_groups(parents[0])
                 grouped_keys = {name for group in groups for name in group}
                 all_keys = set(parents[0].generation_genes) | set(
                     child.generation_genes
                 )
-                operation_verified = bool(
-                    groups == expected_groups
-                    and 0 < point < len(groups)
-                    and self._compatible(self._spec(parents[0]), self._spec(parents[1]))
-                    and self._spec(child).mechanism_id
-                    == self._spec(parents[0]).mechanism_id
-                    and all(
-                        child.generation_genes.get(name)
-                        == parents[0].generation_genes.get(name)
-                        for group in groups[:point]
-                        for name in group
+                if receipt.get("constructive_crossover") is True:
+                    selected = tuple(int(value) for value in receipt.get("selected_splice", ()))
+                    operation_verified = bool(
+                        groups == expected_groups
+                        and selected
+                        and len(set(selected)) == len(selected)
+                        and all(0 <= value < len(groups) for value in selected)
+                        and self._compatible(self._spec(parents[0]), self._spec(parents[1]))
+                        and self._spec(child).mechanism_id
+                        == self._spec(parents[0]).mechanism_id
+                        and all(
+                            child.generation_genes.get(name)
+                            == (
+                                parents[1].generation_genes.get(name)
+                                if index in selected
+                                else parents[0].generation_genes.get(name)
+                            )
+                            for index, group in enumerate(groups)
+                            for name in group
+                        )
+                        and all(
+                            child.generation_genes.get(key)
+                            == parents[0].generation_genes.get(key)
+                            for key in all_keys - grouped_keys
+                        )
+                        and int(receipt.get("enumerated_splice_count", -1))
+                        == (1 << len(groups)) - 2
+                        and int(receipt.get("legal_splice_count", 0)) > 0
+                        and receipt.get("output_type") == "NUMERIC_ASSET_TIME"
                     )
-                    and all(
-                        child.generation_genes.get(name)
-                        == parents[1].generation_genes.get(name)
-                        for group in groups[point:]
-                        for name in group
+                else:
+                    point = int(receipt.get("crossover_point", -1))
+                    operation_verified = bool(
+                        groups == expected_groups
+                        and 0 < point < len(groups)
+                        and self._compatible(self._spec(parents[0]), self._spec(parents[1]))
+                        and self._spec(child).mechanism_id
+                        == self._spec(parents[0]).mechanism_id
+                        and all(
+                            child.generation_genes.get(name)
+                            == parents[0].generation_genes.get(name)
+                            for group in groups[:point]
+                            for name in group
+                        )
+                        and all(
+                            child.generation_genes.get(name)
+                            == parents[1].generation_genes.get(name)
+                            for group in groups[point:]
+                            for name in group
+                        )
+                        and all(
+                            child.generation_genes.get(key)
+                            == parents[0].generation_genes.get(key)
+                            for key in all_keys - grouped_keys
+                        )
+                        and receipt.get("output_type") == "NUMERIC_ASSET_TIME"
                     )
-                    and all(
-                        child.generation_genes.get(key)
-                        == parents[0].generation_genes.get(key)
-                        for key in all_keys - grouped_keys
-                    )
-                    and receipt.get("output_type") == "NUMERIC_ASSET_TIME"
-                )
             targeted_verified = True
             if receipt.get("targeted_parent_source") is not None:
                 basin_id = str(receipt.get("targeted_economic_basin_id") or "")
-                members = set(self.targeted_member_order.get(basin_id, ()))
+                members = set(self._targeted_members(basin_id))
+                source = str(receipt.get("targeted_parent_source") or "")
                 targeted_verified = bool(
                     self.targeted_parent_pool_payload is not None
-                    and receipt.get("targeted_parent_source")
-                    == "FROZEN_TRAIN_ONLY_BASELINE"
+                    and source
+                    in {
+                        "FROZEN_TRAIN_ONLY_BASELINE",
+                        "BASIN_LOCAL_REALIZATION_ARCHIVE_V1",
+                    }
                     and str(receipt.get("targeted_parent_pool_sha256") or "")
                     == str(
                         self.targeted_parent_pool_payload.get(
@@ -5947,6 +6025,18 @@ class MechanismEvolutionV2(MechanismRandomV2):
                         )
                         for parent in parents
                     ]
+                    and (
+                        self.realization_v2_state is None
+                        or receipt.get("targeted_parent_source_types")
+                        == [
+                            str(
+                                self._targeted_parent_record(parent.candidate_id).get(
+                                    "parent_source", "FROZEN_TRAIN_ONLY_BASELINE"
+                                )
+                            )
+                            for parent in parents
+                        ]
+                    )
                 )
             return bool(
                 targeted_verified
@@ -5971,6 +6061,10 @@ class MechanismEvolutionV2(MechanismRandomV2):
             return False
 
     def _propose_targeted(self) -> tuple[CandidateSpec, dict[str, Any]]:
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import propose_targeted_realization_v2
+
+            return propose_targeted_realization_v2(self)
         before = self.state_hash()
         limit = int(self.parameters.get("duplicate_resample_limit", 64))
         for duplicate_attempt in range(1, limit + 2):
@@ -6143,6 +6237,10 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 candidate_id: self.population[candidate_id]
                 for candidate_id in retained
             }
+        if self.realization_v2_state is not None:
+            from .temporal_realization_v2 import observe_realization_v2
+
+            observe_realization_v2(self, candidate, archive_row)
 
     def population_diagnostics(self) -> dict[str, Any]:
         mechanism_occupancy = Counter(
@@ -6191,6 +6289,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 "targeted_parent_cursors": dict(
                     sorted(self.targeted_parent_cursors.items())
                 ),
+                "realization_v2_state": self.realization_v2_state,
             }
         )
         return state
@@ -6230,6 +6329,11 @@ class MechanismEvolutionV2(MechanismRandomV2):
             policy.targeted_parent_cursors = {
                 str(key): int(value) for key, value in restored_cursors.items()
             }
+        realization_state = state.get("realization_v2_state")
+        if isinstance(realization_state, Mapping):
+            from .temporal_realization_v2 import restore_policy_realization_v2
+
+            restore_policy_realization_v2(policy, realization_state)
         return policy
 
 
