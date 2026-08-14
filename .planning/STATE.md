@@ -1,8 +1,41 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-13 Asia/Hong_Kong
+Last updated: 2026-08-15 Asia/Hong_Kong
 
 ## Current phase
+
+`CRYPTO_TEMPORAL_REPRESENTATION_SUCCESSOR_V1_COMPLETE_PARTIAL_ALPHA_HOLD`
+
+The fixed 20,000-strict train-only representation tournament is complete and
+consumed. PC2 runtime
+`crypto_temporal_representation_successor_v1_20260815r1` evaluated independent
+10,000-strict Legacy Realization V2 control and 10,000-strict factorized
+representation-successor arms from the same frozen 23-basin / 228-parent source.
+The canonical checker passes: P1/P4 only, P2/P3 strict zero, independent
+adaptive state and archives, 10,000/10,000 candidate identities verified, and
+validation/OOS/holdout/forward/promotion/sealed reads all zero.
+
+Offline closure improved materially and losslessly: legal-child existence rose
+from 91.85% to 95.47%, mean legal children per pair from 8.02 to 10.68, and
+unique children from 3,668 to 4,645. Economic conversion was mixed. The
+successor produced 1,486 matched-positive rows versus 1,517 control, the same
+55 real 0.90 economic clusters and 17/23 HQ basins deepened, one additional new
+0.90 cluster, two fewer new HQ concrete realizations, and six more wide
+concrete realizations. P1 dual-positive density and 0.90 cluster breadth
+improved, but P4 matched-positive production and cluster breadth weakened.
+
+The durable research decision is `REPRESENTATION_SUCCESSOR_PARTIAL`: retain the
+factorized completion layer and selectively retain productive binding,
+normalization and temporal-parameter modules, but do not replace the legacy
+representation wholesale and do not declare the donor basis exhausted. A
+recoverable Windows path-length fault at the first successor checkpoint was
+closed without replaying strict rows; the exact state was canonically restored
+and the following native checkpoint passed normal atomic restore verification.
+No validation, OOS, promotion, successor search, or automatic follow-up is
+authorized. Authoritative report:
+`reports/CRYPTO_TEMPORAL_REPRESENTATION_SUCCESSOR_V1_20260815R1.md`.
+
+## Previous phase: targeted r2 deployment-invalid closure
 
 `CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_R2_PRE_STRICT_DEPLOYMENT_INVALID`
 

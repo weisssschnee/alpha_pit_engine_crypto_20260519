@@ -2182,7 +2182,10 @@
                       "paths":  [
                                     "alphafactory_crypto/broad_search/temporal_representation_successor_v1.py",
                                     "config/crypto_temporal_representation_successor_v1_offline_evidence.json",
-                                    "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py"
+                                    "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py",
+                                    "reports/CRYPTO_TEMPORAL_REPRESENTATION_SUCCESSOR_V1_20260815R1.md",
+                                    "reports/evidence/crypto_temporal_representation_successor_v1_20260815r1/final_analysis.json",
+                                    "reports/evidence/crypto_temporal_representation_successor_v1_20260815r1/independent_checker.json"
                                 ],
                       "critical":  false,
                       "semantic_role":  "experimental_temporal_representation_successor",
@@ -2196,18 +2199,22 @@
                                             "severity":  "HARD",
                                             "enforced_by":  "temporal_representation_tournament_v1 authorization and independent checker",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_temporal_representation_successor_v1_offline_evidence.json"
+                                            "evidence_ref":  "reports/evidence/crypto_temporal_representation_successor_v1_20260815r1/final_analysis.json"
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "STATIC_VERIFIED",
+                                         "level":  "RUNTIME_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "config/crypto_temporal_representation_successor_v1_offline_evidence.json"
+                                         "evidence_ref":  "reports/evidence/crypto_temporal_representation_successor_v1_20260815r1/final_analysis.json",
+                                         "evidence_sha256":  "0F571A336814A90AF01BFA03FBF601D1EF07C924354F17C280155D077EB8AE77",
+                                         "verified_at_sha":  "d21ac9650feaf1c2309b749ea61a4dc566e7696a"
                                      },
                       "claim_badges":  [
                                            "EXPERIMENTAL CANDIDATE",
                                            "OFFLINE CLOSURE PASS",
+                                           "20K TOURNAMENT PARTIAL",
+                                           "INDEPENDENT CHECKER PASS",
                                            "TRAIN ONLY",
                                            "NO VALIDATION OOS OR FORWARD",
                                            "NO PROMOTION"
@@ -3098,7 +3105,7 @@
                       "binding_state":  "EXPERIMENTAL",
                       "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
-                      "evidence_type":  "STATIC"
+                      "evidence_type":  "RUNTIME"
                   },
                   {
                       "id":  "temporal_representation_successor_derived_from_realization_v2",
