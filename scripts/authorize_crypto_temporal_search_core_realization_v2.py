@@ -80,7 +80,10 @@ def main() -> None:
     if audit.get("status") != "PASS" or offline.get("status") != "PASS":
         raise RuntimeError("offline authority evidence is not PASS")
     baseline_path = args.diagnostic_baseline.resolve()
-    baseline_receipt = {"diagnostic_baseline_path": str(baseline_path)}
+    baseline_receipt = {
+        "diagnostic_baseline_path": str(baseline_path),
+        "diagnostic_baseline_sha256": file_sha256(baseline_path),
+    }
     baseline = load_diagnostic_baseline(root, baseline_receipt)
     pool = build_frozen_target_parent_pool(root, baseline)
     if (
