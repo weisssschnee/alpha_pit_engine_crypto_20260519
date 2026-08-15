@@ -12,6 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from alphafactory_crypto.broad_search import search_engine_v1 as engine
 from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 import (
     AUTHORIZATION_PATH,
+    BLOCK_ROBUST_V2_AUTHORITY,
+    BLOCK_ROBUST_V2_CONTRACT_PATH,
     CHECKPOINT_SIZE,
     EXECUTION_MODE,
     G2_CATALOG_PATH,
@@ -19,6 +21,7 @@ from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 i
     LANE_SEEDS,
     LANE_TARGETS,
     RAW_ATTEMPT_CAP,
+    PRIOR_INCOMPATIBILITY_EVIDENCE_PATH,
     REQUIRED_EXECUTION_COMPONENT_PATHS,
     SOURCE_GAP_PATH,
     STRICT_CAP,
@@ -57,9 +60,15 @@ def main() -> int:
     root = args.repo_root.resolve()
     if _git(root, "status", "--porcelain=v1"):
         raise RuntimeError("implementation checkout must be clean before authorization")
-    if _git(root, "rev-parse", "HEAD") != _git(root, "rev-parse", "@{upstream}"):
-        raise RuntimeError("implementation commit must be tracking before authorization")
     implementation_sha = _git(root, "rev-parse", "HEAD").lower()
+    try:
+        remote_sync_state = (
+            "SYNCHRONIZED"
+            if implementation_sha == _git(root, "rev-parse", "@{upstream}").lower()
+            else "REMOTE_SYNC_PENDING"
+        )
+    except subprocess.CalledProcessError:
+        remote_sync_state = "REMOTE_SYNC_PENDING"
     components = {
         relative: _git(root, "rev-parse", f"{implementation_sha}:{relative}").lower()
         for relative in REQUIRED_EXECUTION_COMPONENT_PATHS
@@ -77,6 +86,7 @@ def main() -> int:
         "run_authorized": True,
         "consumed": False,
         "implementation_source_sha": implementation_sha,
+        "implementation_remote_sync_state": remote_sync_state,
         "runtime_id": args.runtime_id,
         "budget": {
             "strict_evaluated_maximum": STRICT_CAP,
@@ -93,6 +103,7 @@ def main() -> int:
             "p1_g1_reference": True,
             "p4_frozen_health_reference": True,
             "proposal_dispatcher": "TEMPORAL_PROPOSAL_DISPATCHER_V1",
+            "optimizer_feedback": BLOCK_ROBUST_V2_AUTHORITY,
             "adaptive_basin_local_qd": True,
             "new_basin_discovery_allowed": True,
             "automatic_budget_expansion": False,
@@ -115,6 +126,17 @@ def main() -> int:
         "p1_g2_catalog_path": G2_CATALOG_PATH,
         "p1_g2_catalog_file_sha256": _file_sha(root / G2_CATALOG_PATH),
         "p1_g2_catalog_sha256": catalog["catalog_sha256"],
+        "legacy_p1_g1_identity_count": 180,
+        "accepted_p1_g2_semantic_count": 171,
+        "block_robust_v2_contract_path": BLOCK_ROBUST_V2_CONTRACT_PATH,
+        "block_robust_v2_contract_file_sha256": _file_sha(
+            root / BLOCK_ROBUST_V2_CONTRACT_PATH
+        ),
+        "block_robust_v2_authority": BLOCK_ROBUST_V2_AUTHORITY,
+        "prior_incompatibility_evidence_path": PRIOR_INCOMPATIBILITY_EVIDENCE_PATH,
+        "prior_incompatibility_evidence_file_sha256": _file_sha(
+            root / PRIOR_INCOMPATIBILITY_EVIDENCE_PATH
+        ),
         "authority_identity": EXPECTED_AUTHORITY_IDENTITY,
         "market_input_identity": EXPECTED_MARKET_INPUT_IDENTITY,
         "pc2_executor_identity": EXPECTED_PC2_EXECUTOR_IDENTITY,

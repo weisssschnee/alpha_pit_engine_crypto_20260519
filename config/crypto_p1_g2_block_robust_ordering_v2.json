@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+  "campaign_scope": "P1_SEMANTIC_SUPPLY_EXPANSION_V1_BLOCK_ROBUST_V2",
+  "mechanism_shapes": [
+    "BINARY_TWO_AXIS",
+    "HIERARCHICAL_THREE_AXIS"
+  ],
+  "horizons_hours": [
+    4
+  ],
+  "partition_tail_purge_hours": 6,
+  "feature_warmup": "PAST_ONLY_EXISTING_EXPRESSION_WARMUP",
+  "position_boundary": "ZERO_START_CHARGE_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION",
+  "cost_authority": "EXISTING_ECONOMIC_RECEIPT_EXECUTION_COST_BPS",
+  "required_matched_component_rule": "ALL_REQUIRED_MATCHED_COMPONENTS_PER_BLOCK",
+  "binary_required_matched_components": [
+    "primary_minus_left_control",
+    "primary_minus_right_control"
+  ],
+  "hierarchical_required_matched_components": [
+    "interaction_ab_minus_a",
+    "interaction_ab_minus_b",
+    "conditional_abc_minus_ab"
+  ],
+  "binary_joint_reward_seed_namespace": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1",
+  "hierarchical_joint_reward_seed_namespace": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+  "replicated_candidate_rule": "AT_LEAST_2_OF_3_BLOCKS_ALL_REQUIRED_MATCHED_NET_MEAN_POSITIVE",
+  "all_three_rule": "3_OF_3_BLOCKS_ALL_REQUIRED_MATCHED_NET_MEAN_POSITIVE",
+  "ordering": [
+    "REPLICATED_POSITIVE_BLOCK_COUNT_DESC",
+    "WORST_BLOCK_MIN_MATCHED_NET_MEAN_DESC",
+    "MEDIAN_BLOCK_JOINT_SEARCH_REWARD_DESC",
+    "MAX_REQUIRED_ONE_WAY_TURNOVER_ASC",
+    "MIN_REQUIRED_SUPPORT_DESC",
+    "CANDIDATE_ID_ASC"
+  ],
+  "blocks": [
+    {
+      "block_id": "development_block_0",
+      "start": "2025-08-29T07:00:00Z",
+      "end_exclusive": "2025-09-19T12:00:00Z"
+    },
+    {
+      "block_id": "development_block_1",
+      "start": "2025-09-19T12:00:00Z",
+      "end_exclusive": "2025-10-10T18:00:00Z"
+    },
+    {
+      "block_id": "development_block_2",
+      "start": "2025-10-10T18:00:00Z",
+      "end_exclusive": "2025-11-01T00:00:00Z"
+    }
+  ]
+}

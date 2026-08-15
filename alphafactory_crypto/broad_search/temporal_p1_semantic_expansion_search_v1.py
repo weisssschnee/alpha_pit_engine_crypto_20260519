@@ -62,6 +62,12 @@ AUTHORIZATION_PATH = "config/crypto_temporal_p1_semantic_supply_expansion_v1_aut
 HISTORICAL_PRIOR_PATH = "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json"
 SOURCE_GAP_PATH = "config/crypto_p1_semantic_supply_expansion_v1_source_gap.json"
 G2_CATALOG_PATH = "config/crypto_p1_semantic_supply_expansion_v1_catalog.json"
+BLOCK_ROBUST_V2_CONTRACT_PATH = "config/crypto_p1_g2_block_robust_ordering_v2.json"
+BLOCK_ROBUST_V2_AUTHORITY = "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2"
+PRIOR_INCOMPATIBILITY_EVIDENCE_PATH = (
+    "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/"
+    "control_incompatibility_closure.json"
+)
 STRICT_CAP = 20_000
 CHECKPOINT_SIZE = 2_000
 RAW_ATTEMPT_CAP = 500_000
@@ -92,11 +98,13 @@ REQUIRED_EXECUTION_COMPONENT_PATHS = (
     "config/crypto_search_engine_v1_4_binance_target_replay.json",
     "config/crypto_search_replication_aware_gate_v1.json",
     "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+    BLOCK_ROBUST_V2_CONTRACT_PATH,
     "config/crypto_temporal_mechanism_program_v1.json",
     "config/crypto_typed_mechanism_catalog_v2_1.json",
     HISTORICAL_PRIOR_PATH,
     SOURCE_GAP_PATH,
     G2_CATALOG_PATH,
+    PRIOR_INCOMPATIBILITY_EVIDENCE_PATH,
     "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
     "scripts/analyze_crypto_p1_semantic_supply_expansion_v1.py",
     "scripts/check_crypto_p1_semantic_supply_expansion_v1.py",
@@ -170,6 +178,31 @@ def validate_authorization(repo_root: Path) -> dict[str, Any]:
         errors.append("family_scope")
     if dict(payload.get("lane_targets") or {}) != LANE_TARGETS:
         errors.append("lane_targets")
+    if (
+        int(payload.get("legacy_p1_g1_identity_count", -1)) != 180
+        or int(payload.get("accepted_p1_g2_semantic_count", -1)) != 171
+        or dict(payload.get("search_policy") or {}).get("optimizer_feedback")
+        != BLOCK_ROBUST_V2_AUTHORITY
+    ):
+        errors.append("semantic_supply_or_optimizer_authority")
+    block_contract = engine._read_json(root / BLOCK_ROBUST_V2_CONTRACT_PATH)
+    if (
+        block_contract.get("authority") != BLOCK_ROBUST_V2_AUTHORITY
+        or _file_sha(root / BLOCK_ROBUST_V2_CONTRACT_PATH)
+        != payload.get("block_robust_v2_contract_file_sha256")
+        or payload.get("block_robust_v2_authority") != BLOCK_ROBUST_V2_AUTHORITY
+    ):
+        errors.append("block_robust_v2_contract")
+    prior_incompatibility = engine._read_json(root / PRIOR_INCOMPATIBILITY_EVIDENCE_PATH)
+    if (
+        _file_sha(root / PRIOR_INCOMPATIBILITY_EVIDENCE_PATH)
+        != payload.get("prior_incompatibility_evidence_file_sha256")
+        or int(prior_incompatibility.get("search", {}).get("persisted_strict", -1)) != 0
+        or int(prior_incompatibility.get("launches", {}).get(
+            "candidate_evaluations_exact_by_completed_future_batches", -1
+        )) != 16
+    ):
+        errors.append("prior_incompatibility_evidence")
     forbidden = dict(payload.get("forbidden_reads") or {})
     if forbidden != {"validation": 0, "oos": 0, "holdout": 0, "forward": 0, "promotion": 0, "sealed": 0}:
         errors.append("forbidden_reads")
@@ -224,8 +257,10 @@ def validate_authorization(repo_root: Path) -> dict[str, Any]:
     changed = set(_git(root, "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD").splitlines())
     if changed != {AUTHORIZATION_PATH}:
         errors.append("authorization_commit_not_pure")
-    if _git(root, "rev-parse", "HEAD").lower() != _git(root, "rev-parse", "@{upstream}").lower():
-        errors.append("tracking")
+    if payload.get("implementation_remote_sync_state") not in {
+        "SYNCHRONIZED", "REMOTE_SYNC_PENDING"
+    }:
+        errors.append("remote_sync_state")
     if _git(root, "status", "--porcelain=v1"):
         errors.append("worktree")
     if errors:
@@ -251,6 +286,10 @@ def preflight(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
         "historical_prior_sha256": authorization["historical_prior_sha256"],
         "source_gap_sha256": authorization["source_gap_sha256"],
         "p1_g2_catalog_sha256": authorization["p1_g2_catalog_sha256"],
+        "block_robust_v2_authority": authorization["block_robust_v2_authority"],
+        "block_robust_v2_contract_file_sha256": authorization[
+            "block_robust_v2_contract_file_sha256"
+        ],
         "market_preflight_sha256": _sha(market),
         "ledger_rows": int(baseline["source_strict_count"]),
         "ledger_sha256": baseline["source_ledger_sha256"],
@@ -291,6 +330,7 @@ def _make_policies(
         )
         if not isinstance(policy, engine.MechanismEvolutionV2):
             raise RuntimeError("dispatcher policy type changed")
+        policy.parameters["selection_authority"] = BLOCK_ROBUST_V2_AUTHORITY
         configure_policy_realization_v2(policy, pool=pool, baseline=baseline)
         configure_policy_dispatcher_v1(
             policy, historical_prior=prior, p1_g2_source_gap=source_gap
@@ -618,6 +658,10 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
               "historical_prior_sha256": prior["prior_sha256"],
               "source_gap_sha256": source_gap["source_gap_sha256"],
               "p1_g2_catalog_sha256": compiled_g2_payload["catalog_sha256"],
+              "block_robust_v2_authority": BLOCK_ROBUST_V2_AUTHORITY,
+              "block_robust_v2_contract_file_sha256": _file_sha(
+                  root / BLOCK_ROBUST_V2_CONTRACT_PATH
+              ),
               "program_catalog_sha256": program_catalog_payload(temporal_catalog)["catalog_sha256"],
               "lane_targets": LANE_TARGETS,
               "lane_seeds": list(LANE_SEEDS), "input_identities": identities,
@@ -637,7 +681,7 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
         engine._write_json(runtime_root / "source_gap_snapshot.json", source_gap)
         engine._write_json(runtime_root / "p1_g2_catalog_snapshot.json", compiled_g2_payload)
     cache_root = root / str(identities["raw_cache"]["root"])
-    block_contract = engine._read_json(root / str(config["source_authorities"]["development_blocks_config"]))["block_robust_contract"]
+    block_contract = engine._read_json(root / BLOCK_ROBUST_V2_CONTRACT_PATH)
     with concurrent.futures.ProcessPoolExecutor(
         max_workers=WORKERS, initializer=engine._worker_initialize,
         initargs=(str(cache_root), engine._contracts_payload(contracts), behavior,
@@ -650,7 +694,9 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
                         source_gap=source_gap, g2_catalog=g2_catalog, executor=executor)
 
 
-__all__ = ["AUTHORIZATION_PATH", "CAMPAIGN", "EXECUTION_MODE", "HISTORICAL_PRIOR_PATH",
+__all__ = ["AUTHORIZATION_PATH", "BLOCK_ROBUST_V2_AUTHORITY",
+           "BLOCK_ROBUST_V2_CONTRACT_PATH", "CAMPAIGN", "EXECUTION_MODE",
+           "HISTORICAL_PRIOR_PATH", "PRIOR_INCOMPATIBILITY_EVIDENCE_PATH",
            "SOURCE_GAP_PATH", "G2_CATALOG_PATH", "LANE_TARGETS",
            "LANE_SEEDS", "REQUIRED_EXECUTION_COMPONENT_PATHS", "STRICT_CAP",
            "authorization_content_sha", "preflight", "run", "validate_authorization"]

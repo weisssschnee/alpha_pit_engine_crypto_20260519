@@ -4,7 +4,9 @@ import random
 from pathlib import Path
 
 import numpy as np
+import pytest
 
+from alphafactory_crypto.broad_search import pair18m as pair_module
 from alphafactory_crypto.broad_search.compositional18m import (
     CONDITIONAL_SEMANTIC_TUPLES,
     conditional_candidate_from_genes,
@@ -125,6 +127,20 @@ class _Store:
     def target_return(self, horizon: int) -> np.ndarray:
         return self._target
 
+    @property
+    def target_metadata(self) -> dict[str, object]:
+        return {
+            "venue": "BINANCE_USD_M",
+            "source": "SYNTHETIC_TEST_TARGET",
+            "price_field": "open_price",
+            "formula": "synthetic_test_formula",
+            "execution_delay_hours": 2,
+            "horizons_hours": [1, 4],
+            "positive_price_required": True,
+            "missing_value_fill": None,
+            "identity_sha256": "B" * 64,
+        }
+
 
 def test_v14_config_freezes_staged_fresh_state_contract() -> None:
     repo_root = Path(__file__).resolve().parents[1]
@@ -194,6 +210,73 @@ def test_hierarchical_pair_records_ab_and_conditional_gates() -> None:
         evaluation["feedback"]["interaction_left_axis"]["distance"],
         evaluation["feedback"]["interaction_right_axis"]["distance"],
         evaluation["feedback"]["conditional_axis"]["distance"],
+    )
+
+
+def test_hierarchical_pair_passes_existing_three_sleeves_to_v2_projection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    candidate = _v14_sample_conditional(
+        registry=registry,
+        domains=_v14_domains(_contracts()),
+        semantic_tuple="OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+        rng=random.Random(1717),
+    )
+    rng = np.random.default_rng(1718)
+    fields = {
+        contract.field_id: rng.lognormal(0.0, 0.5, size=(8, 400))
+        for contract in _contracts()
+    }
+    fields["signed_aggressor_notional"] = rng.normal(0.0, 1.0, size=(8, 400))
+    fields["volume_imbalance"] = rng.normal(0.0, 0.3, size=(8, 400))
+    captured: dict[str, object] = {}
+
+    def capture_projection(**kwargs: object) -> dict[str, object]:
+        captured.update(kwargs)
+        return {
+            "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+            "replicated_positive_block_count": 0,
+        }
+
+    monkeypatch.setattr(pair_module, "_development_block_robust_ordering", capture_projection)
+    receipt = {
+        "train": {"start": "2025-07-01", "end_exclusive": "2025-08-01"},
+        "validation": {},
+        "holdout": {},
+        "direction": {"rule": "TRAIN_FROZEN_SIGN_ORIENTATION"},
+        "portfolio": {"mapping_id": candidate.mapping_id},
+        "cost": {"cost_bps": 5.0},
+        "execution": {
+            **_Store(fields).target_metadata,
+            "target_cache_identity_sha256": "B" * 64,
+            "partition_tail_purge_hours": 6,
+        },
+    }
+    evaluation = evaluate_pair(
+        store=_Store(fields),
+        registry=registry,
+        candidate=candidate,
+        block_start="2025-07-01",
+        block_end="2025-08-01",
+        block_role="TEST",
+        economic_receipt=receipt,
+        optimizer_block_contract={
+            "schema_version": 2,
+            "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+        },
+    )
+    matched = captured["matched_component_weights"]
+    assert isinstance(matched, dict)
+    assert tuple(matched) == (
+        "interaction_ab_minus_a",
+        "interaction_ab_minus_b",
+        "conditional_abc_minus_ab",
+    )
+    assert np.array_equal(matched["interaction_ab_minus_b"], captured["right_delta_weight"])
+    assert np.array_equal(matched["conditional_abc_minus_ab"], captured["left_delta_weight"])
+    assert evaluation["block_robust_ordering"]["authority"] == (
+        "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2"
     )
 
 

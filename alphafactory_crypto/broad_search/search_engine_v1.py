@@ -5583,15 +5583,15 @@ class MechanismEvolutionV2(MechanismRandomV2):
         *,
         include_family_count: bool,
     ) -> tuple[Any, ...]:
-        if self.parameters.get("selection_authority") != (
-            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
-        ):
+        selection_authority = self.parameters.get("selection_authority")
+        if selection_authority not in {
+            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1",
+            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+        }:
             base: tuple[Any, ...] = (-float(record["search_reward"]),)
         else:
             ordering = dict(record.get("block_robust_ordering") or {})
-            if ordering.get("authority") != (
-                "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
-            ):
+            if ordering.get("authority") != selection_authority:
                 raise ValueError("block-robust Evolution observation is unbound")
             base = (
                 -int(ordering["replicated_positive_block_count"]),

@@ -1062,6 +1062,7 @@ def _development_block_robust_ordering(
     full_block_end: str,
     contract: Mapping[str, Any],
     economic_receipt: Mapping[str, Any],
+    matched_component_weights: Mapping[str, np.ndarray] | None = None,
 ) -> dict[str, Any]:
     """Project the existing evaluator into three purged in-train blocks.
 
@@ -1072,14 +1073,55 @@ def _development_block_robust_ordering(
     establishment and terminal liquidation.
     """
 
-    if contract.get("schema_version") != 1 or contract.get("authority") != (
-        "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
-    ):
+    authority = str(contract.get("authority") or "")
+    schema_version = int(contract.get("schema_version", -1))
+    is_v1 = (
+        schema_version == 1
+        and authority == "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+    )
+    is_v2 = (
+        schema_version == 2
+        and authority == "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2"
+    )
+    if not (is_v1 or is_v2):
         raise ValueError("BLOCK_ROBUST_ORDERING_CONTRACT_CHANGED")
     if int(candidate.horizon_hours) != 4:
         raise ValueError("BLOCK_ROBUST_ORDERING_REQUIRES_4H")
-    if candidate.mechanism_family.startswith("CONDITIONAL_"):
+    hierarchical = (
+        candidate.mechanism_family.startswith("CONDITIONAL_")
+        or str(candidate.generation_genes.get("matched_control_schema", ""))
+        == "HIERARCHICAL_A_B_AB_ABC"
+    )
+    if is_v1 and hierarchical:
         raise ValueError("BLOCK_ROBUST_ORDERING_REQUIRES_BINARY_MECHANISM")
+    if is_v2 and (
+        tuple(contract.get("mechanism_shapes") or ())
+        != ("BINARY_TWO_AXIS", "HIERARCHICAL_THREE_AXIS")
+        or contract.get("required_matched_component_rule")
+        != "ALL_REQUIRED_MATCHED_COMPONENTS_PER_BLOCK"
+    ):
+        raise ValueError("BLOCK_ROBUST_ORDERING_V2_COMPONENT_CONTRACT_CHANGED")
+    if hierarchical:
+        required_names = (
+            "interaction_ab_minus_a",
+            "interaction_ab_minus_b",
+            "conditional_abc_minus_ab",
+        )
+    else:
+        required_names = (
+            "primary_minus_left_control",
+            "primary_minus_right_control",
+        )
+    supplied_matched = (
+        dict(matched_component_weights)
+        if matched_component_weights is not None
+        else {
+            "primary_minus_left_control": left_delta_weight,
+            "primary_minus_right_control": right_delta_weight,
+        }
+    )
+    if set(supplied_matched) != set(required_names):
+        raise ValueError("BLOCK_ROBUST_ORDERING_MATCHED_COMPONENTS_CHANGED")
     execution = dict(economic_receipt.get("execution") or {})
     purge_hours = int(contract.get("partition_tail_purge_hours", -1))
     if purge_hours != int(execution.get("partition_tail_purge_hours", -2)):
@@ -1128,15 +1170,13 @@ def _development_block_robust_ordering(
             [str(np.datetime64(int(value), "ns"))[:7] for value in local_timestamps],
             dtype=str,
         )
-        component_weights = {
-            "primary": np.asarray(primary_weight[:, local], dtype=float),
-            "primary_minus_left_control": np.asarray(
-                left_delta_weight[:, local], dtype=float
-            ),
-            "primary_minus_right_control": np.asarray(
-                right_delta_weight[:, local], dtype=float
-            ),
-        }
+        component_weights = {"primary": np.asarray(primary_weight[:, local], dtype=float)}
+        component_weights.update(
+            {
+                name: np.asarray(supplied_matched[name][:, local], dtype=float)
+                for name in required_names
+            }
+        )
         component_metrics: dict[str, dict[str, Any]] = {}
         objective_components: dict[str, dict[str, np.ndarray]] = {}
         for component_name, weights in component_weights.items():
@@ -1157,10 +1197,15 @@ def _development_block_robust_ordering(
                 "mask": np.asarray(metrics.pop("_objective_mask"), dtype=bool),
             }
             component_metrics[component_name] = metrics
+        seed_authority = (
+            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1"
+            if is_v1 or not hierarchical
+            else "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2"
+        )
         block_seed = int.from_bytes(
             hashlib.sha256(
                 (
-                    "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1|"
+                    f"{seed_authority}|"
                     f"{candidate.candidate_id}|{block_id}"
                 ).encode("utf-8")
             ).digest()[:8],
@@ -1172,10 +1217,12 @@ def _development_block_robust_ordering(
             timestamp_ns=local_timestamps,
             seed=block_seed,
         )
-        left = component_metrics["primary_minus_left_control"]
-        right = component_metrics["primary_minus_right_control"]
         primary = component_metrics["primary"]
+        matched = {name: component_metrics[name] for name in required_names}
         required_objectives = tuple(joint["component_objectives"].values())
+        matched_net_means = {
+            name: float(metrics["net_mean"]) for name, metrics in matched.items()
+        }
         row = {
             "block_id": block_id,
             "start": str(block["start"]),
@@ -1189,16 +1236,6 @@ def _development_block_robust_ordering(
             # reward, gates, mapping, controls, or optimizer ordering.
             "primary_gross_mean": float(primary["gross_mean"]),
             "primary_net_mean": float(primary["net_mean"]),
-            "left_gross_mean": float(left["gross_mean"]),
-            "left_net_mean": float(left["net_mean"]),
-            "right_gross_mean": float(right["gross_mean"]),
-            "right_net_mean": float(right["net_mean"]),
-            "both_matched_net_positive": bool(
-                float(left["net_mean"]) > 0.0 and float(right["net_mean"]) > 0.0
-            ),
-            "min_matched_net_mean": float(
-                min(float(left["net_mean"]), float(right["net_mean"]))
-            ),
             "joint_search_reward": float(joint["search_reward"]),
             "max_required_mean_one_way_turnover": float(
                 max(float(value["mean_one_way_turnover"]) for value in required_objectives)
@@ -1209,12 +1246,46 @@ def _development_block_robust_ordering(
             "initial_establishment_charged": True,
             "terminal_liquidation_charged": True,
         }
+        if is_v1 or not hierarchical:
+            left = matched["primary_minus_left_control"]
+            right = matched["primary_minus_right_control"]
+            row.update(
+                {
+                    "left_gross_mean": float(left["gross_mean"]),
+                    "left_net_mean": float(left["net_mean"]),
+                    "right_gross_mean": float(right["gross_mean"]),
+                    "right_net_mean": float(right["net_mean"]),
+                    "both_matched_net_positive": bool(
+                        float(left["net_mean"]) > 0.0
+                        and float(right["net_mean"]) > 0.0
+                    ),
+                    "min_matched_net_mean": float(min(matched_net_means.values())),
+                }
+            )
+        if is_v2:
+            row.update(
+                {
+                    "required_matched_components": list(required_names),
+                    "all_required_matched_net_positive": bool(
+                        all(value > 0.0 for value in matched_net_means.values())
+                    ),
+                    "min_matched_net_mean": float(min(matched_net_means.values())),
+                }
+            )
+            for name in required_names:
+                row[f"{name}_gross_mean"] = float(matched[name]["gross_mean"])
+                row[f"{name}_net_mean"] = float(matched[name]["net_mean"])
         rows.append(row)
 
-    replicated_count = sum(bool(row["both_matched_net_positive"]) for row in rows)
+    positive_field = (
+        "both_matched_net_positive"
+        if is_v1
+        else "all_required_matched_net_positive"
+    )
+    replicated_count = sum(bool(row[positive_field]) for row in rows)
     payload = {
-        "schema_version": 1,
-        "authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V1",
+        "schema_version": schema_version,
+        "authority": authority,
         "candidate_id": candidate.candidate_id,
         "evaluation_partition": "train",
         "validation_read": False,
@@ -1239,6 +1310,11 @@ def _development_block_robust_ordering(
         ),
         "blocks": rows,
     }
+    if is_v2:
+        payload["mechanism_shape"] = (
+            "HIERARCHICAL_THREE_AXIS" if hierarchical else "BINARY_TWO_AXIS"
+        )
+        payload["required_matched_components"] = list(required_names)
     return {**payload, "ordering_sha256": _json_sha(payload)}
 
 
@@ -2053,6 +2129,24 @@ def evaluate_pair(
             raise ValueError(
                 "BLOCK_ROBUST_ORDERING_REQUIRES_RECEIPT_BOUND_TRAIN_PARTITION"
             )
+        matched_component_weights = None
+        if str(optimizer_block_contract.get("authority") or "") == (
+            "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2"
+        ):
+            if hierarchical_conditional:
+                assert interaction_left_control_weight is not None
+                matched_component_weights = {
+                    "interaction_ab_minus_a": (
+                        control_weight - interaction_left_control_weight
+                    ),
+                    "interaction_ab_minus_b": right_delta_weight,
+                    "conditional_abc_minus_ab": left_delta_weight,
+                }
+            else:
+                matched_component_weights = {
+                    "primary_minus_left_control": left_delta_weight,
+                    "primary_minus_right_control": right_delta_weight,
+                }
         block_robust_ordering = _development_block_robust_ordering(
             candidate=candidate,
             primary_weight=primary_weight,
@@ -2066,6 +2160,7 @@ def evaluate_pair(
             full_block_end=block_end,
             contract=optimizer_block_contract,
             economic_receipt=economic_receipt,
+            matched_component_weights=matched_component_weights,
         )
     if (
         include_validation_paths or include_economic_paths

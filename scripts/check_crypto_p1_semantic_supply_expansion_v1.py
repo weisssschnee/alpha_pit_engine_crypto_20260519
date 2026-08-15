@@ -16,6 +16,7 @@ from alphafactory_crypto.broad_search import search_engine_v1 as engine
 from alphafactory_crypto.broad_search.compositional18m import CandidateSpec, mechanism_role_domains
 from alphafactory_crypto.broad_search.expression import FieldContract, TypedExpressionRegistry
 from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 import (
+    BLOCK_ROBUST_V2_AUTHORITY,
     G2_CATALOG_PATH,
     LANE_TARGETS,
     RAW_ATTEMPT_CAP,
@@ -103,11 +104,29 @@ def check(root: Path, runtime_id: str) -> dict[str, Any]:
     frozen_catalog = engine._read_json(root / G2_CATALOG_PATH)
     if g2_payload["catalog_sha256"] != frozen_catalog["catalog_sha256"]:
         errors.append("catalog_hash")
+    if (
+        len(g2) != 171
+        or sum(program.family_id.startswith("P1_") for _, program in parents) != 180
+    ):
+        errors.append("semantic_supply_count")
     legal_g2 = {program.program_id for _, program in g2}
     legal_g1 = {program.program_id for _, program in parents}
     registry = _registry(root, config)
     replayed = set()
     for row in frame.to_dict("records"):
+        ordering = json.loads(str(row["block_robust_ordering_json"]))
+        ordering_core = {
+            key: value for key, value in ordering.items() if key != "ordering_sha256"
+        }
+        if (
+            ordering.get("authority") != BLOCK_ROBUST_V2_AUTHORITY
+            or ordering.get("ordering_sha256") != _sha(ordering_core)
+            or int(ordering.get("block_count", -1)) != 3
+            or len(ordering.get("required_matched_components") or ())
+            not in {2, 3}
+        ):
+            errors.append("block_robust_v2_ordering")
+            break
         payload = json.loads(str(row["candidate_spec_json"]))
         if engine._payload_sha(payload) != str(row["candidate_spec_sha256"]):
             errors.append("candidate_spec_hash")
@@ -154,7 +173,7 @@ def check(root: Path, runtime_id: str) -> dict[str, Any]:
     decision = str(analysis.get("next_decision"))
     if decision not in {
         "P1_SEMANTIC_EXPANSION_PASS", "P1_SEMANTIC_EXPANSION_PARTIAL",
-        "P1_HYPOTHESIS_FAMILY_WEAK", "P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE",
+        "P1_HYPOTHESIS_FAMILY_WEAK", "BLOCK_ROBUST_V2_INVALID",
         "GLOBAL_SEARCH_CORE_REGRESSION", "RESEARCH_INVALID",
     }:
         errors.append("decision")

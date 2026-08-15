@@ -28,7 +28,7 @@ ALLOWED_DECISIONS = {
     "P1_SEMANTIC_EXPANSION_PASS",
     "P1_SEMANTIC_EXPANSION_PARTIAL",
     "P1_HYPOTHESIS_FAMILY_WEAK",
-    "P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE",
+    "BLOCK_ROBUST_V2_INVALID",
     "GLOBAL_SEARCH_CORE_REGRESSION",
     "RESEARCH_INVALID",
 }
@@ -130,7 +130,7 @@ def analyze(root: Path, runtime_id: str) -> dict[str, Any]:
     if any(int(value) for value in boundaries) or int(complete.get("p2_strict", -1)) or int(complete.get("p3_strict", -1)):
         decision = "RESEARCH_INVALID"
     elif not g2:
-        decision = "P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE"
+        decision = "BLOCK_ROBUST_V2_INVALID"
     elif p4 and p4_matched == 0:
         decision = "GLOBAL_SEARCH_CORE_REGRESSION"
     elif (
