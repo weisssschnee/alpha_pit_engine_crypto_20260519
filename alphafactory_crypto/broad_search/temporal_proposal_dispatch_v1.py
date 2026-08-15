@@ -349,8 +349,39 @@ def configure_policy_dispatcher_v1(
     policy: engine.MechanismEvolutionV2,
     *,
     historical_prior: Mapping[str, Any],
+    p1_g2_source_gap: Mapping[str, Any] | None = None,
 ) -> None:
     prior = _validate_prior(historical_prior)
+    g2_parent_prior: dict[str, Any] = {}
+    g2_source_gap_sha256 = None
+    if p1_g2_source_gap is not None:
+        source_gap = json.loads(json.dumps(dict(p1_g2_source_gap)))
+        source_core = {
+            key: value for key, value in source_gap.items() if key != "source_gap_sha256"
+        }
+        if (
+            source_gap.get("status") != "P1_TRAIN_ONLY_SEMANTIC_SOURCE_GAP_READY"
+            or source_gap.get("source_gap_sha256") != _sha(source_core)
+            or any(
+                int(source_gap.get(name, -1)) != 0
+                for name in (
+                    "validation_reads", "oos_reads", "holdout_reads",
+                    "forward_reads", "promotion_reads", "sealed_reads",
+                )
+            )
+        ):
+            raise ValueError("P1 G2 source-gap prior identity changed")
+        g2_source_gap_sha256 = str(source_gap["source_gap_sha256"])
+        g2_parent_prior = {
+            str(row["program_id"]): {
+                key: row[key]
+                for key in (
+                    "attempts", "matched_positive", "dual_positive", "replicated",
+                    "positive_reward", "reward_sum", "evidence_score",
+                )
+            }
+            for row in source_gap["selected_parent_programs"]
+        }
     realization = policy.realization_v2_state
     if not isinstance(realization, dict):
         raise RuntimeError("dispatcher configuration requires Realization V2")
@@ -359,6 +390,8 @@ def configure_policy_dispatcher_v1(
         "dispatcher_id": DISPATCHER_ID,
         "historical_prior": prior,
         "historical_prior_sha256": prior["prior_sha256"],
+        "p1_g2_source_gap_sha256": g2_source_gap_sha256,
+        "p1_g2_parent_prior": g2_parent_prior,
         "pool_cap": POOL_CAP,
         "source_cap": SOURCE_CAP,
         "exploration_probability": EXPLORATION_PROBABILITY,
@@ -400,6 +433,31 @@ def _record(policy: engine.MechanismEvolutionV2, candidate_id: str) -> dict[str,
     if value is None:
         raise KeyError(candidate_id)
     return dict(value)
+
+
+def _family_lane_parent(
+    policy: engine.MechanismEvolutionV2, basin_id: str, allowed_families: set[str]
+) -> CandidateSpec:
+    candidates = []
+    for candidate_id in targeted_members(policy, basin_id):
+        record = targeted_parent_record(policy, candidate_id)
+        if record is None:
+            continue
+        candidate = policy._candidate(record)
+        genes = candidate.generation_genes
+        if (
+            int(genes.get("semantic_generation", 1)) == 1
+            and str(genes["program_spec"]["family_id"]) in allowed_families
+        ):
+            candidates.append(candidate)
+    if not candidates:
+        raise RuntimeError("proposal dispatcher family lane has no generation-1 parent")
+    candidates.sort(key=lambda candidate: candidate.candidate_id)
+    state = _state(policy)
+    key = "family_parent_cursor:" + basin_id
+    cursor = int(state.get(key, 0))
+    state[key] = cursor + 1
+    return candidates[cursor % len(candidates)]
 
 
 def _dimension_counts(policy: engine.MechanismEvolutionV2, basin_id: str) -> dict[str, int]:
@@ -557,8 +615,26 @@ def _feature_vector(
         for candidate_id in targeted_members(policy, basin_id)
     )
     parent_cell = str(origin.get("realization_cell_id") or "")
+    program_spec = dict(genes["program_spec"])
+    semantic_generation = int(genes.get("semantic_generation", 1))
     return {
-        "program_family_id": str(genes["program_spec"]["family_id"]),
+        "program_family_id": str(program_spec["family_id"]),
+        "semantic_generation": semantic_generation,
+        "parent_p1_program_id": str(
+            genes.get("parent_program_id") or genes.get("program_id") or ""
+        ),
+        "payload_identity": str(
+            genes.get("parent_program_id") or genes.get("program_id") or ""
+        ),
+        "condition_role": str(program_spec.get("condition_role") or "NONE"),
+        "condition_primitive": str(
+            program_spec.get("condition_component") or "NONE"
+        ),
+        "condition_operator": str(
+            program_spec.get("condition_operator") or "NONE"
+        ),
+        "condition_mode": str(program_spec.get("condition_mode") or "NONE"),
+        "semantic_novelty": semantic_generation == 2,
         "economic_basin_id": basin_id,
         "parent_quality": float(origin.get("search_reward") or 0.0),
         "parent_matched_positive": bool(
@@ -640,6 +716,33 @@ def _economic_score(state: Mapping[str, Any], features: Mapping[str, Any]) -> fl
         score += FEATURE_GROUP_WEIGHTS[group] * component
     edit = str(features["semantic_edit_type"])
     score += POSITIVE_EDIT_PRIOR.get(edit, LOW_EDIT_PRIOR.get(edit, 0.0))
+    if int(features.get("semantic_generation", 1)) == 2:
+        hierarchical = {
+            "parent_payload": str(features["parent_p1_program_id"]),
+            "condition_role": str(features["condition_role"]),
+            "condition_operator_mode": (
+                str(features["condition_operator"]) + ":" + str(features["condition_mode"])
+            ),
+            "semantic_program": str(features["program_id"]),
+        }
+        for group, key in hierarchical.items():
+            stats = _table_stats(state, group, key)
+            component = sum(
+                OUTCOME_WEIGHTS[outcome]
+                * _smoothed_rate(stats, outcome, global_prior[outcome])
+                for outcome in OUTCOMES
+            )
+            score += 0.05 * component
+        parent = dict(
+            dict(state.get("p1_g2_parent_prior") or {}).get(
+                str(features["parent_p1_program_id"]), {}
+            )
+        )
+        attempts = float(parent.get("attempts", 0))
+        matched = float(parent.get("matched_positive", 0))
+        score += 0.04 * (matched + 20.0 * global_prior["matched_positive"]) / (
+            attempts + 20.0
+        )
     return score
 
 
@@ -851,7 +954,11 @@ def _semantic_donor_pool(
         )
     )
     output = []
+    weak_output = 0
     for catalog, donor, block in donors[: SOURCE_CAP * 4]:
+        weak = block in LOW_EDIT_PRIOR
+        if weak and weak_output >= 1:
+            continue
         try:
             if catalog == "TEMPORAL_PROGRAM_V1":
                 child, completion = semantic_block_mutation(
@@ -899,6 +1006,7 @@ def _semantic_donor_pool(
                 "details": details,
             }
         )
+        weak_output += int(weak)
         if len(output) >= SOURCE_CAP:
             break
     return output
@@ -921,17 +1029,40 @@ def propose_with_dispatcher_v1(
     *,
     scale_contract: Mapping[str, Any],
     inventory: TemporalRepresentationInventory,
+    allowed_families: Sequence[str] | None = None,
 ) -> tuple[CandidateSpec, dict[str, Any]]:
     state = _state(policy)
     state_hash_before = policy.state_hash()
     dispatch_state_hash_before = dispatcher_state_hash(policy)
     limit = int(policy.parameters.get("duplicate_resample_limit", 64))
     for duplicate_attempt in range(1, limit + 2):
-        basin_id = next_targeted_basin(policy)
-        first = next_targeted_parent(policy, basin_id)
+        if allowed_families is None:
+            basin_id = next_targeted_basin(policy)
+        else:
+            allowed = set(str(value) for value in allowed_families)
+            basins = sorted(
+                str(row["economic_similarity_cluster_id"])
+                for row in policy.targeted_parent_pool_payload["target_basins"]
+                if str(row["program_family_id"]) in allowed
+            )
+            if not basins:
+                raise RuntimeError("proposal dispatcher family lane has no frozen basin")
+            cursor_key = "family_lane_cursor:" + "+".join(sorted(allowed))
+            cursor = int(state.get(cursor_key, 0))
+            basin_id = basins[cursor % len(basins)]
+            state[cursor_key] = cursor + 1
+        first = (
+            next_targeted_parent(policy, basin_id)
+            if allowed_families is None
+            else _family_lane_parent(policy, basin_id, set(str(value) for value in allowed_families))
+        )
         target = select_mutation_target_v1(policy, basin_id)
         legacy_second = policy._targeted_crossover_parent(basin_id, first)
-        successor_second = _successor_second_parent(policy, basin_id, first)
+        successor_second = (
+            _successor_second_parent(policy, basin_id, first)
+            if allowed_families is None
+            else legacy_second
+        )
         pool = (
             _parameter_pool(policy, first, target)
             + _legacy_crossover_pool(policy, first, legacy_second)
@@ -1132,6 +1263,19 @@ def observe_dispatcher_v1(
         "field_signature": str(features["field_signature"]),
         "construction_route": str(features["construction_route"]),
     }
+    if int(features.get("semantic_generation", 1)) == 2:
+        keys.update(
+            {
+                "parent_payload": str(features["parent_p1_program_id"]),
+                "condition_role": str(features["condition_role"]),
+                "condition_operator_mode": (
+                    str(features["condition_operator"])
+                    + ":"
+                    + str(features["condition_mode"])
+                ),
+                "semantic_program": str(features["program_id"]),
+            }
+        )
     for group, key in keys.items():
         _increment_table(state, group, key, outcomes)
     decile = str(int(dispatch_receipt["selected_score_decile"]))

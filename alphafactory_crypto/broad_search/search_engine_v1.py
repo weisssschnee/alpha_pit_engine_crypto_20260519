@@ -1130,15 +1130,26 @@ def _candidate_rebuild_verified(
 ) -> bool:
     try:
         if "program_spec" in candidate.generation_genes:
-            from alphafactory_crypto.broad_search.temporal_program_v1 import (
-                temporal_program_candidate_from_genes,
-            )
+            if int(candidate.generation_genes.get("semantic_generation", 1)) == 2:
+                from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_v1 import (
+                    p1_generation2_candidate_from_genes,
+                )
 
-            rebuilt = temporal_program_candidate_from_genes(
-                registry,
-                genes=candidate.generation_genes,
-                domains=mechanism_role_domains(tuple(registry.fields.values())),
-            )
+                rebuilt = p1_generation2_candidate_from_genes(
+                    registry,
+                    genes=candidate.generation_genes,
+                    domains=mechanism_role_domains(tuple(registry.fields.values())),
+                )
+            else:
+                from alphafactory_crypto.broad_search.temporal_program_v1 import (
+                    temporal_program_candidate_from_genes,
+                )
+
+                rebuilt = temporal_program_candidate_from_genes(
+                    registry,
+                    genes=candidate.generation_genes,
+                    domains=mechanism_role_domains(tuple(registry.fields.values())),
+                )
         elif "mechanism_spec" in candidate.generation_genes:
             rebuilt = mechanism_candidate_from_genes(
                 registry,
@@ -5101,6 +5112,14 @@ class MechanismRandomV2:
 
     def _build_candidate(self, genes: Mapping[str, Any]) -> CandidateSpec:
         if self.parameters.get("candidate_builder") == "TEMPORAL_MECHANISM_PROGRAM_V1":
+            if int(genes.get("semantic_generation", 1)) == 2:
+                from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_v1 import (
+                    p1_generation2_candidate_from_genes,
+                )
+
+                return p1_generation2_candidate_from_genes(
+                    self.registry, genes=genes, domains=self.domains
+                )
             from alphafactory_crypto.broad_search.temporal_program_v1 import (
                 temporal_program_candidate_from_genes,
             )
@@ -5643,6 +5662,12 @@ class MechanismEvolutionV2(MechanismRandomV2):
     @staticmethod
     def _gene_groups(candidate: CandidateSpec) -> tuple[tuple[str, ...], ...]:
         if "program_spec" in candidate.generation_genes:
+            if int(candidate.generation_genes.get("semantic_generation", 1)) == 2:
+                from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_v1 import (
+                    p1_generation2_gene_groups,
+                )
+
+                return p1_generation2_gene_groups(candidate)
             from alphafactory_crypto.broad_search.temporal_program_v1 import (
                 program_gene_groups,
             )

@@ -1,0 +1,50 @@
+{
+  "accepted_semantics": 171,
+  "catalog_id": "P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+  "catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+  "condition_operator_mode_counts": {
+    "ConditionGate:NEGATIVE": 42,
+    "ConditionGate:null": 50,
+    "StateModulation:ABSOLUTE_MAGNITUDE": 43,
+    "StateModulation:SIGN_ROUTING": 36
+  },
+  "condition_primitive_counts": {
+    "EventWindow": 13,
+    "MultiScaleRelation": 24,
+    "Persistence": 86,
+    "Transition": 48
+  },
+  "condition_role_counts": {
+    "CROSS_VENUE_OI_BUNDLE": 12,
+    "FLOW_IMBALANCE": 39,
+    "FUNDING": 84,
+    "OI_LEVEL": 36
+  },
+  "deduplicated_combinations": 0,
+  "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+  "legacy_p1_g1_count": 180,
+  "mapping_class_counts": {
+    "CROSS_SECTIONAL_RELATIVE": 79,
+    "SPARSE_EVENT_CARRY": 92
+  },
+  "matched_control_schema_counts": {
+    "HIERARCHICAL_A_B_AB_ABC": 171
+  },
+  "parent_program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "raw_possible_combinations": 192,
+  "rejected_combinations": 21,
+  "rejection_reasons": {
+    "CONDITION_OUTPUT_TYPE_INCOMPATIBLE_WITH_STATE_MODULATION": 13,
+    "RAW_FIELD_WIDTH_EXCEEDS_EXISTING_MAXIMUM_4": 8
+  },
+  "schema_version": 1,
+  "semantic_generation": 2,
+  "source_gap_sha256": "7800ED9E5BF4E8367E090E207CA0BD4D70D93961F9F34DD4AAB41206E3692682",
+  "status": "P1_G2_SEMANTIC_CATALOG_FROZEN",
+  "validation_reads": 0,
+  "oos_reads": 0,
+  "holdout_reads": 0,
+  "forward_reads": 0,
+  "promotion_reads": 0,
+  "sealed_reads": 0
+}

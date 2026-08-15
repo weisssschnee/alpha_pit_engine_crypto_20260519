@@ -1,0 +1,47 @@
+{
+  "candidate_evaluations": 0,
+  "candidate_rebuild_pass": true,
+  "checkpoint_serialization_pass": true,
+  "compiled_candidate_count": 171,
+  "condition_operator_modes": {
+    "ConditionGate:NEGATIVE": 42,
+    "ConditionGate:None": 50,
+    "StateModulation:ABSOLUTE_MAGNITUDE": 43,
+    "StateModulation:SIGN_ROUTING": 36
+  },
+  "condition_primitives": {
+    "EventWindow": 13,
+    "MultiScaleRelation": 24,
+    "Persistence": 86,
+    "Transition": 48
+  },
+  "condition_roles": {
+    "CROSS_VENUE_OI_BUNDLE": 12,
+    "FLOW_IMBALANCE": 39,
+    "FUNDING": 84,
+    "OI_LEVEL": 36
+  },
+  "deterministic_semantic_identity": true,
+  "expression_compiler_pass": true,
+  "forward_reads": 0,
+  "hierarchical_matched_controls_pass": true,
+  "holdout_reads": 0,
+  "mapping_derivation_pass": true,
+  "market_arrays_read": 0,
+  "offline_evidence_sha256": "E556B73D17A7D42F369C907A69685545AEC42669AD2929E4C4EAAD630D497077",
+  "old_g1_identity_replay": true,
+  "old_p1_g1_count": 180,
+  "old_temporal_program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "oos_reads": 0,
+  "p1_g2_catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+  "p1_g2_semantic_count": 171,
+  "p2_p3_catalog_activation_count": 0,
+  "pit_field_legality_pass": true,
+  "promotion_reads": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "semantic_dedup_pass": true,
+  "status": "P1_SEMANTIC_SUPPLY_EXPANSION_OFFLINE_PASS",
+  "validation_reads": 0
+}
+

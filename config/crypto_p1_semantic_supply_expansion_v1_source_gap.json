@@ -1,0 +1,1213 @@
+{
+  "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+  "forward_reads": 0,
+  "holdout_reads": 0,
+  "observed_p1_program_count": 180,
+  "oos_reads": 0,
+  "promotion_reads": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "selected_parent_count": 24,
+  "selected_parent_programs": [
+    {
+      "attempts": 5882,
+      "behavior_family_count": 2819,
+      "campaign_count": 4,
+      "campaigns": [
+        "proposal_dispatch",
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 3276,
+      "evidence_score": 231.1045486380217,
+      "matched_density": 0.047432845970758246,
+      "matched_positive": 279,
+      "positive_reward": 2996,
+      "program_id": "TEMPORAL_PROGRAM_V1_24D6B15FE4E0F6E00EBD1093BB5DA31E",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_24D6B15FE4E0F6E00EBD1093BB5DA31E",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 2900,
+      "reward_max": 1.3780016045357275,
+      "reward_sum": -197.49418853342078,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 1
+    },
+    {
+      "attempts": 51,
+      "behavior_family_count": 51,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 6,
+      "evidence_score": 1.5052508773431887,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 3,
+      "program_id": "TEMPORAL_PROGRAM_V1_ECF58A8CDECD4F4E7EB0FFCD59B1D00B",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "FUNDING",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_ECF58A8CDECD4F4E7EB0FFCD59B1D00B",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "FLOW_IMBALANCE",
+        "schema_version": 1
+      },
+      "replicated": 1,
+      "reward_max": 1.3130105281182671,
+      "reward_sum": -15.044016028225315,
+      "structural_signature": [
+        "FUNDING",
+        "FLOW_IMBALANCE",
+        "Delta",
+        "Slope",
+        "Residual"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 52,
+      "behavior_family_count": 51,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 9,
+      "evidence_score": 1.5260593651533665,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 2,
+      "program_id": "TEMPORAL_PROGRAM_V1_06AE18F359ED38AD029160BC9DC91674",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_06AE18F359ED38AD029160BC9DC91674",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1
+      },
+      "replicated": 0,
+      "reward_max": 0.3127123818403984,
+      "reward_sum": -35.74513351093835,
+      "structural_signature": [
+        "CROSS_VENUE_OI_BUNDLE",
+        "PRICE_RESPONSE",
+        "MultiScaleRelation",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 222,
+      "behavior_family_count": 199,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 61,
+      "evidence_score": 12.242036071430512,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 43,
+      "program_id": "TEMPORAL_PROGRAM_V1_04F23E520AE2A68CB2380E2ECC9ACCC2",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_04F23E520AE2A68CB2380E2ECC9ACCC2",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 12,
+      "reward_max": 0.15222935225786893,
+      "reward_sum": -54.50434208989363,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 10
+    },
+    {
+      "attempts": 65,
+      "behavior_family_count": 65,
+      "campaign_count": 4,
+      "campaigns": [
+        "proposal_dispatch",
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 7,
+      "evidence_score": 2.699207455553907,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 3,
+      "program_id": "TEMPORAL_PROGRAM_V1_2B91180D24B19A9F399445F1CAC402C0",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_LEVEL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_2B91180D24B19A9F399445F1CAC402C0",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 3,
+      "reward_max": 0.14048946664688367,
+      "reward_sum": -21.588355662366677,
+      "structural_signature": [
+        "OI_LEVEL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 1
+    },
+    {
+      "attempts": 193,
+      "behavior_family_count": 185,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 62,
+      "evidence_score": 11.699057020677964,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 45,
+      "program_id": "TEMPORAL_PROGRAM_V1_39F1AF9459177315C1F40D6AB8A0E7A0",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_39F1AF9459177315C1F40D6AB8A0E7A0",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 6,
+      "reward_max": 0.2784943891481027,
+      "reward_sum": -41.96287872636423,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 9
+    },
+    {
+      "attempts": 277,
+      "behavior_family_count": 214,
+      "campaign_count": 4,
+      "campaigns": [
+        "proposal_dispatch",
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 77,
+      "evidence_score": 11.28168377567378,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 55,
+      "program_id": "TEMPORAL_PROGRAM_V1_A44876E815C7450952BB8C473C8BBDB9",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_A44876E815C7450952BB8C473C8BBDB9",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 6,
+      "reward_max": 0.5146391138687739,
+      "reward_sum": -41.72144364964958,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 8
+    },
+    {
+      "attempts": 192,
+      "behavior_family_count": 108,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 37,
+      "evidence_score": 9.623339458269761,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 19,
+      "program_id": "TEMPORAL_PROGRAM_V1_1A9D7368C00CBCF2C986DD2E6C0BF171",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_1A9D7368C00CBCF2C986DD2E6C0BF171",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 19,
+      "reward_max": 0.09490304164463133,
+      "reward_sum": -30.921729114425002,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "Residual"
+      ],
+      "targeted_basin_count": 3
+    },
+    {
+      "attempts": 233,
+      "behavior_family_count": 175,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 37,
+      "evidence_score": 9.557718766055036,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 17,
+      "program_id": "TEMPORAL_PROGRAM_V1_6E2821F3438C773959E7B5688FA82FF1",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_6E2821F3438C773959E7B5688FA82FF1",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 18,
+      "reward_max": 0.1422451899453519,
+      "reward_sum": -49.299396933948614,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Delta",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 7
+    },
+    {
+      "attempts": 205,
+      "behavior_family_count": 160,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 57,
+      "evidence_score": 9.425573675263974,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 33,
+      "program_id": "TEMPORAL_PROGRAM_V1_67690C3D8C3C889707FCDA4177C4521F",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_67690C3D8C3C889707FCDA4177C4521F",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 3,
+      "reward_max": 0.20367730115766752,
+      "reward_sum": -26.298689795107343,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Slope",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 7
+    },
+    {
+      "attempts": 221,
+      "behavior_family_count": 159,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 26,
+      "evidence_score": 8.468635977344869,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 19,
+      "program_id": "TEMPORAL_PROGRAM_V1_53390744BE09C36739819426AA6409AE",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_53390744BE09C36739819426AA6409AE",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 14,
+      "reward_max": 0.1453246352236702,
+      "reward_sum": -41.668432697747974,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Slope",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 9
+    },
+    {
+      "attempts": 266,
+      "behavior_family_count": 172,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 38,
+      "evidence_score": 8.393312787762886,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 19,
+      "program_id": "TEMPORAL_PROGRAM_V1_F11B8E8212DD0F7F01AA47A765FE92A1",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_F11B8E8212DD0F7F01AA47A765FE92A1",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 13,
+      "reward_max": 0.14078888353875713,
+      "reward_sum": -51.81357100987693,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Delta",
+        "Residual"
+      ],
+      "targeted_basin_count": 8
+    },
+    {
+      "attempts": 91,
+      "behavior_family_count": 91,
+      "campaign_count": 3,
+      "campaigns": [
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 19,
+      "evidence_score": 7.517472300155274,
+      "matched_density": 0.01098901098901099,
+      "matched_positive": 1,
+      "positive_reward": 12,
+      "program_id": "TEMPORAL_PROGRAM_V1_5950F11F544C11581B88CD175D123E72",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_5950F11F544C11581B88CD175D123E72",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 12,
+      "reward_max": 0.7096676018632935,
+      "reward_sum": -26.423284194432632,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "Residual"
+      ],
+      "targeted_basin_count": 1
+    },
+    {
+      "attempts": 179,
+      "behavior_family_count": 98,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 29,
+      "evidence_score": 6.980820450190111,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 15,
+      "program_id": "TEMPORAL_PROGRAM_V1_630DEC2CBAB11BE9A0B5E9E7094E362D",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_630DEC2CBAB11BE9A0B5E9E7094E362D",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 6,
+      "reward_max": 0.14701223403697186,
+      "reward_sum": -26.450981004951725,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Slope",
+        "Residual"
+      ],
+      "targeted_basin_count": 6
+    },
+    {
+      "attempts": 215,
+      "behavior_family_count": 144,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 18,
+      "evidence_score": 6.284095981145614,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 8,
+      "program_id": "TEMPORAL_PROGRAM_V1_9FB4B836DC0CDAF26222A6F6C4149C36",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_9FB4B836DC0CDAF26222A6F6C4149C36",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 9,
+      "reward_max": 0.14293458835489103,
+      "reward_sum": -40.470209976450064,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Slope",
+        "Residual"
+      ],
+      "targeted_basin_count": 8
+    },
+    {
+      "attempts": 63,
+      "behavior_family_count": 63,
+      "campaign_count": 3,
+      "campaigns": [
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 17,
+      "evidence_score": 6.2565722996040956,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 13,
+      "program_id": "TEMPORAL_PROGRAM_V1_3AD0AA693F28B91A4C7947C9DFEB78A8",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "NormalizedDifference",
+        "program_id": "TEMPORAL_PROGRAM_V1_3AD0AA693F28B91A4C7947C9DFEB78A8",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 12,
+      "reward_max": 0.32886759524914416,
+      "reward_sum": -20.51032154332458,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Slope",
+        "NormalizedDifference"
+      ],
+      "targeted_basin_count": 1
+    },
+    {
+      "attempts": 204,
+      "behavior_family_count": 184,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 21,
+      "evidence_score": 6.016374940848512,
+      "matched_density": 0.004901960784313725,
+      "matched_positive": 1,
+      "positive_reward": 16,
+      "program_id": "TEMPORAL_PROGRAM_V1_E3EE85121707205B54916268782D5266",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_E3EE85121707205B54916268782D5266",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 6,
+      "reward_max": 0.43102207869674053,
+      "reward_sum": -40.37072885081305,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 4
+    },
+    {
+      "attempts": 295,
+      "behavior_family_count": 259,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 18,
+      "evidence_score": 5.49596835994682,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 5,
+      "program_id": "TEMPORAL_PROGRAM_V1_25B0F02A87EBA41627A8D8EA7A342AC3",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "OI_NOTIONAL",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_25B0F02A87EBA41627A8D8EA7A342AC3",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 6,
+      "reward_max": 0.14635651333835675,
+      "reward_sum": -65.44878466204986,
+      "structural_signature": [
+        "OI_NOTIONAL",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Delta",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 11
+    },
+    {
+      "attempts": 69,
+      "behavior_family_count": 69,
+      "campaign_count": 3,
+      "campaigns": [
+        "r3",
+        "realization_v2",
+        "representation_successor"
+      ],
+      "dual_positive": 12,
+      "evidence_score": 4.484033806454478,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 6,
+      "program_id": "TEMPORAL_PROGRAM_V1_C653AD1A2DF879DFB23C73FC627B9B41",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_C653AD1A2DF879DFB23C73FC627B9B41",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 8,
+      "reward_max": 0.3084056774537257,
+      "reward_sum": -24.094930581396213,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 1
+    },
+    {
+      "attempts": 52,
+      "behavior_family_count": 51,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 13,
+      "evidence_score": 3.0903260165993522,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 5,
+      "program_id": "TEMPORAL_PROGRAM_V1_260FAB6B01E81FDD58EDEFD099D6CFE3",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_260FAB6B01E81FDD58EDEFD099D6CFE3",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1
+      },
+      "replicated": 4,
+      "reward_max": 0.3339121991922286,
+      "reward_sum": -25.44371322188611,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "PRICE_RESPONSE",
+        "MultiScaleRelation",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 41,
+      "behavior_family_count": 41,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 9,
+      "evidence_score": 2.5634154705884957,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 4,
+      "program_id": "TEMPORAL_PROGRAM_V1_A5EE6EAD8DF9AF68596A33B81F947DFA",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "FUNDING",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_A5EE6EAD8DF9AF68596A33B81F947DFA",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "PRICE_RESPONSE",
+        "schema_version": 1
+      },
+      "replicated": 4,
+      "reward_max": 0.2609856470619514,
+      "reward_sum": -18.039966007223665,
+      "structural_signature": [
+        "FUNDING",
+        "PRICE_RESPONSE",
+        "MultiScaleRelation",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 69,
+      "behavior_family_count": 69,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 12,
+      "evidence_score": 2.534115709996017,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 7,
+      "program_id": "TEMPORAL_PROGRAM_V1_6AF37F6F0B946EC9315E5DDDB616E3F9",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "CROSS_VENUE_OI_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_6AF37F6F0B946EC9315E5DDDB616E3F9",
+        "right_components": [
+          "Delta"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 2,
+      "reward_max": 0.6593885199522013,
+      "reward_sum": -31.839648189560943,
+      "structural_signature": [
+        "CROSS_VENUE_OI_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Delta",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 63,
+      "behavior_family_count": 63,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 12,
+      "evidence_score": 2.515417167018332,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 7,
+      "program_id": "TEMPORAL_PROGRAM_V1_05373D16830497678A73E66822AA4252",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "MultiScaleRelation"
+        ],
+        "left_role": "BASIS_BUNDLE",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "Residual",
+        "program_id": "TEMPORAL_PROGRAM_V1_05373D16830497678A73E66822AA4252",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 2,
+      "reward_max": 0.4350060042199824,
+      "reward_sum": -23.96466899005954,
+      "structural_signature": [
+        "BASIS_BUNDLE",
+        "TRADE_INTENSITY",
+        "MultiScaleRelation",
+        "Slope",
+        "Residual"
+      ],
+      "targeted_basin_count": 0
+    },
+    {
+      "attempts": 54,
+      "behavior_family_count": 54,
+      "campaign_count": 2,
+      "campaigns": [
+        "r3",
+        "realization_v2"
+      ],
+      "dual_positive": 10,
+      "evidence_score": 2.4430628363275386,
+      "matched_density": 0.0,
+      "matched_positive": 0,
+      "positive_reward": 4,
+      "program_id": "TEMPORAL_PROGRAM_V1_0ABB7721A3AB1760067754BC0E4F5E8F",
+      "program_spec": {
+        "axis_labels": [
+          "position_state_change",
+          "observed_response"
+        ],
+        "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+        "hypothesis": "A slow positioning state changes first; a contemporaneously observable flow or price response then predicts the next 4h return.",
+        "inner_operator": null,
+        "left_components": [
+          "Delta"
+        ],
+        "left_role": "FUNDING",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "outer_mode": null,
+        "outer_operator": "RatioInteraction",
+        "program_id": "TEMPORAL_PROGRAM_V1_0ABB7721A3AB1760067754BC0E4F5E8F",
+        "right_components": [
+          "Slope"
+        ],
+        "right_role": "TRADE_INTENSITY",
+        "schema_version": 1
+      },
+      "replicated": 3,
+      "reward_max": 0.3167540359304617,
+      "reward_sum": -16.38659965821747,
+      "structural_signature": [
+        "FUNDING",
+        "TRADE_INTENSITY",
+        "Delta",
+        "Slope",
+        "RatioInteraction"
+      ],
+      "targeted_basin_count": 0
+    }
+  ],
+  "selection_rule": "EVIDENCE_FIRST_GREEDY_STRUCTURAL_COVERAGE_24",
+  "source_campaigns": [
+    {
+      "bytes": 247452329,
+      "campaign_id": "r3",
+      "path": "C:\\HermesWorker\\workspace\\crypto_temporal_targeted_p1_p4_deepening_20260813r3\\runtime\\crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3\\candidate_ledger.parquet",
+      "rows": 30000,
+      "sha256": "AEFF2A76691A905EE166E47DD787A8E8C1BB0B762A0F5302A19A0D279183C16C"
+    },
+    {
+      "bytes": 88591943,
+      "campaign_id": "realization_v2",
+      "path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_search_core_realization_v2_20260814r1\\candidate_ledger.parquet",
+      "rows": 10000,
+      "sha256": "8E7571F7F47F460C02103450274EC5EE51F69C7197E153A154A35429F54548DC"
+    },
+    {
+      "bytes": 89422147,
+      "campaign_id": "representation_successor",
+      "path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\TEMPORAL_REPRESENTATION_SUCCESSOR\\candidate_ledger.parquet",
+      "rows": 10000,
+      "sha256": "7242A6E65EDFB1485C15699A4E67FAFA62495507C8CED5BC5237AD0780C734FE"
+    },
+    {
+      "bytes": 195686873,
+      "campaign_id": "proposal_dispatch",
+      "path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_proposal_dispatch_successor_v1_20260815r1\\candidate_ledger.parquet",
+      "rows": 20000,
+      "sha256": "0C99652E0CDEBA23F665694469E3C25646E797436167E3BAB2ED4E55D5231A5C"
+    }
+  ],
+  "source_gap_sha256": "7800ED9E5BF4E8367E090E207CA0BD4D70D93961F9F34DD4AAB41206E3692682",
+  "source_partitions": [
+    "train"
+  ],
+  "status": "P1_TRAIN_ONLY_SEMANTIC_SOURCE_GAP_READY",
+  "unselected_program_count": 156,
+  "validation_reads": 0
+}
+
