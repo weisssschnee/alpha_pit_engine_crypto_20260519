@@ -1,4 +1,5 @@
 {
+  "accepted_p1_g2_semantic_count": 171,
   "active_program_families": [
     "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
     "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
@@ -14,7 +15,10 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_P1_SEMANTIC_SUPPLY_EXPANSION_V1_AUTHORIZATION",
-  "authorization_sha256": "014744841ACA8620165B4416D95C233395DD4596CC105CF0B7EFADD0A2887BCB",
+  "authorization_sha256": "F425572B945647109D012501ECFCC9CD09DC4D420B197F35033FC88E9058A57E",
+  "block_robust_v2_authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+  "block_robust_v2_contract_file_sha256": "0632EFEADFB87153F49CF21B8C779D929D0E9231EC7A45C2C35B5B5D69BA137D",
+  "block_robust_v2_contract_path": "config/crypto_p1_g2_block_robust_ordering_v2.json",
   "budget": {
     "checkpoint_size": 2000,
     "diagnostic_boundary": 10000,
@@ -23,16 +27,16 @@
     "workers": 8
   },
   "consumed": false,
-  "decision_id": "USER_20260816_P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+  "decision_id": "P1_G2_HIERARCHICAL_BLOCK_ROBUST_PROJECTION_REPAIR_AND_RESUME_V1_20260816",
   "execution_component_blob_oids": {
     "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
     "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
     "alphafactory_crypto/broad_search/expression.py": "f7b1f26002c3a2ded3a819309d4edd7a9fab5368",
-    "alphafactory_crypto/broad_search/pair18m.py": "b1c8457e6b5983e526b3544421ec3421e0c59088",
-    "alphafactory_crypto/broad_search/search_engine_v1.py": "2ec8169b713eb140d536812a7647e72c636dc5d0",
+    "alphafactory_crypto/broad_search/pair18m.py": "0a7f77ab0403f15fd7e9ed66e9029eb3214a0015",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "21c9db7d770613e7e1df7f556ef7103626b9fd7e",
     "alphafactory_crypto/broad_search/temporal_activation_v1.py": "f57bfaabd26dd8539477b6409fa5b291adb8d02b",
     "alphafactory_crypto/broad_search/temporal_development_expansion_v1.py": "c360b409191753c32b9faaaa3645cc4d736ba64d",
-    "alphafactory_crypto/broad_search/temporal_p1_semantic_expansion_search_v1.py": "fff35a637dde8b849dee3014f32e53d793287f38",
+    "alphafactory_crypto/broad_search/temporal_p1_semantic_expansion_search_v1.py": "f9d028d529a240f6e4e516ca5a8e099457ae0771",
     "alphafactory_crypto/broad_search/temporal_p1_semantic_expansion_v1.py": "de4aa8fb2fe5ddaf426ba0aa9826059be2117ad8",
     "alphafactory_crypto/broad_search/temporal_p1_semantic_proposal_v1.py": "880ec8976ef1a2ed350ab70f362334c1500f8b6b",
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "318e590f17ab83a8fcd91eddd400d9583dbb8cf1",
@@ -44,6 +48,7 @@
     "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py": "f880dc73f37203c9703c18db9ab19f5ade281544",
     "alphafactory_crypto/broad_search/temporal_successor_v1.py": "f34c74831d9f112d474c3f57206befd035c6d81b",
     "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "fbe8c9bb0cefe9bd0208cb7d90f97757da7600a8",
+    "config/crypto_p1_g2_block_robust_ordering_v2.json": "77386f94995de758ed1f73b8359d2a0a10bd6ebb",
     "config/crypto_p1_semantic_supply_expansion_v1_catalog.json": "ba07c98a52905518d5dc9773fb9047177d34176e",
     "config/crypto_p1_semantic_supply_expansion_v1_source_gap.json": "760c20e2e86b3ced08234a8a035b84d3aa9dd243",
     "config/crypto_search_engine_v1_4_binance_target_replay.json": "74133adb8f3ad8d715917ccd0e7866118aaf5a18",
@@ -52,9 +57,10 @@
     "config/crypto_temporal_mechanism_program_v1.json": "42f420a1bbde8067b1a10a976346979f5cc8d6d3",
     "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json": "df64d2bbb9b141f0543e05d67283966f488f9fce",
     "config/crypto_typed_mechanism_catalog_v2_1.json": "bb0d9a10ac3db2978ad97b766ac923bb73241095",
+    "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/control_incompatibility_closure.json": "c3039d2c312034ee134838bcac23856308634901",
     "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json": "28d00166356232739a74d6b6e11f7710e2607ab2",
-    "scripts/analyze_crypto_p1_semantic_supply_expansion_v1.py": "b19979ff946a808fc5adb021ac960299e3f915e8",
-    "scripts/check_crypto_p1_semantic_supply_expansion_v1.py": "8fdb8e6473c6afb00e23e87bb326295e429c7a68",
+    "scripts/analyze_crypto_p1_semantic_supply_expansion_v1.py": "f97842f741116a107c9aa3707cd668fbabcee82f",
+    "scripts/check_crypto_p1_semantic_supply_expansion_v1.py": "ffb18c684fc08e149c87117dacd0e38d56590c0d",
     "scripts/run_crypto_p1_semantic_supply_expansion_v1.py": "187c1d76eb048c18d5decbc0e0db136b599e4910",
     "scripts/run_crypto_p1_semantic_supply_expansion_v1_pc2.ps1": "3371a7510880eb69ea89ac83e7fb1372390f1afc"
   },
@@ -79,7 +85,8 @@
   "historical_prior_file_sha256": "B3BB3F6D93E0274DB720DA3A65EDE2EAA4E443D84287694158CAE04E91188F4A",
   "historical_prior_path": "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json",
   "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
-  "implementation_source_sha": "de77d3de399dacdf41de4c0f1bca96348d3d902f",
+  "implementation_remote_sync_state": "SYNCHRONIZED",
+  "implementation_source_sha": "27817ca5016d3f013e438a530c73da4967cf9f5b",
   "lane_seeds": [
     4131986467,
     2529856071,
@@ -91,6 +98,7 @@
     "P1_G2": 0.7,
     "P4": 0.15
   },
+  "legacy_p1_g1_identity_count": 180,
   "market_input_identity": {
     "carrier": {
       "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
@@ -114,18 +122,21 @@
     "user": "desktop-a2h3a2g\\suri",
     "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
   },
+  "prior_incompatibility_evidence_file_sha256": "9340E153DE4CDDC8780DED386D9AE59D08C69C17ACF9AF413D025826B1EBA6D6",
+  "prior_incompatibility_evidence_path": "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/control_incompatibility_closure.json",
   "run_authorization": {
-    "decision_id": "USER_20260816_P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+    "decision_id": "P1_G2_HIERARCHICAL_BLOCK_ROBUST_PROJECTION_REPAIR_AND_RESUME_V1_20260816",
     "one_time": true,
     "scope": "P1_SEMANTIC_SUPPLY_EXPANSION_V1"
   },
   "run_authorized": true,
-  "runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_20260816r1",
+  "runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_block_robust_v2_20260816r2",
   "schema_version": 1,
   "search_policy": {
     "adaptive_basin_local_qd": true,
     "automatic_budget_expansion": false,
     "new_basin_discovery_allowed": true,
+    "optimizer_feedback": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
     "p1_g1_reference": true,
     "p1_g2_clear_majority": true,
     "p4_frozen_health_reference": true,
