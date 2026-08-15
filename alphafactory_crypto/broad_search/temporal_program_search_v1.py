@@ -1709,6 +1709,7 @@ def _observe_candidate(
         "receipt": proposal.get("receipt"),
         "policy_local_family_count_at_completion": local_counts[family_id],
         "block_robust_ordering": evaluation.get("block_robust_ordering"),
+        "matched_positive": bool(evaluation.get("matched_positive")),
     }
     if (
         isinstance(policy, engine.MechanismEvolutionV2)

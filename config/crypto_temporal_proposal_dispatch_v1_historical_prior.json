@@ -1,0 +1,1408 @@
+{
+  "calibration": {
+    "maximum_basin_share": 0.26666666666666666,
+    "severe_basin_concentration": false,
+    "strong_edit_matched_rate": 0.12193243094530648,
+    "strong_edit_ranked_above_weak": true,
+    "weak_edit_matched_rate": 0.0002554931016862545
+  },
+  "campaign_edit_statistics": {
+    "r3": {
+      "legacy_parameter": {
+        "attempts": 15159,
+        "basin_retained": 2439,
+        "matched_positive": 2439,
+        "new_hq_realization": 464,
+        "new_realization": 8629,
+        "positive_reward": 9643,
+        "reward_sum": 2180.328217535874
+      },
+      "operator": {
+        "attempts": 14841,
+        "basin_retained": 2,
+        "matched_positive": 2,
+        "new_hq_realization": 2,
+        "new_realization": 13880,
+        "positive_reward": 973,
+        "reward_sum": -7035.5679052281075
+      }
+    },
+    "realization_v2": {
+      "legacy_parameter": {
+        "attempts": 5831,
+        "basin_retained": 506,
+        "matched_positive": 1116,
+        "new_hq_realization": 67,
+        "new_realization": 4238,
+        "positive_reward": 2782,
+        "reward_sum": 301.45698168823856
+      },
+      "operator": {
+        "attempts": 4169,
+        "basin_retained": 0,
+        "matched_positive": 1,
+        "new_hq_realization": 0,
+        "new_realization": 4155,
+        "positive_reward": 170,
+        "reward_sum": -2197.7737947345518
+      }
+    },
+    "representation_legacy": {
+      "legacy_parameter": {
+        "attempts": 9715,
+        "basin_retained": 606,
+        "matched_positive": 1517,
+        "new_hq_realization": 61,
+        "new_realization": 7062,
+        "positive_reward": 4452,
+        "reward_sum": 275.93945429882535
+      },
+      "operator": {
+        "attempts": 285,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 247,
+        "positive_reward": 43,
+        "reward_sum": -91.85650643683029
+      }
+    },
+    "representation_successor": {
+      "binding": {
+        "attempts": 102,
+        "basin_retained": 28,
+        "matched_positive": 61,
+        "new_hq_realization": 6,
+        "new_realization": 11,
+        "positive_reward": 102,
+        "reward_sum": 47.02217738431444
+      },
+      "binding+normalization": {
+        "attempts": 38,
+        "basin_retained": 10,
+        "matched_positive": 18,
+        "new_hq_realization": 4,
+        "new_realization": 11,
+        "positive_reward": 38,
+        "reward_sum": 16.088284843336787
+      },
+      "binding+normalization+temporal_parameter": {
+        "attempts": 5,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 0,
+        "positive_reward": 5,
+        "reward_sum": 1.2771472193691458
+      },
+      "binding+temporal_parameter": {
+        "attempts": 55,
+        "basin_retained": 16,
+        "matched_positive": 35,
+        "new_hq_realization": 2,
+        "new_realization": 7,
+        "positive_reward": 55,
+        "reward_sum": 27.151349714604393
+      },
+      "component": {
+        "attempts": 29,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 24,
+        "positive_reward": 15,
+        "reward_sum": -4.42042734709176
+      },
+      "legacy_parameter_subblock": {
+        "attempts": 553,
+        "basin_retained": 192,
+        "matched_positive": 341,
+        "new_hq_realization": 14,
+        "new_realization": 92,
+        "positive_reward": 553,
+        "reward_sum": 282.163575546917
+      },
+      "normalization": {
+        "attempts": 152,
+        "basin_retained": 65,
+        "matched_positive": 104,
+        "new_hq_realization": 10,
+        "new_realization": 27,
+        "positive_reward": 151,
+        "reward_sum": 77.66154113177703
+      },
+      "normalization+temporal_parameter": {
+        "attempts": 42,
+        "basin_retained": 9,
+        "matched_positive": 17,
+        "new_hq_realization": 0,
+        "new_realization": 7,
+        "positive_reward": 42,
+        "reward_sum": 17.507151259285013
+      },
+      "operator": {
+        "attempts": 127,
+        "basin_retained": 0,
+        "matched_positive": 1,
+        "new_hq_realization": 0,
+        "new_realization": 70,
+        "positive_reward": 15,
+        "reward_sum": -26.10523908692781
+      },
+      "role": {
+        "attempts": 119,
+        "basin_retained": 0,
+        "matched_positive": 1,
+        "new_hq_realization": 0,
+        "new_realization": 96,
+        "positive_reward": 50,
+        "reward_sum": -12.66024104670912
+      },
+      "temporal_parameter": {
+        "attempts": 8778,
+        "basin_retained": 263,
+        "matched_positive": 908,
+        "new_hq_realization": 23,
+        "new_realization": 6776,
+        "positive_reward": 3575,
+        "reward_sum": -150.75452309501105
+      }
+    }
+  },
+  "campaign_separated": true,
+  "campaigns": [
+    {
+      "campaign_id": "r3",
+      "outcomes": {
+        "attempts": 30000,
+        "basin_retained": 2441,
+        "matched_positive": 2441,
+        "new_hq_realization": 466,
+        "new_realization": 22509,
+        "positive_reward": 10616,
+        "reward_sum": -4855.239687692234
+      },
+      "retained_candidate_count": 0,
+      "row_count": 30000,
+      "source": {
+        "checkpoint_state_path": "C:\\HermesWorker\\workspace\\crypto_temporal_targeted_p1_p4_deepening_20260813r3\\runtime\\crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3\\checkpoints\\checkpoint_014\\state.json",
+        "checkpoint_state_sha256": "E9CD1DFBA0A48FBD269D9E7C0F5949E55AB7710DB22C8E5AAFE7DDA13687D641",
+        "ledger_bytes": 247452329,
+        "ledger_path": "C:\\HermesWorker\\workspace\\crypto_temporal_targeted_p1_p4_deepening_20260813r3\\runtime\\crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3\\candidate_ledger.parquet",
+        "ledger_rows": 30000,
+        "ledger_sha256": "AEFF2A76691A905EE166E47DD787A8E8C1BB0B762A0F5302A19A0D279183C16C"
+      }
+    },
+    {
+      "campaign_id": "realization_v2",
+      "outcomes": {
+        "attempts": 10000,
+        "basin_retained": 506,
+        "matched_positive": 1117,
+        "new_hq_realization": 67,
+        "new_realization": 8393,
+        "positive_reward": 2952,
+        "reward_sum": -1896.3168130463132
+      },
+      "retained_candidate_count": 506,
+      "row_count": 10000,
+      "source": {
+        "checkpoint_state_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_search_core_realization_v2_20260814r1\\checkpoints\\checkpoint_004\\state.json",
+        "checkpoint_state_sha256": "69193F06BA5A36D7A5A17542083762988A7BC070EFD94F71DC7AB6875A410103",
+        "ledger_bytes": 88591943,
+        "ledger_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_search_core_realization_v2_20260814r1\\candidate_ledger.parquet",
+        "ledger_rows": 10000,
+        "ledger_sha256": "8E7571F7F47F460C02103450274EC5EE51F69C7197E153A154A35429F54548DC"
+      }
+    },
+    {
+      "campaign_id": "representation_legacy",
+      "outcomes": {
+        "attempts": 10000,
+        "basin_retained": 606,
+        "matched_positive": 1517,
+        "new_hq_realization": 61,
+        "new_realization": 7309,
+        "positive_reward": 4495,
+        "reward_sum": 184.08294786199508
+      },
+      "retained_candidate_count": 606,
+      "row_count": 10000,
+      "source": {
+        "checkpoint_state_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\LEGACY_REALIZATION_V2_CONTROL\\checkpoints\\checkpoint_004\\state.json",
+        "checkpoint_state_sha256": "50085E0787D54C8885CF17C788F8280D318D3A1BD7487ED98CA57C8D60588085",
+        "ledger_bytes": 89108692,
+        "ledger_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\LEGACY_REALIZATION_V2_CONTROL\\candidate_ledger.parquet",
+        "ledger_rows": 10000,
+        "ledger_sha256": "1E346A2DA86E117CE2DC3AE6B70F5A22CAB261E7F446DF358B1152971C145459"
+      }
+    },
+    {
+      "campaign_id": "representation_successor",
+      "outcomes": {
+        "attempts": 10000,
+        "basin_retained": 583,
+        "matched_positive": 1486,
+        "new_hq_realization": 59,
+        "new_realization": 7121,
+        "positive_reward": 4601,
+        "reward_sum": 274.9307965238641
+      },
+      "retained_candidate_count": 583,
+      "row_count": 10000,
+      "source": {
+        "checkpoint_state_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\TEMPORAL_REPRESENTATION_SUCCESSOR\\checkpoints\\checkpoint_004\\state.json",
+        "checkpoint_state_sha256": "8DA7C0279A05A83B007B6A1D6C14A93994E6B9A8EF3BE0F8E201FBC44959C932",
+        "ledger_bytes": 89422147,
+        "ledger_path": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814\\runtime\\crypto_temporal_representation_successor_v1_20260815r1\\arms\\TEMPORAL_REPRESENTATION_SUCCESSOR\\candidate_ledger.parquet",
+        "ledger_rows": 10000,
+        "ledger_sha256": "7242A6E65EDFB1485C15699A4E67FAFA62495507C8CED5BC5237AD0780C734FE"
+      }
+    }
+  ],
+  "forbidden_fields_verified": true,
+  "forward_reads": 0,
+  "global": {
+    "attempts": 60000,
+    "basin_retained": 4136,
+    "matched_positive": 6561,
+    "new_hq_realization": 653,
+    "new_realization": 45332,
+    "positive_reward": 22664,
+    "reward_sum": -6292.542756352659
+  },
+  "holdout_reads": 0,
+  "oos_reads": 0,
+  "prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "promotion_reads": 0,
+  "safe_fields": [
+    "candidate_id",
+    "field_families_json",
+    "mapped_weight_descriptor_id",
+    "matched_positive",
+    "mutation_target",
+    "operation",
+    "operation_receipt_json",
+    "operator_path",
+    "program_family_id",
+    "raw_fields_json",
+    "realized_operation",
+    "receipt_json",
+    "representation_tournament_arm",
+    "requested_operation",
+    "search_reward",
+    "selected_asset_overlap_id",
+    "semantic_edit_type",
+    "targeted_economic_basin_id",
+    "turnover_path_descriptor_id"
+  ],
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "TRAIN_ONLY_PROPOSAL_PRIOR_READY",
+  "tables": {
+    "basin": {
+      "ECO_090_001": {
+        "attempts": 1767,
+        "basin_retained": 108,
+        "matched_positive": 199,
+        "new_hq_realization": 23,
+        "new_realization": 1200,
+        "positive_reward": 830,
+        "reward_sum": 6.969779993670187
+      },
+      "ECO_090_003": {
+        "attempts": 1858,
+        "basin_retained": 226,
+        "matched_positive": 514,
+        "new_hq_realization": 24,
+        "new_realization": 1094,
+        "positive_reward": 1104,
+        "reward_sum": 238.62915434752227
+      },
+      "ECO_090_006": {
+        "attempts": 1878,
+        "basin_retained": 275,
+        "matched_positive": 618,
+        "new_hq_realization": 33,
+        "new_realization": 1051,
+        "positive_reward": 1185,
+        "reward_sum": 396.6462644281234
+      },
+      "ECO_090_007": {
+        "attempts": 1833,
+        "basin_retained": 178,
+        "matched_positive": 344,
+        "new_hq_realization": 31,
+        "new_realization": 1182,
+        "positive_reward": 908,
+        "reward_sum": 126.43902706485392
+      },
+      "ECO_090_009": {
+        "attempts": 1730,
+        "basin_retained": 149,
+        "matched_positive": 264,
+        "new_hq_realization": 23,
+        "new_realization": 1181,
+        "positive_reward": 858,
+        "reward_sum": 90.66351059738257
+      },
+      "ECO_090_010": {
+        "attempts": 1950,
+        "basin_retained": 245,
+        "matched_positive": 378,
+        "new_hq_realization": 41,
+        "new_realization": 1285,
+        "positive_reward": 965,
+        "reward_sum": 55.69328492162682
+      },
+      "ECO_090_011": {
+        "attempts": 1731,
+        "basin_retained": 135,
+        "matched_positive": 236,
+        "new_hq_realization": 26,
+        "new_realization": 1231,
+        "positive_reward": 824,
+        "reward_sum": 53.430067652131
+      },
+      "ECO_090_012": {
+        "attempts": 1900,
+        "basin_retained": 194,
+        "matched_positive": 316,
+        "new_hq_realization": 29,
+        "new_realization": 1284,
+        "positive_reward": 982,
+        "reward_sum": 159.79728892976414
+      },
+      "ECO_090_013": {
+        "attempts": 1826,
+        "basin_retained": 131,
+        "matched_positive": 261,
+        "new_hq_realization": 24,
+        "new_realization": 1253,
+        "positive_reward": 844,
+        "reward_sum": 29.299721351192495
+      },
+      "ECO_090_014": {
+        "attempts": 1825,
+        "basin_retained": 169,
+        "matched_positive": 287,
+        "new_hq_realization": 23,
+        "new_realization": 1262,
+        "positive_reward": 891,
+        "reward_sum": 87.25465172196377
+      },
+      "ECO_090_015": {
+        "attempts": 1771,
+        "basin_retained": 125,
+        "matched_positive": 237,
+        "new_hq_realization": 22,
+        "new_realization": 1238,
+        "positive_reward": 813,
+        "reward_sum": 26.30248275831911
+      },
+      "ECO_090_018": {
+        "attempts": 1750,
+        "basin_retained": 92,
+        "matched_positive": 166,
+        "new_hq_realization": 19,
+        "new_realization": 1158,
+        "positive_reward": 815,
+        "reward_sum": 3.3106087332893077
+      },
+      "ECO_090_019": {
+        "attempts": 1780,
+        "basin_retained": 105,
+        "matched_positive": 191,
+        "new_hq_realization": 16,
+        "new_realization": 1168,
+        "positive_reward": 903,
+        "reward_sum": 114.22881460798705
+      },
+      "ECO_090_021": {
+        "attempts": 1709,
+        "basin_retained": 165,
+        "matched_positive": 271,
+        "new_hq_realization": 24,
+        "new_realization": 1169,
+        "positive_reward": 842,
+        "reward_sum": 93.40128685979096
+      },
+      "ECO_090_022": {
+        "attempts": 1581,
+        "basin_retained": 103,
+        "matched_positive": 195,
+        "new_hq_realization": 22,
+        "new_realization": 1035,
+        "positive_reward": 839,
+        "reward_sum": 62.32832217980726
+      },
+      "ECO_090_023": {
+        "attempts": 1826,
+        "basin_retained": 151,
+        "matched_positive": 251,
+        "new_hq_realization": 27,
+        "new_realization": 1230,
+        "positive_reward": 922,
+        "reward_sum": 119.84133301018649
+      },
+      "ECO_090_024": {
+        "attempts": 4664,
+        "basin_retained": 677,
+        "matched_positive": 248,
+        "new_hq_realization": 67,
+        "new_realization": 3023,
+        "positive_reward": 2040,
+        "reward_sum": -406.3317874281338
+      },
+      "ECO_090_026": {
+        "attempts": 1836,
+        "basin_retained": 221,
+        "matched_positive": 366,
+        "new_hq_realization": 41,
+        "new_realization": 1280,
+        "positive_reward": 937,
+        "reward_sum": 143.9136966677844
+      },
+      "ECO_090_027": {
+        "attempts": 1871,
+        "basin_retained": 202,
+        "matched_positive": 347,
+        "new_hq_realization": 43,
+        "new_realization": 1367,
+        "positive_reward": 960,
+        "reward_sum": 120.61806211556052
+      },
+      "ECO_090_029": {
+        "attempts": 1744,
+        "basin_retained": 110,
+        "matched_positive": 197,
+        "new_hq_realization": 20,
+        "new_realization": 1186,
+        "positive_reward": 879,
+        "reward_sum": 67.49681361288266
+      },
+      "ECO_090_030": {
+        "attempts": 1667,
+        "basin_retained": 98,
+        "matched_positive": 179,
+        "new_hq_realization": 18,
+        "new_realization": 1127,
+        "positive_reward": 773,
+        "reward_sum": 71.84232435429338
+      },
+      "ECO_090_033": {
+        "attempts": 1817,
+        "basin_retained": 170,
+        "matched_positive": 291,
+        "new_hq_realization": 36,
+        "new_realization": 1292,
+        "positive_reward": 933,
+        "reward_sum": 118.66875991936442
+      },
+      "ECO_090_036": {
+        "attempts": 1686,
+        "basin_retained": 106,
+        "matched_positive": 203,
+        "new_hq_realization": 20,
+        "new_realization": 1078,
+        "positive_reward": 868,
+        "reward_sum": -11.606662867714354
+      },
+      "UNKNOWN": {
+        "attempts": 16000,
+        "basin_retained": 1,
+        "matched_positive": 2,
+        "new_hq_realization": 1,
+        "new_realization": 15958,
+        "positive_reward": 749,
+        "reward_sum": -8061.3795618843415
+      }
+    },
+    "construction_route": {
+      "DIMENSION_AWARE_PARAMETER_MUTATION": {
+        "attempts": 47768,
+        "basin_retained": 2523,
+        "matched_positive": 3439,
+        "new_hq_realization": 469,
+        "new_realization": 37858,
+        "positive_reward": 15839,
+        "reward_sum": -7749.099248743091
+      },
+      "LEGACY_PARAMETER_RECOMBINATION": {
+        "attempts": 2232,
+        "basin_retained": 1030,
+        "matched_positive": 1636,
+        "new_hq_realization": 125,
+        "new_realization": 353,
+        "positive_reward": 2224,
+        "reward_sum": 1181.6256958666008
+      },
+      "REPRESENTATION_SUCCESSOR_RECOMBINATION": {
+        "attempts": 10000,
+        "basin_retained": 583,
+        "matched_positive": 1486,
+        "new_hq_realization": 59,
+        "new_realization": 7121,
+        "positive_reward": 4601,
+        "reward_sum": 274.93079652386257
+      }
+    },
+    "edit_type": {
+      "binding": {
+        "attempts": 102,
+        "basin_retained": 28,
+        "matched_positive": 61,
+        "new_hq_realization": 6,
+        "new_realization": 11,
+        "positive_reward": 102,
+        "reward_sum": 47.02217738431444
+      },
+      "binding+normalization": {
+        "attempts": 38,
+        "basin_retained": 10,
+        "matched_positive": 18,
+        "new_hq_realization": 4,
+        "new_realization": 11,
+        "positive_reward": 38,
+        "reward_sum": 16.088284843336787
+      },
+      "binding+normalization+temporal_parameter": {
+        "attempts": 5,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 0,
+        "positive_reward": 5,
+        "reward_sum": 1.2771472193691458
+      },
+      "binding+temporal_parameter": {
+        "attempts": 55,
+        "basin_retained": 16,
+        "matched_positive": 35,
+        "new_hq_realization": 2,
+        "new_realization": 7,
+        "positive_reward": 55,
+        "reward_sum": 27.151349714604393
+      },
+      "component": {
+        "attempts": 29,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 24,
+        "positive_reward": 15,
+        "reward_sum": -4.42042734709176
+      },
+      "legacy_parameter": {
+        "attempts": 30705,
+        "basin_retained": 3551,
+        "matched_positive": 5072,
+        "new_hq_realization": 592,
+        "new_realization": 19929,
+        "positive_reward": 16877,
+        "reward_sum": 2757.724653522927
+      },
+      "legacy_parameter_subblock": {
+        "attempts": 553,
+        "basin_retained": 192,
+        "matched_positive": 341,
+        "new_hq_realization": 14,
+        "new_realization": 92,
+        "positive_reward": 553,
+        "reward_sum": 282.163575546917
+      },
+      "normalization": {
+        "attempts": 152,
+        "basin_retained": 65,
+        "matched_positive": 104,
+        "new_hq_realization": 10,
+        "new_realization": 27,
+        "positive_reward": 151,
+        "reward_sum": 77.66154113177703
+      },
+      "normalization+temporal_parameter": {
+        "attempts": 42,
+        "basin_retained": 9,
+        "matched_positive": 17,
+        "new_hq_realization": 0,
+        "new_realization": 7,
+        "positive_reward": 42,
+        "reward_sum": 17.507151259285013
+      },
+      "operator": {
+        "attempts": 19422,
+        "basin_retained": 2,
+        "matched_positive": 4,
+        "new_hq_realization": 2,
+        "new_realization": 18352,
+        "positive_reward": 1201,
+        "reward_sum": -9351.303445486428
+      },
+      "role": {
+        "attempts": 119,
+        "basin_retained": 0,
+        "matched_positive": 1,
+        "new_hq_realization": 0,
+        "new_realization": 96,
+        "positive_reward": 50,
+        "reward_sum": -12.66024104670912
+      },
+      "temporal_parameter": {
+        "attempts": 8778,
+        "basin_retained": 263,
+        "matched_positive": 908,
+        "new_hq_realization": 23,
+        "new_realization": 6776,
+        "positive_reward": 3575,
+        "reward_sum": -150.75452309501105
+      }
+    },
+    "family": {
+      "P1_POSITION_STATE_CHANGE_TO_RESPONSE": {
+        "attempts": 16075,
+        "basin_retained": 679,
+        "matched_positive": 250,
+        "new_hq_realization": 69,
+        "new_realization": 13552,
+        "positive_reward": 2570,
+        "reward_sum": -4912.009173977155
+      },
+      "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": {
+        "attempts": 43925,
+        "basin_retained": 3457,
+        "matched_positive": 6311,
+        "new_hq_realization": 584,
+        "new_realization": 31780,
+        "positive_reward": 20094,
+        "reward_sum": -1380.533582375543
+      }
+    },
+    "field_signature": {
+      "funding+other": {
+        "attempts": 561,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 560,
+        "positive_reward": 34,
+        "reward_sum": -244.11716754155668
+      },
+      "funding+price_return": {
+        "attempts": 936,
+        "basin_retained": 1,
+        "matched_positive": 1,
+        "new_hq_realization": 1,
+        "new_realization": 933,
+        "positive_reward": 67,
+        "reward_sum": -439.7209172693142
+      },
+      "funding+quote_volume_activity": {
+        "attempts": 1182,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1181,
+        "positive_reward": 78,
+        "reward_sum": -551.6546496504169
+      },
+      "open_interest_level_change+open_interest_level_change+other": {
+        "attempts": 694,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 688,
+        "positive_reward": 23,
+        "reward_sum": -414.10409733458874
+      },
+      "open_interest_level_change+open_interest_level_change+price_return": {
+        "attempts": 1026,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1023,
+        "positive_reward": 25,
+        "reward_sum": -619.9245781604308
+      },
+      "open_interest_level_change+open_interest_level_change+quote_volume_activity": {
+        "attempts": 1322,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1319,
+        "positive_reward": 20,
+        "reward_sum": -854.358852229056
+      },
+      "open_interest_level_change+other": {
+        "attempts": 721,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 719,
+        "positive_reward": 60,
+        "reward_sum": -303.7672766429257
+      },
+      "open_interest_level_change+price_return": {
+        "attempts": 1171,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1169,
+        "positive_reward": 79,
+        "reward_sum": -516.9249106541228
+      },
+      "open_interest_level_change+quote_volume_activity": {
+        "attempts": 1543,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1543,
+        "positive_reward": 81,
+        "reward_sum": -749.4734496740566
+      },
+      "open_interest_value+other": {
+        "attempts": 34522,
+        "basin_retained": 3458,
+        "matched_positive": 6312,
+        "new_hq_realization": 585,
+        "new_realization": 21541,
+        "positive_reward": 19819,
+        "reward_sum": 3257.524607045231
+      },
+      "open_interest_value+price_return": {
+        "attempts": 1335,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1335,
+        "positive_reward": 70,
+        "reward_sum": -555.3787172014604
+      },
+      "open_interest_value+quote_volume_activity": {
+        "attempts": 7325,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 7318,
+        "positive_reward": 154,
+        "reward_sum": -2215.505171928133
+      },
+      "other+price_level+price_level": {
+        "attempts": 4605,
+        "basin_retained": 677,
+        "matched_positive": 248,
+        "new_hq_realization": 67,
+        "new_realization": 3028,
+        "positive_reward": 2074,
+        "reward_sum": -443.01816542352265
+      },
+      "price_level+price_level+price_return": {
+        "attempts": 989,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 984,
+        "positive_reward": 35,
+        "reward_sum": -559.8128811274503
+      },
+      "price_level+price_level+quote_volume_activity": {
+        "attempts": 2068,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 1991,
+        "positive_reward": 45,
+        "reward_sum": -1082.3065285608484
+      }
+    },
+    "mutation_target": {
+      "asset_selection": {
+        "attempts": 1849,
+        "basin_retained": 16,
+        "matched_positive": 229,
+        "new_hq_realization": 5,
+        "new_realization": 1449,
+        "positive_reward": 867,
+        "reward_sum": 72.1844780460489
+      },
+      "generic": {
+        "attempts": 41849,
+        "basin_retained": 3794,
+        "matched_positive": 5175,
+        "new_hq_realization": 624,
+        "new_realization": 30265,
+        "positive_reward": 16565,
+        "reward_sum": -5052.684875825423
+      },
+      "mapped_weight": {
+        "attempts": 7325,
+        "basin_retained": 131,
+        "matched_positive": 603,
+        "new_hq_realization": 12,
+        "new_realization": 5717,
+        "positive_reward": 3867,
+        "reward_sum": 372.5023778120059
+      },
+      "raw_field": {
+        "attempts": 1501,
+        "basin_retained": 8,
+        "matched_positive": 85,
+        "new_hq_realization": 0,
+        "new_realization": 1235,
+        "positive_reward": 400,
+        "reward_sum": -160.6629091626061
+      },
+      "turnover": {
+        "attempts": 7476,
+        "basin_retained": 187,
+        "matched_positive": 469,
+        "new_hq_realization": 12,
+        "new_realization": 6666,
+        "positive_reward": 965,
+        "reward_sum": -1523.8818272227015
+      }
+    },
+    "operator_path": {
+      "ConditionGate(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 327,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 327,
+        "positive_reward": 13,
+        "reward_sum": -238.50732654463812
+      },
+      "ConditionGate(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 376,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 366,
+        "positive_reward": 14,
+        "reward_sum": -307.6016273918379
+      },
+      "ConditionGate(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 283,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 272,
+        "positive_reward": 15,
+        "reward_sum": -248.974705523362
+      },
+      "ConditionGate(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 674,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 668,
+        "positive_reward": 22,
+        "reward_sum": -470.421723916699
+      },
+      "ConditionGate(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 667,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 660,
+        "positive_reward": 34,
+        "reward_sum": -470.85104578319306
+      },
+      "ConditionGate(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 585,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 582,
+        "positive_reward": 25,
+        "reward_sum": -492.92232480590656
+      },
+      "ConditionGate(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 552,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 543,
+        "positive_reward": 51,
+        "reward_sum": -307.76071501533875
+      },
+      "ConditionGate(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 835,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 788,
+        "positive_reward": 96,
+        "reward_sum": -578.049170681466
+      },
+      "ConditionGate(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 773,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 711,
+        "positive_reward": 74,
+        "reward_sum": -608.9501104615714
+      },
+      "ConditionGate(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 544,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 543,
+        "positive_reward": 61,
+        "reward_sum": -250.4000110647675
+      },
+      "ConditionGate(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 544,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 544,
+        "positive_reward": 71,
+        "reward_sum": -282.29461951657913
+      },
+      "ConditionGate(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 421,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 417,
+        "positive_reward": 57,
+        "reward_sum": -215.1712297233459
+      },
+      "NormalizedDifference(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 199,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 199,
+        "positive_reward": 7,
+        "reward_sum": -82.97337951664568
+      },
+      "NormalizedDifference(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 244,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 227,
+        "positive_reward": 11,
+        "reward_sum": -90.56160866928818
+      },
+      "NormalizedDifference(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 239,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 215,
+        "positive_reward": 12,
+        "reward_sum": -80.20729232993278
+      },
+      "NormalizedDifference(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 3109,
+        "basin_retained": 370,
+        "matched_positive": 125,
+        "new_hq_realization": 29,
+        "new_realization": 2094,
+        "positive_reward": 1167,
+        "reward_sum": -458.00402535492333
+      },
+      "NormalizedDifference(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 1870,
+        "basin_retained": 307,
+        "matched_positive": 122,
+        "new_hq_realization": 38,
+        "new_realization": 1400,
+        "positive_reward": 715,
+        "reward_sum": -312.71500979765074
+      },
+      "NormalizedDifference(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 808,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 658,
+        "positive_reward": 161,
+        "reward_sum": -261.7843057305233
+      },
+      "NormalizedDifference(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 252,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 236,
+        "positive_reward": 13,
+        "reward_sum": -82.71418968919842
+      },
+      "NormalizedDifference(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 399,
+        "basin_retained": 1,
+        "matched_positive": 1,
+        "new_hq_realization": 1,
+        "new_realization": 321,
+        "positive_reward": 35,
+        "reward_sum": -97.65834373944452
+      },
+      "NormalizedDifference(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 547,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 347,
+        "positive_reward": 73,
+        "reward_sum": -125.89875747041715
+      },
+      "NormalizedDifference(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 186,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 186,
+        "positive_reward": 4,
+        "reward_sum": -74.05843902515716
+      },
+      "NormalizedDifference(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 184,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 183,
+        "positive_reward": 8,
+        "reward_sum": -64.20376750059395
+      },
+      "NormalizedDifference(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 287,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 268,
+        "positive_reward": 19,
+        "reward_sum": -91.97374656219637
+      },
+      "RatioInteraction(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 179,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 179,
+        "positive_reward": 5,
+        "reward_sum": -81.85901711953693
+      },
+      "RatioInteraction(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 273,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 271,
+        "positive_reward": 18,
+        "reward_sum": -94.7012767162582
+      },
+      "RatioInteraction(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 292,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 289,
+        "positive_reward": 16,
+        "reward_sum": -108.39648381502009
+      },
+      "RatioInteraction(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 439,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 438,
+        "positive_reward": 9,
+        "reward_sum": -223.3320198730728
+      },
+      "RatioInteraction(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 432,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 431,
+        "positive_reward": 9,
+        "reward_sum": -232.1891008053407
+      },
+      "RatioInteraction(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 471,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 471,
+        "positive_reward": 8,
+        "reward_sum": -256.7404495760945
+      },
+      "RatioInteraction(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 252,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 251,
+        "positive_reward": 13,
+        "reward_sum": -88.09180047363299
+      },
+      "RatioInteraction(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 405,
+        "basin_retained": 1,
+        "matched_positive": 1,
+        "new_hq_realization": 1,
+        "new_realization": 401,
+        "positive_reward": 36,
+        "reward_sum": -114.90093407308677
+      },
+      "RatioInteraction(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 501,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 481,
+        "positive_reward": 60,
+        "reward_sum": -141.38992212187213
+      },
+      "RatioInteraction(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 195,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 195,
+        "positive_reward": 4,
+        "reward_sum": -89.8493224752061
+      },
+      "RatioInteraction(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 194,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 194,
+        "positive_reward": 10,
+        "reward_sum": -76.79357995403676
+      },
+      "RatioInteraction(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 225,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 222,
+        "positive_reward": 2,
+        "reward_sum": -90.05656377329616
+      },
+      "Residual(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 203,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 203,
+        "positive_reward": 3,
+        "reward_sum": -85.13737332051603
+      },
+      "Residual(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 237,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 219,
+        "positive_reward": 5,
+        "reward_sum": -82.75222821237467
+      },
+      "Residual(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 263,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 214,
+        "positive_reward": 9,
+        "reward_sum": -85.2822165940151
+      },
+      "Residual(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 519,
+        "basin_retained": 0,
+        "matched_positive": 1,
+        "new_hq_realization": 0,
+        "new_realization": 507,
+        "positive_reward": 21,
+        "reward_sum": -270.3737469146048
+      },
+      "Residual(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 444,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 442,
+        "positive_reward": 11,
+        "reward_sum": -236.48164779253347
+      },
+      "Residual(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 447,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 443,
+        "positive_reward": 14,
+        "reward_sum": -230.56479468608353
+      },
+      "Residual(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 215,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 181,
+        "positive_reward": 4,
+        "reward_sum": -75.79265258101489
+      },
+      "Residual(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 382,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 262,
+        "positive_reward": 26,
+        "reward_sum": -97.63581589059379
+      },
+      "Residual(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 502,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 261,
+        "positive_reward": 43,
+        "reward_sum": -107.8635208253819
+      },
+      "Residual(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 194,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 193,
+        "positive_reward": 3,
+        "reward_sum": -73.22929531255677
+      },
+      "Residual(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 236,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 233,
+        "positive_reward": 7,
+        "reward_sum": -76.32117887545292
+      },
+      "Residual(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 251,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 237,
+        "positive_reward": 9,
+        "reward_sum": -69.52136680956518
+      },
+      "StateModulation(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 655,
+        "basin_retained": 67,
+        "matched_positive": 112,
+        "new_hq_realization": 5,
+        "new_realization": 430,
+        "positive_reward": 333,
+        "reward_sum": 21.810695765883988
+      },
+      "StateModulation(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 3512,
+        "basin_retained": 294,
+        "matched_positive": 493,
+        "new_hq_realization": 46,
+        "new_realization": 2444,
+        "positive_reward": 1744,
+        "reward_sum": 197.49300771825978
+      },
+      "StateModulation(CanonicalPrimitive(HistoricalPercentile(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 4137,
+        "basin_retained": 359,
+        "matched_positive": 650,
+        "new_hq_realization": 63,
+        "new_realization": 2671,
+        "positive_reward": 2460,
+        "reward_sum": 506.0323103124616
+      },
+      "StateModulation(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 87,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 87,
+        "positive_reward": 10,
+        "reward_sum": -22.843770894726934
+      },
+      "StateModulation(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 86,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 86,
+        "positive_reward": 7,
+        "reward_sum": -20.1334795560563
+      },
+      "StateModulation(CanonicalPrimitive(NormalizedDifference(Raw,Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 66,
+        "basin_retained": 0,
+        "matched_positive": 0,
+        "new_hq_realization": 0,
+        "new_realization": 66,
+        "positive_reward": 9,
+        "reward_sum": -14.167657348488131
+      },
+      "StateModulation(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 3293,
+        "basin_retained": 362,
+        "matched_positive": 623,
+        "new_hq_realization": 49,
+        "new_realization": 2290,
+        "positive_reward": 1476,
+        "reward_sum": 97.77185105869687
+      },
+      "StateModulation(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 9713,
+        "basin_retained": 995,
+        "matched_positive": 1807,
+        "new_hq_realization": 153,
+        "new_realization": 6780,
+        "positive_reward": 4566,
+        "reward_sum": 613.190955555975
+      },
+      "StateModulation(CanonicalPrimitive(RollingZScore(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 10134,
+        "basin_retained": 960,
+        "matched_positive": 1686,
+        "new_hq_realization": 218,
+        "new_realization": 7074,
+        "positive_reward": 5212,
+        "reward_sum": 830.8411068507555
+      },
+      "StateModulation(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(HistoricalPercentile(Raw)))": {
+        "attempts": 553,
+        "basin_retained": 33,
+        "matched_positive": 49,
+        "new_hq_realization": 0,
+        "new_realization": 382,
+        "positive_reward": 293,
+        "reward_sum": 16.374002263909276
+      },
+      "StateModulation(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(RollingZScore(Raw)))": {
+        "attempts": 2010,
+        "basin_retained": 144,
+        "matched_positive": 284,
+        "new_hq_realization": 15,
+        "new_realization": 1240,
+        "positive_reward": 1314,
+        "reward_sum": 276.0197525951024
+      },
+      "StateModulation(CanonicalPrimitive(VolatilityScale(Raw)),CanonicalPrimitive(VolatilityScale(Raw)))": {
+        "attempts": 3098,
+        "basin_retained": 243,
+        "matched_positive": 607,
+        "new_hq_realization": 35,
+        "new_realization": 1809,
+        "positive_reward": 2137,
+        "reward_sum": 588.9822537313865
+      }
+    }
+  },
+  "validation_reads": 0
+}

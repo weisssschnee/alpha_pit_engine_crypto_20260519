@@ -831,6 +831,16 @@ def _receipt(
     return {**core, "receipt_sha256": _payload_sha(core)}
 
 
+def representation_successor_receipt(
+    *,
+    operation: str,
+    parents: Sequence[CandidateSpec],
+    child: CandidateSpec,
+    details: Mapping[str, Any],
+) -> dict[str, Any]:
+    return _receipt(operation=operation, parents=parents, child=child, details=details)
+
+
 def verify_successor_receipt(
     registry: Any,
     parents: Sequence[CandidateSpec],
@@ -1391,6 +1401,7 @@ __all__ = [
     "offline_closure_benchmark",
     "propose_representation_successor",
     "representation_successor_children",
+    "representation_successor_receipt",
     "semantic_block_children",
     "semantic_block_mutation",
     "semantic_mechanism_donor_mutation",

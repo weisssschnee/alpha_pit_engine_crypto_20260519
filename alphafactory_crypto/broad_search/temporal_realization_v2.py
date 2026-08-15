@@ -661,13 +661,13 @@ def select_mutation_groups(
     return selected
 
 
-def constructive_crossover(
+def constructive_crossover_children(
     policy: engine.MechanismEvolutionV2,
     first: engine.CandidateSpec,
     second: engine.CandidateSpec,
-) -> tuple[engine.CandidateSpec | None, dict[str, Any]]:
+) -> tuple[dict[str, tuple[list[int], engine.CandidateSpec]], dict[str, Any]]:
     if not policy._compatible(policy._spec(first), policy._spec(second)):
-        return None, {
+        return {}, {
             "enumerated_splice_count": 0,
             "legal_splice_count": 0,
             "duplicate_splice_count": 0,
@@ -710,6 +710,16 @@ def constructive_crossover(
         "internal_generation_attempts": 1,
         "compile_valid_attempts": len(ordered),
     }
+    return {candidate_id: legal[candidate_id] for candidate_id in ordered}, details
+
+
+def constructive_crossover(
+    policy: engine.MechanismEvolutionV2,
+    first: engine.CandidateSpec,
+    second: engine.CandidateSpec,
+) -> tuple[engine.CandidateSpec | None, dict[str, Any]]:
+    legal, details = constructive_crossover_children(policy, first, second)
+    ordered = sorted(legal)
     if not ordered:
         return None, details
     candidate_id = ordered[policy.rng.randrange(len(ordered))]
@@ -857,6 +867,10 @@ def observe_realization_v2(
         state["admission_counts"] = dict(counts)
         return
     behavior = dict(archive_row)
+    parent_depths = [
+        int((_dynamic_record(policy, candidate_id) or {}).get("lineage_depth") or 0)
+        for candidate_id in receipt.get("parent_ids", ())
+    ]
     record = {
         "candidate": candidate.to_dict(),
         "candidate_id": candidate.candidate_id,
@@ -866,6 +880,8 @@ def observe_realization_v2(
         "behavior_family_id": str(behavior["behavior_family_id"]),
         "family_count": int(behavior.get("policy_local_family_count_at_completion", 1)),
         "search_reward": float(behavior["search_reward"]),
+        "matched_positive": bool(behavior.get("matched_positive")),
+        "lineage_depth": 1 + max(parent_depths, default=0),
         "block_robust_ordering": dict(behavior.get("block_robust_ordering") or {}),
         "mapped_weight_descriptor_id": behavior.get("mapped_weight_descriptor_id"),
         "turnover_path_descriptor_id": behavior.get("turnover_path_descriptor_id"),
@@ -1073,6 +1089,7 @@ __all__ = [
     "checkpoint_decision",
     "configure_policy_realization_v2",
     "constructive_crossover",
+    "constructive_crossover_children",
     "economic_fingerprint_from_evaluation",
     "mutation_target",
     "next_targeted_basin",
