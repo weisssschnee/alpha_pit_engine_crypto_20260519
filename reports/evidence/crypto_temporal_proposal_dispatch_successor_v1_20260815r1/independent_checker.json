@@ -1,0 +1,33 @@
+{
+  "attempts": 255334,
+  "automatic_next_run_started": false,
+  "checker_sha256": "5135B8C9B506A307A4D85FB22826BAD83BC932AA13D6E50F0548764253B79029",
+  "checkpoint_count": 10,
+  "dispatch_counters": {
+    "dispatches": 25106,
+    "exploitation_selected": 21293,
+    "exploration_selected": 3813,
+    "legal_generated": 230205,
+    "legal_scored": 230205,
+    "pool_under_eight": 6804
+  },
+  "dispatched_rejections": 5106,
+  "errors": [],
+  "forbidden_reads": {
+    "forward_reads": 0,
+    "holdout_reads": 0,
+    "oos_reads": 0,
+    "promotion_reads": 0,
+    "sealed_reads": 0,
+    "validation_reads": 0
+  },
+  "frozen_contract_sha256": "303A32A685F30D628A81D893F32C991FB2DCE0D49D82372738F64A17CB718948",
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "program_family_counts": {
+    "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 2923,
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 17077
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "strict": 20000
+}

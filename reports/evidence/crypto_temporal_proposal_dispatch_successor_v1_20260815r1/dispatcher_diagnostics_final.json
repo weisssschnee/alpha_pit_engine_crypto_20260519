@@ -1,0 +1,218 @@
+{
+  "average_pool_size": 9.169322074404525,
+  "diagnostics_sha256": "267BBA748441C5040AA100D6BD21720F14B3450891429C64E9329A1A6ED94DA5",
+  "dispatch_counters": {
+    "dispatches": 25106,
+    "exploitation_selected": 21293,
+    "exploration_selected": 3813,
+    "legal_generated": 230205,
+    "legal_scored": 230205,
+    "pool_under_eight": 6804
+  },
+  "dispatcher_id": "TEMPORAL_PROPOSAL_DISPATCHER_V1",
+  "edit_generated": {
+    "binding": 425,
+    "binding+normalization": 551,
+    "binding+normalization+temporal_parameter": 197,
+    "binding+temporal_parameter": 375,
+    "generic": 115972,
+    "legacy_parameter": 7026,
+    "legacy_parameter_subblock": 5145,
+    "normalization": 547,
+    "normalization+temporal_parameter": 528,
+    "role": 98706,
+    "temporal_parameter": 733
+  },
+  "edit_selected": {
+    "binding": 158,
+    "binding+normalization": 73,
+    "binding+normalization+temporal_parameter": 15,
+    "binding+temporal_parameter": 176,
+    "generic": 20776,
+    "legacy_parameter": 1502,
+    "legacy_parameter_subblock": 517,
+    "normalization": 314,
+    "normalization+temporal_parameter": 59,
+    "role": 1326,
+    "temporal_parameter": 190
+  },
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "median_pool_size": 9,
+  "oos_reads": 0,
+  "policy_state_hashes": {
+    "DISPATCH|2353706625": "09B369F6ED8825C0537357082A14BEF6034F4B504C6F1BC6B62885804536626C",
+    "DISPATCH|3464155279": "203ADC270755302C296954CCE7B216C54A48CF850B89C432E5E99431F3C2CCFF",
+    "DISPATCH|3708754422": "233A1D6C520331919C06818E56F5B2C94A3C3204FD8CFB59AACD42E5A397222F",
+    "DISPATCH|4221635565": "0E02F84690634BEA7D2FF6E87EDAAF2766867E2BA009B35B305B89E0E105B097"
+  },
+  "pool_size_counts": {
+    "1": 113,
+    "10": 4319,
+    "11": 3310,
+    "12": 1496,
+    "13": 550,
+    "14": 385,
+    "15": 337,
+    "16": 308,
+    "17": 237,
+    "18": 201,
+    "19": 118,
+    "2": 414,
+    "20": 106,
+    "21": 90,
+    "22": 92,
+    "23": 62,
+    "24": 23,
+    "3": 755,
+    "4": 1022,
+    "5": 1172,
+    "6": 1455,
+    "7": 1873,
+    "8": 2778,
+    "9": 3890
+  },
+  "schema_version": 1,
+  "score_decile_outcomes": {
+    "0": {
+      "attempts": 11874,
+      "basin_retained": 742,
+      "matched_positive": 1467,
+      "new_hq_realization": 260,
+      "new_realization": 530,
+      "positive_reward": 6472,
+      "reward_sum": 888.2577170659124
+    },
+    "1": {
+      "attempts": 4000,
+      "basin_retained": 148,
+      "matched_positive": 457,
+      "new_hq_realization": 54,
+      "new_realization": 114,
+      "positive_reward": 2116,
+      "reward_sum": 252.82325365655362
+    },
+    "2": {
+      "attempts": 1778,
+      "basin_retained": 63,
+      "matched_positive": 229,
+      "new_hq_realization": 25,
+      "new_realization": 45,
+      "positive_reward": 947,
+      "reward_sum": 137.06967506944716
+    },
+    "3": {
+      "attempts": 794,
+      "basin_retained": 24,
+      "matched_positive": 99,
+      "new_hq_realization": 8,
+      "new_realization": 14,
+      "positive_reward": 410,
+      "reward_sum": 31.145723309118967
+    },
+    "4": {
+      "attempts": 518,
+      "basin_retained": 12,
+      "matched_positive": 61,
+      "new_hq_realization": 6,
+      "new_realization": 7,
+      "positive_reward": 284,
+      "reward_sum": 28.81045227697617
+    },
+    "5": {
+      "attempts": 510,
+      "basin_retained": 6,
+      "matched_positive": 41,
+      "new_hq_realization": 1,
+      "new_realization": 2,
+      "positive_reward": 230,
+      "reward_sum": -10.38562671877445
+    },
+    "6": {
+      "attempts": 283,
+      "basin_retained": 3,
+      "matched_positive": 18,
+      "new_hq_realization": 2,
+      "new_realization": 2,
+      "positive_reward": 88,
+      "reward_sum": -31.00396034291422
+    },
+    "7": {
+      "attempts": 157,
+      "basin_retained": 0,
+      "matched_positive": 2,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 24,
+      "reward_sum": -38.910252861246185
+    },
+    "8": {
+      "attempts": 71,
+      "basin_retained": 0,
+      "matched_positive": 1,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 11,
+      "reward_sum": -14.175404242438683
+    },
+    "9": {
+      "attempts": 15,
+      "basin_retained": 0,
+      "matched_positive": 1,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 4,
+      "reward_sum": -2.2182392883262274
+    }
+  },
+  "sealed_reads": 0,
+  "selected_rank_counts": {
+    "1": 13086,
+    "10": 89,
+    "11": 43,
+    "12": 32,
+    "13": 13,
+    "14": 17,
+    "15": 3,
+    "16": 1,
+    "17": 4,
+    "18": 2,
+    "19": 2,
+    "2": 6168,
+    "21": 1,
+    "23": 1,
+    "3": 2605,
+    "4": 1091,
+    "5": 738,
+    "6": 501,
+    "7": 313,
+    "8": 236,
+    "9": 160
+  },
+  "source_generated": {
+    "DIMENSION_AWARE_PARAMETER_MUTATION": 115972,
+    "LEGACY_PARAMETER_RECOMBINATION": 7026,
+    "REPRESENTATION_SUCCESSOR_RECOMBINATION": 9208,
+    "SEMANTIC_DONOR_MUTATION": 97999
+  },
+  "source_selected": {
+    "DIMENSION_AWARE_PARAMETER_MUTATION": 20776,
+    "LEGACY_PARAMETER_RECOMBINATION": 1502,
+    "REPRESENTATION_SUCCESSOR_RECOMBINATION": 1506,
+    "SEMANTIC_DONOR_MUTATION": 1322
+  },
+  "target_generated": {
+    "asset_selection": 6819,
+    "generic": 182652,
+    "mapped_weight": 27398,
+    "raw_field": 4911,
+    "turnover": 8425
+  },
+  "target_selected": {
+    "asset_selection": 1851,
+    "generic": 13680,
+    "mapped_weight": 6346,
+    "raw_field": 1421,
+    "turnover": 1808
+  },
+  "validation_reads": 0
+}

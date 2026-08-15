@@ -1,0 +1,24 @@
+{
+  "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "cache_root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+  "carrier_manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+  "carrier_manifest_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6",
+  "directory_bundle": {
+    "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+    "bytes": 598775942,
+    "file_count": 122
+  },
+  "market_arrays_read": 0,
+  "sealed_reads": 0,
+  "target_cache": {
+    "directory_bundle": {
+      "bundle_sha256": "1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3",
+      "bytes": 10170182,
+      "file_count": 3
+    },
+    "economic_receipt_path": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+    "economic_receipt_sha256": "A85E83412F274F4AC0117193F79BC9FF6E2FB332581B203BCC695F906CD204F4",
+    "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+    "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1"
+  }
+}

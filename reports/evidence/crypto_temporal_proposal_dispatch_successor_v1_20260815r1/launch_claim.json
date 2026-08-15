@@ -1,0 +1,15 @@
+{
+  "authorization_sha256": "88FC399D0A7BC5639B26F954A5361B96CCAC0FF6CA044EF4D6C0DFD1BB82FB48",
+  "candidate_evaluations_at_claim": 0,
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "market_preflight_sha256": "7151917C860F9462918520EB2F57462550215A04D6D1D2980865002A59A7B31E",
+  "oos_reads": 0,
+  "parent_pool_sha256": "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49",
+  "runtime_id": "crypto_temporal_proposal_dispatch_successor_v1_20260815r1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "c927c0f658a93ef005ce76bd365380ef4e3715a3",
+  "status": "ONE_TIME_PROPOSAL_DISPATCH_SEARCH_LAUNCHED",
+  "strict_at_claim": 0,
+  "validation_reads": 0
+}

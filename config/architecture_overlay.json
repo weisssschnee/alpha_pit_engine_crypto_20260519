@@ -2221,6 +2221,51 @@
                                        ]
                   },
                   {
+                      "id":  "crypto_temporal_proposal_dispatch_successor_v1",
+                      "label":  "Temporal Proposal Dispatch Successor V1 train-only search",
+                      "kind":  "development_experiment",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "paths":  [
+                                    "alphafactory_crypto/broad_search/temporal_proposal_dispatch_v1.py",
+                                    "config/crypto_temporal_proposal_dispatch_successor_v1_authorization.json",
+                                    "reports/CRYPTO_TEMPORAL_PROPOSAL_DISPATCH_SUCCESSOR_V1_20260815R1.md",
+                                    "reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/final_analysis.json",
+                                    "reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/independent_checker.json"
+                                ],
+                      "critical":  false,
+                      "semantic_role":  "experimental_temporal_proposal_dispatch_successor",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "contracts":  [
+                                        {
+                                            "id":  "temporal_proposal_dispatch_train_only_boundary",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "The sole 20k P1/P4 proposal-dispatch runtime is train-only development evidence; validation, OOS, holdout, forward, promotion, sealed reads, semantic-basis expansion and automatic follow-up remain forbidden.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "proposal dispatch authorization, frozen runtime contract and independent checker",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/final_analysis.json"
+                                        }
+                                    ],
+                      "validation":  {
+                                         "level":  "RUNTIME_VERIFIED",
+                                         "result":  "PASS",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/final_analysis.json",
+                                         "evidence_sha256":  "A01EE03F8B3A0A6D79E112BF5DA3BFC9C0B0D2EBCCDA9DD696F13482CAD26579",
+                                         "verified_at_sha":  "e9f8522f26a3dca0e5fa4e2c6058214d9cacba41"
+                                     },
+                      "claim_badges":  [
+                                           "EXPERIMENTAL CANDIDATE",
+                                           "20K TRAIN-ONLY COMPLETE",
+                                           "P1 SEMANTIC SUPPLY BOTTLENECK",
+                                           "INDEPENDENT CHECKER PASS",
+                                           "NO VALIDATION OOS OR FORWARD",
+                                           "NO PROMOTION",
+                                           "NO AUTOMATIC FOLLOW-UP"
+                                       ]
+                  },
+                  {
                       "id":  "sealed_research_boundaries",
                       "label":  "Forward / Challenge / Promotion boundaries",
                       "kind":  "boundary",
@@ -3117,6 +3162,28 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
                       "evidence_type":  "STATIC"
+                  },
+                  {
+                      "id":  "temporal_proposal_dispatch_derived_from_representation_successor",
+                      "source":  "crypto_temporal_proposal_dispatch_successor_v1",
+                      "target":  "crypto_temporal_representation_successor_v1",
+                      "relation":  "derived_from",
+                      "relation_class":  "derived_from",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "RUNTIME"
+                  },
+                  {
+                      "id":  "temporal_proposal_dispatch_candidate_for_search_policy",
+                      "source":  "crypto_temporal_proposal_dispatch_successor_v1",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "candidate_for",
+                      "relation_class":  "candidate_for",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "RUNTIME"
                   }
               ],
     "profile_refs":  [

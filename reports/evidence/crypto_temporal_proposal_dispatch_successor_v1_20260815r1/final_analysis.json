@@ -1,0 +1,390 @@
+{
+  "NEXT_DECISION": "P1_SEMANTIC_SUPPLY_BOTTLENECK",
+  "automatic_next_run_started": false,
+  "canonical_checker": {
+    "attempts": 255334,
+    "automatic_next_run_started": false,
+    "checker_sha256": "5135B8C9B506A307A4D85FB22826BAD83BC932AA13D6E50F0548764253B79029",
+    "checkpoint_count": 10,
+    "dispatch_counters": {
+      "dispatches": 25106,
+      "exploitation_selected": 21293,
+      "exploration_selected": 3813,
+      "legal_generated": 230205,
+      "legal_scored": 230205,
+      "pool_under_eight": 6804
+    },
+    "dispatched_rejections": 5106,
+    "errors": [],
+    "forbidden_reads": {
+      "forward_reads": 0,
+      "holdout_reads": 0,
+      "oos_reads": 0,
+      "promotion_reads": 0,
+      "sealed_reads": 0,
+      "validation_reads": 0
+    },
+    "frozen_contract_sha256": "303A32A685F30D628A81D893F32C991FB2DCE0D49D82372738F64A17CB718948",
+    "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+    "program_family_counts": {
+      "P1_POSITION_STATE_CHANGE_TO_RESPONSE": 2923,
+      "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 17077
+    },
+    "schema_version": 1,
+    "status": "PASS",
+    "strict": 20000
+  },
+  "decision_rationale": [
+    "Canonical checker PASS with 20,000 strict, P1/P4 only, and zero forbidden reads.",
+    "The dispatcher retained abundant legal supply without collapse: 230,205 legal proposals, median pool 9, and 15.19% bounded exploration.",
+    "P4 converted productively at 2,270 matched-positive of 17,077 strict and deepened 15 high-quality basins, while P1 produced only 106 of 2,923 and deepened one basin.",
+    "Overall matched density was 11.88% with 16 high-quality basins deepened and 121 new high-quality concrete realizations, but it did not exceed the 14.86-15.17% historical Representation tournament densities on reused development data.",
+    "The evidence localizes the remaining supply bottleneck to P1 rather than global semantic exhaustion or search-policy collapse."
+  ],
+  "dispatch": {
+    "average_pool_size": 9.2821,
+    "exploitation_percent": 85.68,
+    "exploration_percent": 14.32,
+    "legal_candidates_generated": 185642,
+    "legal_candidates_scored": 185642,
+    "median_pool_size": 9.0,
+    "pool_under_eight": 6804,
+    "score_distribution": {
+      "maximum": 0.6267649847549638,
+      "mean": 0.2700568762835467,
+      "median": 0.2614546973097237,
+      "minimum": 0.06041589358777216
+    },
+    "selected_rank_distribution": {
+      "1": 13086,
+      "10": 89,
+      "11": 43,
+      "12": 32,
+      "13": 13,
+      "14": 17,
+      "15": 3,
+      "16": 1,
+      "17": 4,
+      "18": 2,
+      "19": 2,
+      "2": 6168,
+      "21": 1,
+      "23": 1,
+      "3": 2605,
+      "4": 1091,
+      "5": 738,
+      "6": 501,
+      "7": 313,
+      "8": 236,
+      "9": 160
+    },
+    "source_generated": {
+      "DIMENSION_AWARE_PARAMETER_MUTATION": 115972,
+      "LEGACY_PARAMETER_RECOMBINATION": 7026,
+      "REPRESENTATION_SUCCESSOR_RECOMBINATION": 9208,
+      "SEMANTIC_DONOR_MUTATION": 97999
+    },
+    "source_selected": {
+      "DIMENSION_AWARE_PARAMETER_MUTATION": 20776,
+      "LEGACY_PARAMETER_RECOMBINATION": 1502,
+      "REPRESENTATION_SUCCESSOR_RECOMBINATION": 1506,
+      "SEMANTIC_DONOR_MUTATION": 1322
+    },
+    "strict_selected": 20000
+  },
+  "edit_attribution": {
+    "binding": {
+      "basin_retained": 39,
+      "generated": 425,
+      "matched_positive": 36,
+      "new_HQ_realization": 13,
+      "new_realization": 30,
+      "selected": 128,
+      "strict": 128
+    },
+    "binding+normalization": {
+      "basin_retained": 9,
+      "generated": 551,
+      "matched_positive": 11,
+      "new_HQ_realization": 0,
+      "new_realization": 6,
+      "selected": 51,
+      "strict": 51
+    },
+    "binding+normalization+temporal_parameter": {
+      "basin_retained": 0,
+      "generated": 197,
+      "matched_positive": 0,
+      "new_HQ_realization": 0,
+      "new_realization": 0,
+      "selected": 6,
+      "strict": 6
+    },
+    "binding+temporal_parameter": {
+      "basin_retained": 35,
+      "generated": 375,
+      "matched_positive": 35,
+      "new_HQ_realization": 15,
+      "new_realization": 31,
+      "selected": 122,
+      "strict": 122
+    },
+    "generic": {
+      "basin_retained": 189,
+      "generated": 115972,
+      "matched_positive": 1193,
+      "new_HQ_realization": 85,
+      "new_realization": 134,
+      "selected": 16617,
+      "strict": 16617
+    },
+    "legacy_parameter": {
+      "basin_retained": 487,
+      "generated": 7026,
+      "matched_positive": 736,
+      "new_HQ_realization": 161,
+      "new_realization": 341,
+      "selected": 1437,
+      "strict": 1437
+    },
+    "legacy_parameter_subblock": {
+      "basin_retained": 112,
+      "generated": 5145,
+      "matched_positive": 196,
+      "new_HQ_realization": 23,
+      "new_realization": 79,
+      "selected": 474,
+      "strict": 474
+    },
+    "normalization": {
+      "basin_retained": 81,
+      "generated": 547,
+      "matched_positive": 99,
+      "new_HQ_realization": 37,
+      "new_realization": 62,
+      "selected": 230,
+      "strict": 230
+    },
+    "normalization+temporal_parameter": {
+      "basin_retained": 13,
+      "generated": 528,
+      "matched_positive": 13,
+      "new_HQ_realization": 5,
+      "new_realization": 10,
+      "selected": 43,
+      "strict": 43
+    },
+    "role": {
+      "basin_retained": 0,
+      "generated": 98706,
+      "matched_positive": 8,
+      "new_HQ_realization": 0,
+      "new_realization": 0,
+      "selected": 753,
+      "strict": 753
+    },
+    "temporal_parameter": {
+      "basin_retained": 33,
+      "generated": 733,
+      "matched_positive": 49,
+      "new_HQ_realization": 17,
+      "new_realization": 21,
+      "selected": 139,
+      "strict": 139
+    }
+  },
+  "final_analysis_sha256": "6DFEC85ADA418723A6250EDD7A8DE4681A6784A59514D222F2A9236826E4CBA6",
+  "forward_reads": 0,
+  "historical_calibration": {
+    "maximum_basin_share": 0.26666666666666666,
+    "severe_basin_concentration": false,
+    "strong_edit_matched_rate": 0.12193243094530648,
+    "strong_edit_ranked_above_weak": true,
+    "weak_edit_matched_rate": 0.0002554931016862545
+  },
+  "holdout_reads": 0,
+  "mutation_target_attribution": {
+    "asset_selection": {
+      "attempts": 6819,
+      "basin_retained": 7,
+      "descriptor_change": 1490,
+      "generated": 6819,
+      "matched_positive": 113,
+      "new_HQ_realization": 6,
+      "new_realization": 6,
+      "selected": 1490,
+      "strict": 1490
+    },
+    "generic": {
+      "attempts": 182652,
+      "basin_retained": 949,
+      "descriptor_change": 0,
+      "generated": 182652,
+      "matched_positive": 1927,
+      "new_HQ_realization": 335,
+      "new_realization": 679,
+      "selected": 10611,
+      "strict": 10611
+    },
+    "mapped_weight": {
+      "attempts": 27398,
+      "basin_retained": 24,
+      "descriptor_change": 5307,
+      "generated": 27398,
+      "matched_positive": 249,
+      "new_HQ_realization": 6,
+      "new_realization": 17,
+      "selected": 5307,
+      "strict": 5307
+    },
+    "raw_field": {
+      "attempts": 4911,
+      "basin_retained": 2,
+      "descriptor_change": 1134,
+      "generated": 4911,
+      "matched_positive": 29,
+      "new_HQ_realization": 2,
+      "new_realization": 2,
+      "selected": 1134,
+      "strict": 1134
+    },
+    "turnover": {
+      "attempts": 8425,
+      "basin_retained": 16,
+      "descriptor_change": 1458,
+      "generated": 8425,
+      "matched_positive": 58,
+      "new_HQ_realization": 7,
+      "new_realization": 10,
+      "selected": 1458,
+      "strict": 1458
+    }
+  },
+  "oos_reads": 0,
+  "promotion_reads": 0,
+  "proposal_prior_quality": {
+    "bottom": {
+      "basin_retention_rate": 0.017,
+      "matched_density": 0.11,
+      "new_HQ_realization_rate": 0.0065,
+      "new_realization_rate": 0.0075,
+      "score_mean": 0.17995682560710552,
+      "strict": 2000
+    },
+    "middle": {
+      "basin_retention_rate": 0.00975,
+      "matched_density": 0.06475,
+      "new_HQ_realization_rate": 0.004,
+      "new_realization_rate": 0.007,
+      "score_mean": 0.2606435241233081,
+      "strict": 4000
+    },
+    "top": {
+      "basin_retention_rate": 0.3055,
+      "matched_density": 0.385,
+      "new_HQ_realization_rate": 0.112,
+      "new_realization_rate": 0.235,
+      "score_mean": 0.41069680180897056,
+      "strict": 2000
+    }
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_efficiency": {
+    "comparison_is_descriptive_reused_development_data": true,
+    "current": {
+      "matched_positive_per_1k": 118.8,
+      "new_HQ_per_1k": 6.05,
+      "new_economic_clusters_090_per_1k": 0.45,
+      "new_realization_per_1k": 35.7
+    },
+    "historical_train_only_campaigns": {
+      "r3": {
+        "matched_positive_per_1k": 81.36666666666666,
+        "new_HQ_per_1k": 15.533333333333333,
+        "new_realization_per_1k": 750.3,
+        "strict": 30000
+      },
+      "realization_v2": {
+        "matched_positive_per_1k": 111.7,
+        "new_HQ_per_1k": 6.7,
+        "new_realization_per_1k": 839.3,
+        "strict": 10000
+      },
+      "representation_legacy": {
+        "matched_positive_per_1k": 151.7,
+        "new_HQ_per_1k": 6.1,
+        "new_realization_per_1k": 730.9,
+        "strict": 10000
+      },
+      "representation_successor": {
+        "matched_positive_per_1k": 148.6,
+        "new_HQ_per_1k": 5.9,
+        "new_realization_per_1k": 712.1,
+        "strict": 10000
+      }
+    }
+  },
+  "search_result": {
+    "HQ_basins_deepened": 16,
+    "P1_P4": {
+      "P1_POSITION_STATE_CHANGE_TO_RESPONSE": {
+        "concrete_realization_count": 26,
+        "dual_positive_count": 1753,
+        "dual_positive_density": 0.5997263085870681,
+        "economic_cluster_count_0_90": 4,
+        "high_quality_basins_deepened": 1,
+        "mapped_weight_realizations_ge_2": 0,
+        "matched_positive_count": 106,
+        "proposal_count": 2923,
+        "replicated_count": 1600,
+        "replication_density": 0.5473828258638386,
+        "turnover_realizations_ge_2": 0
+      },
+      "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": {
+        "concrete_realization_count": 283,
+        "dual_positive_count": 9206,
+        "dual_positive_density": 0.5390876617672893,
+        "economic_cluster_count_0_90": 51,
+        "high_quality_basins_deepened": 15,
+        "mapped_weight_realizations_ge_2": 12,
+        "matched_positive_count": 2270,
+        "proposal_count": 17077,
+        "replicated_count": 6323,
+        "replication_density": 0.3702640979094689,
+        "turnover_realizations_ge_2": 0
+      }
+    },
+    "P2_strict": 0,
+    "P3_strict": 0,
+    "attempts": 255334,
+    "depth_increments": {
+      "asset_selection_realizations_ge_2": 7,
+      "mapped_weight_realizations_ge_2": 2,
+      "mapped_weight_realizations_ge_3": 3,
+      "raw_field_realizations_ge_2": 5,
+      "turnover_realizations_ge_2": 0
+    },
+    "economic_clusters": {
+      "0.85": {
+        "count": 44,
+        "new": 6
+      },
+      "0.90": {
+        "count": 58,
+        "new": 9
+      },
+      "0.95": {
+        "count": 84,
+        "new": 23
+      }
+    },
+    "matched_density": 0.1188,
+    "matched_positive": 2376,
+    "new_HQ_realizations": 121,
+    "strict": 20000,
+    "wide_realizations": 309
+  },
+  "status": "FINAL_ANALYSIS_COMPLETE",
+  "validation_reads": 0
+}

@@ -2025,3 +2025,34 @@ market continuation `NOT_RUN`. It performed zero market-array reads, zero
 candidate evaluations and zero sealed reads. Validation, OOS, holdout, forward,
 promotion and automatic expansion remain forbidden. This phase is source and
 synthetic verification only; it creates no market or Alpha evidence.
+
+## Completed phase: Proposal Dispatch Successor V1 train-only search
+
+`SEARCH_CORE_PROPOSAL_DISPATCH_SUCCESSOR_V1` integrated bounded legal-pool
+generation, historical train-only economic priors, basin/QD novelty, controlled
+exploration, Legacy plus Representation Successor recombination and online
+train-only conversion memory. Implementation commit
+`7936825b061a3fef69de55bf6e42486b7664b3bf` and pure authorization commit
+`c927c0f658a93ef005ce76bd365380ef4e3715a3` produced the sole runtime
+`crypto_temporal_proposal_dispatch_successor_v1_20260815r1`.
+
+The runtime stopped normally at its 20,000 strict hard cap after 255,334 raw
+attempts. It produced 2,376 matched-positive rows, 58 real economic clusters at
+0.90 similarity including 9 new clusters, deepened 16 of 23 target HQ basins
+and produced 121 new unique HQ concrete realizations. P1/P4 strict counts were
+2,923/17,077; P2/P3 were zero. All validation, OOS, holdout, forward, promotion
+and sealed reads were zero, and no automatic follow-up was started.
+
+The independent checker is `PASS`. It reconciles 25,106 dispatcher selections
+as 20,000 strict rows plus 5,106 paired-control pre-strict rejections and binds
+the completed runtime to its immutable authorization snapshot, launch commit
+and execution-component Git objects. Checker-only repairs changed no frozen
+execution component or economic row.
+
+The final development-only decision is `P1_SEMANTIC_SUPPLY_BOTTLENECK`. P4
+converted 2,270 matched-positive rows and deepened 15 HQ basins, while P1
+converted 106 and deepened one. This is not validation/OOS proof, does not
+expand the frozen 464 semantic basis, grants no promotion authority and starts
+no follow-up experiment. Canonical evidence is
+`reports/CRYPTO_TEMPORAL_PROPOSAL_DISPATCH_SUCCESSOR_V1_20260815R1.md` and
+`reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/final_analysis.json`.
