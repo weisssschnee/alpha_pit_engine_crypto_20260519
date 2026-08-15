@@ -1,8 +1,41 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-15 Asia/Hong_Kong
+Last updated: 2026-08-16 Asia/Hong_Kong
 
 ## Current phase
+
+`P1_SEMANTIC_SUPPLY_EXPANSION_V1_CONTROL_INCOMPATIBLE_ALPHA_HOLD`
+
+The bounded P1 generation-2 conditioned semantic basis is implemented at
+`de77d3de399dacdf41de4c0f1bca96348d3d902f` and its pure one-time
+authorization at `e2c661b128a35b1dc799fd68908a2dacd02b6cc5`. The catalog
+retains all 180 legacy P1 identities and freezes 171 new economically
+interpretable P1 G2 semantics from 192 raw combinations. Proposal-only checks
+passed compilation, hierarchical controls, mapping, PIT legality, checkpoint
+serialization and dispatcher integration with zero market evaluations.
+
+The sole runtime
+`crypto_temporal_p1_semantic_supply_expansion_v1_20260816r1` failed closed
+before a persisted strict row. All frozen G2 candidates identify as
+`CONDITIONAL_V2_P1`, while the unchanged development three-block robust-ordering
+evaluator rejects every `CONDITIONAL_*` mechanism with
+`BLOCK_ROBUST_ORDERING_REQUIRES_BINARY_MECHANISM`. One initial worker batch and
+one diagnostic relaunch exposed the same structural conflict. The runtime has
+zero checkpoints, no ledger and no run-complete artifact; no P1/P4 economic or
+cluster conclusion is available.
+
+The independent checker reports
+`CANONICAL_P1_G2_CONTROL_INCOMPATIBILITY_CHECK_PASS`. Execution-component and
+catalog identities remain unchanged, P2/P3 strict are zero, and validation,
+OOS, holdout, forward, promotion and sealed reads are all zero. The PC2 task is
+disabled and no runner survives. The durable decision is
+`P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE`. Continuing would require an explicitly
+authorized conditional block-robust evaluator/control extension; no evaluator
+change, semantic-catalog mutation, replacement run or follow-up is authorized.
+Authoritative report:
+`reports/CRYPTO_P1_SEMANTIC_SUPPLY_EXPANSION_V1_20260816R1.md`.
+
+## Previous phase: representation successor partial closure
 
 `CRYPTO_TEMPORAL_REPRESENTATION_SUCCESSOR_V1_COMPLETE_PARTIAL_ALPHA_HOLD`
 

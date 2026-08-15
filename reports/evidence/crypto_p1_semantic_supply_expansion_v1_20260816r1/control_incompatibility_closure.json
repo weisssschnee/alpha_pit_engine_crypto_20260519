@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "campaign": "P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+  "runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_20260816r1",
+  "implementation_commit": "de77d3de399dacdf41de4c0f1bca96348d3d902f",
+  "authorization_commit": "e2c661b128a35b1dc799fd68908a2dacd02b6cc5",
+  "authorization_sha256": "014744841ACA8620165B4416D95C233395DD4596CC105CF0B7EFADD0A2887BCB",
+  "catalog": {
+    "legacy_p1_g1_count": 180,
+    "raw_possible_combinations": 192,
+    "rejected_combinations": 21,
+    "deduplicated_combinations": 0,
+    "accepted_p1_g2_semantics": 171,
+    "catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+    "post_authorization_mutation": false
+  },
+  "launches": {
+    "initial_launch": "2026-08-16T02:52:44+08:00",
+    "operational_diagnostic_relaunches": 1,
+    "worker_batch_size_per_launch": 8,
+    "candidate_evaluations_exact_by_completed_future_batches": 16,
+    "durable_worker_terminal_files": 5,
+    "raw_generation_attempts": null,
+    "raw_generation_attempts_reason": "No checkpoint persisted proposal policy state before the batch-wide control incompatibility stop."
+  },
+  "search": {
+    "persisted_strict": 0,
+    "completed_checkpoints": 0,
+    "candidate_ledger_present": false,
+    "run_complete_present": false,
+    "p1_g2_strict": 0,
+    "p1_g1_strict": 0,
+    "p4_strict": 0,
+    "p2_strict": 0,
+    "p3_strict": 0,
+    "matched_positive": 0,
+    "economic_clusters_available": false
+  },
+  "incompatibility": {
+    "builder_contract": "All frozen P1 G2 candidates use mechanism_family CONDITIONAL_V2_P1.",
+    "evaluator_contract": "Development block-robust ordering rejects every mechanism_family beginning CONDITIONAL_.",
+    "observed_error": "BLOCK_ROBUST_ORDERING_REQUIRES_BINARY_MECHANISM",
+    "affected_frozen_semantics": 171,
+    "repair_requires_forbidden_change": "Extending or bypassing the evaluator/control contract.",
+    "evaluator_change_attempted": false,
+    "matched_control_weakening_attempted": false
+  },
+  "independent_checker": {
+    "status": "CANONICAL_P1_G2_CONTROL_INCOMPATIBILITY_CHECK_PASS",
+    "decision": "P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE",
+    "checker_payload_sha256": "E17131003BAF4175880707AB8CF4813F2CE892C62A7A7D9F0454862AEDB72252",
+    "checker_file_sha256": "E3BFE6E4E408F45501C958775F53F9BEC35E82A845DF54F123C759C50A6F24FF",
+    "stderr_file_sha256": "7340BA7A96C50D54F09213D63787970C22A675AF9232ECF110B45E2EE7EBFE89",
+    "process_exit_file_sha256": "C93C855106330993E9A992E264638F99841FB30E71CFE77E702AECAFC4505AEF",
+    "execution_component_identities_match": true,
+    "head_equals_tracking": true,
+    "worktree_clean": true
+  },
+  "boundaries": {
+    "validation_reads": 0,
+    "oos_reads": 0,
+    "holdout_reads": 0,
+    "forward_reads": 0,
+    "promotion_reads": 0,
+    "sealed_reads": 0,
+    "automatic_next_run_started": false,
+    "pc2_task_disabled": true,
+    "active_python_runner": false
+  },
+  "final_decision": "P1_G2_CONTROL_OR_MAPPING_INCOMPATIBLE"
+}
