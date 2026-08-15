@@ -26,6 +26,18 @@ def _sha(value: Any) -> str:
     ).hexdigest().upper()
 
 
+def _dispatched_rejection_count(rejected: pd.DataFrame) -> int:
+    """Count proposals selected by the dispatcher but rejected before strict evaluation."""
+    if rejected.empty or "status" not in rejected:
+        return 0
+    return int(
+        rejected["status"]
+        .astype(str)
+        .isin({"EXACT_OR_REPLAY_REJECT", "PAIR_REJECTED"})
+        .sum()
+    )
+
+
 def independent_check(repo_root: Path, runtime_root: Path) -> dict[str, Any]:
     root, runtime = repo_root.resolve(), runtime_root.resolve()
     errors: list[str] = []
@@ -37,9 +49,10 @@ def independent_check(repo_root: Path, runtime_root: Path) -> dict[str, Any]:
         ledger = pd.read_parquet(runtime / "candidate_ledger.parquet")
         checkpoints = sorted((runtime / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
         final_state = engine._read_json(checkpoints[-1] / "state.json")
+        rejected = pd.read_parquet(checkpoints[-1] / "rejected_candidate_ledger.parquet")
     except (OSError, ValueError, RuntimeError, IndexError, json.JSONDecodeError) as failure:
         authorization = frozen = final = dispatch = final_state = {}
-        ledger, checkpoints = pd.DataFrame(), []
+        ledger, rejected, checkpoints = pd.DataFrame(), pd.DataFrame(), []
         errors.append("artifact_or_authorization:" + str(failure))
     if (
         frozen.get("ledger_sha256") != EXPECTED_LEDGER_SHA256
@@ -98,7 +111,14 @@ def independent_check(repo_root: Path, runtime_root: Path) -> dict[str, Any]:
         ):
             errors.append("policy_frozen_identity")
     counters = dict(dispatch.get("dispatch_counters") or {})
-    if int(counters.get("dispatches", -1)) != STRICT_CAP:
+    dispatched_rejections = _dispatched_rejection_count(rejected)
+    expected_dispatches = len(ledger) + dispatched_rejections
+    if (
+        int(counters.get("dispatches", -1)) != expected_dispatches
+        or int(counters.get("exploration_selected", -1))
+        + int(counters.get("exploitation_selected", -1))
+        != expected_dispatches
+    ):
         errors.append("dispatch_count")
     forbidden = {
         key: int(final.get(key, -1))
@@ -115,6 +135,7 @@ def independent_check(repo_root: Path, runtime_root: Path) -> dict[str, Any]:
         "program_family_counts": dict(sorted(families.items())),
         "checkpoint_count": len(checkpoints),
         "dispatch_counters": counters,
+        "dispatched_rejections": dispatched_rejections,
         "historical_prior_sha256": authorization.get("historical_prior_sha256"),
         "frozen_contract_sha256": frozen.get("frozen_contract_sha256"),
         "forbidden_reads": forbidden,

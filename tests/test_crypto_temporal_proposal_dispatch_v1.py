@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+import pandas as pd
+
 from alphafactory_crypto.broad_search.search_engine_v1 import MechanismEvolutionV2
+from alphafactory_crypto.broad_search.temporal_proposal_dispatch_checker_v1 import (
+    _dispatched_rejection_count,
+)
 from alphafactory_crypto.broad_search.temporal_proposal_dispatch_v1 import (
     build_train_only_historical_prior,
     configure_policy_dispatcher_v1,
@@ -251,3 +256,18 @@ def test_search_budget_is_one_20k_lane_with_10k_diagnostic_only() -> None:
     assert STRICT_CAP == 20_000
     assert CHECKPOINT_SIZE == 2_000
     assert len(LANE_SEEDS) == len(set(LANE_SEEDS)) == 4
+
+
+def test_dispatch_count_includes_selected_pre_strict_rejections() -> None:
+    rejected = pd.DataFrame(
+        {
+            "status": [
+                "PROPOSAL_REJECT",
+                "EXACT_OR_REPLAY_REJECT",
+                "PAIR_REJECTED",
+                "PAIR_REJECTED",
+            ]
+        }
+    )
+
+    assert _dispatched_rejection_count(rejected) == 3
