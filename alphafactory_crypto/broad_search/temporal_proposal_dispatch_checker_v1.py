@@ -12,9 +12,12 @@ import pandas as pd
 
 from . import search_engine_v1 as engine
 from .temporal_proposal_dispatch_search_v1 import (
+    AUTHORIZATION_PATH,
     LANE_SEEDS,
+    REQUIRED_EXECUTION_COMPONENT_PATHS,
     STRICT_CAP,
-    validate_authorization,
+    _git,
+    authorization_content_sha,
 )
 from .temporal_representation_successor_v1 import ACTIVE_FAMILIES
 from .temporal_representation_tournament_v1 import EXPECTED_LEDGER_SHA256, EXPECTED_POOL_SHA256
@@ -38,11 +41,39 @@ def _dispatched_rejection_count(rejected: pd.DataFrame) -> int:
     )
 
 
+def _validate_runtime_authorization(root: Path, runtime: Path) -> dict[str, Any]:
+    authorization = engine._read_json(runtime / "authorization_snapshot.json")
+    claim = engine._read_json(runtime / "launch_claim.json")
+    source_sha = str(claim.get("source_sha") or "").lower()
+    implementation_sha = str(authorization.get("implementation_source_sha") or "").lower()
+    if (
+        authorization.get("status") != "RUN_AUTHORIZED_ONE_TIME_PROPOSAL_DISPATCH_20000"
+        or authorization_content_sha(authorization)
+        != authorization.get("authorization_sha256")
+        or _git(root, "rev-parse", f"{source_sha}^").lower() != implementation_sha
+        or set(
+            _git(root, "diff-tree", "--no-commit-id", "--name-only", "-r", source_sha).splitlines()
+        )
+        != {AUTHORIZATION_PATH}
+    ):
+        raise RuntimeError("runtime_authorization_identity")
+    committed_authorization = json.loads(_git(root, "show", f"{source_sha}:{AUTHORIZATION_PATH}"))
+    if committed_authorization != authorization:
+        raise RuntimeError("runtime_authorization_snapshot")
+    components = dict(authorization.get("execution_component_blob_oids") or {})
+    if set(components) != set(REQUIRED_EXECUTION_COMPONENT_PATHS):
+        raise RuntimeError("runtime_execution_component_set")
+    for relative, expected in components.items():
+        if _git(root, "rev-parse", f"{implementation_sha}:{relative}").lower() != str(expected).lower():
+            raise RuntimeError("runtime_execution_component_identity:" + relative)
+    return authorization
+
+
 def independent_check(repo_root: Path, runtime_root: Path) -> dict[str, Any]:
     root, runtime = repo_root.resolve(), runtime_root.resolve()
     errors: list[str] = []
     try:
-        authorization = validate_authorization(root)
+        authorization = _validate_runtime_authorization(root, runtime)
         frozen = engine._read_json(runtime / "frozen_contract.json")
         final = engine._read_json(runtime / "run_complete.json")
         dispatch = engine._read_json(runtime / "dispatcher_diagnostics_final.json")
