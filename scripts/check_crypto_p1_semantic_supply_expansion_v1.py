@@ -19,10 +19,9 @@ from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 i
     BLOCK_ROBUST_V2_AUTHORITY,
     G2_CATALOG_PATH,
     LANE_TARGETS,
-    RAW_ATTEMPT_CAP,
     SOURCE_GAP_PATH,
     STRICT_CAP,
-    validate_authorization,
+    validate_authorization as validate_original_authorization,
 )
 from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_v1 import (
     CONTROL_SCHEMA,
@@ -67,7 +66,29 @@ def _registry(root: Path, config: dict[str, Any]) -> TypedExpressionRegistry:
 
 
 def check(root: Path, runtime_id: str) -> dict[str, Any]:
-    authorization = validate_authorization(root)
+    continuation = False
+    continuation_authorization_path = root / "config/crypto_p1_g2_operational_continuation_v1_authorization.json"
+    if continuation_authorization_path.is_file():
+        candidate_authorization = engine._read_json(continuation_authorization_path)
+        continuation = candidate_authorization.get("runtime_id") == runtime_id
+    if continuation:
+        from alphafactory_crypto.broad_search.temporal_p1_g2_operational_continuation_v1 import (
+            IMPORTED_CHECKPOINT_LABEL,
+            NATIVE_CHECKPOINT_LABELS,
+            RAW_ATTEMPT_CAP,
+            validate_authorization as validate_continuation_authorization,
+            validate_migration_receipt,
+        )
+
+        authorization = validate_continuation_authorization(root)
+        migration = validate_migration_receipt(
+            root, runtime_id=runtime_id, authorization=authorization
+        )
+    else:
+        from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 import RAW_ATTEMPT_CAP
+
+        authorization = validate_original_authorization(root)
+        migration = None
     runtime = root / "runtime" / runtime_id
     errors = []
     if runtime_id != authorization["runtime_id"]:
@@ -160,9 +181,17 @@ def check(root: Path, runtime_id: str) -> dict[str, Any]:
                 errors.append("legacy_lane_scope")
                 break
     checkpoints = sorted((runtime / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]"))
-    if len(checkpoints) != STRICT_CAP // 2_000:
+    if continuation:
+        import_path = runtime / "checkpoints" / IMPORTED_CHECKPOINT_LABEL
+        if (
+            [path.name for path in checkpoints] != list(NATIVE_CHECKPOINT_LABELS)
+            or not import_path.is_dir()
+            or migration is None
+        ):
+            errors.append("continuation_checkpoint_set")
+    elif len(checkpoints) != STRICT_CAP // 2_000:
         errors.append("checkpoint_count")
-    else:
+    if checkpoints:
         manifest = engine._read_json(checkpoints[-1] / "manifest.json")
         if manifest.get("restore_verified") is not True or int(manifest.get("completed_ledger_row_count", -1)) != STRICT_CAP:
             errors.append("checkpoint_restore")
@@ -191,6 +220,11 @@ def check(root: Path, runtime_id: str) -> dict[str, Any]:
         "p2_strict": 0,
         "p3_strict": 0,
         "checkpoint_count": len(checkpoints),
+        "imported_checkpoint_count": 1 if continuation else 0,
+        "operational_continuation": continuation,
+        "migration_receipt_sha256": (
+            migration.get("migration_receipt_sha256") if migration else None
+        ),
         "next_decision": decision,
         "errors": sorted(set(errors)),
         "market_arrays_read": 0,

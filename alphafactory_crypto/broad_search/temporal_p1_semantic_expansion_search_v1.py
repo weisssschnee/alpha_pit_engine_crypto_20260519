@@ -9,7 +9,7 @@ import subprocess
 import time
 from collections import Counter
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 import pandas as pd
 
@@ -71,6 +71,7 @@ PRIOR_INCOMPATIBILITY_EVIDENCE_PATH = (
 STRICT_CAP = 20_000
 CHECKPOINT_SIZE = 2_000
 RAW_ATTEMPT_CAP = 500_000
+RAW_ATTEMPT_TERMINAL = "OPERATIONAL_RAW_ATTEMPT_BUDGET_EXHAUSTED"
 WORKERS = 8
 LANE_COUNT = 4
 P4 = "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
@@ -111,6 +112,16 @@ REQUIRED_EXECUTION_COMPONENT_PATHS = (
     "scripts/run_crypto_p1_semantic_supply_expansion_v1.py",
     "scripts/run_crypto_p1_semantic_supply_expansion_v1_pc2.ps1",
 )
+
+
+class ProposalSupplyExhausted(RuntimeError):
+    """Operational terminal that leaves the latest durable checkpoint valid."""
+
+    def __init__(self, status: str, *, attempts: int, cap: int) -> None:
+        self.status = str(status)
+        self.attempts = int(attempts)
+        self.cap = int(cap)
+        super().__init__(f"{self.status}:attempts={self.attempts}:cap={self.cap}")
 
 
 def _sha(value: Any) -> str:
@@ -425,6 +436,9 @@ def _execute(
     catalog: Sequence[Any], pool: Mapping[str, Any], baseline: Mapping[str, Any],
     inventory: Any, prior: Mapping[str, Any], source_gap: Mapping[str, Any],
     g2_catalog: Sequence[Any], executor: concurrent.futures.ProcessPoolExecutor,
+    initial_checkpoint: Path | None = None,
+    raw_attempt_cap: int = RAW_ATTEMPT_CAP,
+    raw_attempt_terminal: str = RAW_ATTEMPT_TERMINAL,
 ) -> dict[str, Any]:
     if (runtime_root / "run_complete.json").is_file():
         result = engine._read_json(runtime_root / "run_complete.json")
@@ -437,6 +451,11 @@ def _execute(
             checkpoints[-1], registry=registry, expected_source=source_sha,
             expected_frozen=frozen_hash, expected_identities=identities,
         )
+    elif initial_checkpoint is not None:
+        state, policies, ledger, archive, _, metrics, rejected = _load_checkpoint(
+            initial_checkpoint, registry=registry, expected_source=source_sha,
+            expected_frozen=frozen_hash, expected_identities=identities,
+        )
     else:
         state = _state(source_sha, frozen_hash, config)
         policies = _make_policies(
@@ -444,11 +463,16 @@ def _execute(
             baseline=baseline, prior=prior, source_gap=source_gap,
         )
         ledger, archive, metrics, rejected = [], engine.BehaviorArchive(), [], []
+    if len(ledger) % CHECKPOINT_SIZE:
+        raise RuntimeError("continuation strict prefix is not checkpoint aligned")
+    start_checkpoint_index = len(ledger) // CHECKPOINT_SIZE
+    if int(state.get("next_checkpoint_index", -1)) != start_checkpoint_index:
+        raise RuntimeError("continuation checkpoint ordinal changed")
     attempted = set(str(value) for value in state.get("attempted_exact_ids", ()))
     lane_order = sorted(policies)
     lane_cursor = len(ledger)
     started = time.perf_counter()
-    for checkpoint_index in range(len(checkpoints), STRICT_CAP // CHECKPOINT_SIZE):
+    for checkpoint_index in range(start_checkpoint_index, STRICT_CAP // CHECKPOINT_SIZE):
         target = (checkpoint_index + 1) * CHECKPOINT_SIZE
         while len(ledger) < target:
             proposals = []
@@ -477,16 +501,24 @@ def _execute(
                 except (ValueError, RuntimeError) as failure:
                     attempts = int(getattr(failure, "raw_attempts", 1))
                     state["generation_attempts"] += attempts
-                    if int(state["generation_attempts"]) > RAW_ATTEMPT_CAP:
-                        raise RuntimeError("RESEARCH_INVALID:RAW_ATTEMPT_CAP")
+                    if int(state["generation_attempts"]) > int(raw_attempt_cap):
+                        raise ProposalSupplyExhausted(
+                            raw_attempt_terminal,
+                            attempts=int(state["generation_attempts"]),
+                            cap=int(raw_attempt_cap),
+                        )
                     rejected.append({"checkpoint_index": checkpoint_index, "policy_key": policy_key,
                                      "status": "PROPOSAL_REJECT", "error": type(failure).__name__ + ":" + str(failure),
                                      "raw_attempts": attempts})
                     continue
                 attempts = int(metadata.get("raw_attempts", 1))
                 state["generation_attempts"] += attempts
-                if int(state["generation_attempts"]) > RAW_ATTEMPT_CAP:
-                    raise RuntimeError("RESEARCH_INVALID:RAW_ATTEMPT_CAP")
+                if int(state["generation_attempts"]) > int(raw_attempt_cap):
+                    raise ProposalSupplyExhausted(
+                        raw_attempt_terminal,
+                        attempts=int(state["generation_attempts"]),
+                        cap=int(raw_attempt_cap),
+                    )
                 if candidate.candidate_id in attempted or not engine._candidate_rebuild_verified(registry, candidate, {}):
                     attempted.add(candidate.candidate_id)
                     rejected.append({"checkpoint_index": checkpoint_index, "policy_key": policy_key,
@@ -593,9 +625,25 @@ def _execute(
                         archive=archive, baseline=baseline)
 
 
-def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
+def run(
+    repo_root: Path,
+    *,
+    runtime_id: str,
+    authorization_override: Mapping[str, Any] | None = None,
+    raw_attempt_cap: int = RAW_ATTEMPT_CAP,
+    raw_attempt_terminal: str = RAW_ATTEMPT_TERMINAL,
+    continuation_context: Mapping[str, Any] | None = None,
+    checkpoint_importer: Callable[..., Path] | None = None,
+) -> dict[str, Any]:
     root = repo_root.resolve()
-    authorization = validate_authorization(root)
+    authorization = (
+        dict(authorization_override)
+        if authorization_override is not None
+        else validate_authorization(root)
+    )
+    continuation = dict(continuation_context or {})
+    if authorization_override is not None and not continuation:
+        raise RuntimeError("authorization override requires continuation context")
     if runtime_id != str(authorization.get("runtime_id") or ""):
         raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:runtime_id")
     runtime_root = root / "runtime" / runtime_id
@@ -613,17 +661,21 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
                                 "derivation": "FIRST_UINT32_SHA256_EXECUTION_MODE_LANE",
                                 "seeds": list(LANE_SEEDS), "old_campaign_seed_reuse": False}
     config["search_budget"].update({"strict_evaluated_maximum": STRICT_CAP,
-                                    "raw_generation_attempts_maximum": RAW_ATTEMPT_CAP,
+                                    "raw_generation_attempts_maximum": int(raw_attempt_cap),
                                     "checkpoint_count_maximum": STRICT_CAP // CHECKPOINT_SIZE,
                                     "release_boundaries_strict": [10_000, STRICT_CAP]})
     source_sha = _git(root, "rev-parse", "HEAD").lower()
-    claim = {"schema_version": 1, "status": "ONE_TIME_P1_SEMANTIC_EXPANSION_SEARCH_LAUNCHED",
+    claim = {"schema_version": 1, "status": (
+                 "ONE_TIME_P1_G2_OPERATIONAL_CONTINUATION_LAUNCHED"
+                 if continuation else "ONE_TIME_P1_SEMANTIC_EXPANSION_SEARCH_LAUNCHED"
+             ),
              "authorization_sha256": authorization["authorization_sha256"], "source_sha": source_sha,
              "runtime_id": runtime_id, "historical_prior_sha256": prior["prior_sha256"],
              "source_gap_sha256": source_gap["source_gap_sha256"],
              "p1_g2_catalog_sha256": committed_g2_catalog["catalog_sha256"],
              "market_preflight_sha256": _sha(market), "parent_pool_sha256": pool["target_parent_pool_sha256"],
-             "strict_at_claim": 0, "candidate_evaluations_at_claim": 0,
+             "strict_at_claim": int(continuation.get("imported_strict", 0)),
+             "candidate_evaluations_at_claim": 0,
              "validation_reads": 0, "oos_reads": 0, "sealed_reads": 0}
     if claim_path.is_file():
         if engine._read_json(claim_path) != claim:
@@ -666,6 +718,8 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
               "lane_targets": LANE_TARGETS,
               "lane_seeds": list(LANE_SEEDS), "input_identities": identities,
               "validation_reads": 0, "oos_reads": 0, "sealed_reads": 0}
+    if continuation:
+        frozen["operational_continuation"] = continuation
     frozen_hash = _sha(frozen)
     frozen = {**frozen, "frozen_contract_sha256": frozen_hash}
     frozen_path = runtime_root / "frozen_contract.json"
@@ -680,6 +734,15 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
         engine._write_json(runtime_root / "historical_prior_snapshot.json", prior)
         engine._write_json(runtime_root / "source_gap_snapshot.json", source_gap)
         engine._write_json(runtime_root / "p1_g2_catalog_snapshot.json", compiled_g2_payload)
+    initial_checkpoint = None
+    if checkpoint_importer is not None:
+        initial_checkpoint = checkpoint_importer(
+            runtime_root=runtime_root,
+            registry=registry,
+            identities=identities,
+            source_sha=source_sha,
+            frozen_hash=frozen_hash,
+        )
     cache_root = root / str(identities["raw_cache"]["root"])
     block_contract = engine._read_json(root / BLOCK_ROBUST_V2_CONTRACT_PATH)
     with concurrent.futures.ProcessPoolExecutor(
@@ -691,12 +754,16 @@ def run(repo_root: Path, *, runtime_id: str) -> dict[str, Any]:
         return _execute(runtime_root, source_sha=source_sha, frozen_hash=frozen_hash,
                         identities=identities, registry=registry, config=config, catalog=active_catalog,
                         pool=pool, baseline=baseline, inventory=inventory, prior=prior,
-                        source_gap=source_gap, g2_catalog=g2_catalog, executor=executor)
+                        source_gap=source_gap, g2_catalog=g2_catalog, executor=executor,
+                        initial_checkpoint=initial_checkpoint,
+                        raw_attempt_cap=int(raw_attempt_cap),
+                        raw_attempt_terminal=raw_attempt_terminal)
 
 
 __all__ = ["AUTHORIZATION_PATH", "BLOCK_ROBUST_V2_AUTHORITY",
            "BLOCK_ROBUST_V2_CONTRACT_PATH", "CAMPAIGN", "EXECUTION_MODE",
            "HISTORICAL_PRIOR_PATH", "PRIOR_INCOMPATIBILITY_EVIDENCE_PATH",
            "SOURCE_GAP_PATH", "G2_CATALOG_PATH", "LANE_TARGETS",
-           "LANE_SEEDS", "REQUIRED_EXECUTION_COMPONENT_PATHS", "STRICT_CAP",
+           "LANE_SEEDS", "ProposalSupplyExhausted", "RAW_ATTEMPT_TERMINAL",
+           "REQUIRED_EXECUTION_COMPONENT_PATHS", "STRICT_CAP",
            "authorization_content_sha", "preflight", "run", "validate_authorization"]

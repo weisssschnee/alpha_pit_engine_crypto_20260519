@@ -5,6 +5,8 @@ import random
 from collections import Counter
 from pathlib import Path
 
+import pytest
+
 from alphafactory_crypto.broad_search import search_engine_v1 as engine
 from alphafactory_crypto.broad_search.compositional18m import (
     mapping_id_for_mechanism_spec,
@@ -20,7 +22,17 @@ from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_v1 import (
     sample_p1_generation2_candidate,
 )
 from alphafactory_crypto.broad_search.temporal_p1_semantic_expansion_search_v1 import (
+    ProposalSupplyExhausted,
     _next_semantic_lane,
+)
+from alphafactory_crypto.broad_search.temporal_p1_g2_operational_continuation_v1 import (
+    IMPORTED_CHECKPOINT_LABEL,
+    IMPORTED_STRICT,
+    NATIVE_CHECKPOINT_LABELS,
+    RAW_ATTEMPT_CAP,
+    RAW_ATTEMPT_TERMINAL,
+    SOURCE_RECEIPT_PATH,
+    _frame_sha,
 )
 from alphafactory_crypto.broad_search.temporal_program_v1 import (
     compile_temporal_program_catalog,
@@ -122,3 +134,41 @@ def test_productive_lane_scheduler_keeps_g2_as_clear_majority() -> None:
         "P1_G1": 3_000,
         "P4": 3_000,
     }
+
+
+def test_operational_continuation_contract_preserves_12k_and_native_ordinals() -> None:
+    receipt = json.loads((ROOT / SOURCE_RECEIPT_PATH).read_text(encoding="utf-8"))
+    assert receipt["status"] == "FROZEN_DURABLE_PREFIX_SOURCE"
+    assert receipt["durable_strict"] == IMPORTED_STRICT == 12_000
+    assert receipt["durable_generation_attempts"] == 479_114
+    assert receipt["terminal_reclassification"] == "REPAIRABLE_OPERATIONAL_CAPACITY_EXHAUSTION"
+    assert receipt["source_runtime_immutable"] is True
+    assert IMPORTED_CHECKPOINT_LABEL == "checkpoint_import_012000"
+    assert NATIVE_CHECKPOINT_LABELS == (
+        "checkpoint_006", "checkpoint_007", "checkpoint_008", "checkpoint_009"
+    )
+    assert RAW_ATTEMPT_CAP == 1_250_000
+    assert RAW_ATTEMPT_TERMINAL == "OPERATIONAL_PROPOSAL_SUPPLY_EXHAUSTED"
+
+
+def test_raw_attempt_exhaustion_is_operational_not_research_invalid() -> None:
+    failure = ProposalSupplyExhausted(
+        RAW_ATTEMPT_TERMINAL, attempts=RAW_ATTEMPT_CAP + 1, cap=RAW_ATTEMPT_CAP
+    )
+    assert failure.status == RAW_ATTEMPT_TERMINAL
+    assert failure.attempts == RAW_ATTEMPT_CAP + 1
+    assert failure.cap == RAW_ATTEMPT_CAP
+    assert "RESEARCH_INVALID" not in str(failure)
+
+
+def test_logical_checkpoint_frame_hash_is_order_and_content_sensitive() -> None:
+    rows = [{"candidate_id": "a", "reward": 1.0}, {"candidate_id": "b", "reward": 2.0}]
+    assert _frame_sha(rows) == _frame_sha(json.loads(json.dumps(rows)))
+    assert _frame_sha(rows) != _frame_sha(list(reversed(rows)))
+    changed = json.loads(json.dumps(rows))
+    changed[1]["reward"] = 2.1
+    assert _frame_sha(rows) != _frame_sha(changed)
+    with pytest.raises(ProposalSupplyExhausted):
+        raise ProposalSupplyExhausted(
+            RAW_ATTEMPT_TERMINAL, attempts=RAW_ATTEMPT_CAP + 1, cap=RAW_ATTEMPT_CAP
+        )
