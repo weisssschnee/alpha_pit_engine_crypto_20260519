@@ -1,0 +1,123 @@
+{
+  "active_program_families": [
+    "P5_FLOW_PARTICIPATION_CONVICTION",
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING"
+  ],
+  "authority_identity": {
+    "behavior_contract_sha256": "E3E41C3D9820558AE11E79C0767854B9AADDDFED4955F0F1B1CA9FD458BC8088",
+    "economic_receipt_sha256": "244ADFC59AD7AAB453928365B68CAAB6B8537CDF55795EC9F97629F1B15A46AC",
+    "market_contract_sha256": "E104F1A18901FC2370BE2CEE26D66BEE23EC3B33CE0719AC212F1BCADC161618",
+    "optimizer_reward_and_matched_attribution_sha256": "23DC1B680613C558154E9D83DAC95EE0D944F834E26C37C77BA4E6B7F78E593B",
+    "portfolio_mapping_and_cost_sha256": "C868E17F941E6677114920F63E7CD9BB45453106D8211E2B080787A2BC4367CF",
+    "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+    "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
+  },
+  "authorization_sha256": "48E90D3DCAA3616F126CE8ED07BC3D6CEF19C618D21FB691F6DFD170E0A96C4B",
+  "automatic_next_run_authorized": false,
+  "block_robust_v2_authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+  "budget": {
+    "checkpoint_size": 2000,
+    "diagnostic_boundaries": [
+      10000,
+      20000
+    ],
+    "raw_generation_attempts_maximum": 2000000,
+    "strict_evaluated_maximum": 30000,
+    "workers": 8
+  },
+  "consumed": false,
+  "execution_component_blob_oids": {
+    "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
+    "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
+    "alphafactory_crypto/broad_search/expression.py": "f7b1f26002c3a2ded3a819309d4edd7a9fab5368",
+    "alphafactory_crypto/broad_search/pair18m.py": "0a7f77ab0403f15fd7e9ed66e9029eb3214a0015",
+    "alphafactory_crypto/broad_search/search_engine_v1.py": "91f823b44ce580ad9e83016656e7b6ca96782287",
+    "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_proposal_v1.py": "41b44701644990e1c8b533ce36cdf7a6466b7f49",
+    "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_search_v1.py": "253a19c18b8ecd3862411efd620bc6a851e5b847",
+    "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_v1.py": "6a22ad48cbfd5460069849ee977f4d87ffe63c72",
+    "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "c49744d1c269a9da3aebcafbf534837c1bdaf339",
+    "alphafactory_crypto/broad_search/temporal_program_v1.py": "9c7bb4a214bc69f3e6e69691d352242168fa9f19",
+    "alphafactory_crypto/broad_search/temporal_proposal_dispatch_v1.py": "5ec2a9e62d13d409a52867b190d4c8ea8a3cf4ff",
+    "alphafactory_crypto/broad_search/temporal_realization_v2.py": "4d73fede692d079cf7cf30f62828cae2190b20de",
+    "alphafactory_crypto/broad_search/temporal_representation_successor_v1.py": "d1f9ff9020d0bce533166827b1b302647f6e1ca0",
+    "alphafactory_crypto/broad_search/temporal_representation_tournament_v1.py": "f880dc73f37203c9703c18db9ab19f5ade281544",
+    "alphafactory_crypto/broad_search/temporal_successor_v1.py": "f34c74831d9f112d474c3f57206befd035c6d81b",
+    "alphafactory_crypto/broad_search/temporal_targeted_deepening_v1.py": "fbe8c9bb0cefe9bd0208cb7d90f97757da7600a8",
+    "config/crypto_p1_g2_block_robust_ordering_v2.json": "77386f94995de758ed1f73b8359d2a0a10bd6ebb",
+    "config/crypto_search_engine_v1_4_binance_target_replay.json": "74133adb8f3ad8d715917ccd0e7866118aaf5a18",
+    "config/crypto_search_replication_aware_gate_v1.json": "d12595414c85bcd171757ba63af871524c8a6e58",
+    "config/crypto_search_replication_aware_gate_v1_r3_receipt.json": "c94d5ac4d74269777d179d8ee186c8a7d0ffbf78",
+    "config/crypto_temporal_hypothesis_frontier_v1_catalog.json": "1a85c27410d3669a6d3b80a092ac1ad6ebc36d53",
+    "config/crypto_temporal_hypothesis_frontier_v1_source_gap.json": "12c7ad25dfc011aa176f8d5eb0969b003f659a9e",
+    "config/crypto_temporal_mechanism_program_v1.json": "42f420a1bbde8067b1a10a976346979f5cc8d6d3",
+    "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json": "df64d2bbb9b141f0543e05d67283966f488f9fce",
+    "config/crypto_typed_mechanism_catalog_v2_1.json": "bb0d9a10ac3db2978ad97b766ac923bb73241095",
+    "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json": "28d00166356232739a74d6b6e11f7710e2607ab2",
+    "scripts/analyze_crypto_temporal_hypothesis_frontier_v1.py": "2af6c772b1a0ca8d60d41aaf81895881b7eb7e55",
+    "scripts/check_crypto_temporal_hypothesis_frontier_v1.py": "05e380e695203a5db311a7125076a848e11fc8a7",
+    "scripts/run_crypto_temporal_hypothesis_frontier_v1.py": "0d049866050a043d2542b659f81c27c864c1036b",
+    "scripts/run_crypto_temporal_hypothesis_frontier_v1_pc2.ps1": "9694c7c0734d436a67fb1e81d1cc82357c5f217f"
+  },
+  "execution_mode": "TEMPORAL_HYPOTHESIS_FRONTIER_V1",
+  "forbidden_reads": {
+    "forward": 0,
+    "holdout": 0,
+    "oos": 0,
+    "promotion": 0,
+    "sealed": 0,
+    "validation": 0
+  },
+  "frontier_catalog_file_sha256": "B1AD02F70970EB40C5EA04DC96BEBBBF4C1310896198E77E663DE0F12CBE3F9B",
+  "frontier_catalog_sha256": "1E6D6648BDEC6BAE3AADF3E82C3D70D5053FC48B82A73E1BF526835BBD10CAE0",
+  "frozen_inputs": {
+    "frozen_parents": 228,
+    "ledger_rows": 50000,
+    "ledger_sha256": "5171CD9655944CCED18D35CCB413C725E9542889260A135E8F95F4BE7B401B46",
+    "matched_positive": 302,
+    "parent_pool_sha256": "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49",
+    "preauthorization_receipt_sha256": "86CF72BEF57E56F0CC7EAB8ACAED6FB6173A049806E76E70B574E4E0866D50C4",
+    "target_basins": 23
+  },
+  "historical_prior_file_sha256": "B3BB3F6D93E0274DB720DA3A65EDE2EAA4E443D84287694158CAE04E91188F4A",
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "implementation_source_sha": "d8e4845d0acb97bc263dab800ac4ca83b6b57f0b",
+  "lane_seeds": [
+    359043271,
+    3574107642,
+    2099206231,
+    3823740441
+  ],
+  "lane_targets": {
+    "P4": 0.2,
+    "P5": 0.4,
+    "P6": 0.4
+  },
+  "market_input_identity": {
+    "carrier": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "files": 122,
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA"
+    },
+    "target": {
+      "bundle_sha256": "1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3",
+      "bytes": 10170182,
+      "files": 3,
+      "identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0"
+    }
+  },
+  "offline_preflight_sha256": "AE7B2F8EA92A4B8A8BB7FB23427E797FD6869AF8FE263E596886C38DDD1BB9F0",
+  "pc2_executor_identity": {
+    "host": "desktop-a2h3a2g",
+    "python": "D:\\HermesWorker\\workspace\\crypto_line\\.venv_b251733\\Scripts\\python.exe",
+    "user": "desktop-a2h3a2g\\suri",
+    "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
+  },
+  "run_authorized": true,
+  "runtime_id": "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+  "schema_version": 1,
+  "source_gap_file_sha256": "5FCCCF48938269288F3E1C8B42FF5D2A7FC008D5AFC3308F50258359C12F03E2",
+  "source_gap_sha256": "438D6C667996C4A4FD703ED9D61A5B421FD57ED87F74E809A1DE0CC8E12ED250",
+  "status": "RUN_AUTHORIZED_ONE_TIME_TEMPORAL_HYPOTHESIS_FRONTIER_30000"
+}
