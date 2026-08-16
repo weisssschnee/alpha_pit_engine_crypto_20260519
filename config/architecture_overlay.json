@@ -2272,9 +2272,8 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
                                     "alphafactory_crypto/broad_search/temporal_p1_semantic_expansion_v1.py",
-                                    "config/crypto_p1_semantic_supply_expansion_v1_catalog.json",
-                                    "reports/CRYPTO_P1_SEMANTIC_SUPPLY_EXPANSION_V1_20260816R1.md",
-                                    "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/control_incompatibility_closure.json"
+                                    "reports/CRYPTO_P1_G2_OPERATIONAL_CONTINUATION_V1_20260816R3.md",
+                                    "reports/evidence/crypto_p1_g2_operational_continuation_v1_20260816r3/final_analysis.json"
                                 ],
                       "critical":  false,
                       "semantic_role":  "experimental_p1_conditioned_semantic_supply",
@@ -2282,30 +2281,30 @@
                       "active_authority":  false,
                       "contracts":  [
                                         {
-                                            "id":  "p1_g2_conditional_block_robust_incompatibility",
-                                            "type":  "BOUNDARY",
-                                            "rule":  "The frozen P1 G2 catalog emits CONDITIONAL_V2_P1 candidates, while the unchanged development block-robust evaluator admits binary mechanisms only; evaluator bypass, matched-control weakening, catalog mutation and replacement launch are forbidden without a new explicit decision.",
+                                            "id":  "p1_g2_block_robust_v2_operational_continuation_closure",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The exact restore-verified r2 12k prefix was migrated without adaptive or economic state reset and continued to the original 20k train-only cap. P1 G2 produced zero matched-positive rows, zero 0.90 economic clusters and zero new HQ realizations across eight observed semantic programs, while P4 and the dispatcher remained healthy. The result challenges the frozen P1 G2 hypothesis family only and grants no validation, OOS, promotion or follow-up authority.",
                                             "severity":  "HARD",
-                                            "enforced_by":  "pair18m block-robust ordering guard and the P1 G2 independent incompatibility checker",
+                                            "enforced_by":  "migration receipt, restore-verified checkpoint_009, final analyzer and canonical completion checker",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/control_incompatibility_closure.json"
+                                            "evidence_ref":  "reports/evidence/crypto_p1_g2_operational_continuation_v1_20260816r3/final_analysis.json"
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "RUNTIME_VERIFIED",
-                                         "result":  "FAIL",
+                                         "level":  "STATIC_VERIFIED",
+                                         "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "reports/evidence/crypto_p1_semantic_supply_expansion_v1_20260816r1/control_incompatibility_closure.json",
-                                         "verified_at_sha":  "e2c661b128a35b1dc799fd68908a2dacd02b6cc5"
+                                         "evidence_ref":  "reports/evidence/crypto_p1_g2_operational_continuation_v1_20260816r3/final_analysis.json",
+                                         "evidence_sha256":  "ED77719B6C63143B631F27DAE3183E3D97C48A3CEDFE42AF5C904691250BF75A",
+                                         "verified_at_sha":  "7458bc9b79b0c5bbeaecb2501f0d1fc389e7a483"
                                      },
                       "claim_badges":  [
                                            "EXPERIMENTAL CANDIDATE",
-                                           "OFFLINE SEMANTIC CHECKS PASS",
-                                           "PRODUCTIVE EVALUATOR INCOMPATIBLE",
-                                           "ZERO PERSISTED STRICT",
-                                           "NO VALIDATION OOS OR FORWARD",
-                                           "NO PROMOTION",
-                                           "NO AUTOMATIC FOLLOW-UP"
+                                           "20K CHECKPOINT CONTINUATION COMPLETE",
+                                           "P1 G2 ZERO MATCHED ZERO BASINS",
+                                           "P4 AND DISPATCHER HEALTHY",
+                                           "CHECKER PASS NO FORBIDDEN READS",
+                                           "NO PROMOTION OR FOLLOW-UP"
                                        ]
                   },
                   {
