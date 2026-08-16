@@ -64,6 +64,7 @@ from .compositional18m import (
     mechanism_role_domains,
     sample_mechanism_candidate,
     skeleton_registry,
+    temporal_mechanism_candidate_from_genes,
 )
 from .expression import FieldContract, TypedExpressionRegistry
 from .experiment_authority import (
@@ -1151,7 +1152,12 @@ def _candidate_rebuild_verified(
                     domains=mechanism_role_domains(tuple(registry.fields.values())),
                 )
         elif "mechanism_spec" in candidate.generation_genes:
-            rebuilt = mechanism_candidate_from_genes(
+            builder = (
+                temporal_mechanism_candidate_from_genes
+                if "temporal_transform" in candidate.generation_genes
+                else mechanism_candidate_from_genes
+            )
+            rebuilt = builder(
                 registry,
                 genes=candidate.generation_genes,
                 domains=mechanism_role_domains(tuple(registry.fields.values())),
