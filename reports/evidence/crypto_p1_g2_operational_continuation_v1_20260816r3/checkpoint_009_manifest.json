@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "0494BF97AE839F5FC533DDB3A14D1D17C47FF8EE941E601BEB1FB5EC0B5F6297",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_009",
+  "checkpoint_index": 9,
+  "compiler_identity": {
+    "bundle_sha256": "D4ED59D8B5499BE6305A3134A74C2C46EA8404B52E1D45C79FBE042474C7E96E",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 111655,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "58B08BD1FEB8D947DFF03E49C9588458912FE58085A1A4B73A4BF589FB239DB3"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1020895,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "02A9F46552E42BC67E7CBC312A2B943A5A44262AC5A699030E6CCF2940E0C7C8"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "FBAD75CEE1B7D7770602D922187841AA70B2CCCBC20C6B2B0CD5C7D3DF4FB599",
+  "completed_ledger_row_count": 20000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 600,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 15968450,
+      "name": "behavior_archive.parquet",
+      "sha256": "5F62B00DEBCFD2E3CAAA5159521E6DDCA45E40D32DB77C8BA84062EDCCB47AD2"
+    },
+    {
+      "bytes": 236034747,
+      "name": "candidate_ledger.parquet",
+      "sha256": "2FC6B541EAE9AE04915034B33068BF32E1BC48BD1851F64B51D6CCED919447D9"
+    },
+    {
+      "bytes": 233599,
+      "name": "discovery_diagnostics.json",
+      "sha256": "E6CD6F085AC3CFC965533487ADD0353EB80722F0E1654F919DE6DE80964C62AF"
+    },
+    {
+      "bytes": 600,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 2758019,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "0FB04401F240B1DDEC0F04211C3DE474981A32495DFE724882C174E0E3AD0104"
+    },
+    {
+      "bytes": 92315573,
+      "name": "state.json",
+      "sha256": "3A5B7C55591A7C2876CA97A0B6709126017579E6C4F74B495D8FFE2CAD805A5B"
+    }
+  ],
+  "frozen_contract_sha256": "3EA16297E78A01FB2456AA3E711B645756D769109118C3C910E944BF0EBAC0CF",
+  "policy_state_sha256": "18EA5ADD27E58C6FB6CB6D47346F5BE6C62475CBCF2D89142792AB00BAE5D2BC",
+  "receipt_count": 20000,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "043da5dc478e0b81ba7cca168cf10562c84a057e",
+  "state_sha256": "713CEE709C71BAE83234419D325988916B11487B3B782C904FCCA503BD60C747"
+}

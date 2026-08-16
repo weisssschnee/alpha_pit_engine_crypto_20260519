@@ -1,0 +1,142 @@
+{
+  "authorization_sha256": "A795C6A2398F1184EEC355001A4A732A5A289DCD5DA5C9CA62533F142826B960",
+  "block_robust_v2_authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
+  "block_robust_v2_contract_file_sha256": "0632EFEADFB87153F49CF21B8C779D929D0E9231EC7A45C2C35B5B5D69BA137D",
+  "execution_mode": "P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+  "frozen_contract_sha256": "3EA16297E78A01FB2456AA3E711B645756D769109118C3C910E944BF0EBAC0CF",
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    "behavior_contract_window": {
+      "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "holdout_read": false,
+      "start": "2025-08-29T07:00:00Z",
+      "validation_read": false
+    },
+    "compiler_identity": {
+      "bundle_sha256": "D4ED59D8B5499BE6305A3134A74C2C46EA8404B52E1D45C79FBE042474C7E96E",
+      "paths": [
+        {
+          "bytes": 54135,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+        },
+        {
+          "bytes": 40308,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 95618,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+        },
+        {
+          "bytes": 111655,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "58B08BD1FEB8D947DFF03E49C9588458912FE58085A1A4B73A4BF589FB239DB3"
+        },
+        {
+          "bytes": 112828,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+        },
+        {
+          "bytes": 1020895,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "02A9F46552E42BC67E7CBC312A2B943A5A44262AC5A699030E6CCF2940E0C7C8"
+        },
+        {
+          "bytes": 34792,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    }
+  },
+  "lane_seeds": [
+    4131986467,
+    2529856071,
+    2147570948,
+    3145876785
+  ],
+  "lane_targets": {
+    "P1_G1": 0.15,
+    "P1_G2": 0.7,
+    "P4": 0.15
+  },
+  "ledger_sha256": "5171CD9655944CCED18D35CCB413C725E9542889260A135E8F95F4BE7B401B46",
+  "market_preflight": {
+    "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "cache_root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+    "carrier_manifest_path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "carrier_manifest_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6",
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "market_arrays_read": 0,
+    "sealed_reads": 0,
+    "target_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "1B37684AB7442FF4BDBA37666FEC63DB4FFB01AF08623A1C04F4C06DD973B0A3",
+        "bytes": 10170182,
+        "file_count": 3
+      },
+      "economic_receipt_path": "config/crypto_search_replication_aware_gate_v1_r3_receipt.json",
+      "economic_receipt_sha256": "A85E83412F274F4AC0117193F79BC9FF6E2FB332581B203BCC695F906CD204F4",
+      "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+      "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1"
+    }
+  },
+  "oos_reads": 0,
+  "operational_continuation": {
+    "automatic_further_increase": false,
+    "continuation_id": "P1_G2_OPERATIONAL_CONTINUATION_V1",
+    "imported_generation_attempts": 479114,
+    "imported_strict": 12000,
+    "raw_generation_attempts_maximum_total": 1250000,
+    "source_checkpoint": "checkpoint_005",
+    "source_checkpoint_manifest_file_sha256": "0C1B648153130B2148FF47DBCA32EC2C80D5E0A9FEF7682BA0FA746B7BFCFAA3",
+    "source_runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_block_robust_v2_20260816r2",
+    "terminal_if_exhausted": "OPERATIONAL_PROPOSAL_SUPPLY_EXHAUSTED"
+  },
+  "p1_g2_catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+  "parent_pool_sha256": "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49",
+  "program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_gap_sha256": "7800ED9E5BF4E8367E090E207CA0BD4D70D93961F9F34DD4AAB41206E3692682",
+  "source_sha": "043da5dc478e0b81ba7cca168cf10562c84a057e",
+  "validation_reads": 0
+}

@@ -2089,3 +2089,42 @@ expand the frozen 464 semantic basis, grants no promotion authority and starts
 no follow-up experiment. Canonical evidence is
 `reports/CRYPTO_TEMPORAL_PROPOSAL_DISPATCH_SUCCESSOR_V1_20260815R1.md` and
 `reports/evidence/crypto_temporal_proposal_dispatch_successor_v1_20260815r1/final_analysis.json`.
+
+## Completed phase: P1 G2 Block Robust V2 checkpoint-preserving operational continuation
+
+The r2 `12,000 strict / 479,114 attempts` restore-verified prefix remains valid
+and immutable. Its 500,000 raw-attempt stop is classified as
+`OPERATIONAL_RAW_ATTEMPT_BUDGET_EXHAUSTED`, not `RESEARCH_INVALID`, because the
+counter is an operational safety circuit and changes none of the target,
+mapping, cost, evaluator, matched-control, Block Robust V2, data-boundary or
+semantic-catalog contracts.
+
+Implementation `55df1cda91a1d232904b09df9e447f79c9cee11b` and pure authorization
+`043da5dc478e0b81ba7cca168cf10562c84a057e` created the sole successor runtime
+`p1g2_opcont_v1_20260816r3`. Migration receipt
+`4555BEBBF14D3400FE8FC61B2D167ED07E5BFDC26FA8063B2B63E7FBE547BF53`
+proves exact equality of every non-metadata adaptive and economic field. The
+successor resumed at candidate 12,001, preserved 479,114 generation attempts,
+and completed 20,000 strict at 756,099 attempts through four native,
+restore-verified 14k/16k/18k/20k checkpoints. The fixed 1,250,000 operational
+ceiling was not reached.
+
+The continuous lineage produced 956 matched-positive and 3,127 replicated rows.
+Lane outcomes were P1 G2 `14,000 / 0 matched / 162 replicated`, P1 G1
+`3,000 / 100 matched`, and P4 `3,000 / 856 matched`; P2/P3 were zero. Real
+economic cluster counts at 0.95/0.90/0.85 were 72/50/45, including 12/3/2 new
+clusters. The overall search deepened 19 HQ basins and produced 81 new unique HQ
+concrete realizations, but P1 G2 produced zero 0.90 clusters and zero new HQ
+realizations across all eight observed semantic program IDs. P4 remained healthy
+at 28.53% matched density.
+
+The canonical checker is `PASS` with SHA-256
+`3D6F3D6BB7EF3B10B626C6D226F868399D04861AC1371064E6DE8CF060E4A6CB`.
+The 20,000-row ledger SHA-256 is
+`2FC6B541EAE9AE04915034B33068BF32E1BC48BD1851F64B51D6CCED919447D9`.
+Validation, OOS, holdout, forward, promotion and sealed reads are all zero; no
+automatic next run was started. The completed development-only decision is
+`P1_HYPOTHESIS_FAMILY_WEAK`, not global Search Core regression and not research
+invalidity. Canonical evidence is
+`reports/CRYPTO_P1_G2_OPERATIONAL_CONTINUATION_V1_20260816R3.md` and
+`reports/evidence/crypto_p1_g2_operational_continuation_v1_20260816r3/`.

@@ -1,0 +1,33 @@
+{
+  "authorization_sha256": "A795C6A2398F1184EEC355001A4A732A5A289DCD5DA5C9CA62533F142826B960",
+  "automatic_next_run_started": false,
+  "candidate_ledger_bytes": 236034747,
+  "candidate_ledger_rows": 20000,
+  "candidate_ledger_sha256": "2FC6B541EAE9AE04915034B33068BF32E1BC48BD1851F64B51D6CCED919447D9",
+  "checker_sha256": "3D6F3D6BB7EF3B10B626C6D226F868399D04861AC1371064E6DE8CF060E4A6CB",
+  "checkpoint_count": 4,
+  "errors": [],
+  "forward_reads": 0,
+  "holdout_reads": 0,
+  "imported_checkpoint_count": 1,
+  "market_arrays_read": 0,
+  "migration_receipt_sha256": "4555BEBBF14D3400FE8FC61B2D167ED07E5BFDC26FA8063B2B63E7FBE547BF53",
+  "next_decision": "P1_HYPOTHESIS_FAMILY_WEAK",
+  "oos_reads": 0,
+  "operational_continuation": true,
+  "p1_g2_catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+  "p1_g2_programs_observed": 8,
+  "p2_strict": 0,
+  "p3_strict": 0,
+  "promotion_reads": 0,
+  "runtime_id": "p1g2_opcont_v1_20260816r3",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "semantic_lane_counts": {
+    "P1_G1": 3000,
+    "P1_G2": 14000,
+    "P4": 3000
+  },
+  "status": "PASS",
+  "validation_reads": 0
+}

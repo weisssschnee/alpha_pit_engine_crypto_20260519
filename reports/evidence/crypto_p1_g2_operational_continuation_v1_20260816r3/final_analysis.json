@@ -1,0 +1,415 @@
+{
+  "analysis_sha256": "4E78E555FFDBB6BC41CB59B9DA216287980D90F07689C6C53EC45369674DFA0B",
+  "automatic_next_run_started": false,
+  "catalog": {
+    "accepted_semantics": 171,
+    "catalog_id": "P1_SEMANTIC_SUPPLY_EXPANSION_V1",
+    "catalog_sha256": "60AEE0D3AF8EEABA43B89D39BE05AD1CC75DD076963D4FC6346CC5B95904E286",
+    "condition_operator_mode_counts": {
+      "ConditionGate:NEGATIVE": 42,
+      "ConditionGate:null": 50,
+      "StateModulation:ABSOLUTE_MAGNITUDE": 43,
+      "StateModulation:SIGN_ROUTING": 36
+    },
+    "condition_primitive_counts": {
+      "EventWindow": 13,
+      "MultiScaleRelation": 24,
+      "Persistence": 86,
+      "Transition": 48
+    },
+    "condition_role_counts": {
+      "CROSS_VENUE_OI_BUNDLE": 12,
+      "FLOW_IMBALANCE": 39,
+      "FUNDING": 84,
+      "OI_LEVEL": 36
+    },
+    "deduplicated_combinations": 0,
+    "family_id": "P1_POSITION_STATE_CHANGE_TO_RESPONSE",
+    "forward_reads": 0,
+    "holdout_reads": 0,
+    "legacy_p1_g1_count": 180,
+    "mapping_class_counts": {
+      "CROSS_SECTIONAL_RELATIVE": 79,
+      "SPARSE_EVENT_CARRY": 92
+    },
+    "matched_control_schema_counts": {
+      "HIERARCHICAL_A_B_AB_ABC": 171
+    },
+    "oos_reads": 0,
+    "parent_program_catalog_sha256": "52228270AE1D24B4888801B6A86BDB22ADF249D0B941429AEB511C305DBF47B7",
+    "promotion_reads": 0,
+    "raw_possible_combinations": 192,
+    "rejected_combinations": 21,
+    "rejection_reasons": {
+      "CONDITION_OUTPUT_TYPE_INCOMPATIBLE_WITH_STATE_MODULATION": 13,
+      "RAW_FIELD_WIDTH_EXCEEDS_EXISTING_MAXIMUM_4": 8
+    },
+    "schema_version": 1,
+    "sealed_reads": 0,
+    "semantic_generation": 2,
+    "source_gap_sha256": "7800ED9E5BF4E8367E090E207CA0BD4D70D93961F9F34DD4AAB41206E3692682",
+    "status": "P1_G2_SEMANTIC_CATALOG_FROZEN",
+    "validation_reads": 0
+  },
+  "dispatch_efficiency": {
+    "known_low_value_generation": {
+      "component": 0,
+      "operator": 0,
+      "role": 7254
+    },
+    "legal_generated": 695306,
+    "proposal_cpu_seconds": 7864.328125,
+    "score_regions": [
+      {
+        "matched": 0,
+        "matched_density": 0.0,
+        "region": "top",
+        "strict": 9452
+      },
+      {
+        "matched": 0,
+        "matched_density": 0.0,
+        "region": "middle",
+        "strict": 2835
+      },
+      {
+        "matched": 0,
+        "matched_density": 0.0,
+        "region": "bottom",
+        "strict": 1713
+      }
+    ],
+    "selected": 60793,
+    "strict_evaluated": 20000
+  },
+  "forward_reads": 0,
+  "holdout_reads": 0,
+  "next_decision": "P1_HYPOTHESIS_FAMILY_WEAK",
+  "oos_reads": 0,
+  "p1_g2_attribution": {
+    "by_condition_mode": [
+      {
+        "condition_mode": "ABSOLUTE_MAGNITUDE",
+        "dual_positive": 343,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 63,
+        "strict": 3712
+      },
+      {
+        "condition_mode": "NEGATIVE",
+        "dual_positive": 152,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 10,
+        "strict": 3753
+      },
+      {
+        "condition_mode": "NONE",
+        "dual_positive": 1264,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 87,
+        "strict": 5632
+      },
+      {
+        "condition_mode": "SIGN_ROUTING",
+        "dual_positive": 23,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 2,
+        "strict": 903
+      }
+    ],
+    "by_condition_operator": [
+      {
+        "condition_operator": "ConditionGate",
+        "dual_positive": 1416,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 97,
+        "strict": 9385
+      },
+      {
+        "condition_operator": "StateModulation",
+        "dual_positive": 366,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 65,
+        "strict": 4615
+      }
+    ],
+    "by_condition_primitive": [
+      {
+        "condition_primitive": "MultiScaleRelation",
+        "dual_positive": 702,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 41,
+        "strict": 3760
+      },
+      {
+        "condition_primitive": "Persistence",
+        "dual_positive": 918,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 110,
+        "strict": 7684
+      },
+      {
+        "condition_primitive": "Transition",
+        "dual_positive": 162,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 11,
+        "strict": 2556
+      }
+    ],
+    "by_condition_role": [
+      {
+        "condition_role": "FUNDING",
+        "dual_positive": 297,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 21,
+        "strict": 5828
+      },
+      {
+        "condition_role": "OI_LEVEL",
+        "dual_positive": 1485,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "replicated": 141,
+        "strict": 8172
+      }
+    ],
+    "by_parent_p1_payload": [
+      {
+        "dual_positive": 1782,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "parent_p1_program_id": "TEMPORAL_PROGRAM_V1_24D6B15FE4E0F6E00EBD1093BB5DA31E",
+        "replicated": 162,
+        "strict": 14000
+      }
+    ],
+    "by_semantic_combination": [
+      {
+        "dual_positive": 220,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_194CF82543CC3A4A713CD5E90855641E",
+        "replicated": 53,
+        "strict": 1973
+      },
+      {
+        "dual_positive": 22,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_4572CDDFA11887398E827E40906A3B45",
+        "replicated": 1,
+        "strict": 336
+      },
+      {
+        "dual_positive": 123,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_467C04CF73866C116BF6D7335179C630",
+        "replicated": 10,
+        "strict": 1739
+      },
+      {
+        "dual_positive": 12,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_62489152416F71002E5AF2F096BAB6F6",
+        "replicated": 0,
+        "strict": 1533
+      },
+      {
+        "dual_positive": 701,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_9294D17DECE1D3BA0E7CA8B144F15D9D",
+        "replicated": 40,
+        "strict": 3193
+      },
+      {
+        "dual_positive": 1,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_98F148AE4AF9F7C06E6E3BD4F5E92695",
+        "replicated": 1,
+        "strict": 567
+      },
+      {
+        "dual_positive": 563,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_D932EBC023245412B3E15DB72B5928A0",
+        "replicated": 47,
+        "strict": 2439
+      },
+      {
+        "dual_positive": 140,
+        "economic_clusters": 0,
+        "hq": 0,
+        "matched": 0,
+        "matched_density": 0.0,
+        "new_economic_clusters": 0,
+        "new_hq_realization": 0,
+        "program_id": "TEMPORAL_P1_G2_FE528C5CB375BCE2311D2B61DD918DB2",
+        "replicated": 10,
+        "strict": 2220
+      }
+    ]
+  },
+  "p1_semantic_breadth": {
+    "concrete_realizations": 0,
+    "depth": {
+      "asset_selection_realizations_ge_2": 26,
+      "economic_basin_count": 50,
+      "high_quality_basins_deepened": 19,
+      "mapped_weight_realizations_ge_2": 15,
+      "mapped_weight_realizations_ge_3": 2,
+      "new_high_quality_concrete_realizations": 81,
+      "raw_field_realizations_ge_2": 25,
+      "singleton_basin_count": 4,
+      "turnover_realizations_ge_2": 1
+    },
+    "depth_increase": {
+      "asset_selection_realizations_ge_2": 7,
+      "mapped_weight_realizations_ge_2": 4,
+      "mapped_weight_realizations_ge_3": 0,
+      "raw_field_realizations_ge_2": 6,
+      "turnover_realizations_ge_2": 0
+    },
+    "economic_clusters_0_95_0_90_0_85": {
+      "0.85": 45,
+      "0.90": 50,
+      "0.95": 72
+    },
+    "existing_hq_basins_deepened": 1,
+    "new_clusters_0_95_0_90_0_85": {
+      "0.85": 2,
+      "0.90": 3,
+      "0.95": 12
+    },
+    "new_hq_concrete_realizations": 0,
+    "p1_g2_economic_clusters_0_90": 0,
+    "p1_g2_new_economic_clusters_0_90": 0,
+    "turnover_is_diagnostic": true
+  },
+  "p4_health": {
+    "frozen_semantic_basis": true,
+    "matched_density": 0.2853333333333333,
+    "matched_positive": 856,
+    "strict": 3000
+  },
+  "promotion_reads": 0,
+  "runtime_id": "p1g2_opcont_v1_20260816r3",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search": {
+    "attempts": 756099,
+    "lane_outcomes": {
+      "P1_G1": {
+        "matched_density": 0.03333333333333333,
+        "matched_positive": 100,
+        "strict": 3000
+      },
+      "P1_G2": {
+        "matched_density": 0.0,
+        "matched_positive": 0,
+        "strict": 14000
+      },
+      "P4": {
+        "matched_density": 0.2853333333333333,
+        "matched_positive": 856,
+        "strict": 3000
+      }
+    },
+    "matched_positive": 956,
+    "p2_strict": 0,
+    "p3_strict": 0,
+    "strict": 20000
+  },
+  "status": "P1_SEMANTIC_SUPPLY_EXPANSION_FINAL_ANALYSIS",
+  "validation_reads": 0
+}

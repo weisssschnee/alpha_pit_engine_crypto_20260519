@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p1g2_opcont_v1_20260816r3",
+  "objective": "Preserve the restore-verified r2 12k prefix and complete the originally authorized 20k P1 G2 Block Robust V2 development question without changing the scientific contract.",
+  "status": "COMPLETED",
+  "runtime_host": "DESKTOP-A2H3A2G",
+  "runtime_repo": "C:/HermesWorker/workspace/crypto_temporal_search_core_realization_v2_20260814",
+  "runtime_id": "p1g2_opcont_v1_20260816r3",
+  "source_runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_block_robust_v2_20260816r2",
+  "implementation_commit": "55df1cda91a1d232904b09df9e447f79c9cee11b",
+  "authorization_commit": "043da5dc478e0b81ba7cca168cf10562c84a057e",
+  "authorization_sha256": "A795C6A2398F1184EEC355001A4A732A5A289DCD5DA5C9CA62533F142826B960",
+  "migration_receipt_sha256": "4555BEBBF14D3400FE8FC61B2D167ED07E5BFDC26FA8063B2B63E7FBE547BF53",
+  "run_result_sha256": "B03DAC2D0C0D850C2262275B949BEBABEA43798310449370AA1A29B8AB33CDC7",
+  "analysis_sha256": "4E78E555FFDBB6BC41CB59B9DA216287980D90F07689C6C53EC45369674DFA0B",
+  "checker_sha256": "3D6F3D6BB7EF3B10B626C6D226F868399D04861AC1371064E6DE8CF060E4A6CB",
+  "candidate_ledger": {
+    "rows": 20000,
+    "bytes": 236034747,
+    "sha256": "2FC6B541EAE9AE04915034B33068BF32E1BC48BD1851F64B51D6CCED919447D9",
+    "copied_locally": false,
+    "identity_source": "canonical_checker.json and checkpoint_009_manifest.json"
+  },
+  "final_checkpoint": {
+    "checkpoint": "checkpoint_009",
+    "strict": 20000,
+    "restore_verified": true,
+    "state_sha256": "713CEE709C71BAE83234419D325988916B11487B3B782C904FCCA503BD60C747"
+  },
+  "files": [
+    {"path": "authorization_snapshot.json", "bytes": 9391, "sha256": "9ADE06CBF7C0333C3ED99B34564A3B52D0C53493EA2584027A03EA4B256351CE", "purpose": "immutable authorization snapshot"},
+    {"path": "canonical_checker.json", "bytes": 1147, "sha256": "07305D64DD456CF69508BCB0DA1150A0A194F2C251A09A0CD79712CE35BC8985", "purpose": "canonical completion checker; embedded canonical checker hash excludes its self-hash field"},
+    {"path": "checkpoint_009_manifest.json", "bytes": 4009, "sha256": "BADD80CC23EEB04B1178E6907560259439FCF6C11C9048E28D2C4442A1681C16", "purpose": "restore-verified 20k final checkpoint manifest"},
+    {"path": "final_analysis.json", "bytes": 11291, "sha256": "ED77719B6C63143B631F27DAE3183E3D97C48A3CEDFE42AF5C904691250BF75A", "purpose": "canonical final analysis; embedded canonical analysis hash excludes its self-hash field"},
+    {"path": "frozen_contract.json", "bytes": 6242, "sha256": "3D84329256266825A65839CD87BFFD89720B990DC74B66881C5CB6EC2DBEF78C", "purpose": "frozen continuation contract"},
+    {"path": "launch_claim.json", "bytes": 891, "sha256": "0CDDB77D720E095A4959AD5CAA1EBFE0EAA3F7E8FC9E5A0AB6047E7E4A2182C9", "purpose": "single-launch claim"},
+    {"path": "market_input_preflight.json", "bytes": 1171, "sha256": "DA8357AA5BD39D79302CB8D4FB858EFE078FB23A0F2C7BE325A5829372CC7B43", "purpose": "market-input identity preflight"},
+    {"path": "migration_receipt.json", "bytes": 6558, "sha256": "80A16EC3B2CE3C222C5A273FC6E644A3ABC986F829DA52A796588C6A56FFD5D3", "purpose": "exact 12k state migration and equality proof; embedded canonical receipt hash excludes its self-hash field"},
+    {"path": "run_complete.json", "bytes": 252896, "sha256": "5ACE82C78A29033E935FCD838FE3C1B0E0458F10C4534527238AA5D63ED667E0", "purpose": "20k run completion and economic diagnostics"}
+  ],
+  "runtime_task": {"task_id": "job_20260816_140426_2ffe61", "started_at": "2026-08-16T14:04:30+08:00", "ended_at": "2026-08-16T19:49:04+08:00", "exit_code": 0},
+  "post_run_task": {"task_id": "job_20260816_200738_7741c6", "started_at": "2026-08-16T20:07:46+08:00", "ended_at": "2026-08-16T20:08:08+08:00", "exit_code": 0},
+  "reproducibility": {
+    "status": "YES",
+    "continuation": "Use the source r2 checkpoint, migration_receipt.json, imported checkpoint identity, four native successor checkpoints, and the final ledger SHA. Do not replay strict rows 1 through 12000.",
+    "automatic_next_run_started": false
+  }
+}
