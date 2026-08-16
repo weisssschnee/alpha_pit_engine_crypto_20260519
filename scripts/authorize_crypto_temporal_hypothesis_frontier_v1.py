@@ -19,12 +19,15 @@ def _git(root: Path, *args: str) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(); parser.add_argument("--repo-root", type=Path, required=True); parser.add_argument("--runtime-id", required=True); parser.add_argument("--offline-receipt", type=Path, required=True)
     args = parser.parse_args(); root = args.repo_root.resolve(); target = root / AUTHORIZATION_PATH
-    if target.exists() or _git(root, "status", "--porcelain=v1") or _git(root, "rev-parse", "HEAD") != _git(root, "rev-parse", "@{upstream}"):
+    if target.exists() or _git(root, "status", "--porcelain=v1", "--untracked-files=no") or _git(root, "rev-parse", "HEAD") != _git(root, "rev-parse", "@{upstream}"):
         raise RuntimeError("authorization requires clean synchronized implementation and absent authorization")
     offline = engine._read_json(args.offline_receipt)
     if offline.get("status") != "TEMPORAL_HYPOTHESIS_FRONTIER_PREAUTHORIZATION_OFFLINE_PASS" or int(offline.get("candidate_evaluations", -1)) != 0:
         raise RuntimeError("offline receipt not authorized")
-    implementation = _git(root, "rev-parse", "HEAD").lower(); source_gap = engine._read_json(root / "config/crypto_temporal_hypothesis_frontier_v1_source_gap.json"); catalog = engine._read_json(root / "config/crypto_temporal_hypothesis_frontier_v1_catalog.json"); prior = engine._read_json(root / "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json")
+    implementation = _git(root, "rev-parse", "HEAD").lower()
+    if str(offline.get("head") or "").lower() != implementation:
+        raise RuntimeError("offline receipt is not bound to the implementation HEAD")
+    source_gap = engine._read_json(root / "config/crypto_temporal_hypothesis_frontier_v1_source_gap.json"); catalog = engine._read_json(root / "config/crypto_temporal_hypothesis_frontier_v1_catalog.json"); prior = engine._read_json(root / "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json")
     components = {path: _git(root, "rev-parse", f"{implementation}:{path}").lower() for path in REQUIRED_EXECUTION_COMPONENT_PATHS}
     core = {
         "schema_version": 1, "execution_mode": EXECUTION_MODE, "status": "RUN_AUTHORIZED_ONE_TIME_TEMPORAL_HYPOTHESIS_FRONTIER_30000", "run_authorized": True, "consumed": False,

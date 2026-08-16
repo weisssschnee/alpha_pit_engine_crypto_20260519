@@ -200,7 +200,7 @@ def validate_authorization(repo_root: Path) -> dict[str, Any]:
     changed = set(_git(root, "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD").splitlines())
     if changed != {AUTHORIZATION_PATH}:
         errors.append("authorization_commit_not_pure")
-    if _git(root, "status", "--porcelain=v1"):
+    if _git(root, "status", "--porcelain=v1", "--untracked-files=no"):
         errors.append("worktree")
     if errors:
         raise RuntimeError("FAIL_CLOSED_BEFORE_MARKET_READ:" + ",".join(sorted(errors)))
