@@ -1668,7 +1668,10 @@ def _load_checkpoint(
 
 
 def _program_family(candidate: CandidateSpec) -> str:
-    return str(candidate.generation_genes["program_spec"]["family_id"])
+    genes = candidate.generation_genes
+    if "program_spec" in genes:
+        return str(genes["program_spec"]["family_id"])
+    return str(genes["mechanism_spec"]["template_id"])
 
 
 def _observe_candidate(
@@ -1745,8 +1748,15 @@ def _observe_candidate(
         require_evidence_provenance=True,
     )
     row["program_family_id"] = _program_family(candidate)
-    row["program_id"] = str(candidate.generation_genes["program_id"])
-    row["representation"] = str(candidate.generation_genes["representation"])
+    genes = candidate.generation_genes
+    mechanism = dict(genes.get("mechanism_spec") or {})
+    row["program_id"] = str(
+        genes.get("program_id") or mechanism.get("program_id") or ""
+    )
+    row["representation"] = str(
+        genes.get("representation")
+        or ("TEMPORAL_FRONTIER_PROGRAM" if "temporal_transform" in genes else "MECHANISM_FRONTIER_PROGRAM")
+    )
     row["total_process_cpu_seconds"] = float(
         row["proposal_compile_cpu_seconds"] + row["pair_process_cpu_seconds"]
     )

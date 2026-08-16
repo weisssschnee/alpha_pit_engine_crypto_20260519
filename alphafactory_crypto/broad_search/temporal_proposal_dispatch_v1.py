@@ -350,6 +350,7 @@ def configure_policy_dispatcher_v1(
     *,
     historical_prior: Mapping[str, Any],
     p1_g2_source_gap: Mapping[str, Any] | None = None,
+    frontier_source_gap: Mapping[str, Any] | None = None,
 ) -> None:
     prior = _validate_prior(historical_prior)
     g2_parent_prior: dict[str, Any] = {}
@@ -418,6 +419,28 @@ def configure_policy_dispatcher_v1(
         "target_generated": {},
         "target_selected": {},
     }
+    if frontier_source_gap is not None:
+        frontier = json.loads(json.dumps(dict(frontier_source_gap)))
+        frontier_core = {
+            key: value for key, value in frontier.items() if key != "source_gap_sha256"
+        }
+        if (
+            frontier.get("status") != "TEMPORAL_HYPOTHESIS_FRONTIER_SOURCE_GAP_READY"
+            or frontier.get("source_gap_sha256") != _sha(frontier_core)
+            or any(int(frontier.get(name, -1)) != 0 for name in (
+                "validation_reads", "oos_reads", "holdout_reads", "forward_reads",
+                "promotion_reads", "sealed_reads",
+            ))
+        ):
+            raise ValueError("frontier source-gap prior identity changed")
+        state["frontier_source_gap_sha256"] = frontier["source_gap_sha256"]
+        state["frontier_template_prior"] = {
+            str(row["key"]): {
+                "strict": int(row["strict"]),
+                "positive_reward": int(row["positive_reward"]),
+            }
+            for row in frontier["historical_template_stats"]
+        }
     state["configuration_sha256"] = _sha(
         {key: value for key, value in state.items() if key != "configuration_sha256"}
     )
@@ -742,6 +765,16 @@ def _economic_score(state: Mapping[str, Any], features: Mapping[str, Any]) -> fl
         matched = float(parent.get("matched_positive", 0))
         score += 0.04 * (matched + 20.0 * global_prior["matched_positive"]) / (
             attempts + 20.0
+        )
+    template = str(features.get("parent_template_id") or "")
+    if template:
+        prior = dict(dict(state.get("frontier_template_prior") or {}).get(template, {}))
+        attempts = float(prior.get("strict", 0))
+        positive = float(prior.get("positive_reward", 0))
+        # Deliberately small and strongly smoothed: old reward is a development
+        # prior, never present-contract Alpha evidence.
+        score += 0.05 * (positive + 40.0 * global_prior["positive_reward"]) / (
+            attempts + 40.0
         )
     return score
 

@@ -1,0 +1,545 @@
+{
+  "accepted_motif_plan": [
+    {
+      "condition_variants": [
+        {
+          "mode": "ABSOLUTE_MAGNITUDE",
+          "operator": "StateModulation",
+          "role": "OI_LEVEL"
+        }
+      ],
+      "family_id": "P5_FLOW_PARTICIPATION_CONVICTION",
+      "hypothesis": "Aggressor imbalance relative to participation intensity separates directional conviction from sparse prints and exhaustion.",
+      "motif_id": "FLOW_INTENSITY_CONVICTION",
+      "parent_template_id": "FLOW_INTENSITY_CONVICTION",
+      "payload_modes": {
+        "ConditionGate": [
+          "SIGN_CONFIRMATION",
+          "SIGN_DISAGREEMENT"
+        ]
+      },
+      "payload_operators": [
+        "SafeDiv",
+        "SafeMul",
+        "Residual",
+        "ConditionGate"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "Persistence"
+        },
+        {
+          "axis": "left",
+          "primitive": "Acceleration"
+        },
+        {
+          "axis": "right",
+          "primitive": "EventWindow"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": "ABSOLUTE_MAGNITUDE",
+          "operator": "StateModulation",
+          "role": "TRADE_INTENSITY"
+        }
+      ],
+      "family_id": "P5_FLOW_PARTICIPATION_CONVICTION",
+      "hypothesis": "Persistent taker pressure with weak or strong price displacement distinguishes absorption from continuation.",
+      "motif_id": "FLOW_PRICE_ABSORPTION",
+      "parent_template_id": "FLOW_PRICE_ABSORPTION",
+      "payload_operators": [
+        "SafeDiv",
+        "NormalizedDifference",
+        "Residual"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "Acceleration"
+        },
+        {
+          "axis": "right",
+          "primitive": "Persistence"
+        },
+        {
+          "axis": "right",
+          "primitive": "MultiScaleRelation"
+        }
+      ]
+    },
+    {
+      "condition_variants": [],
+      "family_id": "P5_FLOW_PARTICIPATION_CONVICTION",
+      "hypothesis": "Large-trade participation relative to price response identifies concentrated informed pressure or absorbed block flow.",
+      "motif_id": "LARGE_TRADE_PRICE_RESPONSE",
+      "parent_template_id": "LARGE_TRADE_PRICE_RESPONSE",
+      "payload_operators": [
+        "SafeDiv",
+        "NormalizedDifference",
+        "Residual"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "right",
+          "primitive": "Persistence"
+        },
+        {
+          "axis": "right",
+          "primitive": "EventWindow"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": "ABSOLUTE_MAGNITUDE",
+          "operator": "StateModulation",
+          "role": "OI_LEVEL"
+        }
+      ],
+      "family_id": "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+      "hypothesis": "Funding pressure relative to aggressor flow measures contemporaneous directional crowding and unwind risk.",
+      "motif_id": "FUNDING_FLOW_CROWDING",
+      "parent_template_id": "FUNDING_FLOW_CROWDING",
+      "payload_modes": {
+        "ConditionGate": [
+          "SIGN_CONFIRMATION",
+          "SIGN_DISAGREEMENT"
+        ]
+      },
+      "payload_operators": [
+        "SafeDiv",
+        "SafeMul",
+        "Residual",
+        "ConditionGate"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "Persistence"
+        },
+        {
+          "axis": "left",
+          "primitive": "Transition"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": "NEGATIVE",
+          "operator": "ConditionGate",
+          "role": "FUNDING"
+        }
+      ],
+      "family_id": "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+      "hypothesis": "Flow crowding normalized by open-interest expansion distinguishes new leverage from inventory transfer.",
+      "motif_id": "OI_FLOW_CONFIRMATION",
+      "parent_template_id": "OI_FLOW_CONFIRMATION_V2",
+      "payload_operators": [
+        "NormalizedDifference",
+        "Residual",
+        "RatioInteraction"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "Delta"
+        },
+        {
+          "axis": "left",
+          "primitive": "MultiScaleRelation"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": "ABSOLUTE_MAGNITUDE",
+          "operator": "StateModulation",
+          "role": "OI_LEVEL"
+        }
+      ],
+      "family_id": "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+      "hypothesis": "Basis dislocation relative to aggressor flow identifies derivatives pressure confirmed or rejected by carry.",
+      "motif_id": "BASIS_FLOW_DISLOCATION",
+      "parent_template_id": "BASIS_FLOW_DISLOCATION",
+      "payload_operators": [
+        "NormalizedDifference",
+        "Residual",
+        "RatioInteraction"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "MultiScaleRelation"
+        },
+        {
+          "axis": "right",
+          "primitive": "Persistence"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": null,
+          "operator": "ConditionGate",
+          "role": "FLOW_IMBALANCE"
+        }
+      ],
+      "family_id": "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+      "hypothesis": "Carry dislocation relative to open-interest participation measures crowded leverage demand.",
+      "motif_id": "BASIS_OI_CROWDING",
+      "parent_template_id": "BASIS_OI_CROWDING",
+      "payload_operators": [
+        "NormalizedDifference",
+        "Residual",
+        "RatioInteraction"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "MultiScaleRelation"
+        },
+        {
+          "axis": "right",
+          "primitive": "Delta"
+        }
+      ]
+    },
+    {
+      "condition_variants": [
+        {
+          "mode": "SIGN_ROUTING",
+          "operator": "StateModulation",
+          "role": "FUNDING"
+        }
+      ],
+      "family_id": "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+      "hypothesis": "Cross-venue open-interest disagreement relative to flow reveals venue-local leverage pressure.",
+      "motif_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+      "parent_template_id": "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+      "payload_operators": [
+        "NormalizedDifference",
+        "Residual"
+      ],
+      "temporal_variants": [
+        {},
+        {
+          "axis": "left",
+          "primitive": "MultiScaleRelation"
+        }
+      ]
+    }
+  ],
+  "forward_reads": 0,
+  "historical_condition_role_stats": [
+    {
+      "key": "BASIS_BUNDLE",
+      "positive_reward": 5,
+      "positive_reward_density": 0.004734848484848485,
+      "strict": 1056
+    },
+    {
+      "key": "FLOW_IMBALANCE",
+      "positive_reward": 2,
+      "positive_reward_density": 0.002364066193853428,
+      "strict": 846
+    },
+    {
+      "key": "FUNDING",
+      "positive_reward": 12,
+      "positive_reward_density": 0.0061570035915854285,
+      "strict": 1949
+    },
+    {
+      "key": "NONE",
+      "positive_reward": 680,
+      "positive_reward_density": 0.1585081585081585,
+      "strict": 4290
+    },
+    {
+      "key": "OI_LEVEL",
+      "positive_reward": 1067,
+      "positive_reward_density": 0.16137326073805203,
+      "strict": 6612
+    },
+    {
+      "key": "TRADE_INTENSITY",
+      "positive_reward": 4,
+      "positive_reward_density": 0.0032076984763432237,
+      "strict": 1247
+    }
+  ],
+  "historical_oos_used_as_adaptive_label": false,
+  "historical_operator_condition_stats": [
+    {
+      "key": "ConditionGate+ConditionGate",
+      "positive_reward": 4,
+      "positive_reward_density": 0.008,
+      "strict": 500
+    },
+    {
+      "key": "ConditionGate+NONE",
+      "positive_reward": 165,
+      "positive_reward_density": 0.1588065447545717,
+      "strict": 1039
+    },
+    {
+      "key": "ConditionGate+StateModulation",
+      "positive_reward": 388,
+      "positive_reward_density": 0.1425946343256156,
+      "strict": 2721
+    },
+    {
+      "key": "NormalizedDifference+ConditionGate",
+      "positive_reward": 7,
+      "positive_reward_density": 0.022435897435897436,
+      "strict": 312
+    },
+    {
+      "key": "NormalizedDifference+NONE",
+      "positive_reward": 2,
+      "positive_reward_density": 0.014084507042253521,
+      "strict": 142
+    },
+    {
+      "key": "NormalizedDifference+StateModulation",
+      "positive_reward": 3,
+      "positive_reward_density": 0.003870967741935484,
+      "strict": 775
+    },
+    {
+      "key": "RatioInteraction+ConditionGate",
+      "positive_reward": 1,
+      "positive_reward_density": 0.0027472527472527475,
+      "strict": 364
+    },
+    {
+      "key": "RatioInteraction+NONE",
+      "positive_reward": 54,
+      "positive_reward_density": 0.108,
+      "strict": 500
+    },
+    {
+      "key": "RatioInteraction+StateModulation",
+      "positive_reward": 64,
+      "positive_reward_density": 0.046410442349528645,
+      "strict": 1379
+    },
+    {
+      "key": "Residual+ConditionGate",
+      "positive_reward": 11,
+      "positive_reward_density": 0.02119460500963391,
+      "strict": 519
+    },
+    {
+      "key": "Residual+NONE",
+      "positive_reward": 375,
+      "positive_reward_density": 0.21138669673055244,
+      "strict": 1774
+    },
+    {
+      "key": "Residual+StateModulation",
+      "positive_reward": 465,
+      "positive_reward_density": 0.18185373484552209,
+      "strict": 2557
+    },
+    {
+      "key": "SafeDiv+ConditionGate",
+      "positive_reward": 0,
+      "positive_reward_density": 0.0,
+      "strict": 206
+    },
+    {
+      "key": "SafeDiv+NONE",
+      "positive_reward": 34,
+      "positive_reward_density": 0.09264305177111716,
+      "strict": 367
+    },
+    {
+      "key": "SafeDiv+StateModulation",
+      "positive_reward": 93,
+      "positive_reward_density": 0.09935897435897435,
+      "strict": 936
+    },
+    {
+      "key": "SafeMul+ConditionGate",
+      "positive_reward": 4,
+      "positive_reward_density": 0.01238390092879257,
+      "strict": 323
+    },
+    {
+      "key": "SafeMul+NONE",
+      "positive_reward": 50,
+      "positive_reward_density": 0.10683760683760683,
+      "strict": 468
+    },
+    {
+      "key": "SafeMul+StateModulation",
+      "positive_reward": 50,
+      "positive_reward_density": 0.044722719141323794,
+      "strict": 1118
+    }
+  ],
+  "historical_provenance": [
+    {
+      "kind": "OI_FUNDING_QUEUE",
+      "path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mech3_oi_funding_lag_pass_reward_queue_20260703\\a7source5_source_lag_survivor_reward_queue.csv",
+      "sha256": "0692B1DE6E00007BDFA8D2674B25D2250A2AC6F526CE6D4886F8268AC6C7E266"
+    },
+    {
+      "kind": "REGIME_MECHANISM_AUDIT",
+      "path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7REGIME2_MECHANISM_REGIME_AUDIT_20260612.md",
+      "sha256": "C7C6369C8BD5E4DFBF395DEB92982A2820855C561F0C73D6B1ED4EC52BBC5E7F"
+    }
+  ],
+  "historical_template_stats": [
+    {
+      "key": "BASIS_FLOW_DISLOCATION",
+      "matched_positive": 0,
+      "positive_reward": 6,
+      "positive_reward_density": 0.007361963190184049,
+      "reward_sum": -727.2759121290384,
+      "strict": 815
+    },
+    {
+      "key": "BASIS_OI_CROWDING",
+      "matched_positive": 0,
+      "positive_reward": 5,
+      "positive_reward_density": 0.010224948875255624,
+      "reward_sum": -373.6324929307763,
+      "strict": 489
+    },
+    {
+      "key": "CROSS_VENUE_OI_FLOW_DISAGREEMENT",
+      "matched_positive": 0,
+      "positive_reward": 2,
+      "positive_reward_density": 0.004081632653061225,
+      "reward_sum": -392.56639951604484,
+      "strict": 490
+    },
+    {
+      "key": "FLOW_INTENSITY_CONVICTION",
+      "matched_positive": 0,
+      "positive_reward": 661,
+      "positive_reward_density": 0.1757044125465178,
+      "reward_sum": -1336.8692018009872,
+      "strict": 3762
+    },
+    {
+      "key": "FLOW_PRICE_ABSORPTION",
+      "matched_positive": 0,
+      "positive_reward": 11,
+      "positive_reward_density": 0.009708737864077669,
+      "reward_sum": -895.7002752804575,
+      "strict": 1133
+    },
+    {
+      "key": "FUNDING_FLOW_CROWDING",
+      "matched_positive": 0,
+      "positive_reward": 1068,
+      "positive_reward_density": 0.20082737871380218,
+      "reward_sum": -2155.303947376485,
+      "strict": 5318
+    },
+    {
+      "key": "LARGE_TRADE_OI_CROWDING",
+      "matched_positive": 0,
+      "positive_reward": 3,
+      "positive_reward_density": 0.006085192697768763,
+      "reward_sum": -328.8060266923458,
+      "strict": 493
+    },
+    {
+      "key": "LARGE_TRADE_PRICE_RESPONSE",
+      "matched_positive": 0,
+      "positive_reward": 0,
+      "positive_reward_density": 0.0,
+      "reward_sum": -438.2823635213251,
+      "strict": 493
+    },
+    {
+      "key": "OI_ACTIVITY_EXPANSION",
+      "matched_positive": 0,
+      "positive_reward": 2,
+      "positive_reward_density": 0.003883495145631068,
+      "reward_sum": -392.44727004777053,
+      "strict": 515
+    },
+    {
+      "key": "OI_FLOW_CONFIRMATION_V2",
+      "matched_positive": 0,
+      "positive_reward": 5,
+      "positive_reward_density": 0.004807692307692308,
+      "reward_sum": -800.9150908546305,
+      "strict": 1040
+    },
+    {
+      "key": "OI_NOTIONAL_PRICE_ABSORPTION",
+      "matched_positive": 0,
+      "positive_reward": 1,
+      "positive_reward_density": 0.0021141649048625794,
+      "reward_sum": -399.42053318749487,
+      "strict": 473
+    },
+    {
+      "key": "OI_PRICE_DIVERGENCE_V2",
+      "matched_positive": 0,
+      "positive_reward": 6,
+      "positive_reward_density": 0.006128702757916241,
+      "reward_sum": -683.528542067943,
+      "strict": 979
+    }
+  ],
+  "holdout_reads": 0,
+  "mapping_authority": [
+    "CROSS_SECTIONAL_RELATIVE",
+    "SPARSE_EVENT_CARRY"
+  ],
+  "matched_control_schemas": [
+    "DUAL_AXIS_A_B_AB",
+    "HIERARCHICAL_A_B_AB_ABC"
+  ],
+  "oos_reads": 0,
+  "pit_contract": {
+    "all_lags_nonnegative": true,
+    "contract_count": 115,
+    "manifest_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_engine_v1_4_oi_flow_20260728\\aligned_carrier_manifest.json",
+    "manifest_sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+  },
+  "promotion_reads": 0,
+  "raw_possible_combinations": 111,
+  "rejection_reasons": {
+    "FULL_CARTESIAN_PRODUCT": "BOUNDED_CATALOG_POLICY",
+    "P1_POSITION_FIRST_SEMANTICS": "ARCHIVED_FAMILY_OVERLAP",
+    "P4_SLOW_STATE_ROUTING": "ANCHOR_ONLY_NOT_FRONTIER",
+    "UNREGISTERED_PRIMITIVES": "NOT_REQUIRED_BY_SOURCE_GAP"
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_gap_sha256": "438D6C667996C4A4FD703ED9D61A5B421FD57ED87F74E809A1DE0CC8E12ED250",
+  "source_ledger": {
+    "bytes": 81689188,
+    "path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_mechanism_v2_3_20260802\\candidate_ledger.parquet",
+    "rows": 16000,
+    "sha256": "B19F0E94B9BB50933E8F6BD6A92754E3D8DC8059968C0D5069E3EF87527456E4"
+  },
+  "source_partitions": [
+    "train"
+  ],
+  "status": "TEMPORAL_HYPOTHESIS_FRONTIER_SOURCE_GAP_READY",
+  "validation_reads": 0
+}

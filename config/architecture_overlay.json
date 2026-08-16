@@ -2308,6 +2308,37 @@
                                        ]
                   },
                   {
+                      "id":  "crypto_temporal_hypothesis_frontier_v1",
+                      "label":  "Temporal P5/P6 hypothesis frontier V1",
+                      "kind":  "development_experiment",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "paths":  [
+                                    "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_v1.py",
+                                    "config/crypto_temporal_hypothesis_frontier_v1_catalog.json"
+                                ],
+                      "critical":  false,
+                      "semantic_role":  "experimental_temporal_hypothesis_frontier",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "contracts":  [
+                                        {
+                                            "id":  "temporal_hypothesis_frontier_train_only_boundary",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "One bounded 30k strict P5/P6/P4 development campaign may use the frozen P5/P6 catalog and existing Search Core; validation, OOS, holdout, forward, promotion, sealed reads, catalog mutation and automatic follow-up remain forbidden.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "pure authorization, frozen runtime contract, 2k checkpoints and canonical checker",
+                                            "bypass_forbidden":  true
+                                        }
+                                    ],
+                      "claim_badges":  [
+                                           "EXPERIMENTAL CANDIDATE",
+                                           "P5 P6 FRONTIER CATALOG FROZEN",
+                                           "P4 HEALTH ANCHOR",
+                                           "TRAIN ONLY",
+                                           "NO PROMOTION OR AUTOMATIC FOLLOW-UP"
+                                       ]
+                  },
+                  {
                       "id":  "sealed_research_boundaries",
                       "label":  "Forward / Challenge / Promotion boundaries",
                       "kind":  "boundary",
@@ -3237,6 +3268,28 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
                       "evidence_type":  "RUNTIME"
+                  },
+                  {
+                      "id":  "temporal_hypothesis_frontier_candidate_for_search_policy",
+                      "source":  "crypto_temporal_hypothesis_frontier_v1",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "candidate_for",
+                      "relation_class":  "candidate_for",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "STATIC"
+                  },
+                  {
+                      "id":  "temporal_hypothesis_frontier_derived_from_proposal_dispatch",
+                      "source":  "crypto_temporal_hypothesis_frontier_v1",
+                      "target":  "crypto_temporal_proposal_dispatch_successor_v1",
+                      "relation":  "derived_from",
+                      "relation_class":  "derived_from",
+                      "binding_state":  "EXPERIMENTAL",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  false,
+                      "evidence_type":  "STATIC"
                   }
               ],
     "profile_refs":  [
