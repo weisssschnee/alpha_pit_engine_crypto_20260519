@@ -174,13 +174,13 @@ def validate_authorization(repo_root: Path) -> dict[str, Any]:
         errors.append("market_input_identity")
     if dict(payload.get("pc2_executor_identity") or {}) != EXPECTED_PC2_EXECUTOR_IDENTITY:
         errors.append("pc2_executor_identity")
-    for path_key, hash_key, identity_key in (
-        (SOURCE_GAP_PATH, "source_gap_file_sha256", "source_gap_sha256"),
-        (CATALOG_PATH, "frontier_catalog_file_sha256", "frontier_catalog_sha256"),
-        (HISTORICAL_PRIOR_PATH, "historical_prior_file_sha256", "historical_prior_sha256"),
+    for path_key, hash_key, embedded_key, identity_key in (
+        (SOURCE_GAP_PATH, "source_gap_file_sha256", "source_gap_sha256", "source_gap_sha256"),
+        (CATALOG_PATH, "frontier_catalog_file_sha256", "catalog_sha256", "frontier_catalog_sha256"),
+        (HISTORICAL_PRIOR_PATH, "historical_prior_file_sha256", "prior_sha256", "historical_prior_sha256"),
     ):
         observed = engine._read_json(root / path_key)
-        embedded = observed.get("source_gap_sha256") or observed.get("catalog_sha256") or observed.get("prior_sha256")
+        embedded = observed.get(embedded_key)
         if _file_sha(root / path_key) != payload.get(hash_key) or embedded != payload.get(identity_key):
             errors.append("identity:" + path_key)
     implementation = str(payload.get("implementation_source_sha") or "").lower()
