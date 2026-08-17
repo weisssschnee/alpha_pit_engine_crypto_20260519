@@ -14,7 +14,7 @@
     "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
-  "authorization_sha256": "AA5AB3310ABD6AA625A1215C6AA5BC1B8372D3F6484AF98A1290513983CF22E8",
+  "authorization_sha256": "0FBB0D856DDBD8C4DCD5F86FC5278C35F1FCA9FCC3C9CFBF536E3ADD2B25B9CF",
   "budget": {
     "checkpoint_size": 2000,
     "raw_generation_attempts_maximum": 1250000,
@@ -29,7 +29,7 @@
     "alphafactory_crypto/broad_search/pair18m.py": "0a7f77ab0403f15fd7e9ed66e9029eb3214a0015",
     "alphafactory_crypto/broad_search/search_engine_v1.py": "91f823b44ce580ad9e83016656e7b6ca96782287",
     "alphafactory_crypto/broad_search/temporal_frontier_pocket_assurance_v1.py": "1837b8606d33d545bf356e54774d329803b86b7f",
-    "alphafactory_crypto/broad_search/temporal_frontier_pocket_search_v1.py": "5189e51856a327a949ce17a6504871ac9a3f1f5c",
+    "alphafactory_crypto/broad_search/temporal_frontier_pocket_search_v1.py": "74e8c551afb0c7807110f20c07c0f6ce06aaddf1",
     "alphafactory_crypto/broad_search/temporal_frontier_pocket_v1.py": "10db99ee9e808c1ca3427d6e6e71e9c4532dfb50",
     "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_v1.py": "6a22ad48cbfd5460069849ee977f4d87ffe63c72",
     "alphafactory_crypto/broad_search/temporal_program_search_v1.py": "c49744d1c269a9da3aebcafbf534837c1bdaf339",
@@ -69,7 +69,7 @@
     "preauthorization_receipt_sha256": "86CF72BEF57E56F0CC7EAB8ACAED6FB6173A049806E76E70B574E4E0866D50C4",
     "target_basins": 23
   },
-  "implementation_source_sha": "f4bc56fda736fc2c7a8da71f1d6abae3fe39e665",
+  "implementation_source_sha": "6e79016b74727b713f3940e9ae90737feb48f255",
   "lane_seeds": {
     "P5_FLOW_PARTICIPATION_CONVICTION": [
       3235453507,
@@ -87,7 +87,8 @@
   "launch_policy": {
     "no_automatic_next_run": true,
     "repair_engineering_faults_before_scientific_advancement": true,
-    "single_run": true
+    "single_run": true,
+    "supersedes_pre_strict_engineering_failure_runtime": "crypto_temporal_frontier_pocket_maturation_v1_20260817r1"
   },
   "market_input_identity": {
     "carrier": {
@@ -110,7 +111,7 @@
     "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
   },
   "run_authorized": true,
-  "runtime_id": "crypto_temporal_frontier_pocket_maturation_v1_20260817r1",
+  "runtime_id": "crypto_temporal_frontier_pocket_maturation_v1_20260817r2",
   "schema_version": 1,
   "status": "RUN_AUTHORIZED_ONE_TIME_FRONTIER_POCKET_MATURATION_V1"
 }
