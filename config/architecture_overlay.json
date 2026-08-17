@@ -2314,7 +2314,10 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
                                     "alphafactory_crypto/broad_search/temporal_hypothesis_frontier_v1.py",
-                                    "config/crypto_temporal_hypothesis_frontier_v1_catalog.json"
+                                    "config/crypto_temporal_hypothesis_frontier_v1_catalog.json",
+                                    "reports/CRYPTO_TEMPORAL_HYPOTHESIS_FRONTIER_V1_20260817R1.md",
+                                    "reports/evidence/crypto_temporal_hypothesis_frontier_v1_20260817r1/frontier_analysis.json",
+                                    "reports/evidence/crypto_temporal_hypothesis_frontier_v1_20260817r1/canonical_checker.json"
                                 ],
                       "critical":  false,
                       "semantic_role":  "experimental_temporal_hypothesis_frontier",
@@ -2327,14 +2330,28 @@
                                             "rule":  "One bounded 30k strict P5/P6/P4 development campaign may use the frozen P5/P6 catalog and existing Search Core; validation, OOS, holdout, forward, promotion, sealed reads, catalog mutation and automatic follow-up remain forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "pure authorization, frozen runtime contract, 2k checkpoints and canonical checker",
-                                            "bypass_forbidden":  true
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "reports/evidence/crypto_temporal_hypothesis_frontier_v1_20260817r1/canonical_checker.json"
                                         }
                                     ],
+                      "validation":  {
+                                         "level":  "RUNTIME_VERIFIED",
+                                         "result":  "PASS",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "reports/evidence/crypto_temporal_hypothesis_frontier_v1_20260817r1/canonical_checker.json",
+                                         "evidence_sha256":  "5A49FAA18875C1F04C67973C0CE82E14A27B873E7D09E4BC994CC681A002613E",
+                                         "verified_at_sha":  "fe4cf3ed42080f8616f4c2bfd64e6c541f30ad6e"
+                                     },
                       "claim_badges":  [
                                            "EXPERIMENTAL CANDIDATE",
                                            "P5 P6 FRONTIER CATALOG FROZEN",
                                            "P4 HEALTH ANCHOR",
                                            "TRAIN ONLY",
+                                           "30K TRAIN-ONLY COMPLETE",
+                                           "CANONICAL CHECKER PASS",
+                                           "P5 P6 EACH ONE MATCHED",
+                                           "TWO INDEPENDENT NEW 0.90 CLUSTERS",
+                                           "NO FORBIDDEN READS",
                                            "NO PROMOTION OR AUTOMATIC FOLLOW-UP"
                                        ]
                   },

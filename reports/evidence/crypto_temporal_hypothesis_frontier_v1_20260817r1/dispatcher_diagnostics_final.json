@@ -1,0 +1,213 @@
+{
+  "average_pool_size": 14.204840325771395,
+  "diagnostics_sha256": "3A8ED29A3EF4C34BD1519ECDCBEF347D098D8A6212B33E64CF0DCFF7F3C0E23B",
+  "dispatch_counters": {
+    "dispatches": 38923,
+    "exploitation_selected": 33102,
+    "exploration_selected": 5821,
+    "legal_generated": 552895,
+    "legal_scored": 552895,
+    "pool_under_eight": 6148
+  },
+  "dispatcher_id": "TEMPORAL_PROPOSAL_DISPATCHER_V1",
+  "edit_generated": {
+    "binding": 127,
+    "binding+normalization": 242,
+    "binding+normalization+temporal_parameter": 92,
+    "binding+temporal_parameter": 132,
+    "condition_structure": 108147,
+    "frontier_relation": 120863,
+    "generic": 40079,
+    "legacy_parameter": 4513,
+    "normalization": 236,
+    "normalization+temporal_parameter": 144,
+    "role": 7885,
+    "temporal_parameter": 279,
+    "temporal_primitive": 270156
+  },
+  "edit_selected": {
+    "binding": 69,
+    "binding+normalization": 25,
+    "binding+normalization+temporal_parameter": 3,
+    "binding+temporal_parameter": 74,
+    "condition_structure": 15651,
+    "frontier_relation": 4555,
+    "generic": 6093,
+    "legacy_parameter": 1016,
+    "normalization": 151,
+    "normalization+temporal_parameter": 10,
+    "role": 128,
+    "temporal_parameter": 56,
+    "temporal_primitive": 11092
+  },
+  "historical_prior_sha256": "719B1DB5764701897D3CC2764E595ABD4F582BF64F6C91B0E658D864F4F39AEA",
+  "median_pool_size": 16,
+  "oos_reads": 0,
+  "policy_state_hashes": {
+    "DISPATCH|2099206231": "3836F031FA8D59AFB601C8CB7E81DA341C8B91CA62075DE820D5BB024E7B27A2",
+    "DISPATCH|3574107642": "C3E4258FA866361EB3217341E9B13B721741E85A615FDC10657570A05AF2CF60",
+    "DISPATCH|359043271": "FB119117AE798391EF208C77CB17A9AA81DCE6F5B39586E077CFB3A7E4A24767",
+    "DISPATCH|3823740441": "30DB368E8EB0C50A00ADB9EFFF7DE1B634BB1B82E760A1CDD24523F09D6C2C9B"
+  },
+  "pool_size_counts": {
+    "10": 146,
+    "11": 112,
+    "12": 122,
+    "13": 180,
+    "14": 201,
+    "15": 1562,
+    "16": 29765,
+    "17": 1,
+    "2": 1,
+    "3": 36,
+    "4": 188,
+    "5": 946,
+    "6": 2267,
+    "7": 2710,
+    "8": 440,
+    "9": 246
+  },
+  "schema_version": 1,
+  "score_decile_outcomes": {
+    "0": {
+      "attempts": 13738,
+      "basin_retained": 0,
+      "matched_positive": 796,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 2196,
+      "reward_sum": -5300.098311835255
+    },
+    "1": {
+      "attempts": 10608,
+      "basin_retained": 0,
+      "matched_positive": 232,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 914,
+      "reward_sum": -4886.914052446193
+    },
+    "2": {
+      "attempts": 1058,
+      "basin_retained": 0,
+      "matched_positive": 73,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 252,
+      "reward_sum": -298.7315824377095
+    },
+    "3": {
+      "attempts": 932,
+      "basin_retained": 0,
+      "matched_positive": 31,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 136,
+      "reward_sum": -384.213185537945
+    },
+    "4": {
+      "attempts": 587,
+      "basin_retained": 0,
+      "matched_positive": 40,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 120,
+      "reward_sum": -172.26754033486137
+    },
+    "5": {
+      "attempts": 922,
+      "basin_retained": 0,
+      "matched_positive": 36,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 134,
+      "reward_sum": -348.54089872103407
+    },
+    "6": {
+      "attempts": 805,
+      "basin_retained": 0,
+      "matched_positive": 31,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 71,
+      "reward_sum": -318.52931278505184
+    },
+    "7": {
+      "attempts": 411,
+      "basin_retained": 0,
+      "matched_positive": 14,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 51,
+      "reward_sum": -155.07585786070257
+    },
+    "8": {
+      "attempts": 684,
+      "basin_retained": 0,
+      "matched_positive": 12,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 30,
+      "reward_sum": -317.3283213892114
+    },
+    "9": {
+      "attempts": 255,
+      "basin_retained": 0,
+      "matched_positive": 0,
+      "new_hq_realization": 0,
+      "new_realization": 0,
+      "positive_reward": 6,
+      "reward_sum": -119.13373949601363
+    }
+  },
+  "sealed_reads": 0,
+  "selected_rank_counts": {
+    "1": 12770,
+    "10": 418,
+    "11": 384,
+    "12": 395,
+    "13": 346,
+    "14": 361,
+    "15": 318,
+    "16": 255,
+    "2": 8696,
+    "3": 6396,
+    "4": 5974,
+    "5": 669,
+    "6": 558,
+    "7": 515,
+    "8": 452,
+    "9": 416
+  },
+  "source_generated": {
+    "DIMENSION_AWARE_PARAMETER_MUTATION": 40079,
+    "LEGACY_PARAMETER_RECOMBINATION": 4513,
+    "REPRESENTATION_SUCCESSOR_RECOMBINATION": 1527,
+    "SEMANTIC_DONOR_MUTATION": 7610,
+    "TEMPORAL_HYPOTHESIS_FRONTIER_CATALOG_SAMPLE": 499166
+  },
+  "source_selected": {
+    "DIMENSION_AWARE_PARAMETER_MUTATION": 6093,
+    "LEGACY_PARAMETER_RECOMBINATION": 1016,
+    "REPRESENTATION_SUCCESSOR_RECOMBINATION": 388,
+    "SEMANTIC_DONOR_MUTATION": 128,
+    "TEMPORAL_HYPOTHESIS_FRONTIER_CATALOG_SAMPLE": 31298
+  },
+  "target_generated": {
+    "asset_selection": 3119,
+    "frontier_supply": 499166,
+    "generic": 36784,
+    "mapped_weight": 8915,
+    "raw_field": 2116,
+    "turnover": 2795
+  },
+  "target_selected": {
+    "asset_selection": 667,
+    "frontier_supply": 31298,
+    "generic": 4028,
+    "mapped_weight": 1877,
+    "raw_field": 499,
+    "turnover": 554
+  },
+  "validation_reads": 0
+}

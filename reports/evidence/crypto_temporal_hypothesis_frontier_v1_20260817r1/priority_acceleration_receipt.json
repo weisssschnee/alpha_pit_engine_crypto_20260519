@@ -1,0 +1,83 @@
+﻿{
+    "schema_version":  1,
+    "status":  "ENGINEERING_PRIORITY_ACCELERATION_APPLIED",
+    "runtime_id":  "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+    "applied_at":  "2026-08-17T09:31:16.2104525+08:00",
+    "target_priority":  "AboveNormal",
+    "realtime_forbidden":  true,
+    "execution_component_changes":  0,
+    "search_state_changes":  0,
+    "process_count":  10,
+    "processes":  [
+                      {
+                          "pid":  11812,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  12556,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  14264,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  22880,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  31132,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  33336,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  35128,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  36900,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  38188,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      },
+                      {
+                          "pid":  38788,
+                          "name":  "python",
+                          "priority_before":  "BelowNormal",
+                          "priority_after":  "AboveNormal",
+                          "processor_affinity":  1048575
+                      }
+                  ]
+}

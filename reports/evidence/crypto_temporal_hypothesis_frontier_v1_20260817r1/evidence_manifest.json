@@ -1,0 +1,106 @@
+﻿{
+    "schema_version":  1,
+    "status":  "HASH_BOUND_CLOSURE_EVIDENCE",
+    "runtime_id":  "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+    "source_sha":  "fe4cf3ed42080f8616f4c2bfd64e6c541f30ad6e",
+    "implementation_sha":  "d8e4845d0acb97bc263dab800ac4ca83b6b57f0b",
+    "search_task_id":  "job_20260817_040337_2aebcb",
+    "analysis_checker_task_id":  "job_20260817_132535_80da98",
+    "strict":  30000,
+    "attempts":  562122,
+    "run_result_sha256":  "384D1B72621DAE09EFDBCF2F954E416FA9046BAC42DA37F8C406A853EB7894EE",
+    "checker_status":  "PASS",
+    "checker_sha256":  "5A49FAA18875C1F04C67973C0CE82E14A27B873E7D09E4BC994CC681A002613E",
+    "analysis_sha256":  "6A4E49012DE42A898B6640A37D210508CD4E2EC853A4D6659294DF1F9C648BA3",
+    "next_decision":  "HYPOTHESIS_FRONTIER_PASS",
+    "forbidden_reads":  {
+                            "validation":  0,
+                            "oos":  0,
+                            "holdout":  0,
+                            "forward":  0,
+                            "promotion":  0,
+                            "sealed":  0
+                        },
+    "files":  [
+                  {
+                      "relative_path":  "authorization_snapshot.json",
+                      "bytes":  7305,
+                      "sha256":  "4EB5EFC2B97F8255FC4583890B8AAD943907DEE05995AF24CA802329B112F4BA"
+                  },
+                  {
+                      "relative_path":  "basin_diagnostics_final.json",
+                      "bytes":  251660,
+                      "sha256":  "B014429F3DAB13286BB745271ED9749B1B87039EEF55241C0634985636C30C4E"
+                  },
+                  {
+                      "relative_path":  "behavior_archive.parquet",
+                      "bytes":  26092198,
+                      "sha256":  "9A46F74982D117A10F79E2D5D2F3816B4785B0D920FB8ED3E3AF07CCA210CC89"
+                  },
+                  {
+                      "relative_path":  "candidate_ledger.parquet",
+                      "bytes":  320347472,
+                      "sha256":  "74C7CD4B6D182A681BDC107F879BC257C6D347EF4C02688B9DDC0CAFD688B677"
+                  },
+                  {
+                      "relative_path":  "canonical_checker.json",
+                      "bytes":  822,
+                      "sha256":  "86C2D1BB121FEE8660C2A6FA23CC960F30482B300355EF6D8877F119D59B0256"
+                  },
+                  {
+                      "relative_path":  "diagnostic_010000.json",
+                      "bytes":  247445,
+                      "sha256":  "21E3697D08829C7BDD19B495B93972DD8D923BFFD281A9E8EDFA47C7488A7532"
+                  },
+                  {
+                      "relative_path":  "diagnostic_020000.json",
+                      "bytes":  257170,
+                      "sha256":  "FFA99F8EFB1017DD1C4FF2336EBE89EF6CC77CB9FA79AD708C9D86506DF010E7"
+                  },
+                  {
+                      "relative_path":  "dispatcher_diagnostics_final.json",
+                      "bytes":  5620,
+                      "sha256":  "49ABC846AB3FDB7C8B435997798201E53E05BF2A8B44BC2B3CD0CFA270E718C4"
+                  },
+                  {
+                      "relative_path":  "frontier_analysis.json",
+                      "bytes":  659329,
+                      "sha256":  "ED54A66BFEAABCE382AA24C02DC003A3C3FCD0D0445B027BD2AD6C504B55A9C3"
+                  },
+                  {
+                      "relative_path":  "frontier_catalog_snapshot.json",
+                      "bytes":  201984,
+                      "sha256":  "9B4D53D1549A7929E2A9D25EF25AEC3CFD67929F8F10BCFBB701885CA0D373E7"
+                  },
+                  {
+                      "relative_path":  "frozen_contract.json",
+                      "bytes":  5599,
+                      "sha256":  "1F0AAE5FD21055CF0781460655F9AE7AAD471E88F3A64DB08E62609DE6A03AD3"
+                  },
+                  {
+                      "relative_path":  "launch_claim.json",
+                      "bytes":  438,
+                      "sha256":  "AFCEE13767D13A70C3D7622C6EBB84644C5CB793E56F2E919F24BD1FE5B7EF29"
+                  },
+                  {
+                      "relative_path":  "market_input_preflight.json",
+                      "bytes":  1171,
+                      "sha256":  "DA8357AA5BD39D79302CB8D4FB858EFE078FB23A0F2C7BE325A5829372CC7B43"
+                  },
+                  {
+                      "relative_path":  "run_complete.json",
+                      "bytes":  272196,
+                      "sha256":  "3E63538474A4D8542403EB0D3C8F53689B9F91707FA07327EAAA161062266BC7"
+                  },
+                  {
+                      "relative_path":  "source_gap_snapshot.json",
+                      "bytes":  15266,
+                      "sha256":  "C71E3CC4F211B114E8DAE7741E6B21F393ECDC33235F1CE35B7B7B482E6DA074"
+                  },
+                  {
+                      "relative_path":  "checkpoints/checkpoint_014/manifest.json",
+                      "bytes":  4009,
+                      "sha256":  "7725D39E8325B6B15837F2E7197BFB848B336B023C25D735980060168F34D613"
+                  }
+              ]
+}

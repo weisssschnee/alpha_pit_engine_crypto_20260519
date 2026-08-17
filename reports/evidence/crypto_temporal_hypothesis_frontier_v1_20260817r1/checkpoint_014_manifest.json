@@ -1,0 +1,107 @@
+{
+  "archive_state_sha256": "7A2CD3BD0C53594565CF394BBC9C60DEF93A73171C9265C138BB594B7FA42557",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint": "checkpoint_014",
+  "checkpoint_index": 14,
+  "compiler_identity": {
+    "bundle_sha256": "DF97E0DA947F153A565F8A356282D6ABA98399A05905464F9EF29533A158144C",
+    "paths": [
+      {
+        "bytes": 54135,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "7136C065662F8D6C114CAFF7F4FEA14185234B10E6CEC255D798255FA599B257"
+      },
+      {
+        "bytes": 40308,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "65D26BDB7FAA19BD233A27F4FA6C191DB78BE8C4BAC28A77D1689C2313E67EAE"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 95618,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1"
+      },
+      {
+        "bytes": 111655,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "58B08BD1FEB8D947DFF03E49C9588458912FE58085A1A4B73A4BF589FB239DB3"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 1021133,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "33798B67DE3AEBFC06203A3B6CFE706CB862E0A4A027BBA91E155D1AEB8D101D"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "completed_identity_sha256": "3D13D78FF3A866EED467013975E98F5D8F6BCCF7D13716BC56B5FA173A70B5D0",
+  "completed_ledger_row_count": 30000,
+  "completed_pair_row_count": 0,
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "files": [
+    {
+      "bytes": 600,
+      "name": "arm_checkpoint_metrics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 26092198,
+      "name": "behavior_archive.parquet",
+      "sha256": "9A46F74982D117A10F79E2D5D2F3816B4785B0D920FB8ED3E3AF07CCA210CC89"
+    },
+    {
+      "bytes": 320347472,
+      "name": "candidate_ledger.parquet",
+      "sha256": "74C7CD4B6D182A681BDC107F879BC257C6D347EF4C02688B9DDC0CAFD688B677"
+    },
+    {
+      "bytes": 251660,
+      "name": "discovery_diagnostics.json",
+      "sha256": "B014429F3DAB13286BB745271ED9749B1B87039EEF55241C0634985636C30C4E"
+    },
+    {
+      "bytes": 600,
+      "name": "paired_program_diagnostics.parquet",
+      "sha256": "E215417C31DA96039F7C6A7EE96849A76402A53B58C64304FD15FB5189A69E91"
+    },
+    {
+      "bytes": 615843,
+      "name": "rejected_candidate_ledger.parquet",
+      "sha256": "350064AA540ECDD5D15BC19B9D6A574B00FA19FAA4D045EE3A3A22A8141600AD"
+    },
+    {
+      "bytes": 72919036,
+      "name": "state.json",
+      "sha256": "43B5AD7D39A0C2E57936259E89290F603FCC4BF3A2B0F7779902FFEDFC5F76C2"
+    }
+  ],
+  "frozen_contract_sha256": "DA2E13FC9E3912EB93AD0643F85FEF779D7CB2A810B65AE907C12D5BF961970B",
+  "policy_state_sha256": "D1EA3743B14AC2A6E96548F25AE2ED8D4A491AE045FEB83F9C7711CF186715E8",
+  "receipt_count": 30000,
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "fe4cf3ed42080f8616f4c2bfd64e6c541f30ad6e",
+  "state_sha256": "F1785A312B7163ABF5B8F28481612A3EEDBB616E82EC1FE0F3BD5F71E3095633"
+}

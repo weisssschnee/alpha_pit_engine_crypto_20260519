@@ -2128,3 +2128,32 @@ automatic next run was started. The completed development-only decision is
 invalidity. Canonical evidence is
 `reports/CRYPTO_P1_G2_OPERATIONAL_CONTINUATION_V1_20260816R3.md` and
 `reports/evidence/crypto_p1_g2_operational_continuation_v1_20260816r3/`.
+
+## Completed phase: Temporal Hypothesis Frontier V1 train-only search
+
+`TEMPORAL_HYPOTHESIS_FRONTIER_V1` reconstructed the historical train-only
+source gap, froze a bounded 111-entry P5/P6 catalog (`49 / 62`), integrated it
+with the unchanged Search Core, and completed the sole authorized runtime
+`crypto_temporal_hypothesis_frontier_v1_20260817r1`. Implementation
+`d8e4845d0acb97bc263dab800ac4ca83b6b57f0b` and pure authorization
+`fe4cf3ed42080f8616f4c2bfd64e6c541f30ad6e` remain the bound execution
+identities.
+
+The runtime reached its fixed `30,000 strict` cap after `562,122` attempts:
+P5/P6/P4 strict counts were `12,000 / 12,000 / 6,000`; P1/P2/P3 were zero.
+P4 remained healthy at `1,263 / 6,000` matched-positive, while P5 and P6 each
+produced only `1 / 12,000`. Canonical real economic clusters at 0.95/0.90/0.85
+were `78/56/44`, including `17/6/3` new clusters. P5 and P6 each contributed
+one independent current-only 0.90 cluster with no cross-family overlap. The
+lineage deepened 15 HQ basins, created 73 new HQ concrete realizations and
+increased economic basin count from 47 to 56.
+
+The independent checker is `PASS` with SHA-256
+`5A49FAA18875C1F04C67973C0CE82E14A27B873E7D09E4BC994CC681A002613E`.
+Validation, OOS, holdout, forward, promotion and sealed reads are all zero; no
+automatic next run was started. The completed train-only decision is
+`HYPOTHESIS_FRONTIER_PASS`: the frontier and two distinct economic realizations
+exist, but P5/P6 conversion is extremely sparse and grants no validation or
+promotion authority. Canonical evidence is
+`reports/CRYPTO_TEMPORAL_HYPOTHESIS_FRONTIER_V1_20260817R1.md` and
+`reports/evidence/crypto_temporal_hypothesis_frontier_v1_20260817r1/`.

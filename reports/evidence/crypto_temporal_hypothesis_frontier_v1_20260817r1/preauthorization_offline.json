@@ -1,0 +1,40 @@
+{
+  "accepted_semantics": 111,
+  "candidate_evaluations": 0,
+  "candidate_rebuild_pass": true,
+  "dispatcher_feature_extraction_pass": true,
+  "family_semantic_counts": {
+    "P5_FLOW_PARTICIPATION_CONVICTION": 49,
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE": 62
+  },
+  "forward_reads": 0,
+  "frontier_catalog_sha256": "1E6D6648BDEC6BAE3AADF3E82C3D70D5053FC48B82A73E1BF526835BBD10CAE0",
+  "frozen_parents": 228,
+  "head": "d8e4845d0acb97bc263dab800ac4ca83b6b57f0b",
+  "holdout_reads": 0,
+  "lane_family_scope": {
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 1,
+    "P5_FLOW_PARTICIPATION_CONVICTION": 32,
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE": 32
+  },
+  "ledger_rows": 50000,
+  "ledger_sha256": "5171CD9655944CCED18D35CCB413C725E9542889260A135E8F95F4BE7B401B46",
+  "market_arrays_read": 0,
+  "market_preflight_sha256": "7151917C860F9462918520EB2F57462550215A04D6D1D2980865002A59A7B31E",
+  "matched_positive": 302,
+  "minimum_legal_pool_size": 16,
+  "offline_preflight_sha256": "AE7B2F8EA92A4B8A8BB7FB23427E797FD6869AF8FE263E596886C38DDD1BB9F0",
+  "oos_reads": 0,
+  "p1_p2_p3_proposals": 0,
+  "parent_pool_sha256": "A08112ED1765A432D15D259A70F308C2DE5BA7B617D294BFB8349020EC61AA49",
+  "policy_checkpoint_restore_pass": true,
+  "promotion_reads": 0,
+  "proposal_only_requested": 64,
+  "proposal_only_unique": 64,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_gap_sha256": "438D6C667996C4A4FD703ED9D61A5B421FD57ED87F74E809A1DE0CC8E12ED250",
+  "status": "TEMPORAL_HYPOTHESIS_FRONTIER_PREAUTHORIZATION_OFFLINE_PASS",
+  "target_basins": 23,
+  "validation_reads": 0
+}

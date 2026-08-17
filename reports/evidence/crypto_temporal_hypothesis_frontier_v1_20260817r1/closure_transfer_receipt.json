@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "HASH_BOUND_CLOSURE_TRANSFER_VERIFIED",
+  "runtime_id": "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+  "transfer_artifact": {
+    "relative_path": "closure_transfer.zip",
+    "bytes": 99432,
+    "sha256": "3A0A35B9E58A51A316D3D88DD75ECF9A06C60E5040FFEDC12B2F9B8611F2BE38"
+  },
+  "manifest_entries": 16,
+  "local_runtime_json_artifacts_verified": 14,
+  "local_runtime_json_hash_mismatches": 0,
+  "remote_only_hash_bound_artifacts": [
+    {
+      "relative_path": "candidate_ledger.parquet",
+      "bytes": 320347472,
+      "sha256": "74C7CD4B6D182A681BDC107F879BC257C6D347EF4C02688B9DDC0CAFD688B677"
+    },
+    {
+      "relative_path": "behavior_archive.parquet",
+      "bytes": 26092198,
+      "sha256": "9A46F74982D117A10F79E2D5D2F3816B4785B0D920FB8ED3E3AF07CCA210CC89"
+    }
+  ]
+}

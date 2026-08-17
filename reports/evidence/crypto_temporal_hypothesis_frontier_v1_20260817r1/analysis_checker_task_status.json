@@ -1,0 +1,15 @@
+﻿{
+    "exit_code":  0,
+    "log":  "D:\\HermesWorker\\runtime\\jobs\\job_20260817_132535_80da98.log",
+    "schema_version":  2,
+    "state":  "COMPLETED",
+    "stdout_log":  "D:\\HermesWorker\\runtime\\jobs\\job_20260817_132535_80da98.stdout.log",
+    "task_id":  "job_20260817_132535_80da98",
+    "launcher_pid":  36808,
+    "started_at":  "2026-08-17T13:26:04",
+    "ended_at":  "2026-08-17T13:26:50",
+    "task_name":  "HermesRemote_job_20260817_132535_80da98",
+    "child_pid":  37448,
+    "start_lock":  "D:\\HermesWorker\\runtime\\jobs\\job_20260817_132535_80da98.start.lock",
+    "stderr_log":  "D:\\HermesWorker\\runtime\\jobs\\job_20260817_132535_80da98.stderr.log"
+}

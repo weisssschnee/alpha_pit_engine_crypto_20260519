@@ -1,0 +1,12 @@
+{
+  "authorization_sha256": "48E90D3DCAA3616F126CE8ED07BC3D6CEF19C618D21FB691F6DFD170E0A96C4B",
+  "candidate_evaluations_at_claim": 0,
+  "oos_reads": 0,
+  "runtime_id": "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "fe4cf3ed42080f8616f4c2bfd64e6c541f30ad6e",
+  "status": "ONE_TIME_TEMPORAL_HYPOTHESIS_FRONTIER_LAUNCHED",
+  "strict_at_claim": 0,
+  "validation_reads": 0
+}

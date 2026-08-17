@@ -1,0 +1,28 @@
+{
+  "attempts": 562122,
+  "candidate_rebuild_failures": 0,
+  "canonical_analysis_sha256": "6A4E49012DE42A898B6640A37D210508CD4E2EC853A4D6659294DF1F9C648BA3",
+  "checker_sha256": "5A49FAA18875C1F04C67973C0CE82E14A27B873E7D09E4BC994CC681A002613E",
+  "errors": [],
+  "family_counts": {
+    "P4_MULTISCALE_STATE_X_TRANSITION_ROUTING": 6000,
+    "P5_FLOW_PARTICIPATION_CONVICTION": 12000,
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE": 12000
+  },
+  "forward_reads": 0,
+  "holdout_reads": 0,
+  "lane_shares": {
+    "P4": 0.2,
+    "P5": 0.4,
+    "P6": 0.4
+  },
+  "next_decision": "HYPOTHESIS_FRONTIER_PASS",
+  "oos_reads": 0,
+  "promotion_reads": 0,
+  "runtime_id": "crypto_temporal_hypothesis_frontier_v1_20260817r1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "strict": 30000,
+  "validation_reads": 0
+}
