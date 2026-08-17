@@ -1,0 +1,219 @@
+{
+  "anchor_receipt": {
+    "anchor_receipt_sha256": "CD12068B04944287D6B9C64EB0BE22744D9E1E36CC785A9542EDCEE31A0F55C0",
+    "anchors": {
+      "P5_FLOW_PARTICIPATION_CONVICTION": {
+        "candidate_id": "92879E90E1587A4D951DEBE2F94B2AAD1C30F0D3DB52D4B4E12C31C688B0F2CF",
+        "candidate_spec_sha256": "3E30BC3D480CB47D92177153113B4369CCE9FC0FAA22D770D68E80BCBDF97788",
+        "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        "matched_positive": true,
+        "mechanism_id": "MECHANISM_V2_57401347C63ED9E146FE4164C46923F6",
+        "program_id": "TEMPORAL_FRONTIER_V1_34A11C69FE06AC49E4820772793355ED",
+        "replicated_positive_block_count": 3,
+        "seed": 3823740441,
+        "worst_block_min_matched_net_mean": 8.844163090121683e-06
+      },
+      "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE": {
+        "candidate_id": "C6F2ED2519831A1AA58E3FAFA932DA2A79CDAB13DD56F72159C9A80B1C282252",
+        "candidate_spec_sha256": "822DDF4CA9A1171F8834C40F231F44B941BEE5C7C06898A3A51DF705CE5282E3",
+        "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        "matched_positive": true,
+        "mechanism_id": "MECHANISM_V2_DCC5C85D45DFF1541EA7A4E0E1F42761",
+        "program_id": "TEMPORAL_FRONTIER_V1_AD96002D012C7C2B2021C20FC245F471",
+        "replicated_positive_block_count": 3,
+        "seed": 2099206231,
+        "worst_block_min_matched_net_mean": 8.770790371097821e-05
+      }
+    },
+    "forward_reads": 0,
+    "holdout_reads": 0,
+    "oos_reads": 0,
+    "promotion_reads": 0,
+    "schema_version": 1,
+    "sealed_reads": 0,
+    "source_ledger_rows": 30000,
+    "source_ledger_sha256": "74C7CD4B6D182A681BDC107F879BC257C6D347EF4C02688B9DDC0CAFD688B677",
+    "status": "FRONTIER_POCKET_ANCHORS_EXACTLY_RECOVERED",
+    "validation_reads": 0
+  },
+  "assurance_receipt_sha256": "8F727D5AACC89561134DE1CC7449732E2DD04F206242B5BD5DD5D347CADB3A57",
+  "deterministic_anchor_replays": {
+    "P5_FLOW_PARTICIPATION_CONVICTION": {
+      "block_robust_ordering_sha256": "5AACA35753D4D2D8DCC56940D80916799C9BF70D738D9CF314A486E74FE25EB7",
+      "candidate_id": "92879E90E1587A4D951DEBE2F94B2AAD1C30F0D3DB52D4B4E12C31C688B0F2CF",
+      "matched_positive": true,
+      "pair_reward": 0.2397938843892467,
+      "replicated_positive_block_count": 3,
+      "search_reward": 0.5172316582519921
+    },
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE": {
+      "block_robust_ordering_sha256": "94E215228B8D68D56C8CA6F14BF06E642B732598F75F9CABC1AAFB29D86FE13E",
+      "candidate_id": "C6F2ED2519831A1AA58E3FAFA932DA2A79CDAB13DD56F72159C9A80B1C282252",
+      "matched_positive": true,
+      "pair_reward": 0.039856757303382305,
+      "replicated_positive_block_count": 3,
+      "search_reward": 0.6913464477125489
+    }
+  },
+  "forward_reads": 0,
+  "holdout_reads": 0,
+  "live_initial_pockets": [
+    "P6_DERIVATIVE_CROWDING_RELATIVE_PRESSURE",
+    "P5_FLOW_PARTICIPATION_CONVICTION"
+  ],
+  "market_preflight_sha256": "7151917C860F9462918520EB2F57462550215A04D6D1D2980865002A59A7B31E",
+  "new_strict": 0,
+  "oos_reads": 0,
+  "p5_sparse_event_falsification": {
+    "block_results": [
+      {
+        "block_id": "development_block_0",
+        "event_hours": 24,
+        "expanded_event_hours": 433,
+        "metrics": {
+          "primary_minus_left_control": {
+            "base_net_mean": 3.101324700527143e-05,
+            "leave_all_event_hours_out_net_mean": 5.529866807892651e-05,
+            "leave_largest_event_cluster_out_net_mean": 3.101324700527143e-05
+          },
+          "primary_minus_right_control": {
+            "base_net_mean": 6.202649401054286e-05,
+            "leave_all_event_hours_out_net_mean": 0.00011059733615785302,
+            "leave_largest_event_cluster_out_net_mean": 6.202649401054286e-05
+          }
+        }
+      },
+      {
+        "block_id": "development_block_1",
+        "event_hours": 14,
+        "expanded_event_hours": 494,
+        "metrics": {
+          "primary_minus_left_control": {
+            "base_net_mean": 0.0005363580246500195,
+            "leave_all_event_hours_out_net_mean": 0.0005453000606871918,
+            "leave_largest_event_cluster_out_net_mean": 0.0005363580246500195
+          },
+          "primary_minus_right_control": {
+            "base_net_mean": 0.001072716049300039,
+            "leave_all_event_hours_out_net_mean": 0.0010906001213743836,
+            "leave_largest_event_cluster_out_net_mean": 0.001072716049300039
+          }
+        }
+      },
+      {
+        "block_id": "development_block_2",
+        "event_hours": 10,
+        "expanded_event_hours": 414,
+        "metrics": {
+          "primary_minus_left_control": {
+            "base_net_mean": 8.844163090121683e-06,
+            "leave_all_event_hours_out_net_mean": 3.6216875680119725e-05,
+            "leave_largest_event_cluster_out_net_mean": 2.8747635112689546e-05
+          },
+          "primary_minus_right_control": {
+            "base_net_mean": 1.7688326180243365e-05,
+            "leave_all_event_hours_out_net_mean": 7.243375136023945e-05,
+            "leave_largest_event_cluster_out_net_mean": 5.749527022537909e-05
+          }
+        }
+      }
+    ],
+    "classification": "P5_RARE_EVENT_POCKET",
+    "denominator_differs_all_zero_fraction": 0.5020381921645874,
+    "denominator_nonzero_coordinates": 110103,
+    "event_cluster_count": 43,
+    "leave_all_event_hours_out_destroyed_blocks": 0,
+    "leave_largest_event_cluster_out_destroyed_blocks": 0,
+    "matched_incremental_absolute_pnl_on_event_hours_share": 0.051222897144681534,
+    "matched_incremental_absolute_pnl_within_72h_event_share": 0.99971486437583,
+    "nonzero_event_hour_fraction": 0.03151674326986211,
+    "nonzero_event_hours": 48,
+    "raw_finite_coordinates": 185342,
+    "raw_nonzero_coordinates": 49,
+    "raw_nonzero_fraction": 0.00026437612629625235,
+    "state_entropy_bits": 0.20654654706819583,
+    "state_unique_count": 3
+  },
+  "p6_field_and_provenance_assurance": {
+    "asset_contribution_concentration": {
+      "top_10_absolute_share": 0.8147886686760722,
+      "top_1_absolute_share": 0.23556258617171993,
+      "top_3_absolute_share": 0.4633506738655549,
+      "top_5_absolute_share": 0.6097777645899384
+    },
+    "block_coverage": [
+      {
+        "assets_with_any_coverage": 123,
+        "block_id": "development_block_0",
+        "finite_coordinate_fraction": 0.288706068543986,
+        "transition_hours": 508
+      },
+      {
+        "assets_with_any_coverage": 128,
+        "block_id": "development_block_1",
+        "finite_coordinate_fraction": 0.327328431372549,
+        "transition_hours": 510
+      },
+      {
+        "assets_with_any_coverage": 130,
+        "block_id": "development_block_2",
+        "finite_coordinate_fraction": 0.5240988756613757,
+        "transition_hours": 504
+      }
+    ],
+    "event_cluster_dependence_transition_hour_absolute_pnl_share": 1.0,
+    "field": "bybit__funding_rate_mean",
+    "source_discontinuity_abs_diff_q999": 0.0008906100286076515,
+    "symbol_subset_dependence_top_5_absolute_share": 0.6097777645899384,
+    "top_asset_contributors": [
+      {
+        "absolute_share": 0.23556258617171993,
+        "asset": "MYXUSDT"
+      },
+      {
+        "absolute_share": 0.14094515557009255,
+        "asset": "BBUSDT"
+      },
+      {
+        "absolute_share": 0.08684293212374243,
+        "asset": "JUPUSDT"
+      },
+      {
+        "absolute_share": 0.07862019101471307,
+        "asset": "1000FLOKIUSDT"
+      },
+      {
+        "absolute_share": 0.06780689970967041,
+        "asset": "AVNTUSDT"
+      },
+      {
+        "absolute_share": 0.05866072623838122,
+        "asset": "ARKMUSDT"
+      },
+      {
+        "absolute_share": 0.04668749589231215,
+        "asset": "MOODENGUSDT"
+      },
+      {
+        "absolute_share": 0.038266290726760736,
+        "asset": "API3USDT"
+      },
+      {
+        "absolute_share": 0.033659506339516886,
+        "asset": "ZORAUSDT"
+      },
+      {
+        "absolute_share": 0.027736884889162837,
+        "asset": "GRASSUSDT"
+      }
+    ],
+    "transition_hour_fraction": 0.9993434011818779,
+    "transition_hours": 1522,
+    "venue": "BYBIT"
+  },
+  "promotion_reads": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "FRONTIER_POCKET_PREAUTH_ASSURANCE_PASS",
+  "validation_reads": 0
+}
