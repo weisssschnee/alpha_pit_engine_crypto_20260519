@@ -352,6 +352,7 @@ def _execute(runtime_root: Path, *, source_sha: str, frozen_hash: str, identitie
                     "arm": "frontier_pocket_local",
                     "seed": item["seed"],
                     "policy_key": "POCKET|" + family,
+                    "checkpoint_completion_ordinal": len(ledger) % CHECKPOINT_SIZE + 1,
                     "generation_attempt_ordinal": int(state["generation_attempts"]),
                     "operation": "FRONTIER_POCKET_LOCAL_SAMPLE",
                     "parent_ids": [ANCHORS[family]["candidate_id"]],
