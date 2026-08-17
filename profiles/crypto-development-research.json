@@ -2,9 +2,26 @@
   "id": "crypto-development-research",
   "required_components": [
     "instrument_semantics_audit",
-    "multi_paradigm_arena",
     "data_adequacy_gate",
-    "observed_archive_18m_compositional_search"
+    "field_information_qualification_v0",
+    "new_data_integration",
+    "crypto_search_evidence_memory",
+    "real_policy_upgrade_canary",
+    "formal_performance_search",
+    "sealed_research_boundaries"
   ],
-  "required_edges": []
+  "required_edges": [
+    {
+      "id": "research_carrier_admission_before_formal_search",
+      "source": "new_data_integration",
+      "target": "formal_performance_search",
+      "relation": "research_admission_required_before_search"
+    },
+    {
+      "id": "search_evidence_memory_required_before_search",
+      "source": "crypto_search_evidence_memory",
+      "target": "real_policy_upgrade_canary",
+      "relation": "memory_required_before_search"
+    }
+  ]
 }

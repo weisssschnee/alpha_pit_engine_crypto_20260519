@@ -14,14 +14,14 @@
     "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
-  "authorization_sha256": "7909A0E067979504ACFD2C19823354829B931C5CA4B92627E4006C53D6F2C49A",
+  "authorization_sha256": "F3A8D513D01D965DB5687041FD07D8007AD7EE6D8BACF6AE7C8E901F327575A6",
   "budget": {
     "checkpoint_size": 2000,
     "raw_generation_attempts_maximum": 1250000,
     "strict_evaluated_maximum": 20000,
     "workers": 8
   },
-  "consumed": false,
+  "consumed": true,
   "execution_component_blob_oids": {
     "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
     "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
@@ -110,8 +110,21 @@
     "user": "desktop-a2h3a2g\\suri",
     "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_frontier_pocket_maturation_v1_20260817r3",
   "schema_version": 1,
-  "status": "RUN_AUTHORIZED_ONE_TIME_FRONTIER_POCKET_MATURATION_V1"
+  "status": "ABORTED_SYSTEM_MAINTENANCE_RETROSPECTIVE_CARRIER",
+  "maintenance_abort": {
+    "authority": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+    "reason": "RETROSPECTIVE_DIAGNOSTIC_CARRIER_NOT_RESEARCH_ADMITTED",
+    "carrier_identity": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "stopped_at": "2026-08-17",
+    "runtimes": [
+      "crypto_temporal_frontier_pocket_maturation_v1_20260817r2",
+      "crypto_temporal_frontier_pocket_maturation_v1_20260817r3"
+    ],
+    "durable_candidate_ledger": false,
+    "durable_checkpoint": false,
+    "automatic_next_run": false
+  }
 }

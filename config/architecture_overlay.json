@@ -1933,6 +1933,11 @@
                       "lifecycle":  "FORBIDDEN",
                       "critical":  true,
                       "semantic_role":  "performance_search_boundary",
+                      "claim_badges":  [
+                                           "SYSTEM MAINTENANCE",
+                                           "NO MARKET SEARCH",
+                                           "MAINTENANCE EXIT REQUIRED"
+                                       ],
                       "authority":  {
                                         "path":  ".planning/STATE.md",
                                         "repo_ref":  "repair/crypto-instrument-capability-20260715"
@@ -1945,6 +1950,15 @@
                                             "severity":  "HARD",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_instrument_capability_20260715/manifest.json"
+                                        },
+                                        {
+                                            "id":  "system_maintenance_market_search_suspension",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "ADR 0024 places the project in SYSTEM_MAINTENANCE_CONTROL_PLANE_RECOVERY. No economic or market search, strict candidate budget, validation/OOS/forward access, promotion, pocket/frontier expansion, optimizer bakeoff, rescue run, or automatic successor may start until an explicit maintenance-exit decision records all exit criteria as satisfied.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md and .planning/STATE.md",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
                                         }
                                     ],
                       "validation":  {
@@ -1963,6 +1977,11 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "critical":  true,
                       "semantic_role":  "new_data_integration_boundary",
+                      "claim_badges":  [
+                                           "ENGINEERING PASS",
+                                           "RESEARCH HOLD",
+                                           "PIT UNIVERSE ADMISSION REQUIRED"
+                                       ],
                       "paths":  [
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "alphafactory_crypto/broad_search/runner18m.py",
@@ -1995,6 +2014,15 @@
                                             "enforced_by":  "data_admission_v1.check_search_surface_integration and ADR 0011",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md"
+                                        },
+                                        {
+                                            "id":  "retrospective_carrier_not_research_authority",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "The V1.4 E8BFD15A carrier is a fixed retrospective DEVELOPMENT_DIAGNOSTIC_ONLY surface. Cache identity, field reachability and successful pair evaluation cannot substitute for historical PIT-universe/source-coverage research admission.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "ADR 0011, ADR 0024, runtime/crypto_search_surface_integration_v1_20260728/final_decision.json and future canonical market-loader preflight",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
                                         }
                                     ],
                       "validation":  {
@@ -2403,6 +2431,53 @@
                                          "profile":  "crypto-real-data-instrument-canary",
                                          "evidence_ref":  ".planning/STATE.md",
                                          "verified_at_sha":  "5066c20234b6a4f778fa3644e09200a38a076114"
+                                     }
+                  },
+                  {
+                      "id":  "crypto_search_evidence_memory",
+                      "label":  "Search evidence memory continuity (recovery required)",
+                      "kind":  "governance_component",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "critical":  true,
+                      "semantic_role":  "search_evidence_memory_continuity",
+                      "authority_class":  "NON_FORMAL",
+                      "active_authority":  false,
+                      "paths":  [
+                                    "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json",
+                                    "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json",
+                                    "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                ],
+                      "claim_badges":  [
+                                           "A7MEM EXISTS",
+                                           "TEMPORAL CONTINUITY MISSING",
+                                           "NO ADAPTIVE STATE IMPORT",
+                                           "MAINTENANCE BLOCKER"
+                                       ],
+                      "contracts":  [
+                                        {
+                                            "id":  "persistent_search_evidence_required_before_new_search",
+                                            "type":  "ADMISSION",
+                                            "rule":  "Future market search must query one persistent development SearchEvidenceMemory covering candidate/semantic identity, field/carrier authority, cluster/rejection/route closure, prior spend and lineage. Campaign-local BehaviorArchive or aggregate proposal priors alone are insufficient.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "ADR 0024 and Phase 5 maintenance exit gate",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                        },
+                                        {
+                                            "id":  "adaptive_state_isolation_preserved",
+                                            "type":  "BOUNDARY",
+                                            "rule":  "SearchEvidenceMemory is evidence continuity only. CEM/Evolution populations, learned tables, RNG state and individual adaptive reward state remain forbidden across campaigns unless separately authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "ADR 0024 and existing NO_CROSS_SPRINT_ADAPTIVE_MEMORY boundary",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                        }
+                                    ],
+                      "validation":  {
+                                         "level":  "DECLARED",
+                                         "result":  "HOLD",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json"
                                      }
                   }
               ],
@@ -3307,6 +3382,61 @@
                       "lifecycle":  "EXPERIMENTAL",
                       "required":  false,
                       "evidence_type":  "STATIC"
+                  },
+                  {
+                      "id":  "research_carrier_admission_before_formal_search",
+                      "source":  "new_data_integration",
+                      "target":  "formal_performance_search",
+                      "relation":  "research_admission_required_before_search",
+                      "relation_class":  "research_admission_required_before_search",
+                      "binding_state":  "FORBIDDEN",
+                      "lifecycle":  "FORBIDDEN",
+                      "forbidden":  true,
+                      "required":  true,
+                      "critical":  true,
+                      "evidence_type":  "DECLARED",
+                      "contract":  {
+                                       "id":  "carrier_research_admission_gate",
+                                       "type":  "BOUNDARY",
+                                       "rule":  "Engineering-reachable or retrospective diagnostic carriers cannot activate formal/development market search. A carrier-specific historical PIT-universe/source-coverage research admission must be resolved before market arrays are read.",
+                                       "severity":  "HARD",
+                                       "enforced_by":  "ADR 0011 and ADR 0024; future canonical search preflight",
+                                       "bypass_forbidden":  true,
+                                       "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                   },
+                      "validation":  {
+                                         "level":  "DECLARED",
+                                         "result":  "PASS",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                     }
+                  },
+                  {
+                      "id":  "search_evidence_memory_required_before_search",
+                      "source":  "crypto_search_evidence_memory",
+                      "target":  "real_policy_upgrade_canary",
+                      "relation":  "memory_required_before_search",
+                      "relation_class":  "memory_required_before_search",
+                      "binding_state":  "UNRESOLVED",
+                      "lifecycle":  "EXPERIMENTAL",
+                      "required":  true,
+                      "critical":  true,
+                      "evidence_type":  "DECLARED",
+                      "contract":  {
+                                       "id":  "search_evidence_memory_admission_gate",
+                                       "type":  "ADMISSION",
+                                       "rule":  "A future search cannot generate candidates until unified SearchEvidenceMemory is current against canonical development ledgers/closures and queried by proposal preflight. This does not authorize cross-campaign adaptive optimizer-state import.",
+                                       "severity":  "HARD",
+                                       "enforced_by":  "ADR 0024 and Phase 5 maintenance exit gate",
+                                       "bypass_forbidden":  true,
+                                       "evidence_ref":  "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+                                   },
+                      "validation":  {
+                                         "level":  "DECLARED",
+                                         "result":  "HOLD",
+                                         "profile":  "crypto-development-research",
+                                         "evidence_ref":  "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json"
+                                     }
                   }
               ],
     "profile_refs":  [

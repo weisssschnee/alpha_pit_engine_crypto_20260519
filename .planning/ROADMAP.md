@@ -1,6 +1,21 @@
 # Crypto AlphaFactory Roadmap
 
-**Last updated:** 2026-06-29 11:20 Asia/Hong_Kong
+**Last updated:** 2026-08-17 Asia/Hong_Kong
+
+## Maintenance Override — Current Authority
+
+The project is in `SYSTEM_MAINTENANCE_CONTROL_PLANE_RECOVERY` under accepted ADR `docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md`.
+
+This section supersedes the stale phase statuses below for current execution decisions. The historical roadmap is retained because its older phase definitions and evidence remain useful provenance.
+
+Current rules:
+
+- Phase 5 system rectification is the owning active phase.
+- Phase 5 Wave 1 (state freeze, verified-core inventory, core interface contracts, architecture blueprint) was already executed on 2026-06-30 and is not repeated.
+- Phase 5 Wave 2/3 are resumed against the current August code/evidence: data/field/PIT authority audit and repair; reward/search/memory control-chain audit; verified-core/current-repo decision and final maintenance audit.
+- New economic/market search, strict candidate budgets, validation/OOS/forward/promotion and automatic successor runs are suspended.
+- Phase 6 Controlled Expansion is blocked by maintenance exit, not by completion of an obsolete A7SEARCH5 checklist.
+- Maintenance exit requires the carrier-admission, field continuity, SearchEvidenceMemory, search-core continuity, project-state/Graph enforcement and runtime-safety criteria in ADR 0024.
 
 ## Already Passed Prerequisites
 
@@ -104,7 +119,7 @@ Exit criteria:
 
 ## Phase 5 - Verified Core Extraction Or New Repo Decision
 
-Status: planned, PLAN.md ready
+Status: **ACTIVE MAINTENANCE** — Wave 1 completed 2026-06-30; Wave 2/3 resumed 2026-08-17 under ADR 0024
 
 Goal:
 
@@ -135,7 +150,7 @@ Exit criteria:
 
 ## Phase 6 - Controlled Expansion
 
-Status: blocked until Phases 1-4 pass
+Status: **BLOCKED BY SYSTEM MAINTENANCE** — requires an explicit ADR 0024 maintenance-exit decision after Phase 5 Wave 2/3 and the final system-level audit pass
 
 Goal:
 

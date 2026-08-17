@@ -2,10 +2,10 @@
 phase: 5
 name: verified-core-extraction-or-new-repo-decision
 type: system-rectification-and-core-extraction
-status: planned
-wave: 1
+status: active_maintenance
+wave: 2
 autonomous: true
-last_updated: 2026-06-30 16:20 Asia/Hong_Kong
+last_updated: 2026-08-17 Asia/Hong_Kong
 depends_on:
   - Phase 1 A7SEARCH6 proxy aggregate status
   - Phase 2 data/regime coverage audit
@@ -19,6 +19,33 @@ requirements:
 ---
 
 # Phase 5: Verified Core Extraction Or New Repo Decision
+
+## 2026-08-17 Maintenance Resumption
+
+This phase is now the owning project phase under accepted ADR `docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md`.
+
+Wave 1 was materially executed on 2026-06-30. The following existing artifacts are accepted as completed prerequisites and must not be regenerated merely to create new paperwork:
+
+- `runtime/system_rectification_20260630/system_state_manifest.json`
+- `runtime/system_rectification_20260630/core_inventory.csv`
+- `runtime/system_rectification_20260630/core_status_summary.csv`
+- `runtime/system_rectification_20260630/core_interface_contracts.json`
+- `runtime/system_rectification_20260630/architecture_nodes.csv`
+- `runtime/system_rectification_20260630/architecture_edges.csv`
+- `reports/CRYPTO_SYSTEM_CORE_INVENTORY_20260630.md`
+- `reports/CRYPTO_SYSTEM_CORE_INTERFACE_CONTRACTS_20260630.md`
+- `reports/CRYPTO_SYSTEM_ARCHITECTURE_BLUEPRINT_20260630.md`
+
+The current work starts at Wave 2 and audits the live August implementation rather than the June snapshot. The newly confirmed blocking failures are:
+
+1. a research-admission HOLD was not propagated through `_load_v14_inputs()` / later Temporal preflights;
+2. Unified Field Management (298 base / 235 carrier-bound) and the Temporal executable registry (115) are disconnected;
+3. A7MEM candidate/cluster/rejection memory was not carried into the Temporal generation and current BehaviorArchive state is campaign-local;
+4. new P5/P6 frontier families used a bounded sampler rather than the mature archive/parent/deepening path;
+5. CURRENT preserved the data HOLD but market runs lacked task-relevant runtime traces/strict Graph gating; `workflow_guard` was disabled;
+6. PROJECT/ROADMAP/STATE stopped agreeing about which phase was actually active.
+
+Until this phase closes under ADR 0024, no market/economic search or strict candidate budget is authorized. Maintenance uses source-only tests and immutable evidence. The old `do not interrupt A7SEARCH6` rule is historical and no longer describes a live process.
 
 ## Objective
 

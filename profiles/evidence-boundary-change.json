@@ -2,7 +2,17 @@
   "id": "evidence-boundary-change",
   "required_components": [
     "accepted_frontier_closure",
+    "new_data_integration",
+    "crypto_search_evidence_memory",
+    "formal_performance_search",
     "sealed_research_boundaries"
   ],
-  "required_edges": []
+  "required_edges": [
+    {
+      "id": "research_carrier_admission_before_formal_search",
+      "source": "new_data_integration",
+      "target": "formal_performance_search",
+      "relation": "research_admission_required_before_search"
+    }
+  ]
 }

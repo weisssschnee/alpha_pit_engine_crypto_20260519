@@ -1,8 +1,48 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-08-16 Asia/Hong_Kong
+Last updated: 2026-08-17 Asia/Hong_Kong
 
 ## Current phase
+
+`SYSTEM_MAINTENANCE_CONTROL_PLANE_RECOVERY`
+
+Authority: accepted ADR `docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md` under the user's explicit 2026-08-17 instruction to stop project/search drift and enter maintenance.
+
+### Immediate maintenance state
+
+- All new economic/market search, candidate evaluation, validation/OOS/forward access, promotion and automatic successor execution are suspended until an explicit maintenance-exit decision.
+- Frontier Pocket r2 and r3 on PC2 were manually terminated on 2026-08-17 after discovering that their authorization still bound carrier `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`. Both stopped before any durable candidate ledger/checkpoint. Launch/runtime evidence is retained and must not be rewritten.
+- The V1.4 carrier is reproducible but explicitly `fixed_retrospective_cohort=true` / `DEVELOPMENT_DIAGNOSTIC_ONLY`; its upstream Search Surface Integration retains research `HOLD` for historical PIT-universe / identity coverage. All `E8BFD15A...` economic findings are therefore development-diagnostic clues pending transfer to a research-admitted PIT carrier. Search-engine, evaluator, policy-comparison and checkpoint evidence remains useful within its actual scope.
+- Unified Field Management already contains 298 base fields / 5,509 canonical views / 235 carrier-bound base fields, while the active Temporal V1.4 loader exposes only 115. Maintenance must reconnect existing field authorities before adding another field family.
+- A7MEM-0 already contains candidate/cluster/rejection/pair-motif memory, but current Temporal campaigns do not require it and initialize campaign-local BehaviorArchive state. Maintenance must restore one persistent non-sealed SearchEvidenceMemory while preserving the prohibition on importing optimizer population/RNG/reward state across campaigns.
+- P5/P6 Frontier was a bounded diagnostic sampler, not the same archive-parent-deepening path used by P4; its 111 semantic catalog contains no temporal+condition compositions. No pocket/frontier expansion is authorized during maintenance.
+- Phase 5 `Verified Core Extraction Or New Repo Decision` is resumed as the owning system-rectification phase. Its 2026-06-30 Wave 1 inventory/interface/architecture artifacts are retained as completed prerequisites; Wave 2/3 must be completed against current code rather than restarted.
+- CURRENT/Graph remains the canonical advisory architecture projection, but formal future market execution must provide an explicit execution trace and strict task-relevant profile. RAW/CURRENT freshness alone is not runtime enforcement.
+
+### Maintenance blockers / exit requirements
+
+1. Carrier research admission must be a mandatory pre-market dependency and must enforce historical PIT-universe/source coverage instead of accepting a held carrier hash.
+2. The 298/235/115 field layers must be reconciled into one executable research-carrier view using existing authorities.
+3. A7MEM, mechanism aggregate knowledge, Temporal dispatcher priors, later ledgers and route closures must compile into one SearchEvidenceMemory queried before proposals.
+4. New frontier families must use the same evidence-aware archive/parent/deepening path after seeding, or be explicitly diagnostic only; semantic complexity exposure must be measured.
+5. PROJECT / STATE / ROADMAP / Phase 5 / CURRENT must agree on the active maintenance boundary.
+6. Pocket authorizations must be consumed/disabled, no relevant PC2 runner may survive, and the final system-level maintenance audit must check the whole `PROJECT -> authority -> data -> fields -> memory -> search -> runtime -> evidence/Graph` chain.
+
+### Allowed work
+
+Source inspection and repair; deterministic/source-only tests; data-authority and field-registry repair; SearchEvidenceMemory migration; project/ADR/STATE/ROADMAP/Graph maintenance; immutable evidence reclassification; no-market execution-trace/checker work.
+
+### Forbidden while maintenance is active
+
+New market/economic search; P1/P4/P5/P6/P7/P8 expansion; new optimizer bakeoff; strict candidate budget; validation/OOS/holdout/forward/promotion/sealed reads; rescue by changing target/mapping/cost/control; automatic next run.
+
+### Current next action
+
+Resume Phase 5 Wave 2 as a system repair package: first close the carrier-admission/preflight bypass and SearchEvidenceMemory discontinuity, then reconcile the executable field surface and frontier/deepening path. Do not run a market experiment to test these repairs. After Wave 2/3, perform one independent strict maintenance audit and only then consider a maintenance-exit decision.
+
+The historical phase detail below is retained for provenance and does not override the current maintenance state.
+
+## Previous phase: P1 semantic supply expansion control incompatibility
 
 `P1_SEMANTIC_SUPPLY_EXPANSION_V1_CONTROL_INCOMPATIBLE_ALPHA_HOLD`
 
