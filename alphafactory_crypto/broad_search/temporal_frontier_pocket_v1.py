@@ -107,7 +107,7 @@ def anchor_receipt(rows: Mapping[str, Mapping[str, Any]], candidates: Mapping[st
             "mapping_id": candidate.mapping_id,
             "matched_positive": bool(row["matched_positive"]),
             "replicated_positive_block_count": int(row["replicated_positive_block_count"]),
-            "worst_block_min_matched_net_mean": float(row["development_worst_block_min_matched_net"]),
+            "worst_block_min_matched_net_mean": float(row["worst_block_min_matched_net_mean"]),
         }
     core = {
         "schema_version": 1,
