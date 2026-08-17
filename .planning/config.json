@@ -26,8 +26,7 @@
   },
   "resolve_model_ids": "omit",
   "hooks": {
-    "context_warnings": true,
-    "workflow_guard": true
+    "context_warnings": true
   },
   "git": {
     "branching_strategy": "none",

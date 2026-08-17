@@ -19,7 +19,7 @@ Search memory suffered a separate generational disconnect. A7MEM-0 already built
 
 The P5/P6 Frontier exposed a third disconnect. Its source-gap plan is a bounded hard-coded motif plan; two historical artifacts are recorded as provenance hashes but not consumed as decision evidence. P5/P6 proposals sample bounded semantic programs and random realization bindings and enter the dispatcher with no survivor parent lineage. This is not the same archive-driven mechanism deepening path used by P4. The 111-entry frontier contains temporal-only and condition-only variants but no temporal+condition compositions.
 
-Project management did not stop the drift. Phase 5 `Verified Core Extraction Or New Repo Decision` was designed on 2026-06-30 specifically to enforce `data/PIT -> fields -> formula/search -> reward/validation -> memory -> next queue`, and Wave 1 artifacts were created, but ROADMAP kept the phase as planned and STATE became an append-heavy history rather than a reliable current-state pointer. CURRENT preserved the new-data research HOLD, but runtime campaigns were not supplied with matching Graph execution traces; generated CURRENT therefore remained advisory. `.planning/config.json` also had `hooks.workflow_guard=false`. Freshness of RAW/CURRENT files was consequently mistaken for proof that task-relevant authority had been enforced.
+Project management did not stop the drift. Phase 5 `Verified Core Extraction Or New Repo Decision` was designed on 2026-06-30 specifically to enforce `data/PIT -> fields -> formula/search -> reward/validation -> memory -> next queue`, and Wave 1 artifacts were created, but ROADMAP kept the phase as planned and STATE became an append-heavy history rather than a reliable current-state pointer. CURRENT preserved the new-data research HOLD, but runtime campaigns were not supplied with matching Graph execution traces; generated CURRENT therefore remained advisory. The Codex `PROJECT_CONTROL_REVIEW` route is also explicitly advisory: the installed Review Skill states that it is not a controller, scheduler, or execution interceptor. The installed GSD runtime recognizes `hooks.context_warnings` but does not implement a `hooks.workflow_guard` execution gate even though one settings document mentions the key. Freshness of RAW/CURRENT files and prompt-level review were consequently mistaken for proof that task-relevant authority had been enforced.
 
 On 2026-08-17 the subsequently authorized Frontier Pocket r2/r3 processes were manually stopped before any durable candidate ledger/checkpoint because their authorizations still bound the retrospective diagnostic carrier. Their runtime/launch evidence is retained; it must not be deleted or rewritten as if the launches never happened.
 
@@ -87,7 +87,7 @@ Phase 5 system rectification becomes the active maintenance phase. Its 2026-06-3
 
 `.planning/ROADMAP.md` must show maintenance as active and Controlled Expansion blocked by maintenance exit.
 
-`hooks.workflow_guard` is enabled for this project.
+Do not rely on a `hooks.workflow_guard` setting: the installed GSD runtime does not implement that key. Prompt-level `PROJECT_CONTROL_REVIEW` remains advisory. Real execution control must therefore be enforced by repository authority/authorization preflights and explicit lifecycle state, while CURRENT provides task-scoped authority context and audit evidence.
 
 ### 8. Make CURRENT a pre-execution gate, not a post-hoc diagram
 

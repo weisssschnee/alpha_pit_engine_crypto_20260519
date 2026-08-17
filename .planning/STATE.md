@@ -34,6 +34,7 @@ Authority: accepted ADR `docs/adr/0024-system-maintenance-suspension-and-control
 - The `crypto-frontier-pocket-maturation-r3` 10-minute heartbeat that could repair-and-continue the obsolete pocket path was deleted. Its aborted r3 had 1,098 in-memory strict / 1,636 attempts but zero durable checkpoint, zero candidate ledger, zero run-complete artifact and zero forbidden reads; it is non-durable invalid suffix only.
 - Repo Graphify RAW is rebuilt at maintenance commit `6fe53244133857f320ef5275374e4bb15bf791df` with 24,570 nodes / 46,802 links. CURRENT has no ERROR; its two remaining `REQUIRED_EDGE_NOT_IN_RAW` warnings intentionally expose the unimplemented carrier-admission and SearchEvidenceMemory execution dependencies.
 - MCP Project Intelligence is separately reindexed and ready with 22,778 files / 6,780,165 lines / 17,351 symbols. It is a code-navigation index only and does not own project authority.
+- Codex project-control audit found no physical L1 interceptor: `PROJECT_CONTROL_REVIEW` is an advisory Review-Skill mode, `UserPromptSubmit` only routes skills, and the installed GSD runtime does not implement the documented `hooks.workflow_guard` key. That unsupported setting has been removed. Project execution safety must be enforced by repository authority/authorization preflights plus explicit ADR/STATE/CURRENT lifecycle facts, not by assuming the router or Graph renderer blocks tools.
 
 ### Allowed work
 
