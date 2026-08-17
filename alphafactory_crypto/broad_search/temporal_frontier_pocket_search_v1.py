@@ -8,6 +8,7 @@ import json
 import random
 import subprocess
 import time
+import traceback
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -337,38 +338,83 @@ def _execute(runtime_root: Path, *, source_sha: str, frozen_hash: str, identitie
                     candidate = local
                 attempted.add(candidate.candidate_id)
                 proposals.append({"family": family, "candidate": candidate, "attempts": attempts, "seed": SEEDS[family][lane]})
-            futures = {executor.submit(engine._worker_evaluate, row["candidate"].to_dict()): row for row in proposals}
-            results = [(futures[future], future.result()) for future in concurrent.futures.as_completed(futures)]
-            for item, worker in sorted(results, key=lambda value: value[0]["candidate"].candidate_id):
-                if worker.get("system_error") or worker.get("memory_error"):
-                    raise RuntimeError("REPAIRABLE_FAULT:WORKER:" + str(worker.get("error")))
-                if worker.get("evaluation") is None:
-                    rejected.append({"status": "PAIR_REJECTED", "family": item["family"], "candidate_id": item["candidate"].candidate_id, "error": worker.get("error")})
-                    continue
-                family = item["family"]
+            futures = {
+                row["candidate"].candidate_id: executor.submit(
+                    engine._worker_evaluate, row["candidate"].to_dict()
+                )
+                for row in proposals
+            }
+            for item in sorted(proposals, key=lambda row: row["candidate"].candidate_id):
                 candidate = item["candidate"]
-                receipt_core = {"schema_version": 1, "operation": "FRONTIER_POCKET_LOCAL_SAMPLE", "anchor_candidate_id": ANCHORS[family]["candidate_id"], "child_id": candidate.candidate_id, "family": family, "successor_near_miss_mode": successor}
-                proposal = {
-                    "arm": "frontier_pocket_local",
-                    "seed": item["seed"],
-                    "policy_key": "POCKET|" + family,
-                    "checkpoint_completion_ordinal": len(ledger) % CHECKPOINT_SIZE + 1,
-                    "generation_attempt_ordinal": int(state["generation_attempts"]),
-                    "operation": "FRONTIER_POCKET_LOCAL_SAMPLE",
-                    "parent_ids": [ANCHORS[family]["candidate_id"]],
-                    "receipt": {**receipt_core, "receipt_sha256": _sha(receipt_core)},
-                    "receipt_verified": True,
-                    "expression_hash_verified": True,
-                    "policy_state_hash_before": _sha({"family": family, "before": len(ledger)}),
-                    "policy_state_hash_after_proposal": _sha({"family": family, "candidate": candidate.candidate_id}),
-                    "proposal_cpu_seconds": 0.0,
-                }
-                _observe_candidate(candidate=candidate, evaluation=worker["evaluation"], proposal=proposal, worker=worker, archive=archive, policy=None, state=state, ledger=ledger, checkpoint_index=checkpoint_index)
-                classification, similarity = classify_against_anchor(anchor_rows[family], ledger[-1])
-                expected_fields = tuple(anchors[family].raw_fields)
-                binding_class = "EXACT_ANCHOR_BINDING" if tuple(candidate.raw_fields) == expected_fields else "SAME_SOURCE_OR_VENUE_NEIGHBOR"
-                ledger[-1].update({"semantic_lane": family, "pocket_classification": classification, "economic_similarity_to_anchor": similarity, "concrete_realization_id": realization_id(ledger[-1]), "binding_class": binding_class, "successor_near_miss_mode": successor})
-                state["arm_counters"]["frontier_pocket_local"]["exact_unique"] += 1
+                try:
+                    worker = futures[candidate.candidate_id].result()
+                    if worker.get("system_error") or worker.get("memory_error"):
+                        raise RuntimeError("REPAIRABLE_FAULT:WORKER:" + str(worker.get("error")))
+                    if worker.get("evaluation") is None:
+                        rejected.append({"status": "PAIR_REJECTED", "family": item["family"], "candidate_id": candidate.candidate_id, "error": worker.get("error")})
+                        continue
+                    family = item["family"]
+                    receipt_core = {"schema_version": 1, "operation": "FRONTIER_POCKET_LOCAL_SAMPLE", "anchor_candidate_id": ANCHORS[family]["candidate_id"], "child_id": candidate.candidate_id, "family": family, "successor_near_miss_mode": successor}
+                    proposal = {
+                        "arm": "frontier_pocket_local",
+                        "seed": item["seed"],
+                        "policy_key": "POCKET|" + family,
+                        "checkpoint_completion_ordinal": len(ledger) % CHECKPOINT_SIZE + 1,
+                        "generation_attempt_ordinal": int(state["generation_attempts"]),
+                        "operation": "FRONTIER_POCKET_LOCAL_SAMPLE",
+                        "parent_ids": [ANCHORS[family]["candidate_id"]],
+                        "receipt": {**receipt_core, "receipt_sha256": _sha(receipt_core)},
+                        "receipt_verified": True,
+                        "expression_hash_verified": True,
+                        "policy_state_hash_before": _sha({"family": family, "before": len(ledger)}),
+                        "policy_state_hash_after_proposal": _sha({"family": family, "candidate": candidate.candidate_id}),
+                        "proposal_cpu_seconds": 0.0,
+                    }
+                    _observe_candidate(candidate=candidate, evaluation=worker["evaluation"], proposal=proposal, worker=worker, archive=archive, policy=None, state=state, ledger=ledger, checkpoint_index=checkpoint_index)
+                    classification, similarity = classify_against_anchor(anchor_rows[family], ledger[-1])
+                    expected_fields = tuple(anchors[family].raw_fields)
+                    binding_class = "EXACT_ANCHOR_BINDING" if tuple(candidate.raw_fields) == expected_fields else "SAME_SOURCE_OR_VENUE_NEIGHBOR"
+                    ledger[-1].update({"semantic_lane": family, "pocket_classification": classification, "economic_similarity_to_anchor": similarity, "concrete_realization_id": realization_id(ledger[-1]), "binding_class": binding_class, "successor_near_miss_mode": successor})
+                    state["arm_counters"]["frontier_pocket_local"]["exact_unique"] += 1
+                except BaseException as failure:
+                    engine._write_json(
+                        runtime_root / "operational_failure.json",
+                        {
+                            "schema_version": 1,
+                            "status": "REPAIRABLE_PARENT_RESULT_PROCESSING_FAILURE",
+                            "candidate_id": candidate.candidate_id,
+                            "error_type": type(failure).__name__,
+                            "error_message": str(failure),
+                            "traceback": traceback.format_exc(),
+                            "in_memory_strict": len(ledger),
+                            "durable_checkpoint_strict": checkpoint_index * CHECKPOINT_SIZE,
+                            "generation_attempts": int(state["generation_attempts"]),
+                            "validation_reads": 0,
+                            "oos_reads": 0,
+                            "holdout_reads": 0,
+                            "forward_reads": 0,
+                            "promotion_reads": 0,
+                            "sealed_reads": 0,
+                        },
+                    )
+                    raise
+            engine._write_json(
+                runtime_root / "producer_status.json",
+                {
+                    "schema_version": 1,
+                    "status": "RUNNING",
+                    "in_memory_strict": len(ledger),
+                    "durable_checkpoint_strict": checkpoint_index * CHECKPOINT_SIZE,
+                    "generation_attempts": int(state["generation_attempts"]),
+                    "active_families": sorted(live),
+                    "validation_reads": 0,
+                    "oos_reads": 0,
+                    "holdout_reads": 0,
+                    "forward_reads": 0,
+                    "promotion_reads": 0,
+                    "sealed_reads": 0,
+                },
+            )
         state["attempted_exact_ids"] = sorted(attempted)
         state["strict_evaluated"] = len(ledger)
         state["next_checkpoint_index"] = checkpoint_index + 1
