@@ -21,7 +21,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_SEARCH_CORE_REALIZATION_V2_CANARY_AUTHORIZATION",
-  "authorization_sha256": "AEA788F33A6788ACA4872C6EDE0459F92E742A4F6E476C75139494E35F520626",
+  "authorization_sha256": "E7E591EF4BF614B2C5F341B4F0891E6EE401854CEB4DA282E77206975A892780",
   "authorized_implementation_sha": "4a56a393c40e564fc4289de35d0156b376e3fc03",
   "automatic_next_run_started": false,
   "boundaries": {
@@ -49,7 +49,7 @@
     "workers_default": 10,
     "workers_memory_fallback": 8
   },
-  "consumed": false,
+  "consumed": true,
   "decision_to_change": "Whether Search Core Realization V2 improves economically viable within-basin realization production without quality collapse",
   "diagnostic_baseline_path": "C:\\HermesWorker\\workspace\\crypto_temporal_targeted_p1_p4_deepening_20260813r3\\runtime\\crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3\\targeted_deepening_diagnostic_baseline.json",
   "diagnostic_baseline_sha256": "B53B3A2DBA81D9CD94B2BE9A0295175CA4EA4234A93C859AF115F596477A8E37",
@@ -160,8 +160,8 @@
     "decision_id": "AUTHORIZE_TEMPORAL_SEARCH_CORE_REALIZATION_V2_20260814",
     "scope": "ONE_20000_STRICT_TRAIN_ONLY_TEMPORAL_SEARCH_CORE_REALIZATION_V2_CANARY"
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_search_core_realization_v2_20260814r1",
   "schema_version": 1,
-  "status": "RUN_AUTHORIZED_ONE_TIME_REALIZATION_V2_CANARY"
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION"
 }

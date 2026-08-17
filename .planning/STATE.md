@@ -28,6 +28,13 @@ Authority: accepted ADR `docs/adr/0024-system-maintenance-suspension-and-control
 5. PROJECT / STATE / ROADMAP / Phase 5 / CURRENT must agree on the active maintenance boundary.
 6. Pocket authorizations must be consumed/disabled, no relevant PC2 runner may survive, and the final system-level maintenance audit must check the whole `PROJECT -> authority -> data -> fields -> memory -> search -> runtime -> evidence/Graph` chain.
 
+### Maintenance closure facts recorded on 2026-08-17
+
+- Authorization census found seven completed/obsolete one-time search authorizations still persisted as `run_authorized=true / consumed=false` (Targeted, Realization V2, Representation, Proposal Dispatcher, P1 G2, operational continuation, and Hypothesis Frontier). Their immutable runtime authorization snapshots remain untouched, but all seven working authorization files are now consumed under maintenance; current `config/*.json` contains zero `run_authorized=true` receipts.
+- The `crypto-frontier-pocket-maturation-r3` 10-minute heartbeat that could repair-and-continue the obsolete pocket path was deleted. Its aborted r3 had 1,098 in-memory strict / 1,636 attempts but zero durable checkpoint, zero candidate ledger, zero run-complete artifact and zero forbidden reads; it is non-durable invalid suffix only.
+- Repo Graphify RAW is rebuilt at maintenance commit `6fe53244133857f320ef5275374e4bb15bf791df` with 24,570 nodes / 46,802 links. CURRENT has no ERROR; its two remaining `REQUIRED_EDGE_NOT_IN_RAW` warnings intentionally expose the unimplemented carrier-admission and SearchEvidenceMemory execution dependencies.
+- MCP Project Intelligence is separately reindexed and ready with 22,778 files / 6,780,165 lines / 17,351 symbols. It is a code-navigation index only and does not own project authority.
+
 ### Allowed work
 
 Source inspection and repair; deterministic/source-only tests; data-authority and field-registry repair; SearchEvidenceMemory migration; project/ADR/STATE/ROADMAP/Graph maintenance; immutable evidence reclassification; no-market execution-trace/checker work.

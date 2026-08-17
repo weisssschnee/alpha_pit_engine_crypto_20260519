@@ -14,7 +14,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_PROPOSAL_DISPATCH_SUCCESSOR_V1_AUTHORIZATION",
-  "authorization_sha256": "88FC399D0A7BC5639B26F954A5361B96CCAC0FF6CA044EF4D6C0DFD1BB82FB48",
+  "authorization_sha256": "12324E02DF18FDD5C5F9A4FC3CA1CE112A1887B59D5CAA271285D1B341BF7067",
   "budget": {
     "checkpoint_size": 2000,
     "diagnostic_boundary": 10000,
@@ -22,7 +22,7 @@
     "strict_evaluated_maximum": 20000,
     "workers": 8
   },
-  "consumed": false,
+  "consumed": true,
   "decision_id": "USER_20260815_SEARCH_CORE_PROPOSAL_DISPATCH_SUCCESSOR_V1",
   "execution_component_blob_oids": {
     "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
@@ -113,7 +113,7 @@
     "one_time": true,
     "scope": "SEARCH_CORE_PROPOSAL_DISPATCH_SUCCESSOR_V1"
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_proposal_dispatch_successor_v1_20260815r1",
   "schema_version": 1,
   "search_policy": {
@@ -125,5 +125,5 @@
     "representation_successor_recombination": true,
     "semantic_basis_expansion": false
   },
-  "status": "RUN_AUTHORIZED_ONE_TIME_PROPOSAL_DISPATCH_20000"
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION"
 }

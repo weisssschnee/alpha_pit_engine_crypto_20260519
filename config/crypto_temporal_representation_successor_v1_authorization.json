@@ -23,9 +23,9 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_TEMPORAL_REPRESENTATION_SUCCESSOR_V1_TOURNAMENT_AUTHORIZATION",
-  "authorization_sha256": "19277B534BA95AD9908B64272327E838231CFF277165C4934E16FA68AD437786",
+  "authorization_sha256": "C24DC2D75932289AD7DE922D4A98BB42310E723B25934668EF430FE3128C6BDC",
   "automatic_next_run_started": false,
-  "consumed": false,
+  "consumed": true,
   "execution_component_blob_oids": {
     "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
     "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
@@ -108,10 +108,10 @@
     "mechanism_mutation_probability": 0.03,
     "parameter_mutation_probability": 0.62
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_representation_successor_v1_20260815r1",
   "schema_version": 1,
-  "status": "RUN_AUTHORIZED_ONE_TIME_REPRESENTATION_TOURNAMENT",
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION",
   "strict_budget": {
     "LEGACY_REALIZATION_V2_CONTROL": 10000,
     "TEMPORAL_REPRESENTATION_SUCCESSOR": 10000,

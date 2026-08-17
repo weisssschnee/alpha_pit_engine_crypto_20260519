@@ -15,7 +15,7 @@
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
   "authorization_id": "CRYPTO_P1_G2_OPERATIONAL_CONTINUATION_V1_AUTHORIZATION",
-  "authorization_sha256": "A795C6A2398F1184EEC355001A4A732A5A289DCD5DA5C9CA62533F142826B960",
+  "authorization_sha256": "7A4AA885D1369D564E345D2D815CEB7EC4463D026CF7F19E6F63ECFD10A63962",
   "budget": {
     "automatic_further_increase": false,
     "checkpoint_size": 2000,
@@ -25,7 +25,7 @@
     "strict_evaluated_maximum": 20000,
     "terminal_if_exhausted": "OPERATIONAL_PROPOSAL_SUPPLY_EXHAUSTED"
   },
-  "consumed": false,
+  "consumed": true,
   "continuation_from_existing_valid_checkpoint": true,
   "continuation_id": "P1_G2_OPERATIONAL_CONTINUATION_V1",
   "decision_id": "P1_G2_OPERATIONAL_CONTINUATION_V1_20260816",
@@ -131,7 +131,7 @@
     "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
   },
   "raw_attempt_ceiling": 1250000,
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "p1g2_opcont_v1_20260816r3",
   "schema_version": 1,
   "scientific_contract_changed": false,
@@ -155,6 +155,6 @@
   "source_generation_attempts": 479114,
   "source_runtime_id": "crypto_temporal_p1_semantic_supply_expansion_v1_block_robust_v2_20260816r2",
   "source_strict": 12000,
-  "status": "RUN_AUTHORIZED_ONE_TIME_OPERATIONAL_CONTINUATION_12000_TO_20000",
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION",
   "target_strict": 20000
 }

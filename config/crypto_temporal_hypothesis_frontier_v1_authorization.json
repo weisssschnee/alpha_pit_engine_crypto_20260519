@@ -13,7 +13,7 @@
     "target_contract_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
     "target_execution_sha256": "1D409B1580DC9AAF90C7A3C4E619F9C0998AA727AA4DC9204CCDB3538CC04630"
   },
-  "authorization_sha256": "48E90D3DCAA3616F126CE8ED07BC3D6CEF19C618D21FB691F6DFD170E0A96C4B",
+  "authorization_sha256": "295E0248F0D6C34F63B2146C5C3A3CE529B96576A55FF1289262B002DE8A3846",
   "automatic_next_run_authorized": false,
   "block_robust_v2_authority": "DEVELOPMENT_THREE_BLOCK_ROBUST_ORDERING_V2",
   "budget": {
@@ -26,7 +26,7 @@
     "strict_evaluated_maximum": 30000,
     "workers": 8
   },
-  "consumed": false,
+  "consumed": true,
   "execution_component_blob_oids": {
     "alphafactory_crypto/broad_search/compositional18m.py": "923421b2429fc4382c8e4b452ddda26fa5e3a755",
     "alphafactory_crypto/broad_search/experiment_authority.py": "f56a6f4f192ac275fdfa694471e34e238e8067a3",
@@ -114,10 +114,10 @@
     "user": "desktop-a2h3a2g\\suri",
     "workspace": "C:\\HermesWorker\\workspace\\crypto_temporal_search_core_realization_v2_20260814"
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_hypothesis_frontier_v1_20260817r1",
   "schema_version": 1,
   "source_gap_file_sha256": "5FCCCF48938269288F3E1C8B42FF5D2A7FC008D5AFC3308F50258359C12F03E2",
   "source_gap_sha256": "438D6C667996C4A4FD703ED9D61A5B421FD57ED87F74E809A1DE0CC8E12ED250",
-  "status": "RUN_AUTHORIZED_ONE_TIME_TEMPORAL_HYPOTHESIS_FRONTIER_30000"
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION"
 }

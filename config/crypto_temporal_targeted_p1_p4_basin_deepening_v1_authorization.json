@@ -26,7 +26,7 @@
     "scripts/check_crypto_temporal_targeted_r2_control.py"
   ],
   "authorization_id": "CRYPTO_TEMPORAL_TARGETED_P1_P4_BASIN_DEEPENING_V1_AUTHORIZATION",
-  "authorization_sha256": "F25DD461DF6E2C5ACEFD644FD373EB44B3AA92F9E8B6AFA4415FC07D0F0A8C2E",
+  "authorization_sha256": "CA1B65A163A96773EBA931D906A23DF93FF942F843ADAEA30A63AE442E7270C4",
   "authorized_component_sha256": {
     "alphafactory_crypto/broad_search/compositional18m.py": "E736473F5E64E9A963ABDBBF8A3D03DA31838B2EF989420C3B4F663EF1F312A1",
     "alphafactory_crypto/broad_search/experiment_authority.py": "92E0C0983C8FAC691A4B7658903C6A919C07A855ABF0AA8AA27A6DAEEBA6B22F",
@@ -63,7 +63,7 @@
     "workers_default": 10,
     "workers_memory_fallback": 8
   },
-  "consumed": false,
+  "consumed": true,
   "decision_to_change": "Whether targeted deepening is sufficient to wait for forward, should continue, or exposes a Search Core realization bottleneck",
   "diagnostic_baseline_path": "config/crypto_temporal_targeted_p1_p4_basin_deepening_v1_baseline.json",
   "diagnostic_baseline_policy_feedback": false,
@@ -187,7 +187,7 @@
     "decision_id": "AUTHORIZE_TARGETED_P1_P4_BASIN_DEEPENING_20260813",
     "scope": "ONE_30000_STRICT_TRAIN_ONLY_P1_P4_TARGETED_DEEPENING"
   },
-  "run_authorized": true,
+  "run_authorized": false,
   "runtime_id": "crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r3",
   "saturation_rule": {
     "new_economic_clusters_since_10000_maximum": 0,
@@ -197,5 +197,5 @@
     "strict_boundary": 20000
   },
   "schema_version": 2,
-  "status": "RUN_AUTHORIZED_ONE_TIME_TARGETED_P1_P4_DEEPENING"
+  "status": "CONSUMED_SYSTEM_MAINTENANCE_HISTORICAL_AUTHORIZATION"
 }
