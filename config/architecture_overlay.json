@@ -2475,7 +2475,7 @@
                                     ],
                       "validation":  {
                                          "level":  "DECLARED",
-                                         "result":  "HOLD",
+                                         "result":  "INSUFFICIENT_EVIDENCE",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json"
                                      }
@@ -3388,8 +3388,7 @@
                       "source":  "new_data_integration",
                       "target":  "formal_performance_search",
                       "relation":  "research_admission_required_before_search",
-                      "relation_class":  "research_admission_required_before_search",
-                      "binding_state":  "FORBIDDEN",
+                      "relation_class":  "constrains",
                       "lifecycle":  "FORBIDDEN",
                       "forbidden":  true,
                       "required":  true,
@@ -3416,8 +3415,7 @@
                       "source":  "crypto_search_evidence_memory",
                       "target":  "real_policy_upgrade_canary",
                       "relation":  "memory_required_before_search",
-                      "relation_class":  "memory_required_before_search",
-                      "binding_state":  "UNRESOLVED",
+                      "relation_class":  "constrains",
                       "lifecycle":  "EXPERIMENTAL",
                       "required":  true,
                       "critical":  true,
@@ -3433,7 +3431,7 @@
                                    },
                       "validation":  {
                                          "level":  "DECLARED",
-                                         "result":  "HOLD",
+                                         "result":  "INSUFFICIENT_EVIDENCE",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json"
                                      }

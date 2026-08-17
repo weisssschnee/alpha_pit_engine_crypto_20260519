@@ -6,6 +6,26 @@
       "evidence": {},
       "message": "Current view is advisory; formal runtime evidence was not supplied",
       "severity": "INFO"
+    },
+    {
+      "category": "DRIFT",
+      "code": "REQUIRED_EDGE_NOT_IN_RAW",
+      "evidence": {
+        "source": "new_data_integration",
+        "target": "formal_performance_search"
+      },
+      "message": "Required current relationship is absent from the raw graph",
+      "severity": "WARN"
+    },
+    {
+      "category": "DRIFT",
+      "code": "REQUIRED_EDGE_NOT_IN_RAW",
+      "evidence": {
+        "source": "crypto_search_evidence_memory",
+        "target": "real_policy_upgrade_canary"
+      },
+      "message": "Required current relationship is absent from the raw graph",
+      "severity": "WARN"
     }
   ],
   "edges": [
@@ -1506,9 +1526,85 @@
         "result": "NOT_REQUIRED",
         "verified_at_sha": null
       }
+    },
+    {
+      "applies_to_binding": "",
+      "binding_state": "",
+      "color": "#c62828",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "ADR 0011 and ADR 0024; future canonical search preflight",
+        "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+        "id": "carrier_research_admission_gate",
+        "rule": "Engineering-reachable or retrospective diagnostic carriers cannot activate formal/development market search. A carrier-specific historical PIT-universe/source-coverage research admission must be resolved before market arrays are read.",
+        "severity": "HARD",
+        "type": "BOUNDARY"
+      },
+      "critical": true,
+      "decision_ref": "",
+      "declared": true,
+      "declared_evidence_type": "DECLARED",
+      "evidence": "DECLARED",
+      "forbidden": true,
+      "id": "research_carrier_admission_before_formal_search",
+      "lifecycle": "FORBIDDEN",
+      "line_style": "dotted",
+      "relation": "research_admission_required_before_search",
+      "relation_class": "constrains",
+      "required": true,
+      "source": "new_data_integration",
+      "target": "formal_performance_search",
+      "validation": {
+        "checked_at": "2026-08-17T11:45:13.023981+00:00",
+        "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+        "evidence_sha256": "8A54C078B5383A9E0F44C0ABB041A4933B6B425DF78DAD0D397E4F835C674DF7",
+        "level": "DECLARED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": null
+      }
+    },
+    {
+      "applies_to_binding": "",
+      "binding_state": "",
+      "color": "#f9a825",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "ADR 0024 and Phase 5 maintenance exit gate",
+        "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+        "id": "search_evidence_memory_admission_gate",
+        "rule": "A future search cannot generate candidates until unified SearchEvidenceMemory is current against canonical development ledgers/closures and queried by proposal preflight. This does not authorize cross-campaign adaptive optimizer-state import.",
+        "severity": "HARD",
+        "type": "ADMISSION"
+      },
+      "critical": true,
+      "decision_ref": "",
+      "declared": true,
+      "declared_evidence_type": "DECLARED",
+      "evidence": "DECLARED",
+      "forbidden": false,
+      "id": "search_evidence_memory_required_before_search",
+      "lifecycle": "EXPERIMENTAL",
+      "line_style": "dotted",
+      "relation": "memory_required_before_search",
+      "relation_class": "constrains",
+      "required": true,
+      "source": "crypto_search_evidence_memory",
+      "target": "real_policy_upgrade_canary",
+      "validation": {
+        "checked_at": "2026-08-17T11:45:13.023981+00:00",
+        "evidence_ref": "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json",
+        "evidence_sha256": "4889D639D945E164FDB4973AAE2BBCDA6F2EADBE7722ADD2821A2E4C96428B46",
+        "level": "DECLARED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": null
+      }
     }
   ],
-  "generated_at": "2026-08-17T05:55:16.860094+00:00",
+  "generated_at": "2026-08-17T12:05:34.679974+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -9298,7 +9394,11 @@
       "authority_bindings": [],
       "authority_class": "",
       "binding_ref": "",
-      "claim_badges": [],
+      "claim_badges": [
+        "SYSTEM MAINTENANCE",
+        "NO MARKET SEARCH",
+        "MAINTENANCE EXIT REQUIRED"
+      ],
       "color": "#c62828",
       "contract_ref": "",
       "contracts": [
@@ -9308,6 +9408,15 @@
           "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
           "id": "new_performance_search_frozen",
           "rule": "NEW_PERFORMANCE_SEARCH_FROZEN remains in force; synthetic qualification cannot activate a real market search",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md and .planning/STATE.md",
+          "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+          "id": "system_maintenance_market_search_suspension",
+          "rule": "ADR 0024 places the project in SYSTEM_MAINTENANCE_CONTROL_PLANE_RECOVERY. No economic or market search, strict candidate budget, validation/OOS/forward access, promotion, pocket/frontier expansion, optimizer bakeoff, rescue run, or automatic successor may start until an explicit maintenance-exit decision records all exit criteria as satisfied.",
           "severity": "HARD",
           "type": "BOUNDARY"
         }
@@ -9332,7 +9441,7 @@
       "semantic_role": "performance_search_boundary",
       "supersedes": [],
       "validation": {
-        "checked_at": "2026-08-17T05:45:53.381416+00:00",
+        "checked_at": "2026-08-17T10:18:06.762406+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
@@ -9355,7 +9464,11 @@
       "authority_bindings": [],
       "authority_class": "",
       "binding_ref": "",
-      "claim_badges": [],
+      "claim_badges": [
+        "ENGINEERING PASS",
+        "RESEARCH HOLD",
+        "PIT UNIVERSE ADMISSION REQUIRED"
+      ],
       "color": "#f9a825",
       "contract_ref": "",
       "contracts": [
@@ -9374,6 +9487,15 @@
           "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
           "id": "engineering_integration_not_research_admission",
           "rule": "Engineering carrier reachability cannot authorize a market Arena, reward read, sealed access, OOS, challenge, promotion, or future-arm qualification",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "ADR 0011, ADR 0024, runtime/crypto_search_surface_integration_v1_20260728/final_decision.json and future canonical market-loader preflight",
+          "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+          "id": "retrospective_carrier_not_research_authority",
+          "rule": "The V1.4 E8BFD15A carrier is a fixed retrospective DEVELOPMENT_DIAGNOSTIC_ONLY surface. Cache identity, field reachability and successful pair evaluation cannot substitute for historical PIT-universe/source-coverage research admission.",
           "severity": "HARD",
           "type": "BOUNDARY"
         }
@@ -9560,7 +9682,7 @@
       "semantic_role": "new_data_integration_boundary",
       "supersedes": [],
       "validation": {
-        "checked_at": "2026-08-17T05:45:53.381416+00:00",
+        "checked_at": "2026-08-17T10:18:06.762406+00:00",
         "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "evidence_sha256": "955583E49D21F1409AA14B9FFBB1FF6685AC326BD89DBDF942DBDD3EF5F0067C",
         "level": "STATIC_VERIFIED",
@@ -9854,6 +9976,7 @@
         "planning_state",
         "planning_state_accepted_identities",
         "planning_state_active_execution_plan",
+        "planning_state_allowed_work",
         "planning_state_blockers",
         "planning_state_closed_lines_and_reusable_capability",
         "planning_state_completed_phase_30k_valid_prefix_policy_reconstruction_and_successor_preflight",
@@ -9866,10 +9989,15 @@
         "planning_state_crypto_alphafactory_current_state",
         "planning_state_crypto_reward_uncertainty_v2_source_repair",
         "planning_state_current_decisions",
+        "planning_state_current_next_action",
         "planning_state_current_phase",
         "planning_state_evidence_qualified_position",
+        "planning_state_forbidden_while_maintenance_is_active",
         "planning_state_graph_and_maintenance",
+        "planning_state_immediate_maintenance_state",
+        "planning_state_maintenance_blockers_exit_requirements",
         "planning_state_preceding_completed_phase",
+        "planning_state_previous_phase_p1_semantic_supply_expansion_control_incompatibility",
         "planning_state_previous_phase_r1_system_invalid_closure",
         "planning_state_previous_phase_r2_authorization",
         "planning_state_previous_phase_representation_successor_partial_closure",
@@ -9899,7 +10027,7 @@
       "semantic_role": "experimental_targeted_p1_p4_basin_deepening",
       "supersedes": [],
       "validation": {
-        "checked_at": "2026-08-17T05:51:38.691732+00:00",
+        "checked_at": "2026-08-17T10:18:06.762406+00:00",
         "evidence_ref": "reports/evidence/crypto_temporal_targeted_p1_p4_basin_deepening_v1_20260813r2/system_invalid_closure.json",
         "evidence_sha256": "DBE2962060B9A4D65CBB514AF2C1E411914F9AF97A79A5E93944B516CDDAE6A4",
         "level": "PARTIAL",
@@ -10568,6 +10696,7 @@
         "planning_state",
         "planning_state_accepted_identities",
         "planning_state_active_execution_plan",
+        "planning_state_allowed_work",
         "planning_state_blockers",
         "planning_state_closed_lines_and_reusable_capability",
         "planning_state_completed_phase_30k_valid_prefix_policy_reconstruction_and_successor_preflight",
@@ -10580,10 +10709,15 @@
         "planning_state_crypto_alphafactory_current_state",
         "planning_state_crypto_reward_uncertainty_v2_source_repair",
         "planning_state_current_decisions",
+        "planning_state_current_next_action",
         "planning_state_current_phase",
         "planning_state_evidence_qualified_position",
+        "planning_state_forbidden_while_maintenance_is_active",
         "planning_state_graph_and_maintenance",
+        "planning_state_immediate_maintenance_state",
+        "planning_state_maintenance_blockers_exit_requirements",
         "planning_state_preceding_completed_phase",
+        "planning_state_previous_phase_p1_semantic_supply_expansion_control_incompatibility",
         "planning_state_previous_phase_r1_system_invalid_closure",
         "planning_state_previous_phase_r2_authorization",
         "planning_state_previous_phase_representation_successor_partial_closure",
@@ -10597,7 +10731,7 @@
       "semantic_role": "evaluation_access_boundary",
       "supersedes": [],
       "validation": {
-        "checked_at": "2026-08-17T05:51:38.691732+00:00",
+        "checked_at": "2026-08-17T10:18:06.762406+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -10609,23 +10743,108 @@
         "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
+    },
+    {
+      "active_authority": false,
+      "artifact_sha256": null,
+      "authority": null,
+      "authority_bindings": [],
+      "authority_class": "NON_FORMAL",
+      "binding_ref": "",
+      "claim_badges": [
+        "A7MEM EXISTS",
+        "TEMPORAL CONTINUITY MISSING",
+        "NO ADAPTIVE STATE IMPORT",
+        "MAINTENANCE BLOCKER"
+      ],
+      "color": "#f9a825",
+      "contract_ref": "",
+      "contracts": [
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "ADR 0024 and Phase 5 maintenance exit gate",
+          "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+          "id": "persistent_search_evidence_required_before_new_search",
+          "rule": "Future market search must query one persistent development SearchEvidenceMemory covering candidate/semantic identity, field/carrier authority, cluster/rejection/route closure, prior spend and lineage. Campaign-local BehaviorArchive or aggregate proposal priors alone are insufficient.",
+          "severity": "HARD",
+          "type": "ADMISSION"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "ADR 0024 and existing NO_CROSS_SPRINT_ADAPTIVE_MEMORY boundary",
+          "evidence_ref": "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md",
+          "id": "adaptive_state_isolation_preserved",
+          "rule": "SearchEvidenceMemory is evidence continuity only. CEM/Evolution populations, learned tables, RNG state and individual adaptive reward state remain forbidden across campaigns unless separately authorized.",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        }
+      ],
+      "critical": true,
+      "evidence": "STATIC",
+      "expires_at": "",
+      "id": "crypto_search_evidence_memory",
+      "implementation_bindings": [],
+      "kind": "governance_component",
+      "label": "Search evidence memory continuity (recovery required)",
+      "lifecycle": "EXPERIMENTAL",
+      "node_class": "",
+      "owner": "",
+      "paths": [
+        "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json",
+        "config/crypto_temporal_proposal_dispatch_v1_historical_prior.json",
+        "docs/adr/0024-system-maintenance-suspension-and-control-plane-recovery.md"
+      ],
+      "promotion_requirements": [],
+      "qualification_kind": "",
+      "qualification_result": "",
+      "raw_node_ids": [
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_1_suspend_real_market_search_execution",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_2_reclassify_the_e8bfd15a_lineage_without_destroying_it",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_3_make_carrier_research_admission_a_mandatory_run_dependency",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_4_reconnect_the_field_system_instead_of_adding_another_field_registry",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_5_restore_searchevidencememory_keep_adaptive_state_isolation",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_6_unify_frontier_and_deepening_semantics",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_7_restore_project_management_truth",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_8_make_current_a_pre_execution_gate_not_a_post_hoc_diagram",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_adr_0024_system_maintenance_suspension_and_control_plane_recovery",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_consequences",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_context",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_decision",
+        "docs_adr_0024_system_maintenance_suspension_and_control_plane_recovery_maintenance_exit_criteria"
+      ],
+      "required": false,
+      "scope": "",
+      "semantic_role": "search_evidence_memory_continuity",
+      "supersedes": [],
+      "validation": {
+        "checked_at": "2026-08-17T11:45:13.023981+00:00",
+        "evidence_ref": "runtime/a7mem0_search_memory_registry_20260628/a7mem0_manifest.json",
+        "evidence_sha256": "4889D639D945E164FDB4973AAE2BBCDA6F2EADBE7722ADD2821A2E4C96428B46",
+        "level": "DECLARED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": null
+      },
+      "visible_by_default": true
     }
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "0303630890C6622FDA259E93E7C32E525F94726BF307A8409AD733F266EB5634"
+    "sha256": "E33F493C7612745CCF1B9D6564A948D2D86FF4B03BB1382B3B6F82031DE9F339"
   },
   "profile_id": null,
   "profiles": [
     {
       "id": "crypto-development-research",
       "path": "profiles/crypto-development-research.json",
-      "sha256": "1758E8B84DECAADDC98285B2E1E8F11B87D94D5B767D4475E7D07B9EAF0571AB"
+      "sha256": "D693531ECADAB0F1E4AE626D02109FB06F6243554BC98A407674565C4806D17E"
     },
     {
       "id": "evidence-boundary-change",
       "path": "profiles/evidence-boundary-change.json",
-      "sha256": "DB9623C591615706A733E0C642150ECAF847D057CEF2799E3021A62903859AB2"
+      "sha256": "896910390B1FD1EB321FFB1A66D8F6DDC9B6E0263EF65FDF2C30D9BEA120FF45"
     },
     {
       "id": "crypto-real-data-instrument-canary",
@@ -10644,13 +10863,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "ff728f39edce00cb6ec433e54c63cfe8cbc10810",
-    "edge_count": 46529,
-    "node_count": 24487,
+    "built_at_commit": "6fe53244133857f320ef5275374e4bb15bf791df",
+    "edge_count": 46802,
+    "node_count": 24570,
     "path": ".planning/graphs/graph.json",
-    "sha256": "C87E6B4BD2A595BF5BEE325A2CF9B0AE935FC98F2B39647C9305E2D7FAFE977F"
+    "sha256": "64F1B4E25BC72B4C6B78A684CB6689144617452037B8B009B07D7163D6CB51FD"
   },
-  "repo_head": "ff728f39edce00cb6ec433e54c63cfe8cbc10810",
+  "repo_head": "6fe53244133857f320ef5275374e4bb15bf791df",
   "schema_version": 1,
   "semantic_authorities": [
     {
@@ -10760,12 +10979,12 @@
   "strict_mode": false,
   "strict_ready": false,
   "summary": {
-    "current_edges": 41,
-    "current_nodes": 32,
+    "current_edges": 43,
+    "current_nodes": 33,
     "errors": 0,
     "runtime_edges": 0,
     "runtime_nodes": 0,
-    "warnings": 0
+    "warnings": 2
   },
   "trace": {
     "path": null,
